@@ -5,6 +5,94 @@
         <link>https://example.com/</link>
         <description>Recent content on catrefine</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+        <language>zh-cn</language>
+        <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo</title>
+        <link>https://example.com/p/hugo/</link>
+        <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/p/hugo/</guid>
+        <description>&lt;img src="https://example.com/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post Hugo" /&gt;&lt;h2 id=&#34;hugo&#34;&gt;hugo&lt;/h2&gt;
+&lt;p&gt;我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下来，供后来者参考。&lt;/p&gt;
+&lt;h2 id=&#34;环境&#34;&gt;环境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;mac&lt;/li&gt;
+&lt;li&gt;brew&lt;/li&gt;
+&lt;li&gt;hugo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装brew&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/bin/zsh -c &amp;quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&amp;quot;
+$ brew update
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;选择中科大源&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装hugo&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ brew install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;新建站点&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo new site myblog
+$ cd myblog
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;新建一个页面&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo new about.md
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开始服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ hugo server --buildDrafts
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;主题&#34;&gt;主题&lt;/h2&gt;
+&lt;p&gt;我使用的主题是&lt;a class=&#34;link&#34; href=&#34;https://blog.jimmycai.com/p/hugo-theme-stack/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-stack&lt;/a&gt;
+安装主题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git 
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;部署到github个人页面&#34;&gt;部署到Github个人页面&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件&lt;/li&gt;
+&lt;li&gt;再创建一个名称为&lt;!-- raw HTML omitted --&gt;.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容
+进入本地网站目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;YOUR PROJECT&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关联远程blog仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git remote add origin git@github.com:jeshs/blog.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将本地网站全部内容推送到远程blog仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;关闭本地Hugo服务器Ctrl+C，然后删除本地网站目录下的public文件夹,创建public子模块，注意下面是一行命令，不是两行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git submodule add -b master git@github.com:&amp;lt;USERNAME&amp;gt;/&amp;lt;USERNAME&amp;gt;.github.io.git public
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后就可以执行hugo命令，此命令会自动将网站静态内容生成到public文件夹，然后提交到远程blog仓库&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;hugo
+cd public
+git status
+git add .
+git commit -m &amp;quot;first commit&amp;quot;
+git push -u orgin master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;过一会就可以打开&lt;!-- raw HTML omitted --&gt;.github.io查看网站了
+注意：本地网站是关联的blog仓库，本地网站下的public文件夹是以子模块的形式关联的github.io仓库，他们是相对独立的&lt;/p&gt;
+&lt;h2 id=&#34;自动部署脚本&#34;&gt;自动部署脚本&lt;/h2&gt;
+&lt;p&gt;将以上步骤添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+echo -e &amp;quot;\033[0;32mDeploying updates to GitHub...\033[0m&amp;quot;
+
+# Build the project.
+hugo # if using a theme, replace with `hugo -t &amp;lt;YOURTHEME&amp;gt;`
+
+# Go To Public folder
+cd public
+# Add changes to git.
+git add .
+
+# Commit changes.
+msg=&amp;quot;rebuilding site `date`&amp;quot;
+if [ $# -eq 1 ]
+  then msg=&amp;quot;$1&amp;quot;
+fi
+git commit -m &amp;quot;$msg&amp;quot;
+
+# Push source and build repos.
+git push origin master
+
+# Come Back up to the Project Root
+cd ..
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;给网站添加评论&#34;&gt;给网站添加评论&lt;/h2&gt;
+&lt;p&gt;Hugo支持Disqus评论，只需要在配置文件config.toml中设置disqusShortname = &amp;ldquo;disqusShortname&amp;rdquo;，如果没有disqusShortname，需要到Disqus官网注册一个账号，注册后添加一个网站，添加时会让填一个shortname，Disqus会生成一个shortname.disqus.com的网址，另外还需要把config.toml中的baseURL地址，也就是公网访问地址添加到Diqus的信任网址中，类似于互相添加信任&lt;/p&gt;
+</description>
+        </item>
+        
     </channel>
 </rss>

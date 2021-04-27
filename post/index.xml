@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on catrefine</title>
+    <link>https://example.com/post/</link>
+    <description>Recent content in Posts on catrefine</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo</title>
+      <link>https://example.com/p/hugo/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/p/hugo/</guid>
+      <description>hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下来，供后来者参考。
+环境  mac brew hugo  安装brew
+/bin/zsh -c &amp;quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&amp;quot; $ brew update  选择中科大源
+ 安装hugo
+$ brew install hugo 使用 新建站点
+$ hugo new site myblog $ cd myblog 新建一个页面
+$ hugo new about.md 开始服务
+$ hugo server --buildDrafts 主题 我使用的主题是hugo-theme-stack 安装主题
+git 部署到Github个人页面  在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件 再创建一个名称为.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容 进入本地网站目录  $ cd &amp;lt;YOUR PROJECT&amp;gt; 关联远程blog仓库
+$ git remote add origin git@github.com:jeshs/blog.git 将本地网站全部内容推送到远程blog仓库
+$ git push -u origin master 关闭本地Hugo服务器Ctrl+C，然后删除本地网站目录下的public文件夹,创建public子模块，注意下面是一行命令，不是两行</description>
+    </item>
+    
+  </channel>
+</rss>
