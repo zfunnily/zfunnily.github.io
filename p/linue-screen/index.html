@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Hugo, the world&#39;s fastest framework for building websites'><title>About</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='screen命令 screen 是一个非常有用的命令。应用场景：
+ 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip;  screen使用 创建一个窗口 $ screen -S name 执行自己需要的命令
+$ ... 分离窗口 ctrl &#43; A &#43; D 重新连接到screen 如果只有一个会话可以直接使用 -r
+$ screen -r 如果有多个screen会话，可以使用 ls 参数列出
+$ screen -ls There is a screen on: 10698.ttys004.zqj	(Detached) 1 Socket in /var/folders/kt/9s3ff1cs2tn93x3ndv9kdbn00000gn/T/.screen. 使用会话id还原会话
+$ screen -r 10698 使用name还原会话, 该 name是 上面 创建会话时使用的name: screen -S name
+$ screen -r -S name 终止会话  ctrl &#43; D exit  help 如果要使用screen的所有功能可以参考手册。'><title>linue Screen</title>
 
-<link rel='canonical' href='https://example.com/about/'>
+<link rel='canonical' href='https://example.com/p/linue-screen/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='About'>
-<meta property='og:description' content='Hugo, the world&#39;s fastest framework for building websites'>
-<meta property='og:url' content='https://example.com/about/'>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='linue Screen'>
+<meta property='og:description' content='screen命令 screen 是一个非常有用的命令。应用场景：
+ 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip;  screen使用 创建一个窗口 $ screen -S name 执行自己需要的命令
+$ ... 分离窗口 ctrl &#43; A &#43; D 重新连接到screen 如果只有一个会话可以直接使用 -r
+$ screen -r 如果有多个screen会话，可以使用 ls 参数列出
+$ screen -ls There is a screen on: 10698.ttys004.zqj	(Detached) 1 Socket in /var/folders/kt/9s3ff1cs2tn93x3ndv9kdbn00000gn/T/.screen. 使用会话id还原会话
+$ screen -r 10698 使用name还原会话, 该 name是 上面 创建会话时使用的name: screen -S name
+$ screen -r -S name 终止会话  ctrl &#43; D exit  help 如果要使用screen的所有功能可以参考手册。'>
+<meta property='og:url' content='https://example.com/p/linue-screen/'>
 <meta property='og:site_name' content='catrefine'>
-<meta property='og:type' content='article'><meta property='article:section' content='Page' /><meta property='article:published_time' content='2021-02-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2020-10-09T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="Hugo, the world&#39;s fastest framework for building websites">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-09-07T10:02:16&#43;08:00'/><meta property='article:modified_time' content='2021-09-07T10:02:16&#43;08:00'/>
+<meta name="twitter:title" content="linue Screen">
+<meta name="twitter:description" content="screen命令 screen 是一个非常有用的命令。应用场景：
+ 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip;  screen使用 创建一个窗口 $ screen -S name 执行自己需要的命令
+$ ... 分离窗口 ctrl &#43; A &#43; D 重新连接到screen 如果只有一个会话可以直接使用 -r
+$ screen -r 如果有多个screen会话，可以使用 ls 参数列出
+$ screen -ls There is a screen on: 10698.ttys004.zqj	(Detached) 1 Socket in /var/folders/kt/9s3ff1cs2tn93x3ndv9kdbn00000gn/T/.screen. 使用会话id还原会话
+$ screen -r 10698 使用name还原会话, 该 name是 上面 创建会话时使用的name: screen -S name
+$ screen -r -S name 终止会话  ctrl &#43; D exit  help 如果要使用screen的所有功能可以参考手册。">
     </head>
-    <body class="article-page keep-sidebar">
+    <body class="">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -35,7 +53,7 @@
             document.body.dataset.scheme = 'light';
         }
     })();
-</script><div class="container main-container flex on-phone--column extended ">
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
             <aside class="sidebar left-sidebar sticky">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
@@ -89,7 +107,7 @@
         
         
 
-        <li  class='current' >
+        <li >
             <a href='/about/'>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -168,6 +186,19 @@
 </aside>
 
             <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://example.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
     <article class="main-article">
     <header class="article-header">
 
@@ -175,13 +206,9 @@
     
 
     <h2 class="article-title">
-        <a href="/about/">About</a>
+        <a href="/p/linue-screen/">linue Screen</a>
     </h2>
 
-    
-    <h3 class="article-subtitle">
-        Hugo, the world&#39;s fastest framework for building websites
-    </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -191,22 +218,46 @@
 
 
 
-        <time class="article-time--published">Feb 28, 2021</time>
+        <time class="article-time--published">Sep 07, 2021</time>
     </footer></div>
 </header>
 
     <section class="article-content">
-    <h2 id="who-am-i">Who am I</h2>
-<p>我是一名游戏从业者，刚从IM领域转到游戏领域.
-目前在一家公司做游戏后段的工作.</p>
-<h2 id="skill">Skill</h2>
+    <h2 id="screen命令">screen命令</h2>
+<p><code>screen</code> 是一个非常有用的命令。应用场景：</p>
+<ol>
+<li>单个 <code>SSH</code> 会话中使用多个 <code>shell</code> 窗口（会话）的能力</li>
+<li>服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。
+&hellip;</li>
+</ol>
+<h2 id="screen使用">screen使用</h2>
+<h3 id="创建一个窗口">创建一个窗口</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ screen -S name
+</code></pre></div><p>执行自己需要的命令</p>
+<pre><code>$ ...
+</code></pre><h3 id="分离窗口">分离窗口</h3>
+<pre><code>ctrl + A + D
+</code></pre><h3 id="重新连接到screen">重新连接到screen</h3>
+<p>如果只有一个会话可以直接使用 <code>-r</code></p>
+<pre><code>$ screen -r
+</code></pre><p>如果有多个<code>screen</code>会话，可以使用 ls 参数列出</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ screen -ls
+There is a screen on:
+	10698.ttys004.zqj	<span class="o">(</span>Detached<span class="o">)</span>
+<span class="m">1</span> Socket in /var/folders/kt/9s3ff1cs2tn93x3ndv9kdbn00000gn/T/.screen.
+</code></pre></div><p>使用会话<code>id</code>还原会话</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ screen -r <span class="m">10698</span>
+</code></pre></div><p>使用<code>name</code>还原会话, 该 <code>name</code>是 上面 创建会话时使用的<code>name</code>: <code>screen -S name</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">$ screen -r -S name
+</code></pre></div><h3 id="终止会话">终止会话</h3>
 <ul>
-<li>skynet框架 &ndash; 游戏后端</li>
-<li>C/C++  &ndash; IM服务器</li>
-<li>Golang &ndash; 后端</li>
-<li>lua   &ndash; 游戏后端</li>
+<li>ctrl + D</li>
+<li>exit</li>
 </ul>
-
+<h2 id="help">help</h2>
+<p>如果要使用<code>screen</code>的所有功能可以参考手册。</p>
+<pre><code>$ screen -help
+</code></pre>
 </section>
 
 
@@ -223,26 +274,20 @@
 
 
 
-        <span>CC BY-NC-ND</span>
+        <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    <section class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <span class="article-time--modified">
-            最后更新于 Oct 09, 2020 00:00 UTC
-        </span>
-    </section></footer>
+    </footer>
 
     
 </article>
 
-     
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
         
     <div class="disqus-container">
     <div id="disqus_thread"></div>
@@ -302,8 +347,6 @@
         Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
-
-    
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     
@@ -380,7 +423,6 @@
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
             >
-
             </main>
         </div>
         <script 

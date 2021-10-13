@@ -6,7 +6,220 @@
     <description>Recent content in Posts on catrefine</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Oct 2021 17:15:45 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang调用带有后台进程shell脚本可能会被挂起</title>
+      <link>https://example.com/p/golang%E8%B0%83%E7%94%A8%E5%B8%A6%E6%9C%89%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8Bshell%E8%84%9A%E6%9C%AC%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%A2%AB%E6%8C%82%E8%B5%B7/</link>
+      <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
+      
+      <guid>https://example.com/p/golang%E8%B0%83%E7%94%A8%E5%B8%A6%E6%9C%89%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8Bshell%E8%84%9A%E6%9C%AC%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%A2%AB%E6%8C%82%E8%B5%B7/</guid>
+      <description>起因 今天用golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。
+问题还原 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func main() { cmd := exec.Command(&amp;#34;sh&amp;#34;, &amp;#34;test.sh&amp;#34;) out, err := cmd.Output() if err != nil { fmt.Errorf(err.Error()) return } print(fmt.Sprintf(&amp;#34;%s&amp;#34;, out)) } test.sh
+#!/bin/bash  ping localhost &amp;amp; 启动golang程序 go run main.go, 此时会发现cmd.Output()始终不会返回。如果在终端直接执行sh test.sh就会直接返回了。 是什么原因导致的这个问题？
+脚本执行方式 由于ping localhost会一直运行并且输出，我换了一个立即会结束的脚本:
+#!/bin/bash  ls -la  为什么会想到用立即结束的脚本来验证问题，是因为我写这个程序的需求是使用golang写一个web服务来执行脚本。有的脚本是立马n返回，有的是一直输出的。
+ 改成上面后，cmd.Output() 立马就返回了，看来是因为脚本一直有输出，导致 cmd.OutPut()一直不返回。
+终端是如何把一个后台任务的输出显示在自己的输出中的？ 可以参考菜鸟教程：Shell输入/输出重定向
+引用里面的一段话： 大多数 UNIX 系统命令从你的终端接受输入并将所产生的输出发送回到您的终端。一个命令通常从一个叫标准输入的地方读取输入，默认情况下，这恰好是你的终端。同样，一个命令通常将其输出写入到标准输出，默认情况下，这也是你的终端。
+解读源码 Go 等待进程退出的代码 结合这段代码再回到开始的ping localhost &amp;amp;语句（它在被sh执行的脚本中）：</description>
+    </item>
+    
+    <item>
+      <title>英语学习</title>
+      <link>https://example.com/p/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Tue, 12 Oct 2021 14:36:25 +0800</pubDate>
+      
+      <guid>https://example.com/p/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/</guid>
+      <description>缘由 英文像一座大山，下定决心想要跨过去，可迟迟不的法门。，今天看到一片文章怎么开始并坚持读英文原著, 里面有句话： &amp;ldquo;拖延症怎么坚持下去&amp;ndash;每天控制在10-20页，保持在一个阅读的状态是最重要的。&amp;rdquo; 看到这里 想到以前的n+1和日拱一卒，其实是一个意思。道理都懂，我是拖延症犯了。
+借鉴读取英文方法 读书的时候不能光看不过脑子。我认为比较有效的读书方法如下：
+ 读完一段落后，思考作者主要讲的核心，以及核心之下有哪些分支 关键词要查出来。所谓的关键词是指，它决定了句子意思的词，尤其是动词之类的。 把不认识的词存字典里，第二天对照著文章再看一次。日积月累，你认识的词汇会越来越多。 每天控制在10-20页，保持在一个阅读的状态是最重要的。  读书笔记的写法：
+ 不要狂抄句子，这个是看起来爽，实际是偷懒 把关键词，不懂的词写下来 用自己的话总价作者的意图，并且思考作者用什么论据支撑意图；然后，把它们有条理地写到本子上 如果你有拓展阅读、个人心得、疑问、都可以写在旁边  10-12 下定决心 今天是10-12号，按照上面的方法，坚持一个月。</description>
+    </item>
+    
+    <item>
+      <title>经济学书籍</title>
+      <link>https://example.com/p/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B9%A6%E7%B1%8D/</link>
+      <pubDate>Tue, 14 Sep 2021 19:06:01 +0800</pubDate>
+      
+      <guid>https://example.com/p/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B9%A6%E7%B1%8D/</guid>
+      <description>经济学入门 经济学原理 宏观+微观，[美] 曼昆（N.GregoryMankiw） ，北京大学出版社，【第一篇 导言；第4章、第6章；第10章、第11章；第23章、第24章；第25章】 牛奶可乐经济学，[美] 罗伯特·，弗兰克 著；闾佳 译，北京联合出版公司，【全书，以前五章为主】 经济学的思维方式，[美] 保罗·海恩（Paul Heyne），[美] 彼得·勃特克 等 著；史晨 译，机械工业出版社</description>
+    </item>
+    
+    <item>
+      <title>FPS游戏 实现移动功能</title>
+      <link>https://example.com/p/fps%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/</link>
+      <pubDate>Sun, 12 Sep 2021 20:43:34 +0800</pubDate>
+      
+      <guid>https://example.com/p/fps%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/</guid>
+      <description>三种实现FPS Controller的区别  Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等  Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟main camera 绑定
+using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.UI; public class FPMouseLook : MonoBehaviour { private Transform cameraTransform; [SerializeField] private Transform characterTransform; private Vector3 cameraRotation; public float MouseSensitivity; public Vector2 MaxMinAngle; // Start is called before the first frame update  void Start() { cameraTransform = transform; } // Update is called once per frame  void Update() { var tmp_MouseX = Input.</description>
+    </item>
+    
+    <item>
+      <title>免费Music</title>
+      <link>https://example.com/p/%E5%85%8D%E8%B4%B9music/</link>
+      <pubDate>Wed, 08 Sep 2021 14:47:14 +0800</pubDate>
+      
+      <guid>https://example.com/p/%E5%85%8D%E8%B4%B9music/</guid>
+      <description>介绍一个可以免费听音乐的方法 环境
+ docker mac  安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker  $dir_name 是 你自己宿主机的目录。可以自定义
+ 访问：127.0.0.1:264
+就可以放心使用， 同事推荐的，贼好用。</description>
+    </item>
+    
+    <item>
+      <title>U3D Transform类</title>
+      <link>https://example.com/p/u3d-transform%E7%B1%BB/</link>
+      <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
+      
+      <guid>https://example.com/p/u3d-transform%E7%B1%BB/</guid>
+      <description>Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。
+属性  Position（坐标） Rotation（旋转） Scale（缩放）  脚本中类中的方法就是对它们的改变。 而我们也可以在Scene中和Inspector中直接进行设置。
+修改属性 修改 Position
+var pos =transform.position; transform.position.x; transform.position.y; transform.position.z; transform.position = new Vector3(1f,1f,1f); 修改Rotation
+transform.localEulerAngles.x; transform.localEulerAngles.y; transform.localEulerAngles.z; transform.localEulerAngles = new Vector3(90f,0,0); rotation = new Rotation(x,y,z,w); //修改2： //如果物体面板Rotation (x=22.5,y=0,z=0) //用代码实现方法: transform.Rotate(22.5f,0,0); 修改Scale, 缩放,没有本地和世界分别
+transform.localScale.x; transform.localScale.y; transform.localScale.z; transform.localScale = new Vector3(1f,1f,1f); 在Unity中不能对transform.position.x/y/z直接赋值的原因  Vector3是一个结构体，而position是一个自动实现的属性。 在C#里，结构体是值类型的，值类型在通过方法传递的时候，所传递的只是值的副本。C#的属性可以说是两个分别名为get和set的方法 当我们写出形如 transform.position.x = 1 这样的代码时，是在通过get方法得到position，然后修改position的x字段的值。 由于position是结构体类型的，get得到的也只是position的一个副本，而对这个副本所作出的任何修改，都对原positon没有任何影响，因此这样的修改是毫无意义的。  坐标系 A本地坐标 + A父物体世界坐标 = A在上一级节点的相对坐标 A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中的坐标</description>
+    </item>
+    
+    <item>
+      <title>Vim 输入模式 语言改变</title>
+      <link>https://example.com/p/vim-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F-%E8%AF%AD%E8%A8%80%E6%94%B9%E5%8F%98/</link>
+      <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
+      
+      <guid>https://example.com/p/vim-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F-%E8%AF%AD%E8%A8%80%E6%94%B9%E5%8F%98/</guid>
+      <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。
+跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode
+在idea中使用 vim 插件：
+ IdeaVim IdeaVimExtension  我们需要在 用户目录下创建 .ideavimrc 文件, 并输入以下内容
+set keep-english-in-normal set keep-english-in-normal-and-restore-in-insert $ source ~/.ideavimrc 重启 idea 可以看到效果了。
+IdeaVimExtension插件的文档： 为IdeaVim插件增加自动切换为英文输入法的功能 输入法自动切换功能不会默认启用 编辑器中normal模式下输入输入下面的指令以启用自动切换输入法功能：
+:set keep-english-in-normal 开启输入法自动切换功能 :set keep-english-in-normal-and-restore-in-insert 回到insert模式时恢复输入法 :set nokeep-english-in-normal-and-restore-in-insert 保留输入法自动切换功能，但是回到insert模式不恢复输入法 :set nokeep-english-in-normal 关闭输入法自动切换功能 也可以通过将set keep-english-in-normal[-and-restore-in-insert]加入到~/.ideavimrc文件中并重启IDE来启用插件功能。 注意:支持MacOS和Windows, 通过fcitx-remote支持Linux MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国键盘 Linux需要使用fcitx输入法，通过fcitx-remote切换 在macOS中,normal模式的输入法可以通过keep_input_source_in_normal 来设置,例如let keep_input_source_in_normal=&amp;quot;com.apple.keylayout.ABC&amp;quot;
+在vscode中使用 vim 参考 vscode 插件： https://github.com/VSCodeVim/Vim#input-method
+环境  mac 下载 vscodevim插件 im-select  安装 im-select $ git clone https://github.</description>
+    </item>
+    
+    <item>
+      <title>linue Screen</title>
+      <link>https://example.com/p/linue-screen/</link>
+      <pubDate>Tue, 07 Sep 2021 10:02:16 +0800</pubDate>
+      
+      <guid>https://example.com/p/linue-screen/</guid>
+      <description>screen命令 screen 是一个非常有用的命令。应用场景：
+ 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip;  screen使用 创建一个窗口 $ screen -S name 执行自己需要的命令
+$ ... 分离窗口 ctrl + A + D 重新连接到screen 如果只有一个会话可以直接使用 -r
+$ screen -r 如果有多个screen会话，可以使用 ls 参数列出
+$ screen -ls There is a screen on: 10698.ttys004.zqj	(Detached) 1 Socket in /var/folders/kt/9s3ff1cs2tn93x3ndv9kdbn00000gn/T/.screen. 使用会话id还原会话
+$ screen -r 10698 使用name还原会话, 该 name是 上面 创建会话时使用的name: screen -S name
+$ screen -r -S name 终止会话  ctrl + D exit  help 如果要使用screen的所有功能可以参考手册。</description>
+    </item>
+    
+    <item>
+      <title>U3D PhysicalSystem</title>
+      <link>https://example.com/p/u3d-physicalsystem/</link>
+      <pubDate>Mon, 06 Sep 2021 11:23:30 +0800</pubDate>
+      
+      <guid>https://example.com/p/u3d-physicalsystem/</guid>
+      <description>U3D物理系统 刚体(Rigidbody)、碰撞体(Colliders)、触发器 参照 Unity 官方文档的以下几篇文章，重新进行了整理。 PhysicsOverview Rigidbody2D Rigidbody
+物理的碰撞条件 Unity3D内置物理引擎，可以模拟物理效果。典型的一个物理效果就是碰撞。 两个物体发生物理碰撞的必要条件是：两个物体都带有Collider（碰撞器）组件，其中一个物体带有Rigidbody（刚体）组件，并且是运动的物体带有Rigidbody组件。
+Collider，碰撞器组件 Collider，即碰撞器。这些碰撞器组件名字带2D的都是继承自Collider2D类，名字没带2D的都继承自Collider类，一般3D物体的使用Collider碰撞器，2D物体使用Collider2D碰撞器。
+Rigidbody，刚体组件 Rigidbody，刚体组件，刚体能让你的游戏对象被物理引擎所控制，它能通过受到推力和扭力来实现真实的物理表现效果。 刚体受到力的作用，会改变运动状态。假设初始状态是禁止的，那么施加一个力之后，刚体会动起来。动起来的速度与刚体受到的力成正比，与刚体的质量成反比。
+// 获取刚体组件 Rigidbody rigidBody = gameObject.GetComponent&amp;lt;Rigidbody&amp;gt;(); // 给刚体一个向量为(1, 0, 0)的力 rigidBody.AddForce(new Vector3(1, 0, 0)); // 设置刚体的质量为1 rigidBody.mass = 1; // 给刚体设置速度 rigidBody.velocity = new Vector3(1, 0, 0); // 给刚体设置角速度 rigidBody.angularVelocity = new Vector3(0, 1, 0); // 设置刚体的空气阻力为0 rigidBody.drag = 0; // 设置刚体的角阻力为0.05f rigidBody.angularDrag = 0.05f; 上述属性除了可以用代码调节以外，还可以在inspector调节
+Rigidbody有个Use Gravity属性，意思就是是否使用重力，默认是勾选着的，物体受到重力作用直接垂直往下掉了。
+碰撞器类型   Static Collider，静态碰撞器 静态碰撞器是指只挂了Collider而没挂Rigidbody的游戏对象。这类对象会保持静止或者很轻微的移动。这类碰撞器被刚体碰撞后不会移动。 皮皮：“难怪刚刚被撞的另一个球不会动，因为它是一个静态碰撞器。”</description>
+    </item>
+    
+    <item>
+      <title>重力摩托项目</title>
+      <link>https://example.com/p/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 06 Sep 2021 07:20:45 +0800</pubDate>
+      
+      <guid>https://example.com/p/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98%E9%A1%B9%E7%9B%AE/</guid>
+      <description>重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2
+环境 Unity3D
+开始  新建一个2D项目  </description>
+    </item>
+    
+    <item>
+      <title>Centos7.2的gcc4.8升级为4.9</title>
+      <link>https://example.com/p/centos7.2%E7%9A%84gcc4.8%E5%8D%87%E7%BA%A7%E4%B8%BA4.9/</link>
+      <pubDate>Wed, 01 Sep 2021 18:13:41 +0800</pubDate>
+      
+      <guid>https://example.com/p/centos7.2%E7%9A%84gcc4.8%E5%8D%87%E7%BA%A7%E4%B8%BA4.9/</guid>
+      <description>环境  CentOS 7.2.1511 Docker  我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。
+$ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。
+$ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件放在gcc根目录，再屏蔽contrib/download_prerequisites文件里面的wget操作，再重新执行一次./contrib/download_prerequisites。这样的话，后面编译gcc时，这几个依赖库会自动先编译，不用自动手动一个个编译。
+cloog-0.18.1.tar.gz gmp-4.3.2.tar.bz2 isl-0.12.2.tar.bz2 mpc-0.8.1.tar.gz mpfr-2.4.2.tar.bz2 编译 创建编译目录，开始编译
+$ cd .. &amp;amp;&amp;amp; mkdir build-gcc &amp;amp;&amp;amp; cd build-gcc $ ../gcc-4.9.3/configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++ --enable-plugin --enable-initfini-array --disable-libgcj --enable-gnu-indirect-function --with-tune=generic --disable-multilib $ make -j4 &amp;amp;&amp;amp; make install  编译时间有点长，请耐心等待</description>
+    </item>
+    
+    <item>
+      <title>shell Except 使用</title>
+      <link>https://example.com/p/shell-except-%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
+      
+      <guid>https://example.com/p/shell-except-%E4%BD%BF%E7%94%A8/</guid>
+      <description>Except 参数 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的echo exit 退出expect脚本 eof expect执行结束 退出 set 定义变量 puts 输出变量 set timeout 设置超时时间 log_user 是否开启日志 0/1 log_file 设置日志路径,log_user = 1时才有效 一个完整的示例 我是用skynet的debug_console作为示例:
+#!/usr/bin/expect set timeout 35 log_user 1 log_file colle1.log spawn nc 127.0.0.1 10001 expect &amp;#34;Welcome to skynet console&amp;#34; {send &amp;#34;mem\n&amp;#34;} expect eof </description>
+    </item>
+    
+    <item>
+      <title>U3D UGUI</title>
+      <link>https://example.com/p/u3d-ugui/</link>
+      <pubDate>Fri, 20 Aug 2021 14:15:41 +0800</pubDate>
+      
+      <guid>https://example.com/p/u3d-ugui/</guid>
+      <description>Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性	功能
+ Text	需要显示的文本 Font	显示文本的字体 如：微软雅黑，宋体等 Font Style	显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size	显示字体的大小 Line Spacing	行与行之间的垂直距离 Alignment	文本的水平和垂直方向的对齐方式 Align by Geometry	使用字形几何范围执行水平对齐，而不是字形度量 Horizontal Overflow	用于处理文本宽度超出文本框的情况的方法，有 Wrap (隐藏)和Overflow (溢出)两个选项 Vertical Overflow	用于处理文本高度超出文本框的情况的方法，有 Truncate (截断)和Overflow (溢出)两个选项 Best Fit	忽略 Size 属性，将文本合适的显示在文本框内 Color	文本的颜色 Material	用来渲染文本的材质  其中水平溢出和垂直溢出的两个选项效果：
+ Horizontal Overflow —— 水平溢出  Overflow Wrap   Vertical Overflow —— 垂直溢出  Truncate Overflow    字体 静态设置 我们想改变文本的字体的话，我们可以下载一些字体包导入到 Unity 中</description>
+    </item>
+    
+    <item>
+      <title>golang操作redis</title>
+      <link>https://example.com/p/golang%E6%93%8D%E4%BD%9Credis/</link>
+      <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
+      
+      <guid>https://example.com/p/golang%E6%93%8D%E4%BD%9Credis/</guid>
+      <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。
+redis分布式锁 锁需要的几个组件
+ 获取锁 删除锁  分布式锁还需要
+ 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止死锁)  golang代码 推荐使用redis的连接池
+pool := redis.Pool{ MaxIdle: 8, MaxActive: 0, IdleTimeout: 100, Dial: func() (redis.Conn, error) { return redis.Dial(&amp;#34;tcp&amp;#34;, &amp;#34;127.0.0.1:6100&amp;#34;) }, } 通过lua脚本保证获取锁/加过期时间和获取锁的值/删除锁为原子操作
+var ( updateLockExpireUidScript = redis.NewScript(1, ` local res = redis.call(&amp;#34;SETNX&amp;#34;, KEYS[1], ARGV[1]) if res == 1 then return redis.call(&amp;#34;EXPIRE&amp;#34;, KEYS[1], ARGV[2]) end return res `) deleteLockByUidScript = redis.NewScript(1, ` local res = redis.call(&amp;#34;GET&amp;#34;, KEYS[1]) if res == ARGV[1] then return redis.</description>
+    </item>
+    
+    <item>
+      <title>Auto_findroad</title>
+      <link>https://example.com/p/auto_findroad/</link>
+      <pubDate>Thu, 20 May 2021 17:39:34 +0800</pubDate>
+      
+      <guid>https://example.com/p/auto_findroad/</guid>
+      <description>自动寻路 有限状态机器 行为树 </description>
+    </item>
+    
+    <item>
+      <title>Lua next 的使用</title>
+      <link>https://example.com/p/lua-next-%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
+      
+      <guid>https://example.com/p/lua-next-%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例：
+local t = { [&amp;quot;a&amp;quot;] = 1, [&amp;quot;b&amp;quot;] = 2, [&amp;quot;c&amp;quot;] = 3 } 使用lua_next遍历table t
+int traversing(lua_State *L) { lua_pushnil(L); /*此时栈的状态 ------- | -1 nil | -2 table NUMBER_TABLE ------- */ while (lua_next(L, -2)) { /*此时栈的状态 ------- | -1 value | -2 key | -3 table NUMBER_TABLE ------- */ if (lua_isnumber(L, -2)) printf(&amp;#34;nkey: %d\t&amp;#34;, luaL_checkinteger(L, -2)); else if (lua_isstring(L, -2)) printf(&amp;#34;skey: %s\t&amp;#34;, luaL_checkstring(L, -2)); if (lua_isnumber(L, -1)) printf(&amp;#34;nvalue: %d\t&amp;#34;, luaL_checkinteger(L, -1)); else if (lua_isstring(L, -1)) printf(&amp;#34;svalue: %s\t&amp;#34;, luaL_checkstring(L, -1)); /*此时栈的状态 ------- | -1 value | -2 key | -3 table NUMBER_TABLE ------- */ lua_pop(L, 1); /*此时栈的状态 ------- | -1 key | -2 table NUMBER_TABLE ------- */ } lua_pop(L, 1); /*此时栈的状态 ------- | -1 table NUMBER_TABLE ------- */ return 0; } lua_next(L, -2) 这个函数的工作过程是：</description>
+    </item>
+    
+    <item>
+      <title>Lua的api</title>
+      <link>https://example.com/p/lua%E7%9A%84api/</link>
+      <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
+      
+      <guid>https://example.com/p/lua%E7%9A%84api/</guid>
+      <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释
+/* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果index=4，那么压入2个nil元素 */ void lua_settop (lua_State *L, int index); 使用代码测试
+int lua_test(lua_State *L) { int pop_num = lua_tointeger(L,1); printf(&amp;#34;pop_num= %d\n&amp;#34;, pop_num); lua_settop(L,0); printf(&amp;#34;1-top %d\r\n&amp;#34;,lua_gettop(L)); lua_pushinteger(L,31); lua_pushinteger(L,32); lua_pushinteger(L,33); lua_pushinteger(L,34); printf(&amp;#34;2-top %d\r\n&amp;#34;,lua_gettop(L)); lua_pop(L,pop_num); lua_settop(L, -2); //清除一个栈顶  printf(&amp;#34;3-top %d\r\n&amp;#34;,lua_gettop(L)); printf(&amp;#34;栈底 %d\r\n&amp;#34;,lua_tointeger(L,1)); printf(&amp;#34;栈顶 %d\r\n&amp;#34;,lua_tointeger(L,-1)); return 0; } 输出
+pop_num= 0 1-top 0 2-top 4 3-top 3 栈底 31 栈顶 33 总结lua_settop(L, idx)函数
+ idx=0 栈中元素全部移除 idx&amp;gt;0 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 idx&amp;lt;0 idx=-1表示栈顶，栈不受影响；idx=-2表示清除一个栈顶元素,一次类推；  lua_pop 从代码里看到</description>
+    </item>
+    
     <item>
       <title>Hugo</title>
       <link>https://example.com/p/hugo/</link>

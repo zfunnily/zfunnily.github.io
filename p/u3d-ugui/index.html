@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性	功能
+ Text	需要显示的文本 Font	显示文本的字体 如：微软雅黑，宋体等 Font Style	显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size	显示字体的大小 Line Spacing	行与行之间的垂直距离 Alignment	文本的水平和垂直方向的对齐方式 Align by Geometry	使用字形几何范围执行水平对齐，而不是字形度量 Horizontal Overflow	用于处理文本宽度超出文本框的情况的方法，有 Wrap (隐藏)和Overflow (溢出)两个选项 Vertical Overflow	用于处理文本高度超出文本框的情况的方法，有 Truncate (截断)和Overflow (溢出)两个选项 Best Fit	忽略 Size 属性，将文本合适的显示在文本框内 Color	文本的颜色 Material	用来渲染文本的材质  其中水平溢出和垂直溢出的两个选项效果：
+ Horizontal Overflow —— 水平溢出  Overflow Wrap   Vertical Overflow —— 垂直溢出  Truncate Overflow    字体 静态设置 我们想改变文本的字体的话，我们可以下载一些字体包导入到 Unity 中'><title>U3D UGUI</title>
+
+<link rel='canonical' href='https://example.com/p/u3d-ugui/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='U3D UGUI'>
+<meta property='og:description' content='Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性	功能
+ Text	需要显示的文本 Font	显示文本的字体 如：微软雅黑，宋体等 Font Style	显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size	显示字体的大小 Line Spacing	行与行之间的垂直距离 Alignment	文本的水平和垂直方向的对齐方式 Align by Geometry	使用字形几何范围执行水平对齐，而不是字形度量 Horizontal Overflow	用于处理文本宽度超出文本框的情况的方法，有 Wrap (隐藏)和Overflow (溢出)两个选项 Vertical Overflow	用于处理文本高度超出文本框的情况的方法，有 Truncate (截断)和Overflow (溢出)两个选项 Best Fit	忽略 Size 属性，将文本合适的显示在文本框内 Color	文本的颜色 Material	用来渲染文本的材质  其中水平溢出和垂直溢出的两个选项效果：
+ Horizontal Overflow —— 水平溢出  Overflow Wrap   Vertical Overflow —— 垂直溢出  Truncate Overflow    字体 静态设置 我们想改变文本的字体的话，我们可以下载一些字体包导入到 Unity 中'>
+<meta property='og:url' content='https://example.com/p/u3d-ugui/'>
+<meta property='og:site_name' content='catrefine'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2021-08-20T14:15:41&#43;08:00'/><meta property='article:modified_time' content='2021-08-20T14:15:41&#43;08:00'/>
+<meta name="twitter:title" content="U3D UGUI">
+<meta name="twitter:description" content="Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性	功能
+ Text	需要显示的文本 Font	显示文本的字体 如：微软雅黑，宋体等 Font Style	显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size	显示字体的大小 Line Spacing	行与行之间的垂直距离 Alignment	文本的水平和垂直方向的对齐方式 Align by Geometry	使用字形几何范围执行水平对齐，而不是字形度量 Horizontal Overflow	用于处理文本宽度超出文本框的情况的方法，有 Wrap (隐藏)和Overflow (溢出)两个选项 Vertical Overflow	用于处理文本高度超出文本框的情况的方法，有 Truncate (截断)和Overflow (溢出)两个选项 Best Fit	忽略 Size 属性，将文本合适的显示在文本框内 Color	文本的颜色 Material	用来渲染文本的材质  其中水平溢出和垂直溢出的两个选项效果：
+ Horizontal Overflow —— 水平溢出  Overflow Wrap   Vertical Overflow —— 垂直溢出  Truncate Overflow    字体 静态设置 我们想改变文本的字体的话，我们可以下载一些字体包导入到 Unity 中">
+    </head>
+    <body class="">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script><div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hue2149af5b84951023ea396d2f7da224b_528608_300x0_resize_q75_box.jpg" width="300"
+                            height="421" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://example.com">catrefine</a></h1>
+        <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+            <main class="main full-width">
+    <div id="article-toolbar">
+        <a href="https://example.com" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <h2 class="article-title">
+        <a href="/p/u3d-ugui/">U3D UGUI</a>
+    </h2>
+
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Aug 20, 2021</time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h2 id="text">Text</h2>
+<h3 id="text的属性">Text的属性</h3>
+<p>在 <code>Unity</code> 的 <code>Hierarchy</code> 面板上右键–&gt;<code>UI</code>–&gt;<code>Text</code>, 在 <code>Inspector</code> 面板上查看属性
+属性	功能</p>
+<ul>
+<li><code>Text</code>	需要显示的文本</li>
+<li><code>Font</code>	显示文本的字体 如：微软雅黑，宋体等</li>
+<li><code>Font Style</code>	显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项</li>
+<li><code>Font Size</code>	显示字体的大小</li>
+<li><code>Line Spacing</code>	行与行之间的垂直距离</li>
+<li><code>Alignment</code>	文本的水平和垂直方向的对齐方式</li>
+<li><code>Align by Geometry</code>	使用字形几何范围执行水平对齐，而不是字形度量</li>
+<li><code>Horizontal Overflow</code>	用于处理文本宽度超出文本框的情况的方法，有 Wrap (隐藏)和Overflow (溢出)两个选项</li>
+<li><code>Vertical Overflow</code>	用于处理文本高度超出文本框的情况的方法，有 Truncate (截断)和Overflow (溢出)两个选项</li>
+<li><code>Best Fit</code>	忽略 Size 属性，将文本合适的显示在文本框内</li>
+<li><code>Color</code>	文本的颜色</li>
+<li><code>Material</code>	用来渲染文本的材质</li>
+</ul>
+<p>其中水平溢出和垂直溢出的两个选项效果：</p>
+<ol>
+<li><code>Horizontal Overflow</code> —— 水平溢出
+<ul>
+<li><code>Overflow</code></li>
+<li><code>Wrap</code></li>
+</ul>
+</li>
+<li>Vertical Overflow —— 垂直溢出
+<ul>
+<li><code>Truncate</code></li>
+<li><code>Overflow</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="字体">字体</h3>
+<h4 id="静态设置">静态设置</h4>
+<p>我们想改变文本的字体的话，我们可以下载一些字体包导入到 <code>Unity</code> 中</p>
+<ul>
+<li>Assets 目录下新建一个文件夹 Fonts 用来专门存放字体</li>
+<li>然后 <code>Font</code> 属性中选择你导入的字体包就行了，也可直接 拖动字体 添加引用</li>
+</ul>
+<h4 id="动态设置">动态设置</h4>
+<p>我们可以使用代码动态的设置Text的各种属性</p>
+<div class="highlight"><pre class="chroma"><code class="language-C#" data-lang="C#"><span class="k">using</span> <span class="nn">UnityEngine</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">UnityEngine.UI</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Font</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Text</span> <span class="n">TestText</span><span class="p">;</span>
+    <span class="c1">// Start is called before the first frame update
+</span><span class="c1"></span>    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">TestText</span><span class="p">.</span><span class="n">fontSize</span> <span class="p">=</span> <span class="m">14</span><span class="p">;</span>
+        <span class="n">TestText</span><span class="p">.</span><span class="n">fontStyle</span> <span class="p">=</span> <span class="n">FontStyle</span><span class="p">.</span><span class="n">Normal</span><span class="p">;</span>
+        <span class="n">TestText</span><span class="p">.</span><span class="n">color</span> <span class="p">=</span> <span class="n">UnityEngine</span><span class="p">.</span><span class="n">Color</span><span class="p">.</span><span class="n">blue</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Update is called once per frame
+</span><span class="c1"></span>    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="image">Image</h2>
+<p><code>Image</code> 组件是 <code>UGUI</code> 中最常用的组件。作用：控制/显示图片</p>
+<h3 id="image的属性">Image的属性</h3>
+<p>在 Unity 的 Hierarchy 面板上右键–&gt;<code>UI</code>–&gt;<code>Image</code></p>
+<ul>
+<li>Source Image	需要显示图片来源（文件引用）</li>
+<li>Color	图片的颜色</li>
+<li>Material	渲染图像的材质</li>
+<li>Raycast Target	能否接收到射线检测</li>
+<li>Image Type	图片的排列类型 Simple (普通模式)，Sliced (九宫格)，Tiled (平铺),Filed (填充)</li>
+<li>Preserve Aspect	使图片保留现有尺寸</li>
+<li>Set Native Size	将图像尺寸设置为原始图片的像素大小</li>
+</ul>
+<h3 id="图片导入设置">图片导入设置</h3>
+<ol>
+<li>把图片放入工程目录。</li>
+<li>为了在 <code>Image</code> 组件上使用我们想要的图片，我们需要将图片的纹理类型改为：<code>Sprite/精灵</code>，图片才可正常使用。</li>
+<li>设置 <code>Image</code> 的 <code>Source Image</code> 属性, 找到我们导入的图片。</li>
+</ol>
+<h3 id="image-type属性详解">Image Type属性详解</h3>
+<ul>
+<li>Simple: 简单模式-Use Sprite Mesh：是否使用图片网格，勾选-此选项，我们的图片使用 <code>Unity</code> 帮我们生成的图片网格;</li>
+<li>Sliced:  九宫格模式 Sliced九宫切图。效果：保证(除中间部分)，其他切图部分被拉伸不变形;</li>
+<li>TiledL: 平铺模式</li>
+<li>Filed: 填充，这个适合做技能冷却效果</li>
+</ul>
+<h2 id="button">Button</h2>
+<p>Button 组件是一个按钮组件。它在我们开发中经常使用，通过点击按钮：执行某些事件，动作，切换状态等</p>
+<h3 id="button-属性">Button 属性</h3>
+<p>在Unity的 Hierarchy 面板上右键–&gt;<code>UI</code>–&gt;<code>Button</code>
+一个Button对象比Image对象多了：</p>
+<ol>
+<li>Button 组件</li>
+<li>Text 子物体</li>
+</ol>
+<ul>
+<li>Interactable	是否启用按钮，取消则按钮出去失效状态</li>
+<li>Color	图片的颜色</li>
+<li>Transition	按钮状态过渡的类型：None、 Color Tint 、 Sprotes Swap、Animation四种类型，默认为 Color Tint</li>
+<li>Navigation	导航</li>
+<li>On Click	按钮点击事件的列表。点击后执行哪些函数，在这里可以手动添加</li>
+</ul>
+<p>通过脚本，动态绑定监听函数:</p>
+<pre><code>1 先获取到 目标对象的Button 组件
+2 通过.onClick.Addlistener(函数) 的方式进行动态添加
+3 如函数具有参数，可通过Lambda表达式 .onClick.AddListener(Lambda表达式) 动态添加
+4 如函数具有参数，可通过委托 .onClick.AddListener(delegate {函数;}) 动态添加
+</code></pre><h2 id="toggle---开关">Toggle &ndash;开关</h2>
+<p>我们在项目开发的时候，有时需要一个按钮，来模拟 / 控制开关,此时，如果用 Button 的话，作为开发者还需要自己写一些判定逻辑,来告诉电脑，这个 Button 按钮是打开、还是关闭</p>
+<ol>
+<li>Create Toggle 创建开关组件: UI → Toggle 即可完成创建</li>
+<li>Custom Template —— 可自定义调节模板: 可自由调节颜色/自由更换布局或是图片</li>
+<li>Toggle 组件与 Button 不同之处</li>
+</ol>
+<ul>
+<li><code>Graphic</code> ：用来控制 <code>Toggle</code> 开关图片的显示/隐藏
+2 <code>IsOn</code> ：用来表示 <code>Toggle</code> 开关状态
+3 <code>Group</code> ：用来表示 <code>Toggle</code> 所属开关组/群</li>
+</ul>
+<ol start="3">
+<li>OnChangeValue —— 值改变时调用</li>
+</ol>
+<h2 id="dropdown">Dropdown</h2>
+<p>下拉框</p>
+<h3 id="创建布局">创建布局</h3>
+<ol>
+<li>创建下拉菜单模板
+右键层次列表→ <code>UI</code> → <code>Dropdown</code></li>
+<li>设置属性</li>
+</ol>
+<h3 id="demo-script">Demo Script</h3>
+<pre><code>using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DropDownTest : MonoBehaviour
+{
+    public Dropdown dropDown;
+    // Start is called before the first frame update
+    void Start()
+    {
+        dropDown = GameObject.Find(&quot;Dropdown&quot;).GetComponent&lt;Dropdown&gt;();
+       //是否可以点击
+        dropDown.interactable = true;
+
+        #region 添加下拉选项，，，设置文字，底图
+        //添加一个下拉选项
+        Dropdown.OptionData data = new Dropdown.OptionData();
+        data.text = &quot;方案一&quot;;
+        //data.image = &quot;指定一个图片做背景不指定则使用默认&quot;；
+        dropDown.options.Add(data);
+
+        //另一种添加方式 , 不过用起来并不比第一个方便，
+        List&lt;Dropdown.OptionData&gt; listOptions = new List&lt;Dropdown.OptionData&gt;();       
+        listOptions.Add(new Dropdown.OptionData(&quot;方案二&quot;));
+        listOptions.Add(new Dropdown.OptionData(&quot;方案三&quot;));
+        dropDown.AddOptions(listOptions);
+
+        //设置显示字体大小
+        dropDown.captionText.fontSize = 14;
+        //dropDown.captionImage = &quot;底图&quot;;
+        //设置要复制字体大小
+        dropDown.itemText.fontSize = 15;
+        //dropDown.itemImage = &quot;底图&quot;;
+
+        //PS：我一般是使用循环 使用第一种形式添加
+        #endregion
+
+        #region 添加完成就可以使用了，那么当我们想要复用怎么办呢？，这时就用到了移除OptionData，下面的每个注释打开都是一个功能
+        //直接清理掉所有的下拉选项，
+        // dropDown.ClearOptions();
+        //亲测不是很好用
+        //dropDown.options.Clear(); 
+
+        //对象池回收时，有下拉状态的，直接干掉... (在极限点击测试的情况下会出现)
+        // if (dropDown.transform.childCount == 3)
+        // {
+        //     Destroy(dropDown.transform.GetChild(2).gameObject);
+        // }
+
+        //移除指定数据   参数：OptionData
+        // dropDown.options.Remove(data);
+        //移除指定位置   参数:索引
+        // dropDown.options.RemoveAt(0); 
+        #endregion
+
+        #region 添加监听函数
+        //当点击后值改变是触发 (切换下拉选项)
+        dropDown.onValueChanged.AddListener((int v) =&gt; ConsoleResult(v));
+        //若有多个，可以将自己当做参数传递进去，已做区分。
+        //dropDown.onValueChanged_1.AddListener((int v) =&gt; OnValueChange(dropDown.gameobject,v));
+        #endregion 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public int ConsoleResult(int value)
+    {
+        UnityEngine.Debug.Log(&quot;1231231&quot;);
+        UnityEngine.Debug.Log(value);
+        switch (value)
+        {
+            case 0:
+            UnityEngine.Debug.Log(&quot;第一页&quot;);
+            break;
+            case 1:
+            UnityEngine.Debug.Log(&quot;第二页&quot;);
+            break;
+            case 2:
+            UnityEngine.Debug.Log(&quot;第三页&quot;);
+            break;
+        }
+        return 1;
+    }
+}
+</code></pre><p>这段代码的作用是</p>
+<ol>
+<li>添加属性</li>
+<li>绑定onValueChange事件
+我试过使用<code>Unity</code>自带的<code>On Value Change</code>事件。但是不成功。
+注意：需要另外再创建 右键-&gt; <code>UI</code> -&gt; <code>Create Empty</code>. 然后把脚本跟创建的该<code>Empty</code> 绑定。然后在<code>Drop Down</code>里选择 <code>DropDown</code></li>
+</ol>
+<h3 id="注意事项">注意事项</h3>
+<ol>
+<li>手动添加监听事件，需绑定动态方法（<code>Unity</code>会自动生成）</li>
+<li>设置自己需要的默认项，默认为 0 ，当下拉菜单弹起时，默认就是第一项</li>
+<li>下拉菜单的机制，就是已经被选中的选项，如果再次点击是不会调用函数方法的！！！
+（也就是说，你已经选择了第一页，再次点击第一页，是不会调用任何函数的）</li>
+</ol>
+<h2 id="inputfield">InputField</h2>
+<p>在 <code>Unity</code> 的 <code>Hierarchy</code> 面板上右键–&gt;<code>UI</code>–&gt;<code>InputFiel</code></p>
+<ol>
+<li><code>Placeholder</code> ：用来提示用户的占位符</li>
+<li><code>Text</code> ：用来输入内容</li>
+</ol>
+<h3 id="属性">属性</h3>
+<ul>
+<li>TextComponent	用来管理输入的文本组件</li>
+<li>Text	输入的内容 ( 我们可以在代码中用 InPutField.text 获取到 )</li>
+<li>Character Limit	字符限制类型，可以限制最大字符数的值。</li>
+<li>Content Type	内容类型，定义输入内容接受/限制的字符类型</li>
+<li>Line Type	行类型。单行、多行，多行回车换行</li>
+<li>Placeholder	占位符，用来提示输入的内容，当点击输入框后会隐藏</li>
+<li>Caret Blink Rate	输入框上的光标的闪烁频率</li>
+<li>Selection Color	选中文本的背景颜色</li>
+<li>Hide Mobile Input (iOS only)	隐藏移动输入内容，仅IOS有用</li>
+</ul>
+<h3 id="content-type---内容类型">Content Type &ndash;内容类型</h3>
+<ul>
+<li>Standard	标准，可以输入任何字符</li>
+<li>Auto corrected	自动更正，可以自动更正用户输入，并建议输入内容</li>
+<li>Integer Number	整数，只允许输入整数</li>
+<li>Decimal Number	十进制数，仅允许输入数字和小数点后一位</li>
+<li>Alphanumeric	字母数字，允许字母和数字。无法输入符号</li>
+<li>Name	名称(支持中文)自动将每个单词的首字母大写。(用户可以使用Delete键绕过大小写规则 )</li>
+<li>Email Address	电子邮件地址，允许您输入最多包含一个@符号的字母数字字符串</li>
+<li>Password	密码：用 * 表示输入的字符，从而隐藏输入内容。(允许符号)</li>
+<li>Pin	用 * 号表示输入的字符。仅允许输入整数</li>
+<li>Custom	自定义：允许自定义行类型、输入类型、默认键盘类型、字符验证</li>
+</ul>
+<h3 id="line-type--行类型">Line Type —— 行类型</h3>
+<ul>
+<li>Single Line	单行 ：仅允许文本在一行上</li>
+<li>Multi Line Submit	多行自动换行 ：允许文本使用多行。仅在一行写满后使用新行</li>
+<li>Multi Line Newline	多行回车新建行 ：用户可以随时通过按 Enter 键来新建行，继续输入</li>
+</ul>
+<h3 id="custom--自定义">Custom —— 自定义</h3>
+<ul>
+<li>Default	目标平台的默认键盘</li>
+<li>ASCLL Capable	带标准ASCII键的键盘。</li>
+<li>Numbers And Punctuation	键盘与数字和标点符号键</li>
+<li>URL	键盘与URL输入键</li>
+<li>Number Pad	键盘与标准数字键</li>
+<li>Phone Pad	键盘与适合键入电话号码的布局</li>
+<li>NamePhone Pad	键盘与字母数字键</li>
+<li>Email Address	带有适合键入电子邮件地址的其他键的键盘</li>
+<li>Nintendo Network Account	带有网络账号键的键盘</li>
+<li>Social	键盘与常用于社交媒体上的符号键，如Twitter</li>
+<li>Search	键盘上带有“.” 空格键旁边的键，适合键入搜索词</li>
+</ul>
+<h2 id="exemple">Exemple</h2>
+<p>实现一个小 Demo：获取用户的账号密码：简单的搭建一个用户输入界面</p>
+<ol>
+<li>两个 <code>InputField</code> 输入框分别命名： <code>Account</code> 和 <code>Password</code></li>
+<li>一个 <code>Button</code> 按钮</li>
+<li>将密码的输入框的<code>Content Type</code> 改为 <code>Password</code></li>
+</ol>
+<p>我用代码将组键和函数绑定</p>
+<pre><code>using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class EgInputField : MonoBehaviour
+{
+    public InputField Account; //账号输入框
+    public InputField Password; //密码框
+    public Button LoginButton; //登录按钮
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Account = GameObject.Find(&quot;Account&quot;).GetComponent&lt;InputField&gt;();
+        Password = GameObject.Find(&quot;Password&quot;).GetComponent&lt;InputField&gt;();
+        LoginButton.onClick.AddListener(Login);
+    }
+    public void Login()
+    {
+        UnityEngine.Debug.Log(&quot;1231231&quot;);
+        print(&quot;账号: &quot; + Account.text + &quot;; 密码: &quot; + Account.text);
+    }
+    // Update is called once per frame
+}
+</code></pre><h2 id="raw-image">Raw Image</h2>
+<p>Raw Image 组件是一个显示纹理贴图的组件，常用于与 RenderTexture 结合使用，映射相机画面
+与 Image 组件的区别是：</p>
+<ol>
+<li>Image 显示Sprite 精灵图片；</li>
+<li>Raw Image 可以显示任何纹理贴图。( 如：Texture 、Render Texture )</li>
+</ol>
+<h3 id="raw-image-属性">Raw Image 属性</h3>
+<p>在<code>Unity</code>的 <code>Hierarchy</code> 面板上右键–&gt;<code>UI</code>–&gt;<code>Raw</code> <code>Image</code></p>
+<ul>
+<li><code>Texture</code>	用于显示的纹理贴图的引用</li>
+<li><code>Color</code>	图片的颜色</li>
+<li><code>Material</code>	渲染图像的材质</li>
+<li><code>Raycast Target</code>	能否接收到射线检测</li>
+<li><code>UV Rect</code>	控制 UI 矩形内的图像偏移和大小</li>
+</ul>
+<h3 id="texture-import-setting--图片导入设置">Texture Import Setting —— 图片导入设置</h3>
+<h2 id="canvas">Canvas</h2>
+<h2 id="scroll-view">Scroll View</h2>
+<h2 id="slider">Slider</h2>
+<h2 id="scrollbar">Scrollbar</h2>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2021 catrefine
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
