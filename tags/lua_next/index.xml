@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lua_next on Zzz</title>
+    <link>https://zfunnily.github.io/tags/lua_next/</link>
+    <description>Recent content in lua_next on Zzz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 10 May 2021 16:39:50 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua_next/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lua next 的使用</title>
+      <link>https://zfunnily.github.io/post/lua_api/lua_next/</link>
+      <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/lua_api/lua_next/</guid>
+      <description>lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&amp;quot;a&amp;quot;] = 1, [&amp;quot;b&amp;quot;] = 2, [&amp;quot;c&amp;quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</description>
+    </item>
+    
+  </channel>
+</rss>

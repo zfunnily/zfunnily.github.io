@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unity3D on Zzz</title>
+    <link>https://zfunnily.github.io/categories/Unity3D/</link>
+    <description>Recent content in Unity3D on Zzz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Sep 2021 15:55:59 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Unity3D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>U3D Transform类</title>
+      <link>https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/</link>
+      <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/</guid>
+      <description>Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat</description>
+    </item>
+    
+    <item>
+      <title>U3D PhysicalSystem</title>
+      <link>https://zfunnily.github.io/post/unity3D/physicalSystem/</link>
+      <pubDate>Mon, 06 Sep 2021 11:23:30 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/unity3D/physicalSystem/</guid>
+      <description>U3D物理系统 刚体(Rigidbody)、碰撞体(Colliders)、触发器 参照 Unity 官方文档的以下几篇文章，重新进行了整理。 PhysicsOverview Rigidbody2D Rigidbody 物理的碰撞条件 Unity3D内置物理引擎，可以模拟物理效果。典型的一个物理效果就是碰撞。 两个物体发生物理碰撞的必要条件是：两个物体都带有Collide</description>
+    </item>
+    
+    <item>
+      <title>重力摩托项目</title>
+      <link>https://zfunnily.github.io/post/game/BalanceMoto/</link>
+      <pubDate>Mon, 06 Sep 2021 07:20:45 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/game/BalanceMoto/</guid>
+      <description>重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2 环境 Unity3D 开始 新建一个2D项目</description>
+    </item>
+    
+    <item>
+      <title>U3D UGUI</title>
+      <link>https://zfunnily.github.io/post/unity3D/UGUI/</link>
+      <pubDate>Fri, 20 Aug 2021 14:15:41 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/unity3D/UGUI/</guid>
+      <description>Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性 功能 Text 需要显示的文本 Font 显示文本的字体 如：微软雅黑，宋体等 Font Style 显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size 显示字体的大小 Line Spacing 行与行之间的垂直距离 Alignment 文本的水平和垂直方向的对齐方式 Align</description>
+    </item>
+    
+  </channel>
+</rss>

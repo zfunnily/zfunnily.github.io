@@ -79,30 +79,279 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/hugo/hugo/" title="Hugo">Hugo</a>
+                <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2021年4月17日
+            2021年10月21日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/Live'>Live</a></span>
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
             
         </div>
         
         <div class="post-content">
-            hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下……
+            ……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/hugo/hugo/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从modules服务模块中取出名字为 logger的服务, struct skynet_module * result = _query(name);; 如果找不到则从cpath目……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static void * _try_open(struct modules *m, const char * name)函数第一次打开，然后被加载到全局变量static struct modules *……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            起因 今天用golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &#34;fmt&#34; &#34;os/exec&#34; ) func……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/golang/shell/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Thinking'>Thinking</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 英文像一座大山，下定决心想要跨过去，可迟迟不的法门。，今天看到一片文章怎么开始并坚持读英文原著, 里面有句话： &ldquo;拖延症怎么坚持下去&ndash;每天控制在10-20页，保持在一个阅读的状态是最重要的。&rdquo; 看到这里 想到以前的n+1和日拱一卒，其实是一个意思。……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Book'>Book</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            经济学入门 经济学原理 宏观+微观，[美] 曼昆（N.GregoryMankiw） ，北京大学出版社，【第一篇 导言；第4章、第6章；第10章、第11章；第23章、第24章；第25章】 牛奶可乐经济学，[美] 罗伯特·，弗兰克 著；闾佳 译，北京联合出版公司，【全书，以前五章为主】 经济学的思维方式……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/read/economics/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/game/fps/move/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/music'>music</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍一个可以免费听音乐的方法 环境 docker mac 安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker $dir_name 是 你自己宿主机的目录。可以自定义 访问：127.0.0.1:264 就可以放心使用， 同事推荐的，贼好用。……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/free/music/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Unity3D'>Unity3D</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/">阅读全文</a></p>
     </article>
     
     
     
 
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://zfunnily.github.io/post/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/post/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/post/page/3/">3</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://zfunnily.github.io/post/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -158,7 +407,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/hugo/hugo/" title="Hugo">Hugo</a>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -170,7 +455,29 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/Live/">Live (1)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Book/">Book (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/linux/">linux (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Shell/">Shell (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/hugo/">hugo (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/linux/">linux (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/music/">music (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (3)</a></li>
     
 </ul>
     </section>
@@ -178,6 +485,62 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/Vim/">Vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/english/">english</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
     
 </div>
     </section>

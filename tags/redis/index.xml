@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on Zzz</title>
+    <link>https://zfunnily.github.io/tags/redis/</link>
+    <description>Recent content in redis on Zzz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 03 Jun 2021 15:57:14 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang操作redis</title>
+      <link>https://zfunnily.github.io/post/golang/go_redis/</link>
+      <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/golang/go_redis/</guid>
+      <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止</description>
+    </item>
+    
+  </channel>
+</rss>
