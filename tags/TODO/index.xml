@@ -6,7 +6,16 @@
     <description>Recent content in TODO on Zzz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 06 Sep 2021 07:20:45 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/TODO/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Oct 2021 15:08:43 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/TODO/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TODO</title>
+      <link>https://zfunnily.github.io/todo/todo/</link>
+      <pubDate>Thu, 21 Oct 2021 15:08:43 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/todo/todo/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>重力摩托项目</title>
       <link>https://zfunnily.github.io/post/game/BalanceMoto/</link>

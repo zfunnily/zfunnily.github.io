@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Todoes on Zzz</title>
+    <link>https://zfunnily.github.io/todo/</link>
+    <description>Recent content in Todoes on Zzz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 21 Oct 2021 15:08:43 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/todo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TODO</title>
+      <link>https://zfunnily.github.io/todo/todo/</link>
+      <pubDate>Thu, 21 Oct 2021 15:08:43 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/todo/todo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
