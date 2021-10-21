@@ -145,7 +145,13 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#服务间消息流转">服务间消息流转</a></li>
+    <li><a href="#服务间消息流转">服务间消息流转</a>
+      <ul>
+        <li><a href="#发送消息">发送消息</a></li>
+        <li><a href="#消费消息">消费消息</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
     </div>
@@ -201,6 +207,269 @@
         
         <div class="post-content">
             <h2 id="服务间消息流转">服务间消息流转</h2>
+<h3 id="发送消息">发送消息</h3>
+<p>数据结构<code>message_queue *q</code>是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用<code>skynet.send(...)</code>, 或者调用<code>skynet.call(...)</code>函数发送消息，其实调用的都是<code>c.send(...)</code>,实际上调用的是c接口：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//lua-skynet.c
+</span><span style="color:#998;font-style:italic"></span>lsend(lua_State <span style="color:#000;font-weight:bold">*</span>L) {
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">send_message</span>(L, <span style="color:#099">0</span>, <span style="color:#099">2</span>);
+}
+<span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">send_message</span>(lua_State <span style="color:#000;font-weight:bold">*</span>L, <span style="color:#458;font-weight:bold">int</span> source, <span style="color:#458;font-weight:bold">int</span> idx_type) {...}
+<span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">skynet_send</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span> context, <span style="color:#458;font-weight:bold">uint32_t</span> source, <span style="color:#458;font-weight:bold">uint32_t</span> destination , <span style="color:#458;font-weight:bold">int</span> type, <span style="color:#458;font-weight:bold">int</span> session, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> data, size_t sz){...}
+
+<span style="color:#998;font-style:italic">//把消息push到次级消息中，如果次级消息不在全局消息中，则把次级消息push到全局消息中
+</span><span style="color:#998;font-style:italic"></span><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">skynet_context_push</span>(<span style="color:#458;font-weight:bold">uint32_t</span> handle, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_message</span> <span style="color:#000;font-weight:bold">*</span>message)
+{
+    <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span> ctx <span style="color:#000;font-weight:bold">=</span> skynet_handle_grab(handle);
+	<span style="color:#000;font-weight:bold">if</span> (ctx <span style="color:#000;font-weight:bold">==</span> <span style="color:#0086b3">NULL</span>) {
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>;
+	}
+	skynet_mq_push(ctx<span style="color:#000;font-weight:bold">-&gt;</span>queue, message);
+	skynet_context_release(ctx);
+
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>发送消息所做的事情就是就是把消息push到与本地服务绑定的次级消息队列中。</li>
+</ul>
+<h3 id="消费消息">消费消息</h3>
+<p>消费消息主要在<code>threa_work</code>线程中:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.start.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">thread_worker</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>p) {
+    ...
+    <span style="color:#998;font-style:italic">//声明一个空的消息队列
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span> q <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">NULL</span>;
+	<span style="color:#000;font-weight:bold">while</span> (<span style="color:#000;font-weight:bold">!</span>m<span style="color:#000;font-weight:bold">-&gt;</span>quit) {
+	    <span style="color:#998;font-style:italic">//从全局消息取出一个次级消息队列,并进行处理，处理过程都在skynet_context_message_dispatch
+</span><span style="color:#998;font-style:italic"></span>		q <span style="color:#000;font-weight:bold">=</span> skynet_context_message_dispatch(sm, q, weight);
+		<span style="color:#000;font-weight:bold">if</span> (q <span style="color:#000;font-weight:bold">==</span> <span style="color:#0086b3">NULL</span>) {
+		    ...
+		}
+	}
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">NULL</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>从代码层可以看到，消费消息就是把消息从全局消息队列中取出一个消息队列。然后进行消息处理. 工作线程就是处理这个全局消息的。</li>
+<li>从发送消息push到消息队列，再到工作线程从消息队列中取出消息进行处理，这整个工作流程就很明了。</li>
+</ul>
+<p>继续深入看<code>skynet_context_message_dispatch</code>函数做了哪些事情:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.server.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">skynet_context_message_dispatch</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_monitor</span> <span style="color:#000;font-weight:bold">*</span>sm, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>q, <span style="color:#458;font-weight:bold">int</span> weight) {
+    ...
+    <span style="color:#998;font-style:italic">//从次级消息队列中获取该消息队列属于哪个服务
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint32_t</span> handle <span style="color:#000;font-weight:bold">=</span> skynet_mq_handle(q);
+
+    <span style="color:#998;font-style:italic">//获取服务的ctx，这样就能获取服务实例指针mod了。
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span> ctx <span style="color:#000;font-weight:bold">=</span> skynet_handle_grab(handle);
+	...
+
+	<span style="color:#458;font-weight:bold">int</span> i,n<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>;
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_message</span> msg;
+
+	<span style="color:#000;font-weight:bold">for</span> (i<span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>;i<span style="color:#000;font-weight:bold">&lt;</span>n;i<span style="color:#000;font-weight:bold">++</span>) {
+	    <span style="color:#998;font-style:italic">//循环处理
+</span><span style="color:#998;font-style:italic"></span>	    ...
+		<span style="color:#998;font-style:italic">//判断是否负载
+</span><span style="color:#998;font-style:italic"></span>		<span style="color:#458;font-weight:bold">int</span> overload <span style="color:#000;font-weight:bold">=</span> skynet_mq_overload(q);
+		<span style="color:#000;font-weight:bold">if</span> (overload) {
+			skynet_error(ctx, <span style="color:#d14">&#34;May overload, message queue length = %d&#34;</span>, overload);
+		}
+
+        <span style="color:#998;font-style:italic">//触发监视器
+</span><span style="color:#998;font-style:italic"></span>		skynet_monitor_trigger(sm, msg.source , handle);
+
+		<span style="color:#000;font-weight:bold">if</span> (ctx<span style="color:#000;font-weight:bold">-&gt;</span>cb <span style="color:#000;font-weight:bold">==</span> <span style="color:#0086b3">NULL</span>) {
+			skynet_free(msg.data);
+		} <span style="color:#000;font-weight:bold">else</span> {
+		    <span style="color:#998;font-style:italic">//消息处理
+</span><span style="color:#998;font-style:italic"></span>			dispatch_message(ctx, <span style="color:#000;font-weight:bold">&amp;</span>msg);
+		}
+		<span style="color:#998;font-style:italic">//解除监视器
+</span><span style="color:#998;font-style:italic"></span>		skynet_monitor_trigger(sm, <span style="color:#099">0</span>,<span style="color:#099">0</span>);
+	}
+
+	assert(q <span style="color:#000;font-weight:bold">==</span> ctx<span style="color:#000;font-weight:bold">-&gt;</span>queue);
+	<span style="color:#998;font-style:italic">//再继续从全局消息中取消息
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>nq <span style="color:#000;font-weight:bold">=</span> skynet_globalmq_pop();
+	<span style="color:#000;font-weight:bold">if</span> (nq) {
+		<span style="color:#998;font-style:italic">// If global mq is not empty , push q back, and return next queue (nq)
+</span><span style="color:#998;font-style:italic"></span>		<span style="color:#998;font-style:italic">// Else (global mq is empty or block, don&#39;t push q back, and return q again (for next dispatch)
+</span><span style="color:#998;font-style:italic"></span>		skynet_globalmq_push(q);
+		q <span style="color:#000;font-weight:bold">=</span> nq;
+	} 
+	<span style="color:#998;font-style:italic">//释放当前服务的ctx，实际操作是引用计数-1
+</span><span style="color:#998;font-style:italic"></span>	skynet_context_release(ctx);
+
+	<span style="color:#000;font-weight:bold">return</span> q;
+}
+
+<span style="color:#998;font-style:italic">//消息处理函数
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">dispatch_message</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span>ctx, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_message</span> <span style="color:#000;font-weight:bold">*</span>msg) {
+	assert(ctx<span style="color:#000;font-weight:bold">-&gt;</span>init);
+	CHECKCALLING_BEGIN(ctx)
+	pthread_setspecific(G_NODE.handle_key, (<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>)(uintptr_t)(ctx<span style="color:#000;font-weight:bold">-&gt;</span>handle));
+	<span style="color:#458;font-weight:bold">int</span> type <span style="color:#000;font-weight:bold">=</span> msg<span style="color:#000;font-weight:bold">-&gt;</span>sz <span style="color:#000;font-weight:bold">&gt;&gt;</span> MESSAGE_TYPE_SHIFT;
+	size_t sz <span style="color:#000;font-weight:bold">=</span> msg<span style="color:#000;font-weight:bold">-&gt;</span>sz <span style="color:#000;font-weight:bold">&amp;</span> MESSAGE_TYPE_MASK;
+	<span style="color:#998;font-style:italic">//日志
+</span><span style="color:#998;font-style:italic"></span>	FILE <span style="color:#000;font-weight:bold">*</span>f <span style="color:#000;font-weight:bold">=</span> (FILE <span style="color:#000;font-weight:bold">*</span>)ATOM_LOAD(<span style="color:#000;font-weight:bold">&amp;</span>ctx<span style="color:#000;font-weight:bold">-&gt;</span>logfile);
+	<span style="color:#000;font-weight:bold">if</span> (f) {
+		skynet_log_output(f, msg<span style="color:#000;font-weight:bold">-&gt;</span>source, type, msg<span style="color:#000;font-weight:bold">-&gt;</span>session, msg<span style="color:#000;font-weight:bold">-&gt;</span>data, sz);
+	}
+	<span style="color:#000;font-weight:bold">++</span>ctx<span style="color:#000;font-weight:bold">-&gt;</span>message_count;
+	<span style="color:#458;font-weight:bold">int</span> reserve_msg;
+	<span style="color:#000;font-weight:bold">if</span> (ctx<span style="color:#000;font-weight:bold">-&gt;</span>profile) {
+	    ...
+	} <span style="color:#000;font-weight:bold">else</span> {
+	    <span style="color:#998;font-style:italic">//回调函数
+</span><span style="color:#998;font-style:italic"></span>		reserve_msg <span style="color:#000;font-weight:bold">=</span> ctx<span style="color:#000;font-weight:bold">-&gt;</span>cb(ctx, ctx<span style="color:#000;font-weight:bold">-&gt;</span>cb_ud, type, msg<span style="color:#000;font-weight:bold">-&gt;</span>session, msg<span style="color:#000;font-weight:bold">-&gt;</span>source, msg<span style="color:#000;font-weight:bold">-&gt;</span>data, sz);
+	}
+	<span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>reserve_msg) {
+		skynet_free(msg<span style="color:#000;font-weight:bold">-&gt;</span>data);
+	}
+	CHECKCALLING_END(ctx)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>消息处理过程</p>
+<ul>
+<li>从全局消息中取出次级消息队列</li>
+<li>根据次级消息队列找到对应的服务上下文</li>
+<li>遍历出次级消息队列的消息，并进行处理，调用<code>dispatch_message</code>函数</li>
+<li>然后<code>dispatch_message</code>调用回调函数，这个回调函数是在<code>skynet.lua</code>中,服务启动的时候调用<code>c.callback</code>设置的，于是我们就看到最后服务消息的处理逻辑是在服务启动的时候设置的<code>skynet.dispatch_message(...)</code>中。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>看到整个消息流转，其实不难看出skynet的架构，</p>
+<ol>
+<li>每个服务对应一个次级消息队列，然后每个服务所发送的消息全塞给这个消息队列。</li>
+<li>thread_work线程从全局消息队列中取出一个次级消息队列，然后就可以处理对应服务和对应的消息了。处理消息的逻辑在<code>skynet.dispatch_message(...)</code>.</li>
+</ol>
+<p>下图是skynet作为服务器，收到socket消息，并进行处理的整个过程,这个与上面内部的消息流转其实原理一样。都是把消息放到消息队列中，然后work线程从全局消息队列中取消息进行处理。
+
+        <img class="mx-auto" alt="" src="https://files.catbox.moe/fbin3h.png" />   
+    </p>
 
         </div>
 
@@ -366,7 +635,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/linux/">linux (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (2)</a></li>
     
@@ -381,8 +650,6 @@
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/hugo/">hugo (1)</a></li>
-    
-    <li><a href="https://zfunnily.github.io/categories/linux/">linux (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/music/">music (1)</a></li>
     
