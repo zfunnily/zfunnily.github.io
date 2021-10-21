@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on catrefine</title>
-    <link>https://example.com/tags/</link>
-    <description>Recent content in Tags on catrefine</description>
+    <title>Tags on Zzz</title>
+    <link>https://zfunnily.github.io/tags/</link>
+    <description>Recent content in Tags on Zzz</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language><atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>game</title>
-      <link>https://example.com/tags/game/</link>
+      <link>https://zfunnily.github.io/tags/game/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/tags/game/</guid>
+      <guid>https://zfunnily.github.io/tags/game/</guid>
       <description></description>
     </item>
     

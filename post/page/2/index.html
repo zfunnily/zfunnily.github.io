@@ -1,381 +1,433 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'><title>Posts</title>
+<!doctype html>
+<html lang="zh-CN">
+<head>
 
-<link rel='canonical' href='https://example.com/post/'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Posts'>
-<meta property='og:description' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'>
-<meta property='og:url' content='https://example.com/post/'>
-<meta property='og:site_name' content='catrefine'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-10-20T11:26:07&#43;08:00 '/>
-<meta name="twitter:title" content="Posts">
-<meta name="twitter:description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."><link rel="alternate" type="application/rss&#43;xml" href="https://example.com/post/index.xml">
-    </head>
-    <body class="">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.body.dataset.scheme = 'dark';
-        } else {
-            document.body.dataset.scheme = 'light';
-        }
-    })();
-</script><div class="container main-container flex on-phone--column extended ">
-            <aside class="sidebar left-sidebar sticky">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header class="site-info">
+    <title>Posts | Zzz</title>
+    <meta property="og:title" content="Posts - Zzz">
+    <meta property="og:type" content="article">
         
-            <figure class="site-avatar">
+        
+    <meta name="Keywords" content="golang, C&#43;&#43;, 游戏服务器, lua, skynet框架, IM服务器">
+    <meta name="description" content="Posts">
+        
+    <meta name="author" content="Zzz">
+    <meta property="og:url" content="https://zfunnily.github.io/post/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/post/index.xml" title="Zzz" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
                 
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        Zzz
+                    </a>
+                
+                <p class="description">专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
+                    <a  href="https://zfunnily.github.io/about/" title="关于我">关于我</a>
                     
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
-                        
-                        <img src="/img/avatar_hue2149af5b84951023ea396d2f7da224b_528608_300x0_resize_q75_box.jpg" width="300"
-                            height="421" class="site-logo" loading="lazy" alt="Avatar">
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
-                
-
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
-        
-        <h1 class="site-name"><a href="https://example.com">catrefine</a></h1>
-        <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-    </header>
-
-    <ol class="menu" id="main-menu">
-        
-        
-        
-
-        <li >
-            <a href='/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/about/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/archives/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
-            </a>
-        </li>
-        
-        
-
-        <li >
-            <a href='/search/'>
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-
-        
-            <li id="dark-mode-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                <span>暗色模式</span>
-            </li>
-        
-    </ol>
-</aside>
-
-            <main class="main full-width">
-    <h3 class="section-title">
-        
-            Section
-        
-    </h3>
-
-    <div class="section-card">
-        <div class="section-details">
-            <h3 class="section-count">21 pages</h3>
-            <h1 class="section-term">Posts</h1>
-            
+                </nav>
+            </div>
         </div>
     </div>
-    
-    <section class="article-list--compact">
-        
-            <article>
-    <a href="/p/%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B9%A6%E7%B1%8D/">
-        <div class="article-details">
-            <h2 class="article-title">经济学书籍</h2>
-            <footer class="article-time">
-                <time datetime='2021-09-14T19:06:01&#43;08:00'>Sep 14, 2021</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/fps%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/">
-        <div class="article-details">
-            <h2 class="article-title">FPS游戏 实现移动功能</h2>
-            <footer class="article-time">
-                <time datetime='2021-09-12T20:43:34&#43;08:00'>Sep 12, 2021</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/%E5%85%8D%E8%B4%B9music/">
-        <div class="article-details">
-            <h2 class="article-title">免费Music</h2>
-            <footer class="article-time">
-                <time datetime='2021-09-08T14:47:14&#43;08:00'>Sep 08, 2021</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/u3d-transform%E7%B1%BB/">
-        <div class="article-details">
-            <h2 class="article-title">U3D Transform类</h2>
-            <footer class="article-time">
-                <time datetime='2021-09-07T15:55:59&#43;08:00'>Sep 07, 2021</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/vim-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F-%E8%AF%AD%E8%A8%80%E6%94%B9%E5%8F%98/">
-        <div class="article-details">
-            <h2 class="article-title">Vim 输入模式 语言改变</h2>
-            <footer class="article-time">
-                <time datetime='2021-09-07T10:46:58&#43;08:00'>Sep 07, 2021</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
-    </section>
-    <nav class='pagination'>
-        
-        
+</header>
 
-        
-            
-                    <a class='page-link' href='/post/'>1</a>
-                
-            
-            
-                <span class='page-link current'>2</span>
-                
-            
-            
-                    <a class='page-link' href='/post/page/3/'>3</a>
-                
-            
-            
-                    
-                        
-                        <span class='page-link dots'>&hellip;</span>
-                    
-                
-            
-            
-                    <a class='page-link' href='/post/page/5/'>5</a>
-                
-            
-    </nav>
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
 
-<footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2020 - 
-        
-        2021 catrefine
-    </section>
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
     
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="2.3.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/linux/vim_change_language/" title="Vim 输入模式 语言改变">Vim 输入模式 语言改变</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月7日
+        </date>
+        
+        <div class="post-content">
+            vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim IdeaVimExtension 我们需要在 用户目录……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/linux/vim_change_language/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/linux/screen/" title="linue Screen">linue Screen</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月7日
+        </date>
+        
+        <div class="post-content">
+            screen命令 screen 是一个非常有用的命令。应用场景： 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &hellip; screen使用 创建一个窗口 1 $ screen -S name 执行自己需要的命令 $ ... 分离窗口 ctrl + A + D 重新连接到screen 如果只有一个会话可以直接使……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/linux/screen/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/unity3D/physicalSystem/" title="U3D PhysicalSystem">U3D PhysicalSystem</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月6日
+        </date>
+        
+        <div class="post-content">
+            U3D物理系统 刚体(Rigidbody)、碰撞体(Colliders)、触发器 参照 Unity 官方文档的以下几篇文章，重新进行了整理。 PhysicsOverview Rigidbody2D Rigidbody 物理的碰撞条件 Unity3D内置物理引擎，可以模拟物理效果。典型的一个物理效果就是碰撞。 两个物体发生物理碰撞的必要条件是：两个物体都带有Collide……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/unity3D/physicalSystem/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/game/BalanceMoto/" title="重力摩托项目">重力摩托项目</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月6日
+        </date>
+        
+        <div class="post-content">
+            重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2 环境 Unity3D 开始 新建一个2D项目……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/game/BalanceMoto/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/linux/gcc%E5%8D%87%E7%BA%A7/" title="Centos7.2的gcc4.8升级为4.9">Centos7.2的gcc4.8升级为4.9</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月1日
+        </date>
+        
+        <div class="post-content">
+            环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 1 2 $ docker $ yum update &amp;&amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 1 2 3 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;&amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/linux/gcc%E5%8D%87%E7%BA%A7/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/shell/except/" title="shell Except 使用">shell Except 使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月30日
+        </date>
+        
+        <div class="post-content">
+            Except 参数 1 2 3 4 5 6 7 8 9 10 11 12 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的echo exit 退出expect脚本 eof expect执行结束 退出 set 定义……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/shell/except/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/unity3D/UGUI/" title="U3D UGUI">U3D UGUI</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年8月20日
+        </date>
+        
+        <div class="post-content">
+            Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&gt;UI–&gt;Text, 在 Inspector 面板上查看属性 属性 功能 Text 需要显示的文本 Font 显示文本的字体 如：微软雅黑，宋体等 Font Style 显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size 显示字体的大小 Line Spacing 行与行之间的垂直距离 Alignment 文本的水平和垂直方向的对齐方式 Align……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/unity3D/UGUI/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/golang/go_redis/" title="golang操作redis">golang操作redis</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月3日
+        </date>
+        
+        <div class="post-content">
+            概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/golang/go_redis/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/game/auto_findroad/" title="Auto_findroad">Auto_findroad</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月20日
+        </date>
+        
+        <div class="post-content">
+            自动寻路 有限状态机器 行为树……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/game/auto_findroad/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/lua_api/lua_next/" title="Lua next 的使用">Lua next 的使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-content">
+            lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&quot;a&quot;] = 1, [&quot;b&quot;] = 2, [&quot;c&quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/lua_api/lua_next/">阅读全文</a></p>
+    </article>
+    
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://zfunnily.github.io/post/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://zfunnily.github.io/post/">1</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://zfunnily.github.io/post/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/post/page/3/">3</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://zfunnily.github.io/post/page/3/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz By Zzz</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
 </footer>
 
-            </main>
-    
-    
-    <aside class="sidebar right-sidebar sticky">
-        
-            <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
 
 
-            </button>
-        </p>
-    </form>
-        
-            <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
 
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
 
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2021">
-                        
-                            <span class="year">2021</span>
-                            <span class="count">21</span>
-                        
-                    </a> 
+    <script src='/js/douban.js'></script>
+
                 </div>
-            
-        </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
     </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四(消息调度)">Skynet源码赏析四(消息调度)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三(服务启动)">Skynet源码赏析三(服务启动)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二(基础数据结构)">Skynet源码赏析二(基础数据结构)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一(启动初始化的过程)">Skynet源码赏析一(启动初始化的过程)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/Live/">Live (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
         
-            <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">标签云</h2>
-
-    <div class="tagCloud-tags">
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="Zzz的博客">Zzz的博客</a>
+        </li>
         
-    </div>
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="Zzz的github">Zzz的github</a>
+        </li>
+        
+    </ul>
 </section>
-        
-    </aside>
 
 
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
         </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
-                defer="false"
-                >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+    </div>
+</body>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
 </html>

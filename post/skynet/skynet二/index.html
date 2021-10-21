@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Skynet源码赏析二(基础数据结构) | Zzz</title>
+    <meta property="og:title" content="Skynet源码赏析二(基础数据结构) - Zzz">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-10-19T18:47:45&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-10-19T18:47:45&#43;08:00'>
+        
+    <meta name="Keywords" content="golang, C&#43;&#43;, 游戏服务器, lua, skynet框架, IM服务器">
+    <meta name="description" content="Skynet源码赏析二(基础数据结构)">
+        
+    <meta name="author" content="Zzz">
+    <meta property="og:url" content="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        Zzz
+                    </a>
+                
+                <p class="description">专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于我">关于我</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#module管理模块">module管理模块</a>
+      <ul>
+        <li><a href="#module对应的数据结构如下">module对应的数据结构如下：</a></li>
+        <li><a href="#当要创建该类服务的实例时">当要创建该类服务的实例时</a></li>
+      </ul>
+    </li>
+    <li><a href="#skynet_context服务管理模块">skynet_context服务管理模块</a></li>
+    <li><a href="#消息与队列">消息与队列</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Skynet源码赏析二(基础数据结构)</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月19日
+        </date>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="module管理模块">module管理模块</h2>
+<p>我们所写的C服务编译成.so文件后放在<code>cpath</code>变量路径下，程序会加载路径<code>cpath = root..&quot;cservice/?.so&quot;</code>下的.so文件，通过<code>static void * _try_open(struct modules *m, const char * name)</code>函数第一次打开，然后被加载到全局变量<code>static struct modules * M</code>中。</p>
+<h3 id="module对应的数据结构如下">module对应的数据结构如下：</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet_module.h
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_module</span> {
+	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> name;          <span style="color:#998;font-style:italic">// C服务名称
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> module;              <span style="color:#998;font-style:italic">// 访问so的dl句柄
+</span><span style="color:#998;font-style:italic"></span>	skynet_dl_create create;    <span style="color:#998;font-style:italic">// 绑定.so的 xxx_create 函数
+</span><span style="color:#998;font-style:italic"></span>	skynet_dl_init init;        <span style="color:#998;font-style:italic">// 绑定.so的 xxx_init 函数
+</span><span style="color:#998;font-style:italic"></span>	skynet_dl_release release;  <span style="color:#998;font-style:italic">// 绑定.so的 xxx_release 函数
+</span><span style="color:#998;font-style:italic"></span>	skynet_dl_signal signal;    <span style="color:#998;font-style:italic">// 绑定.so的 xxx_signal 函数
+</span><span style="color:#998;font-style:italic"></span>};
+
+<span style="color:#998;font-style:italic">//skynet_modules.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#999;font-weight:bold;font-style:italic">#define MAX_MODULE_TYPE 32
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">modules</span> {
+	<span style="color:#458;font-weight:bold">int</span> count;                  <span style="color:#998;font-style:italic">// C服务数量
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">spinlock</span> lock;       <span style="color:#998;font-style:italic">// 自旋锁
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> path;          <span style="color:#998;font-style:italic">// C服务.so文件目录，由cpath变量控制置
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_module</span> m[MAX_MODULE_TYPE]; <span style="color:#998;font-style:italic">// C服务列表
+</span><span style="color:#998;font-style:italic"></span>};
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="当要创建该类服务的实例时">当要创建该类服务的实例时</h3>
+<ol>
+<li>从<code>modules</code>列表中取出该服务的<code>skynet_module</code>句柄, 然后调用<code>m-&gt;create()</code>创建实例。</li>
+<li>将实例<code>inst</code>赋值到新的<code>skynet_context</code>中。</li>
+<li>将新的<code>skynet_context</code>注册到<code>skynet_context</code>list中</li>
+<li>初始化<code>inst</code>实例<code>m-&gt;init()</code>。
+对应的代码如下</li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">skynet_context_new</span>(<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> name, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>param) {
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_module</span> <span style="color:#000;font-weight:bold">*</span> mod <span style="color:#000;font-weight:bold">=</span> skynet_module_query(name); <span style="color:#998;font-style:italic">//1. 取出服务句柄
+</span><span style="color:#998;font-style:italic"></span>    ...
+	<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>inst <span style="color:#000;font-weight:bold">=</span> skynet_module_instance_create(mod);<span style="color:#998;font-style:italic">//m-&gt;create 创建实例
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span> ctx <span style="color:#000;font-weight:bold">=</span> skynet_malloc(<span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#000;font-weight:bold">*</span>ctx));
+	CHECKCALLING_INIT(ctx)
+
+	ctx<span style="color:#000;font-weight:bold">-&gt;</span>mod <span style="color:#000;font-weight:bold">=</span> mod;
+	ctx<span style="color:#000;font-weight:bold">-&gt;</span>instance <span style="color:#000;font-weight:bold">=</span> inst; <span style="color:#998;font-style:italic">//2. 将实例赋值懂啊 skynet_context中
+</span><span style="color:#998;font-style:italic"></span>    ...
+	ctx<span style="color:#000;font-weight:bold">-&gt;</span>handle <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>;	
+	ctx<span style="color:#000;font-weight:bold">-&gt;</span>handle <span style="color:#000;font-weight:bold">=</span> skynet_handle_register(ctx); <span style="color:#998;font-style:italic">//3. 注册到skynet_context list中
+</span><span style="color:#998;font-style:italic"></span>    ...
+	<span style="color:#998;font-style:italic">// init function maybe use ctx-&gt;handle, so it must init at last
+</span><span style="color:#998;font-style:italic"></span>	context_inc();
+
+	CHECKCALLING_BEGIN(ctx)
+	<span style="color:#458;font-weight:bold">int</span> r <span style="color:#000;font-weight:bold">=</span> skynet_module_instance_init(mod, inst, ctx, param); <span style="color:#998;font-style:italic">//4.m-&gt;init()
+</span><span style="color:#998;font-style:italic"></span>	CHECKCALLING_END(ctx)
+	<span style="color:#000;font-weight:bold">if</span> (r <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span>) {
+        ...
+	} <span style="color:#000;font-weight:bold">else</span> {
+        ...
+	}
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="skynet_context服务管理模块">skynet_context服务管理模块</h2>
+<p>创建一个新服务，首先要找到对应服务的modules，在创建并初始化modules之后绑定一个上下文<code>skynet_context</code>,skynet通过全局变量<code>static struct handle_storage *H</code>来管理服务。
+主要的数据结构如下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet_server.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> {
+	<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> instance;                <span style="color:#998;font-style:italic">// m-create()创建的实例
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_module</span> <span style="color:#000;font-weight:bold">*</span> mod;     <span style="color:#998;font-style:italic">// 引用mod服务的指针，方便 m 的init(),create()等函数调用 
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> cb_ud;                   <span style="color:#998;font-style:italic">// 调用callback函数时，回传给callback的userdata，一般是instance指针
+</span><span style="color:#998;font-style:italic"></span>    skynet_cb cb;                   <span style="color:#998;font-style:italic">// 服务的消息回调函数，一般在skynet_module的init函数里指定
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>queue;    <span style="color:#998;font-style:italic">// 服务专属的次级消息队列
+</span><span style="color:#998;font-style:italic"></span>	ATOM_POINTER logfile;           <span style="color:#998;font-style:italic">// 日志句柄
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint64_t</span> cpu_cost;	            <span style="color:#998;font-style:italic">// in microsec 
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint64_t</span> cpu_start;	            <span style="color:#998;font-style:italic">// in microsec 
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">char</span> result[<span style="color:#099">32</span>];                <span style="color:#998;font-style:italic">// 操作skynet_context的返回值，会写到这里
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint32_t</span> handle;                <span style="color:#998;font-style:italic">// 标识唯一context的服务id
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> session_id;                 <span style="color:#998;font-style:italic">// 在发出请求后，收到对方的返回消息时，通过session_id来匹配一个返回，对应哪个请求
+</span><span style="color:#998;font-style:italic"></span>	ATOM_INT ref;                   <span style="color:#998;font-style:italic">// 引用计数变量，当为0时，表示内存可以被释放
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> message_count;              <span style="color:#998;font-style:italic">// 消息数量
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">bool</span> init;                      <span style="color:#998;font-style:italic">// 是否完成初始化 
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">bool</span> endless;                   <span style="color:#998;font-style:italic">// 消息是否堵住 
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">bool</span> profile;                   <span style="color:#998;font-style:italic">// 配合 cpu_cost 和 cpu_start使用
+</span><span style="color:#998;font-style:italic"></span>
+	CHECKCALLING_DECL
+};
+
+<span style="color:#998;font-style:italic">//skynet_handle.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">handle_name</span> {
+	<span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> name;                    <span style="color:#998;font-style:italic">// 服务别名
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint32_t</span> handle;                <span style="color:#998;font-style:italic">// 标识唯一context的服务id
+</span><span style="color:#998;font-style:italic"></span>};
+
+<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">handle_storage</span> {
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">rwlock</span> lock;             <span style="color:#998;font-style:italic">// 读写锁
+</span><span style="color:#998;font-style:italic"></span>
+	<span style="color:#458;font-weight:bold">uint32_t</span> harbor;                <span style="color:#998;font-style:italic">// harbor id
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint32_t</span> handle_index;          <span style="color:#998;font-style:italic">// 创建下一个服务时，该服务的slot idx，一般会先判断该slot是否被占用
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> slot_size;                  <span style="color:#998;font-style:italic">// slot的大小，一定是2^n，初始值是4
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">**</span> slot;  <span style="color:#998;font-style:italic">// skynet_context list
+</span><span style="color:#998;font-style:italic"></span>	
+	<span style="color:#458;font-weight:bold">int</span> name_cap;                   <span style="color:#998;font-style:italic">// 别名列表大小，大小为2^n
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> name_count;                 <span style="color:#998;font-style:italic">// 别名数量
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">handle_name</span> <span style="color:#000;font-weight:bold">*</span>name;       <span style="color:#998;font-style:italic">// 别名列表
+</span><span style="color:#998;font-style:italic"></span>};
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="消息与队列">消息与队列</h2>
+<p>在创建C服务module和对应的上下文skynet_context时，有一个对应的消息队列<code>message_queue</code>与之绑定, 最后把该消息队列push到全局队列中。
+数据结构如下:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet_mq.c
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> {
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">spinlock</span> lock;           <span style="color:#998;font-style:italic">// 自旋锁 防止数据冲突
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">uint32_t</span> handle;                <span style="color:#998;font-style:italic">// 服务id 唯一
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> cap;                        <span style="color:#998;font-style:italic">// 队列容量
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> head;                       <span style="color:#998;font-style:italic">// 头部索引，当head=tail时会进行扩容。
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> tail;                       <span style="color:#998;font-style:italic">// 尾部索引
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> release;                    <span style="color:#998;font-style:italic">// 是否能释放消息
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> in_global;                  <span style="color:#998;font-style:italic">// 是否在全局消息队列中，0表示不是，1表示是
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> overload;                   <span style="color:#998;font-style:italic">// 是否过载
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#458;font-weight:bold">int</span> overload_threshold;
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_message</span> <span style="color:#000;font-weight:bold">*</span>queue;   <span style="color:#998;font-style:italic">// 消息内容
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>next;     <span style="color:#998;font-style:italic">// 下一个次级消息队列
+</span><span style="color:#998;font-style:italic"></span>};
+
+<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">global_queue</span> {
+	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>head;     <span style="color:#998;font-style:italic">// 全局消息队列头部指针
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>tail;     <span style="color:#998;font-style:italic">// 全局消息队列尾部指针
+</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">spinlock</span> lock;           <span style="color:#998;font-style:italic">// 自旋锁
+</span><span style="color:#998;font-style:italic"></span>};
+</code></pre></td></tr></table>
+</div>
+</div><p>消息通过函数<code>struct message_queue * skynet_context_message_dispatch(struct skynet_monitor *sm, struct message_queue *q, int weight)</code>来处理，处理过程如下：</p>
+<ol>
+<li>从全局消息队列中取出一个次级消息队列, <code>skynet_globalmq_pop();</code>;</li>
+<li>通过次级消息队列中的handle变量来获取对应服务的上下文， <code>struct skynet_context * ctx = skynet_handle_grab(handle);</code>;</li>
+<li>调用回调函数，<code>dispatch_message(ctx, &amp;msg);</code></li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>本文从数据结构的层面，讲述了一个C服务的启动，以及消息的处理流程。</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/skynet/skynet%E4%B8%80/">Skynet源码赏析一(启动初始化的过程)</a></li>
+        
+        <li><a href="/post/golang/shell/">golang调用带有后台进程shell脚本可能会被挂起</a></li>
+        
+        <li><a href="/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">英语学习</a></li>
+        
+        <li><a href="/post/read/economics/">经济学书籍</a></li>
+        
+        <li><a href="/post/game/fps/move/">FPS游戏 实现移动功能</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz By Zzz</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四(消息调度)">Skynet源码赏析四(消息调度)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三(服务启动)">Skynet源码赏析三(服务启动)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二(基础数据结构)">Skynet源码赏析二(基础数据结构)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一(启动初始化的过程)">Skynet源码赏析一(启动初始化的过程)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/Live/">Live (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="Zzz的博客">Zzz的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="Zzz的github">Zzz的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

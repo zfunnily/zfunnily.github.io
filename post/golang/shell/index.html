@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>golang调用带有后台进程shell脚本可能会被挂起 | Zzz</title>
+    <meta property="og:title" content="golang调用带有后台进程shell脚本可能会被挂起 - Zzz">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-10-13T17:15:45&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-10-13T17:15:45&#43;08:00'>
+        
+    <meta name="Keywords" content="golang, C&#43;&#43;, 游戏服务器, lua, skynet框架, IM服务器">
+    <meta name="description" content="golang调用带有后台进程shell脚本可能会被挂起">
+        
+    <meta name="author" content="Zzz">
+    <meta property="og:url" content="https://zfunnily.github.io/post/golang/shell/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        Zzz
+                    </a>
+                
+                <p class="description">专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于我">关于我</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#起因">起因</a></li>
+    <li><a href="#问题还原">问题还原</a></li>
+    <li><a href="#脚本执行方式">脚本执行方式</a></li>
+    <li><a href="#解读源码">解读源码</a></li>
+    <li><a href="#结论是什么">结论是什么？</a></li>
+    <li><a href="#解决办法">解决办法</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">golang调用带有后台进程shell脚本可能会被挂起</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月13日
+        </date>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="起因">起因</h2>
+<p>今天用golang写一个调用外部shell脚本的程序，使用 <code>exec.Command</code>方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：<code>cmd.Output</code> 始终不会返回，一直挂起。导致我的Go程序也挂起了。</p>
+<h2 id="问题还原">问题还原</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//main.go
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
+
+<span style="color:#000;font-weight:bold">import</span> (
+	<span style="color:#d14">&#34;fmt&#34;</span>
+	<span style="color:#d14">&#34;os/exec&#34;</span>
+)
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+	cmd <span style="color:#000;font-weight:bold">:=</span> exec.<span style="color:#900;font-weight:bold">Command</span>(<span style="color:#d14">&#34;sh&#34;</span>, <span style="color:#d14">&#34;test.sh&#34;</span>)
+	out, err <span style="color:#000;font-weight:bold">:=</span> cmd.<span style="color:#900;font-weight:bold">Output</span>()
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		fmt.<span style="color:#900;font-weight:bold">Errorf</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	<span style="color:#0086b3">print</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;%s&#34;</span>, out))
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>test.sh</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/bash
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+ping localhost &amp;
+</code></pre></td></tr></table>
+</div>
+</div><p>启动<code>golang</code>程序 <code>go run main.go</code>, 此时会发现<code>cmd.Output()</code>始终不会返回。如果在终端直接执行<code>sh test.sh</code>就会直接返回了。
+是什么原因导致的这个问题？</p>
+<h2 id="脚本执行方式">脚本执行方式</h2>
+<p>由于<code>ping localhost</code>会一直运行并且输出，我换了一个立即会结束的脚本:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/bash
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+ls -la
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>为什么会想到用立即结束的脚本来验证问题，是因为我写这个程序的需求是使用golang写一个web服务来执行脚本。有的脚本是立马n返回，有的是一直输出的。</p>
+</blockquote>
+<p>改成上面后，<code>cmd.Output()</code> 立马就返回了，看来是因为脚本一直有输出，导致 <code>cmd.OutPut()</code>一直不返回。</p>
+<p>终端是如何把一个后台任务的输出显示在自己的输出中的？ 可以参考菜鸟教程：<a href="https://www.runoob.com/linux/linux-shell-io-redirections.html">Shell输入/输出重定向</a></p>
+<p>引用里面的一段话：
+大多数 UNIX 系统命令从你的终端接受输入并将所产生的输出发送回到您的终端。一个命令通常从一个叫标准输入的地方读取输入，默认情况下，这恰好是你的终端。同样，一个命令通常将其输出写入到标准输出，默认情况下，这也是你的终端。</p>
+<h2 id="解读源码">解读源码</h2>
+<p>Go 等待进程退出的代码
+
+        <img class="mx-auto" alt="" src="https://files.catbox.moe/16by62.png" />   
+    </p>
+<p>结合这段代码再回到开始的<code>ping localhost &amp;</code>语句（它在被sh执行的脚本中）：</p>
+<p>其中<code>state, err := c.Process.Wait()</code>等待的是sh进程的结束，没问题，sh很快就退出了, 看到这段代码:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">var</span> copyError <span style="color:#458;font-weight:bold">error</span>
+<span style="color:#000;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">range</span> c.goroutine {
+    <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>c.errch; err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> copyError <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nil</span> {
+        copyError = err
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码会等待所有的 <code>goroutines</code> 退出，这些 <code>goroutines</code> 在干啥呢？可以再看下面这两段代码：</p>
+<p>
+        <img class="mx-auto" alt="" src="https://files.catbox.moe/okjims.png" />   
+    
+
+        <img class="mx-auto" alt="" src="https://files.catbox.moe/c7vcdu.png" />   
+    </p>
+<p>也就是说，开了一个 <code>goroutine</code>去把数据从子进程那里把数据读回来。</p>
+<h2 id="结论是什么">结论是什么？</h2>
+<p>cmd.Output() 会等待直接启动的那个进程的退出，并等待所有的连接标准输入/标准输出/标准错误管道全部关闭之后才会返回。只要这三者之一任意一个没有被关闭（而不是写没写/读没读），等待就会持续。</p>
+<p>标准输入：由于本文中的<code>ping</code>是后台任务，<code>sh</code>根本就没把标准输入传递给它，<code>sh</code>退出时就把<code>exec.Command</code>的标准输入管道（的读端）给关闭了。所以这儿的<code>goroutine</code>早就结束了。
+标准输出/标准错误：仍然和<code>ping</code>连接在一起</p>
+<h2 id="解决办法">解决办法</h2>
+<p>那到底该怎么写呢，有两种思路</p>
+<ol>
+<li>改脚本，可以把标准输出和标准错误重定向到文件中。还是参考菜鸟教程<a href="https://www.runoob.com/linux/linux-shell-io-redirections.html">Shell输入/输出重定向</a></li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/bash
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#998;font-style:italic">#如果要保留输出，可以输出到文件</span>
+ping localhost &gt; test.txt 2&gt;&amp;<span style="color:#099">1</span> &amp;
+<span style="color:#998;font-style:italic">#如果输出无用，直接丢弃</span>
+ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#099">1</span> &amp;
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>改golang程序, 使用 <code>cmd.Start()</code> 替代 <code>cmd.Output()</code></li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">package</span> main
+
+<span style="color:#000;font-weight:bold">import</span> (
+	<span style="color:#d14">&#34;fmt&#34;</span>
+	<span style="color:#d14">&#34;os/exec&#34;</span>
+)
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+	cmd <span style="color:#000;font-weight:bold">:=</span> exec.<span style="color:#900;font-weight:bold">Command</span>(<span style="color:#d14">&#34;sh&#34;</span>, <span style="color:#d14">&#34;test.sh&#34;</span>)
+	out<span style="color:#000;font-weight:bold">:=</span> cmd.<span style="color:#900;font-weight:bold">Start</span>()
+	<span style="color:#0086b3">print</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;%s&#34;</span>, out))
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>Cmd的几个方法介绍,有阻塞和非阻塞的，按需使用。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">Command</span>(name <span style="color:#458;font-weight:bold">string</span>, arg <span style="color:#000;font-weight:bold">...</span><span style="color:#458;font-weight:bold">string</span>) <span style="color:#000;font-weight:bold">*</span>Cmd
+方法返回一个<span style="color:#000;font-weight:bold">*</span>Cmd<span style="color:#a61717;background-color:#e3d2d2">，</span> 用于执行name指定的程序(携带arg参数)
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">Run</span>() <span style="color:#458;font-weight:bold">error</span>
+执行Cmd中包含的命令<span style="color:#a61717;background-color:#e3d2d2">，</span>阻塞直到命令执行完成
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">Start</span>() <span style="color:#458;font-weight:bold">error</span>
+执行Cmd中包含的命令<span style="color:#a61717;background-color:#e3d2d2">，</span>该方法立即返回<span style="color:#a61717;background-color:#e3d2d2">，</span>并不等待命令执行完成
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">Wait</span>() <span style="color:#458;font-weight:bold">error</span>
+该方法会阻塞直到Cmd中的命令执行完成<span style="color:#a61717;background-color:#e3d2d2">，</span>但该命令必须是被Start方法开始执行的
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">Output</span>() ([]<span style="color:#458;font-weight:bold">byte</span>, <span style="color:#458;font-weight:bold">error</span>)
+执行Cmd中包含的命令<span style="color:#a61717;background-color:#e3d2d2">，</span>并返回标准输出的切片
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">CombinedOutput</span>() ([]<span style="color:#458;font-weight:bold">byte</span>, <span style="color:#458;font-weight:bold">error</span>)
+执行Cmd中包含的命令<span style="color:#a61717;background-color:#e3d2d2">，</span>并返回标准输出与标准错误合并后的切片
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">StdinPipe</span>() (io.WriteCloser, <span style="color:#458;font-weight:bold">error</span>)
+返回一个管道<span style="color:#a61717;background-color:#e3d2d2">，</span>该管道会在Cmd中的命令被启动后连接到其标准输入
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">StdoutPipe</span>() (io.ReadCloser, <span style="color:#458;font-weight:bold">error</span>)
+返回一个管道<span style="color:#a61717;background-color:#e3d2d2">，</span>该管道会在Cmd中的命令被启动后连接到其标准输出
+<span style="color:#000;font-weight:bold">func</span> (c <span style="color:#000;font-weight:bold">*</span>Cmd) <span style="color:#900;font-weight:bold">StderrPipe</span>() (io.ReadCloser, <span style="color:#458;font-weight:bold">error</span>)
+返回一个管道<span style="color:#a61717;background-color:#e3d2d2">，</span>该管道会在Cmd中的命令被启动后连接到其标准错误
+</code></pre></td></tr></table>
+</div>
+</div>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">英语学习</a></li>
+        
+        <li><a href="/post/read/economics/">经济学书籍</a></li>
+        
+        <li><a href="/post/game/fps/move/">FPS游戏 实现移动功能</a></li>
+        
+        <li><a href="/post/free/music/">免费Music</a></li>
+        
+        <li><a href="/post/unity3D/transform%E7%B1%BB/">U3D Transform类</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yourdiscussshortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "https://github.com/zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz By Zzz</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四(消息调度)">Skynet源码赏析四(消息调度)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三(服务启动)">Skynet源码赏析三(服务启动)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二(基础数据结构)">Skynet源码赏析二(基础数据结构)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一(启动初始化的过程)">Skynet源码赏析一(启动初始化的过程)</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/unity3D/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/Live/">Live (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="Zzz的博客">Zzz的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="Zzz的github">Zzz的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
