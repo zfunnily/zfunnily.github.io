@@ -95,13 +95,16 @@
     <loc>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2021-09-12T20:43:34+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/music/</loc>
-    <lastmod>2021-09-08T14:47:14+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/tags/music/</loc>
     <lastmod>2021-09-08T14:47:14+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/post/free/music/</loc>
+    <loc>https://zfunnily.github.io/categories/Other/</loc>
+    <lastmod>2021-09-08T14:47:14+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/other/</loc>
+    <lastmod>2021-09-08T14:47:14+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/post/other/music/</loc>
     <lastmod>2021-09-08T14:47:14+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/idea/</loc>
@@ -182,12 +185,6 @@
     <loc>https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/</loc>
     <lastmod>2021-08-30T17:20:38+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/Shell/</loc>
-    <lastmod>2021-08-30T17:13:33+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/post/shell/except/</loc>
-    <lastmod>2021-08-30T17:13:33+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/post/unity3D/UGUI/</loc>
     <lastmod>2021-08-20T14:15:41+08:00</lastmod>
   </url><url>
@@ -239,10 +236,10 @@
     <loc>https://zfunnily.github.io/post/lua_api/lua_settop%E5%92%8Clua_pop/</loc>
     <lastmod>2021-05-10T15:57:03+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/post/hugo/hugo/</loc>
+    <loc>https://zfunnily.github.io/post/other/hugo/</loc>
     <lastmod>2021-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/hugo/</loc>
+    <loc>https://zfunnily.github.io/tags/hugo/</loc>
     <lastmod>2021-04-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/git/</loc>
@@ -665,9 +662,6 @@
     <loc>https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2020-10-12T16:29:34+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2020-10-12T16:29:34+00:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/tags/tcpip/</loc>
     <lastmod>2020-10-10T16:46:34+00:00</lastmod>
   </url><url>
@@ -677,10 +671,10 @@
     <loc>https://zfunnily.github.io/tags/event/</loc>
     <lastmod>2020-09-16T23:20:28+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</loc>
+    <loc>https://zfunnily.github.io/tags/libevent/</loc>
     <lastmod>2020-09-16T23:20:28+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2020-09-16T23:20:28+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/ffmpeg/</loc>
@@ -728,6 +722,9 @@
     <loc>https://zfunnily.github.io/post/csdn/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</loc>
     <lastmod>2020-08-14T17:18:58+00:00</lastmod>
   </url><url>
+    <loc>https://zfunnily.github.io/tags/nsf/</loc>
+    <lastmod>2020-08-14T17:17:54+00:00</lastmod>
+  </url><url>
     <loc>https://zfunnily.github.io/post/csdn/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2020-08-14T17:17:54+00:00</lastmod>
   </url><url>
@@ -744,9 +741,6 @@
     <lastmod>2020-08-09T09:34:36+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/node.js/</loc>
-    <lastmod>2020-08-09T09:34:36+00:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/categories/node.js/</loc>
     <lastmod>2020-08-09T09:34:36+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/post/csdn/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/</loc>
@@ -769,6 +763,8 @@
   </url><url>
     <loc>https://zfunnily.github.io/post/csdn/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</loc>
     <lastmod>2020-08-05T09:47:22+00:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/post/linux/except/</loc>
   </url><url>
     <loc>https://zfunnily.github.io/tags/C/C&#43;&#43;/</loc>
   </url><url>

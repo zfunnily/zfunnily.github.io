@@ -114,5 +114,14 @@
       <description>reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大</description>
     </item>
     
+    <item>
+      <title>Libevent定时器的实现</title>
+      <link>https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;amp;ev,</description>
+    </item>
+    
   </channel>
 </rss>

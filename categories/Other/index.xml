@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Other on 流浪花</title>
+    <link>https://zfunnily.github.io/categories/Other/</link>
+    <description>Recent content in Other on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 08 Sep 2021 14:47:14 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Other/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>免费Music</title>
+      <link>https://zfunnily.github.io/post/other/music/</link>
+      <pubDate>Wed, 08 Sep 2021 14:47:14 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/other/music/</guid>
+      <description>介绍一个可以免费听音乐的方法 环境 docker mac 安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker $dir_name 是 你自己宿主机的目录。可以自定义 访问：127.0.0.1:264 就可以放心使用， 同事推荐的，贼好用。</description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://zfunnily.github.io/post/other/hugo/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/other/hugo/</guid>
+      <description>hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下</description>
+    </item>
+    
+    <item>
+      <title>CPU的核与线程-4核8线程</title>
+      <link>https://zfunnily.github.io/post/csdn/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 12 Oct 2020 16:29:34 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/</guid>
+      <description>查看cpu信息 $ cat /proc/cpuinfo 物理CPU 物理CPU就是计算机上实际配置的CPU个数。在linux上可以打开cat /proc/cpuinfo 来查看，其中的physical id就是每个物理CPU的ID，能找到几个physical id就代表计算机实际有几个CPU。 在linux下可以通过指令 grep ‘physical id’ /proc/cpuinfo |</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -62,11 +62,11 @@
     </item>
     
     <item>
-      <title>music</title>
-      <link>https://zfunnily.github.io/categories/music/</link>
+      <title>Other</title>
+      <link>https://zfunnily.github.io/categories/Other/</link>
       <pubDate>Wed, 08 Sep 2021 14:47:14 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/music/</guid>
+      <guid>https://zfunnily.github.io/categories/Other/</guid>
       <description></description>
     </item>
     
@@ -89,29 +89,11 @@
     </item>
     
     <item>
-      <title>Shell</title>
-      <link>https://zfunnily.github.io/categories/Shell/</link>
-      <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/Shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Lua</title>
       <link>https://zfunnily.github.io/categories/Lua/</link>
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/categories/Lua/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://zfunnily.github.io/categories/hugo/</link>
-      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/hugo/</guid>
       <description></description>
     </item>
     
@@ -161,24 +143,6 @@
     </item>
     
     <item>
-      <title>操作系统</title>
-      <link>https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Mon, 12 Oct 2020 16:29:34 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Libevent实践</title>
-      <link>https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/</link>
-      <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>音视频</title>
       <link>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
       <pubDate>Mon, 14 Sep 2020 18:29:33 +0000</pubDate>
@@ -193,15 +157,6 @@
       <pubDate>Mon, 17 Aug 2020 13:58:35 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>node.js</title>
-      <link>https://zfunnily.github.io/categories/node.js/</link>
-      <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/node.js/</guid>
       <description></description>
     </item>
     
