@@ -33,8 +33,8 @@ $(document).ready(function (){
         var quote = quotes[idx]
         var tmpHtml
         if (quote !== undefined) {
-            tmpHtml = quote[0] +  " —— " + quote[1] + " " + (quote[2] ? "《"+quote[2] +"》": "");
+            tmpHtml =  quote[0] +  (quote[1] ? "\n" + " —— " + quote[1]: "") + (quote[2] ? " 《"+quote[2] +"》": "");
         }
-        $("#quotes").text(tmpHtml)
+        document.getElementById('quotes').innerText = tmpHtml
     })
 })
