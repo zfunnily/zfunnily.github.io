@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cinnamon on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/cinnamon/</link>
+    <description>Recent content in cinnamon on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 01 Dec 2020 15:43:58 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/cinnamon/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu16.04.6安装Cinnamon3.0</title>
+      <link>https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
+      <pubDate>Tue, 01 Dec 2020 15:43:58 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</guid>
+      <description>概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多桌面用户相较于 Ubuntu 更喜欢 Linux Mint[3]。 现在你无需安装 Linux Mint[4]就能够体验</description>
+    </item>
+    
+  </channel>
+</rss>

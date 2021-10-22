@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>排序算法 on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 排序算法 on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 23 Mar 2021 13:57:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>插入排序</title>
+      <link>https://zfunnily.github.io/post/csdn/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 13:57:07 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
+      <description>概述 插入排序(InsertionSort)，一般也被称为直接插入排序。 对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;  sort排序</title>
+      <link>https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 13:40:22 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</guid>
+      <description>概述 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可不写） 第一个是要排序的数组的起始地址。- 第二个是结束的地址（最后一位要排序</description>
+    </item>
+    
+    <item>
+      <title>选择排序</title>
+      <link>https://zfunnily.github.io/post/csdn/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:14:35 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 选择排序法（以从小到大排序为例）算法思想：A.在未排序序列中找到最小（大）元素，存放到排序序列的起始位置B.从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾C.以此类推，直到所有元素均排序完毕</description>
+    </item>
+    
+    <item>
+      <title>冒泡排序</title>
+      <link>https://zfunnily.github.io/post/csdn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 冒泡排序算法思想：1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数，然后将该数固定3.针对所有的元素重</description>
+    </item>
+    
+  </channel>
+</rss>

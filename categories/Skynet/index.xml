@@ -43,5 +43,41 @@
       <description>入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&amp;gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat</description>
     </item>
     
+    <item>
+      <title>lua解决百元买鸡的问题</title>
+      <link>https://zfunnily.github.io/post/csdn/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Wed, 24 Feb 2021 17:51:46 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local</description>
+    </item>
+    
+    <item>
+      <title>Lua调用C/C&#43;&#43;的动态库</title>
+      <link>https://zfunnily.github.io/post/csdn/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
+    </item>
+    
+    <item>
+      <title>在skynet中使用lua-protobuf库</title>
+      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
+      <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
+      <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
+    </item>
+    
+    <item>
+      <title>skynet框架入门--写一个echo服务</title>
+      <link>https://zfunnily.github.io/post/csdn/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</guid>
+      <description>概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用</description>
+    </item>
+    
   </channel>
 </rss>

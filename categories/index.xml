@@ -71,6 +71,15 @@
     </item>
     
     <item>
+      <title>Linux技巧</title>
+      <link>https://zfunnily.github.io/categories/Linux%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Tue, 07 Sep 2021 14:41:02 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/Linux%E6%8A%80%E5%B7%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Unity3D</title>
       <link>https://zfunnily.github.io/categories/Unity3D/</link>
       <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
@@ -112,6 +121,105 @@
       <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>汇编学习笔记</title>
+      <link>https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Redis源码解析</title>
+      <link>https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>网络编程</title>
+      <link>https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 28 Dec 2020 11:57:04 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://zfunnily.github.io/categories/Docker/</link>
+      <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/Docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenResty</title>
+      <link>https://zfunnily.github.io/categories/OpenResty/</link>
+      <pubDate>Wed, 25 Nov 2020 16:30:39 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/OpenResty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>操作系统</title>
+      <link>https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 12 Oct 2020 16:29:34 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Libevent实践</title>
+      <link>https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/</link>
+      <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>音视频</title>
+      <link>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+      <pubDate>Mon, 14 Sep 2020 18:29:33 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s入门</title>
+      <link>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Mon, 17 Aug 2020 13:58:35 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>https://zfunnily.github.io/categories/node.js/</link>
+      <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C/C&#43;&#43;</title>
+      <link>https://zfunnily.github.io/categories/C/C&#43;&#43;/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/C/C&#43;&#43;/</guid>
       <description></description>
     </item>
     

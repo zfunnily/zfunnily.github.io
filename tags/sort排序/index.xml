@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sort排序 on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in sort排序 on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 23 Mar 2021 13:40:22 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;  sort排序</title>
+      <link>https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 13:40:22 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</guid>
+      <description>概述 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可不写） 第一个是要排序的数组的起始地址。- 第二个是结束的地址（最后一位要排序</description>
+    </item>
+    
+  </channel>
+</rss>

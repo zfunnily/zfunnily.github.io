@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>vimplus快捷键 | 流浪花</title>
+    <meta property="og:title" content="vimplus快捷键 - 流浪花">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-10-28T09:14:28&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-10-28T09:14:28&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="vimplus快捷键">
+        
+    <meta name="author" content="流浪花">
+    <meta property="og:url" content="https://zfunnily.github.io/post/csdn/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        流浪花
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                    <a  href="https://zfunnily.github.io/todo/" title="TODO">TODO</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-id_4a插件相关"><!-- raw HTML omitted --><!-- raw HTML omitted -->插件相关</a></li>
+    <li><a href="#a-id_95a插入模式"><!-- raw HTML omitted --><!-- raw HTML omitted -->插入模式</a></li>
+    <li><a href="#a-id_116a缓存操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->缓存操作</a></li>
+    <li><a href="#a-id_129a窗口操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->窗口操作</a></li>
+    <li><a href="#a-id_152a光标移动"><!-- raw HTML omitted --><!-- raw HTML omitted -->光标移动</a></li>
+    <li><a href="#a-id_225a文本编辑"><!-- raw HTML omitted --><!-- raw HTML omitted -->文本编辑</a></li>
+    <li><a href="#a-id_426a文件操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->文件操作</a></li>
+    <li><a href="#a-id_463a使用外部程序"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用外部程序</a></li>
+    <li><a href="#宏录制httpslearnkucomarticles26431e45ef2">宏录制<a href="https://learnku.com/articles/26431#e45ef2">#</a></a></li>
+    <li><a href="#a-id_491a实用命令"><!-- raw HTML omitted --><!-- raw HTML omitted -->实用命令</a></li>
+    <li><a href="#a-id_540a帮助"><!-- raw HTML omitted --><!-- raw HTML omitted -->帮助</a></li>
+    <li><a href="#a-id_571a其他"><!-- raw HTML omitted --><!-- raw HTML omitted -->其他</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">vimplus快捷键</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux%E6%8A%80%E5%B7%A7'>Linux技巧</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <ul>
+<li>
+<!-- raw HTML omitted -->
+</li>
+</ul>
+<h2 id="a-id_4a插件相关"><!-- raw HTML omitted --><!-- raw HTML omitted -->插件相关</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>,</code>|Leader Key
+|<code>&lt;leader&gt;n</code>|打开 / 关闭代码资源管理器
+|<code>&lt;leader&gt;t</code>|打开 / 关闭函数列表
+|<code>&lt;leader&gt;a</code>|.h .cpp 文件切换
+|<code>&lt;leader&gt;u</code>|转到函数声明
+|<code>&lt;leader&gt;U</code>|转到函数实现
+|<code>&lt;leader&gt;o</code>|打开 include 文件
+|<code>&lt;leader&gt;y</code>|拷贝函数声明
+|<code>&lt;leader&gt;p</code>|生成函数实现
+|<code>&lt;leader&gt;w</code>|单词跳转
+|<code>&lt;leader&gt;f</code>|搜索～目录下的文件
+|<code>&lt;leader&gt;F</code>|搜索当前目录下的文本
+|<code>&lt;leader&gt;g</code>|显示 git 仓库提交记录
+|<code>&lt;leader&gt;G</code>|显示当前文件提交记录
+|<code>&lt;leader&gt;gg</code>|显示当前文件在某个 commit 下的完整内容
+|<code>&lt;leader&gt;ff</code>|语法错误自动修复 (FixIt)
+|<code>&lt;c-p&gt;</code>|切换到上一个 buffer
+|<code>&lt;c-n&gt;</code>|切换到下一个 buffer
+|<code>&lt;leader&gt;d</code>|删除当前 buffer
+|<code>&lt;leader&gt;D</code>|删除当前 buffer 外的所有 buffer
+|<code>vim</code>|运行 vim 编辑器时，默认启动开始页面
+|<code>&lt;F5&gt;</code>|显示语法错误提示窗口
+|<code>&lt;F7&gt;</code>|启用 markdown 实时预览
+|<code>&lt;F8&gt;</code>|关闭 markdown 实时预览
+|<code>&lt;F9&gt;</code>|显示上一主题
+|<code>&lt;F10&gt;</code>|显示下一主题
+|<code>&lt;leader&gt;l</code>|按竖线对齐
+|<code>&lt;leader&gt;=</code>|按等号对齐
+|<code>Ya</code>|复制行文本到字母 a
+|<code>Da</code>|剪切行文本到字母 a
+|<code>Ca</code>|改写行文本到字母 a
+|<code>rr</code>|替换文本
+|<code>&lt;leader&gt;r</code>|全局替换，目前只支持单个文件
+|<code>gcc</code>|注释代码
+|<code>gcap</code>|注释段落
+|<code>vif</code>|选中函数内容
+|<code>dif</code>|删除函数内容
+|<code>cif</code>|改写函数内容
+|<code>vaf</code>|选中函数内容（包括函数名 花括号）
+|<code>daf</code>|删除函数内容（包括函数名 花括号）
+|<code>caf</code>|改写函数内容（包括函数名 花括号）
+|<code>fa</code>|查找字母 a，然后再按 f 键查找下一个
+|<code>&lt;c-x&gt;&lt;c-o&gt;</code>|Emoji:dog: 补全</p>
+<h2 id="a-id_95a插入模式"><!-- raw HTML omitted --><!-- raw HTML omitted -->插入模式</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>i</code>|在光标处进入插入模式
+|<code>I</code>|在行首进入插入模式
+|<code>a</code>|在光标后进入插入模式
+|<code>A</code>|在行尾进入插入模式
+|<code>o</code>|在下一行插入新行并进入插入模式
+|<code>O</code>|在上一行插入新行并进入插入模式
+|<code>gi</code>|进入到上一次插入模式的位置
+|<code>&lt;esc&gt;</code>|退出插入模式</p>
+<h2 id="a-id_116a缓存操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->缓存操作</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>:e &lt;filename&gt;</code>|新建 buffer 打开文件
+|<code>:bp</code>|切换到上一个 buffer
+|<code>:bn</code>|切换到下一个 buffer
+|<code>:bd</code>|删除当前 buffer</p>
+<h2 id="a-id_129a窗口操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->窗口操作</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>:sp &lt;filename&gt;</code>|横向切分窗口并打开文件
+|<code>:vsp &lt;filename&gt;</code>|竖向切分窗口并打开文件
+|<code>&lt;c-w&gt;h</code>|跳到左边的窗口
+|<code>&lt;c-w&gt;j</code>|跳到下边的窗口
+|<code>&lt;c-w&gt;k</code>|跳到上边的窗口
+|<code>&lt;c-w&gt;l</code>|跳到右边的窗口
+|<code>&lt;c-w&gt;c</code>|关闭当前窗口
+|<code>&lt;c-w&gt;o</code>|关闭其他窗口
+|<code>:only</code>|关闭其他窗口</p>
+<h2 id="a-id_152a光标移动"><!-- raw HTML omitted --><!-- raw HTML omitted -->光标移动</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>h</code>|上下左右移动
+|<code>j</code>|上下左右移动
+|<code>k</code>|上下左右移动
+|<code>l</code>|上下左右移动
+|<code>0</code>|光标移动到行首
+|<code>^</code>|跳到从行首开始第一个非空白字符
+|<code>$</code>|光标移动到行尾
+|<code>&lt;c-o&gt;</code>|跳到上一个位置
+|<code>&lt;c-i&gt;</code>|跳到下一个位置
+|<code>&lt;c-b&gt;</code>|上一页
+|<code>&lt;c-f&gt;</code>|下一页
+|<code>&lt;c-u&gt;</code>|上移半屏
+|<code>&lt;c-d&gt;</code>|下移半屏
+|<code>H</code>|调到屏幕顶上
+|<code>M</code>|调到屏幕中间
+|<code>L</code>|调到屏幕下方
+|<code>:n</code>|跳到第 n 行
+|<code>w</code>|跳到下一个单词开头 (标点或空格分隔的单词)
+|<code>W</code>|跳到下一个单词开头 (空格分隔的单词)
+|<code>e</code>|跳到下一个单词尾部 (标点或空格分隔的单词)
+|<code>E</code>|跳到下一个单词尾部 (空格分隔的单词)
+|<code>b</code>|上一个单词头 (标点或空格分隔的单词)
+|<code>B</code>|上一个单词头 (空格分隔的单词)
+|<code>ge</code>|上一个单词尾
+|<code>%</code>|在配对符间移动，可用于 ()、{}、[]
+|<code>gg</code>|到文件首
+|<code>G</code>|到文件尾
+|<code>fx</code>|跳转到下一个为 x 的字符
+|<code>Fx</code>|跳转到上一个为 x 的字符
+|<code>tx</code>|跳转到下一个为 x 的字符前
+|<code>Tx</code>|跳转到上一个为 x 的字符前
+|<code>;</code>|跳到下一个搜索的结果
+|<code>[[</code>|跳转到函数开头
+|<code>]]</code>|跳转到函数结尾</p>
+<h2 id="a-id_225a文本编辑"><!-- raw HTML omitted --><!-- raw HTML omitted -->文本编辑</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>r</code>|替换当前字符
+|<code>R</code>|进入替换模式，直至 ESC 离开
+|<code>s</code>|替换字符（删除光标处字符，并进入插入模式，前可接数量）
+|<code>S</code>|替换行（删除当前行，并进入插入模式，前可接数量）
+|<code>cc</code>|改写当前行（删除当前行并进入插入模式），同 S
+|<code>cw</code>|改写光标开始处的当前单词
+|<code>ciw</code>|改写光标所处的单词
+|<code>caw</code>|改写光标所处的单词，并且包括前后空格（如果有的话）
+|<code>ct,</code>|改写到逗号
+|<code>c0</code>|改写到行首
+|<code>c^</code>|改写到行首（第一个非零字符）
+|<code>c$</code>|改写到行末
+|<code>C</code>|改写到行末（同 c$）
+|<code>ci&quot;</code>|改写双引号中的内容
+|<code>ci'</code>|改写单引号中的内容
+|<code>ci)</code>|改写小括号中的内容
+|<code>ci]</code>|改写中括号中内容
+|<code>ci}</code>|改写大括号中内容
+|<code>cit</code>|改写 xml tag 中的内容
+|<code>cis</code>|改写当前句子
+|<code>ciB</code>|改写 &lsquo;{}&rsquo; 中的内容
+|<code>c2w</code>|改写下两个单词
+|<code>ct(</code>|改写到小括号前
+|<code>x</code>|删除当前字符，前面可以接数字，3x 代表删除三个字符
+|<code>X</code>|向前删除字符
+|<code>dd</code>|删除当前行
+|<code>d0</code>|删除到行首
+|<code>d^</code>|删除到行首（第一个非零字符）
+|<code>d$</code>|删除到行末
+|<code>D</code>|删除到行末（同 d$）
+|<code>dw</code>|删除当前单词
+|<code>dt,</code>|删除到逗号
+|<code>diw</code>|删除光标所处的单词
+|<code>daw</code>|删除光标所处的单词，并包含前后空格（如果有的话）
+|<code>di&quot;</code>|删除双引号中的内容
+|<code>di'</code>|删除单引号中的内容
+|<code>di)</code>|删除小括号中的内容
+|<code>di]</code>|删除中括号中内容
+|<code>di}</code>|删除大括号中内容
+|<code>diB</code>|删除 &lsquo;{}&rsquo; 中的内容
+|<code>dit</code>|删除 xml tag 中的内容
+|<code>dis</code>|删除当前句子
+|<code>d2w</code>|删除下两个单词
+|<code>dt(</code>|删除到小括号前
+|<code>dgg</code>|删除到文件头部
+|<code>dG</code>|删除到文件尾部
+|<code>d}</code>|删除下一段
+|<code>d{&lt;!-- --&gt;</code>|删除上一段
+|<code>u</code>|撤销
+|<code>U</code>|撤销整行操作
+|<code>CTRL-R</code>|撤销上一次 u 命令
+|<code>J</code>|连接若干行
+|<code>gJ</code>|连接若干行，删除空白字符
+|<code>.</code>|重复上一次操作
+|<code>~</code>|交换大小写
+|<code>g~iw</code>|替换当前单词的大小写
+|<code>gUiw</code>|将单词转成大写
+|<code>guiw</code>|将当前单词转成小写
+|<code>guu</code>|全行转为小写
+|<code>gUU</code>|全行转为大写
+|<code>gg=G</code>|缩进整个文件
+|<code>=a{&lt;!-- --&gt;</code>|缩进光标所在代码块
+|<code>=i{&lt;!-- --&gt;</code>|缩进光标所在代码块，不缩进 &ldquo;{&rdquo;
+|<code>&lt;&lt;</code>|减少缩进
+|<code>&gt;&gt;</code>|增加缩进
+|<code>==</code>|自动缩进
+|<code>CTRL-A</code>|增加数字
+|<code>CTRL-X</code>|减少数字
+|<code>p</code>|粘贴到光标后
+|<code>P</code>|粘贴到光标前
+|<code>v</code>|开始标记
+|<code>y</code>|复制标记内容
+|<code>V</code>|开始按行标记
+|<code>CTRL-V</code>|开始列标记
+|<code>y$</code>|复制当前位置到本行结束的内容
+|<code>yy</code>|复制当前行
+|<code>Y</code>|复制当前行，同 yy
+|<code>yt,</code>|复制到逗号
+|<code>yiw</code>|复制当前单词
+|<code>3yy</code>|复制光标下三行内容
+|<code>v0</code>|选中当前位置到行首
+|<code>v$</code>|选中当前位置到行末
+|<code>vt,</code>|选中到逗号
+|<code>viw</code>|选中当前单词
+|<code>vi)</code>|选中小括号内的东西
+|<code>vi]</code>|选中中括号内的东西
+|<code>viB</code>|选中 &lsquo;{}&rsquo; 中的内容
+|<code>vis</code>|选中句子中的东西
+|<code>gv</code>|重新选择上一次选中的文字
+|<code>:set paste</code>|允许粘贴模式（避免粘贴时自动缩进影响格式）
+|<code>:set nopaste</code>|禁止粘贴模式
+|<code>&quot;?yy</code>|复制当前行到寄存器？，问号代表 0-9 的寄存器名称
+|<code>&quot;?p</code>|将寄存器？的内容粘贴到光标后
+|<code>&quot;?P</code>|将寄存器？的内容粘贴到光标前
+|<code>:registers</code>|显示所有寄存器内容
+|<code>:[range]y</code>|复制范围，比如 :20,30y 是复制 20 到 30 行，:10y 是复制第十行
+|<code>:[range]d</code>|删除范围，比如 :20,30d 是删除 20 到 30 行，:10d 是删除第十行
+|<code>ddp</code>|交换两行内容：先删除当前行复制到寄存器，并粘贴</p>
+<h2 id="a-id_426a文件操作"><!-- raw HTML omitted --><!-- raw HTML omitted -->文件操作</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>:w</code>|保存文件
+|<code>:w &lt;filename&gt;</code>|按名称保存文件
+|<code>ZZ</code>|保存文件（如果有改动的话），并关闭窗口
+|<code>:e &lt;filename&gt;</code>|打开文件并编辑
+|<code>:saveas &lt;filename&gt;</code>|另存为文件
+|<code>:r &lt;filename&gt;</code>|读取文件并将内容插入到光标后
+|<code>:r !dir</code>|将 dir 命令的输出捕获并插入到光标后
+|<code>:close</code>|关闭文件
+|<code>:q</code>|退出
+|<code>:q!</code>|强制退出
+|<code>:wa</code>|保存所有文件
+|<code>:cd &lt;path&gt;</code>|切换 Vim 当前路径
+|<code>:new</code>|打开一个新的窗口编辑新文件
+|<code>:enew</code>|在当前窗口创建新文件
+|<code>:vnew</code>|在左右切分的新窗口中编辑新文件
+|<code>:tabnew</code>|在新的标签页中编辑新文件</p>
+<h2 id="a-id_463a使用外部程序"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用外部程序</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>!</code>|告诉 vim 正在执行一个过滤操作
+|<code>!5Gsort&lt;Enter&gt;</code>|使用外部 sort 命令对 1-5 行文本排序
+|<code>!!</code>|对当前行执行过滤命令
+|<code>!!date&lt;Enter&gt;</code>|用 &ldquo;date&rdquo; 的输出代替当前行</p>
+<h2 id="宏录制httpslearnkucomarticles26431e45ef2">宏录制<a href="https://learnku.com/articles/26431#e45ef2">#</a></h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>qa</code>|开始录制名字为 a 的宏
+|<code>q</code>|结束录制宏
+|<code>@a</code>|播放名字为 a 的宏
+|<code>100@a</code>|播放名字为 a 的宏 100 次
+|<code>:normal@a</code>|播放名字为 a 的宏直到自动结束</p>
+<h2 id="a-id_491a实用命令"><!-- raw HTML omitted --><!-- raw HTML omitted -->实用命令</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>/pattern</code>|从光标处向文件尾搜索 pattern
+|<code>?pattern</code>|从光标处向文件头搜索 pattern
+|<code>n</code>|向同一方向执行上一次搜索
+|<code>N</code>|向相反方向执行上一次搜索
+|<code>*</code>|向前搜索光标下的单词
+|<code>#</code>|向后搜索光标下的单词
+|<code>:s/p1/p2/g</code>|替换当前行的 p1 为 p2
+|<code>:%s/p1/p2/g</code>|替换当前文件中的 p1 为 p2
+|<code>:%s/&lt;p1&gt;/p2/g</code>|替换当前文件中的 p1 单词为 p2
+|<code>:%s/p1/p2/gc</code>|替换当前文件中的 p1 为 p2，并且每处询问你是否替换
+|<code>:10,20s/p1/p2/g</code>|将第 10 到 20 行中所有 p1 替换为 p2
+|<code>:%s/1\\2\/3/123/g</code>|将 “1\2/3” 替换为 “123”（特殊字符使用反斜杠标注）
+|<code>:%s/\r//g</code>|删除 DOS 换行符 ^M
+|<code>:g/^\s*$/d</code>|删除空行
+|<code>:g/test/d</code>|删除所有包含 test 的行
+|<code>:v/test/d</code>|删除所有不包含 test 的行
+|<code>:%s/^/test/</code>|在行首加入特定字符 (也可以用宏录制来添加)
+|<code>:%s/$/test/</code>|在行尾加入特定字符 (也可以用宏录制来添加)
+|<code>:sort</code>|排序
+|<code>:g/^\(.\+\)$\n\1/d</code>|去除重复行 (先排序)
+|<code>:%s/^.\{10\}//</code>|删除每行前 10 个字符
+|<code>:%s/.\{10\}$//</code>|删除每行尾 10 个字符</p>
+<h2 id="a-id_540a帮助"><!-- raw HTML omitted --><!-- raw HTML omitted -->帮助</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>h tutor</code>|入门文档
+|<code>h quickref</code>|快速帮助
+|<code>h index</code>|查询 Vim 所有键盘命令定义
+|<code>h summary</code>|帮助你更好的使用内置帮助系统
+|<code>h pattern.txt</code>|正则表达式帮助
+|<code>h eval</code>|脚本编写帮助
+|<code>h function-list</code>|查看 VimScript 的函数列表
+|<code>h windows.txt</code>|窗口使用帮助
+|<code>h tabpage.txt</code>|标签页使用帮助
+|<code>h tips</code>|查看 Vim 内置的常用技巧文档
+|<code>h quote</code>|寄存器
+|<code>h autocommand-events</code>|所有可能事件
+|<code>h write-plugin</code>|编写插件</p>
+<h2 id="a-id_571a其他"><!-- raw HTML omitted --><!-- raw HTML omitted -->其他</h2>
+<p>|快捷键|说明
+|&mdash;&mdash;
+|<code>vim -u NONE -N</code>|开启 vim 时不加载 vimrc 文件
+|<code>vimdiff file1 file2</code>|显示文件差异
+|<code>&lt;leader&gt;e</code>|快速编辑 vimrc 文件
+|<code>&lt;leader&gt;s</code>|重新加载 vimrc 文件
+|<code>&lt;leader&gt;h</code>|打开 vimplus 帮助文档
+|<code>&lt;leader&gt;H</code>|打开当前光标所在单词的 vim 帮助文档
+|<code>&lt;leader&gt;&lt;leader&gt;i</code>|安装插件
+|<code>&lt;leader&gt;&lt;leader&gt;u</code>|更新插件
+|<code>&lt;leader&gt;&lt;leader&gt;c</code>|删除插件</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/csdn/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C&#43;&#43;IDE/">使用vim打造编C&#43;&#43;IDE</a></li>
+        
+        <li><a href="/post/csdn/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/">linux系统删除大量文件指令--rsync</a></li>
+        
+        <li><a href="/post/csdn/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">CPU的核与线程-4核8线程</a></li>
+        
+        <li><a href="/post/csdn/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">大量TIME_WAIT对线上业务的影响</a></li>
+        
+        <li><a href="/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">Libevent定时器的实现</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/vim'>vim</a></li>
+                
+                <li><a href='/tags/linux'>linux</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">流浪花 By 流浪花</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/free/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/csdn/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/Book/">Book (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (12)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Libevent%E5%AE%9E%E8%B7%B5/">Libevent实践 (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux%E6%8A%80%E5%B7%A7/">Linux技巧 (8)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Shell/">Shell (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (8)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/hugo/">hugo (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/music/">music (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/node.js/">node.js (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统 (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (8)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (6)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/ATT/">ATT</a>
+    
+    <a href="https://zfunnily.github.io/tags/ATT%E8%A7%84%E8%8C%83/">ATT规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    
+    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    
+    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    
+    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    
+    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    
+    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
+    
+    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
+    
+    <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
+    
+    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
+    
+    <a href="https://zfunnily.github.io/tags/english/">english</a>
+    
+    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/event/">event</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
+    
+    <a href="https://zfunnily.github.io/tags/git/">git</a>
+    
+    <a href="https://zfunnily.github.io/tags/github/">github</a>
+    
+    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
+    
+    <a href="https://zfunnily.github.io/tags/go/">go</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
+    
+    <a href="https://zfunnily.github.io/tags/html/">html</a>
+    
+    <a href="https://zfunnily.github.io/tags/http/">http</a>
+    
+    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
+    
+    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
+    
+    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
+    
+    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
+    
+    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
+    
+    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
+    
+    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
+    
+    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
+    
+    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
+    
+    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
+    
+    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
+    
+    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">私有仓库</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="流浪花的博客">流浪花的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="流浪花的github">流浪花的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

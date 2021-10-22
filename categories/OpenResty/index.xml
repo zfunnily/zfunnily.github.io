@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenResty on 流浪花</title>
+    <link>https://zfunnily.github.io/categories/OpenResty/</link>
+    <description>Recent content in OpenResty on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 25 Nov 2020 16:30:39 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/OpenResty/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用OpenResty做一个postman小工具</title>
+      <link>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Wed, 25 Nov 2020 16:30:39 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+      <description>用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &amp;quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&amp;quot;; server { listen 8080; default_type &#39;application/json;charset=utf8&#39;; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了</description>
+    </item>
+    
+    <item>
+      <title>OpenResty初探</title>
+      <link>https://zfunnily.github.io/post/csdn/OpenResty%E5%88%9D%E6%8E%A2/</link>
+      <pubDate>Mon, 23 Nov 2020 16:21:34 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/OpenResty%E5%88%9D%E6%8E%A2/</guid>
+      <description>概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。 OpenResty®通过汇聚各种设计精良的Nginx模块（主要由 OpenResty 团队自主开发）</description>
+    </item>
+    
+  </channel>
+</rss>

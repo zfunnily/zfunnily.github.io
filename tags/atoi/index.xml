@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>atoi on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/atoi/</link>
+    <description>Recent content in atoi on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 17 Mar 2021 16:43:20 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/atoi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用C/C&#43;&#43;实现atoi和itoa函数</title>
+      <link>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 17 Mar 2021 16:43:20 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
+      <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;) &amp;amp;&amp;amp; (*str == &#39;+&#39; || *str == &#39;-&#39;)) { if (*str == &#39;-&#39;) bmin = true; str++; } while (*str != &#39;\0&#39;) { if (*str &amp;gt; &#39;9&#39; || *str &amp;lt;</description>
+    </item>
+    
+  </channel>
+</rss>

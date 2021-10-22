@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/c/</link>
+    <description>Recent content in c on 流浪花</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 21 Mar 2021 10:44:58 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《仙剑奇侠传》编译运行</title>
+      <link>https://zfunnily.github.io/post/csdn/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Sun, 21 Mar 2021 10:44:58 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</guid>
+      <description>概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决</description>
+    </item>
+    
+    <item>
+      <title>Lua调用C/C&#43;&#43;的动态库</title>
+      <link>https://zfunnily.github.io/post/csdn/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
+    </item>
+    
+    <item>
+      <title>C/C&#43;&#43;调用汇编函数</title>
+      <link>https://zfunnily.github.io/post/csdn/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</guid>
+      <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编</description>
+    </item>
+    
+    <item>
+      <title>C数组转化为go的切片类型</title>
+      <link>https://zfunnily.github.io/post/csdn/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
+      <description>概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存</description>
+    </item>
+    
+    <item>
+      <title>配置VScode调试Redis源码</title>
+      <link>https://zfunnily.github.io/post/csdn/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</link>
+      <pubDate>Tue, 12 Jan 2021 14:25:29 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</guid>
+      <description>环境 vscode- gcc5.4- ubuntu16.04 或者 ubuntu18.04- make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 VScode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
+    </item>
+    
+    <item>
+      <title>Redis源码解析-sds字符串分析</title>
+      <link>https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</link>
+      <pubDate>Wed, 06 Jan 2021 14:20:23 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</guid>
+      <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
+    </item>
+    
+  </channel>
+</rss>
