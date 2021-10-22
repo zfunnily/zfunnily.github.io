@@ -80,6 +80,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/" title="Redis源码解析-sds字符串分析">Redis源码解析-sds字符串分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/post/csdn/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/" title="struct中为什么使用char[]而不用char*">struct中为什么使用char[]而不用char*</a>
             </h1>
         </header>
@@ -302,31 +327,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Golang%E7%9A%84grpc/" title="Golang的grpc">Golang的grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Golang%E7%9A%84grpc/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -438,6 +438,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
@@ -473,10 +477,6 @@
         <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/post/csdn/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -508,7 +508,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
     

@@ -78,6 +78,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/csdn/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43;调用汇编函数">C/C&#43;&#43;调用汇编函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>汇编学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/post/csdn/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
             </h1>
         </header>
@@ -282,29 +305,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/" title="Redis源码解析-sds字符串分析">Redis源码解析-sds字符串分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -417,6 +417,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
@@ -452,10 +456,6 @@
         <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/post/csdn/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -487,7 +487,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
     

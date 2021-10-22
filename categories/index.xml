@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 21 Oct 2021 15:08:43 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Oct 2021 19:01:20 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thinking</title>
+      <link>https://zfunnily.github.io/categories/Thinking/</link>
+      <pubDate>Fri, 22 Oct 2021 19:01:20 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/categories/Thinking/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>TODO</title>
       <link>https://zfunnily.github.io/categories/TODO/</link>
@@ -31,15 +40,6 @@
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/categories/Golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Thinking</title>
-      <link>https://zfunnily.github.io/categories/Thinking/</link>
-      <pubDate>Tue, 12 Oct 2021 14:36:25 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/Thinking/</guid>
       <description></description>
     </item>
     
