@@ -32,6 +32,8 @@
     
     
     
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
     
     
     
@@ -284,7 +286,9 @@ ls -la
 <h2 id="解读源码">解读源码</h2>
 <p>Go 等待进程退出的代码
 
-        <img class="mx-auto" alt="" src="https://files.catbox.moe/16by62.png" />   
+        <a data-fancybox="gallery" href="https://files.catbox.moe/16by62.png">
+            <img class="mx-auto" alt="" src="https://files.catbox.moe/16by62.png" />
+        </a>
     </p>
 <p>结合这段代码再回到开始的<code>ping localhost &amp;</code>语句（它在被sh执行的脚本中）：</p>
 <p>其中<code>state, err := c.Process.Wait()</code>等待的是sh进程的结束，没问题，sh很快就退出了, 看到这段代码:</p>
@@ -308,10 +312,14 @@ ls -la
 </div>
 </div><p>这段代码会等待所有的 <code>goroutines</code> 退出，这些 <code>goroutines</code> 在干啥呢？可以再看下面这两段代码：</p>
 <p>
-        <img class="mx-auto" alt="" src="https://files.catbox.moe/okjims.png" />   
+        <a data-fancybox="gallery" href="https://files.catbox.moe/okjims.png">
+            <img class="mx-auto" alt="" src="https://files.catbox.moe/okjims.png" />
+        </a>
     
 
-        <img class="mx-auto" alt="" src="https://files.catbox.moe/c7vcdu.png" />   
+        <a data-fancybox="gallery" href="https://files.catbox.moe/c7vcdu.png">
+            <img class="mx-auto" alt="" src="https://files.catbox.moe/c7vcdu.png" />
+        </a>
     </p>
 <p>也就是说，开了一个 <code>goroutine</code>去把数据从子进程那里把数据读回来。</p>
 <h2 id="结论是什么">结论是什么？</h2>
@@ -501,7 +509,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#099">1</span> &amp;
                 }
             };
     </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
