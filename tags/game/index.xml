@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 12 Sep 2021 20:43:34 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/game/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FPS游戏 实现移动功能</title>
-      <link>https://zfunnily.github.io/2021/09/FPS%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/</link>
+      <link>https://zfunnily.github.io/2021/09/move/</link>
       <pubDate>Sun, 12 Sep 2021 20:43:34 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/09/FPS%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/</guid>
+      <guid>https://zfunnily.github.io/2021/09/move/</guid>
       <description>三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟</description>
     </item>
     

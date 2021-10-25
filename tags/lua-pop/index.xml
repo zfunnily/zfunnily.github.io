@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 10 May 2021 15:57:03 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua-pop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lua的api</title>
-      <link>https://zfunnily.github.io/2021/05/Lua%E7%9A%84api/</link>
+      <link>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</link>
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/05/Lua%E7%9A%84api/</guid>
+      <guid>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</guid>
       <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in</description>
     </item>
     

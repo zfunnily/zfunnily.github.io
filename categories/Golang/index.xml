@@ -9,28 +9,28 @@
     <lastBuildDate>Wed, 13 Oct 2021 17:15:45 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
-      <link>https://zfunnily.github.io/2021/10/Golang%E8%B0%83%E7%94%A8%E5%B8%A6%E6%9C%89%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8Bshell%E8%84%9A%E6%9C%AC%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%A2%AB%E6%8C%82%E8%B5%B7/</link>
+      <link>https://zfunnily.github.io/2021/10/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/Golang%E8%B0%83%E7%94%A8%E5%B8%A6%E6%9C%89%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8Bshell%E8%84%9A%E6%9C%AC%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%A2%AB%E6%8C%82%E8%B5%B7/</guid>
+      <guid>https://zfunnily.github.io/2021/10/shell/</guid>
       <description>起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func</description>
     </item>
     
     <item>
       <title>Golang利用redis实现分布式锁</title>
-      <link>https://zfunnily.github.io/2021/06/Golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+      <link>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/Golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
+      <guid>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
       <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
     <item>
       <title>Golang操作redis</title>
-      <link>https://zfunnily.github.io/2021/06/Golang%E6%93%8D%E4%BD%9Credis/</link>
+      <link>https://zfunnily.github.io/2021/06/go_redis/</link>
       <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/Golang%E6%93%8D%E4%BD%9Credis/</guid>
+      <guid>https://zfunnily.github.io/2021/06/go_redis/</guid>
       <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止</description>
     </item>
     
@@ -45,10 +45,10 @@
     
     <item>
       <title>Golang的定时器实现方式</title>
-      <link>https://zfunnily.github.io/2021/02/Golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <link>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
       <description>概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &amp;lt;- t2.C fmt.Println(&amp;quot;NewTimer...&amp;quot;) } }() select 通过select的方式实现定时器： for { select { case &amp;lt;- time.After(d): fmt.Println(&amp;quot;select...&amp;quot;) } }</description>
     </item>
     
@@ -72,19 +72,19 @@
     
     <item>
       <title>C数组转化为Golang的切片类型</title>
-      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAGolang%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAGolang%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
       <description>概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存</description>
     </item>
     
     <item>
       <title>Golang利用cgo遍历C结构体数组</title>
-      <link>https://zfunnily.github.io/2021/01/Golang%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
+      <link>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Golang%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
       <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语</description>
     </item>
     
@@ -144,10 +144,10 @@
     
     <item>
       <title>Golang builds</title>
-      <link>https://zfunnily.github.io/2020/11/Golang-builds/</link>
+      <link>https://zfunnily.github.io/2020/11/go-builds/</link>
       <pubDate>Thu, 12 Nov 2020 17:15:17 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/Golang-builds/</guid>
+      <guid>https://zfunnily.github.io/2020/11/go-builds/</guid>
       <description>概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？ 有个方法可以解决，就是配置文件。我们也可以利用golang的</description>
     </item>
     

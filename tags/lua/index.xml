@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 03 Jun 2021 16:12:21 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang利用redis实现分布式锁</title>
-      <link>https://zfunnily.github.io/2021/06/Golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+      <link>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/Golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
+      <guid>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
       <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
@@ -27,10 +27,10 @@
     
     <item>
       <title>Lua调用C/C&#43;&#43;的动态库</title>
-      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
       <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
       <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
     </item>
     

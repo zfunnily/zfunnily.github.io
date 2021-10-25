@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 22 Oct 2021 19:01:20 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/thinking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>csdn博客迁移到个人博客</title>
-      <link>https://zfunnily.github.io/2021/10/csdn%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%88%B0%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+      <link>https://zfunnily.github.io/2021/10/blogmigration/</link>
       <pubDate>Fri, 22 Oct 2021 19:01:20 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/csdn%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%88%B0%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>https://zfunnily.github.io/2021/10/blogmigration/</guid>
       <description>迁移博客 我是从18年开始写一些东西，先写在看云笔记上，后面东西越来越多。写出来的东西比较零散. 20年下半年入职新公司，开始在csdn上写博客，今年我准备尝试使用个人博客，hugo和gitPage结合部署静态博客，csdn上没怎么更新. 这两天在研究skynet框架，顺手写了几篇博客</description>
     </item>
     

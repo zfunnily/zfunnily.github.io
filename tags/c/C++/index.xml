@@ -62,10 +62,10 @@
     
     <item>
       <title>使用C/C&#43;&#43;实现atoi和itoa函数</title>
-      <link>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C/C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
+      <link>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
       <pubDate>Wed, 17 Mar 2021 16:43:20 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C/C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
       <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;) &amp;amp;&amp;amp; (*str == &#39;+&#39; || *str == &#39;-&#39;)) { if (*str == &#39;-&#39;) bmin = true; str++; } while (*str != &#39;\0&#39;) { if (*str &amp;gt; &#39;9&#39; || *str &amp;lt;</description>
     </item>
     
@@ -80,28 +80,28 @@
     
     <item>
       <title>Lua调用C/C&#43;&#43;的动态库</title>
-      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
       <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
       <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
     </item>
     
     <item>
       <title>C/C&#43;&#43;调用汇编函数</title>
-      <link>https://zfunnily.github.io/2021/02/C/C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</link>
+      <link>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</link>
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/C/C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</guid>
       <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编</description>
     </item>
     
     <item>
       <title>C数组转化为Golang的切片类型</title>
-      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAGolang%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAGolang%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
       <description>概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存</description>
     </item>
     
@@ -125,10 +125,10 @@
     
     <item>
       <title>Golang利用cgo遍历C结构体数组</title>
-      <link>https://zfunnily.github.io/2021/01/Golang%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
+      <link>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Golang%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
       <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语</description>
     </item>
     
