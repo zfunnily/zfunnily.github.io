@@ -78,6 +78,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="单线程reactor网络库ccnet演变为多线程">单线程reactor网络库ccnet演变为多线程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月30日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/" title="Go sync.Mutex详解">Go sync.Mutex详解</a>
             </h1>
         </header>
@@ -300,31 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Docker容器退出码详解">Docker容器退出码详解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Docker'>Docker</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            docker查看退出码指令 $ docker ps --filter &quot;status=exited&quot; $ docker inspect container-id --format='{&lt;!-- --&gt;{.State.ExitCode}}' 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容器完成其工作后自动停止其容器，则使用此退出代码。 Exit Code 1 程序错误，或者Docker……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -490,7 +490,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (12)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     

@@ -78,6 +78,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/05/lua_next/" title="Lua next 的使用">Lua next 的使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&quot;a&quot;] = 1, [&quot;b&quot;] = 2, [&quot;c&quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/05/lua_next/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/" title="Lua的api">Lua的api</a>
             </h1>
         </header>
@@ -300,31 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/" title="使用C/C&#43;&#43;实现atoi和itoa函数">使用C/C&#43;&#43;实现atoi和itoa函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月17日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt;……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -490,7 +490,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (12)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     

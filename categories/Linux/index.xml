@@ -62,6 +62,15 @@
     </item>
     
     <item>
+      <title>shell Except 使用</title>
+      <link>https://zfunnily.github.io/2021/08/except/</link>
+      <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/08/except/</guid>
+      <description>Except 参数 1 2 3 4 5 6 7 8 9 10 11 12 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的echo exit 退出expect脚本 eof expect执行结束 退出 set 定义</description>
+    </item>
+    
+    <item>
       <title>Ubuntu16.04.6安装Cinnamon3.0</title>
       <link>https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
       <pubDate>Tue, 01 Dec 2020 15:43:58 +0000</pubDate>

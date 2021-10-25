@@ -76,6 +76,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Docker容器退出码详解">Docker容器退出码详解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Docker'>Docker</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            docker查看退出码指令 $ docker ps --filter &quot;status=exited&quot; $ docker inspect container-id --format='{&lt;!-- --&gt;{.State.ExitCode}}' 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容器完成其工作后自动停止其容器，则使用此退出代码。 Exit Code 1 程序错误，或者Docker……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="使用OpenResty做一个postman小工具">使用OpenResty做一个postman小工具</a>
             </h1>
         </header>
@@ -280,29 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/" title="使用Lumberjack&#43;zap进行日志切割归档">使用Lumberjack&#43;zap进行日志切割归档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月4日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            使用Lumberjack+zap进行日志切割归档 为了添加日志切割归档功能，我们将使用第三方库Lumberjack来实现。 安装 执行下面的命令安装Lumberjack go get -u github.com/natefinch/lumberjack zap logger中加入Lumberjack 要在zap中加入Lumberjack支持，我们需要修改WriteSyn……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -469,7 +469,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (12)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     

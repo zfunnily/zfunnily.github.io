@@ -76,6 +76,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/" title="在mac上使用ffmpeg命令行录制摄像头和桌面数据">在mac上使用ffmpeg命令行录制摄像头和桌面数据</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/" title="监控Kubernetes——Prometheus&#43;Grafana">监控Kubernetes——Prometheus&#43;Grafana</a>
             </h1>
         </header>
@@ -280,29 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/" title="Docker远程访问加密">Docker远程访问加密</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Docker'>Docker</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker `` 方法二：修改daemon.json的……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -469,7 +469,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (12)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
