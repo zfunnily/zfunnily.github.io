@@ -9,19 +9,19 @@
     <lastBuildDate>Wed, 30 Dec 2020 09:19:41 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>单线程reactor网络库ccnet演变为多线程</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <link>https://zfunnily.github.io/post/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>https://zfunnily.github.io/post/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
       <description>ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听</description>
     </item>
     
     <item>
       <title>最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)</title>
-      <link>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
+      <link>https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
+      <guid>https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
       <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放</description>
     </item>
     

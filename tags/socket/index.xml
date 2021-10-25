@@ -9,19 +9,19 @@
     <lastBuildDate>Fri, 15 Jan 2021 16:07:51 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/socket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>skynet框架入门--写一个echo服务</title>
-      <link>https://zfunnily.github.io/post/csdn/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://zfunnily.github.io/post/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://zfunnily.github.io/post/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</guid>
       <description>概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用</description>
     </item>
     
     <item>
       <title>最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)</title>
-      <link>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
+      <link>https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
+      <guid>https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
       <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放</description>
     </item>
     

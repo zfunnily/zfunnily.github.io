@@ -9,28 +9,28 @@
     <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/protobuf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在skynet中使用lua-protobuf库</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
+      <link>https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
       <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
     </item>
     
     <item>
       <title>Google Protobuf 请求参数为空的案例</title>
-      <link>https://zfunnily.github.io/post/csdn/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</link>
+      <link>https://zfunnily.github.io/post/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</link>
       <pubDate>Fri, 22 Jan 2021 16:41:16 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</guid>
+      <guid>https://zfunnily.github.io/post/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</guid>
       <description>参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&amp;lt;!-- --&amp;gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &amp;quot;google/protobuf/empty.proto&amp;quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func</description>
     </item>
     
     <item>
       <title>自定义头和protobuf解决沾包问题</title>
-      <link>https://zfunnily.github.io/post/csdn/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</link>
+      <link>https://zfunnily.github.io/post/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sun, 13 Dec 2020 10:22:38 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/post/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
       <description>缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我</description>
     </item>
     

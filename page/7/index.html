@@ -78,99 +78,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Golang%E7%9A%84grpc/" title="Golang的grpc">Golang的grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Golang%E7%9A%84grpc/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/" title="Ubuntu16.04.6安装Cinnamon3.0">Ubuntu16.04.6安装Cinnamon3.0</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多桌面用户相较于 Ubuntu 更喜欢 Linux Mint[3]。 现在你无需安装 Linux Mint[4]就能够体验……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/" title="Ubuntu下version `GLIBC_2.27‘ not found错误">Ubuntu下version `GLIBC_2.27‘ not found错误</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/下载好文件后解压 tar -zxvf glibc-2.27.tar.gz 进入……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Docker容器退出码详解">Docker容器退出码详解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Docker'>Docker</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            docker查看退出码指令 $ docker ps --filter &quot;status=exited&quot; $ docker inspect container-id --format='{&lt;!-- --&gt;{.State.ExitCode}}' 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容器完成其工作后自动停止其容器，则使用此退出代码。 Exit Code 1 程序错误，或者Docker……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="使用OpenResty做一个postman小工具">使用OpenResty做一个postman小工具</a>
+                <a href="https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="使用OpenResty做一个postman小工具">使用OpenResty做一个postman小工具</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -187,13 +95,13 @@
         <div class="post-content">
             用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;; server { listen 8080; default_type 'application/json;charset=utf8'; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/OpenResty%E5%88%9D%E6%8E%A2/" title="OpenResty初探">OpenResty初探</a>
+                <a href="https://zfunnily.github.io/post/2020/11/OpenResty%E5%88%9D%E6%8E%A2/" title="OpenResty初探">OpenResty初探</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -210,13 +118,13 @@
         <div class="post-content">
             概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。 OpenResty®通过汇聚各种设计精良的Nginx模块（主要由 OpenResty 团队自主开发）……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/OpenResty%E5%88%9D%E6%8E%A2/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/" title="最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)">最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)</a>
+                <a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/" title="最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)">最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -233,13 +141,13 @@
         <div class="post-content">
             登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="最后一站源码分析(LastBattle)-服务架构">最后一站源码分析(LastBattle)-服务架构</a>
+                <a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="最后一站源码分析(LastBattle)-服务架构">最后一站源码分析(LastBattle)-服务架构</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -256,13 +164,13 @@
         <div class="post-content">
             服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需求数量|数量说明 |&mdash;&mdash; |GameClient|GC|游戏客户端|不解释|n|不超服……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/" title="最后一战安装部署笔记">最后一战安装部署笔记</a>
+                <a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/" title="最后一战安装部署笔记">最后一战安装部署笔记</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -279,13 +187,13 @@
         <div class="post-content">
             环境准备 win10服务器：vs2010 / 数据库 mysql5.7清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/客户端：unity3d 4.6 ,破解补丁 编译客户端 建议不要有其他的un……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="cgo使用libevent库实现一个定时器">cgo使用libevent库实现一个定时器</a>
+                <a href="https://zfunnily.github.io/post/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="cgo使用libevent库实现一个定时器">cgo使用libevent库实现一个定时器</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -302,7 +210,99 @@
         <div class="post-content">
             使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang 利用指针进行数据转换">Golang 利用指针进行数据转换</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/11/go-builds/" title="Golang builds">Golang builds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？ 有个方法可以解决，就是配置文件。我们也可以利用golang的……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/go-builds/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="cgo的简单使用">cgo的简单使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明：1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8Lumberjack&#43;zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/" title="使用Lumberjack&#43;zap进行日志切割归档">使用Lumberjack&#43;zap进行日志切割归档</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用Lumberjack+zap进行日志切割归档 为了添加日志切割归档功能，我们将使用第三方库Lumberjack来实现。 安装 执行下面的命令安装Lumberjack go get -u github.com/natefinch/lumberjack zap logger中加入Lumberjack 要在zap中加入Lumberjack支持，我们需要修改WriteSyn……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8Lumberjack&#43;zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">阅读全文</a></p>
     </article>
     
     
@@ -417,43 +417,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
+        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -477,23 +477,23 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (8)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -534,13 +534,9 @@
     
     <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
-    
     <a href="https://zfunnily.github.io/tags/asm/">asm</a>
     
     <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
-    
-    <a href="https://zfunnily.github.io/tags/book/">book</a>
     
     <a href="https://zfunnily.github.io/tags/c/">c</a>
     
@@ -559,8 +555,6 @@
     <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
     
     <a href="https://zfunnily.github.io/tags/docker/">docker</a>
-    
-    <a href="https://zfunnily.github.io/tags/english/">english</a>
     
     <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
     
@@ -642,8 +636,6 @@
     
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
-    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
-    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
@@ -682,7 +674,7 @@
     
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     
@@ -764,8 +756,6 @@
     
     <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
     
-    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
-    
     <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
@@ -777,8 +767,6 @@
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
     

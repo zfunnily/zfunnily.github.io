@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 02 Jan 2021 23:19:58 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>最后一战-游戏场景服务器SS解析</title>
-      <link>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</link>
+      <link>https://zfunnily.github.io/post/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Sat, 02 Jan 2021 23:19:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</guid>
+      <guid>https://zfunnily.github.io/post/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</guid>
       <description>游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle- GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&amp;gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送</description>
     </item>
     

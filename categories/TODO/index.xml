@@ -16,14 +16,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>重力摩托项目</title>
-      <link>https://zfunnily.github.io/post/game/BalanceMoto/</link>
-      <pubDate>Mon, 06 Sep 2021 07:20:45 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/post/game/BalanceMoto/</guid>
-      <description>重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2 环境 Unity3D 开始 新建一个2D项目</description>
-    </item>
-    
   </channel>
 </rss>

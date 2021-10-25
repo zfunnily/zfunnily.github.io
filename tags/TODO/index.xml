@@ -17,20 +17,11 @@
     </item>
     
     <item>
-      <title>重力摩托项目</title>
-      <link>https://zfunnily.github.io/post/game/BalanceMoto/</link>
-      <pubDate>Mon, 06 Sep 2021 07:20:45 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/post/game/BalanceMoto/</guid>
-      <description>重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2 环境 Unity3D 开始 新建一个2D项目</description>
-    </item>
-    
-    <item>
       <title>Auto_findroad</title>
-      <link>https://zfunnily.github.io/post/game/auto_findroad/</link>
+      <link>https://zfunnily.github.io/post/2021/05/auto_findroad/</link>
       <pubDate>Thu, 20 May 2021 17:39:34 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/post/game/auto_findroad/</guid>
+      <guid>https://zfunnily.github.io/post/2021/05/auto_findroad/</guid>
       <description>自动寻路 有限状态机器 行为树</description>
     </item>
     

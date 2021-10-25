@@ -9,37 +9,37 @@
     <lastBuildDate>Tue, 01 Dec 2020 15:43:58 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ubuntu16.04.6安装Cinnamon3.0</title>
-      <link>https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
+      <link>https://zfunnily.github.io/post/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
       <pubDate>Tue, 01 Dec 2020 15:43:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</guid>
+      <guid>https://zfunnily.github.io/post/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</guid>
       <description>概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多桌面用户相较于 Ubuntu 更喜欢 Linux Mint[3]。 现在你无需安装 Linux Mint[4]就能够体验</description>
     </item>
     
     <item>
       <title>Ubuntu下version `GLIBC_2.27‘ not found错误</title>
-      <link>https://zfunnily.github.io/post/csdn/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</link>
+      <link>https://zfunnily.github.io/post/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</link>
       <pubDate>Sat, 28 Nov 2020 15:03:04 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</guid>
+      <guid>https://zfunnily.github.io/post/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</guid>
       <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/下载好文件后解压 tar -zxvf glibc-2.27.tar.gz 进入</description>
     </item>
     
     <item>
       <title>使用vim打造编C&#43;&#43;IDE</title>
-      <link>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C&#43;&#43;IDE/</link>
+      <link>https://zfunnily.github.io/post/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C&#43;&#43;IDE/</link>
       <pubDate>Wed, 28 Oct 2020 09:11:32 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C&#43;&#43;IDE/</guid>
+      <guid>https://zfunnily.github.io/post/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C&#43;&#43;IDE/</guid>
       <description>使用 vimplus 打造C++ IDE GitHub： https://github.com/chxuan/vimplus支持平台：macos/linux 安装vimplus // 原来的链接， 国内速度较慢 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus // github修改为镜像的链接 $ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus $ cd ~/.vimplus //不加sudo $ ./install.sh 设置Nerd Font 为防止vimp</description>
     </item>
     
     <item>
       <title>linux系统删除大量文件指令--rsync</title>
-      <link>https://zfunnily.github.io/post/csdn/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</link>
+      <link>https://zfunnily.github.io/post/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</link>
       <pubDate>Tue, 13 Oct 2020 16:29:34 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</guid>
+      <guid>https://zfunnily.github.io/post/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</guid>
       <description>rsync的安装 rsync安装，有些系统默认安装有该命令ubuntu系统 sudo apt-get install rsync centos系统 sudo yum install rsync rsync参数详解 rsync提供了一些跟删除有关的参数 rsync --help | grep delete -del an alias for --delete-during --delete delete extraneous files from destination dirs --delete-before receiver deletes before transfer, not during --delete-during receiver deletes during transfer (default) --delete-delay find deletions during, delete after --delete-after receiver deletes after transfer, not during --delete-excluded also delete excluded files from destination dirs --ignore-errors delete even if there are I/O errors --max-delete=NUM don&#39;t</description>
     </item>
     

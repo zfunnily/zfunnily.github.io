@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua-protobuf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在skynet中使用lua-protobuf库</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
+      <link>https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
       <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
     </item>
     

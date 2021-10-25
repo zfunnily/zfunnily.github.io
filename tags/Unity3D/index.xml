@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Unity3D on 流浪花</title>
-    <link>https://zfunnily.github.io/tags/Unity3D/</link>
-    <description>Recent content in Unity3D on 流浪花</description>
+    <title>unity3D on 流浪花</title>
+    <link>https://zfunnily.github.io/tags/unity3D/</link>
+    <description>Recent content in unity3D on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 12 Sep 2021 20:43:34 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/Unity3D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Sep 2021 20:43:34 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/unity3D/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FPS游戏 实现移动功能</title>
-      <link>https://zfunnily.github.io/post/game/fps/move/</link>
+      <link>https://zfunnily.github.io/post/2021/09/move/</link>
       <pubDate>Sun, 12 Sep 2021 20:43:34 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/post/game/fps/move/</guid>
+      <guid>https://zfunnily.github.io/post/2021/09/move/</guid>
       <description>三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟</description>
-    </item>
-    
-    <item>
-      <title>重力摩托项目</title>
-      <link>https://zfunnily.github.io/post/game/BalanceMoto/</link>
-      <pubDate>Mon, 06 Sep 2021 07:20:45 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/post/game/BalanceMoto/</guid>
-      <description>重力摩托 自己在网上找的一个视频教程：https://www.bilibili.com/video/BV1ix411U7HD?p=2 环境 Unity3D 开始 新建一个2D项目</description>
     </item>
     
   </channel>

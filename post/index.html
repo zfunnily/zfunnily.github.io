@@ -80,7 +80,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+                <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -97,7 +97,7 @@
         <div class="post-content">
             迁移博客 我是从18年开始写一些东西，先写在看云笔记上，后面东西越来越多。写出来的东西比较零散. 20年下半年入职新公司，开始在csdn上写博客，今年我准备尝试使用个人博客，hugo和gitPage结合部署静态博客，csdn上没怎么更新. 这两天在研究skynet框架，顺手写了几篇博客……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/thinking/blogmigration/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/blogmigration/">阅读全文</a></p>
     </article>
     
     
@@ -105,7 +105,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+                <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -122,7 +122,7 @@
         <div class="post-content">
             服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.call(...)函数发送消息，其实调用的都是c.send(...),实际上调用的……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/">阅读全文</a></p>
     </article>
     
     
@@ -130,7 +130,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+                <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -147,7 +147,7 @@
         <div class="post-content">
             skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从modules服务模块中取出名字为 logger的服务, struct skynet_module * result = _query(name);; 如果找不到则从cpath目……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/">阅读全文</a></p>
     </article>
     
     
@@ -155,7 +155,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+                <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -172,7 +172,7 @@
         <div class="post-content">
             module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static void * _try_open(struct modules *m, const char * name)函数第一次打开，然后被加载到全局变量static struct modules *……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/">阅读全文</a></p>
     </article>
     
     
@@ -180,7 +180,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+                <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -197,7 +197,7 @@
         <div class="post-content">
             入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/">阅读全文</a></p>
     </article>
     
     
@@ -205,7 +205,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+                <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -222,7 +222,7 @@
         <div class="post-content">
             起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &#34;fmt&#34; &#34;os/exec&#34; ) func……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/golang/shell/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/10/shell/">阅读全文</a></p>
     </article>
     
     
@@ -230,57 +230,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Thinking'>Thinking</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 英文像一座大山，下定决心想要跨过去，可迟迟不的法门。，今天看到一片文章怎么开始并坚持读英文原著, 里面有句话： &ldquo;拖延症怎么坚持下去&ndash;每天控制在10-20页，保持在一个阅读的状态是最重要的。&rdquo; 看到这里 想到以前的n+1和日拱一卒，其实是一个意思。……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年9月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            经济学入门 经济学原理 宏观+微观，[美] 曼昆（N.GregoryMankiw） ，北京大学出版社，【第一篇 导言；第4章、第6章；第10章、第11章；第23章、第24章；第25章】 牛奶可乐经济学，[美] 罗伯特·，弗兰克 著；闾佳 译，北京联合出版公司，【全书，以前五章为主】 经济学的思维方式……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/read/economics/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+                <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -297,7 +247,7 @@
         <div class="post-content">
             三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/game/fps/move/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/09/move/">阅读全文</a></p>
     </article>
     
     
@@ -305,7 +255,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
+                <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -322,7 +272,57 @@
         <div class="post-content">
             介绍一个可以免费听音乐的方法 环境 docker mac 安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker $dir_name 是 你自己宿主机的目录。可以自定义 访问：127.0.0.1:264 就可以放心使用， 同事推荐的，贼好用。……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/other/music/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/09/music/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim- IdeaVimExtension 我们需要在 用户目录……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Unity3D'>Unity3D</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/">阅读全文</a></p>
     </article>
     
     
@@ -434,43 +434,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
+        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -494,23 +494,23 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (8)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -551,13 +551,9 @@
     
     <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
-    
     <a href="https://zfunnily.github.io/tags/asm/">asm</a>
     
     <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
-    
-    <a href="https://zfunnily.github.io/tags/book/">book</a>
     
     <a href="https://zfunnily.github.io/tags/c/">c</a>
     
@@ -576,8 +572,6 @@
     <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
     
     <a href="https://zfunnily.github.io/tags/docker/">docker</a>
-    
-    <a href="https://zfunnily.github.io/tags/english/">english</a>
     
     <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
     
@@ -659,8 +653,6 @@
     
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
-    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
-    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
@@ -699,7 +691,7 @@
     
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     
@@ -781,8 +773,6 @@
     
     <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
     
-    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
-    
     <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
@@ -794,8 +784,6 @@
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
     

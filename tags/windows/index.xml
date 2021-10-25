@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 09 Sep 2020 09:36:49 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在windows上使用ffmpeg命令行录制摄像头和桌面数据</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
+      <link>https://zfunnily.github.io/post/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Wed, 09 Sep 2020 09:36:49 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
+      <guid>https://zfunnily.github.io/post/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
       <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &amp;quot;Altair USB2.0 Camera&amp;quot; [dshow @ 000002622302e340] Alternative name &amp;quot;@device_pnp_\\?\usb#vid_0ac8&amp;amp;pid_3450&amp;amp;mi_00#6&amp;amp;3b01315a&amp;amp;0&amp;amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&amp;quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,</description>
     </item>
     

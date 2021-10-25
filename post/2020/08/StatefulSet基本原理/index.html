@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>StatefulSet基本原理 | 流浪花</title>
+    <meta property="og:title" content="StatefulSet基本原理 - 流浪花">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-08-14T16:03:41&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-08-14T16:03:41&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="StatefulSet基本原理">
+        
+    <meta name="author" content="流浪花">
+    <meta property="og:url" content="https://zfunnily.github.io/post/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        流浪花
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                    <a  href="https://zfunnily.github.io/todo/" title="TODO">TODO</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-id_6a背景"><!-- raw HTML omitted --><!-- raw HTML omitted -->背景</a></li>
+    <li><a href="#a-idstatefulset__8astatefulset-简介"><!-- raw HTML omitted --><!-- raw HTML omitted -->StatefulSet 简介</a></li>
+    <li><a href="#a-id_statefulset_23a创建-statefulset"><!-- raw HTML omitted --><!-- raw HTML omitted -->创建 StatefulSet</a></li>
+    <li><a href="#a-idpod_126a测试pod间是否相通"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试pod间是否相通</a></li>
+    <li><a href="#a-id_statefulset_157a扩容缩容-statefulset"><!-- raw HTML omitted --><!-- raw HTML omitted -->扩容/缩容 StatefulSet</a>
+      <ul>
+        <li><a href="#a-id_160a扩容"><!-- raw HTML omitted --><!-- raw HTML omitted -->扩容</a></li>
+        <li><a href="#a-id_173a缩容"><!-- raw HTML omitted --><!-- raw HTML omitted -->缩容</a></li>
+        <li><a href="#a-id_pod_186a顺序终止-pod"><!-- raw HTML omitted --><!-- raw HTML omitted -->顺序终止 Pod</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-id_198a域名示例"><!-- raw HTML omitted --><!-- raw HTML omitted -->域名示例</a></li>
+    <li><a href="#a-id_207a更新策略"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新策略</a></li>
+    <li><a href="#a-id_216a外部访问集群内部"><!-- raw HTML omitted --><!-- raw HTML omitted -->外部访问集群内部</a>
+      <ul>
+        <li><a href="#a-id_217a土方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->土方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">StatefulSet基本原理</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="a-id_6a背景"><!-- raw HTML omitted --><!-- raw HTML omitted -->背景</h2>
+<p>用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的<strong>分布式无状态服务</strong>。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行编排。但因为有状态服务的复杂性，这一过程并不容易。本文将以最流行的开源数据库 MySQL 为例，介绍如何在 k8s 上部署运维有状态服务。本文所作的调研基于<code>k8s 1.18</code>。</p>
+<h2 id="a-idstatefulset__8astatefulset-简介"><!-- raw HTML omitted --><!-- raw HTML omitted -->StatefulSet 简介</h2>
+<p><a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>、<a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/">ReplicationController</a>是为无状态服务而设计的，它们中 pod 的名称、主机名、存储都是不稳定的，且 pod 的启动、销毁顺序随机，并不适合数据库这样的有状态应用。为此，k8s 推出了面向有状态服务的工作负载<a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>。其管理的 pod 具有如下特点：</p>
+<ol>
+<li>唯一性 - 对于包含 N 个副本的 StatefulSet，每个 pod 会被分配一个 [0，N)范围内的唯一序号。1. 顺序性 - StatefulSet 中 pod 的启动、更新、销毁默认都是按顺序进行的。1. 稳定的网络身份标识 - pod 的主机名、DNS 地址不会随着 pod 被重新调度而发生变化。1. 稳定的持久化存储 - 当 pod 被重新调度后，仍然能挂载原有的 PersistentVolume，保证了数据的完整性和一致性。
+StatefulSet在Headless Service的基础上又为StatefulSet控制的每个Pod副本创建了一个DNS域名，这个域名的格式为：</li>
+</ol>
+<pre><code>$(podname).(headless server name)   
+FQDN： $(podname).(headless server name).namespace.svc.cluster.local
+
+</code></pre><h2 id="a-id_statefulset_23a创建-statefulset"><!-- raw HTML omitted --><!-- raw HTML omitted -->创建 StatefulSet</h2>
+<p>作为开始，使用如下示例创建一个 StatefulSet。它和<a href="https://kubernetes.io/zh/docs/concepts/abstractions/controllers/statefulsets/">StatefulSets</a>概念中的示例相似。它创建了一个<a href="https://kubernetes.io/zh/docs/user-guide/services/#headless-services">Headless Service</a><code>nginx</code>用来发布 StatefulSet<code>web</code>中的 Pod 的 IP 地址。</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+    - port: 80
+      name: web
+  clusterIP: None
+  selector:
+    app: nginx
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: &quot;www-data-pv&quot;
+  labels:
+    name: www-data-pv
+    release: stable
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /nfs/www/data
+    server: 192.168.84.75
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: www-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      name: www-data-pv
+      release: stable
+
+---
+
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: &quot;nginx&quot;
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: www
+          persistentVolumeClaim:
+            claimName:  www-data-pvc
+
+</code></pre><p>通过该配置文件，可看出StatefulSet的三个组成部分：</p>
+<ul>
+<li>Headless Service：名为nginx，用来定义Pod网络标识( DNS domain)。- StatefulSet：定义具体应用，名为Nginx，有三个Pod副本，并为每个Pod定义了一个域名。- persistentVolumeClaim： 是由<strong>用户进行存储的请求</strong>。它类似于pod。Pod消耗节点资源，PVC消耗PV资源。Pod可以请求特定级别的资源（CPU和内存）。声明可以请求特定的大小和访问模式（例如，可以一次读/写或多次只读）。<strong>【persistentVolumeClaim的细节请看k8s的持久化存储PVC】</strong></li>
+</ul>
+<blockquote>
+</blockquote>
+<p><strong>为什么需要 headless service 无头服务？</strong><!-- raw HTML omitted --> 在用Deployment时，每一个Pod名称是没有顺序的，是随机字符串，因此是Pod名称是无序的，但是在statefulset中要求必须是有序 ，每一个pod不能被随意取代，pod重建后pod名称还是一样的。而pod IP是变化的，所以是以Pod名称来识别。pod名称是pod唯一性的标识符，必须持久稳定有效。这时候要用到无头服务，它可以给每个Pod一个唯一的名称 。</p>
+<p>使用<code>kubectl apply</code>中的 Headless Service 和 StatefulSet。</p>
+<pre><code>kubectl apply -f web.yaml
+service/nginx created
+statefulset.apps/web created
+
+</code></pre><blockquote>
+</blockquote>
+<p>最后三个Pod全部running且ready, 且顺序是web-0.web-1,web-2</p>
+<h2 id="a-idpod_126a测试pod间是否相通"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试pod间是否相通</h2>
+<p>每个 Pod 都拥有一个基于其顺序索引的稳定的主机名。使用<code>kubectl exec</code>在每个 Pod 中执行<code>hostname</code>。</p>
+<pre><code>$ for i in 0 1; do kubectl exec web-$i -- sh -c 'hostname'; done
+web-0
+web-1
+
+</code></pre><p>使用<code>kubectl run</code>运行一个提供<code>nslookup</code>命令的容器，该命令来自于<code>dnsutils</code>包。通过对 Pod 的主机名执行<code>nslookup</code>，你可以检查他们在集群内部的 DNS 地址。</p>
+<pre><code>$ kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm
+
+nslookup web-0.nginx
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-0.nginx
+Address 1: 10.244.1.6
+
+nslookup web-1.nginx
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      web-1.nginx
+Address 1: 10.244.2.6
+
+</code></pre><p>另外一种方法是可以直接在web-0 pod中执行 nslookup + 域名 指令。</p>
+<pre><code>kubectl exec web-0 -- nslookup web-1.nginx.svc.cluster.local
+
+格式是：${podname}.${servername}.svc.cluster.local
+
+</code></pre><h2 id="a-id_statefulset_157a扩容缩容-statefulset"><!-- raw HTML omitted --><!-- raw HTML omitted -->扩容/缩容 StatefulSet</h2>
+<p>扩容/缩容 StatefulSet 指增加或减少它的副本数。这通过更新<code>replicas</code>字段完成。你可以使用<a href="https://kubernetes.io/zh/docs/user-guide/kubectl/v1.18/#scale"><code>kubectl scale</code></a>或者<a href="https://kubernetes.io/zh/docs/user-guide/kubectl/v1.18/#patch"><code>kubectl patch</code></a>来扩容/缩容一个 StatefulSet。</p>
+<h3 id="a-id_160a扩容"><!-- raw HTML omitted --><!-- raw HTML omitted -->扩容</h3>
+<p>在一个终端窗口观察 StatefulSet 的 Pod。</p>
+<pre><code>kubectl get pods -w -l app=nginx
+
+</code></pre><p>在另一个终端窗口使用<code>kubectl scale</code>扩展副本数为 5。</p>
+<pre><code>kubectl scale sts web --replicas=5
+statefulset.apps/web scaled
+
+</code></pre><p>在第一个 终端中检查<code>kubectl get</code>命令的输出，等待增加的 3 个 Pod 的状态变为 Running 和 Ready。<!-- raw HTML omitted --> StatefulSet 控制器扩展了副本的数量。StatefulSet 按序号索引顺序的创建每个 Pod，并且会等待前一个 Pod 变为 Running 和 Ready 才会启动下一个 Pod。</p>
+<h3 id="a-id_173a缩容"><!-- raw HTML omitted --><!-- raw HTML omitted -->缩容</h3>
+<p>在一个终端观察 StatefulSet 的 Pod。</p>
+<pre><code>kubectl get pods -w -l app=nginx
+
+</code></pre><p>在另一个终端使用<code>kubectl patch</code>将 StatefulSet 缩容回三个副本。</p>
+<pre><code>kubectl patch sts web -p '{&quot;spec&quot;:{&quot;replicas&quot;:3}}'
+statefulset.apps/web patched
+
+</code></pre><h3 id="a-id_pod_186a顺序终止-pod"><!-- raw HTML omitted --><!-- raw HTML omitted -->顺序终止 Pod</h3>
+<p>控制器会按照与 Pod 序号索引相反的顺序每次删除一个 Pod。在删除下一个 Pod 前会等待上一个被完全关闭。</p>
+<p><strong>规律总结：</strong></p>
+<!-- raw HTML omitted -->
+<pre><code>      (
+     
+     
+      s
+     
+     
+      t
+     
+     
+      a
+     
+     
+      t
+     
+     
+      e
+     
+     
+      f
+     
+     
+      u
+     
+     
+      l
+     
+     
+      s
+     
+     
+      e
+     
+     
+      t
+     
+     
+      名
+     
+     
+      称
+     
+     
+      )
+     
+     
+      −
+     
+    
+    
+     (statefulset名称)-
+    
+   
+  (statefulset名称)−(序号)&lt;/strong&gt;，比如上面的示例：web-0，web-1，web-2。&lt;/li&gt;- StatefulSet为每个Pod副本创建了一个DNS域名，这个域名的格式为：**$(podname).(headless server name)**，也就意味着服务间是通过Pod域名来通信而非Pod IP，因为当Pod所在Node发生故障时，Pod会被飘移到其它Node上，Pod IP会发生变化，但是Pod域名不会有变化。&lt;li&gt;StatefulSet使用Headless服务来控制Pod的域名，这个域名的FQDN为：&lt;strong&gt;
+  
+   
+    
+     
+      (
+     
+     
+      s
+     
+     
+      e
+     
+     
+      r
+     
+     
+      v
+     
+     
+      i
+     
+     
+      c
+     
+     
+      e
+     
+     
+      n
+     
+     
+      a
+     
+     
+      m
+     
+     
+      e
+     
+     
+      )
+     
+     
+      .
+     
+    
+    
+     (service name).
+    
+   
+  (servicename).(namespace).svc.cluster.local&lt;/strong&gt;，其中，“cluster.local”指的是集群的域名。&lt;/li&gt;- 根据volumeClaimTemplates，为每个Pod创建一个pvc，pvc的命名规则匹配模式：**(volumeClaimTemplates.name)-(pod_name)**，比如上面的volumeMounts.name=www， Pod name=web-[0-2]，因此创建出来的PVC是www-web-0、www-web-1、www-web-2。- 删除Pod不会删除其pvc，手动删除pvc将自动释放pv。
+</code></pre>
+<h2 id="a-id_198a域名示例"><!-- raw HTML omitted --><!-- raw HTML omitted -->域名示例</h2>
+<p>关于Cluster Domain、headless service名称、StatefulSet 名称如何影响StatefulSet的Pod的DNS域名的示例：</p>
+<p>|Cluster Domain|Service (ns/name)|StatefulSet (ns/name)|StatefulSet Domain|Pod DNS|Pod Hostname
+|&mdash;&mdash;
+|cluster.local|default/nginx|default/web|nginx.default.svc.cluster.local|web-{0…N-1}.nginx.default.svc.cluster.local|web-{0…N-1}
+|cluster.local|foo/nginx|foo/web|nginx.foo.svc.cluster.local|web-{0…N-1}.nginx.foo.svc.cluster.local|web-{0…N-1}
+|kube.local|foo/nginx|foo/web|nginx.foo.svc.kube.local|web-{0…N-1}.nginx.foo.svc.kube.local|web-{0…N-1}</p>
+<h2 id="a-id_207a更新策略"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新策略</h2>
+<p>在Kubernetes 1.7及更高版本中，通过.spec.updateStrategy字段允许配置或禁用Pod、labels、source request/limits、annotations自动滚动更新功能。<!-- raw HTML omitted --> **OnDelete：**通过.spec.updateStrategy.type 字段设置为OnDelete，StatefulSet控制器不会自动更新StatefulSet中的Pod。用户必须手动删除Pod，以使控制器创建新的Pod。<!-- raw HTML omitted --> **RollingUpdate：**通过.spec.updateStrategy.type 字段设置为RollingUpdate，实现了Pod的自动滚动更新，如果.spec.updateStrategy未指定，则此为默认策略。<!-- raw HTML omitted --> StatefulSet控制器将删除并重新创建StatefulSet中的每个Pod。它将以Pod终止（从最大序数到最小序数）的顺序进行，一次更新每个Pod。在更新下一个Pod之前，必须等待这个Pod Running and Ready。<!-- raw HTML omitted --> **Partitions：**通过指定 .spec.updateStrategy.rollingUpdate.partition 来对 RollingUpdate 更新策略进行分区，如果指定了分区，则当 StatefulSet 的 .spec.template 更新时，具有大于或等于分区序数的所有 Pod 将被更新。<!-- raw HTML omitted --> 具有小于分区的序数的所有 Pod 将不会被更新，即使删除它们也将被重新创建。如果 StatefulSet 的 .spec.updateStrategy.rollingUpdate.partition 大于其 .spec.replicas，则其 .spec.template 的更新将不会传播到 Pod。在大多数情况下，不需要使用分区。</p>
+<h2 id="a-id_216a外部访问集群内部"><!-- raw HTML omitted --><!-- raw HTML omitted -->外部访问集群内部</h2>
+<h3 id="a-id_217a土方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->土方法</h3>
+<p>对pod打标签，然后映射成服务</p>
+<pre><code>kubectl label pod web-0 webInst=0 -n sy-platform-demo
+kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 --type=NodePort -n sy-platform-demo
+
+</code></pre><p>修改web-0 的nodeport 端口号</p>
+<pre><code>kubectl edit  service web-0 -n sy-platform-demo
+
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">使用k8s创建第一个应用</a></li>
+        
+        <li><a href="/post/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/">coreDNS的部署安装，对k8s来说很重要</a></li>
+        
+        <li><a href="/post/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">k8s集群资源监控 heapster</a></li>
+        
+        <li><a href="/post/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">k8s的界面管理 Dashboard</a></li>
+        
+        <li><a href="/post/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">k8s的第一步，安装！</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/kubernetes'>kubernetes</a></li>
+                
+                <li><a href='/tags/nginx'>nginx</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">流浪花 By 流浪花</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (12)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (7)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/ATT/">ATT</a>
+    
+    <a href="https://zfunnily.github.io/tags/ATT%E8%A7%84%E8%8C%83/">ATT规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    
+    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    
+    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    
+    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    
+    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    
+    <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    
+    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    
+    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
+    
+    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
+    
+    <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
+    
+    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
+    
+    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/event/">event</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
+    
+    <a href="https://zfunnily.github.io/tags/git/">git</a>
+    
+    <a href="https://zfunnily.github.io/tags/github/">github</a>
+    
+    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
+    
+    <a href="https://zfunnily.github.io/tags/go/">go</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
+    
+    <a href="https://zfunnily.github.io/tags/html/">html</a>
+    
+    <a href="https://zfunnily.github.io/tags/http/">http</a>
+    
+    <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
+    
+    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
+    
+    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
+    
+    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
+    
+    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
+    
+    <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
+    
+    <a href="https://zfunnily.github.io/tags/other/">other</a>
+    
+    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
+    
+    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
+    
+    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
+    
+    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
+    
+    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
+    
+    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">私有仓库</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="流浪花的博客">流浪花的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="流浪花的github">流浪花的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

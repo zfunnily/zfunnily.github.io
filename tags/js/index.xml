@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 16 Aug 2020 23:04:13 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/js/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>owt-client-javascript</title>
-      <link>https://zfunnily.github.io/post/csdn/owt-client-javascript/</link>
+      <link>https://zfunnily.github.io/post/2020/08/owt-client-javascript/</link>
       <pubDate>Sun, 16 Aug 2020 23:04:13 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/owt-client-javascript/</guid>
+      <guid>https://zfunnily.github.io/post/2020/08/owt-client-javascript/</guid>
       <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if</description>
     </item>
     

@@ -78,99 +78,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/" title="FFmpeg画中画和视频多宫格处理">FFmpeg画中画和视频多宫格处理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/" title="FFmpeg给视频加文字和图片水印">FFmpeg给视频加文字和图片水印</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/" title="在windows上使用ffmpeg命令行录制摄像头和桌面数据">在windows上使用ffmpeg命令行录制摄像头和桌面数据</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &quot;Altair USB2.0 Camera&quot; [dshow @ 000002622302e340] Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/" title="在mac上使用ffmpeg命令行录制摄像头和桌面数据">在mac上使用ffmpeg命令行录制摄像头和桌面数据</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/" title="监控Kubernetes——Prometheus&#43;Grafana">监控Kubernetes——Prometheus&#43;Grafana</a>
+                <a href="https://zfunnily.github.io/post/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/" title="监控Kubernetes——Prometheus&#43;Grafana">监控Kubernetes——Prometheus&#43;Grafana</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -187,13 +95,13 @@
         <div class="post-content">
             概述 作为应用与Kubernetes的监控体系，Prometheus具备诸多的优势，如： Kubernetes默认支持,非常适合容器和微服务- 无依赖，安装方便，上手容易- 社区活跃，它不仅仅是个工具，而是生态- 已有很多插件或者exporter，可以适应多种应用场景的数据收集需要- Gra……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/owt-client-javascript/" title="owt-client-javascript">owt-client-javascript</a>
+                <a href="https://zfunnily.github.io/post/2020/08/owt-client-javascript/" title="owt-client-javascript">owt-client-javascript</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -210,13 +118,13 @@
         <div class="post-content">
             概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/owt-client-javascript/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/owt-client-javascript/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Ingress的基本使用">Ingress的基本使用</a>
+                <a href="https://zfunnily.github.io/post/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Ingress的基本使用">Ingress的基本使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -233,13 +141,13 @@
         <div class="post-content">
             缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/" title="Statefluset的持久存储PVC">Statefluset的持久存储PVC</a>
+                <a href="https://zfunnily.github.io/post/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/" title="Statefluset的持久存储PVC">Statefluset的持久存储PVC</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -256,13 +164,13 @@
         <div class="post-content">
             缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/" title="nsf服务的搭建和使用">nsf服务的搭建和使用</a>
+                <a href="https://zfunnily.github.io/post/2020/08/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/" title="nsf服务的搭建和使用">nsf服务的搭建和使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -279,13 +187,13 @@
         <div class="post-content">
             搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports 可以设定的参数主要有以下这些： rw：可读写的权限； ro：只读的权限； no_root_squash：……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="StatefulSet基本原理">StatefulSet基本原理</a>
+                <a href="https://zfunnily.github.io/post/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="StatefulSet基本原理">StatefulSet基本原理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -302,7 +210,99 @@
         <div class="post-content">
             背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/" title="coreDNS的部署安装，对k8s来说很重要">coreDNS的部署安装，对k8s来说很重要</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/" title="使用k8s创建第一个应用">使用k8s创建第一个应用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" title="licod安装和配置">licod安装和配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/" title="Docker远程访问加密">Docker远程访问加密</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Docker'>Docker</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker `` 方法二：修改daemon.json的……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">阅读全文</a></p>
     </article>
     
     
@@ -417,43 +417,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
+        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -477,23 +477,23 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (8)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -534,13 +534,9 @@
     
     <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
-    
     <a href="https://zfunnily.github.io/tags/asm/">asm</a>
     
     <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
-    
-    <a href="https://zfunnily.github.io/tags/book/">book</a>
     
     <a href="https://zfunnily.github.io/tags/c/">c</a>
     
@@ -559,8 +555,6 @@
     <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
     
     <a href="https://zfunnily.github.io/tags/docker/">docker</a>
-    
-    <a href="https://zfunnily.github.io/tags/english/">english</a>
     
     <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
     
@@ -642,8 +636,6 @@
     
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
-    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
-    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
@@ -682,7 +674,7 @@
     
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     
@@ -764,8 +756,6 @@
     
     <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
     
-    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
-    
     <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
@@ -777,8 +767,6 @@
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
     

@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 10 Mar 2021 11:11:47 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>协程解析二(云风的coroutine)</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</link>
+      <link>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</link>
       <pubDate>Wed, 10 Mar 2021 11:11:47 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</guid>
+      <guid>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</guid>
       <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp;amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;amp;&amp;amp; make 写一个生产者和消费者的demo //procus.c #include &amp;quot;coroutine.h&amp;quot; #include</description>
     </item>
     

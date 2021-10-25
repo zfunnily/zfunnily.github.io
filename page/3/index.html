@@ -78,99 +78,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="Golang利用redis实现分布式锁">Golang利用redis实现分布式锁</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年6月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/golang/go_redis/" title="Golang操作redis">Golang操作redis</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年6月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/golang/go_redis/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/game/auto_findroad/" title="Auto_findroad">Auto_findroad</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            自动寻路 有限状态机器 行为树……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/game/auto_findroad/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/lua_api/lua_next/" title="Lua next 的使用">Lua next 的使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&quot;a&quot;] = 1, [&quot;b&quot;] = 2, [&quot;c&quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/lua_api/lua_next/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/lua_api/lua_settop%E5%92%8Clua_pop/" title="Lua的api">Lua的api</a>
+                <a href="https://zfunnily.github.io/post/2021/05/lua_settop%E5%92%8Clua_pop/" title="Lua的api">Lua的api</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -187,13 +95,13 @@
         <div class="post-content">
             lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/lua_api/lua_settop%E5%92%8Clua_pop/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/05/lua_settop%E5%92%8Clua_pop/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/other/hugo/" title="Hugo">Hugo</a>
+                <a href="https://zfunnily.github.io/post/2021/04/hugo/" title="Hugo">Hugo</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -210,13 +118,13 @@
         <div class="post-content">
             hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/other/hugo/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/04/hugo/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" title="Go mod拉取私有仓库">Go mod拉取私有仓库</a>
+                <a href="https://zfunnily.github.io/post/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" title="Go mod拉取私有仓库">Go mod拉取私有仓库</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -233,13 +141,13 @@
         <div class="post-content">
             概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" title="插入排序">插入排序</a>
+                <a href="https://zfunnily.github.io/post/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" title="插入排序">插入排序</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -256,13 +164,13 @@
         <div class="post-content">
             概述 插入排序(InsertionSort)，一般也被称为直接插入排序。 对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/" title="C&#43;&#43;  sort排序">C&#43;&#43;  sort排序</a>
+                <a href="https://zfunnily.github.io/post/2021/03/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/" title="C&#43;&#43;  sort排序">C&#43;&#43;  sort排序</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -279,13 +187,13 @@
         <div class="post-content">
             概述 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可不写） 第一个是要排序的数组的起始地址。- 第二个是结束的地址（最后一位要排序……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" title="快速排序">快速排序</a>
+                <a href="https://zfunnily.github.io/post/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" title="快速排序">快速排序</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -302,7 +210,99 @@
         <div class="post-content">
             sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。 使用递归，则需要找到递归点和递归出口： 递归点：如果数组的元素大于1，就需要再……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" title="选择排序">选择排序</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 选择排序法（以从小到大排序为例）算法思想：A.在未排序序列中找到最小（大）元素，存放到排序序列的起始位置B.从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾C.以此类推，直到所有元素均排序完毕……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" title="冒泡排序">冒泡排序</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 冒泡排序算法思想：1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数，然后将该数固定3.针对所有的元素重……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/" title="《仙剑奇侠传》编译运行">《仙剑奇侠传》编译运行</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/2021/03/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/" title="使用C/C&#43;&#43;实现atoi和itoa函数">使用C/C&#43;&#43;实现atoi和itoa函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt;……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/">阅读全文</a></p>
     </article>
     
     
@@ -417,43 +417,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/skynet/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/thinking/%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0/" title="英语学习">英语学习</a>
+        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/read/economics/" title="经济学书籍">经济学书籍</a>
+        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
+        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -477,23 +477,23 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (8)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -534,13 +534,9 @@
     
     <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
-    
     <a href="https://zfunnily.github.io/tags/asm/">asm</a>
     
     <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
-    
-    <a href="https://zfunnily.github.io/tags/book/">book</a>
     
     <a href="https://zfunnily.github.io/tags/c/">c</a>
     
@@ -559,8 +555,6 @@
     <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
     
     <a href="https://zfunnily.github.io/tags/docker/">docker</a>
-    
-    <a href="https://zfunnily.github.io/tags/english/">english</a>
     
     <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
     
@@ -642,8 +636,6 @@
     
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
-    <a href="https://zfunnily.github.io/tags/physicalsystem/">physicalsystem</a>
-    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
@@ -682,7 +674,7 @@
     
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
-    <a href="https://zfunnily.github.io/tags/Unity3D/">Unity3D</a>
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     
@@ -764,8 +756,6 @@
     
     <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
     
-    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a>
-    
     <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
@@ -777,8 +767,6 @@
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%87%8D%E5%8A%9B%E6%91%A9%E6%89%98/">重力摩托</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
     

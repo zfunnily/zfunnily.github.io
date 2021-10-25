@@ -9,37 +9,37 @@
     <lastBuildDate>Mon, 14 Sep 2020 18:29:33 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FFmpeg画中画和视频多宫格处理</title>
-      <link>https://zfunnily.github.io/post/csdn/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/</link>
+      <link>https://zfunnily.github.io/post/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/</link>
       <pubDate>Mon, 14 Sep 2020 18:29:33 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/</guid>
+      <guid>https://zfunnily.github.io/post/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/</guid>
       <description>FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&amp;quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&amp;quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了</description>
     </item>
     
     <item>
       <title>FFmpeg给视频加文字和图片水印</title>
-      <link>https://zfunnily.github.io/post/csdn/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/</link>
+      <link>https://zfunnily.github.io/post/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/</link>
       <pubDate>Sat, 12 Sep 2020 12:47:57 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/</guid>
+      <guid>https://zfunnily.github.io/post/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/</guid>
       <description>FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-</description>
     </item>
     
     <item>
       <title>在windows上使用ffmpeg命令行录制摄像头和桌面数据</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
+      <link>https://zfunnily.github.io/post/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Wed, 09 Sep 2020 09:36:49 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
+      <guid>https://zfunnily.github.io/post/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
       <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &amp;quot;Altair USB2.0 Camera&amp;quot; [dshow @ 000002622302e340] Alternative name &amp;quot;@device_pnp_\\?\usb#vid_0ac8&amp;amp;pid_3450&amp;amp;mi_00#6&amp;amp;3b01315a&amp;amp;0&amp;amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&amp;quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,</description>
     </item>
     
     <item>
       <title>在mac上使用ffmpeg命令行录制摄像头和桌面数据</title>
-      <link>https://zfunnily.github.io/post/csdn/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
+      <link>https://zfunnily.github.io/post/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Sat, 29 Aug 2020 17:20:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/csdn/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
+      <guid>https://zfunnily.github.io/post/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</guid>
       <description>设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &amp;quot; &amp;quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture</description>
     </item>
     
