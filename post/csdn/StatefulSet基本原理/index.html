@@ -216,12 +216,7 @@
         
         
         <div class="post-content">
-            <ul>
-<li>
-<!-- raw HTML omitted -->
-</li>
-</ul>
-<h2 id="a-id_6a背景"><!-- raw HTML omitted --><!-- raw HTML omitted -->背景</h2>
+            <h2 id="a-id_6a背景"><!-- raw HTML omitted --><!-- raw HTML omitted -->背景</h2>
 <p>用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的<strong>分布式无状态服务</strong>。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行编排。但因为有状态服务的复杂性，这一过程并不容易。本文将以最流行的开源数据库 MySQL 为例，介绍如何在 k8s 上部署运维有状态服务。本文所作的调研基于<code>k8s 1.18</code>。</p>
 <h2 id="a-idstatefulset__8astatefulset-简介"><!-- raw HTML omitted --><!-- raw HTML omitted -->StatefulSet 简介</h2>
 <p><a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>、<a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/">ReplicationController</a>是为无状态服务而设计的，它们中 pod 的名称、主机名、存储都是不稳定的，且 pod 的启动、销毁顺序随机，并不适合数据库这样的有状态应用。为此，k8s 推出了面向有状态服务的工作负载<a href="https://link.zhihu.com/?target=https%3A//kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>。其管理的 pod 具有如下特点：</p>
@@ -637,7 +632,7 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/golang/shell/" title="golang调用带有后台进程shell脚本可能会被挂起">golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/post/golang/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>

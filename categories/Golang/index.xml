@@ -8,25 +8,25 @@
     <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Oct 2021 17:15:45 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>golang调用带有后台进程shell脚本可能会被挂起</title>
+      <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
       <link>https://zfunnily.github.io/post/golang/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/post/golang/shell/</guid>
-      <description>起因 今天用golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func</description>
+      <description>起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func</description>
     </item>
     
     <item>
-      <title>golang利用redis实现分布式锁</title>
+      <title>Golang利用redis实现分布式锁</title>
       <link>https://zfunnily.github.io/post/csdn/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/post/csdn/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
-      <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
+      <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
     <item>
-      <title>golang操作redis</title>
+      <title>Golang操作redis</title>
       <link>https://zfunnily.github.io/post/golang/go_redis/</link>
       <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
       
@@ -44,7 +44,7 @@
     </item>
     
     <item>
-      <title>golang的定时器实现方式</title>
+      <title>Golang的定时器实现方式</title>
       <link>https://zfunnily.github.io/post/csdn/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
@@ -71,7 +71,7 @@
     </item>
     
     <item>
-      <title>C数组转化为go的切片类型</title>
+      <title>C数组转化为Golang的切片类型</title>
       <link>https://zfunnily.github.io/post/csdn/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
@@ -80,7 +80,7 @@
     </item>
     
     <item>
-      <title>go利用cgo遍历C结构体数组</title>
+      <title>Golang利用cgo遍历C结构体数组</title>
       <link>https://zfunnily.github.io/post/csdn/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
@@ -143,7 +143,7 @@
     </item>
     
     <item>
-      <title>go builds</title>
+      <title>Golang builds</title>
       <link>https://zfunnily.github.io/post/csdn/go-builds/</link>
       <pubDate>Thu, 12 Nov 2020 17:15:17 +0000</pubDate>
       

@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Oct 2021 17:15:45 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>golang调用带有后台进程shell脚本可能会被挂起</title>
+      <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
       <link>https://zfunnily.github.io/post/golang/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/post/golang/shell/</guid>
-      <description>起因 今天用golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func</description>
+      <description>起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os/exec&amp;#34; ) func</description>
     </item>
     
   </channel>
