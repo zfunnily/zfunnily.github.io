@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 23 Mar 2021 10:13:31 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>冒泡排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
       <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 冒泡排序算法思想：1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数，然后将该数固定3.针对所有的元素重</description>
     </item>
     

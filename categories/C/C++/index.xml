@@ -8,118 +8,118 @@
     <language>zh-CN</language><atom:link href="https://zfunnily.github.io/categories/C/C++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>插入排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 13:57:07 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
       <description>概述 插入排序(InsertionSort)，一般也被称为直接插入排序。 对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之</description>
     </item>
     
     <item>
       <title>C&#43;&#43;  sort排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/C-sort%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 13:40:22 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/C&#43;&#43;-sort%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/C-sort%E6%8E%92%E5%BA%8F/</guid>
       <description>概述 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可不写） 第一个是要排序的数组的起始地址。- 第二个是结束的地址（最后一位要排序</description>
     </item>
     
     <item>
       <title>快速排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:15:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
       <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。 使用递归，则需要找到递归点和递归出口： 递归点：如果数组的元素大于1，就需要再</description>
     </item>
     
     <item>
       <title>选择排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:14:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
       <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 选择排序法（以从小到大排序为例）算法思想：A.在未排序序列中找到最小（大）元素，存放到排序序列的起始位置B.从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾C.以此类推，直到所有元素均排序完毕</description>
     </item>
     
     <item>
       <title>冒泡排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
       <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 冒泡排序算法思想：1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数，然后将该数固定3.针对所有的元素重</description>
     </item>
     
     <item>
       <title>使用C/C&#43;&#43;实现atoi和itoa函数</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
+      <link>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C/C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
       <pubDate>Wed, 17 Mar 2021 16:43:20 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E4%BD%BF%E7%94%A8C-C&#43;&#43;%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C/C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
       <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;) &amp;amp;&amp;amp; (*str == &#39;+&#39; || *str == &#39;-&#39;)) { if (*str == &#39;-&#39;) bmin = true; str++; } while (*str != &#39;\0&#39;) { if (*str &amp;gt; &#39;9&#39; || *str &amp;lt;</description>
     </item>
     
     <item>
       <title>协程解析二(云风的coroutine)</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</link>
+      <link>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</link>
       <pubDate>Wed, 10 Mar 2021 11:11:47 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</guid>
       <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp;amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;amp;&amp;amp; make 写一个生产者和消费者的demo //procus.c #include &amp;quot;coroutine.h&amp;quot; #include</description>
     </item>
     
     <item>
       <title>协程解析一(ucontext)</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</link>
+      <link>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</link>
       <pubDate>Tue, 09 Mar 2021 09:43:00 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</guid>
       <description>概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了</description>
     </item>
     
     <item>
       <title>struct中为什么使用char[]而不用char*</title>
-      <link>https://zfunnily.github.io/post/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</link>
+      <link>https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</link>
       <pubDate>Tue, 05 Jan 2021 15:45:36 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</guid>
+      <guid>https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</guid>
       <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*和char数组有什么区别 常用来构成缓冲区。比起指针，用空数组有这样的优势： 不需要</description>
     </item>
     
     <item>
       <title>单线程reactor网络库ccnet演变为多线程</title>
-      <link>https://zfunnily.github.io/post/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <link>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
       <description>ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听</description>
     </item>
     
     <item>
       <title>一个reactor单线程网络库ccnet</title>
-      <link>https://zfunnily.github.io/post/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
+      <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
       <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</guid>
+      <guid>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</guid>
       <description>缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌</description>
     </item>
     
     <item>
       <title>C&#43;&#43;：vector中的resize()函数 VS reserve()函数</title>
-      <link>https://zfunnily.github.io/post/2020/12/C&#43;&#43;vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</link>
+      <link>https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</link>
       <pubDate>Fri, 25 Dec 2020 11:04:29 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/12/C&#43;&#43;vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</guid>
       <description>reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大</description>
     </item>
     
     <item>
       <title>Libevent定时器的实现</title>
-      <link>https://zfunnily.github.io/post/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <link>https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <guid>https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
       <description>libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;amp;ev,</description>
     </item>
     

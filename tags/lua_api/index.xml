@@ -9,19 +9,19 @@
     <lastBuildDate>Mon, 10 May 2021 16:39:50 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua_api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lua next 的使用</title>
-      <link>https://zfunnily.github.io/post/2021/05/lua_next/</link>
+      <link>https://zfunnily.github.io/2021/05/Lua-next-%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/05/lua_next/</guid>
+      <guid>https://zfunnily.github.io/2021/05/Lua-next-%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&amp;quot;a&amp;quot;] = 1, [&amp;quot;b&amp;quot;] = 2, [&amp;quot;c&amp;quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</description>
     </item>
     
     <item>
       <title>Lua的api</title>
-      <link>https://zfunnily.github.io/post/2021/05/lua_settop%E5%92%8Clua_pop/</link>
+      <link>https://zfunnily.github.io/2021/05/Lua%E7%9A%84api/</link>
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/05/lua_settop%E5%92%8Clua_pop/</guid>
+      <guid>https://zfunnily.github.io/2021/05/Lua%E7%9A%84api/</guid>
       <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in</description>
     </item>
     

@@ -78,7 +78,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/" title="协程解析二(云风的coroutine)">协程解析二(云风的coroutine)</a>
+                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/" title="协程解析二(云风的coroutine)">协程解析二(云风的coroutine)</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -95,13 +95,13 @@
         <div class="post-content">
             概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;&amp; make 写一个生产者和消费者的demo //procus.c #include &quot;coroutine.h&quot; #include……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/" title="协程解析一(ucontext)">协程解析一(ucontext)</a>
+                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/" title="协程解析一(ucontext)">协程解析一(ucontext)</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -118,13 +118,13 @@
         <div class="post-content">
             概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" title="Golang的定时器实现方式">Golang的定时器实现方式</a>
+                <a href="https://zfunnily.github.io/2021/02/Golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" title="Golang的定时器实现方式">Golang的定时器实现方式</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -141,13 +141,13 @@
         <div class="post-content">
             概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &lt;- t2.C fmt.Println(&quot;NewTimer...&quot;) } }() select 通过select的方式实现定时器： for { select { case &lt;- time.After(d): fmt.Println(&quot;select...&quot;) } }……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/" title="lua解决百元买鸡的问题">lua解决百元买鸡的问题</a>
+                <a href="https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/" title="lua解决百元买鸡的问题">lua解决百元买鸡的问题</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -164,13 +164,13 @@
         <div class="post-content">
             问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/" title="Golang使用JWT身份认证">Golang使用JWT身份认证</a>
+                <a href="https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/" title="Golang使用JWT身份认证">Golang使用JWT身份认证</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -187,13 +187,13 @@
         <div class="post-content">
             概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端1. 客户端请求接口时需要带上token。服务器需要验证to……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/02/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/" title="Lua调用C/C&#43;&#43;的动态库">Lua调用C/C&#43;&#43;的动态库</a>
+                <a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/" title="Lua调用C/C&#43;&#43;的动态库">Lua调用C/C&#43;&#43;的动态库</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -210,13 +210,13 @@
         <div class="post-content">
             概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/02/Lua%E8%B0%83%E7%94%A8C-C&#43;&#43;%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C/C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/02/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43;调用汇编函数">C/C&#43;&#43;调用汇编函数</a>
+                <a href="https://zfunnily.github.io/2021/02/C/C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43;调用汇编函数">C/C&#43;&#43;调用汇编函数</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -233,13 +233,13 @@
         <div class="post-content">
             概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/02/C-C&#43;&#43;%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/C/C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
+                <a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -256,13 +256,13 @@
         <div class="post-content">
             概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;T格式|Intel格式|说明 |&mdash;&mdash; |pushl %eax|push eax|在AT&amp;T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;T汇编格式中，用’$&lsquo;前……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/" title="在skynet中使用lua-protobuf库">在skynet中使用lua-protobuf库</a>
+                <a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/" title="在skynet中使用lua-protobuf库">在skynet中使用lua-protobuf库</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -279,13 +279,13 @@
         <div class="post-content">
             概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/" title="Google Protobuf 请求参数为空的案例">Google Protobuf 请求参数为空的案例</a>
+                <a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/" title="Google Protobuf 请求参数为空的案例">Google Protobuf 请求参数为空的案例</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -302,7 +302,7 @@
         <div class="post-content">
             参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &quot;google/protobuf/empty.proto&quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">阅读全文</a></p>
     </article>
     
     
@@ -417,43 +417,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+        <a href="https://zfunnily.github.io/2021/10/csdn%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E5%88%B0%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+        <a href="https://zfunnily.github.io/2021/10/Skynet%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90%E5%9B%9B-%E6%B6%88%E6%81%AF%E8%B0%83%E5%BA%A6/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+        <a href="https://zfunnily.github.io/2021/10/Skynet%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+        <a href="https://zfunnily.github.io/2021/10/Skynet%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90%E4%BA%8C-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+        <a href="https://zfunnily.github.io/2021/10/Skynet%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90%E4%B8%80-%E5%90%AF%E5%8A%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E8%BF%87%E7%A8%8B/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+        <a href="https://zfunnily.github.io/2021/10/Golang%E8%B0%83%E7%94%A8%E5%B8%A6%E6%9C%89%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8Bshell%E8%84%9A%E6%9C%AC%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%A2%AB%E6%8C%82%E8%B5%B7/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+        <a href="https://zfunnily.github.io/2021/09/FPS%E6%B8%B8%E6%88%8F-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E5%8A%9F%E8%83%BD/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/09/music/" title="免费Music">免费Music</a>
+        <a href="https://zfunnily.github.io/2021/09/%E5%85%8D%E8%B4%B9Music/" title="免费Music">免费Music</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
+        <a href="https://zfunnily.github.io/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
+        <a href="https://zfunnily.github.io/2021/09/U3D-Transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
     </li>
     
 </ul>
@@ -477,15 +477,11 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
-    
-    <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
-    
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     

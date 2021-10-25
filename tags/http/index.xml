@@ -9,19 +9,19 @@
     <lastBuildDate>Wed, 24 Feb 2021 14:22:04 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang使用JWT身份认证</title>
-      <link>https://zfunnily.github.io/post/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</link>
+      <link>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</link>
       <pubDate>Wed, 24 Feb 2021 14:22:04 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</guid>
+      <guid>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</guid>
       <description>概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端1. 客户端请求接口时需要带上token。服务器需要验证to</description>
     </item>
     
     <item>
       <title>使用OpenResty做一个postman小工具</title>
-      <link>https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+      <link>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Wed, 25 Nov 2020 16:30:39 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+      <guid>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
       <description>用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &amp;quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&amp;quot;; server { listen 8080; default_type &#39;application/json;charset=utf8&#39;; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了</description>
     </item>
     

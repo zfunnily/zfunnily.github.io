@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 23 Mar 2021 10:14:35 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>选择排序</title>
-      <link>https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <link>https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:14:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
       <description>sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 选择排序法（以从小到大排序为例）算法思想：A.在未排序序列中找到最小（大）元素，存放到排序序列的起始位置B.从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾C.以此类推，直到所有元素均排序完毕</description>
     </item>
     

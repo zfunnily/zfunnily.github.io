@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 24 Feb 2021 17:51:46 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>lua解决百元买鸡的问题</title>
-      <link>https://zfunnily.github.io/post/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Wed, 24 Feb 2021 17:51:46 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local</description>
     </item>
     

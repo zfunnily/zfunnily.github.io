@@ -9,82 +9,82 @@
     <lastBuildDate>Mon, 17 Aug 2020 13:58:35 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>监控Kubernetes——Prometheus&#43;Grafana</title>
-      <link>https://zfunnily.github.io/post/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/</link>
+      <link>https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/</link>
       <pubDate>Mon, 17 Aug 2020 13:58:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus&#43;Grafana/</guid>
+      <guid>https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/</guid>
       <description>概述 作为应用与Kubernetes的监控体系，Prometheus具备诸多的优势，如： Kubernetes默认支持,非常适合容器和微服务- 无依赖，安装方便，上手容易- 社区活跃，它不仅仅是个工具，而是生态- 已有很多插件或者exporter，可以适应多种应用场景的数据收集需要- Gra</description>
     </item>
     
     <item>
       <title>Ingress的基本使用</title>
-      <link>https://zfunnily.github.io/post/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <link>https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 15 Aug 2020 00:05:15 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls</description>
     </item>
     
     <item>
       <title>Statefluset的持久存储PVC</title>
-      <link>https://zfunnily.github.io/post/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</link>
+      <link>https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</link>
       <pubDate>Fri, 14 Aug 2020 17:18:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</guid>
+      <guid>https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</guid>
       <description>缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或</description>
     </item>
     
     <item>
       <title>StatefulSet基本原理</title>
-      <link>https://zfunnily.github.io/post/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</link>
+      <link>https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</link>
       <pubDate>Fri, 14 Aug 2020 16:03:41 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</guid>
+      <guid>https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</guid>
       <description>背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行</description>
     </item>
     
     <item>
       <title>coreDNS的部署安装，对k8s来说很重要</title>
-      <link>https://zfunnily.github.io/post/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/</link>
+      <link>https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/</link>
       <pubDate>Thu, 13 Aug 2020 18:44:28 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/</guid>
+      <guid>https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/</guid>
       <description>概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco</description>
     </item>
     
     <item>
       <title>使用k8s创建第一个应用</title>
-      <link>https://zfunnily.github.io/post/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</link>
+      <link>https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</link>
       <pubDate>Thu, 13 Aug 2020 15:28:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</guid>
       <description>使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1</description>
     </item>
     
     <item>
       <title>k8s集群资源监控 heapster</title>
-      <link>https://zfunnily.github.io/post/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/</link>
+      <link>https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/</link>
       <pubDate>Thu, 06 Aug 2020 09:06:05 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/</guid>
+      <guid>https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/</guid>
       <description>安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu</description>
     </item>
     
     <item>
       <title>k8s的界面管理 Dashboard</title>
-      <link>https://zfunnily.github.io/post/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/</link>
+      <link>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/</link>
       <pubDate>Thu, 06 Aug 2020 09:04:14 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/</guid>
+      <guid>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/</guid>
       <description>安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即</description>
     </item>
     
     <item>
       <title>k8s的第一步，安装！</title>
-      <link>https://zfunnily.github.io/post/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/</link>
+      <link>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/</link>
       <pubDate>Wed, 05 Aug 2020 10:00:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/</guid>
+      <guid>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/</guid>
       <description>安装k8s前的准备工作 环境 ubuntu18.04- docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc</description>
     </item>
     

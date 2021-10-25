@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 07 Sep 2021 15:55:59 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/transform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>U3D Transform类</title>
-      <link>https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/</link>
+      <link>https://zfunnily.github.io/2021/09/U3D-Transform%E7%B1%BB/</link>
       <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/post/2021/09/transform%E7%B1%BB/</guid>
+      <guid>https://zfunnily.github.io/2021/09/U3D-Transform%E7%B1%BB/</guid>
       <description>Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat</description>
     </item>
     

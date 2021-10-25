@@ -150,7 +150,8 @@
     <li><a href="#主题">主题</a></li>
     <li><a href="#部署到github个人页面">部署到Github个人页面</a></li>
     <li><a href="#自动部署脚本">自动部署脚本</a></li>
-    <li><a href="#给网站添加评论">给网站添加评论</a></li>
+    <li><a href="#评论系统">评论系统</a></li>
+    <li><a href="#路由配置">路由配置</a></li>
   </ul>
 </nav>
     </div>
@@ -281,8 +282,39 @@ git push origin master
 
 # Come Back up to the Project Root
 cd ..
-</code></pre><h2 id="给网站添加评论">给网站添加评论</h2>
-<p>Hugo支持Disqus评论，只需要在配置文件config.toml中设置disqusShortname = &ldquo;disqusShortname&rdquo;，如果没有disqusShortname，需要到Disqus官网注册一个账号，注册后添加一个网站，添加时会让填一个shortname，Disqus会生成一个shortname.disqus.com的网址，另外还需要把config.toml中的baseURL地址，也就是公网访问地址添加到Diqus的信任网址中，类似于互相添加信任</p>
+</code></pre><h2 id="评论系统">评论系统</h2>
+<p>配置 utteranc评论,教程参考 <a href="https://utteranc.es/">https://utteranc.es/</a></p>
+<h2 id="路由配置">路由配置</h2>
+<p>假设站点的一个[块sections][]名为post, 您想基于年份、月份和文章标题来构建规范化的路径,可以像下面相应的TOML的配置中一样来设置:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#998;font-style:italic">## 路由</span>
+[permalinks]
+  post = <span style="color:#d14">&#34;/:year/:month/:filename/&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对于标签分类的永久链接也可以如此配置，使用标签的复数形式而不是使用标签块。可能仅仅需要配置:slug 或者 :title
+永久链接配置的值:</p>
+<ul>
+<li>:year: the 4-digit year 4位数年份</li>
+<li>:month: the 2-digit month 2位数月份</li>
+<li>:monthname: the name of the month 月份的名称</li>
+<li>:day the 2-digit day 两位数的月份内日期</li>
+<li>:weekday the 1-digit day of the week (Sunday = 0) 1位的星期几(周日是0)</li>
+<li>:weekdayname the name of the day of the week 星期几的名称</li>
+<li>:yearday the 1- to 3-digit day of the year 1到3位数的年份内日期序数</li>
+<li>:section the content’s section 内容块名称</li>
+<li>:sections the content’s sections hierarchy 内容块的层级</li>
+<li>:title the content’s title 内容的title</li>
+<li>:slug the content’s slug (or title if no slug is provided in the front matter) 内容的slug(或者是title，如果没有在前言设定中提供slug)</li>
+<li>:filename the content’s filename (without extension) 内容的文件名(不包含扩展名)
+另外，用:作为前缀的Go语言的时间模式字符串可以使用</li>
+</ul>
 
         </div>
 
@@ -456,15 +488,13 @@ cd ..
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/TODO/">TODO (1)</a></li>
-    
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
