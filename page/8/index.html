@@ -78,6 +78,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/post/csdn/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="cgo使用libevent库实现一个定时器">cgo使用libevent库实现一个定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/post/csdn/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang 利用指针进行数据转换">Golang 利用指针进行数据转换</a>
             </h1>
         </header>
@@ -282,29 +305,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Libevent定时器的实现">Libevent定时器的实现</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/post/csdn/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -317,53 +317,85 @@
     
 
     
-    <li >
-        <a href="https://zfunnily.github.io/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://zfunnily.github.io/page/2/">2</a>
-    </li>
+        
+        
     
-    <li >
-        <a href="https://zfunnily.github.io/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/4/">4</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/5/">5</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/6/">6</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/7/">7</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://zfunnily.github.io/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/6/">6</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/7/">7</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zfunnily.github.io/page/8/">8</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/9/">9</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/10/">10</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://zfunnily.github.io/page/9/">下一页</a>
     </li>
     
 </ol>
+
 
 
 
@@ -417,6 +449,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/post/csdn/%E5%8D%9A%E5%AE%A2%E6%90%AC%E5%AE%B6%E5%95%A6/" title="博客搬家啦">博客搬家啦</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/post/thinking/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
@@ -450,10 +486,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/post/game/fps/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/post/other/music/" title="免费Music">免费Music</a>
     </li>
     
 </ul>
@@ -492,6 +524,8 @@
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AC%E5%AE%B6/">博客搬家 (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
@@ -705,6 +739,8 @@
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%9A%E5%AE%A2%E6%90%AC%E5%AE%B6/">博客搬家</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
