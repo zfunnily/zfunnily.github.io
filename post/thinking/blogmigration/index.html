@@ -216,7 +216,7 @@
 <p>我在飞雪的主题上加了个随机名人名言的功能，挺有意思.</p>
 <h3 id="csdn博客导出">csdn博客导出</h3>
 <p>感谢 <a href="https://yushuaigee.gitee.io/2021/01/26/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%B8%83)%E2%80%94%E2%80%94%E8%BF%81%E7%A7%BB%20CSDN%20%E5%8D%9A%E5%AE%A2%E5%88%B0%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%AB%99%E7%82%B9/">yushuaigee</a>
-给我提供了一个csdn博客迁移到个人博客的python脚本。他已经把基础功能实现了，我自己在他的基础上做了改，1 是替换 html标签，2是 开始在网页上articles标签没找到
+提供了一个csdn博客迁移到个人博客的python脚本。他已经把基础功能实现了，我自己在他的基础上做了改，1 是替换 html标签，2是 开始在网页上articles标签没找到
 以至于没有找到博客，我把改动的部分贴下来：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -249,26 +249,28 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_article_info</span>(url):
     html <span style="color:#000;font-weight:bold">=</span> requests<span style="color:#000;font-weight:bold">.</span>get(url, headers<span style="color:#000;font-weight:bold">=</span>headers)<span style="color:#000;font-weight:bold">.</span>text
     selector <span style="color:#000;font-weight:bold">=</span> parsel<span style="color:#000;font-weight:bold">.</span>Selector(html)
-    urls <span style="color:#000;font-weight:bold">=</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;article.blog-list-box &gt; a&#39;</span>)<span style="color:#000;font-weight:bold">.</span>xpath(<span style="color:#d14">&#39;.//@href&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall()
+    urls <span style="color:#000;font-weight:bold">=</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;article.blog-list-box &gt; a&#39;</span>)<span style="color:#000;font-weight:bold">.</span>xpath(<span style="color:#d14">&#39;.//@href&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall() <span style="color:#998;font-style:italic">##改动</span>
     <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#39;共找到</span><span style="color:#d14">%d</span><span style="color:#d14">篇文章...&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">len</span>(urls))
     <span style="color:#000;font-weight:bold">return</span> urls
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_html_from_csdn</span>(url):
     <span style="color:#000;font-weight:bold">...</span>
-    category <span style="color:#000;font-weight:bold">=</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;div.blog-tags-box &gt; div &gt; a::text&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall()[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">if</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;div.blog-tags-box &gt; div &gt; a::text&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall() <span style="color:#000;font-weight:bold">else</span> <span style="color:#d14">&#34;TODO&#34;</span>
+    category <span style="color:#000;font-weight:bold">=</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;div.blog-tags-box &gt; div &gt; a::text&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall()[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">if</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;div.blog-tags-box &gt; div &gt; a::text&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall() <span style="color:#000;font-weight:bold">else</span> <span style="color:#d14">&#34;TODO&#34;</span> <span style="color:#998;font-style:italic">##改动</span>
     <span style="color:#000;font-weight:bold">...</span>
     <span style="color:#000;font-weight:bold">return</span> title, article, category, tags, time_stamp, author, origin
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">html_to_md</span>(title, article, category, tags, time_stamp, author, origin):
     <span style="color:#000;font-weight:bold">...</span>
     text <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#34;---</span><span style="color:#d14">\n</span><span style="color:#d14">title: </span><span style="color:#d14">%s</span><span style="color:#d14">\n</span><span style="color:#d14">date: </span><span style="color:#d14">%s</span><span style="color:#d14">\n</span><span style="color:#d14">tags: [</span><span style="color:#d14">%s</span><span style="color:#d14">]</span><span style="color:#d14">\n</span><span style="color:#d14">categories: [</span><span style="color:#d14">%s</span><span style="color:#d14">]</span><span style="color:#d14">\n</span><span style="color:#d14">---</span><span style="color:#d14">\n\n</span><span style="color:#d14">%s</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">%</span> (
-        title, time_stamp, <span style="color:#d14">&#39;, &#39;</span><span style="color:#000;font-weight:bold">.</span>join(tags), category, md)
+        title, time_stamp, <span style="color:#d14">&#39;, &#39;</span><span style="color:#000;font-weight:bold">.</span>join(tags), category, md) <span style="color:#998;font-style:italic">## 改动</span>
     <span style="color:#000;font-weight:bold">...</span>
 
-<span style="color:#998;font-style:italic">##这个函数可以替换文件中的html标签,按需使用</span>
+<span style="color:#998;font-style:italic">## 新增函数, 按需使用</span>
+<span style="color:#998;font-style:italic">## 这个函数可以替换文件中的html标签</span>
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relmd</span>(<span style="color:#0086b3">file</span>):
     <span style="color:#000;font-weight:bold">with</span> <span style="color:#0086b3">open</span>(<span style="color:#0086b3">file</span>, <span style="color:#d14">&#34;r&#34;</span>) <span style="color:#000;font-weight:bold">as</span> r:
         lines<span style="color:#000;font-weight:bold">=</span>r<span style="color:#000;font-weight:bold">.</span>readlines()
