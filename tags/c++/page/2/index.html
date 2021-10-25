@@ -87,52 +87,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/">最后一战-游戏场景服务器SS解析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月2日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a>
-            
-        </div>
-        
-        <div class="post-content">
-            游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle- GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送……
-            <p class="readmore"><a href="https://zfunnily.github.io/post/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">一个reactor单线程网络库ccnet</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月27日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌……
-            <p class="readmore"><a href="https://zfunnily.github.io/post/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/post/2020/12/C&#43;&#43;vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">C&#43;&#43;：vector中的resize()函数 VS reserve()函数</a>
             </h1>
         </header>
@@ -225,29 +179,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">cgo使用libevent库实现一个定时器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月13日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/Golang'>Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
-            <p class="readmore"><a href="https://zfunnily.github.io/post/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/post/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">Libevent定时器的实现</a>
             </h1>
         </header>
@@ -265,52 +196,6 @@
         <div class="post-content">
             libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
             <p class="readmore"><a href="https://zfunnily.github.io/post/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">licod安装和配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月9日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a>
-            
-        </div>
-        
-        <div class="post-content">
-            拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个……
-            <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/post/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">owt-server编译运行</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月5日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd……
-            <p class="readmore"><a href="https://zfunnily.github.io/post/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
         </div>
     </article>
     
@@ -482,11 +367,11 @@
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
     
-    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    <a href="https://zfunnily.github.io/tags/C/">C</a>
     
     <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
     
-    <a href="https://zfunnily.github.io/tags/c/">c</a>
+    <a href="https://zfunnily.github.io/tags/C/">C</a>
     
     <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
     
@@ -510,8 +395,6 @@
     
     <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
     
-    <a href="https://zfunnily.github.io/tags/c/">c</a>
-    
     <a href="https://zfunnily.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a>
     
     <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
@@ -523,8 +406,6 @@
     <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
     
     <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
-    
-    <a href="https://zfunnily.github.io/tags/c%E8%AF%AD%E8%A8%80/">c语言</a>
     
     <a href="https://zfunnily.github.io/tags/docker/">docker</a>
     
