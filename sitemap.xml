@@ -3,7 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zfunnily.github.io/categories/</loc>
-    <lastmod>2021-10-22T19:01:20+08:00</lastmod>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/golang/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/golibp2p/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/libp2p/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/P2P/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/post/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/</loc>
+    <lastmod>2021-10-28T14:40:02+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</loc>
+    <lastmod>2021-10-28T11:15:42+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/10/blogmigration/</loc>
     <lastmod>2021-10-22T19:01:20+08:00</lastmod>
@@ -11,16 +38,7 @@
     <loc>https://zfunnily.github.io/categories/Other/</loc>
     <lastmod>2021-10-22T19:01:20+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/post/</loc>
-    <lastmod>2021-10-22T19:01:20+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/</loc>
-    <lastmod>2021-10-22T19:01:20+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/tags/thinking/</loc>
-    <lastmod>2021-10-22T19:01:20+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/</loc>
     <lastmod>2021-10-22T19:01:20+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/Skynet/</loc>
@@ -42,9 +60,6 @@
     <lastmod>2021-10-19T17:28:45+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/Golang/</loc>
-    <lastmod>2021-10-13T17:15:45+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/golang/</loc>
     <lastmod>2021-10-13T17:15:45+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/10/shell/</loc>

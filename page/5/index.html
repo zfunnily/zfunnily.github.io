@@ -76,6 +76,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>汇编学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;T格式|Intel格式|说明 |&mdash;&mdash; |pushl %eax|push eax|在AT&amp;T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;T汇编格式中，用’$&lsquo;前……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/" title="在skynet中使用lua-protobuf库">在skynet中使用lua-protobuf库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/" title="Google Protobuf 请求参数为空的案例">Google Protobuf 请求参数为空的案例</a>
             </h1>
         </header>
@@ -257,52 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/" title="struct中为什么使用char[]而不用char*">struct中为什么使用char[]而不用char*</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*和char数组有什么区别 常用来构成缓冲区。比起指针，用空数组有这样的优势： 不需要……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/" title="最后一战-游戏场景服务器SS解析">最后一战-游戏场景服务器SS解析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月2日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle- GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -415,6 +415,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
@@ -446,14 +454,6 @@
         <a href="https://zfunnily.github.io/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -476,6 +476,8 @@
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
@@ -562,6 +564,8 @@
     
     <a href="https://zfunnily.github.io/tags/golang/">golang</a>
     
+    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
+    
     <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
     
     <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
@@ -585,6 +589,8 @@
     <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
     
     <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
     
     <a href="https://zfunnily.github.io/tags/linux/">linux</a>
     

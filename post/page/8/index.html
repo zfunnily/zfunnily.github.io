@@ -78,6 +78,56 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/go-builds/" title="Golang builds">Golang builds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？ 有个方法可以解决，就是配置文件。我们也可以利用golang的……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/go-builds/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="cgo的简单使用">cgo的简单使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明：1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/" title="使用Lumberjack&#43;zap进行日志切割归档">使用Lumberjack&#43;zap进行日志切割归档</a>
             </h1>
         </header>
@@ -275,56 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/" title="FFmpeg给视频加文字和图片水印">FFmpeg给视频加文字和图片水印</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/" title="在windows上使用ffmpeg命令行录制摄像头和桌面数据">在windows上使用ffmpeg命令行录制摄像头和桌面数据</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &quot;Altair USB2.0 Camera&quot; [dshow @ 000002622302e340] Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -436,6 +436,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
     </li>
     
@@ -467,14 +475,6 @@
         <a href="https://zfunnily.github.io/2021/09/music/" title="免费Music">免费Music</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/" title="idea和vscode结合vim 自动切换输入法">idea和vscode结合vim 自动切换输入法</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/transform%E7%B1%BB/" title="U3D Transform类">U3D Transform类</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -497,6 +497,8 @@
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
@@ -583,6 +585,8 @@
     
     <a href="https://zfunnily.github.io/tags/golang/">golang</a>
     
+    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
+    
     <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
     
     <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
@@ -606,6 +610,8 @@
     <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
     
     <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
     
     <a href="https://zfunnily.github.io/tags/linux/">linux</a>
     
