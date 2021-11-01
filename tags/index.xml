@@ -6,7 +6,7 @@
     <description>Recent content in Tags on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 28 Oct 2021 14:40:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 31 Oct 2021 10:13:40 +0800</lastBuildDate>
     
 	<atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>golang</title>
       <link>https://zfunnily.github.io/tags/golang/</link>
-      <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
+      <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/tags/golang/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>golibp2p</title>
       <link>https://zfunnily.github.io/tags/golibp2p/</link>
-      <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
+      <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/tags/golibp2p/</guid>
       <description></description>
@@ -32,9 +32,18 @@
     <item>
       <title>libp2p</title>
       <link>https://zfunnily.github.io/tags/libp2p/</link>
-      <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
+      <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/tags/libp2p/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>relay</title>
+      <link>https://zfunnily.github.io/tags/relay/</link>
+      <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/relay/</guid>
       <description></description>
     </item>
     

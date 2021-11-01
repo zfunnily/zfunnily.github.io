@@ -76,6 +76,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43;调用汇编函数">C/C&#43;&#43;调用汇编函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>汇编学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
             </h1>
         </header>
@@ -280,29 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/" title="Redis源码解析-sds字符串分析">Redis源码解析-sds字符串分析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -415,6 +415,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
     </li>
     
@@ -450,10 +454,6 @@
         <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/music/" title="免费Music">免费Music</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -477,7 +477,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
@@ -627,6 +627,8 @@
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
     
     <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
     
     <a href="https://zfunnily.github.io/tags/screen/">screen</a>
     
