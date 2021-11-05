@@ -6,9 +6,18 @@
     <description>Recent content in Posts on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Oct 2021 10:13:40 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Nov 2021 15:50:16 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Gop2p的relay例子</title>
+      <title>随机名人名言</title>
+      <link>https://zfunnily.github.io/2021/11/randomquotes/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/11/randomquotes/</guid>
+      <description>本文目的 我的个人博客已经搭建好了，使用的hugo+飞雪的主题。我看到有些博客上有些随机的名人名言，但是这个主题没有。遂自己写一个。 根据飞雪的主题自定义 飞雪主题的github: https://github.com/flysnow-org/maupassant-hugo 复制主题里的文件themes/maupassant/static到自己的博客根目录下。新增文件stati</description>
+    </item>
+    
+    <item>
+      <title>Go-libp2p | relay例子</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</link>
       <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
@@ -17,7 +26,7 @@
     </item>
     
     <item>
-      <title>go-libp2p的chat例子解析</title>
+      <title>Go-libp2p | chat例子</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</link>
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
@@ -26,7 +35,7 @@
     </item>
     
     <item>
-      <title>go-libp2p的echo例子解析</title>
+      <title>Go-libp2p | echo例子</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</link>
       <pubDate>Thu, 28 Oct 2021 11:15:42 +0800</pubDate>
       

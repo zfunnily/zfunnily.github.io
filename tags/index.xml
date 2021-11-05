@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Oct 2021 10:13:40 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Nov 2021 15:50:16 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo</title>
+      <link>https://zfunnily.github.io/tags/hugo/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>randomquotes</title>
+      <link>https://zfunnily.github.io/tags/randomquotes/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/randomquotes/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>golang</title>
       <link>https://zfunnily.github.io/tags/golang/</link>
@@ -328,15 +346,6 @@
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/tags/lua_settop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://zfunnily.github.io/tags/hugo/</link>
-      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
