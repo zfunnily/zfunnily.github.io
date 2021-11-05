@@ -303,7 +303,7 @@ kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/
 
 </code></pre><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
 <h2 id="a-id_113a创建用户"><!-- raw HTML omitted --><!-- raw HTML omitted -->创建用户</h2>
-<p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<!-- raw HTML omitted --> ``<!-- raw HTML omitted --> **新建文件(文件名随意)<code>admin-user.yaml</code>：**<!-- raw HTML omitted --> 输入内容：</p>
+<p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<!-- raw HTML omitted --> ``<!-- raw HTML omitted --> <strong>新建文件(文件名随意)<code>admin-user.yaml</code>：</strong><!-- raw HTML omitted --> 输入内容：</p>
 <pre><code>apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -314,7 +314,7 @@ metadata:
 <pre><code>sudo kubectl create -f admin-user.yaml
 
 </code></pre><h2 id="a-id_129a绑定用户关系"><!-- raw HTML omitted --><!-- raw HTML omitted -->绑定用户关系</h2>
-<p>**新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：**<!-- raw HTML omitted --> 输入内容：</p>
+<p><strong>新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：</strong><!-- raw HTML omitted --> 输入内容：</p>
 <pre><code>apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -447,7 +447,7 @@ subjects:
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
     </li>
     
     <li>

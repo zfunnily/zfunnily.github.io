@@ -214,7 +214,7 @@ func C.GoString(*C.char) string             //C字符串 转化为 go字符串
 func C.GoStringN(*C.char, C.int) string     
 func C.GoBytes(unsafe.Pointer, C.int) []byte
 
-</code></pre><p>**其中<code>C.CString</code>针对输入的Go字符串，克隆一个C语言格式的字符串；返回的字符串由C语言的<code>malloc</code>函数分配，不使用时需要通过C语言的<code>free</code>函数释放。**<code>C.CBytes</code>函数的功能和<code>C.CString</code>类似，用于从输入的Go语言字节切片克隆一个C语言版本的字节数组，同样返回的数组需要在合适的时候释放。**<code>C.GoString</code>用于将从NULL结尾的C语言字符串克隆一个Go语言字符串。**<code>C.GoStringN</code>是另一个字符数组克隆函数。<code>C.GoBytes</code>用于从C语言数组，克隆一个Go语言字节切片。</p>
+</code></pre><p><strong>其中<code>C.CString</code>针对输入的Go字符串，克隆一个C语言格式的字符串；返回的字符串由C语言的<code>malloc</code>函数分配，不使用时需要通过C语言的<code>free</code>函数释放。</strong><code>C.CBytes</code>函数的功能和<code>C.CString</code>类似，用于从输入的Go语言字节切片克隆一个C语言版本的字节数组，同样返回的数组需要在合适的时候释放。<strong><code>C.GoString</code>用于将从NULL结尾的C语言字符串克隆一个Go语言字符串。</strong><code>C.GoStringN</code>是另一个字符数组克隆函数。<code>C.GoBytes</code>用于从C语言数组，克隆一个Go语言字节切片。</p>
 <blockquote>
 </blockquote>
 <p>克隆方式实现转换的优点是接口和内存管理都很简单，缺点是克隆需要分配新的内存和复制操作都会导致额外的开销。</p>
@@ -479,7 +479,7 @@ func main()  {&lt;!-- --&gt;
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
     </li>
     
     <li>
