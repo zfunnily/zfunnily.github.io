@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Gop2p三 | 流浪花</title>
-    <meta property="og:title" content="Gop2p三 - 流浪花">
+    <title>Gop2p中继Relay | 流浪花</title>
+    <meta property="og:title" content="Gop2p中继Relay - 流浪花">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-10-31T10:13:40&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2021-10-31T10:13:40&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Gop2p三">
+    <meta name="description" content="Gop2p中继Relay">
         
     <meta name="author" content="流浪花">
     <meta property="og:url" content="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/">
@@ -146,6 +146,7 @@
     <li><a href="#go-libp2p的relay例子分析">go-libp2p的relay例子分析</a></li>
     <li><a href="#先实现中继服务">先实现中继服务</a></li>
     <li><a href="#节点代码">节点代码</a></li>
+    <li><a href="#文档">文档</a></li>
   </ul>
 </nav>
     </div>
@@ -179,7 +180,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Gop2p三</h1>
+            <h1 class="post-title">Gop2p中继Relay</h1>
         </header>
         <date class="post-meta meta-date">
             2021年10月31日
@@ -222,7 +223,7 @@
 <p>创建节点:
 创建h1 <code>h1, err := libp2p.New(libp2p.EnableRelay())</code>
 创建h3 <code>h3, err := libp2p.New(libp2p.ListenAddrs(), libp2p.EnableRelay())</code>
-h3监听协议&quot;/cats&quot;，<code>h3.SetStreamHandler(&quot;/cats&quot;, func(s network.Stream) {})</code></p>
+h3监听协议&rdquo;/cats&rdquo;，<code>h3.SetStreamHandler(&quot;/cats&quot;, func(s network.Stream) {})</code></p>
 </li>
 <li>
 <p>创建中继:
@@ -245,14 +246,14 @@ h1清除掉h3的地址：<code>h1.Network().(*swarm.Swarm).Backoff().Clear(h3.ID
 </li>
 <li>
 <p>h1向h3已经准备好连接
-h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStream(context.Background(), h3.ID(), &quot;/cats&quot;)</code>
+h1新建一个&rdquo;/cats&quot;的数据流，用于收发数据 <code>h1.NewStream(context.Background(), h3.ID(), &quot;/cats&quot;)</code>
 读取数据：<code>s.Read(make([]byte, 1))</code></p>
 </li>
 </ol>
 <p>总结以上步骤来说:
 第一步，双方节点先连接中继节点
 第二步，其中一节点h1通过中继服务h2获取到另一方的节点h3地址(这个例子直接就能通过内存获取到对方的地址)
-第三步，h1连接h3，并通过h3监听的协议&quot;/cats&quot;新建数据流，用于收发数据。</p>
+第三步，h1连接h3，并通过h3监听的协议&rdquo;/cats&quot;新建数据流，用于收发数据。</p>
 <p>在各自的局域网内，通过一个中继服务，就能使节点双方进行p2p通信。此例子是在一个进程中实现的。我按照他的例子，把中继服务和节点分离开。</p>
 <h2 id="先实现中继服务">先实现中继服务</h2>
 <p>首先看中继服务需要什么:</p>
@@ -903,29 +904,8 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 }
 </code></pre></td></tr></table>
 </div>
-</div><p>编译</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o relay-server relay-server.go
-$ go build -o chat chat.go
-</code></pre></td></tr></table>
-</div>
-</div><p>使用，先启动中继服务</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay-server -sp <span style="color:#099">3001</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>启动chat窗口, 连上relay服务</p>
-<pre><code>./chat -relay
-</code></pre><p>再启动chat窗，连上relay服务</p>
+</div><h2 id="文档">文档</h2>
+<p><a href="https://www.kancloud.cn/daleboy/blockchain/2001468">https://www.kancloud.cn/daleboy/blockchain/2001468</a></p>
 
         </div>
 
@@ -1043,7 +1023,7 @@ $ go build -o chat chat.go
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
     </li>
     
     <li>

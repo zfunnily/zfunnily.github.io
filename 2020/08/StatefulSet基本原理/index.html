@@ -314,7 +314,7 @@ spec:
 </ul>
 <blockquote>
 </blockquote>
-<p><strong>为什么需要 headless service 无头服务？</strong><!-- raw HTML omitted --> 在用Deployment时，每一个Pod名称是没有顺序的，是随机字符串，因此是Pod名称是无序的，但是在statefulset中要求必须是有序 ，每一个pod不能被随意取代，pod重建后pod名称还是一样的。而pod IP是变化的，所以是以Pod名称来识别。pod名称是pod唯一性的标识符，必须持久稳定有效。这时候要用到无头服务，它可以给每个Pod一个唯一的名称 。</p>
+<p>**为什么需要 headless service 无头服务？**<!-- raw HTML omitted --> 在用Deployment时，每一个Pod名称是没有顺序的，是随机字符串，因此是Pod名称是无序的，但是在statefulset中要求必须是有序 ，每一个pod不能被随意取代，pod重建后pod名称还是一样的。而pod IP是变化的，所以是以Pod名称来识别。pod名称是pod唯一性的标识符，必须持久稳定有效。这时候要用到无头服务，它可以给每个Pod一个唯一的名称 。</p>
 <p>使用<code>kubectl apply</code>中的 Headless Service 和 StatefulSet。</p>
 <pre><code>kubectl apply -f web.yaml
 service/nginx created
@@ -610,7 +610,7 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
     </li>
     
     <li>

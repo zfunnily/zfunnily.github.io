@@ -427,19 +427,19 @@
 <p>节点B</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点B需要知道节点A的地址，并解析A的地址</li>
 <li>把节点A的地址添加到节点B的host</li>
-<li>节点B使用节点A的host.ID和节点A监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流</li>
+<li>节点B使用节点A的host.ID和节点A监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流</li>
 <li>节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <p>节点A</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点A需要知道节点B的地址，并解析B的地址</li>
 <li>把节点B的地址添加到节点A的host</li>
-<li>节点A使用节点B的host.ID和节点B监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流</li>
+<li>节点A使用节点B的host.ID和节点B监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流</li>
 <li>节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <h2 id="循环echo">循环echo</h2>
@@ -579,10 +579,10 @@ log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#
 <p>使用libp2p库让两个节点进行p2p通信一共分为如下几个步骤,以节点B为例子</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点B需要知道节点A的地址，并解析A的地址</li>
 <li>把节点A的地址添加到节点B的host</li>
-<li>节点B使用节点A的host.ID和节点A监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流 , 节点B可以通过这个数据流和A进行通信</li>
+<li>节点B使用节点A的host.ID和节点A监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流 , 节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <p>作为发送方比接收方多了第4步， <code>把节点A的地址添加到节点B的host</code></p>
 
@@ -700,7 +700,7 @@ log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
     </li>
     
     <li>
