@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Gop2p三 | 流浪花</title>
+    <meta property="og:title" content="Gop2p三 - 流浪花">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-10-31T10:13:40&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-10-31T10:13:40&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="Gop2p三">
+        
+    <meta name="author" content="流浪花">
+    <meta property="og:url" content="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        流浪花
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#本文目的">本文目的</a></li>
+    <li><a href="#go-libp2p的relay例子分析">go-libp2p的relay例子分析</a></li>
+    <li><a href="#先实现中继服务">先实现中继服务</a></li>
+    <li><a href="#节点代码">节点代码</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Gop2p三</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="本文目的">本文目的</h2>
+<p>chat和echo两个例子，表达了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。
+如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个<code>中继服务</code>，这个服务做如下两件事：</p>
+<ol>
+<li>交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。</li>
+<li>在打洞不成功的情况下能提供中继服务，转发两节点发送的数据。</li>
+</ol>
+<p>根据我的需求，我在go-libp2p中发现了relay例子。</p>
+<h2 id="go-libp2p的relay例子分析">go-libp2p的relay例子分析</h2>
+<p>这个例子是使用h2作为中继，使h1和h3通过h2进行信息交换，打洞成功后h1和h3可以直接通信。</p>
+<p>relay例子中，可以做到如果两个节点怎么通过中继服务知道对方的地址，然后进行p2p通信。</p>
+<ol>
+<li>
+<p>创建节点:
+创建h1 <code>h1, err := libp2p.New(libp2p.EnableRelay())</code>
+创建h3 <code>h3, err := libp2p.New(libp2p.ListenAddrs(), libp2p.EnableRelay())</code>
+h3监听协议&quot;/cats&quot;，<code>h3.SetStreamHandler(&quot;/cats&quot;, func(s network.Stream) {})</code></p>
+</li>
+<li>
+<p>创建中继:
+创建h2中继 <code>h2, err := libp2p.New(libp2p.DisableRelay())</code>
+中继服务定义接收信息协议，其他节点可以通过协议与之通信<code>_, err = relayv1.NewRelay(h2)</code>
+中继服务地址: <code>h2info := peer.AddrInfo{ ID:    h2.ID(), Addrs: h2.Addrs(), }</code></p>
+</li>
+<li>
+<p>双方节点连上中继服务:
+h1连上h2, <code>h1.Connect(context.Background(), h2info)</code>
+h3连上h2, <code>h3.Connect(context.Background(), h2info)</code></p>
+</li>
+<li>
+<p>获取h3的地址 <code>relayaddr, err := ma.NewMultiaddr(&quot;/p2p/&quot; + h2.ID().Pretty() + &quot;/p2p-circuit/ipfs/&quot; + h3.ID().Pretty())</code>
+<code>h3relayInfo := peer.AddrInfo{ ID:    h3.ID(), Addrs: []ma.Multiaddr{relayaddr}, }</code>
+h1清除掉h3的地址：<code>h1.Network().(*swarm.Swarm).Backoff().Clear(h3.ID())</code></p>
+</li>
+<li>
+<p>h1连接h3 <code>h1.Connect(context.Background(), h3relayInfo)</code></p>
+</li>
+<li>
+<p>h1向h3已经准备好连接
+h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStream(context.Background(), h3.ID(), &quot;/cats&quot;)</code>
+读取数据：<code>s.Read(make([]byte, 1))</code></p>
+</li>
+</ol>
+<p>总结以上步骤来说:
+第一步，双方节点先连接中继节点
+第二步，其中一节点h1通过中继服务h2获取到另一方的节点h3地址(这个例子直接就能通过内存获取到对方的地址)
+第三步，h1连接h3，并通过h3监听的协议&quot;/cats&quot;新建数据流，用于收发数据。</p>
+<p>在各自的局域网内，通过一个中继服务，就能使节点双方进行p2p通信。此例子是在一个进程中实现的。我按照他的例子，把中继服务和节点分离开。</p>
+<h2 id="先实现中继服务">先实现中继服务</h2>
+<p>首先看中继服务需要什么:</p>
+<ol>
+<li>监听一条协议<code>/relay/relayreq/1.0.0</code>，当有一个节点上来，需要记录，当有两个节点时，返回两个节点的信息给对方节点。</li>
+<li>有一个公网IP</li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//relay-server.go
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
+<span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
+
+<span style="color:#000;font-weight:bold">type</span> RelayProtocol <span style="color:#000;font-weight:bold">struct</span> {
+	Server <span style="color:#000;font-weight:bold">*</span>RelayServer
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(server <span style="color:#000;font-weight:bold">*</span>RelayServer)<span style="color:#000;font-weight:bold">*</span>RelayProtocol {
+	protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayProtocol{ Server: server}
+	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolRequest, protocol.onReq)
+	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
+	<span style="color:#000;font-weight:bold">return</span> protocol
+}
+
+<span style="color:#998;font-style:italic">//返回peers节点ID
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onReq</span>(s network.Stream) {
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay req&#34;</span>)
+	p.Server.Mutex.<span style="color:#900;font-weight:bold">Lock</span>()
+	<span style="color:#000;font-weight:bold">defer</span> p.Server.Mutex.<span style="color:#900;font-weight:bold">Unlock</span>()
+	remotePeerID <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>()
+
+
+	<span style="color:#000;font-weight:bold">var</span> rsp <span style="color:#458;font-weight:bold">string</span>
+	<span style="color:#000;font-weight:bold">var</span> peerID <span style="color:#000;font-weight:bold">*</span>list.Element
+
+	<span style="color:#000;font-weight:bold">for</span> p.Server.Peers.<span style="color:#900;font-weight:bold">Len</span>() <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">1</span> {
+		peerID = p.Server.Peers.<span style="color:#900;font-weight:bold">Front</span>()
+		ID <span style="color:#000;font-weight:bold">:=</span> p.Server.Peers.<span style="color:#900;font-weight:bold">Remove</span>(peerID)
+		<span style="color:#000;font-weight:bold">if</span> ID <span style="color:#000;font-weight:bold">!=</span> remotePeerID {
+			rsp = ID.(peer.ID).<span style="color:#900;font-weight:bold">Pretty</span>()
+		}
+		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;peerID: %s; remotePeerID: %s, len: %d\n&#34;</span>, ID.(peer.ID).<span style="color:#900;font-weight:bold">Pretty</span>(), remotePeerID.<span style="color:#900;font-weight:bold">Pretty</span>(),p.Server.Peers.<span style="color:#900;font-weight:bold">Len</span>())
+	}
+	p.Server.Peers.<span style="color:#900;font-weight:bold">PushBack</span>(remotePeerID)
+	<span style="color:#000;font-weight:bold">if</span> rsp <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;&#34;</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;start send peers&#34;</span>)
+		p.Server.<span style="color:#900;font-weight:bold">sendMessage</span>(s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>(), RelayProtocolResponse, rsp)
+	}
+
+}
+
+<span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay rsp&#34;</span>)
+
+}
+
+<span style="color:#000;font-weight:bold">type</span> RelayServer <span style="color:#000;font-weight:bold">struct</span> {
+	host.Host
+	<span style="color:#000;font-weight:bold">*</span>RelayProtocol
+	Ctx context.Context
+
+	<span style="color:#998;font-style:italic">//记录peers
+</span><span style="color:#998;font-style:italic"></span>	Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
+	Peers <span style="color:#000;font-weight:bold">*</span>list.List
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(host host.Host) <span style="color:#000;font-weight:bold">*</span>RelayServer {
+	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayServer{ Host:host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
+	relayServer.RelayProtocol = <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(relayServer)
+	<span style="color:#000;font-weight:bold">return</span> relayServer
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>RelayServer) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
+	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
+		log.<span style="color:#900;font-weight:bold">Println</span>(err)
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
+	}
+	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
+
+	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(seed <span style="color:#458;font-weight:bold">int64</span>) (identity crypto.PrivKey, err <span style="color:#458;font-weight:bold">error</span>) {
+	<span style="color:#000;font-weight:bold">var</span> r io.Reader
+	<span style="color:#000;font-weight:bold">if</span> seed <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
+		r = crand.Reader
+	} <span style="color:#000;font-weight:bold">else</span> {
+		r = mrand.<span style="color:#900;font-weight:bold">New</span>(mrand.<span style="color:#900;font-weight:bold">NewSource</span>(seed))
+	}
+	identity, _, err = crypto.<span style="color:#900;font-weight:bold">GenerateKeyPairWithReader</span>(crypto.RSA, <span style="color:#099">2048</span>, r)
+	<span style="color:#000;font-weight:bold">return</span> identity, err
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(port <span style="color:#458;font-weight:bold">int</span>) (<span style="color:#000;font-weight:bold">*</span>RelayServer,<span style="color:#458;font-weight:bold">error</span>) {
+	prvKey,  err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(<span style="color:#099">0</span>)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(err)
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+	}
+	sourceMultiAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/0.0.0.0/tcp/%d&#34;</span>, port))
+	host, err<span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
+		libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(sourceMultiAddr),
+		libp2p.<span style="color:#900;font-weight:bold">Identity</span>(prvKey),
+		libp2p.<span style="color:#900;font-weight:bold">DisableRelay</span>(),
+	)
+	_, err = relayv1.<span style="color:#900;font-weight:bold">NewRelay</span>(host)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to instantiate h2 relay: %v&#34;</span>, err)
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+	}
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(host), err
+}
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+
+	sourcePort <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">Int</span>(<span style="color:#d14">&#34;sp&#34;</span>, <span style="color:#099">0</span>, <span style="color:#d14">&#34;Source port number&#34;</span>)
+	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+
+	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>sourcePort <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
+		fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -sp port&#34;</span>)
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+
+	serverHost, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to create relay: %v&#34;</span>, err)
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+
+	hostAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, serverHost.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>()))
+	addr <span style="color:#000;font-weight:bold">:=</span> serverHost.<span style="color:#900;font-weight:bold">Addrs</span>()[<span style="color:#099">0</span>]
+	fullAddr <span style="color:#000;font-weight:bold">:=</span> addr.<span style="color:#900;font-weight:bold">Encapsulate</span>(hostAddr)
+	<span style="color:#998;font-style:italic">//log.Printf(&#34;relay server address %s\n&#34;, fullAddr)
+</span><span style="color:#998;font-style:italic"></span>	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Run &#39;./chat -relay %s&#39; on another console.\n&#34;</span>,  fullAddr)
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;You can replace 192.168.0.100 with public IP as well.&#34;</span>)
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Waiting for incoming connection&#34;</span>)
+	log.<span style="color:#900;font-weight:bold">Println</span>()
+	<span style="color:#000;font-weight:bold">&lt;-</span> serverHost.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="节点代码">节点代码</h2>
+<p>节点需要的组件:</p>
+<ol>
+<li>创建host</li>
+<li>监听P2Pmsg协议 和<code>/relay/relayrsp/1.0.0</code>协议</li>
+<li>连接中继服务</li>
+<li>节点发送<code>/relay/relayreq/1.0.0</code>协议给中继服务,服务会返回<code>/relay/relayrsp/1.0.0</code>协议给节点 其他节点的peerID</li>
+<li>连接其他节点，并且往其他节点发送P2Pmsg协议<code>/P2PMsg/1.0.0</code></li>
+</ol>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//chat.go
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
+<span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
+<span style="color:#000;font-weight:bold">const</span> P2PMsg = <span style="color:#d14">&#34;/P2PMsg/1.0.0&#34;</span>
+
+<span style="color:#000;font-weight:bold">type</span> NodeProtocol <span style="color:#000;font-weight:bold">struct</span> {
+	node <span style="color:#000;font-weight:bold">*</span>Node
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(server <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#000;font-weight:bold">*</span>NodeProtocol {
+	protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>NodeProtocol{ node: server}
+	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
+	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(P2PMsg, protocol.onP2PMsg)
+	<span style="color:#000;font-weight:bold">return</span> protocol
+}
+
+<span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>NodeProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
+	buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream Relay rsp peer ID: %s\n&#34;</span>, buf)
+
+	p.node.<span style="color:#900;font-weight:bold">ConnectNode</span>(<span style="color:#0086b3">string</span>(buf))
+}
+
+<span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onP2PMsg</span>(s network.Stream)  {
+	buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;from %s receive P2P msg %s\n&#34;</span>, s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">LocalPeer</span>().<span style="color:#900;font-weight:bold">Pretty</span>(), buf)
+}
+
+
+<span style="color:#000;font-weight:bold">type</span> Node <span style="color:#000;font-weight:bold">struct</span> {
+	host.Host
+	<span style="color:#000;font-weight:bold">*</span>NodeProtocol
+
+	Ctx context.Context
+	<span style="color:#998;font-style:italic">//记录RelayServer
+</span><span style="color:#998;font-style:italic"></span>	ServerAddrInfo <span style="color:#000;font-weight:bold">*</span>peer.AddrInfo
+	<span style="color:#998;font-style:italic">//记录peers
+</span><span style="color:#998;font-style:italic"></span>	Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
+	Peers <span style="color:#000;font-weight:bold">*</span>list.List
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewNode</span>(host host.Host) <span style="color:#000;font-weight:bold">*</span>Node {
+	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>Node{ Host: host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
+	relayServer.NodeProtocol = <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(relayServer)
+	<span style="color:#000;font-weight:bold">return</span> relayServer
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">ConnectRelay</span>(relay <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
+	relayAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(relay)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		<span style="color:#000;font-weight:bold">return</span> err
+	}
+	pid, err <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">ValueForProtocol</span>(multiaddr.P_P2P)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		<span style="color:#000;font-weight:bold">return</span> err
+	}
+	relayPeerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(pid)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		<span style="color:#000;font-weight:bold">return</span> err
+	}
+
+	relayPeerAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, pid))
+	relayAddress <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">Decapsulate</span>(relayPeerAddr)
+
+	peerInfo <span style="color:#000;font-weight:bold">:=</span> peer.AddrInfo{
+		ID:    relayPeerID,
+		Addrs: []multiaddr.Multiaddr{relayAddress},
+	}
+	n.ServerAddrInfo = <span style="color:#000;font-weight:bold">&amp;</span>peerInfo
+	<span style="color:#000;font-weight:bold">return</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, peerInfo)
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">ConnectNode</span>(nodeAddr <span style="color:#458;font-weight:bold">string</span>)  {
+	peerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(nodeAddr)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	n.<span style="color:#900;font-weight:bold">Network</span>().(<span style="color:#000;font-weight:bold">*</span>swarm.Swarm).<span style="color:#900;font-weight:bold">Backoff</span>().<span style="color:#900;font-weight:bold">Clear</span>(peerID)
+
+
+	<span style="color:#000;font-weight:bold">var</span> address = <span style="color:#d14">&#34;/p2p/&#34;</span> <span style="color:#000;font-weight:bold">+</span> n.ServerAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>() <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34;/p2p-circuit/ipfs/&#34;</span> <span style="color:#000;font-weight:bold">+</span> peerID.<span style="color:#900;font-weight:bold">Pretty</span>()
+	<span style="color:#998;font-style:italic">//var address = &#34;/p2p-circuit/ipfs/&#34; + peerID.Pretty()
+</span><span style="color:#998;font-style:italic"></span>	chatTargetAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(address)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;chatTargetAddr error &#34;</span>)
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+
+	chatTargetAddrInfo <span style="color:#000;font-weight:bold">:=</span> peer.AddrInfo{
+		ID:    peerID,
+		Addrs: []multiaddr.Multiaddr{chatTargetAddr},
+	}
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, chatTargetAddrInfo); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;n.Connect error&#34;</span>)
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;opening chat stream&#34;</span>)
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;[INFO] chat connected!&#34;</span>)
+	n.<span style="color:#900;font-weight:bold">sendMessage</span>(chatTargetAddrInfo.ID, P2PMsg, <span style="color:#d14">&#34;Hello Im &#34;</span> <span style="color:#000;font-weight:bold">+</span> chatTargetAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>())
+}
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">Login</span>()  {
+	<span style="color:#000;font-weight:bold">if</span> n.<span style="color:#900;font-weight:bold">sendMessage</span>(n.ServerAddrInfo.ID, RelayProtocolRequest, <span style="color:#d14">&#34;login&#34;</span>) {
+		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s login to relay\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
+	} <span style="color:#000;font-weight:bold">else</span> {
+		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s connect to relay error\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
+	}
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
+	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
+		log.<span style="color:#900;font-weight:bold">Println</span>(err)
+		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
+	}
+	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
+
+	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(seed <span style="color:#458;font-weight:bold">int64</span>) (identity crypto.PrivKey, err <span style="color:#458;font-weight:bold">error</span>) {
+	<span style="color:#000;font-weight:bold">var</span> r io.Reader
+	<span style="color:#000;font-weight:bold">if</span> seed <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
+		r = crand.Reader
+	} <span style="color:#000;font-weight:bold">else</span> {
+		r = mrand.<span style="color:#900;font-weight:bold">New</span>(mrand.<span style="color:#900;font-weight:bold">NewSource</span>(seed))
+	}
+	identity, _, err = crypto.<span style="color:#900;font-weight:bold">GenerateKeyPairWithReader</span>(crypto.RSA, <span style="color:#099">2048</span>, r)
+	<span style="color:#000;font-weight:bold">return</span> identity, err
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>() <span style="color:#000;font-weight:bold">*</span>Node {
+	priv, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(<span style="color:#099">0</span>)
+	listen, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/127.0.0.1/tcp/0&#34;</span>))
+	host, _ <span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
+		libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(listen),
+		libp2p.<span style="color:#900;font-weight:bold">Identity</span>(priv),
+		libp2p.<span style="color:#900;font-weight:bold">EnableRelay</span>(),
+	)
+
+	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewNode</span>(host)
+}
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+	relay <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">String</span>(<span style="color:#d14">&#34;relay&#34;</span>, <span style="color:#d14">&#34;&#34;</span>, <span style="color:#d14">&#34;relay addrs&#34;</span>)
+	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+
+	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>relay <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
+		fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -relay &#34;</span>)
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+
+	node <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>()
+	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> node.<span style="color:#900;font-weight:bold">ConnectRelay</span>(<span style="color:#000;font-weight:bold">*</span>relay); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+		<span style="color:#000;font-weight:bold">return</span>
+	}
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Connect relay success Next Login...&#34;</span>)
+	node.<span style="color:#900;font-weight:bold">Login</span>()
+
+	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Im &#34;</span>, node.<span style="color:#900;font-weight:bold">ID</span>())
+	<span style="color:#000;font-weight:bold">&lt;-</span> node.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>编译</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o relay-server relay-server.go
+$ go build -o chat chat.go
+</code></pre></td></tr></table>
+</div>
+</div><p>使用，先启动中继服务</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay-server -sp <span style="color:#099">3001</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>启动chat窗口, 连上relay服务</p>
+<pre><code>./chat -relay
+</code></pre><p>再启动chat窗，连上relay服务</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2021/10/gop2p%E4%B8%80/">go-libp2p的chat例子解析</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%BA%8C/">go-libp2p的echo例子解析</a></li>
+        
+        <li><a href="/2021/10/shell/">Golang调用带有后台进程shell脚本可能会被挂起</a></li>
+        
+        <li><a href="/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">Golang利用redis实现分布式锁</a></li>
+        
+        <li><a href="/2021/06/go_redis/">Golang操作redis</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/golang'>golang</a></li>
+                
+                <li><a href='/tags/libp2p'>libp2p</a></li>
+                
+                <li><a href='/tags/golibp2p'>golibp2p</a></li>
+                
+                <li><a href='/tags/relay'>relay</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">流浪花 By 流浪花</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (7)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    
+    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    
+    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    
+    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    
+    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    
+    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    
+    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
+    
+    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
+    
+    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
+    
+    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/event/">event</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
+    
+    <a href="https://zfunnily.github.io/tags/git/">git</a>
+    
+    <a href="https://zfunnily.github.io/tags/github/">github</a>
+    
+    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
+    
+    <a href="https://zfunnily.github.io/tags/html/">html</a>
+    
+    <a href="https://zfunnily.github.io/tags/http/">http</a>
+    
+    <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
+    
+    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
+    
+    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
+    
+    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
+    
+    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
+    
+    <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
+    
+    <a href="https://zfunnily.github.io/tags/other/">other</a>
+    
+    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
+    
+    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
+    
+    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
+    
+    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
+    
+    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
+    
+    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="流浪花的博客">流浪花的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="流浪花的github">流浪花的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

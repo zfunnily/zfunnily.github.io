@@ -78,6 +78,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang 利用指针进行数据转换">Golang 利用指针进行数据转换</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/go-builds/" title="Golang builds">Golang builds</a>
             </h1>
         </header>
@@ -300,31 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/" title="FFmpeg画中画和视频多宫格处理">FFmpeg画中画和视频多宫格处理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -436,6 +436,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p三">Gop2p三</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
     </li>
     
@@ -471,10 +475,6 @@
         <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/music/" title="免费Music">免费Music</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -498,7 +498,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
@@ -648,6 +648,8 @@
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
     
     <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
     
     <a href="https://zfunnily.github.io/tags/screen/">screen</a>
     

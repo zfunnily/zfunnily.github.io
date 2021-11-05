@@ -6,7 +6,16 @@
     <description>Recent content in libp2p on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 28 Oct 2021 14:40:02 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/libp2p/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 10:13:40 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/libp2p/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gop2p三</title>
+      <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</link>
+      <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</guid>
+      <description>本文目的 chat和echo两个例子，表达了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。 在打洞不成</description>
+    </item>
+    
     <item>
       <title>go-libp2p的chat例子解析</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</link>
