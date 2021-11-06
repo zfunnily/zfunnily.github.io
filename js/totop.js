@@ -31,9 +31,14 @@ $(document).ready(function (){
     getQuotesJsonArray("/js/quotes.json", function (quotes) {
         var idx = randomQuotesIdx(0,quotes.length-1)
         var quote = quotes[idx]
-        var tmpHtml
+        var tmpHtml, bookname, author
         if (quote !== undefined) {
-            tmpHtml =  quote[0] +  (quote[1] ? "\n" + " —— " + quote[1]: "") + (quote[2] ? " 《"+quote[2] +"》": "");
+            author = quote[1] ? "\n —— " + quote[1]: ""
+            if (author == "") {
+                bookname = "\n —— "
+            }
+            bookname = quote[2] ? " 《"+quote[2] +"》": ""
+            tmpHtml =  quote[0] + author + bookname
         }
         document.getElementById('quotes').innerText = tmpHtml
     })
