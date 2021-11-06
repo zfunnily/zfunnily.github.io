@@ -78,7 +78,32 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
+                <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            本文目的 我的个人博客已经搭建好了，使用的hugo+飞雪的主题。我看到有些博客上有些随机的名人名言，但是这个主题没有。遂自己写一个。 根据飞雪的主题自定义 飞雪主题的github: https://github.com/flysnow-org/maupassant-hugo 复制主题里的文件themes/maupassant/static到自己的博客根目录下。新增文件stati……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/11/randomquotes/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -103,7 +128,32 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -121,31 +171,6 @@
             代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &gt; hello 在节点 A, 如果B有公网IP，则把……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/">阅读全文</a></p>
     </article>
     
     
@@ -300,31 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年9月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/09/move/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -432,15 +432,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
     </li>
     
     <li>
@@ -467,10 +471,6 @@
         <a href="https://zfunnily.github.io/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -492,7 +492,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
     
@@ -640,6 +640,8 @@
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
     

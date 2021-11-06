@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.69.2" />
+	<meta name="generator" content="Hugo 0.82.0" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,6 +72,29 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="cgo使用libevent库实现一个定时器">cgo使用libevent库实现一个定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -280,29 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Libevent定时器的实现">Libevent定时器的实现</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -415,15 +415,19 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Gop2p中继Relay">Gop2p中继Relay</a>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="go-libp2p的chat例子解析">go-libp2p的chat例子解析</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="go-libp2p的echo例子解析">go-libp2p的echo例子解析</a>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
     </li>
     
     <li>
@@ -450,10 +454,6 @@
         <a href="https://zfunnily.github.io/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/09/move/" title="FPS游戏 实现移动功能">FPS游戏 实现移动功能</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -475,7 +475,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (4)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
     
@@ -623,6 +623,8 @@
     <a href="https://zfunnily.github.io/tags/other/">other</a>
     
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
     
     <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
     

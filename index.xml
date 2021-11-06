@@ -6,13 +6,18 @@
     <description>Recent content on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 05 Nov 2021 15:50:16 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>随机名人名言</title>
+      <link>https://zfunnily.github.io/2021/11/randomquotes/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/11/randomquotes/</guid>
+      <description>本文目的 我的个人博客已经搭建好了，使用的hugo+飞雪的主题。我看到有些博客上有些随机的名人名言，但是这个主题没有。遂自己写一个。 根据飞雪的主题自定义 飞雪主题的github: https://github.com/flysnow-org/maupassant-hugo 复制主题里的文件themes/maupassant/static到自己的博客根目录下。新增文件stati</description>
+    </item>
     
     <item>
-      <title>Gop2p中继Relay</title>
+      <title>Go-libp2p三 | relay例子</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</link>
       <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
@@ -21,21 +26,21 @@
     </item>
     
     <item>
-      <title>go-libp2p的chat例子解析</title>
+      <title>Go-libp2p二 | echo例子</title>
+      <link>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</link>
+      <pubDate>Fri, 29 Oct 2021 11:15:42 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</guid>
+      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&amp;#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3</description>
+    </item>
+    
+    <item>
+      <title>Go-libp2p一 | chat例子</title>
       <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</link>
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</guid>
       <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &amp;gt; hello 在节点 A, 如果B有公网IP，则把</description>
-    </item>
-    
-    <item>
-      <title>go-libp2p的echo例子解析</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</link>
-      <pubDate>Thu, 28 Oct 2021 11:15:42 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</guid>
-      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&amp;#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3</description>
     </item>
     
     <item>
@@ -395,7 +400,7 @@
       <pubDate>Sun, 31 Jan 2021 11:25:39 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
-      <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&#39;前缀表示一个立</description>
+      <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&amp;lsquo;前</description>
     </item>
     
     <item>

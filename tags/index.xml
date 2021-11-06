@@ -6,10 +6,24 @@
     <description>Recent content in Tags on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Oct 2021 10:13:40 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 05 Nov 2021 15:50:16 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo</title>
+      <link>https://zfunnily.github.io/tags/hugo/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
     
-	<atom:link href="https://zfunnily.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>randomquotes</title>
+      <link>https://zfunnily.github.io/tags/randomquotes/</link>
+      <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/randomquotes/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>golang</title>
@@ -201,20 +215,20 @@
     </item>
     
     <item>
-      <title>gcc</title>
-      <link>https://zfunnily.github.io/tags/gcc/</link>
-      <pubDate>Wed, 01 Sep 2021 18:55:39 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/gcc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>gcc4.9</title>
       <link>https://zfunnily.github.io/tags/gcc4.9/</link>
       <pubDate>Wed, 01 Sep 2021 18:55:39 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/tags/gcc4.9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gcc</title>
+      <link>https://zfunnily.github.io/tags/gcc/</link>
+      <pubDate>Wed, 01 Sep 2021 18:13:41 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/gcc/</guid>
       <description></description>
     </item>
     
@@ -291,15 +305,6 @@
     </item>
     
     <item>
-      <title>游戏</title>
-      <link>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/</link>
-      <pubDate>Thu, 20 May 2021 17:39:34 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>游戏开发</title>
       <link>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
       <pubDate>Thu, 20 May 2021 17:39:34 +0800</pubDate>
@@ -341,15 +346,6 @@
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/tags/lua_settop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://zfunnily.github.io/tags/hugo/</link>
-      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
@@ -998,6 +994,15 @@
       <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>游戏</title>
+      <link>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/</guid>
       <description></description>
     </item>
     
