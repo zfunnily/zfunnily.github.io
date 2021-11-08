@@ -85,6 +85,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">Google Protobuf 请求参数为空的案例</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月22日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Golang'>Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &quot;google/protobuf/empty.proto&quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/">Go sync.Mutex详解</a>
             </h1>
         </header>
@@ -289,29 +312,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">使用Lumberjack&#43;zap进行日志切割归档</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月4日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/Golang'>Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            使用Lumberjack+zap进行日志切割归档 为了添加日志切割归档功能，我们将使用第三方库Lumberjack来实现。 安装 执行下面的命令安装Lumberjack go get -u github.com/natefinch/lumberjack zap logger中加入Lumberjack 要在zap中加入Lumberjack支持，我们需要修改WriteSyn……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -333,7 +333,15 @@
         <a href="https://zfunnily.github.io/tags/golang/page/2/">2</a>
     </li>
     
+    <li >
+        <a href="https://zfunnily.github.io/tags/golang/page/3/">3</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://zfunnily.github.io/tags/golang/page/3/">下一页</a>
+    </li>
     
 </ol>
 
@@ -389,6 +397,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
@@ -424,10 +436,6 @@
         <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/shell/" title="Golang调用带有后台进程shell脚本可能会被挂起">Golang调用带有后台进程shell脚本可能会被挂起</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -451,7 +459,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
@@ -536,6 +544,8 @@
     
     <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
     
+    <a href="https://zfunnily.github.io/tags/go-libp2p/">go-libp2p</a>
+    
     <a href="https://zfunnily.github.io/tags/golang/">golang</a>
     
     <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
@@ -595,6 +605,8 @@
     <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
     
     <a href="https://zfunnily.github.io/tags/other/">other</a>
+    
+    <a href="https://zfunnily.github.io/tags/p2p/">p2p</a>
     
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
@@ -717,6 +729,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/">穿透</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
     
