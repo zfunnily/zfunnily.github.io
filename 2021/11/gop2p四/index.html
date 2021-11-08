@@ -143,7 +143,8 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#本文目的">本文目的</a></li>
-    <li><a href="#改造上文relay例子代码">改造上文relay例子代码</a></li>
+    <li><a href="#relay例子代码">relay例子代码</a></li>
+    <li><a href="#节点代码">节点代码</a></li>
   </ul>
 </nav>
     </div>
@@ -205,313 +206,25 @@
         
         <div class="post-content">
             <h2 id="本文目的">本文目的</h2>
-<p>利用libp2p的hole punching协议，NAT穿透打洞。打洞成功后进行p2p传输</p>
-<h2 id="改造上文relay例子代码">改造上文relay例子代码</h2>
-<p>直接贴代码
-relay-server</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//relay-server
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;context&#34;</span>
-	<span style="color:#d14">&#34;flag&#34;</span>
-	<span style="color:#d14">&#34;fmt&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/host&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/network&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/peer&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/protocol&#34;</span>
-	relayv1 <span style="color:#d14">&#34;github.com/libp2p/go-libp2p/p2p/protocol/circuitv1/relay&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p/p2p/protocol/holepunch&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p/p2p/protocol/identify&#34;</span>
-	<span style="color:#d14">&#34;github.com/multiformats/go-multiaddr&#34;</span>
-	<span style="color:#d14">&#34;log&#34;</span>
-	<span style="color:#d14">&#34;sync&#34;</span>
-)
-
-<span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
-<span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
-
-<span style="color:#000;font-weight:bold">type</span> RelayProtocol <span style="color:#000;font-weight:bold">struct</span> {
-	Server <span style="color:#000;font-weight:bold">*</span>RelayServer
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(server <span style="color:#000;font-weight:bold">*</span>RelayServer)<span style="color:#000;font-weight:bold">*</span>RelayProtocol {
-	protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayProtocol{ Server: server}
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolRequest, protocol.onReq)
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
-	<span style="color:#000;font-weight:bold">return</span> protocol
-}
-
-<span style="color:#998;font-style:italic">//返回peers节点ID
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onReq</span>(s network.Stream) {
-	p.Server.Mutex.<span style="color:#900;font-weight:bold">Lock</span>()
-	<span style="color:#000;font-weight:bold">defer</span> p.Server.Mutex.<span style="color:#900;font-weight:bold">Unlock</span>()
-	remotePeerID <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>()
-	p.Server.Peers[remotePeerID]=s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemoteMultiaddr</span>()
-
-	localAddrs <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">LocalMultiaddr</span>()
-	remoteAddrs <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemoteMultiaddr</span>()
-
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream relay req, remotePeerID: %s; \nremoteAddr: %s, localAddr: %s\n&#34;</span>,  remotePeerID.<span style="color:#900;font-weight:bold">Pretty</span>(), remoteAddrs.<span style="color:#900;font-weight:bold">String</span>(), localAddrs.<span style="color:#900;font-weight:bold">String</span>())
-
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(p.Server.Peers) <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">2</span> {
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-
-	<span style="color:#000;font-weight:bold">var</span> rsp = <span style="color:#d14">&#34;&#34;</span>
-	<span style="color:#000;font-weight:bold">for</span> k, v <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> p.Server.Peers {
-		rsp = rsp <span style="color:#000;font-weight:bold">+</span> k.<span style="color:#900;font-weight:bold">Pretty</span>() <span style="color:#000;font-weight:bold">+</span>  <span style="color:#d14">&#34;=&#34;</span> <span style="color:#000;font-weight:bold">+</span> v.<span style="color:#900;font-weight:bold">String</span>() <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34;\n&#34;</span>
-	}
-	<span style="color:#000;font-weight:bold">for</span> k, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> p.Server.Peers {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;start send peer: &#34;</span> , s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>().<span style="color:#900;font-weight:bold">Pretty</span>())
-		p.Server.<span style="color:#900;font-weight:bold">sendMessage</span>(k, RelayProtocolResponse, rsp)
-		<span style="color:#0086b3">delete</span>(p.Server.Peers, k)
-	}
-}
-
-<span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay rsp&#34;</span>)
-}
-
-<span style="color:#000;font-weight:bold">type</span> RelayServer <span style="color:#000;font-weight:bold">struct</span> {
-	host.Host
-	<span style="color:#000;font-weight:bold">*</span>RelayProtocol
-	Ctx context.Context
-	HoleServer <span style="color:#000;font-weight:bold">*</span>holepunch.Service
-
-	<span style="color:#998;font-style:italic">//记录peers
-</span><span style="color:#998;font-style:italic"></span>	Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
-	Peers <span style="color:#000;font-weight:bold">map</span>[peer.ID]multiaddr.Multiaddr
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(host host.Host) <span style="color:#000;font-weight:bold">*</span>RelayServer {
-	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayServer{ Host:host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">map</span>[peer.ID]multiaddr.Multiaddr)}
-	relayServer.RelayProtocol = <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(relayServer)
-	<span style="color:#000;font-weight:bold">return</span> relayServer
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>RelayServer) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
-	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
-	}
-	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
-
-	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">AddHolePunchService</span>( h host.Host) <span style="color:#000;font-weight:bold">*</span>holepunch.Service {
-	ids, err <span style="color:#000;font-weight:bold">:=</span> identify.<span style="color:#900;font-weight:bold">NewIDService</span>(h)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-	}
-	hps, err <span style="color:#000;font-weight:bold">:=</span> holepunch.<span style="color:#900;font-weight:bold">NewService</span>(h, ids)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-	}
-	<span style="color:#000;font-weight:bold">return</span> hps
-}
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(port <span style="color:#458;font-weight:bold">int</span>) (<span style="color:#000;font-weight:bold">*</span>RelayServer,<span style="color:#458;font-weight:bold">error</span>) {
-	sourceMultiAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/0.0.0.0/tcp/%d&#34;</span>, port))
-	h, err<span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
-		libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(sourceMultiAddr),
-		libp2p.<span style="color:#900;font-weight:bold">DisableRelay</span>(),
-		libp2p.<span style="color:#900;font-weight:bold">EnableHolePunching</span>(),
-	)
-	_, err = relayv1.<span style="color:#900;font-weight:bold">NewRelay</span>(h)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to instantiate h2 relay: %v&#34;</span>, err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(h), err
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	sourcePort <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">Int</span>(<span style="color:#d14">&#34;sp&#34;</span>, <span style="color:#099">0</span>, <span style="color:#d14">&#34;Source port number&#34;</span>)
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
-
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>sourcePort <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
-		fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -sp port&#34;</span>)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
-
-	serverHost, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to create relay: %v&#34;</span>, err)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-
-	hostAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, serverHost.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>()))
-	addr <span style="color:#000;font-weight:bold">:=</span> serverHost.<span style="color:#900;font-weight:bold">Addrs</span>()[<span style="color:#099">0</span>]
-	fullAddr <span style="color:#000;font-weight:bold">:=</span> addr.<span style="color:#900;font-weight:bold">Encapsulate</span>(hostAddr)
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Run &#39;./chat -relay %s&#39; on another console.\n&#34;</span>,  fullAddr)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;You can replace 192.168.0.100 with public IP as well.&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Waiting for incoming connection&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>()
-	<span style="color:#000;font-weight:bold">&lt;-</span> serverHost.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
-}
-</code></pre></td></tr></table>
-</div>
-</div><p>chat</p>
+<p>上文<code>Go-libp2p三 | relay例子</code>已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事：</p>
+<ol>
+<li>交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。</li>
+<li>在打洞不成功的情况下能提供中继服务，转发两节点发送的数据。</li>
+</ol>
+<p>我是看到源码中有<code>hole punching</code>协议，我是看了测试用例后才明白的。 利用libp2p的<code>hole punching</code>协议，NAT穿透打洞。打洞成功后进行p2p传输</p>
+<h2 id="relay例子代码">relay例子代码</h2>
+<p>relay-server 代码基本不用改变</p>
+<h2 id="节点代码">节点代码</h2>
+<p>节点需要的组件:</p>
+<ol>
+<li>创建host, 绑定holepunching服务， <code>hps := AddHolePunchService(h)</code></li>
+<li>监听<code>RelayProtocolResponse</code>,<code>P2PMsg</code> 和<code>FirstP2PMsg</code>协议</li>
+<li>连接中继服务 n.ConnectRelay()</li>
+<li>节点发送<code>RelayProtocolRequest</code>协议给中继服务,服务会返回<code>RelayProtocolResponse</code>协议给节点 其他节点的peerID</li>
+<li>通过中继服务连接其他节点<code>n.ConnectNode()</code> , 发送<code>FirstP2PMsg</code>协议(很关键),方便后续打洞成功</li>
+<li>收到其他节点发来的<code>FirstP2PMsg</code>协议，5s钟后（已经开始打洞，防止在打洞过程中进行直连操作）开始直连<code>p.node.CmdP2P()</code>, <code>DirectConnect</code></li>
+<li>直连成功，往其他节点发送<code>P2PMsg</code>协议</li>
+</ol>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
@@ -683,200 +396,10 @@ relay-server</p>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">256
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">257
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">258
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">259
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">260
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">261
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">262
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">263
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">264
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">265
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">266
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">267
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">268
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">269
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">270
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">271
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">272
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">273
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">274
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">275
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">276
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">277
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">278
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">279
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">280
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">281
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">282
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">283
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">284
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">285
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">286
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">287
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">288
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">289
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">290
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">291
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">292
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">293
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">294
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">295
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">296
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">297
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">298
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">299
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">300
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">301
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">302
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">303
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">304
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">305
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">306
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">307
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">308
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">309
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">310
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">311
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">312
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">313
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">314
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">315
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">316
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">317
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">318
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">319
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">320
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">321
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">322
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">323
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">324
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">325
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">326
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">327
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">328
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">329
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">330
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">331
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">332
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">333
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">334
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">335
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//chat.go
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;bufio&#34;</span>
-	<span style="color:#d14">&#34;container/list&#34;</span>
-	<span style="color:#d14">&#34;context&#34;</span>
-	<span style="color:#d14">&#34;flag&#34;</span>
-	<span style="color:#d14">&#34;fmt&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/host&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/network&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/peer&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/peerstore&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p-core/protocol&#34;</span>
-	swarm <span style="color:#d14">&#34;github.com/libp2p/go-libp2p-swarm&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p/p2p/protocol/holepunch&#34;</span>
-	<span style="color:#d14">&#34;github.com/libp2p/go-libp2p/p2p/protocol/identify&#34;</span>
-	<span style="color:#d14">&#34;github.com/multiformats/go-multiaddr&#34;</span>
-	<span style="color:#d14">&#34;io/ioutil&#34;</span>
-	<span style="color:#d14">&#34;log&#34;</span>
-	<span style="color:#d14">&#34;os&#34;</span>
-	<span style="color:#d14">&#34;strings&#34;</span>
-	<span style="color:#d14">&#34;sync&#34;</span>
-	<span style="color:#d14">&#34;time&#34;</span>
-)
 
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
@@ -894,29 +417,7 @@ relay-server</p>
 	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
 	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(FirstP2PMsg, protocol.onFirstP2PMsg)
 	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(P2PMsg, protocol.onP2PMsg)
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayMsg, protocol.onRelayMsg)
 	<span style="color:#000;font-weight:bold">return</span> protocol
-}
-
-<span style="color:#998;font-style:italic">//获得对方peerID
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>NodeProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
-	buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	peers <span style="color:#000;font-weight:bold">:=</span> strings.<span style="color:#900;font-weight:bold">Split</span>(<span style="color:#0086b3">string</span>(buf), <span style="color:#d14">&#34;\n&#34;</span>)
-	<span style="color:#000;font-weight:bold">var</span> addrs []<span style="color:#458;font-weight:bold">string</span>
-	<span style="color:#000;font-weight:bold">for</span>  _,v <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> peers {
-		tmp <span style="color:#000;font-weight:bold">:=</span> strings.<span style="color:#900;font-weight:bold">Split</span>(<span style="color:#0086b3">string</span>(v), <span style="color:#d14">&#34;=&#34;</span>)
-		<span style="color:#000;font-weight:bold">if</span> tmp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">!=</span> p.node.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>() {
-			addrs = tmp
-			<span style="color:#000;font-weight:bold">break</span>
-		}
-	}
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream Relay rsp,addrs.len %d, peerInfo : %s\n&#34;</span>, <span style="color:#0086b3">len</span>(addrs) , buf)
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(addrs) <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">1</span> { <span style="color:#000;font-weight:bold">return</span>}
-	p.node.<span style="color:#900;font-weight:bold">ConnectNode</span>(addrs[<span style="color:#099">0</span>], addrs[<span style="color:#099">1</span>])
 }
 
 <span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onFirstP2PMsg</span>(s network.Stream)  {
@@ -927,12 +428,6 @@ relay-server</p>
 }
 
 <span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onP2PMsg</span>(s network.Stream)  {
-	rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
-	<span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">writeData</span>(rw)
-	<span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">readData</span>(rw)
-}
-
-<span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onRelayMsg</span>(s network.Stream)  {
 	rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
 	<span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">writeData</span>(rw)
 	<span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">readData</span>(rw)
@@ -956,68 +451,6 @@ relay-server</p>
 	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>Node{ Host: host, HoleService: hps, chatP2PAddr: <span style="color:#0086b3">new</span>(peer.AddrInfo), Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
 	relayServer.NodeProtocol = <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(relayServer)
 	<span style="color:#000;font-weight:bold">return</span> relayServer
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">readData</span>(rw <span style="color:#000;font-weight:bold">*</span>bufio.ReadWriter) {
-	<span style="color:#000;font-weight:bold">for</span> {
-		str, _ <span style="color:#000;font-weight:bold">:=</span> rw.<span style="color:#900;font-weight:bold">ReadString</span>(<span style="color:#d14">&#39;\n&#39;</span>)
-
-		<span style="color:#000;font-weight:bold">if</span> str <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
-			<span style="color:#000;font-weight:bold">return</span>
-		}
-		<span style="color:#000;font-weight:bold">if</span> str <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;\n&#34;</span> {
-			<span style="color:#998;font-style:italic">// Green console colour: 	\x1b[32m
-</span><span style="color:#998;font-style:italic"></span>			<span style="color:#998;font-style:italic">// Reset console colour: 	\x1b[0m
-</span><span style="color:#998;font-style:italic"></span>			fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;\x1b[32m%s\x1b[0m&gt; &#34;</span>, str)
-		}
-	}
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">writeData</span>(rw <span style="color:#000;font-weight:bold">*</span>bufio.ReadWriter) {
-	stdReader <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReader</span>(os.Stdin)
-	<span style="color:#000;font-weight:bold">for</span> {
-		fmt.<span style="color:#900;font-weight:bold">Print</span>(<span style="color:#d14">&#34;&gt; &#34;</span>)
-		sendData, err <span style="color:#000;font-weight:bold">:=</span> stdReader.<span style="color:#900;font-weight:bold">ReadString</span>(<span style="color:#d14">&#39;\n&#39;</span>)
-		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-			log.<span style="color:#900;font-weight:bold">Println</span>(err)
-			<span style="color:#000;font-weight:bold">return</span>
-		}
-
-		rw.<span style="color:#900;font-weight:bold">WriteString</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;%s\n&#34;</span>, sendData))
-		rw.<span style="color:#900;font-weight:bold">Flush</span>()
-	}
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">getPeerInfoByDest</span>(relay <span style="color:#458;font-weight:bold">string</span>) (<span style="color:#000;font-weight:bold">*</span>peer.AddrInfo, <span style="color:#458;font-weight:bold">error</span>) {
-	relayAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(relay)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
-	}
-	pid, err <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">ValueForProtocol</span>(multiaddr.P_P2P)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
-	}
-	relayPeerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(pid)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
-	}
-
-	relayPeerAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, pid))
-	relayAddress <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">Decapsulate</span>(relayPeerAddr)
-	peerInfo <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>peer.AddrInfo{
-		ID:    relayPeerID,
-		Addrs: []multiaddr.Multiaddr{relayAddress},
-	}
-	<span style="color:#000;font-weight:bold">return</span> peerInfo, err
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">ConnectRelay</span>(relay <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
-	peerInfo ,err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">getPeerInfoByDest</span>(relay)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	n.ServerAddrInfo = peerInfo
-	<span style="color:#000;font-weight:bold">return</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, <span style="color:#000;font-weight:bold">*</span>peerInfo)
 }
 
 <span style="color:#000;font-weight:bold">func</span> (n<span style="color:#000;font-weight:bold">*</span> Node)<span style="color:#900;font-weight:bold">ConnectNode</span>(nodePeerID <span style="color:#458;font-weight:bold">string</span>, nodeAddr <span style="color:#458;font-weight:bold">string</span>) {
@@ -1053,7 +486,8 @@ relay-server</p>
 
 	n.chatP2PAddr = <span style="color:#000;font-weight:bold">&amp;</span>chatTargetAddrInfo
 	n.<span style="color:#900;font-weight:bold">sendMessage</span>(chatTargetAddrInfo.ID, FirstP2PMsg, <span style="color:#d14">&#34;Hello Im &#34;</span> <span style="color:#000;font-weight:bold">+</span> chatTargetAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>())
-}
+	<span style="color:#998;font-style:italic">//n.CmdRelay()
+</span><span style="color:#998;font-style:italic"></span>}
 
 <span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">CmdP2P</span>()  {
 	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Cmdp2p start ....&#34;</span>)
@@ -1082,59 +516,6 @@ relay-server</p>
 	rw.<span style="color:#900;font-weight:bold">Flush</span>()
 	<span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">writeData</span>(rw)
 	<span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">readData</span>(rw)
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">CmdRelay</span>()  {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;CmdRelay start....&#34;</span>)
-	peerInfo <span style="color:#000;font-weight:bold">:=</span> n.chatP2PAddr
-	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, peerInfo.ID, RelayMsg)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-
-	rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;opening chat stream&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;[INFO] chat connected!&#34;</span>)
-	n.<span style="color:#900;font-weight:bold">sendMessage</span>(peerInfo.ID, RelayMsg, <span style="color:#d14">&#34;Hello this is relay msg&#34;</span>)
-
-	<span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">writeData</span>(rw)
-	<span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">readData</span>(rw)
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">Login</span>()  {
-	<span style="color:#000;font-weight:bold">if</span> n.<span style="color:#900;font-weight:bold">sendMessage</span>(n.ServerAddrInfo.ID, RelayProtocolRequest, <span style="color:#d14">&#34;login&#34;</span>) {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s login to relay\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
-	} <span style="color:#000;font-weight:bold">else</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s connect to relay error\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
-	}
-}
-
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
-	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
-	}
-	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
-
-	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">AddHolePunchService</span>( h host.Host) <span style="color:#000;font-weight:bold">*</span>holepunch.Service {
-	ids, err <span style="color:#000;font-weight:bold">:=</span> identify.<span style="color:#900;font-weight:bold">NewIDService</span>(h)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-	}
-	hps, err <span style="color:#000;font-weight:bold">:=</span> holepunch.<span style="color:#900;font-weight:bold">NewService</span>(h, ids)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-	}
-	<span style="color:#000;font-weight:bold">return</span> hps
 }
 
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>(relay <span style="color:#458;font-weight:bold">string</span>) <span style="color:#000;font-weight:bold">*</span>Node {
@@ -1272,7 +653,7 @@ go build relay-server.go
 </span><span style="color:#998;font-style:italic"></span>}
 </code></pre></td></tr></table>
 </div>
-</div><p>至此，用go-libp2p进行p2p传输的流程就理清楚了。<a href="https://github.com/zfunnily/hole-punching-go-libp2p">详细代码</a></p>
+</div><p>用go-libp2p进行p2p传输的流程就理清楚了。我只贴了改动和新增的代码, <a href="https://github.com/zfunnily/hole-punching-go-libp2p">详细代码</a></p>
 
         </div>
 

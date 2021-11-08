@@ -142,7 +142,7 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#本文目的">本文目的</a></li>
+    <li><a href="#我想做什么">我想做什么</a></li>
     <li><a href="#go-libp2p的relay例子分析">go-libp2p的relay例子分析</a></li>
     <li><a href="#先实现中继服务">先实现中继服务</a></li>
     <li><a href="#节点代码">节点代码</a></li>
@@ -206,8 +206,8 @@
         </div>
         
         <div class="post-content">
-            <h2 id="本文目的">本文目的</h2>
-<p>chat和echo两个例子，表达了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。
+            <h2 id="我想做什么">我想做什么</h2>
+<p>chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。
 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个<code>中继服务</code>，这个服务做如下两件事：</p>
 <ol>
 <li>交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。(hole punching, 在 Go-libp2p四 | 穿透NAT 文章中可见)</li>
@@ -215,8 +215,8 @@
 </ol>
 <p>根据我的需求，我在go-libp2p中发现了relay例子。</p>
 <h2 id="go-libp2p的relay例子分析">go-libp2p的relay例子分析</h2>
-<p>这个例子是使用h2作为中继，使h1和h3通过h2进行信息交换，打洞成功后h1和h3可以直接通信。</p>
-<p>relay例子中，可以做到如果两个节点怎么通过中继服务知道对方的地址，然后进行p2p通信。</p>
+<p>这个例子是使用h2作为中继，使h1和h3通过h2进行信息交换, 并可以通过h2使用 h1可以和h3通信。</p>
+<p>relay例子中，可以做到如果两个节点怎么通过中继服务知道对方的地址，然后进行通信。</p>
 <ol>
 <li>
 <p>创建节点:
@@ -257,7 +257,7 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <h2 id="先实现中继服务">先实现中继服务</h2>
 <p>首先看中继服务需要什么:</p>
 <ol>
-<li>监听一条协议<code>/relay/relayreq/1.0.0</code>，当有一个节点上来，需要记录，当有两个节点时，返回两个节点的信息给对方节点。</li>
+<li>监听一条协议<code>RelayProtocolRequest</code>，当有一个节点上来，需要记录，当有两个节点时，返回两个节点的信息给对方节点。</li>
 <li>有一个公网IP</li>
 </ol>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -393,144 +393,138 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//relay-server.go
-</span><span style="color:#998;font-style:italic"></span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//relay-server
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
+
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
 
 <span style="color:#000;font-weight:bold">type</span> RelayProtocol <span style="color:#000;font-weight:bold">struct</span> {
-	Server <span style="color:#000;font-weight:bold">*</span>RelayServer
+   Server <span style="color:#000;font-weight:bold">*</span>RelayServer
 }
 
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(server <span style="color:#000;font-weight:bold">*</span>RelayServer)<span style="color:#000;font-weight:bold">*</span>RelayProtocol {
-	protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayProtocol{ Server: server}
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolRequest, protocol.onReq)
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
-	<span style="color:#000;font-weight:bold">return</span> protocol
+   protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayProtocol{ Server: server}
+   server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolRequest, protocol.onReq)
+   server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
+   <span style="color:#000;font-weight:bold">return</span> protocol
 }
 
 <span style="color:#998;font-style:italic">//返回peers节点ID
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onReq</span>(s network.Stream) {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay req&#34;</span>)
-	p.Server.Mutex.<span style="color:#900;font-weight:bold">Lock</span>()
-	<span style="color:#000;font-weight:bold">defer</span> p.Server.Mutex.<span style="color:#900;font-weight:bold">Unlock</span>()
-	remotePeerID <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>()
+   p.Server.Mutex.<span style="color:#900;font-weight:bold">Lock</span>()
+   <span style="color:#000;font-weight:bold">defer</span> p.Server.Mutex.<span style="color:#900;font-weight:bold">Unlock</span>()
+   remotePeerID <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>()
+   p.Server.Peers[remotePeerID]=s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemoteMultiaddr</span>()
 
+   localAddrs <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">LocalMultiaddr</span>()
+   remoteAddrs <span style="color:#000;font-weight:bold">:=</span> s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemoteMultiaddr</span>()
 
-	<span style="color:#000;font-weight:bold">var</span> rsp <span style="color:#458;font-weight:bold">string</span>
-	<span style="color:#000;font-weight:bold">var</span> peerID <span style="color:#000;font-weight:bold">*</span>list.Element
+   log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream relay req, remotePeerID: %s; \nremoteAddr: %s, localAddr: %s\n&#34;</span>,  remotePeerID.<span style="color:#900;font-weight:bold">Pretty</span>(), remoteAddrs.<span style="color:#900;font-weight:bold">String</span>(), localAddrs.<span style="color:#900;font-weight:bold">String</span>())
 
-	<span style="color:#000;font-weight:bold">for</span> p.Server.Peers.<span style="color:#900;font-weight:bold">Len</span>() <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">1</span> {
-		peerID = p.Server.Peers.<span style="color:#900;font-weight:bold">Front</span>()
-		ID <span style="color:#000;font-weight:bold">:=</span> p.Server.Peers.<span style="color:#900;font-weight:bold">Remove</span>(peerID)
-		<span style="color:#000;font-weight:bold">if</span> ID <span style="color:#000;font-weight:bold">!=</span> remotePeerID {
-			rsp = ID.(peer.ID).<span style="color:#900;font-weight:bold">Pretty</span>()
-		}
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;peerID: %s; remotePeerID: %s, len: %d\n&#34;</span>, ID.(peer.ID).<span style="color:#900;font-weight:bold">Pretty</span>(), remotePeerID.<span style="color:#900;font-weight:bold">Pretty</span>(),p.Server.Peers.<span style="color:#900;font-weight:bold">Len</span>())
-	}
-	p.Server.Peers.<span style="color:#900;font-weight:bold">PushBack</span>(remotePeerID)
-	<span style="color:#000;font-weight:bold">if</span> rsp <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;&#34;</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;start send peers&#34;</span>)
-		p.Server.<span style="color:#900;font-weight:bold">sendMessage</span>(s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>(), RelayProtocolResponse, rsp)
-	}
+   <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(p.Server.Peers) <span style="color:#000;font-weight:bold">!=</span> <span style="color:#099">2</span> {
+      <span style="color:#000;font-weight:bold">return</span>
+   }
 
+   <span style="color:#000;font-weight:bold">var</span> rsp = <span style="color:#d14">&#34;&#34;</span>
+   <span style="color:#000;font-weight:bold">for</span> k, v <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> p.Server.Peers {
+      rsp = rsp <span style="color:#000;font-weight:bold">+</span> k.<span style="color:#900;font-weight:bold">Pretty</span>() <span style="color:#000;font-weight:bold">+</span>  <span style="color:#d14">&#34;=&#34;</span> <span style="color:#000;font-weight:bold">+</span> v.<span style="color:#900;font-weight:bold">String</span>() <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34;\n&#34;</span>
+   }
+   <span style="color:#000;font-weight:bold">for</span> k, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> p.Server.Peers {
+      log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;start send peer: &#34;</span> , s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">RemotePeer</span>().<span style="color:#900;font-weight:bold">Pretty</span>())
+      p.Server.<span style="color:#900;font-weight:bold">sendMessage</span>(k, RelayProtocolResponse, rsp)
+      <span style="color:#0086b3">delete</span>(p.Server.Peers, k)
+   }
 }
 
 <span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>RelayProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay rsp&#34;</span>)
-
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;a new Stream relay rsp&#34;</span>)
 }
 
 <span style="color:#000;font-weight:bold">type</span> RelayServer <span style="color:#000;font-weight:bold">struct</span> {
-	host.Host
-	<span style="color:#000;font-weight:bold">*</span>RelayProtocol
-	Ctx context.Context
+   host.Host
+   <span style="color:#000;font-weight:bold">*</span>RelayProtocol
+   Ctx context.Context
+   HoleServer <span style="color:#000;font-weight:bold">*</span>holepunch.Service
 
-	<span style="color:#998;font-style:italic">//记录peers
-</span><span style="color:#998;font-style:italic"></span>	Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
-	Peers <span style="color:#000;font-weight:bold">*</span>list.List
+   <span style="color:#998;font-style:italic">//记录peers
+</span><span style="color:#998;font-style:italic"></span>   Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
+   Peers <span style="color:#000;font-weight:bold">map</span>[peer.ID]multiaddr.Multiaddr
 }
 
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(host host.Host) <span style="color:#000;font-weight:bold">*</span>RelayServer {
-	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayServer{ Host:host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
-	relayServer.RelayProtocol = <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(relayServer)
-	<span style="color:#000;font-weight:bold">return</span> relayServer
+   relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>RelayServer{ Host:host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">map</span>[peer.ID]multiaddr.Multiaddr)}
+   relayServer.RelayProtocol = <span style="color:#900;font-weight:bold">NewRelayProtocol</span>(relayServer)
+   <span style="color:#000;font-weight:bold">return</span> relayServer
 }
 
 <span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>RelayServer) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
-	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
-	}
-	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
+   s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
+      log.<span style="color:#900;font-weight:bold">Println</span>(err)
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
+   }
+   <span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
 
-	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
+   s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
+   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
 }
 
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(seed <span style="color:#458;font-weight:bold">int64</span>) (identity crypto.PrivKey, err <span style="color:#458;font-weight:bold">error</span>) {
-	<span style="color:#000;font-weight:bold">var</span> r io.Reader
-	<span style="color:#000;font-weight:bold">if</span> seed <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
-		r = crand.Reader
-	} <span style="color:#000;font-weight:bold">else</span> {
-		r = mrand.<span style="color:#900;font-weight:bold">New</span>(mrand.<span style="color:#900;font-weight:bold">NewSource</span>(seed))
-	}
-	identity, _, err = crypto.<span style="color:#900;font-weight:bold">GenerateKeyPairWithReader</span>(crypto.RSA, <span style="color:#099">2048</span>, r)
-	<span style="color:#000;font-weight:bold">return</span> identity, err
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">AddHolePunchService</span>( h host.Host) <span style="color:#000;font-weight:bold">*</span>holepunch.Service {
+   ids, err <span style="color:#000;font-weight:bold">:=</span> identify.<span style="color:#900;font-weight:bold">NewIDService</span>(h)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
+   hps, err <span style="color:#000;font-weight:bold">:=</span> holepunch.<span style="color:#900;font-weight:bold">NewService</span>(h, ids)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
+   <span style="color:#000;font-weight:bold">return</span> hps
 }
-
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(port <span style="color:#458;font-weight:bold">int</span>) (<span style="color:#000;font-weight:bold">*</span>RelayServer,<span style="color:#458;font-weight:bold">error</span>) {
-	prvKey,  err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(<span style="color:#099">0</span>)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	sourceMultiAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/0.0.0.0/tcp/%d&#34;</span>, port))
-	host, err<span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
-		libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(sourceMultiAddr),
-		libp2p.<span style="color:#900;font-weight:bold">Identity</span>(prvKey),
-		libp2p.<span style="color:#900;font-weight:bold">DisableRelay</span>(),
-	)
-	_, err = relayv1.<span style="color:#900;font-weight:bold">NewRelay</span>(host)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to instantiate h2 relay: %v&#34;</span>, err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(host), err
+   sourceMultiAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/0.0.0.0/tcp/%d&#34;</span>, port))
+   h, err<span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
+      libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(sourceMultiAddr),
+      libp2p.<span style="color:#900;font-weight:bold">DisableRelay</span>(),
+      libp2p.<span style="color:#900;font-weight:bold">EnableHolePunching</span>(),
+   )
+   _, err = relayv1.<span style="color:#900;font-weight:bold">NewRelay</span>(h)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to instantiate h2 relay: %v&#34;</span>, err)
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+   }
+   <span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewRelayServer</span>(h), err
 }
+
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+   sourcePort <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">Int</span>(<span style="color:#d14">&#34;sp&#34;</span>, <span style="color:#099">0</span>, <span style="color:#d14">&#34;Source port number&#34;</span>)
+   flag.<span style="color:#900;font-weight:bold">Parse</span>()
 
-	sourcePort <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">Int</span>(<span style="color:#d14">&#34;sp&#34;</span>, <span style="color:#099">0</span>, <span style="color:#d14">&#34;Source port number&#34;</span>)
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+   <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>sourcePort <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
+      fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -sp port&#34;</span>)
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+   flag.<span style="color:#900;font-weight:bold">Parse</span>()
 
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>sourcePort <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
-		fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -sp port&#34;</span>)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+   serverHost, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to create relay: %v&#34;</span>, err)
+      <span style="color:#000;font-weight:bold">return</span>
+   }
 
-	serverHost, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRelayHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Failed to create relay: %v&#34;</span>, err)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-
-	hostAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, serverHost.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>()))
-	addr <span style="color:#000;font-weight:bold">:=</span> serverHost.<span style="color:#900;font-weight:bold">Addrs</span>()[<span style="color:#099">0</span>]
-	fullAddr <span style="color:#000;font-weight:bold">:=</span> addr.<span style="color:#900;font-weight:bold">Encapsulate</span>(hostAddr)
-	<span style="color:#998;font-style:italic">//log.Printf(&#34;relay server address %s\n&#34;, fullAddr)
-</span><span style="color:#998;font-style:italic"></span>	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Run &#39;./chat -relay %s&#39; on another console.\n&#34;</span>,  fullAddr)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;You can replace 192.168.0.100 with public IP as well.&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Waiting for incoming connection&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>()
-	<span style="color:#000;font-weight:bold">&lt;-</span> serverHost.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
+   hostAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, serverHost.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>()))
+   addr <span style="color:#000;font-weight:bold">:=</span> serverHost.<span style="color:#900;font-weight:bold">Addrs</span>()[<span style="color:#099">0</span>]
+   fullAddr <span style="color:#000;font-weight:bold">:=</span> addr.<span style="color:#900;font-weight:bold">Encapsulate</span>(hostAddr)
+   log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Run &#39;./chat -relay %s&#39; on another console.\n&#34;</span>,  fullAddr)
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;You can replace 192.168.0.100 with public IP as well.&#34;</span>)
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Waiting for incoming connection&#34;</span>)
+   log.<span style="color:#900;font-weight:bold">Println</span>()
+   <span style="color:#000;font-weight:bold">&lt;-</span> serverHost.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
 }
 </code></pre></td></tr></table>
 </div>
@@ -538,10 +532,11 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <p>节点需要的组件:</p>
 <ol>
 <li>创建host</li>
-<li>监听P2Pmsg协议 和<code>/relay/relayrsp/1.0.0</code>协议</li>
-<li>连接中继服务</li>
-<li>节点发送<code>/relay/relayreq/1.0.0</code>协议给中继服务,服务会返回<code>/relay/relayrsp/1.0.0</code>协议给节点 其他节点的peerID</li>
-<li>连接其他节点，并且往其他节点发送P2Pmsg协议<code>/P2PMsg/1.0.0</code></li>
+<li>监听<code>RelayMsg</code>协议 和<code>RelayProtocolResponse</code>协议</li>
+<li>连接中继服务 n.ConnectRelay()</li>
+<li>节点发送<code>RelayProtocolRequest</code>协议给中继服务,服务会返回<code>RelayProtocolResponse</code>协议给节点 其他节点的peerID</li>
+<li>通过中继服务连接其他节点<code>n.ConnectNode()</code> ,</li>
+<li>并且往其他节点发送<code>RelayMsg</code>协议,  <code>n.CmdRelay</code></li>
 </ol>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -722,184 +717,374 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">256
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">257
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">258
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">259
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">260
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">261
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">262
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">263
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">264
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">265
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">266
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">267
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">268
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">269
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">270
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">271
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">272
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//chat.go
-</span><span style="color:#998;font-style:italic"></span>
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
+
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolResponse = <span style="color:#d14">&#34;/relay/relayrsp/1.0.0&#34;</span>
-<span style="color:#000;font-weight:bold">const</span> P2PMsg = <span style="color:#d14">&#34;/P2PMsg/1.0.0&#34;</span>
+<span style="color:#000;font-weight:bold">const</span> RelayMsg = <span style="color:#d14">&#34;/relay/relaymsg/1.0.0&#34;</span>
 
 <span style="color:#000;font-weight:bold">type</span> NodeProtocol <span style="color:#000;font-weight:bold">struct</span> {
-	node <span style="color:#000;font-weight:bold">*</span>Node
+   node <span style="color:#000;font-weight:bold">*</span>Node
 }
 
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(server <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#000;font-weight:bold">*</span>NodeProtocol {
-	protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>NodeProtocol{ node: server}
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
-	server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(P2PMsg, protocol.onP2PMsg)
-	<span style="color:#000;font-weight:bold">return</span> protocol
+   protocol <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>NodeProtocol{ node: server}
+   server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayProtocolResponse, protocol.onRsp)
+   server.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(RelayMsg, protocol.onRelayMsg)
+   <span style="color:#000;font-weight:bold">return</span> protocol
 }
 
-<span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>NodeProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
-	buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream Relay rsp peer ID: %s\n&#34;</span>, buf)
+<span style="color:#998;font-style:italic">//获得对方peerID
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>NodeProtocol)<span style="color:#900;font-weight:bold">onRsp</span>(s network.Stream) {
+   buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+   peers <span style="color:#000;font-weight:bold">:=</span> strings.<span style="color:#900;font-weight:bold">Split</span>(<span style="color:#0086b3">string</span>(buf), <span style="color:#d14">&#34;\n&#34;</span>)
+   <span style="color:#000;font-weight:bold">var</span> addrs []<span style="color:#458;font-weight:bold">string</span>
+   <span style="color:#000;font-weight:bold">for</span>  _,v <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> peers {
+      tmp <span style="color:#000;font-weight:bold">:=</span> strings.<span style="color:#900;font-weight:bold">Split</span>(<span style="color:#0086b3">string</span>(v), <span style="color:#d14">&#34;=&#34;</span>)
+      <span style="color:#000;font-weight:bold">if</span> tmp[<span style="color:#099">0</span>] <span style="color:#000;font-weight:bold">!=</span> p.node.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>() {
+         addrs = tmp
+         <span style="color:#000;font-weight:bold">break</span>
+      }
+   }
+   log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;a new Stream Relay rsp,addrs.len %d, peerInfo : %s\n&#34;</span>, <span style="color:#0086b3">len</span>(addrs) , buf)
+   <span style="color:#000;font-weight:bold">if</span> <span style="color:#0086b3">len</span>(addrs) <span style="color:#000;font-weight:bold">&lt;=</span> <span style="color:#099">1</span> { <span style="color:#000;font-weight:bold">return</span>}
+   p.node.<span style="color:#900;font-weight:bold">ConnectNode</span>(addrs[<span style="color:#099">0</span>], addrs[<span style="color:#099">1</span>])
+}
 
-	p.node.<span style="color:#900;font-weight:bold">ConnectNode</span>(<span style="color:#0086b3">string</span>(buf))
+<span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onFirstP2PMsg</span>(s network.Stream)  {
+   buf, _ <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;receive onFirstP2PMsg: &#34;</span>, <span style="color:#0086b3">string</span>(buf))
+   time.<span style="color:#900;font-weight:bold">Sleep</span>(<span style="color:#099">5</span><span style="color:#000;font-weight:bold">*</span>time.Second)
+   p.node.<span style="color:#900;font-weight:bold">CmdP2P</span>()
 }
 
 <span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onP2PMsg</span>(s network.Stream)  {
-	buf, err <span style="color:#000;font-weight:bold">:=</span> ioutil.<span style="color:#900;font-weight:bold">ReadAll</span>(s)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;from %s receive P2P msg %s\n&#34;</span>, s.<span style="color:#900;font-weight:bold">Conn</span>().<span style="color:#900;font-weight:bold">LocalPeer</span>().<span style="color:#900;font-weight:bold">Pretty</span>(), buf)
+   rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
+   <span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">writeData</span>(rw)
+   <span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">readData</span>(rw)
 }
 
+<span style="color:#000;font-weight:bold">func</span> (p<span style="color:#000;font-weight:bold">*</span> NodeProtocol) <span style="color:#900;font-weight:bold">onRelayMsg</span>(s network.Stream)  {
+   rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
+   <span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">writeData</span>(rw)
+   <span style="color:#000;font-weight:bold">go</span> p.node.<span style="color:#900;font-weight:bold">readData</span>(rw)
+}
 
 <span style="color:#000;font-weight:bold">type</span> Node <span style="color:#000;font-weight:bold">struct</span> {
-	host.Host
-	<span style="color:#000;font-weight:bold">*</span>NodeProtocol
+   host.Host
+   <span style="color:#000;font-weight:bold">*</span>NodeProtocol
 
-	Ctx context.Context
-	<span style="color:#998;font-style:italic">//记录RelayServer
-</span><span style="color:#998;font-style:italic"></span>	ServerAddrInfo <span style="color:#000;font-weight:bold">*</span>peer.AddrInfo
-	<span style="color:#998;font-style:italic">//记录peers
-</span><span style="color:#998;font-style:italic"></span>	Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
-	Peers <span style="color:#000;font-weight:bold">*</span>list.List
+   chatP2PAddr <span style="color:#000;font-weight:bold">*</span>peer.AddrInfo
+   Ctx context.Context
+   <span style="color:#998;font-style:italic">//记录RelayServer
+</span><span style="color:#998;font-style:italic"></span>   ServerAddrInfo <span style="color:#000;font-weight:bold">*</span>peer.AddrInfo
+   <span style="color:#998;font-style:italic">//记录peers
+</span><span style="color:#998;font-style:italic"></span>   Mutex <span style="color:#000;font-weight:bold">*</span>sync.Mutex
+   Peers <span style="color:#000;font-weight:bold">*</span>list.List
 }
 
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">NewNode</span>(host host.Host) <span style="color:#000;font-weight:bold">*</span>Node {
-	relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>Node{ Host: host, Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
-	relayServer.NodeProtocol = <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(relayServer)
-	<span style="color:#000;font-weight:bold">return</span> relayServer
+   relayServer <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>Node{ Host: host, chatP2PAddr: <span style="color:#0086b3">new</span>(peer.AddrInfo), Ctx: context.<span style="color:#900;font-weight:bold">Background</span>(), Mutex: <span style="color:#0086b3">new</span>(sync.Mutex), Peers: <span style="color:#0086b3">new</span>(list.List)}
+   relayServer.NodeProtocol = <span style="color:#900;font-weight:bold">NewNodeProtocol</span>(relayServer)
+   <span style="color:#000;font-weight:bold">return</span> relayServer
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">readData</span>(rw <span style="color:#000;font-weight:bold">*</span>bufio.ReadWriter) {
+   <span style="color:#000;font-weight:bold">for</span> {
+      str, _ <span style="color:#000;font-weight:bold">:=</span> rw.<span style="color:#900;font-weight:bold">ReadString</span>(<span style="color:#d14">&#39;\n&#39;</span>)
+
+      <span style="color:#000;font-weight:bold">if</span> str <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
+         <span style="color:#000;font-weight:bold">return</span>
+      }
+      <span style="color:#000;font-weight:bold">if</span> str <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;\n&#34;</span> {
+         <span style="color:#998;font-style:italic">// Green console colour: 	\x1b[32m
+</span><span style="color:#998;font-style:italic"></span>         <span style="color:#998;font-style:italic">// Reset console colour: 	\x1b[0m
+</span><span style="color:#998;font-style:italic"></span>         fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;\x1b[32m%s\x1b[0m&gt; &#34;</span>, str)
+      }
+   }
+}
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">writeData</span>(rw <span style="color:#000;font-weight:bold">*</span>bufio.ReadWriter) {
+   stdReader <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReader</span>(os.Stdin)
+   <span style="color:#000;font-weight:bold">for</span> {
+      fmt.<span style="color:#900;font-weight:bold">Print</span>(<span style="color:#d14">&#34;&gt; &#34;</span>)
+      sendData, err <span style="color:#000;font-weight:bold">:=</span> stdReader.<span style="color:#900;font-weight:bold">ReadString</span>(<span style="color:#d14">&#39;\n&#39;</span>)
+      <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+         log.<span style="color:#900;font-weight:bold">Println</span>(err)
+         <span style="color:#000;font-weight:bold">return</span>
+      }
+
+      rw.<span style="color:#900;font-weight:bold">WriteString</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;%s\n&#34;</span>, sendData))
+      rw.<span style="color:#900;font-weight:bold">Flush</span>()
+   }
+}
+
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">getPeerInfoByDest</span>(relay <span style="color:#458;font-weight:bold">string</span>) (<span style="color:#000;font-weight:bold">*</span>peer.AddrInfo, <span style="color:#458;font-weight:bold">error</span>) {
+   relayAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(relay)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
+   }
+   pid, err <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">ValueForProtocol</span>(multiaddr.P_P2P)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
+   }
+   relayPeerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(pid)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span> , err
+   }
+
+   relayPeerAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, pid))
+   relayAddress <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">Decapsulate</span>(relayPeerAddr)
+   peerInfo <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>peer.AddrInfo{
+      ID:    relayPeerID,
+      Addrs: []multiaddr.Multiaddr{relayAddress},
+   }
+   <span style="color:#000;font-weight:bold">return</span> peerInfo, err
 }
 
 <span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">ConnectRelay</span>(relay <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
-	relayAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(relay)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	pid, err <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">ValueForProtocol</span>(multiaddr.P_P2P)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	relayPeerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(pid)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-
-	relayPeerAddr, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/p2p/%s&#34;</span>, pid))
-	relayAddress <span style="color:#000;font-weight:bold">:=</span> relayAddr.<span style="color:#900;font-weight:bold">Decapsulate</span>(relayPeerAddr)
-
-	peerInfo <span style="color:#000;font-weight:bold">:=</span> peer.AddrInfo{
-		ID:    relayPeerID,
-		Addrs: []multiaddr.Multiaddr{relayAddress},
-	}
-	n.ServerAddrInfo = <span style="color:#000;font-weight:bold">&amp;</span>peerInfo
-	<span style="color:#000;font-weight:bold">return</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, peerInfo)
+   peerInfo ,err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">getPeerInfoByDest</span>(relay)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      <span style="color:#000;font-weight:bold">return</span> err
+   }
+   n.ServerAddrInfo = peerInfo
+   <span style="color:#000;font-weight:bold">return</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, <span style="color:#000;font-weight:bold">*</span>peerInfo)
 }
 
-<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">ConnectNode</span>(nodeAddr <span style="color:#458;font-weight:bold">string</span>)  {
-	peerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(nodeAddr)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	n.<span style="color:#900;font-weight:bold">Network</span>().(<span style="color:#000;font-weight:bold">*</span>swarm.Swarm).<span style="color:#900;font-weight:bold">Backoff</span>().<span style="color:#900;font-weight:bold">Clear</span>(peerID)
+<span style="color:#000;font-weight:bold">func</span> (n<span style="color:#000;font-weight:bold">*</span> Node)<span style="color:#900;font-weight:bold">ConnectNode</span>(nodePeerID <span style="color:#458;font-weight:bold">string</span>, nodeAddr <span style="color:#458;font-weight:bold">string</span>) {
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;start ConnectNodeByRelay....&#34;</span>, nodePeerID, nodeAddr)
+   peerID, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">Decode</span>(nodePeerID)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+   n.<span style="color:#900;font-weight:bold">Network</span>().(<span style="color:#000;font-weight:bold">*</span>swarm.Swarm).<span style="color:#900;font-weight:bold">Backoff</span>().<span style="color:#900;font-weight:bold">Clear</span>(peerID)
 
+   <span style="color:#000;font-weight:bold">var</span> address = nodeAddr <span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;/p2p/&#34;</span> <span style="color:#000;font-weight:bold">+</span> n.ServerAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>()  <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34;/p2p-circuit/p2p/&#34;</span> <span style="color:#000;font-weight:bold">+</span> peerID.<span style="color:#900;font-weight:bold">Pretty</span>()
+   <span style="color:#998;font-style:italic">//var address = nodeAddr +&#34;/p2p/&#34; + peerID.Pretty() + &#34;/p2p-circuit&#34;
+</span><span style="color:#998;font-style:italic"></span>   <span style="color:#998;font-style:italic">//var address = nodeAddr +&#34;/p2p/&#34; + peerID.Pretty()
+</span><span style="color:#998;font-style:italic"></span>   <span style="color:#998;font-style:italic">//var address = &#34;/p2p/&#34;+ peerID.Pretty()
+</span><span style="color:#998;font-style:italic"></span>   chatTargetAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(address)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;chatTargetAddr is err&#34;</span>)
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
 
-	<span style="color:#000;font-weight:bold">var</span> address = <span style="color:#d14">&#34;/p2p/&#34;</span> <span style="color:#000;font-weight:bold">+</span> n.ServerAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>() <span style="color:#000;font-weight:bold">+</span> <span style="color:#d14">&#34;/p2p-circuit/ipfs/&#34;</span> <span style="color:#000;font-weight:bold">+</span> peerID.<span style="color:#900;font-weight:bold">Pretty</span>()
-	<span style="color:#998;font-style:italic">//var address = &#34;/p2p-circuit/ipfs/&#34; + peerID.Pretty()
-</span><span style="color:#998;font-style:italic"></span>	chatTargetAddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(address)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;chatTargetAddr error &#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
+   chatTargetAddrInfo <span style="color:#000;font-weight:bold">:=</span> peer.AddrInfo{
+      ID:    peerID,
+      Addrs: []multiaddr.Multiaddr{chatTargetAddr},
+   }
 
-	chatTargetAddrInfo <span style="color:#000;font-weight:bold">:=</span> peer.AddrInfo{
-		ID:    peerID,
-		Addrs: []multiaddr.Multiaddr{chatTargetAddr},
-	}
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, chatTargetAddrInfo); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;n.Connect error&#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">Connect</span>(n.Ctx, chatTargetAddrInfo); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;chatTargetAddr connect err&#34;</span>)
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
 
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;opening chat stream&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;[INFO] chat connected!&#34;</span>)
-	n.<span style="color:#900;font-weight:bold">sendMessage</span>(chatTargetAddrInfo.ID, P2PMsg, <span style="color:#d14">&#34;Hello Im &#34;</span> <span style="color:#000;font-weight:bold">+</span> chatTargetAddrInfo.ID.<span style="color:#900;font-weight:bold">Pretty</span>())
+   n.chatP2PAddr = <span style="color:#000;font-weight:bold">&amp;</span>chatTargetAddrInfo
+   <span style="color:#998;font-style:italic">//n.sendMessage(chatTargetAddrInfo.ID, FirstP2PMsg, &#34;Hello Im &#34; + chatTargetAddrInfo.ID.Pretty())
+</span><span style="color:#998;font-style:italic"></span>   n.<span style="color:#900;font-weight:bold">CmdRelay</span>()
 }
+
+<span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node)<span style="color:#900;font-weight:bold">CmdRelay</span>()  {
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;CmdRelay start....&#34;</span>)
+   peerInfo <span style="color:#000;font-weight:bold">:=</span> n.chatP2PAddr
+   s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, peerInfo.ID, RelayMsg)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+
+   rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;opening chat stream&#34;</span>)
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;[INFO] chat connected!&#34;</span>)
+   n.<span style="color:#900;font-weight:bold">sendMessage</span>(peerInfo.ID, RelayMsg, <span style="color:#d14">&#34;Hello this is relay msg&#34;</span>)
+
+   <span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">writeData</span>(rw)
+   <span style="color:#000;font-weight:bold">go</span> n.<span style="color:#900;font-weight:bold">readData</span>(rw)
+}
+
 <span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">Login</span>()  {
-	<span style="color:#000;font-weight:bold">if</span> n.<span style="color:#900;font-weight:bold">sendMessage</span>(n.ServerAddrInfo.ID, RelayProtocolRequest, <span style="color:#d14">&#34;login&#34;</span>) {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s login to relay\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
-	} <span style="color:#000;font-weight:bold">else</span> {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s connect to relay error\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
-	}
+   <span style="color:#000;font-weight:bold">if</span> n.<span style="color:#900;font-weight:bold">sendMessage</span>(n.ServerAddrInfo.ID, RelayProtocolRequest, <span style="color:#d14">&#34;login&#34;</span>) {
+      log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s login to relay\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
+   } <span style="color:#000;font-weight:bold">else</span> {
+      log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;%s connect to relay error\n&#34;</span>, n.<span style="color:#900;font-weight:bold">ID</span>())
+   }
 }
 
 <span style="color:#000;font-weight:bold">func</span> (n <span style="color:#000;font-weight:bold">*</span>Node) <span style="color:#900;font-weight:bold">sendMessage</span>(id peer.ID, p protocol.ID, data <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">bool</span> {
-	s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
-	}
-	<span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
+   s, err <span style="color:#000;font-weight:bold">:=</span> n.<span style="color:#900;font-weight:bold">NewStream</span>(n.Ctx, id, p)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;NewStream err&#34;</span>)
+      log.<span style="color:#900;font-weight:bold">Println</span>(err)
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>
+   }
+   <span style="color:#000;font-weight:bold">defer</span> s.<span style="color:#900;font-weight:bold">Close</span>()
 
-	s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
+   s.<span style="color:#900;font-weight:bold">Write</span>([]<span style="color:#0086b3">byte</span>(data))
+   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>
 }
 
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(seed <span style="color:#458;font-weight:bold">int64</span>) (identity crypto.PrivKey, err <span style="color:#458;font-weight:bold">error</span>) {
-	<span style="color:#000;font-weight:bold">var</span> r io.Reader
-	<span style="color:#000;font-weight:bold">if</span> seed <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">0</span> {
-		r = crand.Reader
-	} <span style="color:#000;font-weight:bold">else</span> {
-		r = mrand.<span style="color:#900;font-weight:bold">New</span>(mrand.<span style="color:#900;font-weight:bold">NewSource</span>(seed))
-	}
-	identity, _, err = crypto.<span style="color:#900;font-weight:bold">GenerateKeyPairWithReader</span>(crypto.RSA, <span style="color:#099">2048</span>, r)
-	<span style="color:#000;font-weight:bold">return</span> identity, err
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">AddHolePunchService</span>( h host.Host) <span style="color:#000;font-weight:bold">*</span>holepunch.Service {
+   ids, err <span style="color:#000;font-weight:bold">:=</span> identify.<span style="color:#900;font-weight:bold">NewIDService</span>(h)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
+   hps, err <span style="color:#000;font-weight:bold">:=</span> holepunch.<span style="color:#900;font-weight:bold">NewService</span>(h, ids)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
+   <span style="color:#000;font-weight:bold">return</span> hps
 }
 
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>() <span style="color:#000;font-weight:bold">*</span>Node {
-	priv, _ <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">generateIdentity</span>(<span style="color:#099">0</span>)
-	listen, _ <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;/ip4/127.0.0.1/tcp/0&#34;</span>))
-	host, _ <span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
-		libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(listen),
-		libp2p.<span style="color:#900;font-weight:bold">Identity</span>(priv),
-		libp2p.<span style="color:#900;font-weight:bold">EnableRelay</span>(),
-	)
+<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>(relay <span style="color:#458;font-weight:bold">string</span>) <span style="color:#000;font-weight:bold">*</span>Node {
+   peerInfo ,err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">getPeerInfoByDest</span>(relay)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
 
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewNode</span>(host)
+   <span style="color:#998;font-style:italic">//priv, _ := generateIdentity(0)
+</span><span style="color:#998;font-style:italic"></span>   h, err <span style="color:#000;font-weight:bold">:=</span> libp2p.<span style="color:#900;font-weight:bold">New</span>(
+      libp2p.<span style="color:#900;font-weight:bold">ListenAddrs</span>(multiaddr.<span style="color:#900;font-weight:bold">StringCast</span>(<span style="color:#d14">&#34;/ip4/127.0.0.1/tcp/0/&#34;</span>)),
+      libp2p.<span style="color:#900;font-weight:bold">EnableRelay</span>(),
+   )
+
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+   }
+   <span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">NewNode</span>(h)
 }
+
 <span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	relay <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">String</span>(<span style="color:#d14">&#34;relay&#34;</span>, <span style="color:#d14">&#34;&#34;</span>, <span style="color:#d14">&#34;relay addrs&#34;</span>)
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+   relay <span style="color:#000;font-weight:bold">:=</span> flag.<span style="color:#900;font-weight:bold">String</span>(<span style="color:#d14">&#34;relay&#34;</span>, <span style="color:#d14">&#34;&#34;</span>, <span style="color:#d14">&#34;relay addrs&#34;</span>)
+   flag.<span style="color:#900;font-weight:bold">Parse</span>()
 
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>relay <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
-		fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -relay &#34;</span>)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	flag.<span style="color:#900;font-weight:bold">Parse</span>()
+   <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">*</span>relay <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
+      fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Please Use -relay &#34;</span>)
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+   flag.<span style="color:#900;font-weight:bold">Parse</span>()
 
-	node <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>()
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> node.<span style="color:#900;font-weight:bold">ConnectRelay</span>(<span style="color:#000;font-weight:bold">*</span>relay); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Connect relay success Next Login...&#34;</span>)
-	node.<span style="color:#900;font-weight:bold">Login</span>()
+   node <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeRandomNode</span>(<span style="color:#000;font-weight:bold">*</span>relay)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> node.<span style="color:#900;font-weight:bold">ConnectRelay</span>(<span style="color:#000;font-weight:bold">*</span>relay); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Println</span>(err.<span style="color:#900;font-weight:bold">Error</span>())
+      <span style="color:#000;font-weight:bold">return</span>
+   }
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Connect relay success Next Login...&#34;</span>)
+   node.<span style="color:#900;font-weight:bold">Login</span>()
 
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Im &#34;</span>, node.<span style="color:#900;font-weight:bold">ID</span>())
-	<span style="color:#000;font-weight:bold">&lt;-</span> node.Ctx.<span style="color:#900;font-weight:bold">Done</span>()
+   log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Im &#34;</span>, node.<span style="color:#900;font-weight:bold">ID</span>())
+   <span style="color:#000;font-weight:bold">select</span> {
+   <span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>node.Ctx.<span style="color:#900;font-weight:bold">Done</span>():
+      log.<span style="color:#900;font-weight:bold">Println</span>(node.Ctx.<span style="color:#900;font-weight:bold">Err</span>().<span style="color:#900;font-weight:bold">Error</span>())
+   }
 }
 </code></pre></td></tr></table>
 </div>
@@ -923,9 +1108,12 @@ $ go build -o chat chat.go
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay-server -sp <span style="color:#099">3001</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>启动chat窗口, 连上relay服务</p>
+</div><p>启动A窗口, 连上relay服务</p>
+<pre><code>./chat -relay 
+</code></pre><p>再启动B窗，连上relay服务</p>
 <pre><code>./chat -relay
-</code></pre><p>再启动chat窗，连上relay服务</p>
+</code></pre><p>这样A和B两个节点就可以通过relay服务进行数据传输了。 下篇文章，改造relay服务，relay服务交换节点信息后，使节点间可以进行p2p传输，传输数据不通过relay服务。</p>
+<p>未完待续&hellip;</p>
 
         </div>
 
