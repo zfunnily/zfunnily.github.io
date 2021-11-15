@@ -219,6 +219,14 @@
     </p>
 <p>通过peerconnection的例子来分析webrtc的交互流程</p>
 <h2 id="peer_connection-解析">peer_connection 解析</h2>
+<ol>
+<li>为了便于管理，如编码，回显等，需要在应用层和底层一帧数据做一个桥接层，以隔离上下层。</li>
+<li>桥接层的代码主要位于<code>media/base</code> 和<code>media/engine</code>，WebRTC中抽象了<code>VideoSourceInterface</code>和<code>VideoSinkInterface</code>这两个模板类分别表示生产和吸收视频流。</li>
+<li>如果能提供视频数据，需要实现 <code>VideoSourceInterface</code>，此接口类暴露了 <code>AddOrUpdateSink</code> 函数，可以将 <code>Sink</code> 注册给 <code>Source</code>。</li>
+<li>如果想要接收视频数据，需要实现 <code>VideoSinkInterface</code>，此接口类暴露了 <code>OnFrame</code> 函数。只要将 <code>Sink</code> 通过 <code>AddOrUpdateSink</code> 函数注册给 <code>Source</code>，
+那么 <code>Source</code> 就会通过 <code>OnFrame</code> 接口将数据传给 <code>Sink</code>。</li>
+<li>对于WebRTC的<code>PeerConnection</code>例子，其<code>VcmCapturer</code>类继承了<code>VideoSinkInterface</code>，<code>TestVideoCapturer</code>类继承类<code>VideoSourceInterface&lt;VideoFrame&gt;</code></li>
+</ol>
 <p>信令交互主要是<code>PeerConnectionClient</code>这个类
 初始化socket连接跟 绑定回调</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
