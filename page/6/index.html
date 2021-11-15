@@ -76,29 +76,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/" title="Redis源码分析-ziplist压缩列表">Redis源码分析-ziplist压缩列表</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/" title="配置VScode调试Redis源码">配置VScode调试Redis源码</a>
             </h1>
         </header>
@@ -303,6 +280,29 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/" title="一个reactor单线程网络库ccnet">一个reactor单线程网络库ccnet</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月27日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -447,11 +447,7 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtc-desk/" title="Webrtc Desk">Webrtc Desk</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="Peerconnection一 | 连接">Peerconnection一 | 连接</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
     </li>
     
     <li>
@@ -484,6 +480,10 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
 </ul>
@@ -525,7 +525,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (8)</a></li>
     
 </ul>
     </section>
@@ -763,8 +763,6 @@
     <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%85%B1%E4%BA%AB/">桌面共享</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
     

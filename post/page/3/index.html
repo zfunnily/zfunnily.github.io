@@ -78,31 +78,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/09/gcc%E5%8D%87%E7%BA%A7/" title="Centos7.2的gcc4.8升级为4.9">Centos7.2的gcc4.8升级为4.9</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年9月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 1 2 $ docker $ yum update &amp;&amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 1 2 3 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;&amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/09/gcc%E5%8D%87%E7%BA%A7/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/08/shell-%E4%BD%BF%E7%94%A8Except%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/" title="shell-使用Except自动交互">shell-使用Except自动交互</a>
             </h1>
         </header>
@@ -325,6 +300,31 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" title="Go mod拉取私有仓库">Go mod拉取私有仓库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -454,11 +454,7 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtc-desk/" title="Webrtc Desk">Webrtc Desk</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="Peerconnection一 | 连接">Peerconnection一 | 连接</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
     </li>
     
     <li>
@@ -491,6 +487,10 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
     </li>
     
 </ul>
@@ -532,7 +532,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (8)</a></li>
     
 </ul>
     </section>
@@ -770,8 +770,6 @@
     <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%85%B1%E4%BA%AB/">桌面共享</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
     

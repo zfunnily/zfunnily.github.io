@@ -6,20 +6,11 @@
     <description>Recent content on 流浪花</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 11 Nov 2021 17:24:18 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Nov 2021 16:20:31 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Webrtc Desk</title>
-      <link>https://zfunnily.github.io/2021/11/webrtc-desk/</link>
-      <pubDate>Thu, 11 Nov 2021 17:24:18 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/11/webrtc-desk/</guid>
-      <description>改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource, 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回调 继承类</description>
-    </item>
-    
-    <item>
-      <title>Peerconnection一 | 连接</title>
+      <title>webrtc一 | peerconnection</title>
       <link>https://zfunnily.github.io/2021/11/webrtc-peerconnection/</link>
-      <pubDate>Wed, 10 Nov 2021 16:20:31 +0800</pubDate>
+      <pubDate>Fri, 12 Nov 2021 16:20:31 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtc-peerconnection/</guid>
       <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 信令交互主要是PeerConnectionClient这个类 初始化socket连接跟 绑定回调 1 2 3 4 5 6 7 8 9</description>
