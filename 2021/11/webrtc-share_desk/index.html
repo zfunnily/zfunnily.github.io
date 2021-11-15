@@ -1,0 +1,1188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>webrtc二 | 共享桌面 | 流浪花</title>
+    <meta property="og:title" content="webrtc二 | 共享桌面 - 流浪花">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-11-15T11:23:24&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-11-15T11:23:24&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="webrtc二 | 共享桌面">
+        
+    <meta name="author" content="流浪花">
+    <meta property="og:url" content="https://zfunnily.github.io/2021/11/webrtc-share_desk/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        流浪花
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#改造peerconnection例子用来实现桌面共享">改造peerconnection例子，用来实现桌面共享</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">webrtc二 | 共享桌面</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="改造peerconnection例子用来实现桌面共享">改造peerconnection例子，用来实现桌面共享</h2>
+<p>改造类<code>CapturerTrackSource</code>,</p>
+<ul>
+<li>增加桌面的数据源类<code>RcrtcDesktopCapturerTrackSource</code></li>
+<li>继承<code>webrtc::DesktopCapturer::Callback</code>, 用于桌面数据捕获与回调</li>
+<li>继承类<code>rtc::VideoSourceInterface&lt;webrtc::VideoFrame&gt;</code>, 用于<code>rendered_track_-&gt;AddOrUpdateSink(this, rtc::VideoSinkWants());</code>
+添加<code>class VideoRenderer : public rtc::VideoSinkInterface&lt;webrtc::VideoFrame&gt; </code>的回调</li>
+</ul>
+<p>详细代码：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#999;font-weight:bold;font-style:italic">#ifndef __RCRTC_DESKTOP_CAPTURER__
+</span><span style="color:#999;font-weight:bold;font-style:italic">#define __RCRTC_DESKTOP_CAPTURER__
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;api/video/i420_buffer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;third_party/libyuv/include/libyuv/convert.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;third_party/libyuv/include/libyuv/video_common.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;media/base/video_broadcaster.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;media/base/video_common.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;modules/desktop_capture/desktop_and_cursor_composer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;rtc_base/thread.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;system_wrappers/include/sleep.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;test/vcm_capturer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;rtc_base/platform_thread.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">typedef</span> <span style="color:#900;font-weight:bold">void</span> (<span style="color:#000;font-weight:bold">*</span>desktop_capture_frame_callback)(<span style="color:#458;font-weight:bold">int</span> width, <span style="color:#458;font-weight:bold">int</span> height, <span style="color:#458;font-weight:bold">int</span> y_stride, <span style="color:#458;font-weight:bold">int</span> u_stride, <span style="color:#458;font-weight:bold">int</span> v_stride, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>y, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>u, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>v, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>context);
+
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">RcrtcDesktopCapturerTrackSource</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Callback,
+                                        <span style="color:#000;font-weight:bold">public</span> rtc<span style="color:#000;font-weight:bold">::</span>VideoSourceInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span>
+{
+<span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+  RcrtcDesktopCapturerTrackSource(<span style="color:#998;font-style:italic">/*const std::map&lt;std::string, std::string&gt;&amp; opts*/</span>) {
+    Start(<span style="color:#000;font-weight:bold">nullptr</span>);
+  }
+  <span style="color:#000;font-weight:bold">inline</span> <span style="color:#000;font-weight:bold">~</span>RcrtcDesktopCapturerTrackSource() <span style="color:#000;font-weight:bold">override</span> {}
+
+  <span style="color:#000;font-weight:bold">static</span> RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Create</span>()
+  {
+    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk(<span style="color:#000;font-weight:bold">new</span> RcrtcDesktopCapturerTrackSource);
+    <span style="color:#000;font-weight:bold">return</span> desk.release();
+  }
+  <span style="color:#998;font-style:italic">// overide webrtc::DesktopCapturer::Callback
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">OnCaptureResult</span>(webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Result result,
+                       std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopFrame<span style="color:#000;font-weight:bold">&gt;</span> frame) <span style="color:#000;font-weight:bold">override</span>
+  {
+    <span style="color:#000;font-weight:bold">if</span> (result <span style="color:#000;font-weight:bold">==</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Result<span style="color:#000;font-weight:bold">::</span>SUCCESS)
+    {
+      <span style="color:#458;font-weight:bold">int</span> width <span style="color:#000;font-weight:bold">=</span> frame<span style="color:#000;font-weight:bold">-&gt;</span>size().width();
+      <span style="color:#458;font-weight:bold">int</span> height <span style="color:#000;font-weight:bold">=</span> frame<span style="color:#000;font-weight:bold">-&gt;</span>size().height();
+
+      rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>I420Buffer<span style="color:#000;font-weight:bold">&gt;</span> I420buffer <span style="color:#000;font-weight:bold">=</span>
+          webrtc<span style="color:#000;font-weight:bold">::</span>I420Buffer<span style="color:#000;font-weight:bold">::</span>Create(width, height);
+
+      <span style="color:#458;font-weight:bold">int</span> stride<span style="color:#000;font-weight:bold">=</span>width;
+      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> yplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataY();
+      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> uplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataU();
+      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> vplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataV();
+      <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> conversionResult <span style="color:#000;font-weight:bold">=</span> libyuv<span style="color:#000;font-weight:bold">::</span>ConvertToI420( frame<span style="color:#000;font-weight:bold">-&gt;</span>data(), <span style="color:#099">0</span>, 
+          yplane,stride,
+          uplane,(stride<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2</span>,
+          vplane,(stride<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2</span>,
+          <span style="color:#099">0</span>, <span style="color:#099">0</span>,
+          width,height,
+          width,height,
+          <span style="color:#998;font-style:italic">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span><span style="color:#998;font-style:italic"></span>          <span style="color:#998;font-style:italic">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span><span style="color:#998;font-style:italic"></span>          libyuv<span style="color:#000;font-weight:bold">::</span>kRotate0, <span style="color:#000;font-weight:bold">::</span>libyuv<span style="color:#000;font-weight:bold">::</span>FOURCC_ARGB);
+
+      <span style="color:#000;font-weight:bold">if</span> (conversionResult <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">0</span>)
+      {
+        <span style="color:#998;font-style:italic">// webrtc::VideoFrame videoFrame(I420buffer,
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                               webrtc::VideoRotation::kVideoRotation_0,
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                               rtc::TimeMicros());
+</span><span style="color:#998;font-style:italic"></span>
+        <span style="color:#998;font-style:italic">// rtc::scoped_refptr&lt;webrtc::I420BufferInterface&gt; buffer(
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//     videoFrame.video_frame_buffer()-&gt;ToI420());
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">// _frameCallback(buffer-&gt;width(), buffer-&gt;height(), buffer-&gt;StrideY(),
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                buffer-&gt;StrideU(), buffer-&gt;StrideV(), buffer-&gt;DataY(),
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                buffer-&gt;DataU(), buffer-&gt;DataV(), this-&gt;_userContext);
+</span><span style="color:#998;font-style:italic"></span>        
+        webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame videoFrame<span style="color:#000;font-weight:bold">=</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame(I420buffer,<span style="color:#099">0</span>,<span style="color:#099">0</span>,webrtc<span style="color:#000;font-weight:bold">::</span>kVideoRotation_0);
+        _sink<span style="color:#000;font-weight:bold">-&gt;</span>OnFrame(videoFrame);
+      }
+    }
+  }
+
+  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">setExccludeWindow</span>(webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Source windowId)
+  {
+    _excludeWindowList.push_back(windowId);
+  }
+
+  <span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">CaptureDeskThread</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>obj)
+  {
+    RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*</span>capture <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*&gt;</span>(obj);
+    capture<span style="color:#000;font-weight:bold">-&gt;</span>CaptureProcess();
+  }
+  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">CaptureProcess</span>()
+  {
+    webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCaptureOptions opts <span style="color:#000;font-weight:bold">=</span>
+        webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCaptureOptions<span style="color:#000;font-weight:bold">::</span>CreateDefault();
+    <span style="color:#998;font-style:italic">// opts.set_allow_use_magnification_api(true);  //设置过滤窗口选项
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// 使用 DesktopAndCursorComposer 可以采集鼠标
+</span><span style="color:#998;font-style:italic"></span>    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer <span style="color:#000;font-weight:bold">=</span>
+        std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">&gt;</span>(
+            <span style="color:#000;font-weight:bold">new</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopAndCursorComposer(
+                webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>CreateScreenCapturer(opts), opts));
+
+    <span style="color:#998;font-style:italic">// 设置开始采集状态
+</span><span style="color:#998;font-style:italic"></span>    capturer<span style="color:#000;font-weight:bold">-&gt;</span>Start(<span style="color:#000;font-weight:bold">this</span>);
+
+    <span style="color:#998;font-style:italic">// 设置要过滤的窗口
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#000;font-weight:bold">auto</span> <span style="color:#900;font-weight:bold">source</span> : _excludeWindowList)
+    {
+      capturer<span style="color:#000;font-weight:bold">-&gt;</span>SetExcludedWindow(source.id);
+    }
+
+    <span style="color:#000;font-weight:bold">while</span> (_isrunning)
+    {
+      webrtc<span style="color:#000;font-weight:bold">::</span>SleepMs(_msPerFrame);
+      <span style="color:#998;font-style:italic">// 采集桌面图像
+</span><span style="color:#998;font-style:italic"></span>      capturer<span style="color:#000;font-weight:bold">-&gt;</span>CaptureFrame();
+    }
+  }
+
+  <span style="color:#458;font-weight:bold">bool</span> <span style="color:#900;font-weight:bold">Start</span>(desktop_capture_frame_callback back)
+  {
+    printf(<span style="color:#d14">&#34;start desk capturer...</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>_capture_thread)
+    {
+      _frameCallback <span style="color:#000;font-weight:bold">=</span> back;
+      _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">true</span>;
+      _capture_thread.reset(<span style="color:#000;font-weight:bold">new</span> rtc<span style="color:#000;font-weight:bold">::</span>PlatformThread(RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">::</span>CaptureDeskThread, <span style="color:#000;font-weight:bold">this</span>,
+                                                    <span style="color:#d14">&#34;CaptureThread&#34;</span>, rtc<span style="color:#000;font-weight:bold">::</span>ThreadPriority<span style="color:#000;font-weight:bold">::</span>kHighPriority));
+
+      _capture_thread<span style="color:#000;font-weight:bold">-&gt;</span>Start();
+    }
+    <span style="color:#998;font-style:italic">// CaptureThread();
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread = rtc::Thread::Create();
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread-&gt;Start();
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread-&gt;PostTask(RTC_FROM_HERE, [&amp;]
+</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">//                           { CaptureThread(); });
+</span><span style="color:#998;font-style:italic"></span>  }
+
+  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">Stop</span>()
+  {
+    <span style="color:#000;font-weight:bold">if</span> (_isrunning)
+    {
+      _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">false</span>;
+      _capture_thread<span style="color:#000;font-weight:bold">-&gt;</span>Stop();
+      _capture_thread.reset();
+    }
+  }
+
+  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">AddOrUpdateSink</span>(
+      rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>sink,
+      <span style="color:#000;font-weight:bold">const</span> rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkWants <span style="color:#000;font-weight:bold">&amp;</span>wants)
+  {
+    <span style="color:#998;font-style:italic">// Start(nullptr);
+</span><span style="color:#998;font-style:italic"></span>    _sink <span style="color:#000;font-weight:bold">=</span> sink;
+  }
+
+  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">RemoveSink</span>(rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>sink)
+  {
+    <span style="color:#000;font-weight:bold">if</span> (sink <span style="color:#000;font-weight:bold">==</span> _sink)
+    {
+      _sink <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    }
+
+    Stop();
+  }
+
+<span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+  <span style="color:#458;font-weight:bold">int</span> _msPerFrame <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>;                                   <span style="color:#998;font-style:italic">// 100毫秒采集一次，每秒钟采集10帧
+</span><span style="color:#998;font-style:italic"></span>  webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>SourceList _excludeWindowList;  <span style="color:#998;font-style:italic">//需要过滤的窗口列表
+</span><span style="color:#998;font-style:italic"></span>  desktop_capture_frame_callback _frameCallback <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>; <span style="color:#998;font-style:italic">//视频输出回调
+</span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>_userContext <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+
+<span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
+  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>rtc<span style="color:#000;font-weight:bold">::</span>PlatformThread<span style="color:#000;font-weight:bold">&gt;</span> _capture_thread;
+  <span style="color:#458;font-weight:bold">bool</span> _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">false</span>;
+  rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>_sink;
+};
+<span style="color:#999;font-weight:bold;font-style:italic">#endif
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">peerconnection.cc
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">CapturerTrackSource</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> webrtc<span style="color:#000;font-weight:bold">::</span>VideoTrackSource {
+ <span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
+  <span style="color:#000;font-weight:bold">static</span> rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> Create() {
+    <span style="color:#000;font-weight:bold">const</span> size_t kWidth <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">640</span>;
+    <span style="color:#000;font-weight:bold">const</span> size_t kHeight <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">480</span>;
+    <span style="color:#000;font-weight:bold">const</span> size_t kFps <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">30</span>;
+    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer;
+    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoCaptureModule<span style="color:#000;font-weight:bold">::</span>DeviceInfo<span style="color:#000;font-weight:bold">&gt;</span> info(
+        webrtc<span style="color:#000;font-weight:bold">::</span>VideoCaptureFactory<span style="color:#000;font-weight:bold">::</span>CreateDeviceInfo());
+    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>info) {
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    }
+    <span style="color:#458;font-weight:bold">int</span> num_devices <span style="color:#000;font-weight:bold">=</span> info<span style="color:#000;font-weight:bold">-&gt;</span>NumberOfDevices();
+    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> num_devices; <span style="color:#000;font-weight:bold">++</span>i) {
+      capturer <span style="color:#000;font-weight:bold">=</span> absl<span style="color:#000;font-weight:bold">::</span>WrapUnique(
+          webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">::</span>Create(kWidth, kHeight, kFps, i));
+      <span style="color:#000;font-weight:bold">if</span> (capturer) {
+        <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">new</span>
+            rtc<span style="color:#000;font-weight:bold">::</span>RefCountedObject<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span>(std<span style="color:#000;font-weight:bold">::</span>move(capturer));
+      }
+    }
+
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+  }
+
+  <span style="color:#000;font-weight:bold">static</span> rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> CreateDesk()
+  {
+    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk(RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">::</span>Create());
+    <span style="color:#000;font-weight:bold">if</span> (desk) {
+      printf(<span style="color:#d14">&#34;CreateDesk success</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">new</span> rtc<span style="color:#000;font-weight:bold">::</span>RefCountedObject<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span>(std<span style="color:#000;font-weight:bold">::</span>move(desk));
+    }
+      printf(<span style="color:#d14">&#34;CreateDesk failed...</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
+    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+  }
+
+ <span style="color:#000;font-weight:bold">protected</span><span style="color:#000;font-weight:bold">:</span>
+  <span style="color:#000;font-weight:bold">explicit</span> CapturerTrackSource(
+      std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer)
+      <span style="color:#000;font-weight:bold">:</span> VideoTrackSource(<span style="color:#998;font-style:italic">/*remote=*/</span><span style="color:#0086b3">false</span>), capturer_(std<span style="color:#000;font-weight:bold">::</span>move(capturer)) {}
+  <span style="color:#000;font-weight:bold">explicit</span> <span style="color:#900;font-weight:bold">CapturerTrackSource</span>(
+      std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk)
+      <span style="color:#000;font-weight:bold">:</span> VideoTrackSource(<span style="color:#998;font-style:italic">/*remote=*/</span><span style="color:#0086b3">false</span>), desk_(std<span style="color:#000;font-weight:bold">::</span>move(desk)) {}
+ <span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
+  rtc<span style="color:#000;font-weight:bold">::</span>VideoSourceInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;*</span> source() <span style="color:#000;font-weight:bold">override</span> {
+    <span style="color:#000;font-weight:bold">return</span> desk_.get();
+    <span style="color:#998;font-style:italic">// return capturer_.get();
+</span><span style="color:#998;font-style:italic"></span>  }
+  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer_;
+  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk_;
+};
+</code></pre></td></tr></table>
+</div>
+</div><p>参考： <a href="https://blog.csdn.net/weixin_29405665/article/details/107320004">https://blog.csdn.net/weixin_29405665/article/details/107320004</a></p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2021/11/webrtc-peerconnection/">webrtc一 | peerconnection</a></li>
+        
+        <li><a href="/2021/11/gop2p%E5%9B%9B/">Go-libp2p四 | 穿透NAT</a></li>
+        
+        <li><a href="/2021/11/randomquotes/">随机名人名言</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%B8%89/">Go-libp2p三 | relay例子</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%BA%8C/">Go-libp2p二 | echo例子</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/webrtc'>webrtc</a></li>
+                
+                <li><a href='/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2'>共享桌面</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">流浪花 By 流浪花</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-share_desk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    
+    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    
+    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    
+    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    
+    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    
+    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    
+    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
+    
+    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
+    
+    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
+    
+    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/event/">event</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
+    
+    <a href="https://zfunnily.github.io/tags/git/">git</a>
+    
+    <a href="https://zfunnily.github.io/tags/github/">github</a>
+    
+    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
+    
+    <a href="https://zfunnily.github.io/tags/go-libp2p/">go-libp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
+    
+    <a href="https://zfunnily.github.io/tags/html/">html</a>
+    
+    <a href="https://zfunnily.github.io/tags/http/">http</a>
+    
+    <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
+    
+    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
+    
+    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
+    
+    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
+    
+    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
+    
+    <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
+    
+    <a href="https://zfunnily.github.io/tags/other/">other</a>
+    
+    <a href="https://zfunnily.github.io/tags/p2p/">p2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/peerconnection/">peerconnection</a>
+    
+    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
+    
+    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
+    
+    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
+    
+    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
+    
+    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
+    
+    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/webrtc/">webrtc</a>
+    
+    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
+    
+    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/">穿透</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="流浪花的博客">流浪花的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="流浪花的github">流浪花的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
