@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 15 Nov 2021 11:23:24 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>webrtc二 | 共享桌面</title>
-      <link>https://zfunnily.github.io/2021/11/webrtc-share_desk/</link>
+      <link>https://zfunnily.github.io/2021/11/webrtc-desk/</link>
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/11/webrtc-share_desk/</guid>
+      <guid>https://zfunnily.github.io/2021/11/webrtc-desk/</guid>
       <description>改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource, 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回调 继承类</description>
     </item>
     
