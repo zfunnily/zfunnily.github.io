@@ -76,6 +76,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/" title="linux系统删除大量文件指令--rsync">linux系统删除大量文件指令--rsync</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            rsync的安装 rsync安装，有些系统默认安装有该命令ubuntu系统 sudo apt-get install rsync centos系统 sudo yum install rsync rsync参数详解 rsync提供了一些跟删除有关的参数 rsync --help | grep delete -del an alias for --delete-during --delete delete extraneous files from destination dirs --delete-before receiver deletes before transfer, not during --delete-during receiver deletes during transfer (default) --delete-delay find deletions during, delete after --delete-after receiver deletes after transfer, not during --delete-excluded also delete excluded files from destination dirs --ignore-errors delete even if there are I/O errors --max-delete=NUM don't……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/" title="CPU的核与线程-4核8线程">CPU的核与线程-4核8线程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            查看cpu信息 $ cat /proc/cpuinfo 物理CPU 物理CPU就是计算机上实际配置的CPU个数。在linux上可以打开cat /proc/cpuinfo 来查看，其中的physical id就是每个物理CPU的ID，能找到几个physical id就代表计算机实际有几个CPU。 在linux下可以通过指令 grep ‘physical id’ /proc/cpuinfo |……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/" title="大量TIME_WAIT对线上业务的影响">大量TIME_WAIT对线上业务的影响</a>
             </h1>
         </header>
@@ -257,52 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owt-client-javascript/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Ingress的基本使用">Ingress的基本使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月15日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/" title="Statefluset的持久存储PVC">Statefluset的持久存储PVC</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -434,6 +434,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-desk/" title="Webrtc Desk">Webrtc Desk</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="Peerconnection一 | 连接">Peerconnection一 | 连接</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
@@ -463,14 +471,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/" title="Skynet源码赏析二 | 基础数据结构">Skynet源码赏析二 | 基础数据结构</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%80/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
     </li>
     
 </ul>
@@ -512,7 +512,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
     
 </ul>
     </section>
@@ -645,6 +645,8 @@
     
     <a href="https://zfunnily.github.io/tags/p2p/">p2p</a>
     
+    <a href="https://zfunnily.github.io/tags/peerconnection/">peerconnection</a>
+    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
@@ -694,6 +696,8 @@
     <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
     
     <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/webrtc/">webrtc</a>
     
     <a href="https://zfunnily.github.io/tags/windows/">windows</a>
     
@@ -747,6 +751,8 @@
     
     <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
     
+    <a href="https://zfunnily.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%85%B1%E4%BA%AB/">桌面共享</a>
+    
     <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
@@ -784,6 +790,8 @@
     <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
     
 </div>
     </section>

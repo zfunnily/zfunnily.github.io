@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Peerconnection一 | 连接 | 流浪花</title>
+    <meta property="og:title" content="Peerconnection一 | 连接 - 流浪花">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-11-10T16:20:31&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-11-10T16:20:31&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="Peerconnection一 | 连接">
+        
+    <meta name="author" content="流浪花">
+    <meta property="og:url" content="https://zfunnily.github.io/2021/11/webrtc-peerconnection/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://zfunnily.github.io/">
+                        流浪花
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    
+                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#环境">环境</a></li>
+    <li><a href="#webrtc交互过程">webrtc交互过程</a></li>
+    <li><a href="#peer_connection-解析">peer_connection 解析</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Peerconnection一 | 连接</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="环境">环境</h2>
+<ul>
+<li>Ubuntu18.04</li>
+<li>webrtc M84</li>
+</ul>
+<p>国内镜像：https://webrtc.org.cn/mirror/</p>
+<h2 id="webrtc交互过程">webrtc交互过程</h2>
+<p>
+        <a data-fancybox="gallery" href="https://webrtc.mthli.com/f69fcd7abb2e07136b22886816376982/peer-connection.png">
+            <img class="mx-auto" alt="" src="https://webrtc.mthli.com/f69fcd7abb2e07136b22886816376982/peer-connection.png" />
+        </a>
+    </p>
+<p>通过peerconnection的例子来分析webrtc的交互流程</p>
+<h2 id="peer_connection-解析">peer_connection 解析</h2>
+<p>信令交互主要是<code>PeerConnectionClient</code>这个类
+初始化socket连接跟 绑定回调</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#458;font-weight:bold">void</span> PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>InitSocketSignals() {
+  control_socket_<span style="color:#000;font-weight:bold">-&gt;</span>SignalCloseEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnClose);  <span style="color:#998;font-style:italic">//连接关闭回调
+</span><span style="color:#998;font-style:italic"></span>  hanging_get_<span style="color:#000;font-weight:bold">-&gt;</span>SignalCloseEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnClose);     <span style="color:#998;font-style:italic">//同上
+</span><span style="color:#998;font-style:italic"></span>  
+  control_socket_<span style="color:#000;font-weight:bold">-&gt;</span>SignalConnectEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnConnect);      <span style="color:#998;font-style:italic">//连接成功回调
+</span><span style="color:#998;font-style:italic"></span>  hanging_get_<span style="color:#000;font-weight:bold">-&gt;</span>SignalConnectEvent.connect( <span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnHangingGetConnect); <span style="color:#998;font-style:italic">//同上
+</span><span style="color:#998;font-style:italic"></span>  
+  control_socket_<span style="color:#000;font-weight:bold">-&gt;</span>SignalReadEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnRead); <span style="color:#998;font-style:italic">//消息回调
+</span><span style="color:#998;font-style:italic"></span>  hanging_get_<span style="color:#000;font-weight:bold">-&gt;</span>SignalReadEvent.connect( <span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnHangingGetRead); <span style="color:#998;font-style:italic">//同上
+</span><span style="color:#998;font-style:italic"></span>}
+</code></pre></td></tr></table>
+</div>
+</div><p>peerA:</p>
+<ol>
+<li>连接server，获得自己的<code>peer_id_</code>； 主动连接<code>PeerConnectionClient::DoConnect()</code>, 发送获取<code>peer_id_</code>的协议<code>GET /sign_in</code>， 回调<code>PeerConnectionClient::OnConnect(rtc::AsyncSocket* socket)</code>, 其他客户端连接服务，会添加到peerList</li>
+<li>主动连接<code>peerB</code>, <code>callback_-&gt;ConnectToPeer(id);</code></li>
+</ol>
+<ul>
+<li>初始化peerconnection, <code>Conductor::InitializePeerConnection())</code>
+<ul>
+<li>创建<code>peerConnection</code>，<code>Conductor::CreatePeerConnection</code> 设置<code>IceServer</code>服务器地址</li>
+<li>add audio &amp; video tracks,<code>AddTrack</code>, <code>CreateAudioTrack</code>, <code>CreateVideoTrack</code>, <code>peer_connection_-&gt;AddTrack</code></li>
+</ul>
+</li>
+<li>创建offer &amp; SetLocalDescription, <code>CreateOffer</code>, <code>peer_connection_-&gt;CreateOffer( this, webrtc::PeerConnectionInterface::RTCOfferAnswerOptions());</code>
+<ul>
+<li><code>Conductor::OnSuccess</code>, 设置本地描述符<code>SetLocalDescription</code> , 给peerB发送<code>offer sdp</code>信息。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>A new ICE candidate has been gathered.</li>
+</ol>
+<ul>
+<li><code>OnIceCandidate</code>,  并把<code>Candidate</code>信息发送给peerB</li>
+</ul>
+<ol start="4">
+<li>收到peerB发来的信息 <code>OnMessageFromPeer</code></li>
+</ol>
+<ul>
+<li>设置peerB的描述信息<code>SetRemoteDescription</code></li>
+<li>Once a remote candidate is received from the peerB,<code>CreateIceCandidate</code>,<code>AddIceCandidate</code></li>
+<li>添加candidate <code>CreateIceCandidate</code>, <code>AddIceCandidate</code></li>
+</ul>
+<p>peerB:</p>
+<ol>
+<li>同 peerA</li>
+<li>收到peerA发来的连接信息， <code>OnMessageFromPeer</code></li>
+</ol>
+<ul>
+<li>初始化peerconnection, <code>Conductor::InitializePeerConnection())</code>
+<ul>
+<li>创建<code>peerConnection</code>，<code>Conductor::CreatePeerConnection</code> 设置<code>IceServer</code>服务器地址</li>
+<li>add audio &amp; video tracks,<code>AddTrack</code>, <code>CreateAudioTrack</code>, <code>CreateVideoTrack</code>, <code>peer_connection_-&gt;AddTrack</code></li>
+</ul>
+</li>
+<li>创建描述信息 <code>CreateSessionDescription</code></li>
+<li>设置peerA的描述信息<code>SetRemoteDescription</code></li>
+<li>创建Answer <code>CreateAnswer</code>
+<ul>
+<li><code>Conductor::OnSuccess</code>, 设置本地描述符<code>SetLocalDescription</code> , 给peerA发送<code>answer sdp</code>信息。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>收到peerA发来的信息 <code>OnMessageFromPeer</code></li>
+</ol>
+<ul>
+<li>添加candidate <code>CreateIceCandidate</code>, <code>AddIceCandidate</code></li>
+</ul>
+<ol start="4">
+<li>A new ICE candidate has been gathered.</li>
+</ol>
+<ul>
+<li><code>OnIceCandidate</code>,  并把<code>Candidate</code>信息发送给peerB</li>
+</ul>
+<p>在WebRTC的源码api/peer_connection_interface.h中，有很长一段注释，分别从呼叫方和被呼方的视角说明了整个流程,发起方:</p>
+<pre><code>// The following steps are needed to setup a typical call using WebRTC:
+//
+// 1. Create a PeerConnectionFactoryInterface. Check constructors for more
+// information about input parameters.
+//
+// 2. Create a PeerConnection object. Provide a configuration struct which
+// points to STUN and/or TURN servers used to generate ICE candidates, and
+// provide an object that implements the PeerConnectionObserver interface,
+// which is used to receive callbacks from the PeerConnection.
+//
+// 3. Create local MediaStreamTracks using the PeerConnectionFactory and add
+// them to PeerConnection by calling AddTrack (or legacy method, AddStream).
+//
+// 4. Create an offer, call SetLocalDescription with it, serialize it, and send
+// it to the remote peer
+//
+// 5. Once an ICE candidate has been gathered, the PeerConnection will call the
+// observer function OnIceCandidate. The candidates must also be serialized and
+// sent to the remote peer.
+//
+// 6. Once an answer is received from the remote peer, call
+// SetRemoteDescription with the remote answer.
+//
+// 7. Once a remote candidate is received from the remote peer, provide it to
+// the PeerConnection by calling AddIceCandidate.
+</code></pre><p>接收方</p>
+<pre><code>// If the application decides to accept the call, it should:
+// 1. Create PeerConnectionFactoryInterface if it doesn't exist.
+// 2. Create a new PeerConnection.
+// 3. Provide the remote offer to the new PeerConnection object by calling
+// SetRemoteDescription.
+
+// 4. Generate an answer to the remote offer by calling CreateAnswer and send it
+// back to the remote peer.
+//
+// 5. Provide the local answer to the new PeerConnection by calling
+// SetLocalDescription with the answer.
+//
+// 6. Provide the remote ICE candidates by calling AddIceCandidate.
+//
+// 7. Once a candidate has been gathered, the PeerConnection will call the
+// observer function OnIceCandidate. Send these candidates to the remote peer.
+</code></pre><p>参考连接: <a href="https://blog.csdn.net/ice_ly000/article/details/103162838">https://blog.csdn.net/ice_ly000/article/details/103162838</a>
+webrtc交互流程图片来自：https://webrtc.mthli.com/connection/peer-connection/</p>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2021/11/gop2p%E5%9B%9B/">Go-libp2p四 | 穿透NAT</a></li>
+        
+        <li><a href="/2021/11/randomquotes/">随机名人名言</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%B8%89/">Go-libp2p三 | relay例子</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%BA%8C/">Go-libp2p二 | echo例子</a></li>
+        
+        <li><a href="/2021/10/gop2p%E4%B8%80/">Go-libp2p一 | chat例子</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/webrtc'>webrtc</a></li>
+                
+                <li><a href='/tags/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></li>
+                
+                <li><a href='/tags/peerconnection'>peerconnection</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://zfunnily.github.io/">流浪花 By 流浪花</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-desk/" title="Webrtc Desk">Webrtc Desk</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/webrtc-peerconnection/" title="Peerconnection一 | 连接">Peerconnection一 | 连接</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
+    
+    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    
+    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    
+    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    
+    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    
+    <a href="https://zfunnily.github.io/tags/TODO/">TODO</a>
+    
+    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    
+    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    
+    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    
+    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    
+    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
+    
+    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
+    
+    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
+    
+    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/event/">event</a>
+    
+    <a href="https://zfunnily.github.io/tags/except/">except</a>
+    
+    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
+    
+    <a href="https://zfunnily.github.io/tags/game/">game</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
+    
+    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
+    
+    <a href="https://zfunnily.github.io/tags/git/">git</a>
+    
+    <a href="https://zfunnily.github.io/tags/github/">github</a>
+    
+    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
+    
+    <a href="https://zfunnily.github.io/tags/go-libp2p/">go-libp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
+    
+    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
+    
+    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
+    
+    <a href="https://zfunnily.github.io/tags/html/">html</a>
+    
+    <a href="https://zfunnily.github.io/tags/http/">http</a>
+    
+    <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
+    
+    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
+    
+    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
+    
+    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
+    
+    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
+    
+    <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
+    
+    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
+    
+    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
+    
+    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
+    
+    <a href="https://zfunnily.github.io/tags/move/">move</a>
+    
+    <a href="https://zfunnily.github.io/tags/music/">music</a>
+    
+    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
+    
+    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
+    
+    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
+    
+    <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
+    
+    <a href="https://zfunnily.github.io/tags/other/">other</a>
+    
+    <a href="https://zfunnily.github.io/tags/p2p/">p2p</a>
+    
+    <a href="https://zfunnily.github.io/tags/peerconnection/">peerconnection</a>
+    
+    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
+    
+    <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
+    
+    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
+    
+    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
+    
+    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
+    
+    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
+    
+    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
+    
+    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
+    
+    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
+    
+    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
+    
+    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
+    
+    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
+    
+    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
+    
+    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
+    
+    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
+    
+    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
+    
+    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
+    
+    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
+    
+    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
+    
+    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
+    
+    <a href="https://zfunnily.github.io/tags/web/">web</a>
+    
+    <a href="https://zfunnily.github.io/tags/webrtc/">webrtc</a>
+    
+    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
+    
+    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/">寻路</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%85%B1%E4%BA%AB/">桌面共享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/">穿透</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://zfunnily.github.io/" title="流浪花的博客">流浪花的博客</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="流浪花的github">流浪花的github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
