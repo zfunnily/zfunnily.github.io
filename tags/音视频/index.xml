@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 14 Nov 2021 16:20:31 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>webrtc一 | peerconnection</title>
-      <link>https://zfunnily.github.io/2021/11/webrtc-peerconnection/</link>
+      <link>https://zfunnily.github.io/2021/11/webrtcpeerconnection/</link>
       <pubDate>Sun, 14 Nov 2021 16:20:31 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/11/webrtc-peerconnection/</guid>
+      <guid>https://zfunnily.github.io/2021/11/webrtcpeerconnection/</guid>
       <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，需要在应用层和底层一帧数据做一个桥接层，以隔离上下层。 桥接层的代码主要位于med</description>
     </item>
     
