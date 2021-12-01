@@ -242,15 +242,6 @@
     </item>
     
     <item>
-      <title>Auto_findroad</title>
-      <link>https://zfunnily.github.io/2021/05/auto_findroad/</link>
-      <pubDate>Thu, 20 May 2021 17:39:34 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/05/auto_findroad/</guid>
-      <description>自动寻路 有限状态机器 行为树</description>
-    </item>
-    
-    <item>
       <title>Lua next 的使用</title>
       <link>https://zfunnily.github.io/2021/05/lua_next/</link>
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>

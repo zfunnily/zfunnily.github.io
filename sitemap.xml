@@ -230,18 +230,6 @@
     <loc>https://zfunnily.github.io/2021/06/go_redis/</loc>
     <lastmod>2021-06-03T15:57:14+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2021/05/auto_findroad/</loc>
-    <lastmod>2021-05-20T17:39:34+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/TODO/</loc>
-    <lastmod>2021-05-20T17:39:34+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/%E5%AF%BB%E8%B7%AF/</loc>
-    <lastmod>2021-05-20T17:39:34+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-05-20T17:39:34+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/categories/Lua/</loc>
     <lastmod>2021-05-10T16:39:50+08:00</lastmod>
   </url><url>
@@ -519,6 +507,9 @@
     <lastmod>2021-01-02T23:19:58+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2021-01-02T23:19:58+00:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2021-01-02T23:19:58+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
