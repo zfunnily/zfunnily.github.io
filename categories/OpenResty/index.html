@@ -85,7 +85,30 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">使用OpenResty做一个postman小工具</a>
+                <a href="https://zfunnily.github.io/2021/12/openresty-upload/">Openresty三 | 上传文件接口</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月8日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Openresty'>Openresty</a>
+            
+        </div>
+        
+        <div class="post-content">
+            上传文件接口 account.conf,增加一个location: location /upload { resolver 8.8.8.8 ipv6=off; content_by_lua_file lua/upload.lua; } upload.lua 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 -- upload.lua --========================================== -- 文件上传 --========================================== local chunk_size = 4096 local form, err = upload:new(chunk_size) if not form……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/12/openresty-upload/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">Openresty二 | postman小工具</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -108,7 +131,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">OpenResty初探</a>
+                <a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">Openresty一 | 初探</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -185,6 +208,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
     </li>
     
@@ -220,10 +247,6 @@
         <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -244,6 +267,8 @@
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
@@ -285,6 +310,8 @@
     <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
     
     <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
     
     <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
     
@@ -439,6 +466,8 @@
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
     <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     

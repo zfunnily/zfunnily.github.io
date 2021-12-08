@@ -76,6 +76,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" title="Go mod拉取私有仓库">Go mod拉取私有仓库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" title="插入排序">插入排序</a>
             </h1>
         </header>
@@ -280,29 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" title="Golang的定时器实现方式">Golang的定时器实现方式</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &lt;- t2.C fmt.Println(&quot;NewTimer...&quot;) } }() select 通过select的方式实现定时器： for { select { case &lt;- time.After(d): fmt.Println(&quot;select...&quot;) } }……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -447,6 +447,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
     </li>
     
@@ -482,10 +486,6 @@
         <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -506,6 +506,8 @@
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
@@ -547,6 +549,8 @@
     <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
     
     <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
     
     <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
     
@@ -701,6 +705,8 @@
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
     <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     

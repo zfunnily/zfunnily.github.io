@@ -78,6 +78,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/09/CentOS7.2-%E5%8D%87%E7%BA%A7gcc/" title="CentOS7.2 升级gcc">CentOS7.2 升级gcc</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年9月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 CentOS 7.2.1511- Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 $ docker $ yum update &amp;&amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;&amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件放在gcc……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/09/CentOS7.2-%E5%8D%87%E7%BA%A7gcc/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/09/gcc%E5%8D%87%E7%BA%A7/" title="Centos7.2的gcc4.8升级为4.9">Centos7.2的gcc4.8升级为4.9</a>
             </h1>
         </header>
@@ -300,31 +325,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" title="Go mod拉取私有仓库">Go mod拉取私有仓库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -454,6 +454,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
     </li>
     
@@ -489,10 +493,6 @@
         <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -513,6 +513,8 @@
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
@@ -554,6 +556,8 @@
     <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
     
     <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
     
     <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
     
@@ -708,6 +712,8 @@
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
     <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     

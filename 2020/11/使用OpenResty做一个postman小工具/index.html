@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>使用OpenResty做一个postman小工具 | 留白</title>
-    <meta property="og:title" content="使用OpenResty做一个postman小工具 - 留白">
+    <title>Openresty二 | postman小工具 | 留白</title>
+    <meta property="og:title" content="Openresty二 | postman小工具 - 留白">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2020-11-25T16:30:39&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2020-11-25T16:30:39&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="使用OpenResty做一个postman小工具">
+    <meta name="description" content="Openresty二 | postman小工具">
         
     <meta name="author" content="留白">
     <meta property="og:url" content="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">
@@ -142,23 +142,23 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_4a用到的知识点"><!-- raw HTML omitted --><!-- raw HTML omitted -->用到的知识点</a></li>
-    <li><a href="#a-id_mvcpostman_8a参照-mvc模型来做postman工具"><!-- raw HTML omitted --><!-- raw HTML omitted -->参照 mvc模型来做postman工具</a>
+    <li><a href="#用到的知识点">用到的知识点</a></li>
+    <li><a href="#参照-mvc模型来做postman工具">参照 mvc模型来做postman工具</a>
       <ul>
-        <li><a href="#a-id_10a配置文件说明"><!-- raw HTML omitted --><!-- raw HTML omitted -->配置文件说明</a></li>
-        <li><a href="#a-iduri_39a入口文件解析uri"><!-- raw HTML omitted --><!-- raw HTML omitted -->入口文件/解析uri</a></li>
-        <li><a href="#a-id_101a控制器"><!-- raw HTML omitted --><!-- raw HTML omitted -->控制器</a></li>
-        <li><a href="#a-id_153a模板代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->模板代码</a></li>
+        <li><a href="#配置文件说明">配置文件说明</a></li>
+        <li><a href="#入口文件解析uri">入口文件/解析uri</a></li>
+        <li><a href="#控制器">控制器</a></li>
+        <li><a href="#模板代码">模板代码</a></li>
       </ul>
     </li>
-    <li><a href="#a-id_193a使用方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用方法</a>
+    <li><a href="#使用方法">使用方法</a>
       <ul>
-        <li><a href="#a-idlua_resty_template_197alua_resty_template模板渲染方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->lua_resty_template模板渲染方法</a></li>
-        <li><a href="#a-id_216a模板语法"><!-- raw HTML omitted --><!-- raw HTML omitted -->模板语法</a></li>
+        <li><a href="#lua_resty_template模板渲染方法">lua_resty_template模板渲染方法</a></li>
+        <li><a href="#模板语法">模板语法</a></li>
       </ul>
     </li>
-    <li><a href="#a-id_227a遇到的坑"><!-- raw HTML omitted --><!-- raw HTML omitted -->遇到的坑</a></li>
-    <li><a href="#a-id_243a项目地址"><!-- raw HTML omitted --><!-- raw HTML omitted -->项目地址</a></li>
+    <li><a href="#遇到的坑">遇到的坑</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
   </ul>
 </nav>
     </div>
@@ -192,7 +192,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">使用OpenResty做一个postman小工具</h1>
+            <h1 class="post-title">Openresty二 | postman小工具</h1>
         </header>
         <date class="post-meta meta-date">
             2020年11月25日
@@ -213,10 +213,10 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_4a用到的知识点"><!-- raw HTML omitted --><!-- raw HTML omitted -->用到的知识点</h2>
+            <h2 id="用到的知识点">用到的知识点</h2>
 <p>mvc架构<!-- raw HTML omitted --> 模型渲染库：https://github.com/bungle/lua-resty-template<!-- raw HTML omitted --> resty http请求库： <a href="https://github.com/bungle/lua-resty-template">https://github.com/bungle/lua-resty-template</a></p>
-<h2 id="a-id_mvcpostman_8a参照-mvc模型来做postman工具"><!-- raw HTML omitted --><!-- raw HTML omitted -->参照 mvc模型来做postman工具</h2>
-<h3 id="a-id_10a配置文件说明"><!-- raw HTML omitted --><!-- raw HTML omitted -->配置文件说明</h3>
+<h2 id="参照-mvc模型来做postman工具">参照 mvc模型来做postman工具</h2>
+<h3 id="配置文件说明">配置文件说明</h3>
 <pre><code>worker_processes  1;
 error_log logs/error.log;
 events {
@@ -242,7 +242,7 @@ http {
 </code></pre><ul>
 <li>lua_code_cache off; 是为了修改lua脚本后不用重启nginx自动加载lua。- lua_package_path: lua脚本路径- root static: 静态目录是static</li>
 </ul>
-<h3 id="a-iduri_39a入口文件解析uri"><!-- raw HTML omitted --><!-- raw HTML omitted -->入口文件/解析uri</h3>
+<h3 id="入口文件解析uri">入口文件/解析uri</h3>
 <p>mvc.lua</p>
 <pre><code>#!/usr/bin/lua
 
@@ -303,7 +303,7 @@ if ret == false then
     end
 end
 
-</code></pre><h3 id="a-id_101a控制器"><!-- raw HTML omitted --><!-- raw HTML omitted -->控制器</h3>
+</code></pre><h3 id="控制器">控制器</h3>
 <p>控制器路径：　lua/web/index.lua, lua/web/postman.lua<!-- raw HTML omitted --> lua/web/index.lua 渲染模板 lua/tpl/index.html</p>
 <pre><code>local template = require &quot;resty.template&quot;
 local _M = {}
@@ -351,7 +351,7 @@ function _M.index()
 end
 return _M
 
-</code></pre><h3 id="a-id_153a模板代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->模板代码</h3>
+</code></pre><h3 id="模板代码">模板代码</h3>
 <p>lua/tpl/index.html</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -389,9 +389,9 @@ return _M
 
 &lt;/html&gt;
 
-</code></pre><h2 id="a-id_193a使用方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用方法</h2>
+</code></pre><h2 id="使用方法">使用方法</h2>
 <p>访问地址： http://ip:8080/index/index<!-- raw HTML omitted --> 第一个index代表lua/web/index.lua<!-- raw HTML omitted --> 第二个index代表lua/web/index.lua文件中的index方法。</p>
-<h3 id="a-idlua_resty_template_197alua_resty_template模板渲染方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->lua_resty_template模板渲染方法</h3>
+<h3 id="lua_resty_template模板渲染方法">lua_resty_template模板渲染方法</h3>
 <ol>
 <li>使用template.render</li>
 </ol>
@@ -411,11 +411,11 @@ local func = template.compile(&quot;view.html&quot;)
 --执行函数，得到渲染之后的内容 
 local content = func(context) ngx.say(content)
 
-</code></pre><h3 id="a-id_216a模板语法"><!-- raw HTML omitted --><!-- raw HTML omitted -->模板语法</h3>
+</code></pre><h3 id="模板语法">模板语法</h3>
 <ul>
 <li><code>{&lt;!-- --&gt;{expression}}</code>：输出传递的值，转义<code>html</code>相关标签- <code>{*expression*}</code>：输出传递的值- <code>{% lua code %}</code>：使用<code>lua</code>代码- <code>{(template)}</code>：引入<code>html</code>共用页面- <code>{(base.html, { title = &quot;Hello, World&quot; } )}</code>：引入<code>html</code>共用页面，并传递相关值- <code>{-verbatim-}...{-verbatim-}</code>/<code>{-raw-}...{-raw-}</code>：可原样输出模板语法- <code>{# comments #}</code>：在模板中使用注释，不会被执行和输出</li>
 </ul>
-<h2 id="a-id_227a遇到的坑"><!-- raw HTML omitted --><!-- raw HTML omitted -->遇到的坑</h2>
+<h2 id="遇到的坑">遇到的坑</h2>
 <p>网页上直接输出了html字符串。而不是正常网页<!-- raw HTML omitted --> 解决办法<!-- raw HTML omitted --> nginx.conf配置文件加上default_type text/html;</p>
 <pre><code>server {
     default_type text/html;
@@ -427,7 +427,7 @@ local content = func(context) ngx.say(content)
 </code></pre><p>入口文件mvc.lua开头加上下面的内容：</p>
 <pre><code>ngx.say(&quot;&lt;br/&gt;&quot;)
 
-</code></pre><h2 id="a-id_243a项目地址"><!-- raw HTML omitted --><!-- raw HTML omitted -->项目地址</h2>
+</code></pre><h2 id="项目地址">项目地址</h2>
 <p><a href="https://github.com/diycat1024/OpenRestyPostman">https://github.com/diycat1024/OpenRestyPostman</a></p>
 
         </div>
@@ -441,7 +441,7 @@ local content = func(context) ngx.say(content)
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">OpenResty初探</a></li>
+        <li><a href="/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">Openresty一 | 初探</a></li>
         
         <li><a href="/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Ingress的基本使用</a></li>
         
@@ -548,6 +548,10 @@ local content = func(context) ngx.say(content)
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
     </li>
     
@@ -583,10 +587,6 @@ local content = func(context) ngx.say(content)
         <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -607,6 +607,8 @@ local content = func(context) ngx.say(content)
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
@@ -648,6 +650,8 @@ local content = func(context) ngx.say(content)
     <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
     
     <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
     
     <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
     
@@ -802,6 +806,8 @@ local content = func(context) ngx.say(content)
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
     <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     

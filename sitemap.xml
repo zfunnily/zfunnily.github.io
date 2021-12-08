@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zfunnily.github.io/categories/</loc>
-    <lastmod>2021-11-15T11:23:24+08:00</lastmod>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/OpenResty/</loc>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/Openresty/</loc>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2021/12/openresty-upload/</loc>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/post/</loc>
-    <lastmod>2021-11-15T11:23:24+08:00</lastmod>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/</loc>
-    <lastmod>2021-11-15T11:23:24+08:00</lastmod>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/upload/</loc>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/</loc>
+    <lastmod>2021-12-08T16:42:17+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/webrtc/</loc>
     <lastmod>2021-11-15T11:23:24+08:00</lastmod>
@@ -18,9 +33,6 @@
     <lastmod>2021-11-15T11:23:24+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/</loc>
-    <lastmod>2021-11-15T11:23:24+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/</loc>
     <lastmod>2021-11-15T11:23:24+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</loc>
@@ -593,13 +605,10 @@
     <loc>https://zfunnily.github.io/tags/nginx/</loc>
     <lastmod>2020-11-25T16:30:39+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/categories/OpenResty/</loc>
+    <loc>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-11-25T16:30:39+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/web/</loc>
-    <lastmod>2020-11-25T16:30:39+00:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2020-11-25T16:30:39+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/</loc>

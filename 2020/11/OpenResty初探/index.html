@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>OpenResty初探 | 留白</title>
-    <meta property="og:title" content="OpenResty初探 - 留白">
+    <title>Openresty一 | 初探 | 留白</title>
+    <meta property="og:title" content="Openresty一 | 初探 - 留白">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2020-11-23T16:21:34&#43;08:00'>
@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2020-11-23T16:21:34&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="OpenResty初探">
+    <meta name="description" content="Openresty一 | 初探">
         
     <meta name="author" content="留白">
     <meta property="og:url" content="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">
@@ -142,22 +142,22 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-id_9a我的目的"><!-- raw HTML omitted --><!-- raw HTML omitted -->我的目的</a></li>
-    <li><a href="#a-id_openresty_12a环境安装-openresty"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境＆安装 OpenResty</a></li>
-    <li><a href="#a-id_29a开始第一个程序"><!-- raw HTML omitted --><!-- raw HTML omitted -->开始第一个程序</a></li>
-    <li><a href="#a-idopenrestyluahttp__65aopenresty使用lua脚本写http-请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->OpenResty使用lua脚本写http 请求</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#我的目的">我的目的</a></li>
+    <li><a href="#环境安装-openresty">环境＆安装 OpenResty</a></li>
+    <li><a href="#开始第一个程序">开始第一个程序</a></li>
+    <li><a href="#openresty使用lua脚本写http-请求">OpenResty使用lua脚本写http 请求</a>
       <ul>
-        <li><a href="#a-idget_83aget请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->Get请求</a></li>
-        <li><a href="#a-idpost_102apost请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->Post请求</a></li>
-        <li><a href="#a-idnginx_127a重启nginx"><!-- raw HTML omitted --><!-- raw HTML omitted -->重启nginx</a></li>
-        <li><a href="#a-id_131a验证"><!-- raw HTML omitted --><!-- raw HTML omitted -->验证</a></li>
+        <li><a href="#get请求">Get请求</a></li>
+        <li><a href="#post请求">Post请求</a></li>
+        <li><a href="#重启nginx">重启nginx</a></li>
+        <li><a href="#验证">验证</a></li>
       </ul>
     </li>
-    <li><a href="#a-id_135a常用方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->常用方法</a></li>
-    <li><a href="#a-id_150a遇到的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->遇到的问题</a>
+    <li><a href="#常用方法">常用方法</a></li>
+    <li><a href="#遇到的问题">遇到的问题</a>
       <ul>
-        <li><a href="#a-idopenresty_151aopenresty返回中文乱码问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->OpenResty返回中文乱码问题</a></li>
+        <li><a href="#openresty返回中文乱码问题">OpenResty返回中文乱码问题</a></li>
       </ul>
     </li>
   </ul>
@@ -193,7 +193,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">OpenResty初探</h1>
+            <h1 class="post-title">Openresty一 | 初探</h1>
         </header>
         <date class="post-meta meta-date">
             2020年11月23日
@@ -214,13 +214,13 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+            <h2 id="概述">概述</h2>
 <p>OpenResty®是一个基于<a href="https://openresty.org/cn/nginx.html">Nginx</a>与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。</p>
 <p>OpenResty®通过汇聚各种设计精良的<a href="https://openresty.org/cn/nginx.html">Nginx</a>模块（主要由 OpenResty 团队自主开发），从而将<a href="https://openresty.org/cn/nginx.html">Nginx</a>有效地变成一个强大的通用 Web 应用平台。这样，Web 开发人员和系统工程师可以使用 Lua 脚本语言调动<a href="https://openresty.org/cn/nginx.html">Nginx</a>支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统。</p>
 <p>OpenResty®的目标是让你的Web服务直接跑在<a href="https://openresty.org/cn/nginx.html">Nginx</a>服务内部，充分利用<a href="https://openresty.org/cn/nginx.html">Nginx</a>的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应。</p>
-<h2 id="a-id_9a我的目的"><!-- raw HTML omitted --><!-- raw HTML omitted -->我的目的</h2>
+<h2 id="我的目的">我的目的</h2>
 <p>项目中有个用到http请求,我用shell脚本+curl简单实现了一下.但是我想用一个我不熟悉的语言来做该功能, 在网上搜索到可以通过lua来实现我的需求… 于是我找到了OpenResty框架 . lua发送http请求一般有两种方式, 使用 socket.http 或者 resty.http</p>
-<h2 id="a-id_openresty_12a环境安装-openresty"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境＆安装 OpenResty</h2>
+<h2 id="环境安装-openresty">环境＆安装 OpenResty</h2>
 <p>参考:https://openresty.org/cn/linux-packages.html<!-- raw HTML omitted --> 环境：Ubuntu<!-- raw HTML omitted --> 安装</p>
 <pre><code>$ sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
 $ echo  &quot;deb http://openresty.org/package/ubuntu $(lsb_release -sc) main&quot;  | sudo tee /etc/apt/sources.list.d/openresty.list
@@ -233,7 +233,7 @@ $ sudo apt-get -y install openresty
 
 $ source ~/.bashrc
 
-</code></pre><h2 id="a-id_29a开始第一个程序"><!-- raw HTML omitted --><!-- raw HTML omitted -->开始第一个程序</h2>
+</code></pre><h2 id="开始第一个程序">开始第一个程序</h2>
 <p>创建项目目录</p>
 <pre><code>mkdir ~/openrestry
 cd ~/openrestry
@@ -264,7 +264,7 @@ http {
 <pre><code>curl http://localhost:8080/
 
 </code></pre><p>返回结果<code>&lt;p&gt;hello, world &lt;/p&gt;</code></p>
-<h2 id="a-idopenrestyluahttp__65aopenresty使用lua脚本写http-请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->OpenResty使用lua脚本写http 请求</h2>
+<h2 id="openresty使用lua脚本写http-请求">OpenResty使用lua脚本写http 请求</h2>
 <p>lua脚本可以写在 conf/nginx.conf 配置文件的 localtion 中.也可以写在单独的 lua 脚本文件中.需加上配置参数 <code>content_by_lua_file</code></p>
 <pre><code> worker_processes  1;
 error_log logs/error.log;
@@ -281,7 +281,7 @@ http {
     }
 }
 
-</code></pre><h3 id="a-idget_83aget请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->Get请求</h3>
+</code></pre><h3 id="get请求">Get请求</h3>
 <p>hello.lua脚本</p>
 <pre><code>//hello.lua
 
@@ -299,7 +299,7 @@ end
 ngx.log(ngx.ERR, &quot;request status#&quot;, res.status)
 ngx.say(res.body)
 
-</code></pre><h3 id="a-idpost_102apost请求"><!-- raw HTML omitted --><!-- raw HTML omitted -->Post请求</h3>
+</code></pre><h3 id="post请求">Post请求</h3>
 <p>hello.lua脚本</p>
 <pre><code>//hello.lua
 
@@ -323,13 +323,13 @@ end
 ngx.log(ngx.ERR, &quot;request status#&quot;, res.status)
 ngx.say(res.body)
 
-</code></pre><h3 id="a-idnginx_127a重启nginx"><!-- raw HTML omitted --><!-- raw HTML omitted -->重启nginx</h3>
+</code></pre><h3 id="重启nginx">重启nginx</h3>
 <pre><code>nginx -p `pwd`/ -s reload
 
-</code></pre><h3 id="a-id_131a验证"><!-- raw HTML omitted --><!-- raw HTML omitted -->验证</h3>
+</code></pre><h3 id="验证">验证</h3>
 <pre><code>curl http://localhost:8080
 
-</code></pre><h2 id="a-id_135a常用方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->常用方法</h2>
+</code></pre><h2 id="常用方法">常用方法</h2>
 <p>创建<code>HTTP</code>请求对象，失败返回<code>nil</code>和错误信息。</p>
 <pre><code>httpc = http.new()
 
@@ -339,13 +339,13 @@ ngx.say(res.body)
 </code></pre><p>设置请求超时时间，单位：毫秒。</p>
 <pre><code>httpc:set_timeout(time)
 
-</code></pre><h2 id="a-id_150a遇到的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->遇到的问题</h2>
-<h3 id="a-idopenresty_151aopenresty返回中文乱码问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->OpenResty返回中文乱码问题</h3>
-<h4 id="a-id_153a描述"><!-- raw HTML omitted --><!-- raw HTML omitted -->描述</h4>
+</code></pre><h2 id="遇到的问题">遇到的问题</h2>
+<h3 id="openresty返回中文乱码问题">OpenResty返回中文乱码问题</h3>
+<h4 id="描述">描述</h4>
 <p>接口中使用<code>ngx.say(json.encode)</code>编码<code>json</code>字符串，返回中文乱码。</p>
 <pre><code>{&quot;msg&quot;:&quot;è¯·æ±‚æˆåŠŸ&quot;,&quot;code&quot;:0}｀
 
-</code></pre><h4 id="a-id_159a解决"><!-- raw HTML omitted --><!-- raw HTML omitted -->解决</h4>
+</code></pre><h4 id="解决">解决</h4>
 <p>设置<code>Content-Type</code>时加上<code>charset=utf8</code>。</p>
 <pre><code>server {
     listen       8080;
@@ -471,6 +471,10 @@ ngx.say(res.body)
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
     </li>
     
@@ -506,10 +510,6 @@ ngx.say(res.body)
         <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E4%B8%89/" title="Skynet源码赏析三 | 服务启动">Skynet源码赏析三 | 服务启动</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -530,6 +530,8 @@ ngx.say(res.body)
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (2)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
     
@@ -571,6 +573,8 @@ ngx.say(res.body)
     <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
     
     <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    
+    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
     
     <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
     
@@ -725,6 +729,8 @@ ngx.say(res.body)
     <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
     
     <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
+    
+    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
     
     <a href="https://zfunnily.github.io/tags/vim/">vim</a>
     
