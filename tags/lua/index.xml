@@ -46,7 +46,7 @@
     <item>
       <title>Openresty二 | postman小工具</title>
       <link>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Wed, 25 Nov 2020 16:30:39 +0000</pubDate>
+      <pubDate>Wed, 25 Nov 2020 16:30:39 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
       <description>用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &amp;quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&amp;quot;; server { listen 8080; default_type &#39;application/json;charset=utf8&#39;; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了</description>
