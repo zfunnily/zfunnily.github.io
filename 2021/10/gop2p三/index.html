@@ -222,7 +222,7 @@
 <p>创建节点:
 创建h1 <code>h1, err := libp2p.New(libp2p.EnableRelay())</code>
 创建h3 <code>h3, err := libp2p.New(libp2p.ListenAddrs(), libp2p.EnableRelay())</code>
-h3监听协议&rdquo;/cats&rdquo;，<code>h3.SetStreamHandler(&quot;/cats&quot;, func(s network.Stream) {})</code></p>
+h3监听协议&quot;/cats&quot;，<code>h3.SetStreamHandler(&quot;/cats&quot;, func(s network.Stream) {})</code></p>
 </li>
 <li>
 <p>创建中继:
@@ -245,14 +245,14 @@ h1清除掉h3的地址：<code>h1.Network().(*swarm.Swarm).Backoff().Clear(h3.ID
 </li>
 <li>
 <p>h1向h3已经准备好连接
-h1新建一个&rdquo;/cats&quot;的数据流，用于收发数据 <code>h1.NewStream(context.Background(), h3.ID(), &quot;/cats&quot;)</code>
+h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStream(context.Background(), h3.ID(), &quot;/cats&quot;)</code>
 读取数据：<code>s.Read(make([]byte, 1))</code></p>
 </li>
 </ol>
 <p>总结以上步骤来说:
 第一步，双方节点先连接中继节点
 第二步，其中一节点h1通过中继服务h2获取到另一方的节点h3地址(这个例子直接就能通过内存获取到对方的地址)
-第三步，h1连接h3，并通过h3监听的协议&rdquo;/cats&quot;新建数据流，用于收发数据。</p>
+第三步，h1连接h3，并通过h3监听的协议&quot;/cats&quot;新建数据流，用于收发数据。</p>
 <p>在各自的局域网内，通过一个中继服务，就能使节点双方进行p2p通信。此例子是在一个进程中实现的。我按照他的例子，把中继服务和节点分离开。</p>
 <h2 id="先实现中继服务">先实现中继服务</h2>
 <p>首先看中继服务需要什么:</p>
