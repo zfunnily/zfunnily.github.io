@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.69.2" />
+	<meta name="generator" content="Hugo 0.82.0" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,6 +72,52 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/" title="C数组转化为Golang的切片类型">C数组转化为Golang的切片类型</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/" title="skynet框架入门--写一个echo服务">skynet框架入门--写一个echo服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -257,52 +303,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/" title="Go sync.Mutex详解">Go sync.Mutex详解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" title="五种网络IO模型总结">五种网络IO模型总结</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>网络编程</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IOI/O 操作一般分为两个……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -447,6 +447,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
@@ -478,14 +486,6 @@
         <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/" title="Skynet源码赏析四 | 消息调度">Skynet源码赏析四 | 消息调度</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -498,6 +498,8 @@
     <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/English/">English (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
@@ -565,6 +567,8 @@
     <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
     
     <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    
+    <a href="https://zfunnily.github.io/tags/conjunctio/">conjunctio</a>
     
     <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
     
@@ -660,6 +664,8 @@
     
     <a href="https://zfunnily.github.io/tags/peerconnection/">peerconnection</a>
     
+    <a href="https://zfunnily.github.io/tags/preposition/">preposition</a>
+    
     <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
     
     <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
@@ -719,6 +725,8 @@
     <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
     
     <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E4%BB%8B%E8%AF%8D/">介词</a>
     
     <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
     
@@ -797,6 +805,8 @@
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     
     <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
     
