@@ -142,12 +142,12 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idvim__1avim-在退出输入模式的时候切换为原来的输入法"><!-- raw HTML omitted --><!-- raw HTML omitted -->vim 在退出输入模式的时候切换为原来的输入法</a></li>
-    <li><a href="#a-ididea_vim_6a在idea中使用-vim"><!-- raw HTML omitted --><!-- raw HTML omitted -->在idea中使用 vim</a></li>
-    <li><a href="#a-idvscode_vim_36a在vscode中使用-vim"><!-- raw HTML omitted --><!-- raw HTML omitted -->在vscode中使用 vim</a>
+    <li><a href="#vim-在退出输入模式的时候切换为原来的输入法">vim 在退出输入模式的时候切换为原来的输入法</a></li>
+    <li><a href="#在idea中使用-vim">在idea中使用 vim</a></li>
+    <li><a href="#在vscode中使用-vim">在vscode中使用 vim</a>
       <ul>
-        <li><a href="#a-id_39a环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境</a></li>
-        <li><a href="#a-id_imselect_43a安装-im-select"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装 im-select</a></li>
+        <li><a href="#环境">环境</a></li>
+        <li><a href="#安装-im-select">安装 im-select</a></li>
         <li><a href="#a-id_settingsjson_55a全局配置-settingsjson"><!-- raw HTML omitted --><!-- raw HTML omitted -->全局配置 settings.json</a></li>
       </ul>
     </li>
@@ -205,10 +205,10 @@
         
         
         <div class="post-content">
-            <h2 id="a-idvim__1avim-在退出输入模式的时候切换为原来的输入法"><!-- raw HTML omitted --><!-- raw HTML omitted -->vim 在退出输入模式的时候切换为原来的输入法</h2>
+            <h2 id="vim-在退出输入模式的时候切换为原来的输入法">vim 在退出输入模式的时候切换为原来的输入法</h2>
 <p>在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。</p>
 <p>跟编辑器结合，主要是两种编辑器，一个是 <code>idea</code> 一个是 <code>vscode</code></p>
-<h2 id="a-ididea_vim_6a在idea中使用-vim"><!-- raw HTML omitted --><!-- raw HTML omitted -->在idea中使用 vim</h2>
+<h2 id="在idea中使用-vim">在idea中使用 vim</h2>
 <p>插件：</p>
 <ul>
 <li>IdeaVim- IdeaVimExtension
@@ -227,13 +227,13 @@ set keep-english-in-normal-and-restore-in-insert
 :set nokeep-english-in-normal 关闭输入法自动切换功能
 
 </code></pre><p>也可以通过将<code>set keep-english-in-normal[-and-restore-in-insert]</code>加入到<code>~/.ideavimrc</code>文件中并重启IDE来启用插件功能。<!-- raw HTML omitted --> 注意:支持MacOS和Windows, 通过fcitx-remote支持Linux<!-- raw HTML omitted --> MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国键盘 Linux需要使用fcitx输入法，通过fcitx-remote切换<!-- raw HTML omitted --> 在macOS中,normal模式的输入法可以通过<code>keep_input_source_in_normal</code> 来设置,例如<code>let keep_input_source_in_normal=&quot;com.apple.keylayout.ABC&quot;</code></p>
-<h2 id="a-idvscode_vim_36a在vscode中使用-vim"><!-- raw HTML omitted --><!-- raw HTML omitted -->在vscode中使用 vim</h2>
+<h2 id="在vscode中使用-vim">在vscode中使用 vim</h2>
 <p>参考 vscode 插件： <a href="https://github.com/VSCodeVim/Vim#input-method">https://github.com/VSCodeVim/Vim#input-method</a></p>
-<h3 id="a-id_39a环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境</h3>
+<h3 id="环境">环境</h3>
 <ul>
 <li>mac- 下载 vscodevim插件- im-select</li>
 </ul>
-<h3 id="a-id_imselect_43a安装-im-select"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装 im-select</h3>
+<h3 id="安装-im-select">安装 im-select</h3>
 <pre><code>$ git clone https://github.com.cnpmjs.org/daipeihust/im-select.git
 $ mv im-select/im-select-mac/out/im-select /usr/local/bin/
 $ chmod 777 /usr/local/bin/im-select
