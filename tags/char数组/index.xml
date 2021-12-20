@@ -6,7 +6,11 @@
     <description>Recent content in char数组 on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 05 Jan 2021 15:45:36 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Jan 2021 15:45:36 +0000</lastBuildDate>
+    
+	<atom:link href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>struct中为什么使用char[]而不用char*</title>
       <link>https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</link>
