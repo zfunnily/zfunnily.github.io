@@ -79,98 +79,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/owt-client-javascript/" title="owt-client-javascript">owt-client-javascript</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owt-client-javascript/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Ingress的基本使用">Ingress的基本使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月15日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/" title="Statefluset的持久存储PVC">Statefluset的持久存储PVC</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/" title="nsf服务的搭建和使用">nsf服务的搭建和使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports 可以设定的参数主要有以下这些： rw：可读写的权限； ro：只读的权限； no_root_squash：……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="StatefulSet基本原理">StatefulSet基本原理</a>
             </h1>
         </header>
@@ -306,6 +214,98 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/" title="k8s集群资源监控 heapster">k8s集群资源监控 heapster</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/" title="k8s的界面管理 Dashboard">k8s的界面管理 Dashboard</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/" title="k8s的第一步，安装！">k8s的第一步，安装！</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            安装k8s前的准备工作 环境 ubuntu18.04- docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/" title="owt-server编译运行">owt-server编译运行</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -318,65 +318,49 @@
     
 
     
-
-    
-        
-        
-    
-    
-
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/">1</a>
-        </li>
-        
-    
-        
-        <li>
-            <span>...</span>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/8/">8</a>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/9/">9</a>
-        </li>
-        
-    
-        
-        
-        <li  class="current">
-            <a href="https://zfunnily.github.io/page/10/">10</a>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/11/">11</a>
-        </li>
-        
-    
-
-    
-    
-
-    <li class="next">
-        <a href="https://zfunnily.github.io/page/11/">下一页</a>
+    <li >
+        <a href="https://zfunnily.github.io/">1</a>
     </li>
     
-</ol>
+    <li >
+        <a href="https://zfunnily.github.io/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/4/">4</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/5/">5</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/6/">6</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/7/">7</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/page/9/">9</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://zfunnily.github.io/page/10/">10</a>
+    </li>
+    
 
+    
+</ol>
 
 
 
@@ -464,7 +448,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -661,8 +645,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -705,17 +687,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -726,6 +708,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     

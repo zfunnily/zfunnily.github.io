@@ -494,9 +494,54 @@
     </item>
     
     <item>
+      <title>冒泡排</title>
+      <link>https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>堆排序</title>
+      <link>https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>希尔排序</title>
+      <link>https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>归并排序</title>
+      <link>https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>快速排序</title>
+      <link>https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>排序算法</title>
       <link>https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
-      <pubDate>Tue, 23 Mar 2021 13:57:07 +0000</pubDate>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</guid>
       <description></description>
@@ -505,54 +550,18 @@
     <item>
       <title>插入排序</title>
       <link>https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Tue, 23 Mar 2021 13:57:07 +0000</pubDate>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>sort排序</title>
-      <link>https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Tue, 23 Mar 2021 13:40:22 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>分治算法</title>
-      <link>https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</link>
-      <pubDate>Tue, 23 Mar 2021 10:15:40 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>快速排序</title>
-      <link>https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Tue, 23 Mar 2021 10:15:40 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>选择排序</title>
       <link>https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Tue, 23 Mar 2021 10:14:35 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>冒泡排序</title>
-      <link>https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <guid>https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
       <description></description>
     </item>
     

@@ -88,98 +88,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">最后一站源码分析(LastBattle)-服务架构</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月20日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a>
-            
-        </div>
-        
-        <div class="post-content">
-            服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需求数量|数量说明 |&mdash;&mdash; |GameClient|GC|游戏客户端|不解释|n|不超服……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">最后一战安装部署笔记</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月16日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a>
-            
-        </div>
-        
-        <div class="post-content">
-            环境准备 win10服务器：vs2010 / 数据库 mysql5.7清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/客户端：unity3d 4.6 ,破解补丁 编译客户端 建议不要有其他的un……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">cgo使用libevent库实现一个定时器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月13日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/Golang'>Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">Libevent定时器的实现</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月16日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">licod安装和配置</a>
             </h1>
         </header>
@@ -338,7 +246,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -535,8 +443,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -579,17 +485,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -600,6 +506,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     

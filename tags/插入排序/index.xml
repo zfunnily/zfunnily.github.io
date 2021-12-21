@@ -6,14 +6,14 @@
     <description>Recent content in 插入排序 on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 23 Mar 2021 13:57:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 10:13:31 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>插入排序</title>
-      <link>https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Tue, 23 Mar 2021 13:57:07 +0000</pubDate>
+      <title>八个基础排序</title>
+      <link>https://zfunnily.github.io/2021/03/sort/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
-      <description>概述 插入排序(InsertionSort)，一般也被称为直接插入排序。 对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之</description>
+      <guid>https://zfunnily.github.io/2021/03/sort/</guid>
+      <description>sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可</description>
     </item>
     
   </channel>

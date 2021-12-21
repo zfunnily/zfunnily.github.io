@@ -79,98 +79,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/" title="协程解析一(ucontext)">协程解析一(ucontext)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" title="Golang的定时器实现方式">Golang的定时器实现方式</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &lt;- t2.C fmt.Println(&quot;NewTimer...&quot;) } }() select 通过select的方式实现定时器： for { select { case &lt;- time.After(d): fmt.Println(&quot;select...&quot;) } }……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/" title="lua解决百元买鸡的问题">lua解决百元买鸡的问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月24日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/" title="Golang使用JWT身份认证">Golang使用JWT身份认证</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月24日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端1. 客户端请求接口时需要带上token。服务器需要验证to……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/" title="Lua调用C/C&#43;&#43;的动态库">Lua调用C/C&#43;&#43;的动态库</a>
             </h1>
         </header>
@@ -306,6 +214,98 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/" title="skynet框架入门--写一个echo服务">skynet框架入门--写一个echo服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/" title="Redis源码分析-ziplist压缩列表">Redis源码分析-ziplist压缩列表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/" title="配置VScode调试Redis源码">配置VScode调试Redis源码</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 vscode- gcc5.4- ubuntu16.04 或者 ubuntu18.04- make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 VScode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" title="VScode调试Redis源码，指针显示的问题">VScode调试Redis源码，指针显示的问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -318,85 +318,53 @@
     
 
     
-
+    <li >
+        <a href="https://zfunnily.github.io/">1</a>
+    </li>
     
-        
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/2/">2</a>
+    </li>
     
+    <li >
+        <a href="https://zfunnily.github.io/page/3/">3</a>
+    </li>
     
-
+    <li >
+        <a href="https://zfunnily.github.io/page/4/">4</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/">1</a>
-        </li>
-        
+    <li  class="current">
+        <a href="https://zfunnily.github.io/page/5/">5</a>
+    </li>
     
-        
-        <li>
-            <span>...</span>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/6/">6</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/3/">3</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/7/">7</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/4/">4</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/8/">8</a>
+    </li>
     
-        
-        
-        <li  class="current">
-            <a href="https://zfunnily.github.io/page/5/">5</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/9/">9</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/6/">6</a>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/7/">7</a>
-        </li>
-        
-    
-        
-        <li>
-            <span>...</span>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/page/11/">11</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/page/10/">10</a>
+    </li>
     
 
     
-    
-
     <li class="next">
         <a href="https://zfunnily.github.io/page/6/">下一页</a>
     </li>
     
 </ol>
-
 
 
 
@@ -484,7 +452,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -681,8 +649,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -725,17 +691,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -746,6 +712,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     
