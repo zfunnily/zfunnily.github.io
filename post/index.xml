@@ -431,7 +431,7 @@
     </item>
     
     <item>
-      <title>CGO | 遍历C结构体数组</title>
+      <title>Cgo | 遍历C结构体数组</title>
       <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
@@ -611,7 +611,7 @@
     </item>
     
     <item>
-      <title>CGO | 使用libevent库实现一个定时器</title>
+      <title>Cgo | 使用libevent库实现一个定时器</title>
       <link>https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
       <pubDate>Fri, 13 Nov 2020 16:40:42 +0000</pubDate>
       
@@ -638,7 +638,7 @@
     </item>
     
     <item>
-      <title>CGO | 简单使用</title>
+      <title>Cgo | 简单使用</title>
       <link>https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Thu, 05 Nov 2020 09:45:23 +0000</pubDate>
       
