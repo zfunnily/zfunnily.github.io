@@ -6,7 +6,16 @@
     <description>Recent content in Posts on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 Dec 2021 16:42:17 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Dec 2021 11:05:00 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Darkmode.js给网站添加暗黑模式</title>
+      <link>https://zfunnily.github.io/2021/12/dark/</link>
+      <pubDate>Tue, 21 Dec 2021 11:05:00 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/12/dark/</guid>
+      <description>Wordpress 如果你的网站是wordpress，则可以参考以Darkmode.js为基础的插件: blackout-darkmode-widget darkmode Nuxt.js 如果你正在使用Nuxt.js,则可以使用下面的模块 nuxtjs-darkmode-js-module 快速使用 使用Darkmode.js给网站快速部署上暗/浅色切换。 在网站的html中加入如下代码: 1 2 3 4 5 6 7 &amp;lt;script src=&amp;#34;https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; function addDarkmodeWidget() { new Darkmode().showWidget(); } window.addEventListener(&amp;#39;load&amp;#39;, addDarkmodeWidget); &amp;lt;/script&amp;gt; 可以</description>
+    </item>
+    
     <item>
       <title>Openresty三 | 上传文件接口</title>
       <link>https://zfunnily.github.io/2021/12/openresty-upload/</link>
