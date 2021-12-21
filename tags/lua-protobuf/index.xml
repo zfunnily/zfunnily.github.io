@@ -6,11 +6,7 @@
     <description>Recent content in lua-protobuf on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/tags/lua-protobuf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/lua-protobuf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在skynet中使用lua-protobuf库</title>
       <link>https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
