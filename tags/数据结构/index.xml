@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Fri, 22 Jan 2021 15:56:40 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C数组转化为Golang的切片类型</title>
+      <title>Golang | C数组转化为Golang的切片类型</title>
       <link>https://zfunnily.github.io/2021/01/goslience/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>cgo | 遍历C结构体数组</title>
+      <title>CGO | 遍历C结构体数组</title>
       <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       

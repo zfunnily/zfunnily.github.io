@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 28 Nov 2020 13:32:57 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Docker容器退出码详解</title>
+      <title>Docker | 容器退出码详解</title>
       <link>https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
       
@@ -17,7 +17,7 @@
     </item>
     
     <item>
-      <title>k8s | Ingress的基本使用</title>
+      <title>K8S | Ingress的基本使用</title>
       <link>https://zfunnily.github.io/2020/08/ingress/</link>
       <pubDate>Sat, 15 Aug 2020 00:05:15 +0000</pubDate>
       
@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>k8s | Statefluset的持久存储PVC</title>
+      <title>K8S | Statefluset的持久存储PVC</title>
       <link>https://zfunnily.github.io/2020/08/pvc/</link>
       <pubDate>Fri, 14 Aug 2020 17:18:58 +0000</pubDate>
       
@@ -35,7 +35,7 @@
     </item>
     
     <item>
-      <title>k8s | 创建第一个应用</title>
+      <title>K8S | 创建第一个应用</title>
       <link>https://zfunnily.github.io/2020/08/firstk8s/</link>
       <pubDate>Thu, 13 Aug 2020 15:28:31 +0000</pubDate>
       
@@ -62,7 +62,7 @@
     </item>
     
     <item>
-      <title>k8s | 集群资源监控 heapster</title>
+      <title>K8S | 集群资源监控 heapster</title>
       <link>https://zfunnily.github.io/2020/08/heapster/</link>
       <pubDate>Thu, 06 Aug 2020 09:06:05 +0000</pubDate>
       
@@ -71,7 +71,7 @@
     </item>
     
     <item>
-      <title>k8s | Dashboard界面管理</title>
+      <title>K8S | Dashboard界面管理</title>
       <link>https://zfunnily.github.io/2020/08/dashboard/</link>
       <pubDate>Thu, 06 Aug 2020 09:04:14 +0000</pubDate>
       
@@ -80,7 +80,7 @@
     </item>
     
     <item>
-      <title>k8s | 安装</title>
+      <title>K8S | 安装</title>
       <link>https://zfunnily.github.io/2020/08/k8sinstall/</link>
       <pubDate>Wed, 05 Aug 2020 10:00:40 +0000</pubDate>
       

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>自定义头和protobuf解决沾包问题 | 留白</title>
-    <meta property="og:title" content="自定义头和protobuf解决沾包问题 - 留白">
+    <title>Protobuf | 解决沾包问题 | 留白</title>
+    <meta property="og:title" content="Protobuf | 解决沾包问题 - 留白">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -18,7 +18,7 @@
     <meta property="article:modified_time" content='2020-12-13T10:22:38&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="自定义头和protobuf解决沾包问题">
+    <meta name="description" content="Protobuf | 解决沾包问题">
         
     <meta name="author" content="留白">
     <meta property="og:url" content="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">
@@ -146,7 +146,7 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_1a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</a></li>
+    <li><a href="#缘由">缘由</a></li>
     <li><a href="#a-id_3a定义协议"><!-- raw HTML omitted --><!-- raw HTML omitted -->定义协议</a></li>
     <li><a href="#a-idserver_39aserver示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Server示例代码</a></li>
     <li><a href="#a-idclient_109aclient示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Client示例代码</a></li>
@@ -189,7 +189,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">自定义头和protobuf解决沾包问题</h1>
+            <h1 class="post-title">Protobuf | 解决沾包问题</h1>
         </header>
         <date class="post-meta meta-date">
             2020年12月13日
@@ -205,7 +205,7 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_1a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</h2>
+            <h2 id="缘由">缘由</h2>
 <p>最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我用golnag + protobuf 做了一个简单的client + server</p>
 <h2 id="a-id_3a定义协议"><!-- raw HTML omitted --><!-- raw HTML omitted -->定义协议</h2>
 <p>一个包数据组成：</p>
@@ -413,15 +413,15 @@ for bufio.Scan{
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/12/Golang%E7%9A%84grpc/">Golang的grpc</a></li>
+        <li><a href="/2020/12/Golang%E7%9A%84grpc/">Golang | grpc</a></li>
         
-        <li><a href="/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">Docker容器退出码详解</a></li>
+        <li><a href="/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">Docker | 容器退出码详解</a></li>
         
-        <li><a href="/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">cgo使用libevent库实现一个定时器</a></li>
+        <li><a href="/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">CGO | 使用libevent库实现一个定时器</a></li>
         
-        <li><a href="/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">Golang 利用指针进行数据转换</a></li>
+        <li><a href="/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">Golang | 利用指针进行数据转换</a></li>
         
-        <li><a href="/2020/11/go-builds/">Golang builds</a></li>
+        <li><a href="/2020/11/go-builds/">Golang | builds</a></li>
         
     </ul>
 </div>

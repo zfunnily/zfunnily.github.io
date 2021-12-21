@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language><atom:link href="https://zfunnily.github.io/tags/C/C++/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>八个基础排序</title>
+      <title>C/C&#43;&#43; | 八个基础排序</title>
       <link>https://zfunnily.github.io/2021/03/sort/</link>
       <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
@@ -61,7 +61,7 @@
     </item>
     
     <item>
-      <title>C数组转化为Golang的切片类型</title>
+      <title>Golang | C数组转化为Golang的切片类型</title>
       <link>https://zfunnily.github.io/2021/01/goslience/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
@@ -88,7 +88,7 @@
     </item>
     
     <item>
-      <title>cgo | 遍历C结构体数组</title>
+      <title>CGO | 遍历C结构体数组</title>
       <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
@@ -115,7 +115,7 @@
     </item>
     
     <item>
-      <title>最后一战-游戏场景服务器SS解析</title>
+      <title>lastbattle | 游戏场景服务器SS解析</title>
       <link>https://zfunnily.github.io/2021/01/lastbattle/</link>
       <pubDate>Sat, 02 Jan 2021 23:19:58 +0000</pubDate>
       
@@ -124,7 +124,7 @@
     </item>
     
     <item>
-      <title>一个reactor单线程网络库ccnet</title>
+      <title>CCnet | 一个reactor单线程网络库</title>
       <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
       <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
       
@@ -133,7 +133,7 @@
     </item>
     
     <item>
-      <title>C&#43;&#43;：vector中的resize()函数 VS reserve()函数</title>
+      <title>C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数</title>
       <link>https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</link>
       <pubDate>Fri, 25 Dec 2020 11:04:29 +0000</pubDate>
       
@@ -142,7 +142,7 @@
     </item>
     
     <item>
-      <title>最后一站源码分析(LastBattle)-登录流程(LS &amp; BS &amp; GS)</title>
+      <title>LastBattle | 登录流程(LS &amp; BS &amp; GS)</title>
       <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
@@ -151,7 +151,7 @@
     </item>
     
     <item>
-      <title>最后一站源码分析(LastBattle)-服务架构</title>
+      <title>LastBattle | 服务架构</title>
       <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
       
@@ -160,7 +160,7 @@
     </item>
     
     <item>
-      <title>最后一战安装部署笔记</title>
+      <title>LastBattle | 安装部署笔记</title>
       <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Mon, 16 Nov 2020 06:49:49 +0000</pubDate>
       
@@ -169,7 +169,7 @@
     </item>
     
     <item>
-      <title>cgo使用libevent库实现一个定时器</title>
+      <title>CGO | 使用libevent库实现一个定时器</title>
       <link>https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
       <pubDate>Fri, 13 Nov 2020 16:40:42 +0000</pubDate>
       
@@ -187,7 +187,7 @@
     </item>
     
     <item>
-      <title>licod | 安装和配置</title>
+      <title>Licod | 安装和配置</title>
       <link>https://zfunnily.github.io/2020/08/licode/</link>
       <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
       
@@ -196,7 +196,7 @@
     </item>
     
     <item>
-      <title>owt-server | 编译运行</title>
+      <title>Owt-server | 编译运行</title>
       <link>https://zfunnily.github.io/2020/08/owtservercomplie/</link>
       <pubDate>Wed, 05 Aug 2020 09:47:22 +0000</pubDate>
       

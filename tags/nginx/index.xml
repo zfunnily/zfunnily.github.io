@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>k8s | Ingress的基本使用</title>
+      <title>K8S | Ingress的基本使用</title>
       <link>https://zfunnily.github.io/2020/08/ingress/</link>
       <pubDate>Sat, 15 Aug 2020 00:05:15 +0000</pubDate>
       
@@ -35,7 +35,7 @@
     </item>
     
     <item>
-      <title>k8s | StatefulSet基本原理</title>
+      <title>K8S | StatefulSet基本原理</title>
       <link>https://zfunnily.github.io/2020/08/statefulset/</link>
       <pubDate>Fri, 14 Aug 2020 16:03:41 +0000</pubDate>
       
@@ -44,7 +44,7 @@
     </item>
     
     <item>
-      <title>k8s | 创建第一个应用</title>
+      <title>K8S | 创建第一个应用</title>
       <link>https://zfunnily.github.io/2020/08/firstk8s/</link>
       <pubDate>Thu, 13 Aug 2020 15:28:31 +0000</pubDate>
       

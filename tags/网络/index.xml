@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Fri, 15 Jan 2021 16:07:51 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>skynet框架 | echo服务</title>
+      <title>Skynet | echo服务</title>
       <link>https://zfunnily.github.io/2021/01/skynetecho/</link>
       <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
       
@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>一个reactor单线程网络库ccnet</title>
+      <title>CCnet | 一个reactor单线程网络库</title>
       <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
       <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
       
