@@ -58,6 +58,8 @@
                     
                     <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
@@ -75,56 +77,6 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/" title="Lua的api">Lua的api</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/04/hugo/" title="Hugo">Hugo</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年4月17日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/04/hugo/">阅读全文</a></p>
-    </article>
-    
     
     
     <article class="post">
@@ -327,6 +279,56 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/" title="协程解析二(云风的coroutine)">协程解析二(云风的coroutine)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;&amp; make 写一个生产者和消费者的demo //procus.c #include &quot;coroutine.h&quot; #include……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/" title="协程解析一(ucontext)">协程解析一(ucontext)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -470,14 +472,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
-    </li>
-    
-    <li>
         <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
@@ -487,6 +481,14 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
 </ul>

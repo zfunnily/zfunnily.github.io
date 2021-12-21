@@ -57,6 +57,8 @@
                     
                     <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
@@ -74,52 +76,6 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/" title="协程解析二(云风的coroutine)">协程解析二(云风的coroutine)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;&amp; make 写一个生产者和消费者的demo //procus.c #include &quot;coroutine.h&quot; #include……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/" title="协程解析一(ucontext)">协程解析一(ucontext)</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
-    </article>
     
     <article class="post">
         <header>
@@ -305,6 +261,52 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/" title="C数组转化为Golang的切片类型">C数组转化为Golang的切片类型</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/" title="skynet框架入门--写一个echo服务">skynet框架入门--写一个echo服务</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -449,14 +451,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
-    </li>
-    
-    <li>
         <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
@@ -466,6 +460,14 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
 </ul>

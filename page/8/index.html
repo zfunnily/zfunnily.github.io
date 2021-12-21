@@ -57,6 +57,8 @@
                     
                     <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
@@ -74,52 +76,6 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="Openresty二 | postman小工具">Openresty二 | postman小工具</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/OpenResty'>OpenResty</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;; server { listen 8080; default_type 'application/json;charset=utf8'; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/" title="Openresty一 | 初探">Openresty一 | 初探</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月23日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/OpenResty'>OpenResty</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。 OpenResty®通过汇聚各种设计精良的Nginx模块（主要由 OpenResty 团队自主开发）……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">阅读全文</a></p>
-    </article>
     
     <article class="post">
         <header>
@@ -305,6 +261,52 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">阅读全文</a></p>
     </article>
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="vimplus快捷键">vimplus快捷键</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            插件相关 |快捷键|说明 |&mdash;&mdash; |,|Leader Key |&lt;leader&gt;n|打开 / 关闭代码资源管理器 |&lt;leader&gt;t|打开 / 关闭函数列表 |&lt;leader&gt;a|.h .cpp 文件切换 |&lt;leader&gt;u|转到函数声明 |&lt;leader&gt;U|转到函数实现 |&lt;leader&gt;o|打开……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/" title="使用vim打造编C&#43;&#43;IDE">使用vim打造编C&#43;&#43;IDE</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用 vimplus 打造C++ IDE GitHub： https://github.com/chxuan/vimplus支持平台：macos/linux 安装vimplus // 原来的链接， 国内速度较慢 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus // github修改为镜像的链接 $ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus $ cd ~/.vimplus //不加sudo $ ./install.sh 设置Nerd Font 为防止vimp……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/">阅读全文</a></p>
+    </article>
+    
     
 
 
@@ -449,14 +451,6 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
-    </li>
-    
-    <li>
         <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
@@ -466,6 +460,14 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+    </li>
+    
+    <li>
+        <a href="https://zfunnily.github.io/2021/11/randomquotes/" title="随机名人名言">随机名人名言</a>
     </li>
     
 </ul>
