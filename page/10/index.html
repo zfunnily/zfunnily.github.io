@@ -79,7 +79,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" title="licod安装和配置">licod安装和配置</a>
+                <a href="https://zfunnily.github.io/2020/08/licode/" title="licod | 安装和配置">licod | 安装和配置</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -96,13 +96,13 @@
         <div class="post-content">
             拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licode/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/" title="Docker远程访问加密">Docker远程访问加密</a>
+                <a href="https://zfunnily.github.io/2020/08/dockersecret/" title="Docker | 远程访问加密">Docker | 远程访问加密</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -117,15 +117,15 @@
         </div>
         
         <div class="post-content">
-            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker `` 方法二：修改daemon.json的……
+            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker 方法二：修改daemon.json的配……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockersecret/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/" title="Docker的web管理界面，portainer">Docker的web管理界面，portainer</a>
+                <a href="https://zfunnily.github.io/2020/08/dockerweb/" title="Docker | web管理界面portainer">Docker | web管理界面portainer</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -142,13 +142,13 @@
         <div class="post-content">
             拉取镜像 $ docker pull portainer/portainer 运行启动portainer docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer adminbigant.cn 汉化 Portainer-CN.zip百度云盘: https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw 提取码: nzue新建文件夹命名为public，把Portainer-CN.zip解压至里面。 2、public文件夹传输至系统根目录 3、然后按需执行以下命令 x86-……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockerweb/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/" title="k8s集群资源监控 heapster">k8s集群资源监控 heapster</a>
+                <a href="https://zfunnily.github.io/2020/08/heapster/" title="k8s | 集群资源监控 heapster">k8s | 集群资源监控 heapster</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -165,13 +165,13 @@
         <div class="post-content">
             安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/heapster/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/" title="k8s的界面管理 Dashboard">k8s的界面管理 Dashboard</a>
+                <a href="https://zfunnily.github.io/2020/08/dashboard/" title="k8s | Dashboard界面管理">k8s | Dashboard界面管理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -188,13 +188,13 @@
         <div class="post-content">
             安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dashboard/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/" title="k8s的第一步，安装！">k8s的第一步，安装！</a>
+                <a href="https://zfunnily.github.io/2020/08/k8sinstall/" title="k8s | 安装">k8s | 安装</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -209,15 +209,15 @@
         </div>
         
         <div class="post-content">
-            安装k8s前的准备工作 环境 ubuntu18.04- docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
+            安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8sinstall/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/" title="owt-server编译运行">owt-server编译运行</a>
+                <a href="https://zfunnily.github.io/2020/08/owtservercomplie/" title="owt-server | 编译运行">owt-server | 编译运行</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -234,7 +234,7 @@
         <div class="post-content">
             概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owtservercomplie/">阅读全文</a></p>
     </article>
     
     

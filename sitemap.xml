@@ -704,16 +704,16 @@
     <loc>https://zfunnily.github.io/2020/09/%E5%9C%A8windows%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2020-09-09T09:36:49+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://zfunnily.github.io/2020/08/macffmpeg/</loc>
     <lastmod>2020-08-29T17:20:40+00:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2020/08/prometheusgrafana/</loc>
+    <lastmod>2020-08-17T13:58:35+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-08-17T13:58:35+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/kubernetes/</loc>
-    <lastmod>2020-08-17T13:58:35+00:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/</loc>
     <lastmod>2020-08-17T13:58:35+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2020/08/owt-client-javascript/</loc>
@@ -722,52 +722,52 @@
     <loc>https://zfunnily.github.io/tags/stream/</loc>
     <lastmod>2020-08-16T23:04:13+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</loc>
+    <loc>https://zfunnily.github.io/2020/08/ingress/</loc>
     <lastmod>2020-08-15T00:05:15+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/</loc>
+    <loc>https://zfunnily.github.io/2020/08/pvc/</loc>
     <lastmod>2020-08-14T17:18:58+00:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2020/08/nsf/</loc>
+    <lastmod>2020-08-14T17:17:54+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/nsf/</loc>
     <lastmod>2020-08-14T17:17:54+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/nsf%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2020-08-14T17:17:54+00:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</loc>
+    <loc>https://zfunnily.github.io/2020/08/statefulset/</loc>
     <lastmod>2020-08-14T16:03:41+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/</loc>
+    <loc>https://zfunnily.github.io/2020/08/coredns/</loc>
     <lastmod>2020-08-13T18:44:28+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</loc>
+    <loc>https://zfunnily.github.io/2020/08/firstk8s/</loc>
     <lastmod>2020-08-13T15:28:31+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://zfunnily.github.io/2020/08/licode/</loc>
     <lastmod>2020-08-09T09:34:36+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/node.js/</loc>
     <lastmod>2020-08-09T09:34:36+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/</loc>
+    <loc>https://zfunnily.github.io/2020/08/dockersecret/</loc>
     <lastmod>2020-08-07T07:56:52+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/</loc>
+    <loc>https://zfunnily.github.io/2020/08/dockerweb/</loc>
     <lastmod>2020-08-07T07:54:43+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/</loc>
+    <loc>https://zfunnily.github.io/2020/08/heapster/</loc>
     <lastmod>2020-08-06T09:06:05+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/</loc>
     <lastmod>2020-08-06T09:06:05+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/</loc>
+    <loc>https://zfunnily.github.io/2020/08/dashboard/</loc>
     <lastmod>2020-08-06T09:04:14+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/</loc>
+    <loc>https://zfunnily.github.io/2020/08/k8sinstall/</loc>
     <lastmod>2020-08-05T10:00:40+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</loc>
+    <loc>https://zfunnily.github.io/2020/08/owtservercomplie/</loc>
     <lastmod>2020-08-05T09:47:22+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/archives/</loc>

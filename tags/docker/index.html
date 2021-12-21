@@ -111,7 +111,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Ingress的基本使用</a>
+                <a href="https://zfunnily.github.io/2020/08/ingress/">k8s | Ingress的基本使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -127,14 +127,14 @@
         
         <div class="post-content">
             缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/ingress/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">Statefluset的持久存储PVC</a>
+                <a href="https://zfunnily.github.io/2020/08/pvc/">k8s | Statefluset的持久存储PVC</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -150,14 +150,14 @@
         
         <div class="post-content">
             缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/pvc/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">使用k8s创建第一个应用</a>
+                <a href="https://zfunnily.github.io/2020/08/firstk8s/">k8s | 创建第一个应用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -173,14 +173,14 @@
         
         <div class="post-content">
             使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/firstk8s/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">Docker远程访问加密</a>
+                <a href="https://zfunnily.github.io/2020/08/dockersecret/">Docker | 远程访问加密</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -195,15 +195,38 @@
         </div>
         
         <div class="post-content">
-            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker `` 方法二：修改daemon.json的……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">阅读全文</a></p>
+            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker 方法二：修改daemon.json的配……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockersecret/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">k8s集群资源监控 heapster</a>
+                <a href="https://zfunnily.github.io/2020/08/dockerweb/">Docker | web管理界面portainer</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月7日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Docker'>Docker</a>
+            
+        </div>
+        
+        <div class="post-content">
+            拉取镜像 $ docker pull portainer/portainer 运行启动portainer docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer adminbigant.cn 汉化 Portainer-CN.zip百度云盘: https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw 提取码: nzue新建文件夹命名为public，把Portainer-CN.zip解压至里面。 2、public文件夹传输至系统根目录 3、然后按需执行以下命令 x86-……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockerweb/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/heapster/">k8s | 集群资源监控 heapster</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -219,14 +242,14 @@
         
         <div class="post-content">
             安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/heapster/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">k8s的界面管理 Dashboard</a>
+                <a href="https://zfunnily.github.io/2020/08/dashboard/">k8s | Dashboard界面管理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -242,14 +265,14 @@
         
         <div class="post-content">
             安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dashboard/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">k8s的第一步，安装！</a>
+                <a href="https://zfunnily.github.io/2020/08/k8sinstall/">k8s | 安装</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -264,8 +287,8 @@
         </div>
         
         <div class="post-content">
-            安装k8s前的准备工作 环境 ubuntu18.04- docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">阅读全文</a></p>
+            安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8sinstall/">阅读全文</a></p>
         </div>
     </article>
     

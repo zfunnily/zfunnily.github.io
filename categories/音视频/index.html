@@ -203,7 +203,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">在mac上使用ffmpeg命令行录制摄像头和桌面数据</a>
+                <a href="https://zfunnily.github.io/2020/08/macffmpeg/">在mac上使用ffmpeg命令行录制摄像头和桌面数据</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -219,7 +219,7 @@
         
         <div class="post-content">
             设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E5%9C%A8mac%E4%B8%8A%E4%BD%BF%E7%94%A8ffmpeg%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BD%95%E5%88%B6%E6%91%84%E5%83%8F%E5%A4%B4%E5%92%8C%E6%A1%8C%E9%9D%A2%E6%95%B0%E6%8D%AE/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/macffmpeg/">阅读全文</a></p>
         </div>
     </article>
     
@@ -249,7 +249,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">licod安装和配置</a>
+                <a href="https://zfunnily.github.io/2020/08/licode/">licod | 安装和配置</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -265,14 +265,14 @@
         
         <div class="post-content">
             拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licode/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">owt-server编译运行</a>
+                <a href="https://zfunnily.github.io/2020/08/owtservercomplie/">owt-server | 编译运行</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -288,7 +288,7 @@
         
         <div class="post-content">
             概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owt-server%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owtservercomplie/">阅读全文</a></p>
         </div>
     </article>
     

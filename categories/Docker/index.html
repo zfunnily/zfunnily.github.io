@@ -111,7 +111,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">Docker远程访问加密</a>
+                <a href="https://zfunnily.github.io/2020/08/dockersecret/">Docker | 远程访问加密</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -126,15 +126,15 @@
         </div>
         
         <div class="post-content">
-            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker `` 方法二：修改daemon.json的……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8A%A0%E5%AF%86/">阅读全文</a></p>
+            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker 方法二：修改daemon.json的配……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockersecret/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/">Docker的web管理界面，portainer</a>
+                <a href="https://zfunnily.github.io/2020/08/dockerweb/">Docker | web管理界面portainer</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -150,7 +150,7 @@
         
         <div class="post-content">
             拉取镜像 $ docker pull portainer/portainer 运行启动portainer docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer adminbigant.cn 汉化 Portainer-CN.zip百度云盘: https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw 提取码: nzue新建文件夹命名为public，把Portainer-CN.zip解压至里面。 2、public文件夹传输至系统根目录 3、然后按需执行以下命令 x86-……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Docker%E7%9A%84web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2portainer/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockerweb/">阅读全文</a></p>
         </div>
     </article>
     
