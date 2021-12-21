@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>使用vim打造编C&#43;&#43;IDE | 留白</title>
-    <meta property="og:title" content="使用vim打造编C&#43;&#43;IDE - 留白">
+    <title>FFmpeg | 录制摄像头和桌面数据windows | 留白</title>
+    <meta property="og:title" content="FFmpeg | 录制摄像头和桌面数据windows - 留白">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
-    <meta property="article:published_time" content='2020-10-28T09:11:32&#43;08:00'>
+    <meta property="article:published_time" content='2020-09-09T09:36:49&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-10-28T09:11:32&#43;08:00'>
+    <meta property="article:modified_time" content='2020-09-09T09:36:49&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="使用vim打造编C&#43;&#43;IDE">
+    <meta name="description" content="FFmpeg | 录制摄像头和桌面数据windows">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/">
+    <meta property="og:url" content="https://zfunnily.github.io/2020/09/ffmpegvideow/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -146,20 +146,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_vimplus_c_ide_2a使用-vimplus-打造c-ide"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用 vimplus 打造C++ IDE</a>
-      <ul>
-        <li><a href="#a-idvimplus_6a安装vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装vimplus</a></li>
-        <li><a href="#a-idnerd_font_18a设置nerd-font"><!-- raw HTML omitted --><!-- raw HTML omitted -->设置Nerd Font</a></li>
-        <li><a href="#a-idvimplus_22a更新vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新vimplus</a></li>
-      </ul>
-    </li>
-    <li><a href="#a-id_30a出现过的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->出现过的问题</a>
-      <ul>
-        <li><a href="#a-idycm_31aycm编译错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->YCM编译错误</a></li>
-        <li><a href="#a-idubuntu1604_vimplus_61aubuntu1604-更新安装vimplus不成功"><!-- raw HTML omitted --><!-- raw HTML omitted -->ubuntu16.04 更新安装vimplus不成功</a></li>
-      </ul>
-    </li>
-    <li><a href="#a-idvimc_66a使用vim打开项目c头文件找不到"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用vim打开项目，C++头文件找不到</a></li>
+    <li><a href="#a-id_1a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
+    <li><a href="#a-idffmpeg__dshow__7affmpeg-使用-dshow-采集音视频设备"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 dshow 采集音视频设备</a></li>
+    <li><a href="#a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 vfwcap 采集视频设备</a></li>
+    <li><a href="#a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 gdigrab 采集窗口</a></li>
   </ul>
 </nav>
     </div>
@@ -194,68 +184,91 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">使用vim打造编C&#43;&#43;IDE</h1>
+            <h1 class="post-title">FFmpeg | 录制摄像头和桌面数据windows</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年10月28日
+            2020年9月9日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
             
         </div>
         
         
         
         <div class="post-content">
-            <h2 id="a-id_vimplus_c_ide_2a使用-vimplus-打造c-ide"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用 vimplus 打造C++ IDE</h2>
-<p>GitHub： <a href="https://github.com/chxuan/vimplus">https://github.com/chxuan/vimplus</a><!-- raw HTML omitted --> 支持平台：<!-- raw HTML omitted --> macos/linux</p>
-<h3 id="a-idvimplus_6a安装vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装vimplus</h3>
-<pre><code>// 原来的链接， 国内速度较慢
-$ git clone https://github.com/chxuan/vimplus.git ~/.vimplus
+            <h2 id="a-id_1a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+<p>FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中</p>
+<ul>
+<li><strong>dshow 可以用来抓 取摄像头、采集卡、麦克风等</strong>，- <strong>vfwcap 主要用来采集摄像头类设备</strong>，- <strong>gdigrab 则是抓取 Windows 窗口程序</strong></li>
+</ul>
+<h2 id="a-idffmpeg__dshow__7affmpeg-使用-dshow-采集音视频设备"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 dshow 采集音视频设备</h2>
+<p>使用 dshow 枚举设备</p>
+<pre><code>ffmpeg -f dshow -list_devices true -i dymmy
 
-// github修改为镜像的链接
-$ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus
-$ cd ~/.vimplus
+</code></pre><p>输出</p>
+<pre><code>[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
+[dshow @ 000002622302e340]  &quot;Altair USB2.0 Camera&quot;
+[dshow @ 000002622302e340]     Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot;
+[dshow @ 000002622302e340] DirectShow audio devices
 
-//不加sudo
-$ ./install.sh 
+</code></pre><p>``<!-- raw HTML omitted --> 使用 dshow 展示摄像头, 摄像头的参数为 video=“摄像头名称”</p>
+<pre><code>ffplay -f dshow  -i video=&quot;Altair USB2.0 Camera&quot;
 
-</code></pre><h3 id="a-idnerd_font_18a设置nerd-font"><!-- raw HTML omitted --><!-- raw HTML omitted -->设置Nerd Font</h3>
-<p>为防止vimplus显示乱码，需设置mac终端字体为<code>Droid Sans Mono Nerd Font</code>。</p>
-<h3 id="a-idvimplus_22a更新vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新vimplus</h3>
-<p>紧跟vimplus的步伐，尝鲜新特性</p>
-<pre><code>./update.sh
+</code></pre><p>``<!-- raw HTML omitted --> 获得摄像头支持的分辨率</p>
+<pre><code>ffmpeg -list_options true -f dshow -i video=&quot;Altair USB2.0 Camera&quot;
 
-</code></pre><h2 id="a-id_30a出现过的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->出现过的问题</h2>
-<h3 id="a-idycm_31aycm编译错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->YCM编译错误</h3>
-<p>出现过问题”YouCompleteMe unavailable: No module named ycmd”, 解决办法</p>
-<pre><code>cd ~/.vim/plugged/YouCompleteMe  
-git pull  
-git submodule update --init --recursive
+</code></pre><p>输出</p>
+<pre><code>[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
+[dshow @ 000001b88b90e380]  Pin &quot;捕获&quot; (alternative pin name &quot;0&quot;)
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=320x240 fps=30 max s=320x240 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=320x240 fps=30 max s=320x240 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=176x144 fps=30 max s=176x144 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=176x144 fps=30 max s=176x144 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
 
-apt-get install python3-dev cmake
-./install.sh --clang-completer
+</code></pre><p>可以加上分辨率的参数 <strong>-video_size</strong></p>
+<pre><code>ffplay -f dshow -video_size 640x480  -i video=&quot;Altair USB2.0 Camera&quot;
 
-</code></pre><p>如果是使用其他语言，官网也给出了安装命令，不过也要安装对应的开发语言环境：</p>
-<pre><code>C++:   python3 install.py --clang-completer
-C#：install Mono and run python3 install.py --clangd-completer
-Go：install Go and run python3 install.py --go-completer
-JS and TypeScript：install Node.js and rpm and run python3 install.py --ts-completer
-Rust：python3 install.py --rust-completer
-Java：install JDK8 and python3 install.py --java-completer
+</code></pre><h2 id="a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 vfwcap 采集视频设备</h2>
+<p>vfwcap 主要支持两个参数 video_size framerate ，分别指示采集图像的大小和帧率<!-- raw HTML omitted --> 使用 vfwcap 枚举支持采集的设备</p>
+<pre><code>ffmpeg -f vfwcap -i list
 
-</code></pre><p>如果你想一劳永逸，也可以全部安装，不过也需要把每种语言的环境都安装好才可以：</p>
-<pre><code>python3 install.py --all
+</code></pre><p>输出</p>
+<pre><code>[vfwcap @ 0000025a6d60d080] Driver 0
+[vfwcap @ 0000025a6d60d080]  Microsoft WDM Image Capture (Win32)
+[vfwcap @ 0000025a6d60d080]  Version:  10.0.17134.1
+list: I/O error
 
-</code></pre><h3 id="a-idubuntu1604_vimplus_61aubuntu1604-更新安装vimplus不成功"><!-- raw HTML omitted --><!-- raw HTML omitted -->ubuntu16.04 更新安装vimplus不成功</h3>
-<p>需要安装 gnupg</p>
-<pre><code>sudo apt install --only-upgrade gnupg
+</code></pre><p>使用 vfwcap 生成 MP4 文件</p>
+<pre><code>ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
 
-</code></pre><h2 id="a-idvimc_66a使用vim打开项目c头文件找不到"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用vim打开项目，C++头文件找不到</h2>
-<p>vimplus安装完毕之后，<code>~</code>目录下将会生成两个隐藏文件分别是.vimrc和.ycm_extra_conf.py，其中.vimrc是vim的配置文件，<code>.ycm_extra_conf.py</code>是ycm插件的配置文件，当你需要创建一个project时，<strong>需要将.ycm_extra_conf.py拷贝到project的顶层目录，通过修改该配置文件里面的<code>flags</code>变量来添加你的第三方库路径。</strong></p>
+</code></pre><p>我们通过 -i 指定了待录像的摄像头 索引号，-r 则指定了 需要录像 的帧, -vcodec 指定了录像视频的编码格式，输出 out.mp4</p>
+<h2 id="a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><!-- raw HTML omitted --><!-- raw HTML omitted -->FFmpeg 使用 gdigrab 采集窗口</h2>
+<p>Windows 平台， FFmpeg 支持采集基于 gdi 的屏幕采集设备，这个设备同时支持采 集显示器的某 块区域， gdigrab 支持的主要参数如表 7-5 所示<!-- raw HTML omitted --> 
+        <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/4438f7c7f5f2079933d3db9b77bfe333.png">
+            <img class="mx-auto" alt="4438f7c7f5f2079933d3db9b77bfe333.png" src="https://img-service.csdnimg.cn/img_convert/4438f7c7f5f2079933d3db9b77bfe333.png" />
+        </a>
+    </p>
+<p>gdigrab 的输入主要有两种方式：</p>
+<ol>
+<li>desktop title = window_title ，其中 desktop 代表采 集整个桌面，1. ttitle = window title 则是采集标题为 window title 的窗口
+使用 gdigrab 采集整个桌面</li>
+</ol>
+<pre><code>ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
+
+</code></pre><p>使用gdigrab采集某个窗口</p>
+<pre><code>ffmpeg -f gdigrab -framerate 6 -i title=&quot;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&quot; gdi.mp4
+
+</code></pre><p>该窗口是我用spy++抓的</p>
 
         </div>
 
@@ -268,15 +281,15 @@ Java：install JDK8 and python3 install.py --java-completer
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/">linux系统删除大量文件指令--rsync</a></li>
+        <li><a href="/2020/08/macffmpeg/">FFmpeg | 录制摄像头和桌面数据mac</a></li>
         
-        <li><a href="/2020/08/nsf/">Linux | nsf服务的搭建和使用</a></li>
+        <li><a href="/2020/08/prometheusgrafana/">k8s | Prometheus&#43;Grafana监控</a></li>
         
-        <li><a href="/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">CPU的核与线程-4核8线程</a></li>
+        <li><a href="/2020/08/owt-client-javascript/">owt-server | owt-client-javascript</a></li>
         
-        <li><a href="/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">大量TIME_WAIT对线上业务的影响</a></li>
+        <li><a href="/2020/08/ingress/">k8s | Ingress的基本使用</a></li>
         
-        <li><a href="/2020/09/libeventimer/">Libevent | 定时器</a></li>
+        <li><a href="/2020/08/pvc/">k8s | Statefluset的持久存储PVC</a></li>
         
     </ul>
 </div>
@@ -286,9 +299,9 @@ Java：install JDK8 and python3 install.py --java-completer
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/linux'>linux</a></li>
+                <li><a href='/tags/ffmpeg'>ffmpeg</a></li>
                 
-                <li><a href='/tags/ubuntu'>ubuntu</a></li>
+                <li><a href='/tags/windows'>windows</a></li>
                 
             </ul>
             

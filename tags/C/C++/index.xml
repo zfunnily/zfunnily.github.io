@@ -178,11 +178,11 @@
     </item>
     
     <item>
-      <title>Libevent定时器的实现</title>
-      <link>https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <title>Libevent | 定时器</title>
+      <link>https://zfunnily.github.io/2020/09/libeventimer/</link>
       <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <guid>https://zfunnily.github.io/2020/09/libeventimer/</guid>
       <description>libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;amp;ev,</description>
     </item>
     

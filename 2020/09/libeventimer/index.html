@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>使用vim打造编C&#43;&#43;IDE | 留白</title>
-    <meta property="og:title" content="使用vim打造编C&#43;&#43;IDE - 留白">
+    <title>Libevent | 定时器 | 留白</title>
+    <meta property="og:title" content="Libevent | 定时器 - 留白">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
-    <meta property="article:published_time" content='2020-10-28T09:11:32&#43;08:00'>
+    <meta property="article:published_time" content='2020-09-16T23:20:28&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-10-28T09:11:32&#43;08:00'>
+    <meta property="article:modified_time" content='2020-09-16T23:20:28&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="使用vim打造编C&#43;&#43;IDE">
+    <meta name="description" content="Libevent | 定时器">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/">
+    <meta property="og:url" content="https://zfunnily.github.io/2020/09/libeventimer/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -146,20 +146,9 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_vimplus_c_ide_2a使用-vimplus-打造c-ide"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用 vimplus 打造C++ IDE</a>
-      <ul>
-        <li><a href="#a-idvimplus_6a安装vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装vimplus</a></li>
-        <li><a href="#a-idnerd_font_18a设置nerd-font"><!-- raw HTML omitted --><!-- raw HTML omitted -->设置Nerd Font</a></li>
-        <li><a href="#a-idvimplus_22a更新vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新vimplus</a></li>
-      </ul>
-    </li>
-    <li><a href="#a-id_30a出现过的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->出现过的问题</a>
-      <ul>
-        <li><a href="#a-idycm_31aycm编译错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->YCM编译错误</a></li>
-        <li><a href="#a-idubuntu1604_vimplus_61aubuntu1604-更新安装vimplus不成功"><!-- raw HTML omitted --><!-- raw HTML omitted -->ubuntu16.04 更新安装vimplus不成功</a></li>
-      </ul>
-    </li>
-    <li><a href="#a-idvimc_66a使用vim打开项目c头文件找不到"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用vim打开项目，C++头文件找不到</a></li>
+    <li><a href="#libevent-实现定时器流程">libevent 实现定时器流程</a></li>
+    <li><a href="#完整的示例代码">完整的示例代码</a></li>
+    <li><a href="#libevent实现定时器的第二种方法">libevent实现定时器的第二种方法</a></li>
   </ul>
 </nav>
     </div>
@@ -194,69 +183,95 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">使用vim打造编C&#43;&#43;IDE</h1>
+            <h1 class="post-title">Libevent | 定时器</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年10月28日
+            2020年9月16日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
             
         </div>
         
         
         
         <div class="post-content">
-            <h2 id="a-id_vimplus_c_ide_2a使用-vimplus-打造c-ide"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用 vimplus 打造C++ IDE</h2>
-<p>GitHub： <a href="https://github.com/chxuan/vimplus">https://github.com/chxuan/vimplus</a><!-- raw HTML omitted --> 支持平台：<!-- raw HTML omitted --> macos/linux</p>
-<h3 id="a-idvimplus_6a安装vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装vimplus</h3>
-<pre><code>// 原来的链接， 国内速度较慢
-$ git clone https://github.com/chxuan/vimplus.git ~/.vimplus
+            <h2 id="libevent-实现定时器流程">libevent 实现定时器流程</h2>
+<p>首先初始化libevent库，并保存返回的指针</p>
+<pre><code>struct event_base * base = event_init();  
+</code></pre><blockquote>
+<p>实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。</p>
+</blockquote>
+<p>初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL);</p>
+<pre><code>evtimer_set(&amp;ev, timer_cb, NULL);  
 
-// github修改为镜像的链接
-$ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus
-$ cd ~/.vimplus
+</code></pre><p>设置event从属的event_base ,这一步相当于指明event要注册到哪个event_base实例上；</p>
+<pre><code>event_base_set(base, &amp;ev); 
 
-//不加sudo
-$ ./install.sh 
+</code></pre><p>是正式的添加事件的时候了</p>
+<pre><code>event_add(&amp;ev, timeout);  
 
-</code></pre><h3 id="a-idnerd_font_18a设置nerd-font"><!-- raw HTML omitted --><!-- raw HTML omitted -->设置Nerd Font</h3>
-<p>为防止vimplus显示乱码，需设置mac终端字体为<code>Droid Sans Mono Nerd Font</code>。</p>
-<h3 id="a-idvimplus_22a更新vimplus"><!-- raw HTML omitted --><!-- raw HTML omitted -->更新vimplus</h3>
-<p>紧跟vimplus的步伐，尝鲜新特性</p>
-<pre><code>./update.sh
+</code></pre><p>基本信息都已设置完成，只要简单的调用event_add()函数即可完成，其中timeout是定时值；<!-- raw HTML omitted --> 这一步相当于调用Reactor::register_handler()函数注册事件。
+程序进入无限循环，等待就绪事件并执行事件处理</p>
+<pre><code>event_base_dispatch(base);
 
-</code></pre><h2 id="a-id_30a出现过的问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->出现过的问题</h2>
-<h3 id="a-idycm_31aycm编译错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->YCM编译错误</h3>
-<p>出现过问题”YouCompleteMe unavailable: No module named ycmd”, 解决办法</p>
-<pre><code>cd ~/.vim/plugged/YouCompleteMe  
-git pull  
-git submodule update --init --recursive
+</code></pre><h2 id="完整的示例代码">完整的示例代码</h2>
+<pre><code>#include &lt;iostream&gt;
+#include &quot;event.h&quot;
 
-apt-get install python3-dev cmake
-./install.sh --clang-completer
+struct timeval tv;
+struct event ev;
+static void time_cb(evutil_socket_t fd, short event, void* arg)
+{
+    std::cout &lt;&lt; &quot;timer wakeup&quot; &lt;&lt; std::endl;
+    event_add(&amp;ev, &amp;tv); // reschedule timer
+}
 
-</code></pre><p>如果是使用其他语言，官网也给出了安装命令，不过也要安装对应的开发语言环境：</p>
-<pre><code>C++:   python3 install.py --clang-completer
-C#：install Mono and run python3 install.py --clangd-completer
-Go：install Go and run python3 install.py --go-completer
-JS and TypeScript：install Node.js and rpm and run python3 install.py --ts-completer
-Rust：python3 install.py --rust-completer
-Java：install JDK8 and python3 install.py --java-completer
+int main()
+{
+    struct event_base* base = event_base_new();
 
-</code></pre><p>如果你想一劳永逸，也可以全部安装，不过也需要把每种语言的环境都安装好才可以：</p>
-<pre><code>python3 install.py --all
+    tv.tv_sec = 2;
+    tv.tv_usec = 0;
+   // event *timeout = event_new(base, -1, EV_PERSIST|EV_TIMEOUT, time_cb, NULL);
+    evtimer_set(&amp;ev, time_cb, nullptr);
+    event_base_set(base, &amp;ev);
+    event_add(&amp;ev, &amp;tv);
 
-</code></pre><h3 id="a-idubuntu1604_vimplus_61aubuntu1604-更新安装vimplus不成功"><!-- raw HTML omitted --><!-- raw HTML omitted -->ubuntu16.04 更新安装vimplus不成功</h3>
-<p>需要安装 gnupg</p>
-<pre><code>sudo apt install --only-upgrade gnupg
+    event_base_dispatch(base);
+    return 1;
+}
 
-</code></pre><h2 id="a-idvimc_66a使用vim打开项目c头文件找不到"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用vim打开项目，C++头文件找不到</h2>
-<p>vimplus安装完毕之后，<code>~</code>目录下将会生成两个隐藏文件分别是.vimrc和.ycm_extra_conf.py，其中.vimrc是vim的配置文件，<code>.ycm_extra_conf.py</code>是ycm插件的配置文件，当你需要创建一个project时，<strong>需要将.ycm_extra_conf.py拷贝到project的顶层目录，通过修改该配置文件里面的<code>flags</code>变量来添加你的第三方库路径。</strong></p>
+</code></pre><h2 id="libevent实现定时器的第二种方法">libevent实现定时器的第二种方法</h2>
+<p>定义一个定时器事件，使用event_new()创建了一个定时器事件.替换上述的步骤2和3</p>
+<pre><code>struct event *event_new(struct event_base *, evutil_socket_t, short, event_callback_fn, void *);
+</code></pre><p>完整示例代码</p>
+<pre><code>#include &lt;iostream&gt;
+#include &quot;event.h&quot;
 
+struct timeval tv;
+struct event ev;
+static void time_cb(evutil_socket_t fd, short event, void* arg)
+{
+    std::cout &lt;&lt; &quot;timer wakeup&quot; &lt;&lt; std::endl;
+}
+
+int main()
+{
+    struct event_base* base = event_base_new();
+
+    tv.tv_sec = 2;
+    tv.tv_usec = 0;
+    event* ev = event_new(base, -1, EV_PERSIST|EV_TIMEOUT, time_cb, NULL);
+    event_add(ev, &amp;tv);
+
+    event_base_dispatch(base);
+    return 1;
+}
+</code></pre>
         </div>
 
         
@@ -268,15 +283,15 @@ Java：install JDK8 and python3 install.py --java-completer
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/">linux系统删除大量文件指令--rsync</a></li>
+        <li><a href="/2020/08/licode/">licod | 安装和配置</a></li>
         
-        <li><a href="/2020/08/nsf/">Linux | nsf服务的搭建和使用</a></li>
+        <li><a href="/2020/08/owtservercomplie/">owt-server | 编译运行</a></li>
         
-        <li><a href="/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">CPU的核与线程-4核8线程</a></li>
+        <li><a href="/2020/09/ffmpegpicture/">FFmpeg | 画中画和视频多宫格处理</a></li>
         
-        <li><a href="/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">大量TIME_WAIT对线上业务的影响</a></li>
+        <li><a href="/2020/09/ffmpegvideo/">FFmpeg | 给视频加文字和图片水印</a></li>
         
-        <li><a href="/2020/09/libeventimer/">Libevent | 定时器</a></li>
+        <li><a href="/2020/09/ffmpegvideow/">FFmpeg | 录制摄像头和桌面数据windows</a></li>
         
     </ul>
 </div>
@@ -286,9 +301,11 @@ Java：install JDK8 and python3 install.py --java-completer
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/linux'>linux</a></li>
+                <li><a href='/tags/C/C&#43;&#43;'>C/C&#43;&#43;</a></li>
                 
-                <li><a href='/tags/ubuntu'>ubuntu</a></li>
+                <li><a href='/tags/event'>event</a></li>
+                
+                <li><a href='/tags/libevent'>libevent</a></li>
                 
             </ul>
             

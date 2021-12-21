@@ -240,7 +240,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="Libevent定时器的实现">Libevent定时器的实现</a>
+                <a href="https://zfunnily.github.io/2020/09/libeventimer/" title="Libevent | 定时器">Libevent | 定时器</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -257,13 +257,13 @@
         <div class="post-content">
             libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/Libevent%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/libeventimer/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/" title="FFmpeg画中画和视频多宫格处理">FFmpeg画中画和视频多宫格处理</a>
+                <a href="https://zfunnily.github.io/2020/09/ffmpegpicture/" title="FFmpeg | 画中画和视频多宫格处理">FFmpeg | 画中画和视频多宫格处理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -280,13 +280,13 @@
         <div class="post-content">
             FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%94%BB%E4%B8%AD%E7%94%BB%E5%92%8C%E8%A7%86%E9%A2%91%E5%A4%9A%E5%AE%AB%E6%A0%BC%E5%A4%84%E7%90%86/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegpicture/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/" title="FFmpeg给视频加文字和图片水印">FFmpeg给视频加文字和图片水印</a>
+                <a href="https://zfunnily.github.io/2020/09/ffmpegvideo/" title="FFmpeg | 给视频加文字和图片水印">FFmpeg | 给视频加文字和图片水印</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -303,7 +303,7 @@
         <div class="post-content">
             FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/FFmpeg%E7%BB%99%E8%A7%86%E9%A2%91%E5%8A%A0%E6%96%87%E5%AD%97%E5%92%8C%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegvideo/">阅读全文</a></p>
     </article>
     
     
