@@ -8,17 +8,6 @@
  * 2. Prevent adjustments of font size after orientation changes in
  *    IE on Windows Phone and in iOS.
  */
-:root {
-  color-scheme: light dark;
-  background: white;
-  color: black;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    background: black;
-    color: white;
-  }
-}
 
 html {
   line-height: 1.15; /* 1 */
