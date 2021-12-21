@@ -45,10 +45,10 @@
     
     <item>
       <title>Go-libp2p四 | 穿透NAT</title>
-      <link>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</link>
+      <link>https://zfunnily.github.io/2021/11/gop2pfour/</link>
       <pubDate>Sun, 07 Nov 2021 15:49:46 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</guid>
+      <guid>https://zfunnily.github.io/2021/11/gop2pfour/</guid>
       <description>本文目的 上文Go-libp2p三 | relay例子已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。 在打洞不成功的情况下能提供中继服务，转发两节点发送的数据</description>
     </item>
     
@@ -63,33 +63,33 @@
     
     <item>
       <title>Go-libp2p三 | relay例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2pthree/</link>
       <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2pthree/</guid>
       <description>我想做什么 chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。(hol</description>
     </item>
     
     <item>
       <title>Go-libp2p二 | echo例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2ptwo/</link>
       <pubDate>Fri, 29 Oct 2021 11:15:42 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2ptwo/</guid>
       <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&amp;#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3</description>
     </item>
     
     <item>
       <title>Go-libp2p一 | chat例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2pone/</link>
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2pone/</guid>
       <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &amp;gt; hello 在节点 A, 如果B有公网IP，则把</description>
     </item>
     
     <item>
-      <title>csdn博客迁移到个人博客</title>
+      <title>Blog | csdn博客迁移到个人博客</title>
       <link>https://zfunnily.github.io/2021/10/blogmigration/</link>
       <pubDate>Fri, 22 Oct 2021 19:01:20 +0800</pubDate>
       
@@ -99,42 +99,42 @@
     
     <item>
       <title>Skynet源码赏析四 | 消息调度</title>
-      <link>https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/</link>
+      <link>https://zfunnily.github.io/2021/10/four/</link>
       <pubDate>Thu, 21 Oct 2021 10:06:39 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/skynet%E5%9B%9B/</guid>
+      <guid>https://zfunnily.github.io/2021/10/four/</guid>
       <description>服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.call(...)函数发送消息，其实调用的都是c.send(...),实际上调用的</description>
     </item>
     
     <item>
       <title>Skynet源码赏析三 | 服务启动</title>
-      <link>https://zfunnily.github.io/2021/10/skynet%E4%B8%89/</link>
+      <link>https://zfunnily.github.io/2021/10/skynetthree/</link>
       <pubDate>Wed, 20 Oct 2021 11:26:07 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/skynet%E4%B8%89/</guid>
+      <guid>https://zfunnily.github.io/2021/10/skynetthree/</guid>
       <description>skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &amp;quot;logger&amp;quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&amp;gt;logservice, config-&amp;gt;logger);; 从modules服务模块中取出名字为 logger的服务, struct skynet_module * result = _query(name);; 如果找不到则从cpath目</description>
     </item>
     
     <item>
       <title>Skynet源码赏析二 | 基础数据结构</title>
-      <link>https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/</link>
+      <link>https://zfunnily.github.io/2021/10/skynettwo/</link>
       <pubDate>Tue, 19 Oct 2021 18:47:45 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/skynet%E4%BA%8C/</guid>
+      <guid>https://zfunnily.github.io/2021/10/skynettwo/</guid>
       <description>module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&amp;quot;cservice/?.so&amp;quot;下的.so文件，通过static void * _try_open(struct modules *m, const char * name)函数第一次打开，然后被加载到全局变量static struct modules *</description>
     </item>
     
     <item>
       <title>Skynet源码赏析一 | 启动初始化的过程</title>
-      <link>https://zfunnily.github.io/2021/10/skynet%E4%B8%80/</link>
+      <link>https://zfunnily.github.io/2021/10/skynetone/</link>
       <pubDate>Tue, 19 Oct 2021 17:28:45 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/skynet%E4%B8%80/</guid>
+      <guid>https://zfunnily.github.io/2021/10/skynetone/</guid>
       <description>入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&amp;gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat</description>
     </item>
     
     <item>
-      <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
+      <title>Golang | 调用带有后台进程shell脚本可能会被挂起</title>
       <link>https://zfunnily.github.io/2021/10/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
@@ -143,7 +143,7 @@
     </item>
     
     <item>
-      <title>FPS游戏 实现移动功能</title>
+      <title>FPS游戏 | 实现移动功能</title>
       <link>https://zfunnily.github.io/2021/09/move/</link>
       <pubDate>Sun, 12 Sep 2021 20:43:34 +0800</pubDate>
       
@@ -161,34 +161,25 @@
     </item>
     
     <item>
-      <title>idea和vscode结合vim 自动切换输入法</title>
-      <link>https://zfunnily.github.io/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/</link>
-      <pubDate>Tue, 07 Sep 2021 14:41:02 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/09/idea%E5%92%8Cvscode%E7%BB%93%E5%90%88vim-%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
-      <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim- IdeaVimExtension 我们需要在 用户目录</description>
-    </item>
-    
-    <item>
-      <title>U3D Transform类</title>
-      <link>https://zfunnily.github.io/2021/09/transform%E7%B1%BB/</link>
+      <title>Unity3D | Transform类</title>
+      <link>https://zfunnily.github.io/2021/09/transform/</link>
       <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/09/transform%E7%B1%BB/</guid>
+      <guid>https://zfunnily.github.io/2021/09/transform/</guid>
       <description>Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat</description>
     </item>
     
     <item>
-      <title>Vim 输入模式 语言改变</title>
-      <link>https://zfunnily.github.io/2021/09/vim_change_language/</link>
+      <title>Vim | 切换模式/输入法</title>
+      <link>https://zfunnily.github.io/2021/09/vimchange/</link>
       <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/09/vim_change_language/</guid>
+      <guid>https://zfunnily.github.io/2021/09/vimchange/</guid>
       <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim IdeaVimExtension 我们需要在 用户目录</description>
     </item>
     
     <item>
-      <title>Linux Screen</title>
+      <title>Linux | Screen</title>
       <link>https://zfunnily.github.io/2021/09/screen/</link>
       <pubDate>Tue, 07 Sep 2021 10:02:16 +0800</pubDate>
       
@@ -197,30 +188,12 @@
     </item>
     
     <item>
-      <title>CentOS7.2 升级gcc</title>
-      <link>https://zfunnily.github.io/2021/09/CentOS7.2-%E5%8D%87%E7%BA%A7gcc/</link>
-      <pubDate>Wed, 01 Sep 2021 18:55:39 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/09/CentOS7.2-%E5%8D%87%E7%BA%A7gcc/</guid>
-      <description>环境 CentOS 7.2.1511- Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 $ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件放在gcc</description>
-    </item>
-    
-    <item>
-      <title>Centos7.2的gcc4.8升级为4.9</title>
-      <link>https://zfunnily.github.io/2021/09/gcc%E5%8D%87%E7%BA%A7/</link>
+      <title>Centos7.2 | gcc4.8升级为4.9</title>
+      <link>https://zfunnily.github.io/2021/09/upgradegcc/</link>
       <pubDate>Wed, 01 Sep 2021 18:13:41 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/09/gcc%E5%8D%87%E7%BA%A7/</guid>
+      <guid>https://zfunnily.github.io/2021/09/upgradegcc/</guid>
       <description>环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 1 2 $ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 1 2 3 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件</description>
-    </item>
-    
-    <item>
-      <title>shell-使用Except自动交互</title>
-      <link>https://zfunnily.github.io/2021/08/shell-%E4%BD%BF%E7%94%A8Except%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/</link>
-      <pubDate>Mon, 30 Aug 2021 17:20:38 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/08/shell-%E4%BD%BF%E7%94%A8Except%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/</guid>
-      <description>Except 参数 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的echo exit 退出expect脚本 eof expect执行结束 退出 set 定义变量 puts 输出变量 set timeout 设置超</description>
     </item>
     
     <item>
@@ -233,34 +206,34 @@
     </item>
     
     <item>
-      <title>U3D UGUI</title>
-      <link>https://zfunnily.github.io/2021/08/UGUI/</link>
+      <title>Unity3D | UGUI</title>
+      <link>https://zfunnily.github.io/2021/08/ugui/</link>
       <pubDate>Fri, 20 Aug 2021 14:15:41 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/08/UGUI/</guid>
+      <guid>https://zfunnily.github.io/2021/08/ugui/</guid>
       <description>Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&amp;gt;UI–&amp;gt;Text, 在 Inspector 面板上查看属性 属性 功能 Text 需要显示的文本 Font 显示文本的字体 如：微软雅黑，宋体等 Font Style 显示文本的样式，有普通，粗体，斜体，粗体和斜体四种选项 Font Size 显示字体的大小 Line Spacing 行与行之间的垂直距离 Alignment 文本的水平和垂直方向的对齐方式 Align</description>
     </item>
     
     <item>
       <title>Golang利用redis实现分布式锁</title>
-      <link>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+      <link>https://zfunnily.github.io/2021/06/distribute/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
+      <guid>https://zfunnily.github.io/2021/06/distribute/</guid>
       <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
     <item>
-      <title>Golang操作redis</title>
-      <link>https://zfunnily.github.io/2021/06/go_redis/</link>
+      <title>Golang | redis</title>
+      <link>https://zfunnily.github.io/2021/06/goredis/</link>
       <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/go_redis/</guid>
+      <guid>https://zfunnily.github.io/2021/06/goredis/</guid>
       <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止</description>
     </item>
     
     <item>
-      <title>Lua next 的使用</title>
+      <title>Lua | next的使用</title>
       <link>https://zfunnily.github.io/2021/05/lua_next/</link>
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
       
@@ -269,11 +242,11 @@
     </item>
     
     <item>
-      <title>Lua的api</title>
-      <link>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</link>
+      <title>Lua | API</title>
+      <link>https://zfunnily.github.io/2021/05/settopandpop/</link>
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</guid>
+      <guid>https://zfunnily.github.io/2021/05/settopandpop/</guid>
       <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in</description>
     </item>
     
@@ -287,11 +260,11 @@
     </item>
     
     <item>
-      <title>Go mod拉取私有仓库</title>
-      <link>https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
+      <title>GO MOD | 拉取私有仓库</title>
+      <link>https://zfunnily.github.io/2021/03/gomod/</link>
       <pubDate>Tue, 23 Mar 2021 16:10:02 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/03/gomod/</guid>
       <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;quot;gitlab.com/xxx/zz&amp;quot;: found meta tag get.metaImport{Prefix:&amp;quot;gitlab.com/xxx/zz&amp;quot;, VCS:&amp;quot;git&amp;quot;, RepoRoot:&amp;quot;https://gitlab.com/xxx/zz.git&amp;quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.</description>
     </item>
     
@@ -306,191 +279,191 @@
     
     <item>
       <title>《仙剑奇侠传》编译运行</title>
-      <link>https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</link>
+      <link>https://zfunnily.github.io/2021/03/gamexian/</link>
       <pubDate>Sun, 21 Mar 2021 10:44:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</guid>
+      <guid>https://zfunnily.github.io/2021/03/gamexian/</guid>
       <description>概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决</description>
     </item>
     
     <item>
-      <title>使用C/C&#43;&#43;实现atoi和itoa函数</title>
-      <link>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</link>
+      <title>C/C&#43;&#43; | 实现atoi和itoa函数</title>
+      <link>https://zfunnily.github.io/2021/03/atoianditoa/</link>
       <pubDate>Wed, 17 Mar 2021 16:43:20 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/</guid>
-      <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;) &amp;amp;&amp;amp; (*str == &#39;+&#39; || *str == &#39;-&#39;)) { if (*str == &#39;-&#39;) bmin = true; str++; } while (*str != &#39;\0&#39;) { if (*str &amp;gt; &#39;9&#39; || *str &amp;lt;</description>
+      <guid>https://zfunnily.github.io/2021/03/atoianditoa/</guid>
+      <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;) &amp;amp;&amp;amp; (*str == &#39;+&#39; || *str == &#39;-&#39;)) { if (*str == &#39;-&#39;) bmin = true; str++; } while (*str != &#39;\0&#39;) { if (*str &amp;gt; &#39;9&#39; || *str &amp;lt; &#39;0&#39;)</description>
     </item>
     
     <item>
-      <title>协程解析二(云风的coroutine)</title>
-      <link>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</link>
+      <title>协程解析二 | 云风的coroutine</title>
+      <link>https://zfunnily.github.io/2021/03/coroutinetwo/</link>
       <pubDate>Wed, 10 Mar 2021 11:11:47 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%BA%8C%E4%BA%91%E9%A3%8E%E7%9A%84coroutine/</guid>
-      <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine- Ubuntu16.04- gcc- make- vscode 下载代码 &amp;amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;amp;&amp;amp; make 写一个生产者和消费者的demo //procus.c #include &amp;quot;coroutine.h&amp;quot; #include</description>
+      <guid>https://zfunnily.github.io/2021/03/coroutinetwo/</guid>
+      <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine Ubuntu16.04 gcc make vscode 下载代码 &amp;amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;amp;&amp;amp; make 写一个生产者和消费者的demo //procus.c #include &amp;quot;coroutine.h&amp;quot; #include</description>
     </item>
     
     <item>
-      <title>协程解析一(ucontext)</title>
-      <link>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</link>
+      <title>协程解析一 | ucontext</title>
+      <link>https://zfunnily.github.io/2021/03/coroutineone/</link>
       <pubDate>Tue, 09 Mar 2021 09:43:00 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/</guid>
+      <guid>https://zfunnily.github.io/2021/03/coroutineone/</guid>
       <description>概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了</description>
     </item>
     
     <item>
-      <title>Golang的定时器实现方式</title>
-      <link>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <title>Golang | 定时器</title>
+      <link>https://zfunnily.github.io/2021/02/timer/</link>
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
-      <description>概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &amp;lt;- t2.C fmt.Println(&amp;quot;NewTimer...&amp;quot;) } }() select 通过select的方式实现定时器： for { select { case &amp;lt;- time.After(d): fmt.Println(&amp;quot;select...&amp;quot;) } }</description>
+      <guid>https://zfunnily.github.io/2021/02/timer/</guid>
+      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &amp;lt;- t2.C fmt.Println(&amp;quot;NewTimer...&amp;quot;) } }() select 通过select的方式实现定时器： for { select { case &amp;lt;- time.After(d): fmt.Println(&amp;quot;select...&amp;quot;) } }</description>
     </item>
     
     <item>
-      <title>lua解决百元买鸡的问题</title>
-      <link>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <title>Lua | 解决百元买鸡的问题</title>
+      <link>https://zfunnily.github.io/2021/02/chicken/</link>
       <pubDate>Wed, 24 Feb 2021 17:51:46 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/2021/02/chicken/</guid>
       <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local</description>
     </item>
     
     <item>
       <title>Golang使用JWT身份认证</title>
-      <link>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</link>
+      <link>https://zfunnily.github.io/2021/02/JWT/</link>
       <pubDate>Wed, 24 Feb 2021 14:22:04 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</guid>
-      <description>概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端1. 客户端请求接口时需要带上token。服务器需要验证to</description>
+      <guid>https://zfunnily.github.io/2021/02/JWT/</guid>
+      <description>概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端 客户端请求接口时需要带上token。服务器需要验证toke</description>
     </item>
     
     <item>
-      <title>Lua调用C/C&#43;&#43;的动态库</title>
-      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <title>Lua | 调用C/C&#43;&#43;的动态库</title>
+      <link>https://zfunnily.github.io/2021/02/dynamic/</link>
       <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/02/dynamic/</guid>
       <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
     </item>
     
     <item>
-      <title>C/C&#43;&#43;调用汇编函数</title>
-      <link>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</link>
+      <title>汇编 | C/C&#43;&#43;调用汇编</title>
+      <link>https://zfunnily.github.io/2021/02/compilation/</link>
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2021/02/compilation/</guid>
       <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编</description>
     </item>
     
     <item>
-      <title>AT&amp;T和Intel规范的区别</title>
-      <link>https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <title>汇编 | AT&amp;T和Intel规范的区别</title>
+      <link>https://zfunnily.github.io/2021/01/attandintel/</link>
       <pubDate>Sun, 31 Jan 2021 11:25:39 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://zfunnily.github.io/2021/01/attandintel/</guid>
       <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&amp;lsquo;前</description>
     </item>
     
     <item>
-      <title>在skynet中使用lua-protobuf库</title>
-      <link>https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</link>
+      <title>skynet框架 | lua-protobuf</title>
+      <link>https://zfunnily.github.io/2021/01/skynetprotobuf/</link>
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/01/skynetprotobuf/</guid>
       <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
     </item>
     
     <item>
-      <title>Google Protobuf 请求参数为空的案例</title>
-      <link>https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</link>
+      <title>Protobuf | 请求参数为空的案例</title>
+      <link>https://zfunnily.github.io/2021/01/pbempty/</link>
       <pubDate>Fri, 22 Jan 2021 16:41:16 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/pbempty/</guid>
       <description>参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&amp;lt;!-- --&amp;gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &amp;quot;google/protobuf/empty.proto&amp;quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func</description>
     </item>
     
     <item>
       <title>C数组转化为Golang的切片类型</title>
-      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://zfunnily.github.io/2021/01/goslience/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/goslience/</guid>
       <description>概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存</description>
     </item>
     
     <item>
-      <title>skynet框架入门--写一个echo服务</title>
-      <link>https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</link>
+      <title>skynet框架 | echo服务</title>
+      <link>https://zfunnily.github.io/2021/01/skynetecho/</link>
       <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://zfunnily.github.io/2021/01/skynetecho/</guid>
       <description>概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用</description>
     </item>
     
     <item>
-      <title>Redis源码分析-ziplist压缩列表</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</link>
+      <title>Redis源码分析 | ziplist</title>
+      <link>https://zfunnily.github.io/2021/01/ziplist/</link>
       <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</guid>
-      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis</description>
+      <guid>https://zfunnily.github.io/2021/01/ziplist/</guid>
+      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist</description>
     </item>
     
     <item>
-      <title>配置VScode调试Redis源码</title>
-      <link>https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</link>
+      <title>VScode | 调试Redis源码</title>
+      <link>https://zfunnily.github.io/2021/01/vscodedebugredis/</link>
       <pubDate>Tue, 12 Jan 2021 14:25:29 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</guid>
-      <description>环境 vscode- gcc5.4- ubuntu16.04 或者 ubuntu18.04- make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 VScode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
+      <guid>https://zfunnily.github.io/2021/01/vscodedebugredis/</guid>
+      <description>环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
     </item>
     
     <item>
       <title>VScode调试Redis源码，指针显示的问题</title>
-      <link>https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://zfunnily.github.io/2021/01/vscoderedis/</link>
       <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/2021/01/vscoderedis/</guid>
       <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
     </item>
     
     <item>
-      <title>Golang利用cgo遍历C结构体数组</title>
-      <link>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
+      <title>cgo | 遍历C结构体数组</title>
+      <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://zfunnily.github.io/2021/01/cgostruct/</guid>
       <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语</description>
     </item>
     
     <item>
-      <title>Redis源码解析-sds字符串分析</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</link>
+      <title>Redis源码解析 | sds</title>
+      <link>https://zfunnily.github.io/2021/01/sds/</link>
       <pubDate>Wed, 06 Jan 2021 14:20:23 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</guid>
+      <guid>https://zfunnily.github.io/2021/01/sds/</guid>
       <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
     </item>
     
     <item>
-      <title>struct中为什么使用char[]而不用char*</title>
-      <link>https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</link>
+      <title>C/C&#43;&#43; | struct中使用char[]</title>
+      <link>https://zfunnily.github.io/2021/01/chararray/</link>
       <pubDate>Tue, 05 Jan 2021 15:45:36 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/struct%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8char%E8%80%8C%E4%B8%8D%E7%94%A8char/</guid>
+      <guid>https://zfunnily.github.io/2021/01/chararray/</guid>
       <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*和char数组有什么区别 常用来构成缓冲区。比起指针，用空数组有这样的优势： 不需要</description>
     </item>
     
     <item>
       <title>最后一战-游戏场景服务器SS解析</title>
-      <link>https://zfunnily.github.io/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</link>
+      <link>https://zfunnily.github.io/2021/01/lastbattle/</link>
       <pubDate>Sat, 02 Jan 2021 23:19:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98-%E6%B8%B8%E6%88%8F%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8SS%E8%A7%A3%E6%9E%90/</guid>
-      <description>游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle- GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&amp;gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送</description>
+      <guid>https://zfunnily.github.io/2021/01/lastbattle/</guid>
+      <description>游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&amp;gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送</description>
     </item>
     
     <item>

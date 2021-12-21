@@ -79,75 +79,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="StatefulSet基本原理">StatefulSet基本原理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/" title="coreDNS的部署安装，对k8s来说很重要">coreDNS的部署安装，对k8s来说很重要</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/" title="使用k8s创建第一个应用">使用k8s创建第一个应用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/08/licod%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/" title="licod安装和配置">licod安装和配置</a>
             </h1>
         </header>
@@ -430,7 +361,7 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -456,7 +387,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
@@ -545,8 +476,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -570,8 +499,6 @@
     <a href="https://zfunnily.github.io/tags/http/">http</a>
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
     
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
     
@@ -762,10 +689,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

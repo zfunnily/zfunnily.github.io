@@ -9,46 +9,46 @@
     <lastBuildDate>Thu, 03 Jun 2021 16:12:21 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang利用redis实现分布式锁</title>
-      <link>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+      <link>https://zfunnily.github.io/2021/06/distribute/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
+      <guid>https://zfunnily.github.io/2021/06/distribute/</guid>
       <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
     <item>
-      <title>Golang操作redis</title>
-      <link>https://zfunnily.github.io/2021/06/go_redis/</link>
+      <title>Golang | redis</title>
+      <link>https://zfunnily.github.io/2021/06/goredis/</link>
       <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/go_redis/</guid>
+      <guid>https://zfunnily.github.io/2021/06/goredis/</guid>
       <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止</description>
     </item>
     
     <item>
-      <title>Redis源码分析-ziplist压缩列表</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</link>
+      <title>Redis源码分析 | ziplist</title>
+      <link>https://zfunnily.github.io/2021/01/ziplist/</link>
       <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</guid>
-      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis</description>
+      <guid>https://zfunnily.github.io/2021/01/ziplist/</guid>
+      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist</description>
     </item>
     
     <item>
-      <title>配置VScode调试Redis源码</title>
-      <link>https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</link>
+      <title>VScode | 调试Redis源码</title>
+      <link>https://zfunnily.github.io/2021/01/vscodedebugredis/</link>
       <pubDate>Tue, 12 Jan 2021 14:25:29 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/</guid>
-      <description>环境 vscode- gcc5.4- ubuntu16.04 或者 ubuntu18.04- make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 VScode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
+      <guid>https://zfunnily.github.io/2021/01/vscodedebugredis/</guid>
+      <description>环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
     </item>
     
     <item>
-      <title>Redis源码解析-sds字符串分析</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</link>
+      <title>Redis源码解析 | sds</title>
+      <link>https://zfunnily.github.io/2021/01/sds/</link>
       <pubDate>Wed, 06 Jan 2021 14:20:23 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</guid>
+      <guid>https://zfunnily.github.io/2021/01/sds/</guid>
       <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
     </item>
     

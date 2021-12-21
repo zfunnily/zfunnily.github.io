@@ -79,76 +79,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/" title="Lua调用C/C&#43;&#43;的动态库">Lua调用C/C&#43;&#43;的动态库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Skynet'>Skynet</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43;调用汇编函数">C/C&#43;&#43;调用汇编函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>汇编学习笔记</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/" title="AT&amp;T和Intel规范的区别">AT&amp;T和Intel规范的区别</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>汇编学习笔记</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;T格式|Intel格式|说明 |&mdash;&mdash; |pushl %eax|push eax|在AT&amp;T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;T汇编格式中，用’$&lsquo;前……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/" title="在skynet中使用lua-protobuf库">在skynet中使用lua-protobuf库</a>
+                <a href="https://zfunnily.github.io/2021/01/skynetprotobuf/" title="skynet框架 | lua-protobuf">skynet框架 | lua-protobuf</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -165,13 +96,13 @@
         <div class="post-content">
             概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E5%9C%A8skynet%E4%B8%AD%E4%BD%BF%E7%94%A8lua-protobuf%E5%BA%93/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetprotobuf/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/" title="Google Protobuf 请求参数为空的案例">Google Protobuf 请求参数为空的案例</a>
+                <a href="https://zfunnily.github.io/2021/01/pbempty/" title="Protobuf | 请求参数为空的案例">Protobuf | 请求参数为空的案例</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -188,13 +119,13 @@
         <div class="post-content">
             参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &quot;google/protobuf/empty.proto&quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/pbempty/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/" title="C数组转化为Golang的切片类型">C数组转化为Golang的切片类型</a>
+                <a href="https://zfunnily.github.io/2021/01/goslience/" title="C数组转化为Golang的切片类型">C数组转化为Golang的切片类型</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -211,13 +142,13 @@
         <div class="post-content">
             概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/goslience/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/" title="skynet框架入门--写一个echo服务">skynet框架入门--写一个echo服务</a>
+                <a href="https://zfunnily.github.io/2021/01/skynetecho/" title="skynet框架 | echo服务">skynet框架 | echo服务</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -234,13 +165,13 @@
         <div class="post-content">
             概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetecho/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/" title="Redis源码分析-ziplist压缩列表">Redis源码分析-ziplist压缩列表</a>
+                <a href="https://zfunnily.github.io/2021/01/ziplist/" title="Redis源码分析 | ziplist">Redis源码分析 | ziplist</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -255,15 +186,15 @@
         </div>
         
         <div class="post-content">
-            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis……
+            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ziplist/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/" title="配置VScode调试Redis源码">配置VScode调试Redis源码</a>
+                <a href="https://zfunnily.github.io/2021/01/vscodedebugredis/" title="VScode | 调试Redis源码">VScode | 调试Redis源码</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -278,15 +209,15 @@
         </div>
         
         <div class="post-content">
-            环境 vscode- gcc5.4- ubuntu16.04 或者 ubuntu18.04- make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 VScode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
+            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/%E9%85%8D%E7%BD%AEVScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscodedebugredis/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/" title="VScode调试Redis源码，指针显示的问题">VScode调试Redis源码，指针显示的问题</a>
+                <a href="https://zfunnily.github.io/2021/01/vscoderedis/" title="VScode调试Redis源码，指针显示的问题">VScode调试Redis源码，指针显示的问题</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -303,7 +234,76 @@
         <div class="post-content">
             缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/VScode%E8%B0%83%E8%AF%95Redis%E6%BA%90%E7%A0%81%E6%8C%87%E9%92%88%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscoderedis/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/cgostruct/" title="cgo | 遍历C结构体数组">cgo | 遍历C结构体数组</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/cgostruct/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/sds/" title="Redis源码解析 | sds">Redis源码解析 | sds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/sds/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/chararray/" title="C/C&#43;&#43; | struct中使用char[]">C/C&#43;&#43; | struct中使用char[]</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*和char数组有什么区别 常用来构成缓冲区。比起指针，用空数组有这样的优势： 不需要……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/chararray/">阅读全文</a></p>
     </article>
     
     
@@ -434,7 +434,7 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -460,7 +460,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
@@ -549,8 +549,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -574,8 +572,6 @@
     <a href="https://zfunnily.github.io/tags/http/">http</a>
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
     
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
     
@@ -766,10 +762,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

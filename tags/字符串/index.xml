@@ -8,20 +8,20 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 20 Feb 2021 11:11:51 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Lua调用C/C&#43;&#43;的动态库</title>
-      <link>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</link>
+      <title>Lua | 调用C/C&#43;&#43;的动态库</title>
+      <link>https://zfunnily.github.io/2021/02/dynamic/</link>
       <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/02/dynamic/</guid>
       <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用</description>
     </item>
     
     <item>
-      <title>Redis源码解析-sds字符串分析</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</link>
+      <title>Redis源码解析 | sds</title>
+      <link>https://zfunnily.github.io/2021/01/sds/</link>
       <pubDate>Wed, 06 Jan 2021 14:20:23 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-sds%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E6%9E%90/</guid>
+      <guid>https://zfunnily.github.io/2021/01/sds/</guid>
       <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
     </item>
     

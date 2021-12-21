@@ -171,7 +171,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+                <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -188,7 +188,7 @@
         <div class="post-content">
             本文目的 上文Go-libp2p三 | relay例子已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。 在打洞不成功的情况下能提供中继服务，转发两节点发送的数据……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/11/gop2pfour/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -217,7 +217,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
+                <a href="https://zfunnily.github.io/2021/10/gop2pthree/" title="Go-libp2p三 | relay例子">Go-libp2p三 | relay例子</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -234,13 +234,13 @@
         <div class="post-content">
             我想做什么 chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。(hol……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pthree/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+                <a href="https://zfunnily.github.io/2021/10/gop2ptwo/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -257,13 +257,13 @@
         <div class="post-content">
             go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2ptwo/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
+                <a href="https://zfunnily.github.io/2021/10/gop2pone/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -280,13 +280,13 @@
         <div class="post-content">
             代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &gt; hello 在节点 A, 如果B有公网IP，则把……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pone/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="csdn博客迁移到个人博客">csdn博客迁移到个人博客</a>
+                <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="Blog | csdn博客迁移到个人博客">Blog | csdn博客迁移到个人博客</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -430,7 +430,7 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -456,7 +456,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
@@ -545,8 +545,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -570,8 +568,6 @@
     <a href="https://zfunnily.github.io/tags/http/">http</a>
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
     
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
     
@@ -762,10 +758,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

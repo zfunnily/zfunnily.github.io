@@ -81,81 +81,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/" title="自定义头和protobuf解决沾包问题">自定义头和protobuf解决沾包问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/" title="Golang的grpc">Golang的grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/" title="Ubuntu16.04.6安装Cinnamon3.0">Ubuntu16.04.6安装Cinnamon3.0</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多桌面用户相较于 Ubuntu 更喜欢 Linux Mint[3]。 现在你无需安装 Linux Mint[4]就能够体验……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/" title="Ubuntu下version `GLIBC_2.27‘ not found错误">Ubuntu下version `GLIBC_2.27‘ not found错误</a>
             </h1>
         </header>
@@ -328,6 +253,81 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="cgo使用libevent库实现一个定时器">cgo使用libevent库实现一个定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang 利用指针进行数据转换">Golang 利用指针进行数据转换</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/go-builds/" title="Golang builds">Golang builds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？ 有个方法可以解决，就是配置文件。我们也可以利用golang的……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/go-builds/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -455,7 +455,7 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
+        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -481,7 +481,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
@@ -570,8 +570,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -595,8 +593,6 @@
     <a href="https://zfunnily.github.io/tags/http/">http</a>
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
     
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
     
@@ -787,10 +783,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

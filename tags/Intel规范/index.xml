@@ -8,11 +8,11 @@
     <language>zh-CN</language>
     <lastBuildDate>Sun, 31 Jan 2021 11:25:39 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AT&amp;T和Intel规范的区别</title>
-      <link>https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <title>汇编 | AT&amp;T和Intel规范的区别</title>
+      <link>https://zfunnily.github.io/2021/01/attandintel/</link>
       <pubDate>Sun, 31 Jan 2021 11:25:39 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/ATT%E5%92%8CIntel%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://zfunnily.github.io/2021/01/attandintel/</guid>
       <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&amp;lsquo;前</description>
     </item>
     

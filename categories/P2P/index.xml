@@ -9,37 +9,37 @@
     <lastBuildDate>Sun, 07 Nov 2021 15:49:46 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/P2P/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go-libp2p四 | 穿透NAT</title>
-      <link>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</link>
+      <link>https://zfunnily.github.io/2021/11/gop2pfour/</link>
       <pubDate>Sun, 07 Nov 2021 15:49:46 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</guid>
+      <guid>https://zfunnily.github.io/2021/11/gop2pfour/</guid>
       <description>本文目的 上文Go-libp2p三 | relay例子已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。 在打洞不成功的情况下能提供中继服务，转发两节点发送的数据</description>
     </item>
     
     <item>
       <title>Go-libp2p三 | relay例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2pthree/</link>
       <pubDate>Sun, 31 Oct 2021 10:13:40 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%89/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2pthree/</guid>
       <description>我想做什么 chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。(hol</description>
     </item>
     
     <item>
       <title>Go-libp2p二 | echo例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2ptwo/</link>
       <pubDate>Fri, 29 Oct 2021 11:15:42 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%BA%8C/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2ptwo/</guid>
       <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&amp;#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3</description>
     </item>
     
     <item>
       <title>Go-libp2p一 | chat例子</title>
-      <link>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</link>
+      <link>https://zfunnily.github.io/2021/10/gop2pone/</link>
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/10/gop2p%E4%B8%80/</guid>
+      <guid>https://zfunnily.github.io/2021/10/gop2pone/</guid>
       <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &amp;gt; hello 在节点 A, 如果B有公网IP，则把</description>
     </item>
     

@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 07 Nov 2021 15:49:46 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go-libp2p四 | 穿透NAT</title>
-      <link>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</link>
+      <link>https://zfunnily.github.io/2021/11/gop2pfour/</link>
       <pubDate>Sun, 07 Nov 2021 15:49:46 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/11/gop2p%E5%9B%9B/</guid>
+      <guid>https://zfunnily.github.io/2021/11/gop2pfour/</guid>
       <description>本文目的 上文Go-libp2p三 | relay例子已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。 在打洞不成功的情况下能提供中继服务，转发两节点发送的数据</description>
     </item>
     

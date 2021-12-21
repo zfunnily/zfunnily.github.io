@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Mon, 10 May 2021 16:39:50 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Lua/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Lua next 的使用</title>
+      <title>Lua | next的使用</title>
       <link>https://zfunnily.github.io/2021/05/lua_next/</link>
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
       
@@ -17,20 +17,20 @@
     </item>
     
     <item>
-      <title>Lua的api</title>
-      <link>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</link>
+      <title>Lua | API</title>
+      <link>https://zfunnily.github.io/2021/05/settopandpop/</link>
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/05/lua_settop%E5%92%8Clua_pop/</guid>
+      <guid>https://zfunnily.github.io/2021/05/settopandpop/</guid>
       <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in</description>
     </item>
     
     <item>
-      <title>lua解决百元买鸡的问题</title>
-      <link>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <title>Lua | 解决百元买鸡的问题</title>
+      <link>https://zfunnily.github.io/2021/02/chicken/</link>
       <pubDate>Wed, 24 Feb 2021 17:51:46 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/lua%E8%A7%A3%E5%86%B3%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/2021/02/chicken/</guid>
       <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local</description>
     </item>
     

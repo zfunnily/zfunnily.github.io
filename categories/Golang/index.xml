@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Oct 2021 17:15:45 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
+      <title>Golang | 调用带有后台进程shell脚本可能会被挂起</title>
       <link>https://zfunnily.github.io/2021/10/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
@@ -18,73 +18,73 @@
     
     <item>
       <title>Golang利用redis实现分布式锁</title>
-      <link>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</link>
+      <link>https://zfunnily.github.io/2021/06/distribute/</link>
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/golang%E5%88%A9%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</guid>
+      <guid>https://zfunnily.github.io/2021/06/distribute/</guid>
       <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
     </item>
     
     <item>
-      <title>Golang操作redis</title>
-      <link>https://zfunnily.github.io/2021/06/go_redis/</link>
+      <title>Golang | redis</title>
+      <link>https://zfunnily.github.io/2021/06/goredis/</link>
       <pubDate>Thu, 03 Jun 2021 15:57:14 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/06/go_redis/</guid>
+      <guid>https://zfunnily.github.io/2021/06/goredis/</guid>
       <description>概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁) 给锁加上过期时间 (防止</description>
     </item>
     
     <item>
-      <title>Go mod拉取私有仓库</title>
-      <link>https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</link>
+      <title>GO MOD | 拉取私有仓库</title>
+      <link>https://zfunnily.github.io/2021/03/gomod/</link>
       <pubDate>Tue, 23 Mar 2021 16:10:02 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/Go-mod%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</guid>
+      <guid>https://zfunnily.github.io/2021/03/gomod/</guid>
       <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;quot;gitlab.com/xxx/zz&amp;quot;: found meta tag get.metaImport{Prefix:&amp;quot;gitlab.com/xxx/zz&amp;quot;, VCS:&amp;quot;git&amp;quot;, RepoRoot:&amp;quot;https://gitlab.com/xxx/zz.git&amp;quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.</description>
     </item>
     
     <item>
-      <title>Golang的定时器实现方式</title>
-      <link>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <title>Golang | 定时器</title>
+      <link>https://zfunnily.github.io/2021/02/timer/</link>
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/golang%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
-      <description>概述 golang有三种方式实现定时器： ticker1. timer1. select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &amp;lt;- t2.C fmt.Println(&amp;quot;NewTimer...&amp;quot;) } }() select 通过select的方式实现定时器： for { select { case &amp;lt;- time.After(d): fmt.Println(&amp;quot;select...&amp;quot;) } }</description>
+      <guid>https://zfunnily.github.io/2021/02/timer/</guid>
+      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &amp;lt;- t2.C fmt.Println(&amp;quot;NewTimer...&amp;quot;) } }() select 通过select的方式实现定时器： for { select { case &amp;lt;- time.After(d): fmt.Println(&amp;quot;select...&amp;quot;) } }</description>
     </item>
     
     <item>
       <title>Golang使用JWT身份认证</title>
-      <link>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</link>
+      <link>https://zfunnily.github.io/2021/02/JWT/</link>
       <pubDate>Wed, 24 Feb 2021 14:22:04 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/Golang%E4%BD%BF%E7%94%A8JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/</guid>
-      <description>概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端1. 客户端请求接口时需要带上token。服务器需要验证to</description>
+      <guid>https://zfunnily.github.io/2021/02/JWT/</guid>
+      <description>概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端 客户端请求接口时需要带上token。服务器需要验证toke</description>
     </item>
     
     <item>
-      <title>Google Protobuf 请求参数为空的案例</title>
-      <link>https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</link>
+      <title>Protobuf | 请求参数为空的案例</title>
+      <link>https://zfunnily.github.io/2021/01/pbempty/</link>
       <pubDate>Fri, 22 Jan 2021 16:41:16 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Google-Protobuf-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%A1%88%E4%BE%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/pbempty/</guid>
       <description>参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&amp;lt;!-- --&amp;gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &amp;quot;google/protobuf/empty.proto&amp;quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func</description>
     </item>
     
     <item>
       <title>C数组转化为Golang的切片类型</title>
-      <link>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</link>
+      <link>https://zfunnily.github.io/2021/01/goslience/</link>
       <pubDate>Fri, 22 Jan 2021 15:56:40 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/C%E6%95%B0%E7%BB%84%E8%BD%AC%E5%8C%96%E4%B8%BAgo%E7%9A%84%E5%88%87%E7%89%87%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>https://zfunnily.github.io/2021/01/goslience/</guid>
       <description>概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存</description>
     </item>
     
     <item>
-      <title>Golang利用cgo遍历C结构体数组</title>
-      <link>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</link>
+      <title>cgo | 遍历C结构体数组</title>
+      <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/go%E5%88%A9%E7%94%A8cgo%E9%81%8D%E5%8E%86C%E7%BB%93%E6%9E%84%E4%BD%93%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://zfunnily.github.io/2021/01/cgostruct/</guid>
       <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语</description>
     </item>
     
