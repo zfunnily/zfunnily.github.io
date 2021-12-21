@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://zfunnily.github.io/2021/12/dark/</loc>
+    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
+  </url><url>
     <loc>https://zfunnily.github.io/categories/</loc>
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
@@ -24,9 +27,6 @@
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/2021/12/dark/</loc>
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/English/</loc>
@@ -107,13 +107,13 @@
     <loc>https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/</loc>
     <lastmod>2021-11-07T15:49:46+08:00</lastmod>
   </url><url>
+    <loc>https://zfunnily.github.io/2021/11/randomquotes/</loc>
+    <lastmod>2021-11-05T15:50:16+08:00</lastmod>
+  </url><url>
     <loc>https://zfunnily.github.io/tags/hugo/</loc>
     <lastmod>2021-11-05T15:50:16+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/randomquotes/</loc>
-    <lastmod>2021-11-05T15:50:16+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/2021/11/randomquotes/</loc>
     <lastmod>2021-11-05T15:50:16+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/10/gop2pthree/</loc>
@@ -485,10 +485,10 @@
     <loc>https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2021-01-13T17:52:27+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/tags/vscode/</loc>
+    <loc>https://zfunnily.github.io/2021/01/vscodedebugredis/</loc>
     <lastmod>2021-01-12T14:25:29+00:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/2021/01/vscodedebugredis/</loc>
+    <loc>https://zfunnily.github.io/tags/vscode/</loc>
     <lastmod>2021-01-12T14:25:29+00:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/01/vscoderedis/</loc>

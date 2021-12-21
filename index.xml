@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Tue, 21 Dec 2021 11:05:00 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>给网站添加暗黑模式</title>
+      <title>Blog | 给网站添加暗黑模式</title>
       <link>https://zfunnily.github.io/2021/12/dark/</link>
       <pubDate>Tue, 21 Dec 2021 11:05:00 +0800</pubDate>
       
@@ -71,7 +71,7 @@
     </item>
     
     <item>
-      <title>随机名人名言</title>
+      <title>Blog | 随机名人名言</title>
       <link>https://zfunnily.github.io/2021/11/randomquotes/</link>
       <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>
       
@@ -107,7 +107,7 @@
     </item>
     
     <item>
-      <title>Blog | csdn博客迁移到个人博客</title>
+      <title>Blog | 新的开始</title>
       <link>https://zfunnily.github.io/2021/10/blogmigration/</link>
       <pubDate>Fri, 22 Oct 2021 19:01:20 +0800</pubDate>
       
@@ -440,7 +440,7 @@
     </item>
     
     <item>
-      <title>VScode | 调试Redis源码</title>
+      <title>Redis源码解析 | VScode调试</title>
       <link>https://zfunnily.github.io/2021/01/vscodedebugredis/</link>
       <pubDate>Tue, 12 Jan 2021 14:25:29 +0000</pubDate>
       
@@ -449,7 +449,7 @@
     </item>
     
     <item>
-      <title>VScode调试Redis源码，指针显示的问题</title>
+      <title>VScode | 调试Redis源码，指针显示的问题</title>
       <link>https://zfunnily.github.io/2021/01/vscoderedis/</link>
       <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
       
