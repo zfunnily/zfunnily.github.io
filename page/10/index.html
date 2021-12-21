@@ -30,6 +30,8 @@
     
     
     
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
+    
 </head>
 
 
@@ -75,6 +77,29 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/08/firstk8s/" title="K8S | 创建第一个应用">K8S | 创建第一个应用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/firstk8s/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -297,7 +322,17 @@
 
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -326,7 +361,12 @@
 
 
 
-    <script src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
+
 
                 </div>
 
@@ -345,6 +385,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
@@ -358,10 +402,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -393,7 +433,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     

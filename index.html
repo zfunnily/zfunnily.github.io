@@ -30,6 +30,8 @@
     
     
     
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
+    
 </head>
 
 
@@ -75,6 +77,29 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 今天给我的个人博客加了个暗模式，这样可以在晚上阅读博客的时候不伤害眼睛。突然想到如果在阅读博客的时候可以听听音乐就更好了。 于是在github上找到了一个开源的项目MetingJS，看最后一次commit信息是3年前，但是看着README.md对网站的描述信息，是我要的音乐播放……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/12/music/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -283,29 +308,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pone/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/blogmigration/" title="Blog | 新的开始">Blog | 新的开始</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月22日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            迁移博客 我是从18年开始写一些东西，先写在看云笔记上，后面东西越来越多。写出来的东西比较零散. 20年下半年入职新公司，开始在csdn上写博客，今年我准备尝试使用个人博客，hugo和gitPage结合部署静态博客，csdn上没怎么更新. 这两天在研究skynet框架，顺手写了几篇博客……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/blogmigration/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -366,7 +368,17 @@
 
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -395,7 +407,12 @@
 
 
 
-    <script src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
+
 
                 </div>
 
@@ -414,6 +431,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
@@ -427,10 +448,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -462,7 +479,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     

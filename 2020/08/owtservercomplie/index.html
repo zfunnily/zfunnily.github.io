@@ -36,6 +36,8 @@
     
     
     
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
+    
 </head>
 
 
@@ -79,130 +81,7 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    <style type="text/css">
-    .post-toc {
-        position: fixed;
-        width: 200px;
-        margin-left: -210px;
-        padding: 5px 10px;
-        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
-        font-size: 12px;
-        border: 1px solid rgba(0, 0, 0, .07);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.98);
-        background-clip: padding-box;
-        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        word-wrap: break-word;
-        white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 999;
-        cursor: pointer;
-        max-height: 70%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .post-toc .post-toc-title {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .post-toc .post-toc-content {
-        font-size: 15px;
-    }
-
-    .post-toc .post-toc-content>nav>ul {
-        margin: 10px 0;
-    }
-
-    .post-toc .post-toc-content ul {
-        padding-left: 20px;
-        list-style: square;
-        margin: 0.5em;
-        line-height: 1.8em;
-    }
-
-    .post-toc .post-toc-content ul ul {
-        padding-left: 15px;
-        display: none;
-    }
-
-    @media print,
-    screen and (max-width:1057px) {
-        .post-toc {
-            display: none;
-        }
-    }
-</style>
-
-<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#a-id_5a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-idowtserverdocker_14aowt-server的docker版使用"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的Docker版使用</a></li>
-    <li><a href="#a-idowt_server__36aowt-server-源码编译部署"><!-- raw HTML omitted --><!-- raw HTML omitted -->OWT Server 源码编译、部署</a></li>
-    <li><a href="#a-id_nodejs__39a安装-nodejs-环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装 nodejs 环境</a></li>
-    <li><a href="#a-id_43a下载源码"><!-- raw HTML omitted --><!-- raw HTML omitted -->下载源码</a></li>
-    <li><a href="#a-id_51a安装依赖"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装依赖</a></li>
-    <li><a href="#a-idowtserver_62a编译owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译OWT-Server</a></li>
-    <li><a href="#a-id_owtclientjavascript_67a编译-owt-client-javascript"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译 owt-client-javascript</a></li>
-    <li><a href="#a-id_owtserver_79a打包-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->打包 owt-server</a></li>
-    <li><a href="#a-id_owtserver_88a配置-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->配置 owt-server</a></li>
-    <li><a href="#a-id_owtserver_102a运行-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->运行 owt-server</a></li>
-    <li><a href="#a-id_108a验证结果"><!-- raw HTML omitted --><!-- raw HTML omitted -->验证结果</a>
-      <ul>
-        <li><a href="#a-idmcu_110a测试mcu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试mcu功能</a></li>
-        <li><a href="#a-idsfu_112a测试sfu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试sfu功能</a></li>
-      </ul>
-    </li>
-    <li><a href="#a-id_128a问题处理"><!-- raw HTML omitted --><!-- raw HTML omitted -->问题处理</a>
-      <ul>
-        <li><a href="#a-idchromiumgooglesourcecomwebrtc_136a构建无法下载chromiumgooglesourcecom中的代码webrtc代码的下载使用代理"><!-- raw HTML omitted --><!-- raw HTML omitted -->构建无法下载chromium.googlesource.com中的代码webrtc代码的下载使用代理</a></li>
-        <li><a href="#a-idlicode_146alicode的修改"><!-- raw HTML omitted --><!-- raw HTML omitted -->licode的修改</a></li>
-        <li><a href="#a-idowtserver_159aowt-server的打包问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的打包问题</a></li>
-        <li><a href="#a-idcould_not_run_pkgconfig_166a错误could-not-run-pkg-config"><!-- raw HTML omitted --><!-- raw HTML omitted -->错误Could not run pkg-config</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var postToc = $(".post-toc");
-        if (postToc.length) {
-            var leftPos = $("#main").offset().left;
-            if(leftPos<220){
-                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
-            }
-
-            var t = postToc.offset().top - 20,
-                a = {
-                    start: {
-                        position: "absolute",
-                        top: t
-                    },
-                    process: {
-                        position: "fixed",
-                        top: 20
-                    },
-                };
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                e < t ? postToc.css(a.start) : postToc.css(a.process)
-            })
-        }
-    })
-</script>
+    
     <article class="post">
         <header>
             <h1 class="post-title">Owt-server | 编译运行</h1>
@@ -401,7 +280,17 @@ apt-get install libglib2.0-dev
     
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -440,7 +329,12 @@ apt-get install libglib2.0-dev
 
 
 
-    <script src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
+
 
                 </div>
 
@@ -459,6 +353,10 @@ apt-get install libglib2.0-dev
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
@@ -472,10 +370,6 @@ apt-get install libglib2.0-dev
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
     </li>
     
 </ul>
@@ -507,7 +401,7 @@ apt-get install libglib2.0-dev
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     

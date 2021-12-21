@@ -2,31 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zfunnily.github.io/2021/12/dark/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
+    <loc>https://zfunnily.github.io/2021/12/music/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/js/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/music/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/Other/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/post/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/</loc>
+    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/2021/12/dark/</loc>
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/Darkmode.js/</loc>
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/tags/js/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/categories/Other/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/post/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/tags/%E6%9A%97%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-12-21T11:05:00+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/</loc>
     <lastmod>2021-12-21T11:05:00+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/English/</loc>
@@ -181,9 +187,6 @@
   </url><url>
     <loc>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2021-09-12T20:43:34+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/music/</loc>
-    <lastmod>2021-09-08T14:47:14+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/other/</loc>
     <lastmod>2021-09-08T14:47:14+08:00</lastmod>
