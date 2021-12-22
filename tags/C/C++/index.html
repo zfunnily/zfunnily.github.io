@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
 
     <title>C/C&#43;&#43; | 留白</title>
     <meta property="og:title" content="C/C&#43;&#43; - 留白">
     <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
         
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
@@ -33,6 +32,8 @@
     
     
     
+    
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
     
 </head>
 
@@ -62,6 +63,8 @@
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                 </nav>
             </div>
         </div>
@@ -87,7 +90,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
+                <a href="https://zfunnily.github.io/2021/03/sort/">C/C&#43;&#43; | 八个基础排序</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -102,107 +105,15 @@
         </div>
         
         <div class="post-content">
-            概述 插入排序(InsertionSort)，一般也被称为直接插入排序。 对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
+            sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/sort/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/C-sort%E6%8E%92%E5%BA%8F/">C&#43;&#43;  sort排序</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可不写） 第一个是要排序的数组的起始地址。- 第二个是结束的地址（最后一位要排序……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/C-sort%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题的解组合为原问题的解。 使用递归，则需要找到递归点和递归出口： 递归点：如果数组的元素大于1，就需要再……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 选择排序法（以从小到大排序为例）算法思想：A.在未排序序列中找到最小（大）元素，存放到排序序列的起始位置B.从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾C.以此类推，直到所有元素均排序完毕……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年3月23日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a>
-            
-        </div>
-        
-        <div class="post-content">
-            sort排序冒泡排序选择排序插入排序快速排序希尔排序堆排序归并排序 概述 冒泡排序算法思想：1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数，然后将该数固定3.针对所有的元素重……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">《仙剑奇侠传》编译运行</a>
+                <a href="https://zfunnily.github.io/2021/03/gamexian/">《仙剑奇侠传》编译运行</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -218,14 +129,14 @@
         
         <div class="post-content">
             概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/gamexian/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/">使用C/C&#43;&#43;实现atoi和itoa函数</a>
+                <a href="https://zfunnily.github.io/2021/03/atoianditoa/">C/C&#43;&#43; | 实现atoi和itoa函数</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -240,15 +151,15 @@
         </div>
         
         <div class="post-content">
-            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负- 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt;……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E4%BD%BF%E7%94%A8C-C-%E5%AE%9E%E7%8E%B0atoi%E5%92%8Citoa%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt; '0')……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/atoianditoa/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">协程解析一(ucontext)</a>
+                <a href="https://zfunnily.github.io/2021/03/coroutineone/">协程解析一 | ucontext</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -264,14 +175,14 @@
         
         <div class="post-content">
             概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80ucontext/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/coroutineone/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/">Lua调用C/C&#43;&#43;的动态库</a>
+                <a href="https://zfunnily.github.io/2021/02/dynamic/">Lua | 调用C/C&#43;&#43;的动态库</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -287,14 +198,14 @@
         
         <div class="post-content">
             概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/02/Lua%E8%B0%83%E7%94%A8C-C-%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/02/dynamic/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C/C&#43;&#43;调用汇编函数</a>
+                <a href="https://zfunnily.github.io/2021/02/compilation/">汇编 | C/C&#43;&#43;调用汇编</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -310,7 +221,99 @@
         
         <div class="post-content">
             概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/02/compilation/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/goslience/">Golang | C数组转化为Golang的切片类型</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月22日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Golang'>Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/goslience/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/vscodedebugredis/">Redis源码解析 | VScode调试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscodedebugredis/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/vscoderedis/">VScode | 调试Redis源码，指针显示的问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscoderedis/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/cgostruct/">Cgo | 遍历C结构体数组</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Golang'>Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/cgostruct/">阅读全文</a></p>
         </div>
     </article>
     
@@ -347,7 +350,17 @@
 
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -373,9 +386,14 @@
 
 
 
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
 
 
                 </div>
@@ -395,11 +413,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
     <li>
@@ -407,11 +425,11 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
     </li>
     
 </ul>
@@ -429,7 +447,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -437,13 +455,13 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -475,6 +493,8 @@
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
     <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Darkmode.js/">Darkmode.js</a>
     
     <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
     
@@ -524,8 +544,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -550,9 +568,9 @@
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
     
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
-    
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
     
     <a href="https://zfunnily.github.io/tags/js/">js</a>
     
@@ -622,8 +640,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -666,17 +682,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -687,6 +703,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     
@@ -701,6 +721,8 @@
     <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9A%97%E6%A8%A1%E5%BC%8F/">暗模式</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
     
@@ -735,10 +757,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

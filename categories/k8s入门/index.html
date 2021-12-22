@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
 
     <title>k8s入门 | 留白</title>
     <meta property="og:title" content="k8s入门 - 留白">
     <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
         
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
@@ -33,6 +32,8 @@
     
     
     
+    
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
     
 </head>
 
@@ -62,6 +63,8 @@
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                 </nav>
             </div>
         </div>
@@ -87,7 +90,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/">监控Kubernetes——Prometheus&#43;Grafana</a>
+                <a href="https://zfunnily.github.io/2020/08/prometheusgrafana/">K8S | Prometheus&#43;Grafana监控</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -103,14 +106,14 @@
         
         <div class="post-content">
             概述 作为应用与Kubernetes的监控体系，Prometheus具备诸多的优势，如： Kubernetes默认支持,非常适合容器和微服务- 无依赖，安装方便，上手容易- 社区活跃，它不仅仅是个工具，而是生态- 已有很多插件或者exporter，可以适应多种应用场景的数据收集需要- Gra……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E7%9B%91%E6%8E%A7KubernetesPrometheus-Grafana/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/prometheusgrafana/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Ingress的基本使用</a>
+                <a href="https://zfunnily.github.io/2020/08/ingress/">K8S | Ingress的基本使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -126,14 +129,14 @@
         
         <div class="post-content">
             缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/ingress/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">Statefluset的持久存储PVC</a>
+                <a href="https://zfunnily.github.io/2020/08/pvc/">K8S | Statefluset的持久存储PVC</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -149,14 +152,14 @@
         
         <div class="post-content">
             缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/Statefluset%E7%9A%84%E6%8C%81%E4%B9%85%E5%AD%98%E5%82%A8PVC/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/pvc/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">StatefulSet基本原理</a>
+                <a href="https://zfunnily.github.io/2020/08/statefulset/">K8S | StatefulSet基本原理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -172,14 +175,14 @@
         
         <div class="post-content">
             背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/statefulset/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/">coreDNS的部署安装，对k8s来说很重要</a>
+                <a href="https://zfunnily.github.io/2020/08/coredns/">K8S | coreDNS的部署安装</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -195,14 +198,14 @@
         
         <div class="post-content">
             概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/coreDNS%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%E5%AF%B9k8s%E6%9D%A5%E8%AF%B4%E5%BE%88%E9%87%8D%E8%A6%81/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/coredns/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">使用k8s创建第一个应用</a>
+                <a href="https://zfunnily.github.io/2020/08/firstk8s/">K8S | 创建第一个应用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -218,14 +221,14 @@
         
         <div class="post-content">
             使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/firstk8s/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">k8s集群资源监控 heapster</a>
+                <a href="https://zfunnily.github.io/2020/08/heapster/">K8S | 集群资源监控 heapster</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -241,14 +244,14 @@
         
         <div class="post-content">
             安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7-heapster/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/heapster/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">k8s的界面管理 Dashboard</a>
+                <a href="https://zfunnily.github.io/2020/08/dashboard/">K8S | Dashboard界面管理</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -264,14 +267,14 @@
         
         <div class="post-content">
             安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86-Dashboard/">阅读全文</a></p>
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dashboard/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">k8s的第一步，安装！</a>
+                <a href="https://zfunnily.github.io/2020/08/k8sinstall/">K8S | 安装</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -286,8 +289,8 @@
         </div>
         
         <div class="post-content">
-            安装k8s前的准备工作 环境 ubuntu18.04- docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8s%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%AE%89%E8%A3%85/">阅读全文</a></p>
+            安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/08/k8sinstall/">阅读全文</a></p>
         </div>
     </article>
     
@@ -300,7 +303,17 @@
 
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -326,9 +339,14 @@
 
 
 
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
 
 
                 </div>
@@ -348,11 +366,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
     <li>
@@ -360,11 +378,11 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
     </li>
     
 </ul>
@@ -382,7 +400,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -390,13 +408,13 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -428,6 +446,8 @@
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
     <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Darkmode.js/">Darkmode.js</a>
     
     <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
     
@@ -477,8 +497,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -503,9 +521,9 @@
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
     
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
-    
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
     
     <a href="https://zfunnily.github.io/tags/js/">js</a>
     
@@ -575,8 +593,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -619,17 +635,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -640,6 +656,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     
@@ -654,6 +674,8 @@
     <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9A%97%E6%A8%A1%E5%BC%8F/">暗模式</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
     
@@ -688,10 +710,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

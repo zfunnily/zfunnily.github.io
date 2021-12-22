@@ -13,10 +13,10 @@
     
     <item>
       <title>《仙剑奇侠传》编译运行</title>
-      <link>https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</link>
+      <link>https://zfunnily.github.io/2021/03/gamexian/</link>
       <pubDate>Sun, 21 Mar 2021 10:44:58 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/03/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C/</guid>
+      <guid>https://zfunnily.github.io/2021/03/gamexian/</guid>
       <description>概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决</description>
     </item>
     

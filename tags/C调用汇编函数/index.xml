@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>C/C&#43;&#43;调用汇编函数</title>
-      <link>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</link>
+      <title>汇编 | C/C&#43;&#43;调用汇编</title>
+      <link>https://zfunnily.github.io/2021/02/compilation/</link>
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/02/C-C-%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://zfunnily.github.io/2021/02/compilation/</guid>
       <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编</description>
     </item>
     

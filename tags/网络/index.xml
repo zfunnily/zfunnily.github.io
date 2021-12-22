@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>skynet框架入门--写一个echo服务</title>
-      <link>https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</link>
+      <title>Skynet | echo服务</title>
+      <link>https://zfunnily.github.io/2021/01/skynetecho/</link>
       <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/skynet%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8-%E5%86%99%E4%B8%80%E4%B8%AAecho%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://zfunnily.github.io/2021/01/skynetecho/</guid>
       <description>概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用</description>
     </item>
     
@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>一个reactor单线程网络库ccnet</title>
+      <title>CCnet | 一个reactor单线程网络库</title>
       <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
       <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
       

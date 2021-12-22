@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Redis源码分析-ziplist压缩列表</title>
-      <link>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</link>
+      <title>Redis源码分析 | ziplist</title>
+      <link>https://zfunnily.github.io/2021/01/ziplist/</link>
       <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2021/01/Redis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-ziplist%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8/</guid>
-      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist- 双向链表linkedlist ziplist的结构 ziplis</description>
+      <guid>https://zfunnily.github.io/2021/01/ziplist/</guid>
+      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist</description>
     </item>
     
   </channel>

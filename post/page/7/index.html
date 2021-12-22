@@ -6,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
 
     <title>Posts | 留白</title>
     <meta property="og:title" content="Posts - 留白">
     <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
         
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
@@ -33,6 +32,8 @@
     
     
     
+    
+        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
     
 </head>
 
@@ -62,6 +63,8 @@
                     
                     <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
+                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    
                 </nav>
             </div>
         </div>
@@ -80,182 +83,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/" title="Go sync.Mutex详解">Go sync.Mutex详解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" title="五种网络IO模型总结">五种网络IO模型总结</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>网络编程</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IOI/O 操作一般分为两个……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/" title="一个reactor单线程网络库ccnet">一个reactor单线程网络库ccnet</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月27日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/" title="C&#43;&#43;：vector中的resize()函数 VS reserve()函数">C&#43;&#43;：vector中的resize()函数 VS reserve()函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/" title="用gocolly登录B站">用gocolly登录B站</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录，目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/获取cookie： google浏览器访问bilibili- 按F12- 查看Net……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/" title="自定义头和protobuf解决沾包问题">自定义头和protobuf解决沾包问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/" title="Golang的grpc">Golang的grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/" title="Ubuntu16.04.6安装Cinnamon3.0">Ubuntu16.04.6安装Cinnamon3.0</a>
+                <a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/" title="Ubuntu16.04.6 | 安装Cinnamon3.0">Ubuntu16.04.6 | 安装Cinnamon3.0</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -305,7 +133,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Docker容器退出码详解">Docker容器退出码详解</a>
+                <a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="Docker | 容器退出码详解">Docker | 容器退出码详解</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -327,6 +155,181 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="Openresty二 | postman小工具">Openresty二 | postman小工具</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/OpenResty'>OpenResty</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;; server { listen 8080; default_type 'application/json;charset=utf8'; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/" title="Openresty一 | 初探">Openresty一 | 初探</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/OpenResty'>OpenResty</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。 OpenResty®通过汇聚各种设计精良的Nginx模块（主要由 OpenResty 团队自主开发）……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/" title="LastBattle | 登录流程(LS &amp; BS &amp; GS)">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="LastBattle | 服务架构">LastBattle | 服务架构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需求数量|数量说明 |&mdash;&mdash; |GameClient|GC|游戏客户端|不解释|n|不超服……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/" title="LastBattle | 安装部署笔记">LastBattle | 安装部署笔记</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境准备 win10服务器：vs2010 / 数据库 mysql5.7清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/客户端：unity3d 4.6 ,破解补丁 编译客户端 建议不要有其他的un……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="Cgo | 使用libevent库实现一个定时器">Cgo | 使用libevent库实现一个定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang | 利用指针进行数据转换">Golang | 利用指针进行数据转换</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -338,79 +341,48 @@
     
 
     
-
+    <li >
+        <a href="https://zfunnily.github.io/post/">1</a>
+    </li>
     
-        
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/2/">2</a>
+    </li>
     
+    <li >
+        <a href="https://zfunnily.github.io/post/page/3/">3</a>
+    </li>
     
-
+    <li >
+        <a href="https://zfunnily.github.io/post/page/4/">4</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/">1</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/5/">5</a>
+    </li>
     
-        
-        <li>
-            <span>...</span>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/6/">6</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/page/5/">5</a>
-        </li>
-        
+    <li  class="current">
+        <a href="https://zfunnily.github.io/post/page/7/">7</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/page/6/">6</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/8/">8</a>
+    </li>
     
-        
-        
-        <li  class="current">
-            <a href="https://zfunnily.github.io/post/page/7/">7</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/9/">9</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/page/8/">8</a>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/page/9/">9</a>
-        </li>
-        
-    
-        
-        <li>
-            <span>...</span>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://zfunnily.github.io/post/page/11/">11</a>
-        </li>
-        
+    <li >
+        <a href="https://zfunnily.github.io/post/page/10/">10</a>
+    </li>
     
 
     
-    
-
     <li class="next">
         <a href="https://zfunnily.github.io/post/page/8/">下一页</a>
     </li>
@@ -419,10 +391,19 @@
 
 
 
-
 </div>
 
-                    <footer id="footer">
+                    <meting-js
+        server="netease"
+        type="album"
+        mini="true"
+        fixed="true"
+        autoplay="true"
+        loop="all"
+        id="10855">
+</meting-js>
+
+<footer id="footer">
     <div>
         &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
         
@@ -448,9 +429,14 @@
 
 
 
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
 
 
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+    <script type="text/javascript" src='/js/APlayer.min.js'></script>
+
+    <script type="text/javascript" src='/js/Meting.min.js'></script>
 
 
                 </div>
@@ -470,11 +456,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/preposition/" title="介词 ｜ of 的使用方法">介词 ｜ of 的使用方法</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/conjunction/" title="连词 ｜ and 和 or 的用法">连词 ｜ and 和 or 的用法</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
     </li>
     
     <li>
@@ -482,11 +468,11 @@
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="webrtc二 | 共享桌面">webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="webrtc一 | peerconnection">webrtc一 | peerconnection</a>
+        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
     </li>
     
 </ul>
@@ -504,7 +490,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
     
@@ -512,13 +498,13 @@
     
     <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (13)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (5)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -550,6 +536,8 @@
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
     <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    
+    <a href="https://zfunnily.github.io/tags/Darkmode.js/">Darkmode.js</a>
     
     <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
     
@@ -599,8 +587,6 @@
     
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/gcc4.9/">gcc4.9</a>
-    
     <a href="https://zfunnily.github.io/tags/git/">git</a>
     
     <a href="https://zfunnily.github.io/tags/github/">github</a>
@@ -625,9 +611,9 @@
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
     
-    <a href="https://zfunnily.github.io/tags/idea/">idea</a>
-    
     <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
+    
+    <a href="https://zfunnily.github.io/tags/js/">js</a>
     
     <a href="https://zfunnily.github.io/tags/js/">js</a>
     
@@ -697,8 +683,6 @@
     
     <a href="https://zfunnily.github.io/tags/socket/">socket</a>
     
-    <a href="https://zfunnily.github.io/tags/sort%E6%8E%92%E5%BA%8F/">sort排序</a>
-    
     <a href="https://zfunnily.github.io/tags/stream/">stream</a>
     
     <a href="https://zfunnily.github.io/tags/sync/">sync</a>
@@ -741,17 +725,17 @@
     
     <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
     
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
+    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
     
@@ -762,6 +746,10 @@
     <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
     
     <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
     
@@ -776,6 +764,8 @@
     <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E6%9A%97%E6%A8%A1%E5%BC%8F/">暗模式</a>
     
     <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
     
@@ -810,10 +800,6 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E4%BA%A4%E4%BA%92/">自动交互</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/">自动切换输入法</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Golang调用带有后台进程shell脚本可能会被挂起</title>
+      <title>Golang | 调用带有后台进程shell脚本可能会被挂起</title>
       <link>https://zfunnily.github.io/2021/10/shell/</link>
       <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
       
@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>shell Except 使用</title>
+      <title>Shell | Except 使用</title>
       <link>https://zfunnily.github.io/2021/08/except/</link>
       <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
       

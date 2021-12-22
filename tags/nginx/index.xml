@@ -30,29 +30,29 @@
     </item>
     
     <item>
-      <title>Ingress的基本使用</title>
-      <link>https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <title>K8S | Ingress的基本使用</title>
+      <link>https://zfunnily.github.io/2020/08/ingress/</link>
       <pubDate>Sat, 15 Aug 2020 00:05:15 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/08/Ingress%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://zfunnily.github.io/2020/08/ingress/</guid>
       <description>缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls</description>
     </item>
     
     <item>
-      <title>StatefulSet基本原理</title>
-      <link>https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</link>
+      <title>K8S | StatefulSet基本原理</title>
+      <link>https://zfunnily.github.io/2020/08/statefulset/</link>
       <pubDate>Fri, 14 Aug 2020 16:03:41 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/08/StatefulSet%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</guid>
+      <guid>https://zfunnily.github.io/2020/08/statefulset/</guid>
       <description>背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行</description>
     </item>
     
     <item>
-      <title>使用k8s创建第一个应用</title>
-      <link>https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</link>
+      <title>K8S | 创建第一个应用</title>
+      <link>https://zfunnily.github.io/2020/08/firstk8s/</link>
       <pubDate>Thu, 13 Aug 2020 15:28:31 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/08/%E4%BD%BF%E7%94%A8k8s%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://zfunnily.github.io/2020/08/firstk8s/</guid>
       <description>使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1</description>
     </item>
     
