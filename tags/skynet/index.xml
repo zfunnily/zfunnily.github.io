@@ -6,11 +6,7 @@
     <description>Recent content in skynet on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 21 Oct 2021 10:06:39 +0800</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/tags/skynet/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 21 Oct 2021 10:06:39 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/skynet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Skynet源码赏析四 | 消息调度</title>
       <link>https://zfunnily.github.io/2021/10/four/</link>
