@@ -79,7 +79,125 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#下载">下载</a>
+      <ul>
+        <li><a href="#在kubernetest集群中创建namespace">在kubernetest集群中创建namespace</a></li>
+        <li><a href="#安装node-exporter">安装node-exporter</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装nsf-server-参考最下面的解决办法">安装nsf server 参考最下面的解决办法</a></li>
+    <li><a href="#部署-prometheus-pod">部署 Prometheus pod</a></li>
+    <li><a href="#在kubernetest中部署grafana">在kubernetest中部署grafana</a></li>
+    <li><a href="#grafana的配置">grafana的配置</a>
+      <ul>
+        <li><a href="#登录">登录</a></li>
+        <li><a href="#配置数据源">配置数据源</a></li>
+        <li><a href="#导入dashboard模板">导入Dashboard模板</a></li>
+        <li><a href="#效果展示"><strong>效果展示：</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#kubernetes创建pod一直处于containercreating排查和解决">Kubernetes创建pod一直处于ContainerCreating排查和解决</a></li>
+    <li><a href="#解决办法">解决办法</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
             <h1 class="post-title">K8S | Prometheus&#43;Grafana监控</h1>
@@ -353,13 +471,13 @@ mount -t nfs hostname(orIP):/directory /mount/point
 </div>
 
                     <meting-js
-        server="netease"
-        type="album"
+        server=""
+        type=""
         mini="true"
         fixed="true"
-        autoplay="true"
-        loop="all"
-        id="10855">
+        autoplay=""
+        loop=""
+        id="">
 </meting-js>
 
 <footer id="footer">
