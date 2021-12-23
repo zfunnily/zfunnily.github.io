@@ -217,7 +217,7 @@
 <ol>
 <li>先从栈顶弹出一个 <code>key</code></li>
 <li>从栈指定位置的 <code>table</code> 里取下一对 key-value，先将 <code>key</code> 入栈,再将 <code>value</code> 入栈</li>
-<li>如果第 2 步成功则返回非 0 值，否则返回 0，并且不向栈中压入任何值, 第 2 步中从 <code>table</code> 里取出&quot;下一对 <code>key-value</code>&ldquo;是相对于第 1 步中弹出的 key 的。<code>table</code> 里第一对 <code>key-value</code> 的前面没有数据，所以先用 <code>lua_pushnil()</code> 压入一个 <code>nil</code> 充当初始 <code>key</code>。</li>
+<li>如果第 2 步成功则返回非 0 值，否则返回 0，并且不向栈中压入任何值, 第 2 步中从 <code>table</code> 里取出&quot;下一对 <code>key-value</code>&quot;是相对于第 1 步中弹出的 key 的。<code>table</code> 里第一对 <code>key-value</code> 的前面没有数据，所以先用 <code>lua_pushnil()</code> 压入一个 <code>nil</code> 充当初始 <code>key</code>。</li>
 </ol>
 
         </div>
