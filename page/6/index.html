@@ -79,6 +79,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/sds/" title="Redis源码解析 | sds">Redis源码解析 | sds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/sds/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/chararray/" title="C/C&#43;&#43; | struct中使用char[]">C/C&#43;&#43; | struct中使用char[]</a>
             </h1>
         </header>
@@ -283,29 +306,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/" title="Golang | grpc">Golang | grpc</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -429,6 +429,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="Auto_find">Auto_find</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
@@ -442,10 +446,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
     </li>
     
 </ul>
@@ -491,7 +491,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -505,6 +505,8 @@
 <div class="tagcloud">
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
     
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
@@ -773,6 +775,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     
