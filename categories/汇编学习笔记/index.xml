@@ -6,11 +6,7 @@
     <description>Recent content in 汇编学习笔记 on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 01 Feb 2021 14:40:51 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 01 Feb 2021 14:40:51 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>汇编 | C/C&#43;&#43;调用汇编</title>
       <link>https://zfunnily.github.io/2021/02/compilation/</link>
@@ -26,7 +22,7 @@
       <pubDate>Sun, 31 Jan 2021 11:25:39 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/attandintel/</guid>
-      <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&#39;前缀表示一个立</description>
+      <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&amp;lsquo;前</description>
     </item>
     
   </channel>

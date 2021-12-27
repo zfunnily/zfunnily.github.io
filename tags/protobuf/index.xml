@@ -6,11 +6,7 @@
     <description>Recent content in protobuf on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/tags/protobuf/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/protobuf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Skynet | lua-protobuf</title>
       <link>https://zfunnily.github.io/2021/01/skynetprotobuf/</link>
