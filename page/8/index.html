@@ -30,8 +30,6 @@
     
     
     
-        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
-    
 </head>
 
 
@@ -56,13 +54,11 @@
                     
                     <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
                     
-                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
-                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
-                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -77,6 +73,52 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="Cgo | 使用libevent库实现一个定时器">Cgo | 使用libevent库实现一个定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/" title="Golang | 利用指针进行数据转换">Golang | 利用指针进行数据转换</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -262,52 +304,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/libeventimer/" title="Libevent | 定时器">Libevent | 定时器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/libeventimer/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/09/ffmpegpicture/" title="FFmpeg | 画中画和视频多宫格处理">FFmpeg | 画中画和视频多宫格处理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegpicture/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -373,13 +369,13 @@
 </div>
 
                     <meting-js
-        server="netease"
-        type="album"
+        server=""
+        type=""
         mini="true"
         fixed="true"
-        autoplay="true"
-        loop="all"
-        id="10855">
+        autoplay=""
+        loop=""
+        id="">
 </meting-js>
 
 <footer id="footer">
@@ -413,10 +409,6 @@
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
-    <script type="text/javascript" src='/js/APlayer.min.js'></script>
-
-    <script type="text/javascript" src='/js/Meting.min.js'></script>
-
 
                 </div>
 
@@ -435,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
@@ -450,14 +446,14 @@
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">最近随笔</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 | 另一种文化">摘抄 | 另一种文化</a>
+    </li>
     
 </ul>
 
@@ -479,7 +475,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
@@ -489,7 +485,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
@@ -497,7 +495,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -511,6 +509,8 @@
 <div class="tagcloud">
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
     
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
@@ -779,6 +779,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

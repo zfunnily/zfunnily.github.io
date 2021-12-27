@@ -30,8 +30,6 @@
     
     
     
-        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
-    
 </head>
 
 
@@ -56,13 +54,11 @@
                     
                     <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
                     
-                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
-                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
-                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -77,6 +73,52 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/10/gop2ptwo/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2ptwo/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/10/gop2pone/" title="Go-libp2p一 | chat例子">Go-libp2p一 | chat例子</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &gt; hello 在节点 A, 如果B有公网IP，则把……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pone/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -262,52 +304,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2021/09/music/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/09/transform/" title="Unity3D | Transform类">Unity3D | Transform类</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年9月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Unity3D'>Unity3D</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspector中可以看到存在Transform的组件。 属性 Position（坐标） Rotat……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/09/transform/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/09/vimchange/" title="Vim | 切换模式/输入法">Vim | 切换模式/输入法</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年9月7日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Linux'>Linux</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim IdeaVimExtension 我们需要在 用户目录……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/09/vimchange/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -373,13 +369,13 @@
 </div>
 
                     <meting-js
-        server="netease"
-        type="album"
+        server=""
+        type=""
         mini="true"
         fixed="true"
-        autoplay="true"
-        loop="all"
-        id="10855">
+        autoplay=""
+        loop=""
+        id="">
 </meting-js>
 
 <footer id="footer">
@@ -413,10 +409,6 @@
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
-    <script type="text/javascript" src='/js/APlayer.min.js'></script>
-
-    <script type="text/javascript" src='/js/Meting.min.js'></script>
-
 
                 </div>
 
@@ -435,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
@@ -450,14 +446,14 @@
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">最近随笔</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 | 另一种文化">摘抄 | 另一种文化</a>
+    </li>
     
 </ul>
 
@@ -479,7 +475,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
@@ -489,7 +485,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
@@ -497,7 +495,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -511,6 +509,8 @@
 <div class="tagcloud">
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
     
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
@@ -779,6 +779,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

@@ -6,10 +6,19 @@
     <description>Recent content in lua on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 03 Jun 2021 16:12:21 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Dec 2021 16:37:44 +0800</lastBuildDate>
     
 	<atom:link href="https://zfunnily.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A*算法</title>
+      <link>https://zfunnily.github.io/2021/12/astar/</link>
+      <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/12/astar/</guid>
+      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;rdquo;, 并设置它们的&amp;quot;父方格&amp;quot;为A. 从&amp;quot;开启列表</description>
+    </item>
     
     <item>
       <title>Golang | redis实现分布式锁</title>

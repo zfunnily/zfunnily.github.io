@@ -65,4 +65,17 @@ $(document).ready(function (){
         console.log(darkmode.isActivated())
     }
     window.addEventListener('load', addDarkmodeWidget);
+
+    //二级菜单下拉
+    $(".highlight div").I
+    // $(".highlight div table").hide()
+    $(".highlight div table").click(function(){
+        $(".highlight div table").slideDown("fast");
+    })
+    $(".highlight div table").click(function(){
+        $(".highlight div table").slideUp("fast");
+    })
+    $(".highlight div table").click(function(){
+        $(".highlight div table").slideToggle("fast");
+    })
 })

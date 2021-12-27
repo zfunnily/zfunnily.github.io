@@ -30,8 +30,6 @@
     
     
     
-        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
-    
 </head>
 
 
@@ -56,13 +54,11 @@
                     
                     <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
                     
-                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
-                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
-                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -77,6 +73,52 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/09/libeventimer/" title="Libevent | 定时器">Libevent | 定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL); evtimer_set(&amp;ev,……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/libeventimer/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/09/ffmpegpicture/" title="FFmpeg | 画中画和视频多宫格处理">FFmpeg | 画中画和视频多宫格处理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E9%9F%B3%E8%A7%86%E9%A2%91'>音视频</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegpicture/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -262,52 +304,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/nsf/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/statefulset/" title="K8S | StatefulSet基本原理">K8S | StatefulSet基本原理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/statefulset/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/08/coredns/" title="K8S | coreDNS的部署安装">K8S | coreDNS的部署安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/k8s%E5%85%A5%E9%97%A8'>k8s入门</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/08/coredns/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -373,13 +369,13 @@
 </div>
 
                     <meting-js
-        server="netease"
-        type="album"
+        server=""
+        type=""
         mini="true"
         fixed="true"
-        autoplay="true"
-        loop="all"
-        id="10855">
+        autoplay=""
+        loop=""
+        id="">
 </meting-js>
 
 <footer id="footer">
@@ -413,10 +409,6 @@
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
-    <script type="text/javascript" src='/js/APlayer.min.js'></script>
-
-    <script type="text/javascript" src='/js/Meting.min.js'></script>
-
 
                 </div>
 
@@ -435,6 +427,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
@@ -450,14 +446,14 @@
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">最近随笔</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 | 另一种文化">摘抄 | 另一种文化</a>
+    </li>
     
 </ul>
 
@@ -479,7 +475,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
@@ -489,7 +485,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
@@ -497,7 +495,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -511,6 +509,8 @@
 <div class="tagcloud">
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
     
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
@@ -779,6 +779,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     

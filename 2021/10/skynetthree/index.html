@@ -36,8 +36,6 @@
     
     
     
-        <link rel="stylesheet"  type="text/css" href='/css/APlayer.min.css'>
-    
 </head>
 
 
@@ -60,13 +58,11 @@
                     
                     <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
                     
-                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
-                    
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
                     
-                    <a  href="https://zfunnily.github.io/english/" title="英语">英语</a>
+                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -81,7 +77,117 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#skynet启动一个c服务">skynet启动一个C服务</a>
+      <ul>
+        <li><a href="#启动logger日志服务">启动logger日志服务</a></li>
+        <li><a href="#snlua服务">snlua服务</a></li>
+        <li><a href="#boostrap服务">boostrap服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#skynet启动一个lua服务">skynet启动一个lua服务</a>
+      <ul>
+        <li><a href="#为什么skynetnewservice阻塞">为什么skynet.newservice阻塞</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
             <h1 class="post-title">Skynet源码赏析三 | 服务启动</h1>
@@ -614,13 +720,13 @@
 </div>
 
                     <meting-js
-        server="netease"
-        type="album"
+        server=""
+        type=""
         mini="true"
         fixed="true"
-        autoplay="true"
-        loop="all"
-        id="10855">
+        autoplay=""
+        loop=""
+        id="">
 </meting-js>
 
 <footer id="footer">
@@ -664,10 +770,6 @@
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
-    <script type="text/javascript" src='/js/APlayer.min.js'></script>
-
-    <script type="text/javascript" src='/js/Meting.min.js'></script>
-
 
                 </div>
 
@@ -686,6 +788,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
     </li>
     
@@ -701,14 +807,14 @@
         <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">最近随笔</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 | 另一种文化">摘抄 | 另一种文化</a>
+    </li>
     
 </ul>
 
@@ -730,7 +836,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
     
@@ -740,7 +846,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     
@@ -748,7 +856,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (6)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
     
@@ -762,6 +870,8 @@
 <div class="tagcloud">
     
     <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    
+    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
     
     <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
     
@@ -1030,6 +1140,8 @@
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
     
     <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+    
+    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
     
     <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
     
