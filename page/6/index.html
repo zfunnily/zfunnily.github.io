@@ -52,7 +52,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -73,6 +73,29 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/cgostruct/" title="Cgo | 遍历C结构体数组">Cgo | 遍历C结构体数组</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/cgostruct/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -281,29 +304,6 @@
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/" title="Protobuf | 解决沾包问题">Protobuf | 解决沾包问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -448,8 +448,12 @@
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
     
 </ul>
 
@@ -482,6 +486,8 @@
     <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
     

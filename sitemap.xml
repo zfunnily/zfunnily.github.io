@@ -2,13 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://zfunnily.github.io/categories/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/Thinking/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/thinking/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/thinking/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/thinking/2021/12/pervert/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/</loc>
+    <lastmod>2021-12-27T21:44:21+08:00</lastmod>
+  </url><url>
     <loc>https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-12-23T16:37:44+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/12/astar/</loc>
-    <lastmod>2021-12-23T16:37:44+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/categories/</loc>
     <lastmod>2021-12-23T16:37:44+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/lua/</loc>
@@ -17,13 +35,7 @@
     <loc>https://zfunnily.github.io/post/</loc>
     <lastmod>2021-12-23T16:37:44+08:00</lastmod>
   </url><url>
-    <loc>https://zfunnily.github.io/tags/</loc>
-    <lastmod>2021-12-23T16:37:44+08:00</lastmod>
-  </url><url>
     <loc>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2021-12-23T16:37:44+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/</loc>
     <lastmod>2021-12-23T16:37:44+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/</loc>
@@ -153,9 +165,6 @@
     <lastmod>2021-10-28T14:40:02+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/10/blogmigration/</loc>
-    <lastmod>2021-10-22T19:01:20+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/thinking/</loc>
     <lastmod>2021-10-22T19:01:20+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/Skynet/</loc>
