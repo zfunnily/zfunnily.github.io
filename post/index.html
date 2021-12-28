@@ -81,6 +81,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月28日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/OpenResty'>OpenResty</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            静态网站 应用场景 文件服务 静态网站 &hellip; 静态网站的配置 worker_processes 1; pid nginx.pid; events { worker_connections 1024; multi_accept on; } http { default_type application/octet-stream; sendfile on; keepalive_timeout 100; server { listen 80; charset utf-8,gbk; server_name localhost; location /{ root /opt/; autoindex on; autoindex_localtime on; } index index.html; # 显示首页 #静态文件访问 location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|js|pdf|txt) { root /opt; } } } root: 表示网站根目录 autoindex: on 显示目录, off 关闭目录展示 同一个IP:PORT指向不同的地址 应用场景 移动端+PC端两套网站，部署……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/12/nginx/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
             </h1>
         </header>
@@ -303,31 +328,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/gop2ptwo/" title="Go-libp2p二 | echo例子">Go-libp2p二 | echo例子</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月29日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/P2P'>P2P</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2ptwo/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -446,6 +446,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
@@ -459,10 +463,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
     </li>
     
 </ul>
@@ -496,7 +496,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
     
