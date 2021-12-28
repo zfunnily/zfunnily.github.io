@@ -220,6 +220,11 @@
 <li>当我们发现 &ldquo;开始列表&rdquo; 里出现了目标终点方块的时候, 说明路径已经被找到.</li>
 </ol>
 <p>对每个格子怎么走，往哪个方向走有一个很重要的函数-估价函数, 公式如下:</p>
+<pre><code>f(n) = g(n) + h(n)
+</code></pre><ul>
+<li>g(n) 是指从起始格子到格子n的实际代价。</li>
+<li>h(n) 是指从格子n到终点的的估计代价。</li>
+</ul>
 <h2 id="lua代码">lua代码</h2>
 <p>astart.lua代码如下</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
