@@ -98,7 +98,7 @@
         </div>
         
         <div class="post-content">
-            我想做什么 chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。(hol……
+            我想做什么 chat和echo两个例子，说明了两个节点之间的通信需要两节点在同一个局域网内，或者有一个节点有公网。 如果我两个节点分别在两个NAT下面, 都在各自的局域网内，则需要有一个中继服务，这个服务做……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pthree/">阅读全文</a></p>
     </article>
@@ -123,7 +123,7 @@
         </div>
         
         <div class="post-content">
-            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34; on a different terminal 2021/10/28 11:25:59 listener received new stream 2021/10/28 11:25:59 read: Hello, world! 在另外一个终端输A入： 1 2 3……
+            go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2ptwo/">阅读全文</a></p>
     </article>
@@ -148,7 +148,7 @@
         </div>
         
         <div class="post-content">
-            代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well. 2021/10/28 11:01:25 Waiting for incoming connection 2021/10/28 11:01:25 2021/10/28 11:03:03 Got a new stream! &gt; hello 在节点 A, 如果B有公网IP，则把……
+            代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39; on another console. 2021/10/28 11:01:25……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/gop2pone/">阅读全文</a></p>
     </article>
@@ -173,7 +173,7 @@
         </div>
         
         <div class="post-content">
-            迁移博客 我是从18年开始写一些东西，先写在看云笔记上，后面东西越来越多。写出来的东西比较零散. 20年下半年入职新公司，开始在csdn上写博客，今年我准备尝试使用个人博客，hugo和gitPage结合部署静态博客，csdn上没怎么更新. 这两天在研究skynet框架，顺手写了几篇博客……
+            迁移博客 我是从18年开始写一些东西，先写在看云笔记上，后面东西越来越多。写出来的东西比较零散. 20年下半年入职新公司，开始在csdn上写博客，今年我准备尝试使用个人博客，hugo和gitPage结合部……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/blogmigration/">阅读全文</a></p>
     </article>
@@ -198,7 +198,7 @@
         </div>
         
         <div class="post-content">
-            服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.call(...)函数发送消息，其实调用的都是c.send(...),实际上调用的……
+            服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.c……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/four/">阅读全文</a></p>
     </article>
@@ -223,7 +223,7 @@
         </div>
         
         <div class="post-content">
-            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从modules服务模块中取出名字为 logger的服务, struct skynet_module * result = _query(name);; 如果找不到则从cpath目……
+            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从module……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetthree/">阅读全文</a></p>
     </article>
@@ -248,7 +248,7 @@
         </div>
         
         <div class="post-content">
-            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static void * _try_open(struct modules *m, const char * name)函数第一次打开，然后被加载到全局变量static struct modules *……
+            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynettwo/">阅读全文</a></p>
     </article>
@@ -273,7 +273,7 @@
         </div>
         
         <div class="post-content">
-            入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat……
+            入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetone/">阅读全文</a></p>
     </article>
@@ -298,7 +298,7 @@
         </div>
         
         <div class="post-content">
-            起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我的Go程序也挂起了。 问题还原 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 //main.go package main import ( &#34;fmt&#34; &#34;os/exec&#34; ) func……
+            起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/10/shell/">阅读全文</a></p>
     </article>
@@ -323,7 +323,7 @@
         </div>
         
         <div class="post-content">
-            三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟……
+            三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/09/move/">阅读全文</a></p>
     </article>
@@ -843,10 +843,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

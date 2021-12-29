@@ -13,7 +13,7 @@
       <pubDate>Tue, 12 Jan 2021 14:25:29 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/vscodedebugredis/</guid>
-      <description>环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;amp;&amp;amp; make -j4 打开redis目录后直接按F5，会出现选择启动</description>
+      <description>环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/vscoderedis/</guid>
-      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
+      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在</description>
     </item>
     
   </channel>

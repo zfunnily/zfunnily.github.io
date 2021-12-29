@@ -13,7 +13,7 @@
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcdesk/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回</description>
+      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr</description>
     </item>
     
   </channel>

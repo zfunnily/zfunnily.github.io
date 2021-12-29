@@ -13,7 +13,7 @@
       <pubDate>Thu, 03 Jun 2021 16:12:21 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/06/distribute/</guid>
-      <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (</description>
+      <description>概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删</description>
     </item>
     
   </channel>

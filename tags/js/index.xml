@@ -13,7 +13,7 @@
       <pubDate>Tue, 21 Dec 2021 16:55:23 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/12/music/</guid>
-      <description>概述 今天给我的个人博客加了个暗模式，这样可以在晚上阅读博客的时候不伤害眼睛。突然想到如果在阅读博客的时候可以听听音乐就更好了。 于是在github上找到了一个开源的项目MetingJS，看最后一次commit信息是3年前，但是看着README.md对网站的描述信息，是我要的音乐播放</description>
+      <description>概述 今天给我的个人博客加了个暗模式，这样可以在晚上阅读博客的时候不伤害眼睛。突然想到如果在阅读博客的时候可以听听音乐就更好了。 于是在github上找到了一个开源的项目MetingJS，看最后一次com</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 21 Dec 2021 11:05:00 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/12/dark/</guid>
-      <description>Wordpress 如果你的网站是wordpress，则可以参考以Darkmode.js为基础的插件: blackout-darkmode-widget darkmode Nuxt.js 如果你正在使用Nuxt.js,则可以使用下面的模块 nuxtjs-darkmode-js-module 快速使用 使用Darkmode.js给网站快速部署上暗/浅色切换。 在网站的html中加入如下代码: 1 2 3 4 5 6 7 &amp;lt;script src=&amp;#34;https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; function addDarkmodeWidget() { new Darkmode().showWidget(); } window.addEventListener(&amp;#39;load&amp;#39;, addDarkmodeWidget); &amp;lt;/script&amp;gt; 可以</description>
+      <description>Wordpress 如果你的网站是wordpress，则可以参考以Darkmode.js为基础的插件: blackout-darkmode-widget darkmode Nuxt.js 如果你正在使用Nuxt.js,则可以使用下面的模块 nuxtjs-darkmode-js-module 快速使用 使用Darkmode.js给网站快速部署上暗/浅色</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Sun, 16 Aug 2020 23:04:13 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owt-client-javascript/</guid>
-      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if</description>
+      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js</description>
     </item>
     
   </channel>

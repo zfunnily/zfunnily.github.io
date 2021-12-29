@@ -105,7 +105,7 @@
         </div>
         
         <div class="post-content">
-            A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quot;, 并设置它们的&quot;父方格&quot;为A. 从&quot;开启列表&q……
+            A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quo……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/12/astar/">阅读全文</a></p>
         </div>
     </article>
@@ -128,7 +128,7 @@
         </div>
         
         <div class="post-content">
-            概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删除锁 分布式锁还需要 给锁加上唯一id (只能获取和删除自己的锁)- 给锁加上过期时间 (……
+            概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/06/distribute/">阅读全文</a></p>
         </div>
     </article>
@@ -151,7 +151,7 @@
         </div>
         
         <div class="post-content">
-            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
+            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/02/chicken/">阅读全文</a></p>
         </div>
     </article>
@@ -174,7 +174,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用……
+            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/02/dynamic/">阅读全文</a></p>
         </div>
     </article>
@@ -197,7 +197,7 @@
         </div>
         
         <div class="post-content">
-            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetprotobuf/">阅读全文</a></p>
         </div>
     </article>
@@ -220,7 +220,7 @@
         </div>
         
         <div class="post-content">
-            用到的知识点 mvc架构 模型渲染库：https://github.com/bungle/lua-resty-template resty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;; server { listen 8080; default_type 'application/json;charset=utf8'; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了修改lu……
+            用到的知识点 mvc架构 模型渲染库：https://github.com/bungle/lua-resty-template resty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
         </div>
     </article>
@@ -673,10 +673,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

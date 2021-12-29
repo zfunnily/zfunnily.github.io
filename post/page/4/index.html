@@ -98,7 +98,7 @@
         </div>
         
         <div class="post-content">
-            lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in……
+            lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/05/settopandpop/">阅读全文</a></p>
     </article>
@@ -123,7 +123,7 @@
         </div>
         
         <div class="post-content">
-            hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jekyll是用ruby开发的。于是我选择了hugo。下面我把hugo的安装步骤记录下……
+            hugo 我用过的静态博客有hexo、jekyll和hugo，对比起来，hugo虽然没有hexo那样丰富的插件和主题，但是hugo生成文章的速度更快。我是一名go语言爱好者，而hugo是go语言开发的, jek……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/04/hugo/">阅读全文</a></p>
     </article>
@@ -148,7 +148,7 @@
         </div>
         
         <div class="post-content">
-            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本go mod会对依赖包进行checksum校验，但是私有仓库对sum.golang.……
+            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &quot;gitlab.com/xxx/zz&quot;: found meta tag get.metaImport{Prefix:&quot;gitlab.com/xxx/zz&quot;, VCS:&quot;git&quot;, RepoRoot:&quot;https://gitlab.com/xxx/zz.git&quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/gomod/">阅读全文</a></p>
     </article>
@@ -173,7 +173,7 @@
         </div>
         
         <div class="post-content">
-            sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于快排的方法，时间复杂度为n*log2(n) Sort函数有三个参数：（第三个参数可……
+            sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/sort/">阅读全文</a></p>
     </article>
@@ -198,7 +198,7 @@
         </div>
         
         <div class="post-content">
-            概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决……
+            概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/gamexian/">阅读全文</a></p>
     </article>
@@ -223,7 +223,7 @@
         </div>
         
         <div class="post-content">
-            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数 步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt; '0')……
+            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数 步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/atoianditoa/">阅读全文</a></p>
     </article>
@@ -248,7 +248,7 @@
         </div>
         
         <div class="post-content">
-            概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine Ubuntu16.04 gcc make vscode 下载代码 &amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;&amp; make 写一个生产者和消费者的demo //procus.c #include &quot;coroutine.h&quot; #include……
+            概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/coroutinetwo/">阅读全文</a></p>
     </article>
@@ -273,7 +273,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了……
+            概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/coroutineone/">阅读全文</a></p>
     </article>
@@ -298,7 +298,7 @@
         </div>
         
         <div class="post-content">
-            概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &lt;- t2.C fmt.Println(&quot;NewTimer...&quot;) } }() select 通过select的方式实现定时器： for { select { case &lt;- time.After(d): fmt.Println(&quot;select...&quot;) } }……
+            概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/timer/">阅读全文</a></p>
     </article>
@@ -323,7 +323,7 @@
         </div>
         
         <div class="post-content">
-            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
+            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/chicken/">阅读全文</a></p>
     </article>
@@ -864,10 +864,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

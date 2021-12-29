@@ -105,7 +105,7 @@
         </div>
         
         <div class="post-content">
-            服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.call(...)函数发送消息，其实调用的都是c.send(...),实际上调用的……
+            服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.c……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/10/four/">阅读全文</a></p>
         </div>
     </article>
@@ -128,7 +128,7 @@
         </div>
         
         <div class="post-content">
-            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从modules服务模块中取出名字为 logger的服务, struct skynet_module * result = _query(name);; 如果找不到则从cpath目……
+            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从module……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetthree/">阅读全文</a></p>
         </div>
     </article>
@@ -151,7 +151,7 @@
         </div>
         
         <div class="post-content">
-            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static void * _try_open(struct modules *m, const char * name)函数第一次打开，然后被加载到全局变量static struct modules *……
+            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynettwo/">阅读全文</a></p>
         </div>
     </article>
@@ -174,7 +174,7 @@
         </div>
         
         <div class="post-content">
-            入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管理模块, skynet_handle_init(config-&gt;harbor);; 初始化static struct global_queue *Q消息队列, skynet_mq_init();; 初始化stat……
+            入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetone/">阅读全文</a></p>
         </div>
     </article>
@@ -197,7 +197,7 @@
         </div>
         
         <div class="post-content">
-            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetprotobuf/">阅读全文</a></p>
         </div>
     </article>
@@ -220,7 +220,7 @@
         </div>
         
         <div class="post-content">
-            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetecho/">阅读全文</a></p>
         </div>
     </article>
@@ -673,10 +673,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

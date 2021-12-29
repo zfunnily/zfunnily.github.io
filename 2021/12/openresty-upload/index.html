@@ -208,13 +208,17 @@
         
         <div class="post-content">
             <h2 id="上传文件接口">上传文件接口</h2>
-<p>account.conf,增加一个location:</p>
+<p>nginx.conf 的server 增加一个location:</p>
 <pre><code class="language-conf" data-lang="conf">location /upload
 {
    resolver 8.8.8.8 ipv6=off;
    content_by_lua_file lua/upload.lua;
 }
 </code></pre><p>upload.lua</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        lua
+    </summary>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -375,7 +379,8 @@ filename <span style="color:#000;font-weight:bold">=</span> saveRootPath<span st
 ngx.say(<span style="color:#d14">&#34;save file success filename: &#34;</span> <span style="color:#000;font-weight:bold">..</span> filename)
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="curl测试">curl测试</h2>
+</div></details>
+<h2 id="curl测试">curl测试</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -448,17 +453,6 @@ ngx.say(<span style="color:#d14">&#34;save file success filename: &#34;</span> <
     
 
     
-    
-
-    
-    <div id="vcomments"> </div>
-    <script>
-        new Valine({
-            el: '#vcomments',
-            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
-            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
-        })
-    </script>
     
 </div>
 
@@ -911,10 +905,6 @@ ngx.say(<span style="color:#d14">&#34;save file success filename: &#34;</span> <
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

@@ -96,7 +96,7 @@
         </div>
         
         <div class="post-content">
-            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
+            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/chicken/">阅读全文</a></p>
     </article>
@@ -119,7 +119,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把token返回给客户端 客户端请求接口时需要带上token。服务器需要验证toke……
+            概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/JWT/">阅读全文</a></p>
     </article>
@@ -142,7 +142,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用……
+            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/dynamic/">阅读全文</a></p>
     </article>
@@ -165,7 +165,7 @@
         </div>
         
         <div class="post-content">
-            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
+            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/compilation/">阅读全文</a></p>
     </article>
@@ -188,7 +188,7 @@
         </div>
         
         <div class="post-content">
-            概述 常见的指令集以及汇编语言规范： x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范： - intel公司发布的汇编语言规范，称`intel 汇编`：Windows派系(Microsoft)，比较著名的汇编器有微软的masm和开源的nasm。……
+            概述 常见的指令集以及汇编语言规范： x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范： - intel公司发布的汇编语言规范，称`intel 汇编`：Window……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/attandintel/">阅读全文</a></p>
     </article>
@@ -211,7 +211,7 @@
         </div>
         
         <div class="post-content">
-            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetprotobuf/">阅读全文</a></p>
     </article>
@@ -234,7 +234,7 @@
         </div>
         
         <div class="post-content">
-            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &quot;google/protobuf/empty.proto&quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func……
+            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/pbempty/">阅读全文</a></p>
     </article>
@@ -257,7 +257,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
+            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/goslience/">阅读全文</a></p>
     </article>
@@ -280,7 +280,7 @@
         </div>
         
         <div class="post-content">
-            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetecho/">阅读全文</a></p>
     </article>
@@ -303,7 +303,7 @@
         </div>
         
         <div class="post-content">
-            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist……
+            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ziplist/">阅读全文</a></p>
     </article>
@@ -843,10 +843,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

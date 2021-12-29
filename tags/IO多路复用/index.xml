@@ -13,7 +13,7 @@
       <pubDate>Mon, 28 Dec 2020 11:57:04 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/</guid>
-      <description>概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IO I/O 操作一般分为两个部分</description>
+      <description>概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO</description>
     </item>
     
   </channel>

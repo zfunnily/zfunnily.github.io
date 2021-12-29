@@ -96,7 +96,7 @@
         </div>
         
         <div class="post-content">
-            缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或……
+            缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/pvc/">阅读全文</a></p>
     </article>
@@ -119,7 +119,7 @@
         </div>
         
         <div class="post-content">
-            搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports 可以设定的参数主要有以下这些： rw：可读写的权限； ro：只读的权限； no_root_squash：……
+            搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports 可以设定的参数主要……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/nsf/">阅读全文</a></p>
     </article>
@@ -142,7 +142,7 @@
         </div>
         
         <div class="post-content">
-            背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随着 k8s 的普及和云原生架构的兴起，越来越多的人希望把数据库这类有状态服务也通过 k8s 进行……
+            背景 用户通过 Deployment、ReplicationController 可以方便地在 kubernetes 中部署一套高可用、可扩展的分布式无状态服务。这类应用不在本地存储数据，通过简单的负载均衡策略可实现请求分发。随……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/statefulset/">阅读全文</a></p>
     </article>
@@ -165,7 +165,7 @@
         </div>
         
         <div class="post-content">
-            概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为Kubernetes的DNS服务发现定义的规范：Kubernetes DNS-Based Service Disco……
+            概述 CoreDNS可以在具有标准的Kube-DNS的Kubernetes集群中运行。作为Kubernetes 的插件使用，CoreDNS将从 Kubernetes集群中读取区（zone）数据。它实现了为K……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/coredns/">阅读全文</a></p>
     </article>
@@ -188,7 +188,7 @@
         </div>
         
         <div class="post-content">
-            使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表是NodePort类型的 ports: - port: 80 #这里的端口和clusterIP(10.97.1……
+            使用k8s部署第一个应用 创建一个nginx.yaml文件 apiVersion: v1 kind: Pod metadata: name: nginx # 指定 label，便于检索 labels: app: nginx spec: containers: - name: nginx # 指定镜像 image: nginx:alpine # 指定暴露端口 ports: - containerPort: 80 --- # 创建网络服务 apiVersion: v1 kind: Service metadata: name: kube-node-service labels: name: kube-node-service spec: type: NodePort #这里代表……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/firstk8s/">阅读全文</a></p>
     </article>
@@ -211,7 +211,7 @@
         </div>
         
         <div class="post-content">
-            拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个……
+            拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &quot;MIN_PORT=30000&quot; -e &quot;MAX_PORT=30050&quot; -e &quot;PUBLIC_IP=your_ip_address&quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/licode/">阅读全文</a></p>
     </article>
@@ -234,7 +234,7 @@
         </div>
         
         <div class="post-content">
-            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载docker守护线程 sudo systemctl restart docker // 2，重启docker 方法二：修改daemon.json的配……
+            docker的远程访问 方法一 ：编辑docker.service文件 编辑docker.service文件 sudo vim /lib/systemd/system/docker.service 修改ExecStart行为下面内容 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 重新加载docker配置 sudo systemctl daemon-reload // 1，加载dock……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockersecret/">阅读全文</a></p>
     </article>
@@ -257,7 +257,7 @@
         </div>
         
         <div class="post-content">
-            拉取镜像 $ docker pull portainer/portainer 运行启动portainer docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer admin bigant.cn 汉化 Portainer-CN.zip 百度云盘: https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw 提取码: nzue 新建文件夹命名为public，把Portainer-CN.zip解压至里面。 2、public文件夹传输至系统根目录 3、然后按需执行以下命令 x86-64系统使用 docker volume create portainer_data docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock……
+            拉取镜像 $ docker pull portainer/portainer 运行启动portainer docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer admin bigant.cn 汉化 Portainer-CN.zip 百度云盘: https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw 提取码: nzue 新建文件夹命名为public，把Portainer-CN.zip解压至里面。 2、public文件夹传……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dockerweb/">阅读全文</a></p>
     </article>
@@ -280,7 +280,7 @@
         </div>
         
         <div class="post-content">
-            安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds. 下载heapster的代码 直接现在Githu……
+            安装heapster的原因 查看dashboard状态 $ sudo kubectl get pods --all-namespaces | grep dashboard kubernetes-dashboard dashboard-metrics-scraper-6b4884c9d5-mvnb9 1/1 Running 0 40m kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 1/1 Running 0 40m 查看dashboard的日志 $ sudo kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc 日志遇到这样的情况 No metric client provided. Skipping metrics. 2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code 2020/08/03 09:02:23 Metric client health……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/heapster/">阅读全文</a></p>
     </article>
@@ -303,7 +303,7 @@
         </div>
         
         <div class="post-content">
-            安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml这个地址却很难打开，如果能打开，直接执行即……
+            安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/depl……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/dashboard/">阅读全文</a></p>
     </article>
@@ -823,10 +823,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>

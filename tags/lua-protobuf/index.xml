@@ -13,7 +13,7 @@
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/skynetprotobuf/</guid>
-      <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
+      <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4</description>
     </item>
     
   </channel>
