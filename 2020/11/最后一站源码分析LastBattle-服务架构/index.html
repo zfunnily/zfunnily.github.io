@@ -228,6 +228,8 @@
 <li><strong>①②</strong>：客户端发送消息AskLogin到LS,LS根据客户端登录类型生成相应的url，通过消息队列<strong>m_SDKCallbackQueue</strong>发送给子线程调用url来获取登录验证结果，子线程将url返回结果通过消息队列<strong>m_DBCallbackQueue</strong>发送给主线程，根据返回结果将BS列表发送给客户端。<strong>ps:这块需要了解boost库和liburl库的基本用法</strong>- <strong>③④</strong>：客户端收到LS返回的BS服务器列表后，选择其中一台BS发送消息 <strong>eMsgToBSFromGC_OneClientLogin</strong> ,BS收到该消息后会向LS发消息 <strong>eMsgToLSFromBC_OneClinetLoginCheck</strong> 来进行身份验证，验证通过后会返回给 <strong>BS一个eMsgToBSFromLS_OneClinetLoginCheckRet</strong> 消息， BS给该玩家生成一个唯一token并将玩家token信息根据负载均衡策略发送 <strong>eMsgToGSFromBS_OneUserLoginToken</strong>消息 给目前负载较小的GS来进行登记，登记成功后GS返回其ip和端口等信息 发送 <strong>eMsgToBSFromGS_OneUserLoginTokenRet</strong> 到BS,进而发送给客户端。- <strong>⑤</strong>：客户端收到GS的ip和端口等信息后，发送登录消息给GS,GS校验token成功后会将登录信息转发给CS,游戏玩家数据实际是在CS上加载并创建玩家实体。到此，玩家登录完成，后续玩家在CS和SS上的操作消息都会通过GS作为中间桥梁和客户端通讯。</li>
 </ul>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         

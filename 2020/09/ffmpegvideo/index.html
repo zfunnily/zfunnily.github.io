@@ -273,6 +273,8 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
 </code></pre><p>将透明水印加入到视频中效果会更好一点，当只有纯色背景的logo，可以考虑使用movie 与colorkey滤镜配合做成半透明的效果：</p>
 <pre><code>ffmpeg -i input.mp4 -vf  &quot;movie=logo.png, colorkey=black:1.0:1.0 [wm]; [in][wm]overlay=30:10[out]&quot; colorkey.mp4
 </code></pre>
+
+            <h4 align="center">--完--</h4>
         </div>
 
         

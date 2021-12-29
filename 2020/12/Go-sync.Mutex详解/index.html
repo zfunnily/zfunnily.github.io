@@ -390,6 +390,8 @@ func main() {
 <li><code>sync.Mutex</code>是传值，如果<code>copy结构体</code>可能能会导致死锁，<code>sync.Mutex</code>是<code>noCopy</code>的。；- 我认为可以将<code>* sync.Mutex</code>视为简单指针。如果你想要使用它，您应该声明并初始化它，但是如果使用<code>sync.Mutex</code>，它已经被初始化。- 我认为需要声明为指针 <code>*sync.Mutex</code>，它们总是传递要使用的可变指针，因为传递<code>struct</code>会复制，但是如果使用指针，您需要传递的只是一个指针。 (我的意思是，不需要花费副本)。</li>
 </ul>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
