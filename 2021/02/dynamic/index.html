@@ -39,6 +39,7 @@
 
     <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
 
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -339,15 +340,15 @@ stack traceback:
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+    
+    <div id="vcomments"></div>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'>
+        new Valine({
+            el: '#vcomments',
+            appId: '',
+            appKey: ''
+        })
+    </script>
     
 </div>
 
