@@ -13,7 +13,7 @@
       <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description>ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听</description>
+      <description>[ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reactor_45)- [多线程的ccnet](#ccnet_57) ccnet从单线程演</description>
     </item>
     
     <item>

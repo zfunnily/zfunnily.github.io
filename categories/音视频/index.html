@@ -172,7 +172,7 @@
         </div>
         
         <div class="post-content">
-            FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-……
+            FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。 -f 指定保存图片使用的格式，可忽略。 image-%……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegvideo/">阅读全文</a></p>
         </div>
     </article>
@@ -195,7 +195,7 @@
         </div>
         
         <div class="post-content">
-            概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &quot;Altair USB2.0 Camera&quot; [dshow @ 000002622302e340] Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,……
+            概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &quot;Altair USB2.0 Camera&quot; [dshow @ 000002622302e340] Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot; [dshow @ 000002622302e340] DirectShow audio devices `` 使用 dshow 展示摄像头, 摄……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegvideow/">阅读全文</a></p>
         </div>
     </article>
@@ -218,7 +218,7 @@
         </div>
         
         <div class="post-content">
-            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture……
+            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture screen……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/08/macffmpeg/">阅读全文</a></p>
         </div>
     </article>
@@ -287,7 +287,7 @@
         </div>
         
         <div class="post-content">
-            概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd……
+            概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。 客户端系列web/windows/linux/ios/android都有相应的sd……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/08/owtservercomplie/">阅读全文</a></p>
         </div>
     </article>
@@ -360,6 +360,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -373,10 +377,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -412,7 +412,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -588,6 +588,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

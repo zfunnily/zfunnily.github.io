@@ -22,7 +22,7 @@
       <pubDate>Sat, 15 Aug 2020 00:05:15 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/ingress/</guid>
-      <description>缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls</description>
+      <description>缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。 结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefuls</description>
     </item>
     
     <item>
@@ -31,7 +31,7 @@
       <pubDate>Fri, 14 Aug 2020 17:18:58 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/pvc/</guid>
-      <description>缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或</description>
+      <description>缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述kubectl describe pod podname或</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Wed, 05 Aug 2020 10:00:40 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/k8sinstall/</guid>
-      <description>安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc</description>
+      <description>安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。 cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。doc</description>
     </item>
     
   </channel>

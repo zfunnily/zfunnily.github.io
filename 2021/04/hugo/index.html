@@ -236,7 +236,7 @@ $ cd myblog
 </code></pre><h2 id="部署到github个人页面">部署到Github个人页面</h2>
 <ul>
 <li>在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件</li>
-<li>再创建一个名称为<!-- raw HTML omitted -->.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容
+<li>再创建一个名称为<username>.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容
 进入本地网站目录</li>
 </ul>
 <pre><code>$ cd &lt;YOUR PROJECT&gt;
@@ -253,7 +253,7 @@ git status
 git add .
 git commit -m &quot;first commit&quot;
 git push -u orgin master
-</code></pre><p>过一会就可以打开<!-- raw HTML omitted -->.github.io查看网站了
+</code></pre><p>过一会就可以打开<username>.github.io查看网站了
 注意：本地网站是关联的blog仓库，本地网站下的public文件夹是以子模块的形式关联的github.io仓库，他们是相对独立的</p>
 <h2 id="自动部署脚本">自动部署脚本</h2>
 <p>将以上步骤添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布</p>
@@ -487,6 +487,10 @@ cd ..
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -500,10 +504,6 @@ cd ..
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -539,7 +539,7 @@ cd ..
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -715,6 +715,8 @@ cd ..
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

@@ -150,7 +150,7 @@
     <li><a href="#数组字符串和切片">数组、字符串和切片</a></li>
     <li><a href="#以克隆的方式进行类型转换">以克隆的方式进行类型转换</a></li>
     <li><a href="#通过直接访问c语言的内存来进行数据转换">通过直接访问C语言的内存来进行数据转换</a></li>
-    <li><a href="#a-idgoc_74a在go语言中直接访问c语言的内存空间的例子"><!-- raw HTML omitted --><!-- raw HTML omitted -->在Go语言中直接访问C语言的内存空间的例子</a></li>
+    <li><a href="#a-idgoc_74a在go语言中直接访问c语言的内存空间的例子"><a id="GoC_74"></a>在Go语言中直接访问C语言的内存空间的例子</a></li>
     <li><a href="#给一个小彩蛋">给一个小彩蛋</a></li>
   </ul>
 </nav>
@@ -205,7 +205,7 @@
             <h2 id="概述">概述</h2>
 <p>最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在<a href="https://blog.csdn.net/qq_39503880/article/details/112478609">go中遍历C结构体数组</a>的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。</p>
 <h2 id="数组字符串和切片">数组、字符串和切片</h2>
-<p>我们将一段特定长度的内存统称为数组。C语言的字符串是一个char类型的数组，字符串的长度需要根据表示结尾的NULL字符的位置确定。C语言中没有切片类型。<!-- raw HTML omitted --> 在Go语言中，数组是一种值类型，而且数组的长度是数组类型的一个部分。Go语言字符串对应一段长度确定的只读byte类型的内存。Go语言的切片则是一个简化版的动态数组。<!-- raw HTML omitted --> Go语言和C语言的数组、字符串和切片之间的相互转换可以简化为Go语言的切片和C语言中指向一定长度内存的指针之间的转换。</p>
+<p>我们将一段特定长度的内存统称为数组。C语言的字符串是一个char类型的数组，字符串的长度需要根据表示结尾的NULL字符的位置确定。C语言中没有切片类型。<br> 在Go语言中，数组是一种值类型，而且数组的长度是数组类型的一个部分。Go语言字符串对应一段长度确定的只读byte类型的内存。Go语言的切片则是一个简化版的动态数组。<br> Go语言和C语言的数组、字符串和切片之间的相互转换可以简化为Go语言的切片和C语言中指向一定长度内存的指针之间的转换。</p>
 <h2 id="以克隆的方式进行类型转换">以克隆的方式进行类型转换</h2>
 <p>CGO的C虚拟包提供了以下一组函数，用于Go语言和C语言之间数组和字符串的双向转换：</p>
 <pre><code>func C.CString(string) *C.char              //go字符串转化为char*
@@ -266,7 +266,7 @@ func main() {&lt;!-- --&gt;
 <pre><code>typedef struct {&lt;!-- --&gt; const char *p; GoInt n; } GoString;
 typedef struct {&lt;!-- --&gt; void *data; GoInt len; GoInt cap; } GoSlice;
 
-</code></pre><h2 id="a-idgoc_74a在go语言中直接访问c语言的内存空间的例子"><!-- raw HTML omitted --><!-- raw HTML omitted -->在Go语言中直接访问C语言的内存空间的例子</h2>
+</code></pre><h2 id="a-idgoc_74a在go语言中直接访问c语言的内存空间的例子"><a id="GoC_74"></a>在Go语言中直接访问C语言的内存空间的例子</h2>
 <pre><code>package main
 
 /*
@@ -485,6 +485,10 @@ func main()  {&lt;!-- --&gt;
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -498,10 +502,6 @@ func main()  {&lt;!-- --&gt;
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -537,7 +537,7 @@ func main()  {&lt;!-- --&gt;
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -713,6 +713,8 @@ func main()  {&lt;!-- --&gt;
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

@@ -146,12 +146,12 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_3a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</a></li>
-    <li><a href="#a-idpv_15apv"><!-- raw HTML omitted --><!-- raw HTML omitted -->PV</a></li>
-    <li><a href="#a-idpvc_49apvc"><!-- raw HTML omitted --><!-- raw HTML omitted -->PVC</a></li>
-    <li><a href="#a-id_103a完整示例"><!-- raw HTML omitted --><!-- raw HTML omitted -->完整示例</a></li>
-    <li><a href="#a-idstorageclass_192astorageclass"><!-- raw HTML omitted --><!-- raw HTML omitted -->StorageClass</a></li>
-    <li><a href="#a-idkuberntes__pv__206a技巧kuberntes-中无法删除-pv-的解决方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->技巧：Kuberntes 中无法删除 PV 的解决方法</a></li>
+    <li><a href="#a-id_3a缘由"><a id="_3"></a>缘由</a></li>
+    <li><a href="#a-idpv_15apv"><a id="PV_15"></a>PV</a></li>
+    <li><a href="#a-idpvc_49apvc"><a id="PVC_49"></a>PVC</a></li>
+    <li><a href="#a-id_103a完整示例"><a id="_103"></a>完整示例</a></li>
+    <li><a href="#a-idstorageclass_192astorageclass"><a id="StorageClass_192"></a>StorageClass</a></li>
+    <li><a href="#a-idkuberntes__pv__206a技巧kuberntes-中无法删除-pv-的解决方法"><a id="Kuberntes__PV__206"></a>技巧：Kuberntes 中无法删除 PV 的解决方法</a></li>
   </ul>
 </nav>
     </div>
@@ -202,15 +202,15 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_3a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</h2>
+            <h2 id="a-id_3a缘由"><a id="_3"></a>缘由</h2>
 <p>在看statefluset基础教程的时候遇到pod状态为pending</p>
 <pre><code>kubectl describe pod web-0
 
 </code></pre><p>日志内容是</p>
 <pre><code> pod has unbound immediate PersistentVolumeClaims
 
-</code></pre><p>于是就对PV和PVC进行研究。<!-- raw HTML omitted --> 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述<code>kubectl describe pod podname</code>或者日志<code>kubectl logs -f podname</code>，自然知晓怎么处理pod的状态为pending的问题了。</p>
-<h2 id="a-idpv_15apv"><!-- raw HTML omitted --><!-- raw HTML omitted -->PV</h2>
+</code></pre><p>于是就对PV和PVC进行研究。<br> 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述<code>kubectl describe pod podname</code>或者日志<code>kubectl logs -f podname</code>，自然知晓怎么处理pod的状态为pending的问题了。</p>
+<h2 id="a-idpv_15apv"><a id="PV_15"></a>PV</h2>
 <p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
 <pre><code>apiVersion: v1
 kind: PersistentVolume
@@ -235,7 +235,7 @@ spec:
 PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</li>
 <li>Retain，不清理, 保留 Volume（需要手动清理）- Recycle，删除数据，即<code>rm -rf /thevolume/*</code>（只有 NFS 和 HostPath 支持）- Delete，删除存储资源，比如删除 AWS EBS 卷（只有 AWS EBS, GCE PD, Azure Disk 和 Cinder 支持）</li>
 </ul>
-<h2 id="a-idpvc_49apvc"><!-- raw HTML omitted --><!-- raw HTML omitted -->PVC</h2>
+<h2 id="a-idpvc_49apvc"><a id="PVC_49"></a>PVC</h2>
 <p>PV 是存储资源，而 PersistentVolumeClaim (PVC) 是对 PV 的请求。PVC 跟 Pod 类似：Pod 消费 Node 资源，而 PVC 消费 PV 资源；Pod 能够请求 CPU 和内存资源，而 PVC 请求特定大小和访问模式的数据卷。</p>
 <pre><code>apiVersion: v1
 kind: PersistentVolumeClaim
@@ -282,7 +282,7 @@ spec:
           persistentVolumeClaim:
             claimName:  www-data-pvc
 
-</code></pre><h2 id="a-id_103a完整示例"><!-- raw HTML omitted --><!-- raw HTML omitted -->完整示例</h2>
+</code></pre><h2 id="a-id_103a完整示例"><a id="_103"></a>完整示例</h2>
 <pre><code>apiVersion: v1
 kind: Service
 metadata:
@@ -367,14 +367,14 @@ spec:
 <pre><code>sudo apt install nfs-kernel-server
 
 </code></pre><p>需要手动创建一个NFS Volume，具体细节看这里：<a href="nfs%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8.md">nfs的安装和使用</a></p>
-<h2 id="a-idstorageclass_192astorageclass"><!-- raw HTML omitted --><!-- raw HTML omitted -->StorageClass</h2>
+<h2 id="a-idstorageclass_192astorageclass"><a id="StorageClass_192"></a>StorageClass</h2>
 <p>上面通过手动的方式创建了一个 NFS Volume，这在管理很多 Volume 的时候不太方便。Kubernetes 还提供了<a href="https://kubernetes.io/docs/user-guide/persistent-volumes/#storageclasses">StorageClass</a>来动态创建 PV，不仅节省了管理员的时间，还可以封装不同类型的存储供 PVC 选用。</p>
 <p>StorageClass 包括四个部分</p>
 <ul>
 <li>provisioner：指定 Volume 插件的类型，包括内置插件（如<code>kubernetes.io/glusterfs</code>）和外部插件（如<a href="https://github.com/kubernetes-incubator/external-storage/tree/master/ceph/cephfs">external-storage</a>提供的<code>ceph.com/cephfs</code>）。- mountOptions：指定挂载选项，当 PV 不支持指定的选项时会直接失败。比如 NFS 支持<code>hard</code>和<code>nfsvers=4.1</code>等选项。- parameters：指定 provisioner 的选项，比如<code>kubernetes.io/aws-ebs</code>支持<code>type</code>、<code>zone</code>、<code>iopsPerGB</code>等参数。- reclaimPolicy：指定回收策略，同 PV 的回收策略。
 在使用 PVC 时，可以通过<code>DefaultStorageClass</code>准入控制设置默认 StorageClass, 即给未设置 storageClassName 的 PVC 自动添加默认的 StorageClass。而默认的 StorageClass 带有 annotation<code>storageclass.kubernetes.io/is-default-class=true</code>。</li>
 </ul>
-<h2 id="a-idkuberntes__pv__206a技巧kuberntes-中无法删除-pv-的解决方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->技巧：Kuberntes 中无法删除 PV 的解决方法</h2>
+<h2 id="a-idkuberntes__pv__206a技巧kuberntes-中无法删除-pv-的解决方法"><a id="Kuberntes__PV__206"></a>技巧：Kuberntes 中无法删除 PV 的解决方法</h2>
 <p>系统内有一个已经不再使用的 PV ，已经删除了与其关联的 Pod 及 PVC ，并对其执行了删除命令，但是无法正常删除，一直出于如下状态：</p>
 <pre><code>$ kubectl get pv
 NAME          CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                                    STORAGECLASS          REASON   AGE
@@ -513,6 +513,10 @@ No resources found.
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -526,10 +530,6 @@ No resources found.
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -565,7 +565,7 @@ No resources found.
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -741,6 +741,8 @@ No resources found.
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

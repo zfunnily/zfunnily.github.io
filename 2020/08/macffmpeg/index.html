@@ -211,7 +211,7 @@ D avfoundation AVFoundation input device
 D lavfi  Libavfilter virtual input device
  E sdl,sdl2 SDL2 output device
 
-</code></pre><p>可以看到输入设备有：avfoundation，lavfi<!-- raw HTML omitted --> 输出设备有：sdl<!-- raw HTML omitted --> ``<!-- raw HTML omitted --> 设备采集举例：</p>
+</code></pre><p>可以看到输入设备有：avfoundation，lavfi<br> 输出设备有：sdl<br> ``<br> 设备采集举例：</p>
 <pre><code>$  ffmpeg -f avfoundation -list_devices true -i &quot; &quot;
 
 </code></pre><p>看到了 如下设备</p>
@@ -235,7 +235,7 @@ ffmpeg -f avfoundation -i  0 out.mp4
 [avfoundation @ 0x7fbf16808200]   640x480@[27.000027 27.000027]fps
 [avfoundation @ 0x7fbf16808200]   640x480@[26.000026 26.000026]fps
 [avfoundation @ 0x7fbf16808200]   640x480@[25.000000 25.000000]fps
-</code></pre><p>日志告诉我们 <strong>Selected framerate (29.970030) is not supported by the device</strong> ，默认的framerate 不被设备支持，下面也给出了支持的分辨率和framerate<!-- raw HTML omitted --> 所以我们要改一下命令,选取第一个吧 <strong>640x480@[30.000030 30.000030]fps</strong></p>
+</code></pre><p>日志告诉我们 <strong>Selected framerate (29.970030) is not supported by the device</strong> ，默认的framerate 不被设备支持，下面也给出了支持的分辨率和framerate<br> 所以我们要改一下命令,选取第一个吧 <strong>640x480@[30.000030 30.000030]fps</strong></p>
 <pre><code>ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -i  &quot;FaceTime高清摄像头&quot; out.mp4
 </code></pre><p>把<strong>摄像头和麦克风</strong>的数据存到一个文件里，使用命令：</p>
 <pre><code>ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -video_device_index 0 -i &quot;:0&quot; out.mp4
@@ -374,6 +374,10 @@ ffmpeg -f avfoundation -i 1 -r:v 30 screen.mp4
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -387,10 +391,6 @@ ffmpeg -f avfoundation -i 1 -r:v 30 screen.mp4
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -426,7 +426,7 @@ ffmpeg -f avfoundation -i 1 -r:v 30 screen.mp4
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -602,6 +602,8 @@ ffmpeg -f avfoundation -i 1 -r:v 30 screen.mp4
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

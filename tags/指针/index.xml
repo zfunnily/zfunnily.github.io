@@ -40,7 +40,7 @@
       <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/vscoderedis/</guid>
-      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
+      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@
       <pubDate>Tue, 29 Dec 2020 13:17:18 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/</guid>
-      <description>概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用</description>
+      <description>概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。 优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用</description>
     </item>
     
     <item>

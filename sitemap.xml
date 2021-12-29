@@ -2,8 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://zfunnily.github.io/2021/12/shortcodes/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
     <loc>https://zfunnily.github.io/categories/</loc>
-    <lastmod>2021-12-28T16:04:10+08:00</lastmod>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/hugo/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/Other/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/post/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/shortcodes/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/tags/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/</loc>
+    <lastmod>2021-12-29T13:50:28+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/nginx/</loc>
     <lastmod>2021-12-28T16:04:10+08:00</lastmod>
@@ -12,15 +33,6 @@
     <lastmod>2021-12-28T16:04:10+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/OpenResty/</loc>
-    <lastmod>2021-12-28T16:04:10+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/post/</loc>
-    <lastmod>2021-12-28T16:04:10+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/</loc>
-    <lastmod>2021-12-28T16:04:10+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/</loc>
     <lastmod>2021-12-28T16:04:10+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/Thinking/</loc>
@@ -57,9 +69,6 @@
     <lastmod>2021-12-21T16:55:23+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/music/</loc>
-    <lastmod>2021-12-21T16:55:23+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/categories/Other/</loc>
     <lastmod>2021-12-21T16:55:23+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/12/dark/</loc>
@@ -147,9 +156,6 @@
     <lastmod>2021-11-07T15:49:46+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/11/randomquotes/</loc>
-    <lastmod>2021-11-05T15:50:16+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/tags/hugo/</loc>
     <lastmod>2021-11-05T15:50:16+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/randomquotes/</loc>

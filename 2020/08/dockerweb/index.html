@@ -150,7 +150,7 @@
       <ul>
         <li><a href="#拉取镜像">拉取镜像</a></li>
         <li><a href="#运行启动portainer">运行启动portainer</a></li>
-        <li><a href="#a-id_14a汉化"><!-- raw HTML omitted --><!-- raw HTML omitted -->汉化</a></li>
+        <li><a href="#a-id_14a汉化"><a id="_14"></a>汉化</a></li>
       </ul>
     </li>
   </ul>
@@ -207,9 +207,9 @@
 <pre><code>$ docker pull portainer/portainer
 </code></pre><h3 id="运行启动portainer">运行启动portainer</h3>
 <pre><code>docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer
-</code></pre><p>admin<!-- raw HTML omitted --> bigant.cn</p>
-<h3 id="a-id_14a汉化"><!-- raw HTML omitted --><!-- raw HTML omitted -->汉化</h3>
-<p><a href="https://dl.quchao.net/Soft/Portainer-CN.zip">Portainer-CN.zip</a><!-- raw HTML omitted --> 百度云盘: <a href="https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw">https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw</a> 提取码: <code>nzue</code><!-- raw HTML omitted --> 新建文件夹命名为<code>public</code>，把<code>Portainer-CN.zip</code>解压至里面。 2、<code>public</code>文件夹传输至系统根目录 3、然后按需执行以下命令 x86-64系统使用</p>
+</code></pre><p>admin<br> bigant.cn</p>
+<h3 id="a-id_14a汉化"><a id="_14"></a>汉化</h3>
+<p><a href="https://dl.quchao.net/Soft/Portainer-CN.zip">Portainer-CN.zip</a><br> 百度云盘: <a href="https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw">https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw</a> 提取码: <code>nzue</code><br> 新建文件夹命名为<code>public</code>，把<code>Portainer-CN.zip</code>解压至里面。 2、<code>public</code>文件夹传输至系统根目录 3、然后按需执行以下命令 x86-64系统使用</p>
 <pre><code>docker volume create portainer_data
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock   -v portainer_data:/data -v /public:/public  --name portainer --restart=always portainer/portainer
 </code></pre><p>ARM64系统使用</p>
@@ -337,6 +337,10 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -350,10 +354,6 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -389,7 +389,7 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -565,6 +565,8 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

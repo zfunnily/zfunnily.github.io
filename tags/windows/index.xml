@@ -13,7 +13,7 @@
       <pubDate>Wed, 09 Sep 2020 09:36:49 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/09/ffmpegvideow/</guid>
-      <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &amp;quot;Altair USB2.0 Camera&amp;quot; [dshow @ 000002622302e340] Alternative name &amp;quot;@device_pnp_\\?\usb#vid_0ac8&amp;amp;pid_3450&amp;amp;mi_00#6&amp;amp;3b01315a&amp;amp;0&amp;amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&amp;quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,</description>
+      <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &amp;quot;Altair USB2.0 Camera&amp;quot; [dshow @ 000002622302e340] Alternative name &amp;quot;@device_pnp_\\?\usb#vid_0ac8&amp;amp;pid_3450&amp;amp;mi_00#6&amp;amp;3b01315a&amp;amp;0&amp;amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&amp;quot; [dshow @ 000002622302e340] DirectShow audio devices `` 使用 dshow 展示摄像头, 摄</description>
     </item>
     
   </channel>

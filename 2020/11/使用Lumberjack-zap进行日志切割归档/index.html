@@ -146,10 +146,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idlumberjackzap_2a使用lumberjackzap进行日志切割归档"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用Lumberjack+zap进行日志切割归档</a></li>
-    <li><a href="#a-id_6a安装"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装</a></li>
-    <li><a href="#a-idzap_loggerlumberjack_14azap-logger中加入lumberjack"><!-- raw HTML omitted --><!-- raw HTML omitted -->zap logger中加入Lumberjack</a></li>
-    <li><a href="#a-id_40a测试所有功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试所有功能</a></li>
+    <li><a href="#a-idlumberjackzap_2a使用lumberjackzap进行日志切割归档"><a id="Lumberjackzap_2"></a>使用Lumberjack+zap进行日志切割归档</a></li>
+    <li><a href="#a-id_6a安装"><a id="_6"></a>安装</a></li>
+    <li><a href="#a-idzap_loggerlumberjack_14azap-logger中加入lumberjack"><a id="zap_loggerLumberjack_14"></a>zap logger中加入Lumberjack</a></li>
+    <li><a href="#a-id_40a测试所有功能"><a id="_40"></a>测试所有功能</a></li>
   </ul>
 </nav>
     </div>
@@ -200,13 +200,13 @@
         
         
         <div class="post-content">
-            <h2 id="a-idlumberjackzap_2a使用lumberjackzap进行日志切割归档"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用Lumberjack+zap进行日志切割归档</h2>
+            <h2 id="a-idlumberjackzap_2a使用lumberjackzap进行日志切割归档"><a id="Lumberjackzap_2"></a>使用Lumberjack+zap进行日志切割归档</h2>
 <p>为了添加日志切割归档功能，我们将使用第三方库<a href="https://github.com/natefinch/lumberjack">Lumberjack</a>来实现。</p>
-<h2 id="a-id_6a安装"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装</h2>
+<h2 id="a-id_6a安装"><a id="_6"></a>安装</h2>
 <p>执行下面的命令安装Lumberjack</p>
 <pre><code>go get -u github.com/natefinch/lumberjack
 
-</code></pre><h2 id="a-idzap_loggerlumberjack_14azap-logger中加入lumberjack"><!-- raw HTML omitted --><!-- raw HTML omitted -->zap logger中加入Lumberjack</h2>
+</code></pre><h2 id="a-idzap_loggerlumberjack_14azap-logger中加入lumberjack"><a id="zap_loggerLumberjack_14"></a>zap logger中加入Lumberjack</h2>
 <p>要在zap中加入Lumberjack支持，我们需要修改<code>WriteSyncer</code>代码。我们将按照下面的代码修改<code>getLogWriter()</code>函数：</p>
 <pre><code>func getLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &amp;lumberjack.Logger{
@@ -224,7 +224,7 @@
 <ul>
 <li>Filename: 日志文件的位置- MaxSize：在进行切割之前，日志文件的最大大小（以MB为单位）- MaxBackups：保留旧文件的最大个数- MaxAges：保留旧文件的最大天数- Compress：是否压缩/归档旧文件</li>
 </ul>
-<h2 id="a-id_40a测试所有功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试所有功能</h2>
+<h2 id="a-id_40a测试所有功能"><a id="_40"></a>测试所有功能</h2>
 <pre><code>package main
 
 import (
@@ -407,6 +407,10 @@ func simpleHttpGet(url string) {
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -420,10 +424,6 @@ func simpleHttpGet(url string) {
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -459,7 +459,7 @@ func simpleHttpGet(url string) {
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -635,6 +635,8 @@ func simpleHttpGet(url string) {
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

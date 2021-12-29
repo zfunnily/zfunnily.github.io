@@ -146,10 +146,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-id_slice__string__9a获得-slice-和-string-的内存数据"><!-- raw HTML omitted --><!-- raw HTML omitted -->获得 Slice 和 String 的内存数据</a></li>
-    <li><a href="#a-idstring_cchar_36a把string转化为-cchar"><!-- raw HTML omitted --><!-- raw HTML omitted -->把string转化为 *C.char</a></li>
-    <li><a href="#a-id_byte__string_71a把-byte-转成-string"><!-- raw HTML omitted --><!-- raw HTML omitted -->把 []byte 转成 string</a></li>
+    <li><a href="#a-id_2a概述"><a id="_2"></a>概述</a></li>
+    <li><a href="#a-id_slice__string__9a获得-slice-和-string-的内存数据"><a id="_Slice__String__9"></a>获得 Slice 和 String 的内存数据</a></li>
+    <li><a href="#a-idstring_cchar_36a把string转化为-cchar"><a id="string_Cchar_36"></a>把string转化为 *C.char</a></li>
+    <li><a href="#a-id_byte__string_71a把-byte-转成-string"><a id="_byte__string_71"></a>把 []byte 转成 string</a></li>
   </ul>
 </nav>
     </div>
@@ -200,12 +200,12 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+            <h2 id="a-id_2a概述"><a id="_2"></a>概述</h2>
 <p>在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。</p>
 <p>在Go语言中，指针的本质是什么呢？是unsafe.Pointer和uintptr。</p>
 <p>当你清楚了它们的本质之后，你就可以随意的玩弄它们，嘿嘿嘿。</p>
-<h2 id="a-id_slice__string__9a获得-slice-和-string-的内存数据"><!-- raw HTML omitted --><!-- raw HTML omitted -->获得 Slice 和 String 的内存数据</h2>
-<p>有一个 CGO 接口要调用，需要你把一个字符串数据或者字节数组数据从Go这边传递到C那边.<!-- raw HTML omitted --> 查了各种教程和文档，它们都告诉你要用 C.GoString 或 C.GoBytes 来转换数据。</p>
+<h2 id="a-id_slice__string__9a获得-slice-和-string-的内存数据"><a id="_Slice__String__9"></a>获得 Slice 和 String 的内存数据</h2>
+<p>有一个 CGO 接口要调用，需要你把一个字符串数据或者字节数组数据从Go这边传递到C那边.<br> 查了各种教程和文档，它们都告诉你要用 C.GoString 或 C.GoBytes 来转换数据。</p>
 <p>但是，当你调用这两个函数的时候，发生了什么事情呢？这时候Go复制了一份数据，然后再把新数据的地址传给C，因为Go不想冒任何风险。</p>
 <p><strong>你的C程序只是想一次性的用一下这些数据，也不得不做一次数据复制，这对于一个性能癖来说是多麽可怕的一个事实</strong>！</p>
 <p>这时候我们就需要一个黑魔法，来做到不拷贝数据又能把指针地址传递给C。</p>
@@ -223,7 +223,7 @@ func bytePointer(b []byte) unsafe.Pointer {
 
 </code></pre><p>以上就是黑魔法第一式，我们先去到Go字符串的指针，它本质上是一个 *reflect.StringHeader ，但是Go告诉我们这是一个 *string ，我们告诉Go它同时也是一个 unsafe.Pointer ，Go说好吧它是，于是你得到了unsafe.Pointer，接着你就躲过了Go的监视，偷偷的把unsafe.Pointer转成了 *reflect.StringHeader 。</p>
 <p>有了 *reflect.StringHeader ，你很快就取到了Data字段指向的内存地址，它就是Go保护着不想给你看到的隐秘所在，你把这个地址偷偷告诉给了C，于是C就愉快的偷看了Go的隐私。</p>
-<h2 id="a-idstring_cchar_36a把string转化为-cchar"><!-- raw HTML omitted --><!-- raw HTML omitted -->把string转化为 *C.char</h2>
+<h2 id="a-idstring_cchar_36a把string转化为-cchar"><a id="string_Cchar_36"></a>把string转化为 *C.char</h2>
 <pre><code>package main
 
 /*
@@ -255,8 +255,8 @@ func main() {
    C.test1(GetCString(s))
 }
 
-</code></pre><p>思考为什么 v := s + “\000” 字符串后面要加 “\000”.我尝试了,如果不加转换会报错.如果加上 “\0” 则字符串打印出来结尾会多一个 \0<!-- raw HTML omitted --> 可以自己尝试一下</p>
-<h2 id="a-id_byte__string_71a把-byte-转成-string"><!-- raw HTML omitted --><!-- raw HTML omitted -->把 []byte 转成 string</h2>
+</code></pre><p>思考为什么 v := s + “\000” 字符串后面要加 “\000”.我尝试了,如果不加转换会报错.如果加上 “\0” 则字符串打印出来结尾会多一个 \0<br> 可以自己尝试一下</p>
+<h2 id="a-id_byte__string_71a把-byte-转成-string"><a id="_byte__string_71"></a>把 []byte 转成 string</h2>
 <p>普通的转换方法是</p>
 <pre><code>b := []byte(&quot;hello world&quot;)
 c := string(b)        // []byte =&gt; string
@@ -419,6 +419,10 @@ func Benchmark_ByteString(b *testing.B) {
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -432,10 +436,6 @@ func Benchmark_ByteString(b *testing.B) {
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -471,7 +471,7 @@ func Benchmark_ByteString(b *testing.B) {
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -647,6 +647,8 @@ func Benchmark_ByteString(b *testing.B) {
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

@@ -103,7 +103,7 @@
         </div>
         
         <div class="post-content">
-            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录，目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/获取cookie： google浏览器访问bilibili- 按F12- 查看Net……
+            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/ 获取cookie： google浏览器访问bilibili- 按F12- 查看Net……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
         </div>
     </article>
@@ -241,7 +241,7 @@
         </div>
         
         <div class="post-content">
-            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明：1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必……
+            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必……
             <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
         </div>
     </article>
@@ -357,6 +357,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -370,10 +374,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -409,7 +409,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -585,6 +585,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

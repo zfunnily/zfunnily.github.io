@@ -234,7 +234,7 @@
 </code></pre><p>重启机器</p>
 <pre><code>sudo reboot
 </code></pre><h2 id="docker-的配置">docker 的配置</h2>
-<p>安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。<!-- raw HTML omitted --> cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。docker 默认使用的是cgroupfs，而 k8s 也用到了一个进程隔离工具systemd，如果使用两个隔离组的话可能会引起异常，所以我们要把 docker 的也改成systemd。
+<p>安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。<br> cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。docker 默认使用的是cgroupfs，而 k8s 也用到了一个进程隔离工具systemd，如果使用两个隔离组的话可能会引起异常，所以我们要把 docker 的也改成systemd。
 编辑daemon.json：</p>
 <pre><code>sudo vim /etc/docker/daemon.json
 </code></pre><pre><code>{
@@ -247,7 +247,7 @@
 <pre><code>sudo systemctl daemon-reload
 sudo systemctl restart docker
 </code></pre><h2 id="安装-k8s">安装 k8s</h2>
-<p>kubelet: k8s 的核心服务<!-- raw HTML omitted --> kubeadm: 这个是用于快速安装 k8s 的一个集成工具，我们在master1和worker1上的 k8s 部署都将使用它来完成。<!-- raw HTML omitted --> kubectl: k8s 的命令行工具，部署完成之后后续的操作都要用它来执行</p>
+<p>kubelet: k8s 的核心服务<br> kubeadm: 这个是用于快速安装 k8s 的一个集成工具，我们在master1和worker1上的 k8s 部署都将使用它来完成。<br> kubectl: k8s 的命令行工具，部署完成之后后续的操作都要用它来执行</p>
 <pre><code>#进入root权限/或者使用sudo
 
 # 使得 apt 支持 ssl 传输
@@ -269,7 +269,7 @@ sudo apt install kubeadm=1.18.0-00 kubectl=1.18.0-00 kubelet=1.18.0-00
 <li>部署flannel网络- 配置kubectl工具</li>
 </ul>
 <h3 id="拉取国内镜像">拉取国内镜像</h3>
-<p>获取镜像列表<!-- raw HTML omitted --> 由于官方镜像地址被墙，所以我们需要首先获取所需镜像以及它们的版本。然后从国内阿里的镜像站获取。</p>
+<p>获取镜像列表<br> 由于官方镜像地址被墙，所以我们需要首先获取所需镜像以及它们的版本。然后从国内阿里的镜像站获取。</p>
 <pre><code>kubeadm config images list
 </code></pre><p>脚本获取</p>
 <pre><code>images=(
@@ -290,7 +290,7 @@ done
 <p>版本要对应。</p>
 </blockquote>
 <h3 id="如果版本对不上">如果版本对不上</h3>
-<p>比如kubeadm config images list输出的版本号为v1.18.6，但是安装的k8s版本是v1.18.0，则使用配置<!-- raw HTML omitted --> 导出配置文件</p>
+<p>比如kubeadm config images list输出的版本号为v1.18.6，但是安装的k8s版本是v1.18.0，则使用配置<br> 导出配置文件</p>
 <pre><code>kubeadm config print init-defaults --kubeconfig ClusterConfiguration &gt; kubeadm.yml
 </code></pre><p>修改配置</p>
 <pre><code># 修改配置为如下内容
@@ -565,6 +565,10 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -578,10 +582,6 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -617,7 +617,7 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -793,6 +793,8 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

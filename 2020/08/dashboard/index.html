@@ -151,14 +151,14 @@
         <li><a href="#nodeport方式访问web">NodePort方式访问web</a></li>
       </ul>
     </li>
-    <li><a href="#a-idweb_64aweb访问的其他方式"><!-- raw HTML omitted --><!-- raw HTML omitted -->Web访问的其他方式</a>
+    <li><a href="#a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</a>
       <ul>
-        <li><a href="#a-idnodeport_65a开启nodeport访问的另一种方式"><!-- raw HTML omitted --><!-- raw HTML omitted -->开启NodePort访问的另一种方式</a></li>
-        <li><a href="#a-idapi_server_87aapi-server访问"><!-- raw HTML omitted --><!-- raw HTML omitted -->API Server访问</a></li>
+        <li><a href="#a-idnodeport_65a开启nodeport访问的另一种方式"><a id="NodePort_65"></a>开启NodePort访问的另一种方式</a></li>
+        <li><a href="#a-idapi_server_87aapi-server访问"><a id="API_Server_87"></a>API Server访问</a></li>
       </ul>
     </li>
-    <li><a href="#a-id_113a创建用户"><!-- raw HTML omitted --><!-- raw HTML omitted -->创建用户</a></li>
-    <li><a href="#a-id_129a绑定用户关系"><!-- raw HTML omitted --><!-- raw HTML omitted -->绑定用户关系</a></li>
+    <li><a href="#a-id_113a创建用户"><a id="_113"></a>创建用户</a></li>
+    <li><a href="#a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</a></li>
     <li><a href="#获取token">获取token</a></li>
   </ul>
 </nav>
@@ -260,8 +260,8 @@ kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Runn
 <pre><code># 删除dashboard插件，recommended.yaml为安装时的名称，执行删除后，docker里对应的镜像没不会同步删除
 sudo kubectl delete -f recommended.yaml
 
-</code></pre><h2 id="a-idweb_64aweb访问的其他方式"><!-- raw HTML omitted --><!-- raw HTML omitted -->Web访问的其他方式</h2>
-<h3 id="a-idnodeport_65a开启nodeport访问的另一种方式"><!-- raw HTML omitted --><!-- raw HTML omitted -->开启NodePort访问的另一种方式</h3>
+</code></pre><h2 id="a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</h2>
+<h3 id="a-idnodeport_65a开启nodeport访问的另一种方式"><a id="NodePort_65"></a>开启NodePort访问的另一种方式</h3>
 <p>查看 kubernetes-dashboard</p>
 <pre><code>sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
 
@@ -278,7 +278,7 @@ NAME                   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)         
 kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/TCP   59s
 
 </code></pre><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
-<h3 id="a-idapi_server_87aapi-server访问"><!-- raw HTML omitted --><!-- raw HTML omitted -->API Server访问</h3>
+<h3 id="a-idapi_server_87aapi-server访问"><a id="API_Server_87"></a>API Server访问</h3>
 <p>启动Web访问，accept-hosts需要绑定当前服务器ip，即绑定接收请求的地址（可以使用正则表达式），不绑定访问可能会被拒绝，直接返回“Forbidden”</p>
 <pre><code>nohup sudo kubectl proxy --address='0.0.0.0' --port=8001 --accept-hosts='.*' &amp;
 
@@ -300,8 +300,8 @@ kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/
 }
 
 </code></pre><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
-<h2 id="a-id_113a创建用户"><!-- raw HTML omitted --><!-- raw HTML omitted -->创建用户</h2>
-<p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<!-- raw HTML omitted --> ``<!-- raw HTML omitted --> <strong>新建文件(文件名随意)<code>admin-user.yaml</code>：</strong><!-- raw HTML omitted --> 输入内容：</p>
+<h2 id="a-id_113a创建用户"><a id="_113"></a>创建用户</h2>
+<p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<br> ``<br> <strong>新建文件(文件名随意)<code>admin-user.yaml</code>：</strong><br> 输入内容：</p>
 <pre><code>apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -311,8 +311,8 @@ metadata:
 </code></pre><p>执行：</p>
 <pre><code>sudo kubectl create -f admin-user.yaml
 
-</code></pre><h2 id="a-id_129a绑定用户关系"><!-- raw HTML omitted --><!-- raw HTML omitted -->绑定用户关系</h2>
-<p><strong>新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：</strong><!-- raw HTML omitted --> 输入内容：</p>
+</code></pre><h2 id="a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</h2>
+<p><strong>新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：</strong><br> 输入内容：</p>
 <pre><code>apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -453,6 +453,10 @@ subjects:
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -466,10 +470,6 @@ subjects:
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -505,7 +505,7 @@ subjects:
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -681,6 +681,8 @@ subjects:
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

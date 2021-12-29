@@ -146,19 +146,19 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_1a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-idposix_4aposix"><!-- raw HTML omitted --><!-- raw HTML omitted -->POSIX</a></li>
-    <li><a href="#a-id_10a简述阻塞非阻塞同步异步"><!-- raw HTML omitted --><!-- raw HTML omitted -->简述阻塞、非阻塞、同步、异步</a>
+    <li><a href="#a-id_1a概述"><a id="_1"></a>概述</a></li>
+    <li><a href="#a-idposix_4aposix"><a id="POSIX_4"></a>POSIX</a></li>
+    <li><a href="#a-id_10a简述阻塞非阻塞同步异步"><a id="_10"></a>简述阻塞、非阻塞、同步、异步</a>
       <ul>
-        <li><a href="#a-id_11a阻塞和非阻塞"><!-- raw HTML omitted --><!-- raw HTML omitted -->阻塞和非阻塞</a></li>
-        <li><a href="#a-idio_23a同步异步io"><!-- raw HTML omitted --><!-- raw HTML omitted -->同步/异步IO</a></li>
+        <li><a href="#a-id_11a阻塞和非阻塞"><a id="_11"></a>阻塞和非阻塞</a></li>
+        <li><a href="#a-idio_23a同步异步io"><a id="IO_23"></a>同步/异步IO</a></li>
       </ul>
     </li>
-    <li><a href="#a-idio_34aio多路复用"><!-- raw HTML omitted --><!-- raw HTML omitted -->IO多路复用</a></li>
-    <li><a href="#a-id_39a异步"><!-- raw HTML omitted --><!-- raw HTML omitted -->异步</a></li>
-    <li><a href="#a-id_42a信号驱动"><!-- raw HTML omitted --><!-- raw HTML omitted -->信号驱动</a></li>
-    <li><a href="#a-idio_46a总结比较下五种io模型"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结比较下五种IO模型</a></li>
-    <li><a href="#a-id_49a总结"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结</a></li>
+    <li><a href="#a-idio_34aio多路复用"><a id="IO_34"></a>IO多路复用</a></li>
+    <li><a href="#a-id_39a异步"><a id="_39"></a>异步</a></li>
+    <li><a href="#a-id_42a信号驱动"><a id="_42"></a>信号驱动</a></li>
+    <li><a href="#a-idio_46a总结比较下五种io模型"><a id="IO_46"></a>总结比较下五种IO模型</a></li>
+    <li><a href="#a-id_49a总结"><a id="_49"></a>总结</a></li>
   </ul>
 </nav>
     </div>
@@ -209,19 +209,25 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_1a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+            <h2 id="a-id_1a概述"><a id="_1"></a>概述</h2>
 <p>在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。</p>
-<h2 id="a-idposix_4aposix"><!-- raw HTML omitted --><!-- raw HTML omitted -->POSIX</h2>
-<p>POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IO<!-- raw HTML omitted --> I/O 操作一般分为两个部分：</p>
+<h2 id="a-idposix_4aposix"><a id="POSIX_4"></a>POSIX</h2>
+<p>POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IO<br> I/O 操作一般分为两个部分：</p>
 <ul>
 <li>阶段1：应用程序发起 I/O 操作请求，<strong>等待数据</strong>，或者将要操作的数据拷贝到系统内核中（比如 socket）。- 阶段2：系统内核进行 I/O 操作（一般是内核将数据拷贝到用户进程中）。</li>
 </ul>
-<h2 id="a-id_10a简述阻塞非阻塞同步异步"><!-- raw HTML omitted --><!-- raw HTML omitted -->简述阻塞、非阻塞、同步、异步</h2>
-<h3 id="a-id_11a阻塞和非阻塞"><!-- raw HTML omitted --><!-- raw HTML omitted -->阻塞和非阻塞</h3>
+<h2 id="a-id_10a简述阻塞非阻塞同步异步"><a id="_10"></a>简述阻塞、非阻塞、同步、异步</h2>
+<h3 id="a-id_11a阻塞和非阻塞"><a id="_11"></a>阻塞和非阻塞</h3>
 <p>阻塞和非阻塞发生在请求处，也就是<strong>阶段1</strong> ，关注的是程序在等待调用结果时的状态。</p>
-<!-- raw HTML omitted -->
-<h3 id="a-idio_23a同步异步io"><!-- raw HTML omitted --><!-- raw HTML omitted -->同步/异步IO</h3>
-<!-- raw HTML omitted -->
+<li> 阻塞是指**调用结果**返回之前，当前进程（线程）会被挂起，调用进程（线程）会阻塞在IO请求处，直到IO操作请求完成，数据到来，最重要的是用户进程的函数在请求过程中不会返回。<br> ![8e9619a3f39bbef05a4f3f262d55dd66.png](https://img-blog.csdnimg.cn/img_convert/8e9619a3f39bbef05a4f3f262d55dd66.png) 
+  <ul>- eg：recv()函数默认是阻塞的，什么是阻塞呢？就是当你调用recv()函数时，整个进程或者线程就等待在这里了，直到你recv的fd的所有信息都被send过来，这么做好处就是保证所有信息都能够完整的读取了，但劣势也很明显，就是在recv()的过程中你的进程或线程做不了其它事情，由此，引入了非阻塞IO。
+非阻塞调用是指在不能立刻得到结果之前，该调用不会阻塞进程（线程），进程（线程）可以去干别的事情，一般使用轮询的方法来查询IO操作的数据是否准备好了。<br> ![638c1c283a6c3891a8f345d73d4cd711.png](https://img-blog.csdnimg.cn/img_convert/638c1c283a6c3891a8f345d73d4cd711.png)
+- eg：以recv()函数为例，当你将其设置为非阻塞时，每次当你recv()时，就直接返回，不管信息有没有完全send进来，好处很明显，recv()了之后进程马上能处理下一行代码，坏处也很明显，就是你不知道你的消息是否读完了，这种问题就是TCP中大名鼎鼎的半包问题（解决办法主要是通过一个buffer缓存所有读进来的消息）
+当使用**I/O 多路复用**的时候，用户的 I/O 操作会立即返回，但会利用 select 和 epoll 等方法对所监视的 I/O 操作描述符进行遍历轮询（此操作是为了检查数据是否准备完毕，也就是 I/O 操作的**阶段1**，同时此操作是阻塞，进程或者线程需要等待轮询结果的返回），查看可用的句柄并返回。然后用户进程再对其进行操作。
+<h3 id="a-idio_23a同步异步io"><a id="IO_23"></a>同步/异步IO</h3>
+<li>同步和异步关注的是消息通信机制，具体来说就是调用者是否等待调用结果的返回，对于 I/O 操作而言，就是应用程序是否等待 I/O 操作完成。 
+  <ul>- eg: 以recv()函数为例， 不管 是否设置为阻塞还是非阻塞(阶段1)，都有一个将内核数据拷贝到用户进程的I/O操作(阶段2)，如果用户进程等待I/O操作返回，则为同步，反之则为异步。
+### <a id="ioio_27"></a>同异步io和阻塞非阻塞io的区别
 <p>结合前面的概念，可以看出，其实这两者存在本质的区别，<strong>它们的修饰对象是不同的</strong>。</p>
 <ul>
 <li>阻塞和非阻塞是指进程访问的数据如果尚未就绪，进程是否需要等待，简单说这相当于函数内部的实现区别，也就是未就绪时是直接返回还是等待就绪。- 同步和异步是指访问数据的机制，<strong>同步一般指主动请求并等待 I/O 操作完毕的方式，当数据就绪后在读写的时候必须等待</strong>，<strong>异步则指主动请求数据后便可以继续处理其它任务，随后等待 I/O，操作完毕的通知，这可以使进程在数据读写时也不阻塞。</strong></li>
@@ -229,32 +235,32 @@
 <blockquote>
 </blockquote>
 <p><strong>只有同步的时候，才会有是否阻塞之说</strong>。</p>
-<h2 id="a-idio_34aio多路复用"><!-- raw HTML omitted --><!-- raw HTML omitted -->IO多路复用</h2>
+<h2 id="a-idio_34aio多路复用"><a id="IO_34"></a>IO多路复用</h2>
 <p>这里在调用<code>recv</code>前先调用<code>select</code>或者<code>poll</code>，这两个个系统调用都可以在内核准备好数据(网络数据到达内核)时告知用户进程，这个时候再调用<code>recv</code>一定是有数据的。因此这一过程中它是<strong>阻塞于</strong><code>select</code>或<code>poll</code>，而没有阻塞于<code>recv</code>，有人将非阻塞IO定义成在读写操作时没有阻塞于系统调用的IO操作(不包括数据从内核复制到用户空间时的阻塞，因为这相对于网络IO来说确实很短暂)，如果按这样理解，这种IO模型也能称之为非阻塞IO模型，但是按POSIX来看，它也是同步IO，称之为同步非阻塞IO。</p>
-<p>这种IO模型比较特别，分个段。因为它能同时监听多个文件描述符(fd)。当有文件描述符有就绪事件时，则返回就绪事件的文件描述符来进行读写。<!-- raw HTML omitted --> 
+<p>这种IO模型比较特别，分个段。因为它能同时监听多个文件描述符(fd)。当有文件描述符有就绪事件时，则返回就绪事件的文件描述符来进行读写。<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/71aa8666b1c87dca8c17cc46b2dc2c34.png">
             <img class="mx-auto" alt="71aa8666b1c87dca8c17cc46b2dc2c34.png" src="https://img-blog.csdnimg.cn/img_convert/71aa8666b1c87dca8c17cc46b2dc2c34.png" />
         </a>
     </p>
-<h2 id="a-id_39a异步"><!-- raw HTML omitted --><!-- raw HTML omitted -->异步</h2>
-<p>调用<code>aio_read</code>，让内核等数据准备好，并且复制到用户进程空间后执行事先指定好的函数。整个过程没有<code>recv</code>，这才是真正的异步IO。<!-- raw HTML omitted --> 
+<h2 id="a-id_39a异步"><a id="_39"></a>异步</h2>
+<p>调用<code>aio_read</code>，让内核等数据准备好，并且复制到用户进程空间后执行事先指定好的函数。整个过程没有<code>recv</code>，这才是真正的异步IO。<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/23ae9c946f1e28f38078a22371d89b27.png">
             <img class="mx-auto" alt="23ae9c946f1e28f38078a22371d89b27.png" src="https://img-blog.csdnimg.cn/img_convert/23ae9c946f1e28f38078a22371d89b27.png" />
         </a>
     </p>
-<h2 id="a-id_42a信号驱动"><!-- raw HTML omitted --><!-- raw HTML omitted -->信号驱动</h2>
-<p>通过调用<code>sigaction</code>注册信号函数，等内核数据准备好的时候系统中断当前程序，执行信号函数(在这里面调用<code>recv</code>)。是不是很像异步IO？很遗憾，它还是同步IO(省不了数据从内核拷贝到用户空间的操作)。<!-- raw HTML omitted --> 
+<h2 id="a-id_42a信号驱动"><a id="_42"></a>信号驱动</h2>
+<p>通过调用<code>sigaction</code>注册信号函数，等内核数据准备好的时候系统中断当前程序，执行信号函数(在这里面调用<code>recv</code>)。是不是很像异步IO？很遗憾，它还是同步IO(省不了数据从内核拷贝到用户空间的操作)。<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/1391dda5294104d4527236f624499072.png">
             <img class="mx-auto" alt="1391dda5294104d4527236f624499072.png" src="https://img-blog.csdnimg.cn/img_convert/1391dda5294104d4527236f624499072.png" />
         </a>
     </p>
-<h2 id="a-idio_46a总结比较下五种io模型"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结比较下五种IO模型</h2>
+<h2 id="a-idio_46a总结比较下五种io模型"><a id="IO_46"></a>总结比较下五种IO模型</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/004ecc012652df42897c1823e0bc4711.png">
             <img class="mx-auto" alt="004ecc012652df42897c1823e0bc4711.png" src="https://img-blog.csdnimg.cn/img_convert/004ecc012652df42897c1823e0bc4711.png" />
         </a>
     </p>
-<h2 id="a-id_49a总结"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结</h2>
+<h2 id="a-id_49a总结"><a id="_49"></a>总结</h2>
 <p>IO分两阶段：</p>
 <pre><code>1.数据准备阶段
 2.内核空间复制回用户进程缓冲区阶段
@@ -393,6 +399,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -406,10 +416,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -445,7 +451,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -621,6 +627,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

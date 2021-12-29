@@ -147,12 +147,12 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#缘由">缘由</a></li>
-    <li><a href="#a-id_3a定义协议"><!-- raw HTML omitted --><!-- raw HTML omitted -->定义协议</a></li>
-    <li><a href="#a-idserver_39aserver示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Server示例代码</a></li>
-    <li><a href="#a-idclient_109aclient示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Client示例代码</a></li>
-    <li><a href="#a-id_154a知识点"><!-- raw HTML omitted --><!-- raw HTML omitted -->知识点</a>
+    <li><a href="#a-id_3a定义协议"><a id="_3"></a>定义协议</a></li>
+    <li><a href="#a-idserver_39aserver示例代码"><a id="Server_39"></a>Server示例代码</a></li>
+    <li><a href="#a-idclient_109aclient示例代码"><a id="Client_109"></a>Client示例代码</a></li>
+    <li><a href="#a-id_154a知识点"><a id="_154"></a>知识点</a>
       <ul>
-        <li><a href="#a-idbufioscan_160abufioscan的使用"><!-- raw HTML omitted --><!-- raw HTML omitted -->bufio.Scan的使用</a></li>
+        <li><a href="#a-idbufioscan_160abufioscan的使用"><a id="bufioScan_160"></a>bufio.Scan的使用</a></li>
       </ul>
     </li>
   </ul>
@@ -207,9 +207,11 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我用golnag + protobuf 做了一个简单的client + server</p>
-<h2 id="a-id_3a定义协议"><!-- raw HTML omitted --><!-- raw HTML omitted -->定义协议</h2>
+<h2 id="a-id_3a定义协议"><a id="_3"></a>定义协议</h2>
 <p>一个包数据组成：</p>
-<!-- raw HTML omitted -->
+<li>包头 
+  <ul>- size ：表示body长度，int32，占位4字节- cmd ： 表示指令，int32，占位 4字节
+## <a id="proto_10"></a>.proto文件
 <pre><code>// msg.proto
 syntax = &quot;proto3&quot;;
 option go_package = &quot;.;GCToLs&quot;;
@@ -236,7 +238,7 @@ message AskLogin
 </code></pre><p>执行命令,生成 msg.pb.go文件</p>
 <pre><code>protoc ./*.proto --go_out=protos -I ./
 
-</code></pre><h2 id="a-idserver_39aserver示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Server示例代码</h2>
+</code></pre><h2 id="a-idserver_39aserver示例代码"><a id="Server_39"></a>Server示例代码</h2>
 <pre><code>package main
 
 import (
@@ -305,7 +307,7 @@ func main() {
 	fmt.Errorf(&quot;%s\n&quot;, &lt;- errs)
 }
 
-</code></pre><h2 id="a-idclient_109aclient示例代码"><!-- raw HTML omitted --><!-- raw HTML omitted -->Client示例代码</h2>
+</code></pre><h2 id="a-idclient_109aclient示例代码"><a id="Client_109"></a>Client示例代码</h2>
 <pre><code>package main
 
 import (
@@ -349,9 +351,9 @@ func main() {
 	defer conn.Close()
 }
 
-</code></pre><h2 id="a-id_154a知识点"><!-- raw HTML omitted --><!-- raw HTML omitted -->知识点</h2>
-<p>一、golang的net网路库的使用<!-- raw HTML omitted --> 二、golang的goroutine<!-- raw HTML omitted --> 三、golang的channel使用<!-- raw HTML omitted --> 四、bufio.Scan可以很好的分割一个数据包。</p>
-<h3 id="a-idbufioscan_160abufioscan的使用"><!-- raw HTML omitted --><!-- raw HTML omitted -->bufio.Scan的使用</h3>
+</code></pre><h2 id="a-id_154a知识点"><a id="_154"></a>知识点</h2>
+<p>一、golang的net网路库的使用<br> 二、golang的goroutine<br> 三、golang的channel使用<br> 四、bufio.Scan可以很好的分割一个数据包。</p>
+<h3 id="a-idbufioscan_160abufioscan的使用"><a id="bufioScan_160"></a>bufio.Scan的使用</h3>
 <pre><code>//生成一个 scanner
 scanner := bufio.NewScanner(conn)
 //自定义解包方法
@@ -525,6 +527,10 @@ for bufio.Scan{
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -538,10 +544,6 @@ for bufio.Scan{
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -577,7 +579,7 @@ for bufio.Scan{
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -753,6 +755,8 @@ for bufio.Scan{
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

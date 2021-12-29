@@ -146,11 +146,11 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idrsync_1arsync的安装"><!-- raw HTML omitted --><!-- raw HTML omitted -->rsync的安装</a></li>
-    <li><a href="#a-id_26a快速删除大量文件"><!-- raw HTML omitted --><!-- raw HTML omitted -->快速删除大量文件</a></li>
-    <li><a href="#a-id_37a快速删除大文件方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->快速删除大文件方法</a></li>
-    <li><a href="#a-idrsync_47a为什么rsync能够快速删除大文件"><!-- raw HTML omitted --><!-- raw HTML omitted -->为什么rsync能够快速删除大文件？</a></li>
-    <li><a href="#a-id_55a总结频繁做减法不如直接从头来过"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结：频繁做减法不如直接从头来过</a></li>
+    <li><a href="#a-idrsync_1arsync的安装"><a id="rsync_1"></a>rsync的安装</a></li>
+    <li><a href="#a-id_26a快速删除大量文件"><a id="_26"></a>快速删除大量文件</a></li>
+    <li><a href="#a-id_37a快速删除大文件方法"><a id="_37"></a>快速删除大文件方法</a></li>
+    <li><a href="#a-idrsync_47a为什么rsync能够快速删除大文件"><a id="rsync_47"></a>为什么rsync能够快速删除大文件？</a></li>
+    <li><a href="#a-id_55a总结频繁做减法不如直接从头来过"><a id="_55"></a>总结：频繁做减法不如直接从头来过</a></li>
   </ul>
 </nav>
     </div>
@@ -201,8 +201,8 @@
         
         
         <div class="post-content">
-            <h2 id="a-idrsync_1arsync的安装"><!-- raw HTML omitted --><!-- raw HTML omitted -->rsync的安装</h2>
-<p>rsync安装，有些系统默认安装有该命令<!-- raw HTML omitted --> ubuntu系统</p>
+            <h2 id="a-idrsync_1arsync的安装"><a id="rsync_1"></a>rsync的安装</h2>
+<p>rsync安装，有些系统默认安装有该命令<br> ubuntu系统</p>
 <pre><code>sudo apt-get install rsync
 
 </code></pre><p>centos系统</p>
@@ -222,8 +222,8 @@ rsync --help | grep delete
        --max-delete=NUM    don't delete more than NUM files
 其中--delete-before接收者在传输之前进行删除操作
 
-</code></pre><h2 id="a-id_26a快速删除大量文件"><!-- raw HTML omitted --><!-- raw HTML omitted -->快速删除大量文件</h2>
-<p>假如你要在linux下删除大量文件，比如100万、1000万，像/var/spool/clientmqueue/的mail邮件，/usr/local/nginx/proxy_temp的nginx缓存等，那么rm -rf *可能就不好使了。 rsync 可以用来清空目录或文件<!-- raw HTML omitted --> 先建立一个空目录</p>
+</code></pre><h2 id="a-id_26a快速删除大量文件"><a id="_26"></a>快速删除大量文件</h2>
+<p>假如你要在linux下删除大量文件，比如100万、1000万，像/var/spool/clientmqueue/的mail邮件，/usr/local/nginx/proxy_temp的nginx缓存等，那么rm -rf *可能就不好使了。 rsync 可以用来清空目录或文件<br> 先建立一个空目录</p>
 <pre><code>mkdir empty
 
 </code></pre><p>用rsync删除目标目录, 自定义目录是empty ， 要删除的目标目录是cdf_tmp</p>
@@ -232,20 +232,20 @@ rsync --help | grep delete
 </code></pre><blockquote>
 </blockquote>
 <p>注：其中–delete-before 接收者在传输之前进行删除操作</p>
-<h2 id="a-id_37a快速删除大文件方法"><!-- raw HTML omitted --><!-- raw HTML omitted -->快速删除大文件方法</h2>
+<h2 id="a-id_37a快速删除大文件方法"><a id="_37"></a>快速删除大文件方法</h2>
 <p>创建一个空文件</p>
 <pre><code>$ touch /data/blank.txt
 
 </code></pre><p>用rsync清空文件</p>
 <pre><code>$ rsync-a --delete-before --progress --stats /root/blank.txt /root/nohup.out
 
-</code></pre><h2 id="a-idrsync_47a为什么rsync能够快速删除大文件"><!-- raw HTML omitted --><!-- raw HTML omitted -->为什么rsync能够快速删除大文件？</h2>
+</code></pre><h2 id="a-idrsync_47a为什么rsync能够快速删除大文件"><a id="rsync_47"></a>为什么rsync能够快速删除大文件？</h2>
 <p>1）rm命令大量调用了lstat64和unlink，可以推测删除每个文件前都从文件系统中做过一次lstat操作。过程：正式删除工作的第一阶段，需要通过getdirentries64调用，分批读取目录（每次大约为4K），在内存中建立rm的文件列表；第二阶段，lstat64确定所有文件的状态；第三阶段，通过unlink执行实际删除。这三个阶段都有比较多的系统调用和文件系统操作。</p>
 <p>2）rsync所做的系统调用很少：没有针对单个文件做lstat和unlink操作。命令执行前期，rsync开启了一片共享内存，通过mmap方式加载目录信息。只做目录同步，不需要针对单个文件做unlink。</p>
 <blockquote>
 </blockquote>
 <p>rm的上下文切换比较多，会造成System CPU占用较多——对于文件系统的操作，简单增加并发数并不总能提升操作速度。</p>
-<h2 id="a-id_55a总结频繁做减法不如直接从头来过"><!-- raw HTML omitted --><!-- raw HTML omitted -->总结：频繁做减法不如直接从头来过</h2>
+<h2 id="a-id_55a总结频繁做减法不如直接从头来过"><a id="_55"></a>总结：频繁做减法不如直接从头来过</h2>
 <p>把文件系统的目录与书籍的目录做类比，rm删除内容时，将目录的每一个条目逐个删除(unlink)，需要循环重复操作很多次；rsync删除内容时，建立好新的空目录，替换掉老目录，基本没开销。</p>
 
         </div>
@@ -371,6 +371,10 @@ rsync --help | grep delete
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -384,10 +388,6 @@ rsync --help | grep delete
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -423,7 +423,7 @@ rsync --help | grep delete
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -599,6 +599,8 @@ rsync --help | grep delete
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

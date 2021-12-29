@@ -79,6 +79,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/05/lua_next/" title="Lua | next的使用">Lua | next的使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年5月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&quot;a&quot;] = 1, [&quot;b&quot;] = 2, [&quot;c&quot;] = 3 } 使用lua_next遍历table t 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/05/lua_next/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/05/settopandpop/" title="Lua | API">Lua | API</a>
             </h1>
         </header>
@@ -209,7 +232,7 @@
         </div>
         
         <div class="post-content">
-            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt; '0')……
+            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数 步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正负 if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-')) { if (*str == '-') bmin = true; str++; } while (*str != '\0') { if (*str &gt; '9' || *str &lt; '0')……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/03/atoianditoa/">阅读全文</a></p>
     </article>
@@ -281,29 +304,6 @@
             概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&quot;NewTicker...&quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d) defer t2.Stop() go func() { for { &lt;- t2.C fmt.Println(&quot;NewTimer...&quot;) } }() select 通过select的方式实现定时器： for { select { case &lt;- time.After(d): fmt.Println(&quot;select...&quot;) } }……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/timer/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/02/chicken/" title="Lua | 解决百元买鸡的问题">Lua | 解决百元买鸡的问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月24日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/chicken/">阅读全文</a></p>
     </article>
     
     
@@ -461,6 +461,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -474,10 +478,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -513,7 +513,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -689,6 +689,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

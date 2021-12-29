@@ -146,10 +146,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idc_1a使用自己的c函数"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用自己的C函数</a></li>
-    <li><a href="#a-idccstring_64accstring的解释"><!-- raw HTML omitted --><!-- raw HTML omitted -->C.CString的解释</a></li>
-    <li><a href="#a-idgoc_88a用go重新实现c函数"><!-- raw HTML omitted --><!-- raw HTML omitted -->用Go重新实现C函数</a></li>
-    <li><a href="#a-idcgo_124a面向c接口的go编程"><!-- raw HTML omitted --><!-- raw HTML omitted -->面向C接口的Go编程</a></li>
+    <li><a href="#a-idc_1a使用自己的c函数"><a id="C_1"></a>使用自己的C函数</a></li>
+    <li><a href="#a-idccstring_64accstring的解释"><a id="CCString_64"></a>C.CString的解释</a></li>
+    <li><a href="#a-idgoc_88a用go重新实现c函数"><a id="GoC_88"></a>用Go重新实现C函数</a></li>
+    <li><a href="#a-idcgo_124a面向c接口的go编程"><a id="CGo_124"></a>面向C接口的Go编程</a></li>
   </ul>
 </nav>
     </div>
@@ -200,7 +200,7 @@
         
         
         <div class="post-content">
-            <h2 id="a-idc_1a使用自己的c函数"><!-- raw HTML omitted --><!-- raw HTML omitted -->使用自己的C函数</h2>
+            <h2 id="a-idc_1a使用自己的c函数"><a id="C_1"></a>使用自己的C函数</h2>
 <p>文件名：testC.go</p>
 <pre><code>package main
 
@@ -221,7 +221,7 @@ func main() {
     defer C.free(unsafe.Pointer(cs)) //释放内存
 }
 
-</code></pre><p>说明：<!-- raw HTML omitted --> 1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必须的，并且和上面的C代码之间不能用空行分割，必须紧密相连</p>
+</code></pre><p>说明：<br> 1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必须的，并且和上面的C代码之间不能用空行分割，必须紧密相连</p>
 <p>如果执行go run **时出现</p>
 <pre><code># command-line-arguments
 could not determine kind of name for xxx
@@ -239,7 +239,7 @@ could not determine kind of name for xxx
 <p>然后我们编译以下测试看看。</p>
 <pre><code>go  run  testC.go
 
-</code></pre><h2 id="a-idccstring_64accstring的解释"><!-- raw HTML omitted --><!-- raw HTML omitted -->C.CString的解释</h2>
+</code></pre><h2 id="a-idccstring_64accstring的解释"><a id="CCString_64"></a>C.CString的解释</h2>
 <p>在<a href="https://golang.org/cmd/cgo/">cgo-1</a>中关于 C.CString 的注释里面已经写的很清楚了。 需要手动释放，C.CString 返回的指针。</p>
 <pre><code>// Go string to C string
 // The C string is allocated in the C heap using malloc.
@@ -256,7 +256,7 @@ func C.CString(string) *C.char
 }
 
 </code></pre><p>这个问题我想后来也是引起了Go语言作者的注意了， 在go1.7新版本发布信息中我发现新出了一个 C.Bytes 的类型，C.Bytes 就不需要像 C.CString 一样需要手动释放内存了。</p>
-<h2 id="a-idgoc_88a用go重新实现c函数"><!-- raw HTML omitted --><!-- raw HTML omitted -->用Go重新实现C函数</h2>
+<h2 id="a-idgoc_88a用go重新实现c函数"><a id="GoC_88"></a>用Go重新实现C函数</h2>
 <p>定义一个头文件</p>
 <pre><code>//hello.h
 void SayHello(const char* c);
@@ -286,7 +286,7 @@ func main() {
     C.SayHello(C.CString(&quot;Hello, World\n&quot;))
 }
 
-</code></pre><h2 id="a-idcgo_124a面向c接口的go编程"><!-- raw HTML omitted --><!-- raw HTML omitted -->面向C接口的Go编程</h2>
+</code></pre><h2 id="a-idcgo_124a面向c接口的go编程"><a id="CGo_124"></a>面向C接口的Go编程</h2>
 <p>尝试将例子中的几个文件重新合并到一个Go文件。下面是合并后的成果：</p>
 <pre><code>//c_say_hello.go
 package main
@@ -508,6 +508,10 @@ hello world!
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -521,10 +525,6 @@ hello world!
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -560,7 +560,7 @@ hello world!
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -736,6 +736,8 @@ hello world!
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

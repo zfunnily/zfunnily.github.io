@@ -222,6 +222,11 @@
 <li>&hellip;</li>
 </ul>
 <h3 id="静态网站的配置">静态网站的配置</h3>
+<p>配置如下:</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        nginx.conf
+    </summary>
 <pre><code>worker_processes  1;
 pid        nginx.pid;
 
@@ -257,7 +262,8 @@ http {
         }
     }
 }
-</code></pre><ul>
+</code></pre></details>
+<ul>
 <li>root: 表示网站根目录</li>
 <li>autoindex: on 显示目录, off 关闭目录展示</li>
 </ul>
@@ -267,6 +273,11 @@ http {
 <li>移动端+PC端两套网站，部署在同一台服务器上</li>
 </ul>
 <h3 id="配置">配置</h3>
+<p>配置如下:</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        nginx.conf
+    </summary>
 <pre><code>    server {
             listen 80;
             charset utf-8;
@@ -304,7 +315,8 @@ http {
             index  index.html index.htm;
         }
     }
-</code></pre><ul>
+</code></pre></details>
+<ul>
 <li>http公共部分的配置我隐去了，参考上面静态网站配置</li>
 <li>pc.com和h5.com两个域名都解析在同一个ip上(也就是网站部署所在的服务器ip)</li>
 <li>不同域名，配置同样的listen， nginx允许这样配置</li>
@@ -439,6 +451,10 @@ http {
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -452,10 +468,6 @@ http {
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -491,7 +503,7 @@ http {
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -667,6 +679,8 @@ http {
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

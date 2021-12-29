@@ -6,7 +6,16 @@
     <description>Recent content in Other on 留白</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 21 Dec 2021 16:55:23 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Other/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Dec 2021 13:50:28 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/Other/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Blog | 代码显示/隐藏</title>
+      <link>https://zfunnily.github.io/2021/12/shortcodes/</link>
+      <pubDate>Wed, 29 Dec 2021 13:50:28 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/12/shortcodes/</guid>
+      <description>缘由 最近在写技术博客时，引入的太多，影响观感。 在尽力减少代码量，还是有些不可或缺的代码，代码量很惊人，已经占满整个屏幕. 因为个人博客是使用hugo生成的静态博客，我刚开始想的使用原生的js和css来实现，奈何技术不足，我是做后端的，一度想放弃 后面还是在网上发现h5有个新的标签&amp;l</description>
+    </item>
+    
     <item>
       <title>Blog | 给网站加一个音乐播放器</title>
       <link>https://zfunnily.github.io/2021/12/music/</link>
@@ -67,7 +76,7 @@
       <pubDate>Mon, 12 Oct 2020 16:29:34 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/</guid>
-      <description>查看cpu信息 $ cat /proc/cpuinfo 物理CPU 物理CPU就是计算机上实际配置的CPU个数。在linux上可以打开cat /proc/cpuinfo 来查看，其中的physical id就是每个物理CPU的ID，能找到几个physical id就代表计算机实际有几个CPU。 在linux下可以通过指令 grep ‘physical id’ /proc/cpuinfo |</description>
+      <description>查看cpu信息 $ cat /proc/cpuinfo 物理CPU 物理CPU就是计算机上实际配置的CPU个数。 在linux上可以打开cat /proc/cpuinfo 来查看，其中的physical id就是每个物理CPU的ID，能找到几个physical id就代表计算机实际有几个CPU。 在linux下可以通过指令 grep ‘physical id’ /proc/cpuinfo |</description>
     </item>
     
   </channel>

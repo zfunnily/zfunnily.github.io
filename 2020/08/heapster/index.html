@@ -151,7 +151,7 @@
     <li><a href="#下载镜像">下载镜像</a></li>
     <li><a href="#安装">安装</a>
       <ul>
-        <li><a href="#a-id_72a可能会遇到的错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->可能会遇到的错误</a></li>
+        <li><a href="#a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</a></li>
       </ul>
     </li>
     <li><a href="#错误解决">错误解决</a></li>
@@ -246,8 +246,8 @@ done
 <p>查看这些文件，看看所使用的镜像版本是否是你上面所下载的镜像的版本。确认无误之后运行下面的命令即可配置完成:</p>
 <pre><code>$ sudo kubectl create -f  heapster/deploy/kube-config/influxdb/
 </code></pre><p>这样，我们再次进入到k8s-dashboard就可以看到各种以图表形式展示的系统，各个pod的实时的监控数据了。</p>
-<h3 id="a-id_72a可能会遇到的错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->可能会遇到的错误</h3>
-<p>参考链接：<a href="https://cloud.tencent.com/developer/article/1394657">https://cloud.tencent.com/developer/article/1394657</a><!-- raw HTML omitted --> 错误1：</p>
+<h3 id="a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</h3>
+<p>参考链接：<a href="https://cloud.tencent.com/developer/article/1394657">https://cloud.tencent.com/developer/article/1394657</a><br> 错误1：</p>
 <pre><code>error: error validating &quot;test_pod_svc.yaml&quot;: error validating data: ValidationError(Deployment.spec): missing required field &quot;selector&quot; in io.k8s.api.apps.v1.DeploymentSpec; if you choose to ignore these errors, turn validation off with --validate=false
 </code></pre><p>修改文件heapster/deploy/kube-config/influxdb/grafana.yaml</p>
 <pre><code>apiVersion: apps/v1
@@ -292,7 +292,7 @@ unable to recognize &quot;heapster/deploy/kube-config/influxdb/heapster.yaml&quo
 </code></pre><p>执行删除命令</p>
 <pre><code>sudo kubectl delete -f heapster/deploy/kube-config/influxdb/
 </code></pre><h2 id="错误解决">错误解决</h2>
-<p>参考：<a href="https://my.oschina.net/u/4335103/blog/4280880/print">https://my.oschina.net/u/4335103/blog/4280880/print</a><!-- raw HTML omitted --> 查看dashboard状态</p>
+<p>参考：<a href="https://my.oschina.net/u/4335103/blog/4280880/print">https://my.oschina.net/u/4335103/blog/4280880/print</a><br> 查看dashboard状态</p>
 <pre><code>$ sudo kubectl get pods --all-namespaces | grep dashboard
 kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
 kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
@@ -302,7 +302,7 @@ kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Runn
 2020/04/08 01:54:31 [2020-04-08T01:54:31Z] Outcoming response to 192.168.122.21:7788 with 200 status code
 2020/04/08 01:54:31 Getting list of all replication controllers in the cluster
 2020/04/08 01:54:31 Non-critical error occurred during resource retrieval: replicationcontrollers is forbidden: User &quot;system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard&quot; cannot list resource &quot;replicationcontrollers&quot; in API group &quot;&quot; in the namespace &quot;default&quot;
-</code></pre><p>解决方法<!-- raw HTML omitted --> 写入文件<code>vim heapster-rbac.yaml</code></p>
+</code></pre><p>解决方法<br> 写入文件<code>vim heapster-rbac.yaml</code></p>
 <pre><code>kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -443,6 +443,10 @@ rules:
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -456,10 +460,6 @@ rules:
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -495,7 +495,7 @@ rules:
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -671,6 +671,8 @@ rules:
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

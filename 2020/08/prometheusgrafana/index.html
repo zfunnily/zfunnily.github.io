@@ -222,7 +222,7 @@
 <li>Kubernetes默认支持,非常适合容器和微服务- 无依赖，安装方便，上手容易- 社区活跃，它不仅仅是个工具，而是生态- 已有很多插件或者exporter，可以适应多种应用场景的数据收集需要- Grafana默认支持,提供良好的可视化- 高效，单一Prometheus可以处理百万级的监控指标，每秒处理数十万的数据点
 在部署之前，先来了解一下Prometheus各个组件的作用吧！</li>
 <li>MertricServer：是k8s集群资源使用情况的聚合器，收集数据给K8s集群内使用，如：kubectl，hpa,scheduler- PrometheusOperator：是一个系统检测和警报工具箱，用来存储监控数据；- NodeExporter：用于各node的关键度量指标状态数据；- kubeStateMetrics：收集k8s集群内资源对象数据，指定告警规则；- Prometheus：采用pull方式收集apiserver，scheduler，controller-manager，kubelet组件数据，通过http协议传输；- Grafana：是可视化数据统计和监控平台。
-web管理部署一个就可以。如果安装了其他web管理可以删除<!-- raw HTML omitted --> <a href="https://github.com/prometheus/prometheus">https://github.com/prometheus/prometheus</a></li>
+web管理部署一个就可以。如果安装了其他web管理可以删除<br> <a href="https://github.com/prometheus/prometheus">https://github.com/prometheus/prometheus</a></li>
 </ul>
 <h2 id="下载">下载</h2>
 <p><strong>下载prometheus所需文件：</strong></p>
@@ -275,7 +275,7 @@ sudo systemctl start rpcbind
 sudo systemctl status rpcbind
 
 </code></pre><h2 id="部署-prometheus-pod">部署 Prometheus pod</h2>
-<p>prometheus.yaml 中包含rbac认证、ConfigMap等。<!-- raw HTML omitted --> 需要修改 PersistentVolume.server</p>
+<p>prometheus.yaml 中包含rbac认证、ConfigMap等。<br> 需要修改 PersistentVolume.server</p>
 <pre><code>apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -307,7 +307,7 @@ NAME                    TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)
 grafana-service         NodePort   10.96.101.190    &lt;none&gt;        3000:32405/TCP
 node-exporter-service   NodePort   10.107.147.241   &lt;none&gt;        9100:31672/TCP
 prometheus-service      NodePort   10.97.249.230    &lt;none&gt;        9090:30437/TCP
-</code></pre><p>如果是宿主机则可以访问：http://10.97.249.230:9090<!-- raw HTML omitted --> 浏览器访问： http://主机ip:30437/graph</p>
+</code></pre><p>如果是宿主机则可以访问：http://10.97.249.230:9090<br> 浏览器访问： http://主机ip:30437/graph</p>
 <h2 id="在kubernetest中部署grafana">在kubernetest中部署grafana</h2>
 <pre><code>sudo kubectl apply -f grafana.yaml
 </code></pre><p>检验是否正常运行</p>
@@ -329,19 +329,19 @@ prometheus-service      NodePort   10.97.249.230    &lt;none&gt;        9090:304
 </code></pre><p>浏览器访问： http://主机ip:32405/graph/login 默认用户名和密码：admin/admin</p>
 <h2 id="grafana的配置">grafana的配置</h2>
 <h3 id="登录">登录</h3>
-<p>浏览器访问：http://主机ip:32405/graph/login<!-- raw HTML omitted --> 默认用户名和密码都是admin<!-- raw HTML omitted --> 
+<p>浏览器访问：http://主机ip:32405/graph/login<br> 默认用户名和密码都是admin<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135531464.png">
             <img class="mx-auto" alt="20200817135531464.png" src="https://img-blog.csdnimg.cn/20200817135531464.png" />
         </a>
     </p>
 <h3 id="配置数据源">配置数据源</h3>
 <p>Grafana需要拉取prometheus的接口获取数据，才能画图。</p>
-<p>然后添加datasource：<!-- raw HTML omitted --> 
+<p>然后添加datasource：<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135605743.png">
             <img class="mx-auto" alt="20200817135605743.png" src="https://img-blog.csdnimg.cn/20200817135605743.png" />
         </a>
     </p>
-<p>选择prometheus，配置服务端地址,地址写上面的 http://prometheus-service:9090(域名:9090)， k8s的coreDNS会解析域名prometheus-service为对应的10.97.249.230地址 ：<!-- raw HTML omitted --> 
+<p>选择prometheus，配置服务端地址,地址写上面的 http://prometheus-service:9090(域名:9090)， k8s的coreDNS会解析域名prometheus-service为对应的10.97.249.230地址 ：<br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135617874.png">
             <img class="mx-auto" alt="20200817135617874.png" src="https://img-blog.csdnimg.cn/20200817135617874.png" />
         </a>
@@ -352,23 +352,23 @@ prometheus-service      NodePort   10.97.249.230    &lt;none&gt;        9090:304
         </a>
     </p>
 <h3 id="导入dashboard模板">导入Dashboard模板</h3>
-<p>![20200817135756136.png](<a href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cuaXRub3RlYm9va3MuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE4LzA4L1FRJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU2JTg4JUFBJUU1JTlCJUJFMjAxODA4MjMyMzI2MzMucG5n?x-oss-process=image/format,png%22">https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cuaXRub3RlYm9va3MuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE4LzA4L1FRJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU2JTg4JUFBJUU1JTlCJUJFMjAxODA4MjMyMzI2MzMucG5n?x-oss-process=image/format,png&quot;</a> alt=&quot;&quot;&gt;<!-- raw HTML omitted --> <strong>这里使用的是kubernetes集群模板，模板编号315，在线导入地址https://grafana.com/dashboards/315</strong><!-- raw HTML omitted --> <!-- raw HTML omitted --><!-- raw HTML omitted --> &lt;img src=&ldquo;<a href="https://img-blog.csdnimg.cn/20200817135756136.png">https://img-blog.csdnimg.cn/20200817135756136.png</a>)</p>
+<p>![20200817135756136.png](<a href="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cuaXRub3RlYm9va3MuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE4LzA4L1FRJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU2JTg4JUFBJUU1JTlCJUJFMjAxODA4MjMyMzI2MzMucG5n?x-oss-process=image/format,png%22">https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cuaXRub3RlYm9va3MuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE4LzA4L1FRJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU2JTg4JUFBJUU1JTlCJUJFMjAxODA4MjMyMzI2MzMucG5n?x-oss-process=image/format,png&quot;</a> alt=&quot;&quot;&gt;<br> <strong>这里使用的是kubernetes集群模板，模板编号315，在线导入地址https://grafana.com/dashboards/315</strong><br> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93d3cuaXRub3RlYm9va3MuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE4LzA4L1FRJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU2JTg4JUFBJUU1JTlCJUJFMjAxODA4MjMyMzI2NTgucG5n?x-oss-process=image/format,png" alt=""><br> &lt;img src=&ldquo;<a href="https://img-blog.csdnimg.cn/20200817135756136.png">https://img-blog.csdnimg.cn/20200817135756136.png</a>)</p>
 <h3 id="效果展示"><strong>效果展示：</strong></h3>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135808128.png">
             <img class="mx-auto" alt="20200817135808128.png" src="https://img-blog.csdnimg.cn/20200817135808128.png" />
         </a>
-    <!-- raw HTML omitted --> 
+    <br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135813640.png">
             <img class="mx-auto" alt="20200817135813640.png" src="https://img-blog.csdnimg.cn/20200817135813640.png" />
         </a>
-    <!-- raw HTML omitted --> 
+    <br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/20200817135821332.png">
             <img class="mx-auto" alt="20200817135821332.png" src="https://img-blog.csdnimg.cn/20200817135821332.png" />
         </a>
     </p>
 <h2 id="kubernetes创建pod一直处于containercreating排查和解决">Kubernetes创建pod一直处于ContainerCreating排查和解决</h2>
-<p>通过 <code>sudo kubectl get pod -n ns-monitor</code>查看pod名字和状态<!-- raw HTML omitted --> 查看 prometheus pod信息</p>
+<p>通过 <code>sudo kubectl get pod -n ns-monitor</code>查看pod名字和状态<br> 查看 prometheus pod信息</p>
 <pre><code>sudo kubectl describe pod prometheus  -n ns-monitor 
 
 mount: /var/lib/kubelet/pods/9b618933-87b6-496a-90da-25a4e9e782c3/volumes/kubernetes.io~nfs/prometheus-data-pv: bad option; for several filesystems (e.g. nfs, cifs) you might need a /sbin/mount.&lt;type&gt; helper program.
@@ -539,6 +539,10 @@ mount -t nfs hostname(orIP):/directory /mount/point
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -552,10 +556,6 @@ mount -t nfs hostname(orIP):/directory /mount/point
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -591,7 +591,7 @@ mount -t nfs hostname(orIP):/directory /mount/point
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -767,6 +767,8 @@ mount -t nfs hostname(orIP):/directory /mount/point
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

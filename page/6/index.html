@@ -79,6 +79,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/vscodedebugredis/" title="Redis源码解析 | VScode调试">Redis源码解析 | VScode调试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscodedebugredis/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/vscoderedis/" title="VScode | 调试Redis源码，指针显示的问题">VScode | 调试Redis源码，指针显示的问题</a>
             </h1>
         </header>
@@ -94,7 +117,7 @@
         </div>
         
         <div class="post-content">
-            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
+            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscoderedis/">阅读全文</a></p>
     </article>
@@ -140,7 +163,7 @@
         </div>
         
         <div class="post-content">
-            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
+            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。 最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/sds/">阅读全文</a></p>
     </article>
@@ -209,7 +232,7 @@
         </div>
         
         <div class="post-content">
-            ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听……
+            [ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reactor_45)- [多线程的ccnet](#ccnet_57) ccnet从单线程演……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
     </article>
@@ -232,7 +255,7 @@
         </div>
         
         <div class="post-content">
-            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
+            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。 优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
     </article>
@@ -255,7 +278,7 @@
         </div>
         
         <div class="post-content">
-            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IOI/O 操作一般分为两个……
+            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IO I/O 操作一般分为两个部分……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文</a></p>
     </article>
@@ -281,29 +304,6 @@
             缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数">C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">阅读全文</a></p>
     </article>
     
     
@@ -461,6 +461,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -474,10 +478,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -513,7 +513,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -689,6 +689,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

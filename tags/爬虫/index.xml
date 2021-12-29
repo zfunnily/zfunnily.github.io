@@ -13,7 +13,7 @@
       <pubDate>Sun, 13 Dec 2020 14:51:53 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/</guid>
-      <description>概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录，目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/获取cookie： google浏览器访问bilibili- 按F12- 查看Net</description>
+      <description>概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/ 获取cookie： google浏览器访问bilibili- 按F12- 查看Net</description>
     </item>
     
   </channel>

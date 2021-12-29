@@ -146,11 +146,11 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_0a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</a></li>
-    <li><a href="#a-id_2a实现这个库所需的介绍"><!-- raw HTML omitted --><!-- raw HTML omitted -->实现这个库所需的介绍</a></li>
-    <li><a href="#a-id_9a架构"><!-- raw HTML omitted --><!-- raw HTML omitted -->架构</a></li>
-    <li><a href="#a-id_15a后续规划"><!-- raw HTML omitted --><!-- raw HTML omitted -->后续规划</a></li>
-    <li><a href="#a-id20201229_19a2020-12-29更新"><!-- raw HTML omitted --><!-- raw HTML omitted -->2020-12-29更新</a></li>
+    <li><a href="#a-id_0a缘由"><a id="_0"></a>缘由</a></li>
+    <li><a href="#a-id_2a实现这个库所需的介绍"><a id="_2"></a>实现这个库所需的介绍</a></li>
+    <li><a href="#a-id_9a架构"><a id="_9"></a>架构</a></li>
+    <li><a href="#a-id_15a后续规划"><a id="_15"></a>后续规划</a></li>
+    <li><a href="#a-id20201229_19a2020-12-29更新"><a id="20201229_19"></a>2020-12-29更新</a></li>
   </ul>
 </nav>
     </div>
@@ -201,13 +201,13 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_0a缘由"><!-- raw HTML omitted --><!-- raw HTML omitted -->缘由</h2>
+            <h2 id="a-id_0a缘由"><a id="_0"></a>缘由</h2>
 <p>最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proactor架构，还有select/poll/epoll网络模型方面的基础理论知识已经掌握，自己也一直想做一个网络库来对自己之前工作的一个总结。muduo整体代码量不多，易读，整个架构也容易理解，于是我模仿muduo写了一个单线程的reactor网络库。</p>
-<h2 id="a-id_2a实现这个库所需的介绍"><!-- raw HTML omitted --><!-- raw HTML omitted -->实现这个库所需的介绍</h2>
+<h2 id="a-id_2a实现这个库所需的介绍"><a id="_2"></a>实现这个库所需的介绍</h2>
 <ul>
 <li>C++11- 编译器gcc7.3- linux平台- 单线程- 事件循环 Reactor架构。- epoll</li>
 </ul>
-<h2 id="a-id_9a架构"><!-- raw HTML omitted --><!-- raw HTML omitted -->架构</h2>
+<h2 id="a-id_9a架构"><a id="_9"></a>架构</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/0a49a7a4c5f29b1172e7550cd20819bd.png">
             <img class="mx-auto" alt="0a49a7a4c5f29b1172e7550cd20819bd.png" src="https://img-blog.csdnimg.cn/img_convert/0a49a7a4c5f29b1172e7550cd20819bd.png" />
@@ -216,10 +216,10 @@
 <ul>
 <li>整个库是对一个epoll的一个封装- EventLoop是整个库的核心，对应的架构是 loop peer thread。- EventLoop收集EPollPoller所产生的事件，通过Channel分发事件给TcpConnection，TcpConnection进行读写到Buffer缓冲区，然后通过回调给TcpServer。用户通过绑定与TcpServer的回调函数即可收到数据报。</li>
 </ul>
-<h2 id="a-id_15a后续规划"><!-- raw HTML omitted --><!-- raw HTML omitted -->后续规划</h2>
+<h2 id="a-id_15a后续规划"><a id="_15"></a>后续规划</h2>
 <p>该库是对epoll的一个简单的封装，只支持单线程，后续会改造为多线程。还有定时器和一些example会继续完善。</p>
 <p>github地址：https://github.com/diycat1024/ccnet</p>
-<h2 id="a-id20201229_19a2020-12-29更新"><!-- raw HTML omitted --><!-- raw HTML omitted -->2020-12-29更新</h2>
+<h2 id="a-id20201229_19a2020-12-29更新"><a id="20201229_19"></a>2020-12-29更新</h2>
 <p>已经加入了事件循环线程池，如果需要初始化的单线程版本则可以</p>
 <pre><code>git clone https://github.com/diycat1024/ccnet.git
 git checkout 70d5269d81af53c95ec080f20c294ed8e6ba4a55
@@ -354,6 +354,10 @@ git checkout 70d5269d81af53c95ec080f20c294ed8e6ba4a55
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -367,10 +371,6 @@ git checkout 70d5269d81af53c95ec080f20c294ed8e6ba4a55
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -406,7 +406,7 @@ git checkout 70d5269d81af53c95ec080f20c294ed8e6ba4a55
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -582,6 +582,8 @@ git checkout 70d5269d81af53c95ec080f20c294ed8e6ba4a55
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

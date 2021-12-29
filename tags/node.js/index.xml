@@ -22,7 +22,7 @@
       <pubDate>Wed, 05 Aug 2020 09:47:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owtservercomplie/</guid>
-      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd</description>
+      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。 客户端系列web/windows/linux/ios/android都有相应的sd</description>
     </item>
     
   </channel>

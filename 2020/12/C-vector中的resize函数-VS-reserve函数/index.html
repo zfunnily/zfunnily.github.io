@@ -146,8 +146,8 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idreserve_1areserve"><!-- raw HTML omitted --><!-- raw HTML omitted -->reserve</a></li>
-    <li><a href="#a-idresize_9aresize"><!-- raw HTML omitted --><!-- raw HTML omitted -->resize</a></li>
+    <li><a href="#a-idreserve_1areserve"><a id="reserve_1"></a>reserve</a></li>
+    <li><a href="#a-idresize_9aresize"><a id="resize_9"></a>resize</a></li>
   </ul>
 </nav>
     </div>
@@ -198,14 +198,14 @@
         
         
         <div class="post-content">
-            <h2 id="a-idreserve_1areserve"><!-- raw HTML omitted --><!-- raw HTML omitted -->reserve</h2>
+            <h2 id="a-idreserve_1areserve"><a id="reserve_1"></a>reserve</h2>
 <pre><code>void reserve (size_type n);
 
 </code></pre><p>reserver函数用来给vector<strong>预分配</strong>存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大于或者等于n 。这样，当ector调用push_back函数使得size 超过原来的默认分配的capacity值时 避免了内存重分配开销。</p>
 <blockquote>
 </blockquote>
 <p>需要注意的是：reserve 函数分配出来的内存空间，<strong>只是表示vector可以利用这部分内存，但vector不能有效地访问这些内存空间</strong>，访问的时候就会出现越界现象，导致程序崩溃。</p>
-<h2 id="a-idresize_9aresize"><!-- raw HTML omitted --><!-- raw HTML omitted -->resize</h2>
+<h2 id="a-idresize_9aresize"><a id="resize_9"></a>resize</h2>
 <pre><code>void resize (size_type n);
 
 </code></pre><pre><code>void resize (size_type n, value_type val);
@@ -339,6 +339,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -352,10 +356,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -391,7 +391,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -567,6 +567,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

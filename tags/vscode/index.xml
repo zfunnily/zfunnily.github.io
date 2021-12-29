@@ -22,7 +22,7 @@
       <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/vscoderedis/</guid>
-      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
+      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：</description>
     </item>
     
   </channel>

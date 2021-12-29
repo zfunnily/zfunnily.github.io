@@ -40,7 +40,7 @@
       <pubDate>Thu, 05 Nov 2020 09:45:23 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
-      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;quot;%s\n&amp;quot;, str); } */ import &amp;quot;C&amp;quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;quot;unsafe&amp;quot; func main() { s := &amp;quot;Hello Cgo&amp;quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明：1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必</description>
+      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;quot;%s\n&amp;quot;, str); } */ import &amp;quot;C&amp;quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;quot;unsafe&amp;quot; func main() { s := &amp;quot;Hello Cgo&amp;quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必</description>
     </item>
     
   </channel>

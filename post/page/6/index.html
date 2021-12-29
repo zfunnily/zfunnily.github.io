@@ -81,6 +81,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/vscoderedis/" title="VScode | 调试Redis源码，指针显示的问题">VScode | 调试Redis源码，指针显示的问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscoderedis/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/cgostruct/" title="Cgo | 遍历C结构体数组">Cgo | 遍历C结构体数组</a>
             </h1>
         </header>
@@ -121,7 +146,7 @@
         </div>
         
         <div class="post-content">
-            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
+            SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。 最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&lt;!-- --&gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/sds/">阅读全文</a></p>
     </article>
@@ -196,7 +221,7 @@
         </div>
         
         <div class="post-content">
-            ccnet从单线程演变为多线程 ccnet现状： epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中 单线程的ccnet ccnet的单线程的角色： EventLoop: 整个事件循环。1. EPollPoller: 负责事件的收集。1. Channel：负责事件的分发。1. Acceptor：处理客户端新连接，绑定监听……
+            [ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reactor_45)- [多线程的ccnet](#ccnet_57) ccnet从单线程演……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
     </article>
@@ -221,7 +246,7 @@
         </div>
         
         <div class="post-content">
-            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
+            概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。 优化的方向是: 减少代码量的改动- 减少gpu内存的使用，同一个模型只用加载一次 涉及的问题： sync.Mutex是传值还是传引用……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
     </article>
@@ -246,7 +271,7 @@
         </div>
         
         <div class="post-content">
-            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IOI/O 操作一般分为两个……
+            概述 在网络上看到很多关于阻塞IO、非阻塞IO、同步IO、异步IO的例子，总觉得写的过于复杂并且让人难以理解。于是我把我自己把这几个概念的理解写下来以供参考。 POSIX POSIX(可移植操作系统接口)把同步IO操作定义为导致进程阻塞直到IO完成的操作，反之则是异步IO I/O 操作一般分为两个部分……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%BA%94%E7%A7%8D%E7%BD%91%E7%BB%9CIO%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">阅读全文</a></p>
     </article>
@@ -303,31 +328,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/" title="Golang | 用gocolly登录B站">Golang | 用gocolly登录B站</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录，目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com/获取cookie： google浏览器访问bilibili- 按F12- 查看Net……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -339,53 +339,85 @@
     
 
     
-    <li >
-        <a href="https://zfunnily.github.io/post/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://zfunnily.github.io/post/page/2/">2</a>
-    </li>
+        
+        
     
-    <li >
-        <a href="https://zfunnily.github.io/post/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/4/">4</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/5/">5</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://zfunnily.github.io/post/page/6/">6</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/7/">7</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/4/">4</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/5/">5</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zfunnily.github.io/post/page/6/">6</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/7/">7</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/8/">8</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://zfunnily.github.io/post/page/7/">下一页</a>
     </li>
     
 </ol>
+
 
 
 
@@ -450,6 +482,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -463,10 +499,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -502,7 +534,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -678,6 +710,8 @@
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     

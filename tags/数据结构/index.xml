@@ -40,7 +40,7 @@
       <pubDate>Wed, 06 Jan 2021 14:20:23 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/sds/</guid>
-      <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
+      <description>SDS头文件及作用 sds.h: sds声明- sdsalloc.h： 为sds分配内存 源码文件sds.h中有这样一行代码 typedef char *sds; 很清晰、明了，sds其实就是char*。 最新的6.2分支的代码： struct __attribute__ ((__packed__)) sdshdr5 {&amp;lt;!-- --&amp;gt; unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; struct __attribute__ ((__packed__)) sdshdr8 {&amp;lt;!-- --&amp;gt; uint8_t len; /* used */ uint8_t alloc; /* excluding the header and null terminator */ unsigned char flags; /* 3 lsb of type,</description>
     </item>
     
   </channel>

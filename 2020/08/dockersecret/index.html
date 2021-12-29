@@ -224,7 +224,7 @@ sudo systemctl restart docker // 2，重启docker
   &quot;hosts&quot;: [&quot;tcp://0.0.0.0:2375&quot;, &quot;unix:///var/run/docker.sock&quot;]
 }
 </code></pre><blockquote>
-<p>&ldquo;unix:///var/run/docker.sock&rdquo;：unix socket，本地客户端将通过这个来连接 Docker Daemon。<!-- raw HTML omitted --> “tcp://0.0.0.0:2375”：tcp socket，表示允许任何远程客户端通过 2375 端口连接 Docker Daemon。</p>
+<p>&ldquo;unix:///var/run/docker.sock&rdquo;：unix socket，本地客户端将通过这个来连接 Docker Daemon。<br> “tcp://0.0.0.0:2375”：tcp socket，表示允许任何远程客户端通过 2375 端口连接 Docker Daemon。</p>
 </blockquote>
 <p>修改配置以后 然后让docker重新读取配置文件,并重启docker服务</p>
 <pre><code>systemctl daemon-reload
@@ -250,11 +250,11 @@ cd /usr/local/ca
 <pre><code>sudo openssl genrsa -aes256 -out ca-key.pem 4096
 sudo openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
 </code></pre><blockquote>
-<p>提示你需要输入密码和确认密码，请记住这个密码<!-- raw HTML omitted --> 填写一些基本的信息，国家啊，地区</p>
+<p>提示你需要输入密码和确认密码，请记住这个密码<br> 填写一些基本的信息，国家啊，地区</p>
 </blockquote>
 <p>生成server-key.pem</p>
 <pre><code>sudo openssl genrsa -out server-key.pem 4096
-</code></pre><p>绑定IP或者域名<!-- raw HTML omitted --> $HOST 这个值，填写你的服务器外网IP 或者服务器外网域名</p>
+</code></pre><p>绑定IP或者域名<br> $HOST 这个值，填写你的服务器外网IP 或者服务器外网域名</p>
 <pre><code>sudo openssl req -subj &quot;/CN=$HOST&quot; -sha256 -new -key server-key.pem -out server.csr
 </code></pre><p>配置白名单</p>
 <pre><code>sudo vim extfile.cnf
@@ -288,18 +288,18 @@ chmod -v 0444 ca.pem server-cert.pem cert.pem
 <p>把证书复制过去</p>
 <pre><code>sudo cp server-*.pem  /etc/docker/
 sudo cp ca.pem /etc/docker/
-</code></pre><p>将Docker服务停止了，然后：<!-- raw HTML omitted --> 修改docker 的配置</p>
+</code></pre><p>将Docker服务停止了，然后：<br> 修改docker 的配置</p>
 <pre><code>sudo vi /lib/systemd/system/docker.service
 </code></pre><p>把ExecStart 的值设置为如下</p>
 <pre><code>/usr/bin/dockerd --tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server-cert.pem --tlskey=/etc/docker/server-key.pem -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
-</code></pre><p>启动Docker守护进程，并将其挂载在2375端口。<!-- raw HTML omitted --> 重启docker</p>
+</code></pre><p>启动Docker守护进程，并将其挂载在2375端口。<br> 重启docker</p>
 <pre><code>sudo systemctl daemon-reload
 sudo systemctl restart docker 
 </code></pre><h3 id="使用证书连接">使用证书连接</h3>
-<p>复制<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件到客户端<!-- raw HTML omitted --> 执行命令连接：</p>
+<p>复制<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件到客户端<br> 执行命令连接：</p>
 <pre><code>docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=192.168.211.238:2375 version
 </code></pre><h3 id="默认连接">默认连接</h3>
-<p>如果想默认连接该Docker服务器，可以进行如下配置：<!-- raw HTML omitted --> 将<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件移动到 ~/.docker</p>
+<p>如果想默认连接该Docker服务器，可以进行如下配置：<br> 将<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件移动到 ~/.docker</p>
 <p>设置环境变量：</p>
 <pre><code>export DOCKER_HOST=tcp://$HOST:2375 DOCKER_TLS_VERIFY=1
 </code></pre><p>执行<code>docker xxx</code>即默认连接Docker服务器进行操作。</p>
@@ -309,11 +309,11 @@ sudo systemctl restart docker
 </ul>
 <h3 id="连接到远程docker">连接到远程docker</h3>
 <p>成功连接，连接不上的，查找如下原因</p>
-<p>1、tcp连接没换<!-- raw HTML omitted --> 2、端口不对<!-- raw HTML omitted --> 3、服务器防火墙没放端口<!-- raw HTML omitted --> 4、云服务器防火墙没放端口<!-- raw HTML omitted --> 5、证书没弄好</p>
+<p>1、tcp连接没换<br> 2、端口不对<br> 3、服务器防火墙没放端口<br> 4、云服务器防火墙没放端口<br> 5、证书没弄好</p>
 <h3 id="证书配置错误">证书配置错误</h3>
 <pre><code>Can't load /home/ubuntu/.rnd into RNG
 139826195939776:error:2406F079:random number generator:RAND_load_file:Cannot open file:../crypto/rand/randfile.c:88:Filename=/home/ubuntu/.rnd
-</code></pre><p>解决办法<!-- raw HTML omitted --> 进入.rnd所在目录</p>
+</code></pre><p>解决办法<br> 进入.rnd所在目录</p>
 <pre><code>cd /home/ubuntu/
 sudo     openssl rand -writerand .rnd
 </code></pre>
@@ -438,6 +438,10 @@ sudo     openssl rand -writerand .rnd
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
@@ -451,10 +455,6 @@ sudo     openssl rand -writerand .rnd
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
     </li>
     
 </ul>
@@ -490,7 +490,7 @@ sudo     openssl rand -writerand .rnd
     
     <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -666,6 +666,8 @@ sudo     openssl rand -writerand .rnd
     <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
+    
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
     
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
