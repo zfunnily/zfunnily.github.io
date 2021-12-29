@@ -143,28 +143,28 @@
     
     <item>
       <title>LastBattle | 登录流程(LS &amp; BS &amp; GS)</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattlelogin/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
+      <guid>https://zfunnily.github.io/2020/11/lastbattlelogin/</guid>
       <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接 监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环</description>
     </item>
     
     <item>
       <title>LastBattle | 服务架构</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleserver/</link>
       <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
-      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区</description>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleserver/</guid>
+      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需</description>
     </item>
     
     <item>
       <title>LastBattle | 安装部署笔记</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleone/</link>
       <pubDate>Mon, 16 Nov 2020 06:49:49 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleone/</guid>
       <description>环境准备 win10 服务器：vs2010 / 数据库 mysql5.7 清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/ 客户端</description>
     </item>
     

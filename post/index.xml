@@ -584,12 +584,12 @@
     </item>
     
     <item>
-      <title>Ubuntu下version `GLIBC_2.27‘ not found错误</title>
-      <link>https://zfunnily.github.io/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</link>
+      <title>Ubuntu | version `GLIBC_2.27‘ not found错误</title>
+      <link>https://zfunnily.github.io/2020/11/glibcnotfound/</link>
       <pubDate>Sat, 28 Nov 2020 15:03:04 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/</guid>
-      <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录,创</description>
+      <guid>https://zfunnily.github.io/2020/11/glibcnotfound/</guid>
+      <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 1 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录</description>
     </item>
     
     <item>
@@ -621,28 +621,28 @@
     
     <item>
       <title>LastBattle | 登录流程(LS &amp; BS &amp; GS)</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattlelogin/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
+      <guid>https://zfunnily.github.io/2020/11/lastbattlelogin/</guid>
       <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接 监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环</description>
     </item>
     
     <item>
       <title>LastBattle | 服务架构</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleserver/</link>
       <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
-      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区</description>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleserver/</guid>
+      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需</description>
     </item>
     
     <item>
       <title>LastBattle | 安装部署笔记</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleone/</link>
       <pubDate>Mon, 16 Nov 2020 06:49:49 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleone/</guid>
       <description>环境准备 win10 服务器：vs2010 / 数据库 mysql5.7 清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/ 客户端</description>
     </item>
     
