@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>留白 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</title>
-    <meta property="og:title" content="留白 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发">
+    <title>Zzz记忆 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</title>
+    <meta property="og:title" content="Zzz记忆 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发">
     <meta property="og:type" content="website">
     <meta name="color-scheme" content="light dark">
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/index.xml" title="留白" />
+    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -30,6 +30,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -41,7 +46,7 @@
                 
                     <h1>
                         <a id="logo" href="https://zfunnily.github.io/">
-                            留白
+                            Zzz记忆
                         </a>
                     </h1>
                 
@@ -52,7 +57,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -77,6 +82,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/lastbattleserver/" title="LastBattle | 服务架构">LastBattle | 服务架构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/lastbattleserver/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/11/lastbattleone/" title="LastBattle | 安装部署笔记">LastBattle | 安装部署笔记</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月16日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境准备 win10 服务器：vs2010 / 数据库 mysql5.7 清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/ 客户端……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/lastbattleone/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="Cgo | 使用libevent库实现一个定时器">Cgo | 使用libevent库实现一个定时器</a>
             </h1>
         </header>
@@ -92,7 +143,7 @@
         </div>
         
         <div class="post-content">
-            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2; tv.tv_usec = 0; evtimer_set(&amp;ev, time_cb, NULL); event_base_set(base, &amp;ev); event_add(&amp;ev, &amp;tv); event_base_dispatch(base); event_base_free(base); } go调用libevent实现定时器 把编译好的头文件和库……
+            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &quot;event.h&quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&quot;timer wakeup\n&quot;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
     </article>
@@ -115,7 +166,7 @@
         </div>
         
         <div class="post-content">
-            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHeader结构体和这个结构体所指向的内存。 在Go语言中，指针的本质是什么呢？是unsa……
+            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHead……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
     </article>
@@ -138,7 +189,7 @@
         </div>
         
         <div class="post-content">
-            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？ 有个方法可以解决，就是配置文件。我们也可以利用golang的……
+            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/go-builds/">阅读全文</a></p>
     </article>
@@ -161,7 +212,7 @@
         </div>
         
         <div class="post-content">
-            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明：1、go代码中的C代码，需要用注释包裹，块注释和行注释均可，其次import “C”是必……
+            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&quot;%s\n&quot;, str); } */ import &quot;C&quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &quot;unsafe&quot; func main() { s := &quot;Hello Cgo&quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
     </article>
@@ -184,7 +235,7 @@
         </div>
         
         <div class="post-content">
-            使用Lumberjack+zap进行日志切割归档 为了添加日志切割归档功能，我们将使用第三方库Lumberjack来实现。 安装 执行下面的命令安装Lumberjack go get -u github.com/natefinch/lumberjack zap logger中加入Lumberjack 要在zap中加入Lumberjack支持，我们需要修改WriteSyn……
+            使用Lumberjack+zap进行日志切割归档 为了添加日志切割归档功能，我们将使用第三方库Lumberjack来实现。 安装 执行下面的命令安装Lumberjack go get -u github.com/natefinch/lumberjack zap logger中加入Lumbe……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">阅读全文</a></p>
     </article>
@@ -207,7 +258,7 @@
         </div>
         
         <div class="post-content">
-            插件相关 |快捷键|说明 |&mdash;&mdash; |,|Leader Key |&lt;leader&gt;n|打开 / 关闭代码资源管理器 |&lt;leader&gt;t|打开 / 关闭函数列表 |&lt;leader&gt;a|.h .cpp 文件切换 |&lt;leader&gt;u|转到函数声明 |&lt;leader&gt;U|转到函数实现 |&lt;leader&gt;o|打开……
+            插件相关 |快捷键|说明 |&mdash;&mdash; |,|Leader Key |&lt;leader&gt;n|打开 / 关闭代码资源管理器 |&lt;leader&gt;t|打开 / 关闭函数列表 |&lt;leader&gt;a|.h .cpp 文件切换 |&lt;leader&gt;u|转到函数声明 |&……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读全文</a></p>
     </article>
@@ -230,7 +281,7 @@
         </div>
         
         <div class="post-content">
-            使用 vimplus 打造C++ IDE GitHub： https://github.com/chxuan/vimplus支持平台：macos/linux 安装vimplus // 原来的链接， 国内速度较慢 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus // github修改为镜像的链接 $ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus $ cd ~/.vimplus //不加sudo $ ./install.sh 设置Nerd Font 为防止vimp……
+            使用 vimplus 打造C++ IDE GitHub： https://github.com/chxuan/vimplus 支持平台： macos/linux 安装vimplus // 原来的链接， 国内速度较慢 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus // github修改为镜像的链接 $ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus $ cd ~/.vimplus //不加sudo $ ./install.sh 设置Nerd Font 为防止vimplu……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/">阅读全文</a></p>
     </article>
@@ -253,55 +304,9 @@
         </div>
         
         <div class="post-content">
-            rsync的安装 rsync安装，有些系统默认安装有该命令ubuntu系统 sudo apt-get install rsync centos系统 sudo yum install rsync rsync参数详解 rsync提供了一些跟删除有关的参数 rsync --help | grep delete -del an alias for --delete-during --delete delete extraneous files from destination dirs --delete-before receiver deletes before transfer, not during --delete-during receiver deletes during transfer (default) --delete-delay find deletions during, delete after --delete-after receiver deletes after transfer, not during --delete-excluded also delete excluded files from destination dirs --ignore-errors delete even if there are I/O errors --max-delete=NUM don't……
+            rsync的安装 rsync安装，有些系统默认安装有该命令 ubuntu系统 sudo apt-get install rsync centos系统 sudo yum install rsync rsync参数详解 rsync提供了一些跟删除有关的参数 rsync --help | grep delete -del an alias for --delete-during --delete delete extraneous files from destination dirs --delete-before receiver deletes before……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/" title="CPU的核与线程-4核8线程">CPU的核与线程-4核8线程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年10月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Other'>Other</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            查看cpu信息 $ cat /proc/cpuinfo 物理CPU 物理CPU就是计算机上实际配置的CPU个数。在linux上可以打开cat /proc/cpuinfo 来查看，其中的physical id就是每个物理CPU的ID，能找到几个physical id就代表计算机实际有几个CPU。 在linux下可以通过指令 grep ‘physical id’ /proc/cpuinfo |……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/" title="TCP/IP | 大量TIME_WAIT对线上业务的影响">TCP/IP | 大量TIME_WAIT对线上业务的影响</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年10月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>网络编程</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            TCP的三次握手和四次挥手 TIME_WAIT概述 TIME_WAIT 状态： TCP 连接中，主动关闭连接的一方出现的状态；（收到 FIN 命令，进入 TIME_WAIT 状态，并返回 ACK 命令） - 保持 2 个 MSL时间，即，4 分钟 ；（MSL 为 2 分钟） TCP 连接建立后，「主动关闭连接」的一端，收到对方的 FIN 请求后，发送 ACK 响应，会处于 time_wait 状态； 在高并发……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">阅读全文</a></p>
     </article>
     
     
@@ -316,48 +321,79 @@
     
 
     
-    <li >
-        <a href="https://zfunnily.github.io/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://zfunnily.github.io/page/2/">2</a>
-    </li>
+        
+        
     
-    <li >
-        <a href="https://zfunnily.github.io/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/4/">4</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/5/">5</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/6/">6</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/7/">7</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://zfunnily.github.io/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/6/">6</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/7/">7</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zfunnily.github.io/page/8/">8</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/9/">9</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/10/">10</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://zfunnily.github.io/page/9/">下一页</a>
     </li>
@@ -366,21 +402,24 @@
 
 
 
+
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -395,6 +434,10 @@
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
     </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
 </footer>
 
 
@@ -408,6 +451,7 @@
 
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
 
 
                 </div>
@@ -427,28 +471,28 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -477,9 +521,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -656,6 +700,8 @@
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -801,11 +847,11 @@
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -822,6 +868,9 @@
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

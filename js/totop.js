@@ -22,12 +22,6 @@ function getQuotesJsonArray(file, callback) {
 }
 
 $(document).ready(function (){
-    // var quotes = [
-    //     ["时来谁不来,时不来谁来","兰陵笑笑声", "《金瓶梅》"],
-    //     ["投资成功与否并非取决于你了解的东西，而在于你能否老老实实地承认你所不知道的东西！\n" +
-    //     "投资人并不需要做对很多事情，重要的是不要犯重大的错误！", "巴菲特"],
-    //     ["好的程序代码本身就是最好的文档", "Steve McConnell", "《代码大全》"],
-    // ]
     getQuotesJsonArray("/js/quotes.json", function (quotes) {
         var idx = randomQuotesIdx(0,quotes.length-1)
         var quote = quotes[idx]
@@ -60,22 +54,7 @@ $(document).ready(function (){
 
     function addDarkmodeWidget() {
         const darkmode = new Darkmode(options)
-        // darkmode.toggle()
         darkmode.showWidget()
-        console.log(darkmode.isActivated())
     }
     window.addEventListener('load', addDarkmodeWidget);
-
-    //二级菜单下拉
-    $(".highlight div").I
-    // $(".highlight div table").hide()
-    $(".highlight div table").click(function(){
-        $(".highlight div table").slideDown("fast");
-    })
-    $(".highlight div table").click(function(){
-        $(".highlight div table").slideUp("fast");
-    })
-    $(".highlight div table").click(function(){
-        $(".highlight div table").slideToggle("fast");
-    })
 })

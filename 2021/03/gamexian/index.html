@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>《仙剑奇侠传》编译运行 | 留白</title>
-    <meta property="og:title" content="《仙剑奇侠传》编译运行 - 留白">
+    <title>《仙剑奇侠传》编译运行 | Zzz记忆</title>
+    <meta property="og:title" content="《仙剑奇侠传》编译运行 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -144,10 +149,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-id_5a环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境</a></li>
-    <li><a href="#a-idsdlpal_24a编译sdlpal"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译sdlpal</a></li>
-    <li><a href="#a-idsdlpal_53a运行sdlpal"><!-- raw HTML omitted --><!-- raw HTML omitted -->运行sdlpal</a></li>
+    <li><a href="#a-id_2a概述"><a id="_2"></a>概述</a></li>
+    <li><a href="#a-id_5a环境"><a id="_5"></a>环境</a></li>
+    <li><a href="#a-idsdlpal_24a编译sdlpal"><a id="sdlpal_24"></a>编译sdlpal</a></li>
+    <li><a href="#a-idsdlpal_53a运行sdlpal"><a id="sdlpal_53"></a>运行sdlpal</a></li>
   </ul>
 </nav>
     </div>
@@ -198,9 +203,9 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_2a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+            <h2 id="a-id_2a概述"><a id="_2"></a>概述</h2>
 <p>今天在github上找到了《仙剑奇侠传》的rpg单机游戏<code>sdlpal</code>，<code>sdlpal</code> 是一个开源项目，基于<code>sdl</code>把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。</p>
-<h2 id="a-id_5a环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->环境</h2>
+<h2 id="a-id_5a环境"><a id="_5"></a>环境</h2>
 <ul>
 <li>win10- sdl1.2- sdlpal- vs2017- DirectX SDK10
 下载<code>sdlpal</code></li>
@@ -211,8 +216,8 @@
 <pre><code>$ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/
 
 </code></pre><p>下载 <a href="https://www.microsoft.com/zh-CN/download/confirmation.aspx?id=6812">DirectX SDK10</a>， 双击安装即可</p>
-<h2 id="a-idsdlpal_24a编译sdlpal"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译sdlpal</h2>
-<p>打开解决方案： <code>sdlpal\win32\sdlpal.sln</code><!-- raw HTML omitted --> sdl解决方案右键属性，附加依赖项加入如下内容</p>
+<h2 id="a-idsdlpal_24a编译sdlpal"><a id="sdlpal_24"></a>编译sdlpal</h2>
+<p>打开解决方案： <code>sdlpal\win32\sdlpal.sln</code><br> sdl解决方案右键属性，附加依赖项加入如下内容</p>
 <pre><code>d3d8.lib
 dxerr8.lib
 uuid.lib
@@ -237,8 +242,8 @@ d3dxof.lib
 1&gt;sdl.lib(SDL\_dx5events.obj) : error LNK2001: 无法解析的外部符号 \_IID\_IDirectInputDevice2A
 1&gt;.\\Release\\sdlpal.exe : fatal error LNK1120: 15 个无法解析的外部命令
 
-</code></pre><h2 id="a-idsdlpal_53a运行sdlpal"><!-- raw HTML omitted --><!-- raw HTML omitted -->运行sdlpal</h2>
-<p>编译出可执行文件<code>sdlpal.exe</code>,运行发现需要资源文件。<!-- raw HTML omitted --> 下载资源文件</p>
+</code></pre><h2 id="a-idsdlpal_53a运行sdlpal"><a id="sdlpal_53"></a>运行sdlpal</h2>
+<p>编译出可执行文件<code>sdlpal.exe</code>,运行发现需要资源文件。<br> 下载资源文件</p>
 <pre><code>git clone https://github.com.cnpmjs.org/paldn/sdlpal.git  DATA
 
 </code></pre><p>资源文件在<code>DATA/Data</code>目录下，运行程序，需要指定资源文件。</p>
@@ -246,9 +251,20 @@ d3dxof.lib
 </blockquote>
 <p><code>sdlpal</code>配置文件和可执行文件在同级目录：<code>sdlpal.cfg</code></p>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2021/03/gamexian/">https://zfunnily.github.io/2021/03/gamexian/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -292,31 +308,34 @@ d3dxof.lib
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -330,6 +349,10 @@ d3dxof.lib
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -356,6 +379,7 @@ d3dxof.lib
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -373,28 +397,28 @@ d3dxof.lib
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -423,9 +447,9 @@ d3dxof.lib
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -602,6 +626,8 @@ d3dxof.lib
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -747,11 +773,11 @@ d3dxof.lib
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -768,6 +794,9 @@ d3dxof.lib
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

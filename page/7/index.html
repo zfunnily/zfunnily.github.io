@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>留白 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</title>
-    <meta property="og:title" content="留白 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发">
+    <title>Zzz记忆 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发</title>
+    <meta property="og:title" content="Zzz记忆 | 专注于游戏开发、skynet框架、C&#43;&#43;、Golang开发">
     <meta property="og:type" content="website">
     <meta name="color-scheme" content="light dark">
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/index.xml" title="留白" />
+    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -30,6 +30,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -41,7 +46,7 @@
                 
                     <h1>
                         <a id="logo" href="https://zfunnily.github.io/">
-                            留白
+                            Zzz记忆
                         </a>
                     </h1>
                 
@@ -52,7 +57,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -77,6 +82,52 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/" title="C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数">C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/C/C&#43;&#43;'>C/C&#43;&#43;</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/" title="Golang | 用gocolly登录B站">Golang | 用gocolly登录B站</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/" title="Protobuf | 解决沾包问题">Protobuf | 解决沾包问题</a>
             </h1>
         </header>
@@ -92,7 +143,7 @@
         </div>
         
         <div class="post-content">
-            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我……
+            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
     </article>
@@ -115,7 +166,7 @@
         </div>
         
         <div class="post-content">
-            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接口，从而为移动端（iOS/Androi）到服务器端通讯提供了一种解决方案。 当然在……
+            OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/">阅读全文</a></p>
     </article>
@@ -138,7 +189,7 @@
         </div>
         
         <div class="post-content">
-            概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多桌面用户相较于 Ubuntu 更喜欢 Linux Mint[3]。 现在你无需安装 Linux Mint[4]就能够体验……
+            概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/">阅读全文</a></p>
     </article>
@@ -146,7 +197,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/" title="Ubuntu下version `GLIBC_2.27‘ not found错误">Ubuntu下version `GLIBC_2.27‘ not found错误</a>
+                <a href="https://zfunnily.github.io/2020/11/glibcnotfound/" title="Ubuntu | version `GLIBC_2.27‘ not found错误">Ubuntu | version `GLIBC_2.27‘ not found错误</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -161,9 +212,9 @@
         </div>
         
         <div class="post-content">
-            version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/下载好文件后解压 tar -zxvf glibc-2.27.tar.gz 进入……
+            version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 1 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/glibcnotfound/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -184,7 +235,7 @@
         </div>
         
         <div class="post-content">
-            docker查看退出码指令 $ docker ps --filter &quot;status=exited&quot; $ docker inspect container-id --format='{&lt;!-- --&gt;{.State.ExitCode}}' 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容器完成其工作后自动停止其容器，则使用此退出代码。 Exit Code 1 程序错误，或者Docker……
+            docker查看退出码指令 $ docker ps --filter &quot;status=exited&quot; $ docker inspect container-id --format='{&lt;!-- --&gt;{.State.ExitCode}}' 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/">阅读全文</a></p>
     </article>
@@ -207,7 +258,7 @@
         </div>
         
         <div class="post-content">
-            用到的知识点 mvc架构模型渲染库：https://github.com/bungle/lua-resty-templateresty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events { worker_connections 1024; } http { lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;; server { listen 8080; default_type 'application/json;charset=utf8'; lua_code_cache off; location / { content_by_lua_file mvc.lua; } location ~ ^/js/|^/css/|\.html { root static; } } } lua_code_cache off; 是为了……
+            用到的知识点 mvc架构 模型渲染库：https://github.com/bungle/lua-resty-template resty http请求库： https://github.com/bungle/lua-resty-template 参照 mvc模型来做postman工具 配置文件说明 worker_processes 1; error_log logs/error.log; events……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">阅读全文</a></p>
     </article>
@@ -230,7 +281,7 @@
         </div>
         
         <div class="post-content">
-            概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。 OpenResty®通过汇聚各种设计精良的Nginx模块（主要由 OpenResty 团队自主开发）……
+            概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">阅读全文</a></p>
     </article>
@@ -238,7 +289,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/" title="LastBattle | 登录流程(LS &amp; BS &amp; GS)">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a>
+                <a href="https://zfunnily.github.io/2020/11/lastbattlelogin/" title="LastBattle | 登录流程(LS &amp; BS &amp; GS)">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -253,55 +304,9 @@
         </div>
         
         <div class="post-content">
-            登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放……
+            登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接 监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="LastBattle | 服务架构">LastBattle | 服务架构</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月20日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需求数量|数量说明 |&mdash;&mdash; |GameClient|GC|游戏客户端|不解释|n|不超服……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/" title="LastBattle | 安装部署笔记">LastBattle | 安装部署笔记</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            环境准备 win10服务器：vs2010 / 数据库 mysql5.7清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/客户端：unity3d 4.6 ,破解补丁 编译客户端 建议不要有其他的un……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/11/lastbattlelogin/">阅读全文</a></p>
     </article>
     
     
@@ -316,48 +321,79 @@
     
 
     
-    <li >
-        <a href="https://zfunnily.github.io/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://zfunnily.github.io/page/2/">2</a>
-    </li>
+        
+        
     
-    <li >
-        <a href="https://zfunnily.github.io/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/4/">4</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/5/">5</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/6/">6</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://zfunnily.github.io/page/7/">7</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/5/">5</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/6/">6</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zfunnily.github.io/page/7/">7</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/8/">8</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/9/">9</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://zfunnily.github.io/page/8/">下一页</a>
     </li>
@@ -366,21 +402,24 @@
 
 
 
+
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -395,6 +434,10 @@
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
     </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
 </footer>
 
 
@@ -408,6 +451,7 @@
 
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
 
 
                 </div>
@@ -427,28 +471,28 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -477,9 +521,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -656,6 +700,8 @@
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -801,11 +847,11 @@
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -822,6 +868,9 @@
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

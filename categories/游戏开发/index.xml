@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>游戏开发 on 留白</title>
+    <title>游戏开发 on Zzz记忆</title>
     <link>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
-    <description>Recent content in 游戏开发 on 留白</description>
+    <description>Recent content in 游戏开发 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 23 Dec 2021 16:37:44 +0800</lastBuildDate>
@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>A*算法</title>
+      <title>A*算法 | Lua版本</title>
       <link>https://zfunnily.github.io/2021/12/astar/</link>
       <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/12/astar/</guid>
-      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;rdquo;, 并设置它们的&amp;quot;父方格&amp;quot;为A. 从&amp;quot;开启列表</description>
+      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;rd</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sun, 12 Sep 2021 20:43:34 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/09/move/</guid>
-      <description>三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects互动 可以滞空运动(太空人) 提供多种运动效果例如 slopes steps 等 Rigid body + Capsule Collider 控制摄像头旋转 FPMouseLook.cs 跟</description>
+      <description>三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects</description>
     </item>
     
     <item>
@@ -35,43 +35,43 @@
       <pubDate>Sun, 21 Mar 2021 10:44:58 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/gamexian/</guid>
-      <description>概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git 下载sdl1.2 $ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/ 下载 DirectX SDK10， 双击安装即可 编译sdlpal 打开解决</description>
+      <description>概述 今天在github上找到了《仙剑奇侠传》的rpg单机游戏sdlpal，sdlpal 是一个开源项目，基于sdl把仙剑奇侠传重写了一遍。 下面是我的编译过程总结。 环境 win10- sdl1.2- sdlpal- vs2017- DirectX SDK10 下载sdlpal $ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git</description>
     </item>
     
     <item>
-      <title>lastbattle | 游戏场景服务器SS解析</title>
+      <title>Lastbattle | 游戏场景服务器SS解析</title>
       <link>https://zfunnily.github.io/2021/01/lastbattle/</link>
       <pubDate>Sat, 02 Jan 2021 23:19:58 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/lastbattle/</guid>
-      <description>游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)中创建站场成功后，加入到战场管理器中: m_cAllBattleMap[pBattle-&amp;gt;GetBattleID()] = pBattle; 发送创建结果给CS服务器 CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid()); 发送</description>
+      <description>游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLengt</description>
     </item>
     
     <item>
       <title>LastBattle | 登录流程(LS &amp; BS &amp; GS)</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattlelogin/</link>
       <pubDate>Fri, 20 Nov 2020 17:27:08 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/</guid>
-      <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环查询IOCP内部的网络事件,并分派处理.这里多个工作线程仅仅是将所有的网络事件放</description>
+      <guid>https://zfunnily.github.io/2020/11/lastbattlelogin/</guid>
+      <description>登录流程 根据上一篇文章中的登录流程,我在工程中找到了相应的代码并记录了下来 登录服务代码解析 监听端口：49997 供BS服务连接 监听端口：49996 供客户端连接 CIocpCtrl：IOCP控制类 多线程循环</description>
     </item>
     
     <item>
       <title>LastBattle | 服务架构</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleserver/</link>
       <pubDate>Fri, 20 Nov 2020 17:24:32 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
-      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。- 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需求数量|数量说明 |&amp;mdash;&amp;mdash; |GameClient|GC|游戏客户端|不解释|n|不超服</description>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleserver/</guid>
+      <description>服务器架构简图如下: 连线说明： 实线：表示客户端登录流程，①②③④⑤表示登录流程，详细解释见下文。 虚线：表示服务器间的连接，虚线箭头指向监听方。 架构说明： |英文名称|简称|中文名称|功能简介|单个大区需</description>
     </item>
     
     <item>
       <title>LastBattle | 安装部署笔记</title>
-      <link>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</link>
+      <link>https://zfunnily.github.io/2020/11/lastbattleone/</link>
       <pubDate>Mon, 16 Nov 2020 06:49:49 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</guid>
-      <description>环境准备 win10服务器：vs2010 / 数据库 mysql5.7清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/客户端：unity3d 4.6 ,破解补丁 编译客户端 建议不要有其他的un</description>
+      <guid>https://zfunnily.github.io/2020/11/lastbattleone/</guid>
+      <description>环境准备 win10 服务器：vs2010 / 数据库 mysql5.7 清华大学mysql镜像网站:https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.7/ 客户端</description>
     </item>
     
   </channel>

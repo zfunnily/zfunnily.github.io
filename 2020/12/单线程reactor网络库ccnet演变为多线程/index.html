@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>CCnet | 单线程reactor演变为多线程 | 留白</title>
-    <meta property="og:title" content="CCnet | 单线程reactor演变为多线程 - 留白">
+    <title>CCnet | 单线程reactor演变为多线程 | Zzz记忆</title>
+    <meta property="og:title" content="CCnet | 单线程reactor演变为多线程 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -144,11 +149,11 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idccnet_2accnet从单线程演变为多线程"><!-- raw HTML omitted --><!-- raw HTML omitted -->ccnet从单线程演变为多线程</a></li>
-    <li><a href="#a-idccnet_11a单线程的ccnet"><!-- raw HTML omitted --><!-- raw HTML omitted -->单线程的ccnet</a></li>
-    <li><a href="#a-idreactor_24a单线程的reactor"><!-- raw HTML omitted --><!-- raw HTML omitted -->单线程的Reactor</a></li>
-    <li><a href="#a-idreactor_45a主从reactor多线程模型"><!-- raw HTML omitted --><!-- raw HTML omitted -->主从Reactor多线程模型</a></li>
-    <li><a href="#a-idccnet_57a多线程的ccnet"><!-- raw HTML omitted --><!-- raw HTML omitted -->多线程的ccnet</a></li>
+    <li><a href="#a-idccnet_2accnet从单线程演变为多线程"><a id="ccnet_2"></a>ccnet从单线程演变为多线程</a></li>
+    <li><a href="#a-idccnet_11a单线程的ccnet"><a id="ccnet_11"></a>单线程的ccnet</a></li>
+    <li><a href="#a-idreactor_24a单线程的reactor"><a id="Reactor_24"></a>单线程的Reactor</a></li>
+    <li><a href="#a-idreactor_45a主从reactor多线程模型"><a id="Reactor_45"></a>主从Reactor多线程模型</a></li>
+    <li><a href="#a-idccnet_57a多线程的ccnet"><a id="ccnet_57"></a>多线程的ccnet</a></li>
   </ul>
 </nav>
     </div>
@@ -201,30 +206,30 @@
         <div class="post-content">
             <ul>
 <li>
-<!-- raw HTML omitted -->
+<ul><li>[ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reactor_45)- [多线程的ccnet](#ccnet_57)
 </li>
 </ul>
-<h2 id="a-idccnet_2accnet从单线程演变为多线程"><!-- raw HTML omitted --><!-- raw HTML omitted -->ccnet从单线程演变为多线程</h2>
+<h2 id="a-idccnet_2accnet从单线程演变为多线程"><a id="ccnet_2"></a>ccnet从单线程演变为多线程</h2>
 <p>ccnet现状：</p>
 <ul>
 <li>epoll- linux平台- 事件循环- 单线程- reactor- 监听和新连接的事件都在主线程中</li>
 </ul>
-<h2 id="a-idccnet_11a单线程的ccnet"><!-- raw HTML omitted --><!-- raw HTML omitted -->单线程的ccnet</h2>
+<h2 id="a-idccnet_11a单线程的ccnet"><a id="ccnet_11"></a>单线程的ccnet</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/98fb4a422ca29f30211176d1b81489fd.png">
             <img class="mx-auto" alt="98fb4a422ca29f30211176d1b81489fd.png" src="https://img-blog.csdnimg.cn/img_convert/98fb4a422ca29f30211176d1b81489fd.png" />
         </a>
-    <!-- raw HTML omitted --> <code>ccnet</code>的单线程的角色：</p>
+    <br> <code>ccnet</code>的单线程的角色：</p>
 <ol>
 <li><code>EventLoop</code>: 整个事件循环。1. <code>EPollPoller</code>: 负责事件的收集。1. <code>Channel</code>：负责事件的分发。1. <code>Acceptor</code>：处理客户端新连接，绑定监听回调时间。1. <code>TcpConnection</code>: 包含<code>EventLoop</code>组件，<code>Channel</code>组件，接收缓冲区和发送缓冲区，负责数据的收发。1. <code>TcpServer</code>：包含<code>EventLoop</code>组件，<code>Acceptor</code>组件，客户端连接<code>map</code>，还有回调接口1. <code>Buffer</code>： 缓冲区
 <code>ccnet</code>的单线程模型只是对epoll进行了封装，然后根据reactor模型在代码上进行了组件的区分，但是整体操作还是单线程，不能充分利用硬件资源。<code>TcpServer</code>的回调函数中，数据接收和业务处理在同一条线程中。</li>
 </ol>
-<h2 id="a-idreactor_24a单线程的reactor"><!-- raw HTML omitted --><!-- raw HTML omitted -->单线程的Reactor</h2>
+<h2 id="a-idreactor_24a单线程的reactor"><a id="Reactor_24"></a>单线程的Reactor</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/e2f3cbeb7e1fdd730f024e3cbf719806.png">
             <img class="mx-auto" alt="e2f3cbeb7e1fdd730f024e3cbf719806.png" src="https://img-blog.csdnimg.cn/img_convert/e2f3cbeb7e1fdd730f024e3cbf719806.png" />
         </a>
-    <!-- raw HTML omitted --> Reactor模型中定义的三种角色：</p>
+    <br> Reactor模型中定义的三种角色：</p>
 <ol>
 <li>Reactor：负责监听和分配事件，将I/O事件分派给对应的Handler。新的事件包含连接建立就绪、读就绪、写就绪等。1. Acceptor：处理客户端新连接，并分派请求到处理器中。1. Handler：将自身与事件绑定，执行非阻塞读/写任务。
 单线程<code>reactor</code>的消息处理流程：</li>
@@ -233,27 +238,27 @@
 </ol>
 <p>对于一些小容量应用场景，可以使用单<code>Reactor</code>单线程模型。但是对于高负载、大并发的应用场景却不合适，主要原因如下：</p>
 <ol>
-<li>即便<code>Reactor</code>线程的CPU负荷达到100%，也无法满足海量消息的编码、解码、读取和发送。1. 当<code>Reactor</code>线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后往往会进行重发，这更加重<code>Reactor</code>线程的负载，最终会导致大量消息积压和处理超时，成为系统的性能瓶颈。1. 一旦<code>Reactor</code>线程意外中断或者进入死循环，会导致整个系统通信模块不可用，不能接收和处理外部消息，造成节点故障。<!-- raw HTML omitted --> 于是所线程</li>
+<li>即便<code>Reactor</code>线程的CPU负荷达到100%，也无法满足海量消息的编码、解码、读取和发送。1. 当<code>Reactor</code>线程负载过重之后，处理速度将变慢，这会导致大量客户端连接超时，超时之后往往会进行重发，这更加重<code>Reactor</code>线程的负载，最终会导致大量消息积压和处理超时，成为系统的性能瓶颈。1. 一旦<code>Reactor</code>线程意外中断或者进入死循环，会导致整个系统通信模块不可用，不能接收和处理外部消息，造成节点故障。<br> 于是所线程</li>
 </ol>
-<h2 id="a-idreactor_45a主从reactor多线程模型"><!-- raw HTML omitted --><!-- raw HTML omitted -->主从Reactor多线程模型</h2>
+<h2 id="a-idreactor_45a主从reactor多线程模型"><a id="Reactor_45"></a>主从Reactor多线程模型</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/3101015a895e4b2ac6745eaa0af0cee9.png">
             <img class="mx-auto" alt="3101015a895e4b2ac6745eaa0af0cee9.png" src="https://img-blog.csdnimg.cn/img_convert/3101015a895e4b2ac6745eaa0af0cee9.png" />
         </a>
-    <!-- raw HTML omitted --> 消息处理流程：</p>
+    <br> 消息处理流程：</p>
 <ol>
 <li>从主线程池中随机选择一个<code>Reactor</code>线程作为<code>acceptor</code>线程，用于绑定监听端口，接收客户端连接1. <code>acceptor</code>线程接收客户端连接请求之后创建新的<code>SocketChannel</code>，将其注册到主线程池的其它<code>Reactor</code>线程上。1. 步骤2完成之后，业务层的链路正式建立，将<code>SocketChannel</code>从主线程池的Reactor线程的多路复用器上摘除，重新注册到<code>SubReactor</code>线程池的线程上，并创建一个<code>Handler</code>用于处理各种<strong>读写事件</strong>1. 当有新的事件发生时，<code>SubReactor</code>会调用连接对应的<code>Handler</code>进行响应1. <code>Handler</code>通过<code>Read</code>读取数据后，会分发给后面的<code>Worker</code>线程池进行业务处理1. <code>Worker</code>线程池会分配独立的线程完成真正的业务处理，如何将响应结果发给Handler进行处理1. <code>Handler</code>收到响应结果后通过<code>Send</code>将响应结果返回给<code>Client</code></li>
 </ol>
-<h2 id="a-idccnet_57a多线程的ccnet"><!-- raw HTML omitted --><!-- raw HTML omitted -->多线程的ccnet</h2>
+<h2 id="a-idccnet_57a多线程的ccnet"><a id="ccnet_57"></a>多线程的ccnet</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/12df821b4bd49ee8aa39226e997e3303.png">
             <img class="mx-auto" alt="12df821b4bd49ee8aa39226e997e3303.png" src="https://img-blog.csdnimg.cn/img_convert/12df821b4bd49ee8aa39226e997e3303.png" />
         </a>
-    <!-- raw HTML omitted --> 
+    <br> 
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/c3c41423ed93f958253e514ba031e737.png">
             <img class="mx-auto" alt="c3c41423ed93f958253e514ba031e737.png" src="https://img-blog.csdnimg.cn/img_convert/c3c41423ed93f958253e514ba031e737.png" />
         </a>
-    <!-- raw HTML omitted --> 根据主从<code>Reactor</code>多线程模型，可以想到<code>ccnet</code>单线程模型中还缺少事件循环线程池<code>EventLoopThreadPool</code>组件和<strong>worker线程池</strong>，<code>EventLoopThreadPool</code>顾名思义，每个线程里都有一个事件循环。<code>ccnet</code>没有worker线程池。<!-- raw HTML omitted --> 可以把<code>ccnet</code>的单线程模型中 <code>TcpServer</code>组件修改一下，因为他包含事件循环<code>EventLoop</code>组件<code>和Acceptor</code>组件，也绑定了 <code>Acceptor</code>的新连接事件回调，<code>TcpServer</code>一个 <code>ccnet</code>多线程模型所需组件的集合，他还需要的组件如下：</p>
+    <br> 根据主从<code>Reactor</code>多线程模型，可以想到<code>ccnet</code>单线程模型中还缺少事件循环线程池<code>EventLoopThreadPool</code>组件和<strong>worker线程池</strong>，<code>EventLoopThreadPool</code>顾名思义，每个线程里都有一个事件循环。<code>ccnet</code>没有worker线程池。<br> 可以把<code>ccnet</code>的单线程模型中 <code>TcpServer</code>组件修改一下，因为他包含事件循环<code>EventLoop</code>组件<code>和Acceptor</code>组件，也绑定了 <code>Acceptor</code>的新连接事件回调，<code>TcpServer</code>一个 <code>ccnet</code>多线程模型所需组件的集合，他还需要的组件如下：</p>
 <ul>
 <li><code>EventLoopThread</code>: on loop peer thread，负责开启一个线程一个事件循环。- <code>EventLoopThreadPool</code>: 是事件循环线程池。- <code>TcpServer</code>: 增加<code>EventLoopThreadPool</code>组件。
 修改<code>TcpServer.cc</code>的代码：</li>
@@ -285,9 +290,20 @@
 
 </code></pre><p>详细代码请参考：github: <a href="https://github.com/diycat1024/ccnet">https://github.com/diycat1024/ccnet</a></p>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -300,11 +316,11 @@
         
         <li><a href="/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/">Ubuntu16.04.6 | 安装Cinnamon3.0</a></li>
         
-        <li><a href="/2020/11/Ubuntu%E4%B8%8Bversion-GLIBC_2.27-not-found%E9%94%99%E8%AF%AF/">Ubuntu下version `GLIBC_2.27‘ not found错误</a></li>
+        <li><a href="/2020/11/glibcnotfound/">Ubuntu | version `GLIBC_2.27‘ not found错误</a></li>
         
         <li><a href="/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">Openresty一 | 初探</a></li>
         
-        <li><a href="/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a></li>
+        <li><a href="/2020/11/lastbattlelogin/">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a></li>
         
     </ul>
 </div>
@@ -333,31 +349,34 @@
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -371,6 +390,10 @@
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -397,6 +420,7 @@
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -414,28 +438,28 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -464,9 +488,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -643,6 +667,8 @@
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -788,11 +814,11 @@
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -809,6 +835,9 @@
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

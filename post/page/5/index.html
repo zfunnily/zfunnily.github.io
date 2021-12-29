@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Posts | 留白</title>
-    <meta property="og:title" content="Posts - 留白">
+    <title>Posts | Zzz记忆</title>
+    <meta property="og:title" content="Posts - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/post/index.xml" title="留白" />
+    <link rel="alternate" type="application/rss+xml" href="https://zfunnily.github.io/post/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -33,6 +33,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -43,7 +48,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -53,7 +58,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -79,6 +84,56 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/02/JWT/" title="Golang | JWT身份认证">Golang | JWT身份认证</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月24日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近要在http接口上加一个token认证，但是接口很多，有没有一个省时省力的办法来解决。token的使用流程是： 用户使用帐号密码登陆到服务器1. 服务器验证登陆成功，根据帐号密码生成token。把……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/JWT/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/02/dynamic/" title="Lua | 调用C/C&#43;&#43;的动态库">Lua | 调用C/C&#43;&#43;的动态库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月20日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Lua'>Lua</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的……
+        </div>
+        <p class="readmore"><a href="https://zfunnily.github.io/2021/02/dynamic/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/02/compilation/" title="汇编 | C/C&#43;&#43;调用汇编">汇编 | C/C&#43;&#43;调用汇编</a>
             </h1>
         </header>
@@ -94,7 +149,7 @@
         </div>
         
         <div class="post-content">
-            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp;T的环境 ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc 下载vscode插件GNU Assembler Language Support C代码生成为汇编……
+            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&quot;hello world!\n&quot;); } 搭建AT&amp……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/02/compilation/">阅读全文</a></p>
     </article>
@@ -119,7 +174,7 @@
         </div>
         
         <div class="post-content">
-            概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;T格式|Intel格式|说明 |&mdash;&mdash; |pushl %eax|push eax|在AT&amp;T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;T汇编格式中，用’$'前缀表示一个立……
+            概述 常见的指令集以及汇编语言规范： x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范： - intel公司发布的汇编语言规范，称`intel 汇编`：Window……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/attandintel/">阅读全文</a></p>
     </article>
@@ -144,7 +199,7 @@
         </div>
         
         <div class="post-content">
-            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最……
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetprotobuf/">阅读全文</a></p>
     </article>
@@ -169,7 +224,7 @@
         </div>
         
         <div class="post-content">
-            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &quot;google/protobuf/empty.proto&quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func……
+            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/pbempty/">阅读全文</a></p>
     </article>
@@ -194,7 +249,7 @@
         </div>
         
         <div class="post-content">
-            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切片，对于文章的方法我直接”拿来主义“。 数组、字符串和切片 我们将一段特定长度的内存……
+            概述 最近在巩固cgo的基础知识，在网上看到一篇Go和C之间 字符串数组、切片类型转换的文章，让我想到我之前写的一篇在go中遍历C结构体数组的文章，让我有新的方法来解决之前的问题，把C的数组转化为Go的切……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/goslience/">阅读全文</a></p>
     </article>
@@ -219,7 +274,7 @@
         </div>
         
         <div class="post-content">
-            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要先对框架本身的结构有所了解，理解框架到底帮助开发者解决怎样的问题。如果你希望使用……
+            概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/skynetecho/">阅读全文</a></p>
     </article>
@@ -244,7 +299,7 @@
         </div>
         
         <div class="post-content">
-            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist……
+            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/ziplist/">阅读全文</a></p>
     </article>
@@ -269,59 +324,9 @@
         </div>
         
         <div class="post-content">
-            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用插件： C/C++ 先编译redis cd redis &amp;&amp; make -j4 打开redis目录后直接按F5，会出现选择启动……
+            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscodedebugredis/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/vscoderedis/" title="VScode | 调试Redis源码，指针显示的问题">VScode | 调试Redis源码，指针显示的问题</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月12日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>Redis源码解析</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。网上几乎都在说在监视栏添加下面的表达式可以解决问题， 可以查看int arr_name[10]的值：……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/vscoderedis/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/01/cgostruct/" title="Cgo | 遍历C结构体数组">Cgo | 遍历C结构体数组</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月11日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语……
-        </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2021/01/cgostruct/">阅读全文</a></p>
     </article>
     
     
@@ -337,48 +342,79 @@
     
 
     
-    <li >
-        <a href="https://zfunnily.github.io/post/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://zfunnily.github.io/post/page/2/">2</a>
-    </li>
+        
+        
     
-    <li >
-        <a href="https://zfunnily.github.io/post/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/4/">4</a>
-    </li>
-    
-    <li  class="current">
-        <a href="https://zfunnily.github.io/post/page/5/">5</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/6/">6</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/7/">7</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://zfunnily.github.io/post/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/">1</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/3/">3</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/4/">4</a>
+        </li>
+        
+    
+        
+        
+        <li  class="current">
+            <a href="https://zfunnily.github.io/post/page/5/">5</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/6/">6</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/7/">7</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://zfunnily.github.io/post/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://zfunnily.github.io/post/page/6/">下一页</a>
     </li>
@@ -387,21 +423,24 @@
 
 
 
+
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -416,6 +455,10 @@
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
     </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
 </footer>
 
 
@@ -429,6 +472,7 @@
 
 
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
 
 
                 </div>
@@ -448,28 +492,28 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -498,9 +542,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -677,6 +721,8 @@
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -822,11 +868,11 @@
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -843,6 +889,9 @@
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

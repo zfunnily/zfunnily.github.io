@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>lua-pop on 留白</title>
+    <title>lua-pop on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/lua-pop/</link>
-    <description>Recent content in lua-pop on 留白</description>
+    <description>Recent content in lua-pop on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 10 May 2021 15:57:03 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 May 2021 15:57:03 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/05/settopandpop/</guid>
-      <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果index=0，那么移除栈上所有元素 如果index=1，移除栈顶一个元素 如果in</description>
+      <description>lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果</description>
     </item>
     
   </channel>

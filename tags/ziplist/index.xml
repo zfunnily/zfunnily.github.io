@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ziplist on 留白</title>
+    <title>ziplist on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/ziplist/</link>
-    <description>Recent content in ziplist on 留白</description>
+    <description>Recent content in ziplist on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Jan 2021 17:52:27 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/ziplist/</guid>
-      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩列表ziplist 双向链表linkedlist ziplist的结构 ziplist</description>
+      <description>概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩</description>
     </item>
     
   </channel>

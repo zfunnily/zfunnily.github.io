@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>百元买鸡 on 留白</title>
+    <title>百元买鸡 on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/</link>
-    <description>Recent content in 百元买鸡 on 留白</description>
+    <description>Recent content in 百元买鸡 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 24 Feb 2021 17:51:46 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Wed, 24 Feb 2021 17:51:46 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/02/chicken/</guid>
-      <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ ----------------------------------------------------------------------------- local maxprice = 100 --总价 local maxnum = 100 --总数量 local</description>
+      <description>问题 编写lua程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？ 代码 ----------------------------------------------------------------------------- --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买</description>
     </item>
     
   </channel>

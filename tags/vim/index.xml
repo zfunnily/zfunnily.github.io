@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vim on 留白</title>
+    <title>vim on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/vim/</link>
-    <description>Recent content in vim on 留白</description>
+    <description>Recent content in vim on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 07 Sep 2021 10:46:58 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/09/vimchange/</guid>
-      <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，主要是两种编辑器，一个是 idea 一个是 vscode 在idea中使用 vim 插件： IdeaVim IdeaVimExtension 我们需要在 用户目录</description>
+      <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Wed, 28 Oct 2020 09:14:28 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
-      <description>插件相关 |快捷键|说明 |&amp;mdash;&amp;mdash; |,|Leader Key |&amp;lt;leader&amp;gt;n|打开 / 关闭代码资源管理器 |&amp;lt;leader&amp;gt;t|打开 / 关闭函数列表 |&amp;lt;leader&amp;gt;a|.h .cpp 文件切换 |&amp;lt;leader&amp;gt;u|转到函数声明 |&amp;lt;leader&amp;gt;U|转到函数实现 |&amp;lt;leader&amp;gt;o|打开</description>
+      <description>插件相关 |快捷键|说明 |&amp;mdash;&amp;mdash; |,|Leader Key |&amp;lt;leader&amp;gt;n|打开 / 关闭代码资源管理器 |&amp;lt;leader&amp;gt;t|打开 / 关闭函数列表 |&amp;lt;leader&amp;gt;a|.h .cpp 文件切换 |&amp;lt;leader&amp;gt;u|转到函数声明 |&amp;</description>
     </item>
     
   </channel>

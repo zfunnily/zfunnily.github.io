@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>音视频 on 留白</title>
+    <title>音视频 on Zzz记忆</title>
     <link>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
-    <description>Recent content in 音视频 on 留白</description>
+    <description>Recent content in 音视频 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 15 Nov 2021 11:23:24 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcdesk/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回</description>
+      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sun, 14 Nov 2021 16:20:31 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcpeerconnection/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，需要在应用层和底层一帧数据做一个桥接层，以隔离上下层。 桥接层的代码主要位于med</description>
+      <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Mon, 14 Sep 2020 18:29:33 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/09/ffmpegpicture/</guid>
-      <description>FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&amp;quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量： ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&amp;quot; -vcodec libx264 output.flv 根据命令行可以分析出，除了</description>
+      <description>FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&amp;quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Sat, 12 Sep 2020 12:47:57 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/09/ffmpegvideo/</guid>
-      <description>FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。-f 指定保存图片使用的格式，可忽略。image-</description>
+      <description>FFmpeg给视频加上logo ffmpeg从视频中截取图像帧 ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg -r 指定抽取的帧率，即从视频中每秒钟抽取</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
       <pubDate>Wed, 09 Sep 2020 09:36:49 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/09/ffmpegvideow/</guid>
-      <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices) [dshow @ 000002622302e340] &amp;quot;Altair USB2.0 Camera&amp;quot; [dshow @ 000002622302e340] Alternative name &amp;quot;@device_pnp_\\?\usb#vid_0ac8&amp;amp;pid_3450&amp;amp;mi_00#6&amp;amp;3b01315a&amp;amp;0&amp;amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&amp;quot; [dshow @ 000002622302e340] DirectShow audio devices ``使用 dshow 展示摄像头,</description>
+      <description>概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340]</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@
       <pubDate>Sat, 29 Aug 2020 17:20:40 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/macffmpeg/</guid>
-      <description>设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi输出设备有：sdl``设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &amp;quot; &amp;quot; 看到了 如下设备 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices: [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建） [AVFoundation input device @ 0x7fac75c048c0] [1] Capture</description>
+      <description>设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &amp;quot; &amp;quot; 看到了 如下设</description>
     </item>
     
     <item>
@@ -71,7 +71,7 @@
       <pubDate>Sun, 16 Aug 2020 23:04:13 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owt-client-javascript/</guid>
-      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if</description>
+      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js</description>
     </item>
     
     <item>
@@ -80,7 +80,7 @@
       <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/licode/</guid>
-      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;quot;MIN_PORT=30000&amp;quot; -e &amp;quot;MAX_PORT=30050&amp;quot; -e &amp;quot;PUBLIC_IP=your_ip_address&amp;quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个</description>
+      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;quot;MIN_PORT=30000&amp;quot; -e &amp;quot;MAX_PORT=30050&amp;quot; -e &amp;quot;PUBLIC_IP=your_ip_address&amp;quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之</description>
     </item>
     
     <item>
@@ -89,7 +89,7 @@
       <pubDate>Wed, 05 Aug 2020 09:47:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owtservercomplie/</guid>
-      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd</description>
+      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。 客</description>
     </item>
     
   </channel>

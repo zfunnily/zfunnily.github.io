@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ucontext on 留白</title>
+    <title>ucontext on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/ucontext/</link>
-    <description>Recent content in ucontext on 留白</description>
+    <description>Recent content in ucontext on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 09 Mar 2021 09:43:00 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 09 Mar 2021 09:43:00 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/coroutineone/</guid>
-      <description>概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了</description>
+      <description>概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上</description>
     </item>
     
   </channel>

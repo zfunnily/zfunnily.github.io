@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>coroutine on 留白</title>
+    <title>coroutine on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/coroutine/</link>
-    <description>Recent content in coroutine on 留白</description>
+    <description>Recent content in coroutine on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 10 Mar 2021 11:11:47 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Wed, 10 Mar 2021 11:11:47 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/coroutinetwo/</guid>
-      <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境 coroutine Ubuntu16.04 gcc make vscode 下载代码 &amp;amp; 编译 $ git clone https://github.com/cloudwu/coroutine $ cd coroutine &amp;amp;&amp;amp; make 写一个生产者和消费者的demo //procus.c #include &amp;quot;coroutine.h&amp;quot; #include</description>
+      <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境</description>
     </item>
     
   </channel>

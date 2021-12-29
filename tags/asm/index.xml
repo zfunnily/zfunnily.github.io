@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>asm on 留白</title>
+    <title>asm on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/asm/</link>
-    <description>Recent content in asm on 留白</description>
+    <description>Recent content in asm on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 31 Jan 2021 11:25:39 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 31 Jan 2021 11:25:39 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/attandintel/</guid>
-      <description>概述 常见的指令集以及汇编语言规范： 表格如下： |AT&amp;amp;T格式|Intel格式|说明 |&amp;mdash;&amp;mdash; |pushl %eax|push eax|在AT&amp;amp;T汇编格式中，寄存器名要加上’ %&amp;lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀 |pushl $1|push 1|在AT&amp;amp;T汇编格式中，用’$&#39;前缀表示一个立</description>
+      <description>概述 常见的指令集以及汇编语言规范： x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范： - intel公司发布的汇编语言规范，称`intel 汇编`：Window</description>
     </item>
     
   </channel>

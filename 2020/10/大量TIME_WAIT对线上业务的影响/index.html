@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>TCP/IP | 大量TIME_WAIT对线上业务的影响 | 留白</title>
-    <meta property="og:title" content="TCP/IP | 大量TIME_WAIT对线上业务的影响 - 留白">
+    <title>TCP/IP | 大量TIME_WAIT对线上业务的影响 | Zzz记忆</title>
+    <meta property="og:title" content="TCP/IP | 大量TIME_WAIT对线上业务的影响 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -144,18 +149,18 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-idtcp_1atcp的三次握手和四次挥手"><!-- raw HTML omitted --><!-- raw HTML omitted -->TCP的三次握手和四次挥手</a></li>
-    <li><a href="#a-idtime_wait_4atime_wait概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->TIME_WAIT概述</a></li>
-    <li><a href="#a-idtime_waittcp_24a大量的time_wait状态tcp连接有什么业务上的影响"><!-- raw HTML omitted --><!-- raw HTML omitted -->大量的TIME_WAIT状态TCP连接，有什么业务上的影响</a></li>
-    <li><a href="#a-id_38a现实场景"><!-- raw HTML omitted --><!-- raw HTML omitted -->现实场景</a></li>
-    <li><a href="#a-id_45a问题分析"><!-- raw HTML omitted --><!-- raw HTML omitted -->问题分析</a></li>
-    <li><a href="#a-idtime_wait_50a解决time_wait的办法"><!-- raw HTML omitted --><!-- raw HTML omitted -->解决TIME_WAIT的办法</a></li>
-    <li><a href="#a-id_65a几个核心问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->几个核心问题</a>
+    <li><a href="#a-idtcp_1atcp的三次握手和四次挥手"><a id="TCP_1"></a>TCP的三次握手和四次挥手</a></li>
+    <li><a href="#a-idtime_wait_4atime_wait概述"><a id="TIME_WAIT_4"></a>TIME_WAIT概述</a></li>
+    <li><a href="#a-idtime_waittcp_24a大量的time_wait状态tcp连接有什么业务上的影响"><a id="TIME_WAITTCP_24"></a>大量的TIME_WAIT状态TCP连接，有什么业务上的影响</a></li>
+    <li><a href="#a-id_38a现实场景"><a id="_38"></a>现实场景</a></li>
+    <li><a href="#a-id_45a问题分析"><a id="_45"></a>问题分析</a></li>
+    <li><a href="#a-idtime_wait_50a解决time_wait的办法"><a id="TIME_WAIT_50"></a>解决TIME_WAIT的办法</a></li>
+    <li><a href="#a-id_65a几个核心问题"><a id="_65"></a>几个核心问题</a>
       <ul>
-        <li><a href="#a-idtime_waitor__66atime_wait是服务器端的状态or-客户端的状态"><!-- raw HTML omitted --><!-- raw HTML omitted -->TIME_WAIT是「服务器端」的状态？or 「客户端」的状态？</a></li>
-        <li><a href="#a-id_71a服务器在对外服务时是客户端发起的断开连接还是服务器发起的断开连接"><!-- raw HTML omitted --><!-- raw HTML omitted -->服务器在对外服务时，是「客户端」发起的断开连接？还是「服务器」发起的断开连接？</a></li>
-        <li><a href="#a-id_http__tcp_time_wait_78a关于-http-请求中设置的主动关闭-tcp-连接的机制time_wait的是主动断开方才会出现的所以主动断开方是服务端"><!-- raw HTML omitted --><!-- raw HTML omitted -->关于 HTTP 请求中，设置的主动关闭 TCP 连接的机制：TIME_WAIT的是主动断开方才会出现的，所以主动断开方是服务端？</a></li>
-        <li><a href="#a-idtime_wait_85a为什么需要time_wait"><!-- raw HTML omitted --><!-- raw HTML omitted -->为什么需要time_wait</a></li>
+        <li><a href="#a-idtime_waitor__66atime_wait是服务器端的状态or-客户端的状态"><a id="TIME_WAITor__66"></a>TIME_WAIT是「服务器端」的状态？or 「客户端」的状态？</a></li>
+        <li><a href="#a-id_71a服务器在对外服务时是客户端发起的断开连接还是服务器发起的断开连接"><a id="_71"></a>服务器在对外服务时，是「客户端」发起的断开连接？还是「服务器」发起的断开连接？</a></li>
+        <li><a href="#a-id_http__tcp_time_wait_78a关于-http-请求中设置的主动关闭-tcp-连接的机制time_wait的是主动断开方才会出现的所以主动断开方是服务端"><a id="_HTTP__TCP_TIME_WAIT_78"></a>关于 HTTP 请求中，设置的主动关闭 TCP 连接的机制：TIME_WAIT的是主动断开方才会出现的，所以主动断开方是服务端？</a></li>
+        <li><a href="#a-idtime_wait_85a为什么需要time_wait"><a id="time_wait_85"></a>为什么需要time_wait</a></li>
       </ul>
     </li>
   </ul>
@@ -208,16 +213,16 @@
         
         
         <div class="post-content">
-            <h2 id="a-idtcp_1atcp的三次握手和四次挥手"><!-- raw HTML omitted --><!-- raw HTML omitted -->TCP的三次握手和四次挥手</h2>
+            <h2 id="a-idtcp_1atcp的三次握手和四次挥手"><a id="TCP_1"></a>TCP的三次握手和四次挥手</h2>
 <p>
         <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/8bdf9b9537f30646bf95dafe476884b2.png">
             <img class="mx-auto" alt="8bdf9b9537f30646bf95dafe476884b2.png" src="https://img-blog.csdnimg.cn/img_convert/8bdf9b9537f30646bf95dafe476884b2.png" />
         </a>
     </p>
-<h2 id="a-idtime_wait_4atime_wait概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->TIME_WAIT概述</h2>
+<h2 id="a-idtime_wait_4atime_wait概述"><a id="TIME_WAIT_4"></a>TIME_WAIT概述</h2>
 <p>TIME_WAIT 状态：</p>
 <ul>
-<li>TCP 连接中，<strong>主动关闭连接</strong>的一方出现的状态；（收到 FIN 命令，进入 TIME_WAIT 状态，并返回 ACK 命令） -  保持 2 个 <code>MSL</code><!-- raw HTML omitted --> 时间，即，<code>4 分钟</code> ；（MSL 为 2 分钟）</li>
+<li>TCP 连接中，<strong>主动关闭连接</strong>的一方出现的状态；（收到 FIN 命令，进入 TIME_WAIT 状态，并返回 ACK 命令） -  保持 2 个 <code>MSL</code><br> 时间，即，<code>4 分钟</code> ；（MSL 为 2 分钟）</li>
 </ul>
 <blockquote>
 </blockquote>
@@ -225,50 +230,61 @@
 <p>在高并发的场景下，<code>TIME_WAIT</code> 连接存在，属于正常现象。</p>
 <p>线上场景中，持续的高并发场景</p>
 <ul>
-<li>一部分 <code>TIME_WAIT</code><!-- raw HTML omitted --> 连接被回收，但新的 <code>TIME_WAIT</code><!-- raw HTML omitted --> 连接产生； -  一些极端情况下，会出现<strong>大量</strong>的 <code>TIME_WAIT</code><!-- raw HTML omitted --> 连接。</li>
+<li>一部分 <code>TIME_WAIT</code><br> 连接被回收，但新的 <code>TIME_WAIT</code><br> 连接产生； -  一些极端情况下，会出现<strong>大量</strong>的 <code>TIME_WAIT</code><br> 连接。</li>
 </ul>
-<h2 id="a-idtime_waittcp_24a大量的time_wait状态tcp连接有什么业务上的影响"><!-- raw HTML omitted --><!-- raw HTML omitted -->大量的TIME_WAIT状态TCP连接，有什么业务上的影响</h2>
+<h2 id="a-idtime_waittcp_24a大量的time_wait状态tcp连接有什么业务上的影响"><a id="TIME_WAITTCP_24"></a>大量的TIME_WAIT状态TCP连接，有什么业务上的影响</h2>
 <ul>
-<li>TCP 连接中，「主动发起关闭连接」的一端，会进入 time_wait 状态 -  time_wait 状态，默认会持续 <code>2 MSL</code><!-- raw HTML omitted --> （报文的最大生存时间），一般是 2x2 mins -  time_wait 状态下，TCP 连接占用的端口，无法被再次使用 -  每一个 time_wait 状态，都会占用一个「本地端口」，上限为 <code>65535</code><!-- raw HTML omitted --> (16 bit，2 Byte)； -  当大量的连接处于 <code>time_wait</code><!-- raw HTML omitted --> 时，新建立 TCP 连接会出错，<strong>address already in use : connect</strong> 异常</li>
+<li>TCP 连接中，「主动发起关闭连接」的一端，会进入 time_wait 状态 -  time_wait 状态，默认会持续 <code>2 MSL</code><br> （报文的最大生存时间），一般是 2x2 mins -  time_wait 状态下，TCP 连接占用的端口，无法被再次使用 -  每一个 time_wait 状态，都会占用一个「本地端口」，上限为 <code>65535</code><br> (16 bit，2 Byte)； -  当大量的连接处于 <code>time_wait</code><br> 时，新建立 TCP 连接会出错，<strong>address already in use : connect</strong> 异常</li>
 </ul>
 <blockquote>
 </blockquote>
 <p>TCP 本地端口数量，上限为 <code>65535</code> （6.5w），这是因为 TCP 头部使用 <code>16 bit</code> ，存储「<strong>端口号</strong>」，因此约束上限为 <code>65535</code> 。</p>
-<h2 id="a-id_38a现实场景"><!-- raw HTML omitted --><!-- raw HTML omitted -->现实场景</h2>
+<h2 id="a-id_38a现实场景"><a id="_38"></a>现实场景</h2>
 <ul>
-<li>服务器端，一般设置：<strong>不允许</strong>「主动关闭连接」，但 HTTP 请求中，http 头部 connection 参数，可能设置为 close，则，服务端处理完请求会主动关闭 TCP 连接<!-- raw HTML omitted --> 。现在浏览器中， HTTP 请求 <code>connection</code><!-- raw HTML omitted --> 参数，一般都设置为 <code>keep-alive</code> -  Nginx 反向代理场景中，可能出现大量短链接，服务器端，可能存在</li>
+<li>服务器端，一般设置：<strong>不允许</strong>「主动关闭连接」，但 HTTP 请求中，http 头部 connection 参数，可能设置为 close，则，服务端处理完请求会主动关闭 TCP 连接<br> 。现在浏览器中， HTTP 请求 <code>connection</code><br> 参数，一般都设置为 <code>keep-alive</code> -  Nginx 反向代理场景中，可能出现大量短链接，服务器端，可能存在</li>
 </ul>
-<h2 id="a-id_45a问题分析"><!-- raw HTML omitted --><!-- raw HTML omitted -->问题分析</h2>
+<h2 id="a-id_45a问题分析"><a id="_45"></a>问题分析</h2>
 <p>大量的TIME_WAIT状态TCP连接存在，其本质原因是什么？</p>
 <ul>
 <li>大量短链接存在- 特别是http请求中，如果connection头部取值被设置为close时，基本都由【服务端】发起主动关闭连接，而TCP四次挥手关闭连接机制中，为了保证ACK重发和丢弃延迟数据，设置TIME_WAIT为2倍的MSL（报文存活最大时间）</li>
 </ul>
-<h2 id="a-idtime_wait_50a解决time_wait的办法"><!-- raw HTML omitted --><!-- raw HTML omitted -->解决TIME_WAIT的办法</h2>
-<p>解决上述 <code>time_wait</code><!-- raw HTML omitted --> 状态大量存在，导致新连接创建失败的问题，一般解决办法：<!-- raw HTML omitted --> 1、<strong>客户端</strong>，HTTP 请求的头部，connection 设置为 keep-alive，保持存活一段时间：现在的浏览器，一般都这么进行了<!-- raw HTML omitted --> 2、<strong>服务器端</strong>，</p>
+<h2 id="a-idtime_wait_50a解决time_wait的办法"><a id="TIME_WAIT_50"></a>解决TIME_WAIT的办法</h2>
+<p>解决上述 <code>time_wait</code><br> 状态大量存在，导致新连接创建失败的问题，一般解决办法：<br> 1、<strong>客户端</strong>，HTTP 请求的头部，connection 设置为 keep-alive，保持存活一段时间：现在的浏览器，一般都这么进行了<br> 2、<strong>服务器端</strong>，</p>
 <ul>
-<li>允许 <code>time_wait</code><!-- raw HTML omitted --> 状态的 socket 被<strong>重用</strong> -  缩减 <code>time_wait</code><!-- raw HTML omitted --> 时间，设置为 <code>1 MSL</code><!-- raw HTML omitted --> （即，2 mins）</li>
+<li>允许 <code>time_wait</code><br> 状态的 socket 被<strong>重用</strong> -  缩减 <code>time_wait</code><br> 时间，设置为 <code>1 MSL</code><br> （即，2 mins）</li>
 </ul>
-<h2 id="a-id_65a几个核心问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->几个核心问题</h2>
-<h3 id="a-idtime_waitor__66atime_wait是服务器端的状态or-客户端的状态"><!-- raw HTML omitted --><!-- raw HTML omitted -->TIME_WAIT是「服务器端」的状态？or 「客户端」的状态？</h3>
+<h2 id="a-id_65a几个核心问题"><a id="_65"></a>几个核心问题</h2>
+<h3 id="a-idtime_waitor__66atime_wait是服务器端的状态or-客户端的状态"><a id="TIME_WAITor__66"></a>TIME_WAIT是「服务器端」的状态？or 「客户端」的状态？</h3>
 <ul>
 <li>RE：time_wait 是「主动关闭 TCP 连接」一方的状态，可能是「客服端」的，也可能是「服务器端」的 -  一般情况下，都是「客户端」所处的状态；「服务器端」一般设置「不主动关闭连接」</li>
 </ul>
-<h3 id="a-id_71a服务器在对外服务时是客户端发起的断开连接还是服务器发起的断开连接"><!-- raw HTML omitted --><!-- raw HTML omitted -->服务器在对外服务时，是「客户端」发起的断开连接？还是「服务器」发起的断开连接？</h3>
+<h3 id="a-id_71a服务器在对外服务时是客户端发起的断开连接还是服务器发起的断开连接"><a id="_71"></a>服务器在对外服务时，是「客户端」发起的断开连接？还是「服务器」发起的断开连接？</h3>
 <ul>
 <li>正常情况下，都是「客户端」发起的断开连接 -  「服务器」一般设置为「不主动关闭连接」，服务器通常执行「被动关闭」 -  但 HTTP 请求中，http 头部 connection 参数，可能设置为 close，则，服务端处理完请求会主动关闭 TCP 连接</li>
 </ul>
-<h3 id="a-id_http__tcp_time_wait_78a关于-http-请求中设置的主动关闭-tcp-连接的机制time_wait的是主动断开方才会出现的所以主动断开方是服务端"><!-- raw HTML omitted --><!-- raw HTML omitted -->关于 HTTP 请求中，设置的主动关闭 TCP 连接的机制：TIME_WAIT的是主动断开方才会出现的，所以主动断开方是服务端？</h3>
+<h3 id="a-id_http__tcp_time_wait_78a关于-http-请求中设置的主动关闭-tcp-连接的机制time_wait的是主动断开方才会出现的所以主动断开方是服务端"><a id="_HTTP__TCP_TIME_WAIT_78"></a>关于 HTTP 请求中，设置的主动关闭 TCP 连接的机制：TIME_WAIT的是主动断开方才会出现的，所以主动断开方是服务端？</h3>
 <ul>
 <li>是的。在HTTP1.1协议中，有个 Connection 头，Connection有两个值，close和keep-alive，这个头就相当于客户端告诉服务端，服务端你执行完成请求之后，是关闭连接还是保持连接，保持连接就意味着在保持连接期间，只能由客户端主动断开连接。还有一个keep-alive的头，设置的值就代表了服务端保持连接保持多久。 -  HTTP默认的Connection值为close，那么就意味着关闭请求的一方几乎都会是由服务端这边发起的。那么这个服务端产生TIME_WAIT过多的情况就很正常了。 -  虽然HTTP默认Connection值为close，但是，现在的浏览器发送请求的时候一般都会设置Connection为keep-alive了。所以，也有人说，现在没有必要通过调整参数来使TIME_WAIT降低了。</li>
 </ul>
-<h3 id="a-idtime_wait_85a为什么需要time_wait"><!-- raw HTML omitted --><!-- raw HTML omitted -->为什么需要time_wait</h3>
+<h3 id="a-idtime_wait_85a为什么需要time_wait"><a id="time_wait_85"></a>为什么需要time_wait</h3>
 <ul>
 <li><strong>可靠的实现 TCP 全双工连接的终止</strong>：四次挥手关闭 TCP 连接过程中，最后的 ACK 是由「主动关闭连接」的一端发出的，如果这个 ACK 丢失，则，对方会重发 FIN 请求，因此，在「主动关闭连接」的一段，需要维护一个 time_wait 状态，处理对方重发的 FIN 请求； -  <strong>处理延迟到达的报文</strong>：由于路由器可能抖动，TCP 报文会延迟到达，为了避免「延迟到达的 TCP 报文」被误认为是「新 TCP 连接」的数据，则，需要在允许新创建 TCP 连接之前，保持一个不可用的状态，等待所有延迟报文的消失，一般设置为 2 倍的 MSL（报文的最大生存时间），解决「延迟达到的 TCP 报文」问题；</li>
 </ul>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/">https://zfunnily.github.io/2020/10/%E5%A4%A7%E9%87%8FTIME_WAIT%E5%AF%B9%E7%BA%BF%E4%B8%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%BD%B1%E5%93%8D/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -306,31 +322,34 @@
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -344,6 +363,10 @@
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -370,6 +393,7 @@
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -387,28 +411,28 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -437,9 +461,9 @@
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -616,6 +640,8 @@
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -761,11 +787,11 @@
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -782,6 +808,9 @@
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

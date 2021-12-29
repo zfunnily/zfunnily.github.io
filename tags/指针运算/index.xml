@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>指针运算 on 留白</title>
+    <title>指针运算 on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/</link>
-    <description>Recent content in 指针运算 on 留白</description>
+    <description>Recent content in 指针运算 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 11 Jan 2021 17:18:35 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/cgostruct/</guid>
-      <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指的是C语言 利用cgo作为桥梁，遍历C结构体数组 unsafe.Pointer在C语</description>
+      <description>缘由 现在有个应用场景，我们要在go中获取C结构体数组中的值。在C语言中，对于结构体数组，我们可以利用指针的偏移量来获取我们想要的值的位置。在go中我们怎么使用C指针和偏移量进行运算呢？下面的文字中C指</description>
     </item>
     
   </channel>

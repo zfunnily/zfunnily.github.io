@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Openresty二 | postman小工具 | 留白</title>
-    <meta property="og:title" content="Openresty二 | postman小工具 - 留白">
+    <title>Openresty二 | postman小工具 | Zzz记忆</title>
+    <meta property="og:title" content="Openresty二 | postman小工具 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -218,7 +223,7 @@
         
         <div class="post-content">
             <h2 id="用到的知识点">用到的知识点</h2>
-<p>mvc架构<!-- raw HTML omitted --> 模型渲染库：https://github.com/bungle/lua-resty-template<!-- raw HTML omitted --> resty http请求库： <a href="https://github.com/bungle/lua-resty-template">https://github.com/bungle/lua-resty-template</a></p>
+<p>mvc架构<br> 模型渲染库：https://github.com/bungle/lua-resty-template<br> resty http请求库： <a href="https://github.com/bungle/lua-resty-template">https://github.com/bungle/lua-resty-template</a></p>
 <h2 id="参照-mvc模型来做postman工具">参照 mvc模型来做postman工具</h2>
 <h3 id="配置文件说明">配置文件说明</h3>
 <pre><code>worker_processes  1;
@@ -308,7 +313,7 @@ if ret == false then
 end
 
 </code></pre><h3 id="控制器">控制器</h3>
-<p>控制器路径：　lua/web/index.lua, lua/web/postman.lua<!-- raw HTML omitted --> lua/web/index.lua 渲染模板 lua/tpl/index.html</p>
+<p>控制器路径：　lua/web/index.lua, lua/web/postman.lua<br> lua/web/index.lua 渲染模板 lua/tpl/index.html</p>
 <pre><code>local template = require &quot;resty.template&quot;
 local _M = {}
 function _M.index()
@@ -394,7 +399,7 @@ return _M
 &lt;/html&gt;
 
 </code></pre><h2 id="使用方法">使用方法</h2>
-<p>访问地址： http://ip:8080/index/index<!-- raw HTML omitted --> 第一个index代表lua/web/index.lua<!-- raw HTML omitted --> 第二个index代表lua/web/index.lua文件中的index方法。</p>
+<p>访问地址： http://ip:8080/index/index<br> 第一个index代表lua/web/index.lua<br> 第二个index代表lua/web/index.lua文件中的index方法。</p>
 <h3 id="lua_resty_template模板渲染方法">lua_resty_template模板渲染方法</h3>
 <ol>
 <li>使用template.render</li>
@@ -420,7 +425,7 @@ local content = func(context) ngx.say(content)
 <li><code>{&lt;!-- --&gt;{expression}}</code>：输出传递的值，转义<code>html</code>相关标签- <code>{*expression*}</code>：输出传递的值- <code>{% lua code %}</code>：使用<code>lua</code>代码- <code>{(template)}</code>：引入<code>html</code>共用页面- <code>{(base.html, { title = &quot;Hello, World&quot; } )}</code>：引入<code>html</code>共用页面，并传递相关值- <code>{-verbatim-}...{-verbatim-}</code>/<code>{-raw-}...{-raw-}</code>：可原样输出模板语法- <code>{# comments #}</code>：在模板中使用注释，不会被执行和输出</li>
 </ul>
 <h2 id="遇到的坑">遇到的坑</h2>
-<p>网页上直接输出了html字符串。而不是正常网页<!-- raw HTML omitted --> 解决办法<!-- raw HTML omitted --> nginx.conf配置文件加上default_type text/html;</p>
+<p>网页上直接输出了html字符串。而不是正常网页<br> 解决办法<br> nginx.conf配置文件加上default_type text/html;</p>
 <pre><code>server {
     default_type text/html;
     location / {
@@ -434,9 +439,20 @@ local content = func(context) ngx.say(content)
 </code></pre><h2 id="项目地址">项目地址</h2>
 <p><a href="https://github.com/diycat1024/OpenRestyPostman">https://github.com/diycat1024/OpenRestyPostman</a></p>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -453,7 +469,7 @@ local content = func(context) ngx.say(content)
         
         <li><a href="/2020/08/firstk8s/">K8S | 创建第一个应用</a></li>
         
-        <li><a href="/2020/11/%E6%9C%80%E5%90%8E%E4%B8%80%E7%AB%99%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90LastBattle-%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8BLS-BS-GS/">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a></li>
+        <li><a href="/2020/11/lastbattlelogin/">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a></li>
         
     </ul>
 </div>
@@ -482,31 +498,34 @@ local content = func(context) ngx.say(content)
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -520,6 +539,10 @@ local content = func(context) ngx.say(content)
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -546,6 +569,7 @@ local content = func(context) ngx.say(content)
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -563,28 +587,28 @@ local content = func(context) ngx.say(content)
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -613,9 +637,9 @@ local content = func(context) ngx.say(content)
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -792,6 +816,8 @@ local content = func(context) ngx.say(content)
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -937,11 +963,11 @@ local content = func(context) ngx.say(content)
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -958,6 +984,9 @@ local content = func(context) ngx.say(content)
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

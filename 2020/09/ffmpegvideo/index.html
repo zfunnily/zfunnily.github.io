@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>FFmpeg | 给视频加文字和图片水印 | 留白</title>
-    <meta property="og:title" content="FFmpeg | 给视频加文字和图片水印 - 留白">
+    <title>FFmpeg | 给视频加文字和图片水印 | Zzz记忆</title>
+    <meta property="og:title" content="FFmpeg | 给视频加文字和图片水印 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -223,14 +228,14 @@ ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg
 ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg  
 ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d.jpeg  
 </code></pre><blockquote>
-<p>-r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。<!-- raw HTML omitted --> -f 指定保存图片使用的格式，可忽略。<!-- raw HTML omitted --> image-%05d.jpeg，指定文件的输出名字。<!-- raw HTML omitted --> 4cif 代表帧的尺寸为705x576.其他可用尺寸如下。<!-- raw HTML omitted --> -t 代表持续时间，单位为秒。<!-- raw HTML omitted --> -ss 指定起始时间<!-- raw HTML omitted --> -vframes 指定抽取的帧数</p>
+<p>-r 指定抽取的帧率，即从视频中每秒钟抽取图片的数量。1代表每秒抽取一帧。<br> -f 指定保存图片使用的格式，可忽略。<br> image-%05d.jpeg，指定文件的输出名字。<br> 4cif 代表帧的尺寸为705x576.其他可用尺寸如下。<br> -t 代表持续时间，单位为秒。<br> -ss 指定起始时间<br> -vframes 指定抽取的帧数</p>
 </blockquote>
 <h3 id="ffmpeg给视频加logo">ffmpeg给视频加logo</h3>
 <p>ffmpeg 给视频input.mp4 加上logo.png的logo, logo的格式也可以用 <strong>.jepg</strong></p>
 <pre><code>ffmpeg -i input.mp4 -i logo.png -filter_complex &quot;[1:v] scale=176:144[logo];[0:v][logo]overlay=x=0:y=0&quot; output.mp4
 </code></pre><p>从上述命令可以看，将logo.png的图像流缩放为176x144的分辨率，然后定义一个临时标记名logo，最后将缩放后的图像[logo]铺在输入视频input.mp4的视频流[0:v]的左上角。</p>
 <h2 id="ffmpeg给视频加水印文字">FFmpeg给视频加水印文字</h2>
-<p>FFmpeg可以为视频加水印，水印可以是文字，也可以是图片，主要用来标记视频所属标记。以下为参数列表<!-- raw HTML omitted --> 
+<p>FFmpeg可以为视频加水印，水印可以是文字，也可以是图片，主要用来标记视频所属标记。以下为参数列表<br> 
         <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/f858f4dd0efb0cdbb44030978ce5deb8.png">
             <img class="mx-auto" alt="f858f4dd0efb0cdbb44030978ce5deb8.png" src="https://img-service.csdnimg.cn/img_convert/f858f4dd0efb0cdbb44030978ce5deb8.png" />
         </a>
@@ -257,20 +262,31 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
 <p>中文水印，需要系统中包含中文字库与中文编码支持。</p>
 <pre><code>ffmpeg -i input.mp4 -vf &quot;drawtext=fontsize=100:fontfile=/Library/Fonts/Songti.ttc:text='中文测试':x=20:y=20:enable=lt(mod(t\, 3)\, 1)&quot; chinese.mp4
 </code></pre><h2 id="图片水印">图片水印</h2>
-<p>使用movie的滤镜参数<!-- raw HTML omitted --> 
+<p>使用movie的滤镜参数<br> 
         <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/cc5ae74901ef0e9468de3f9e99ad9e54.png">
             <img class="mx-auto" alt="cc5ae74901ef0e9468de3f9e99ad9e54.png" src="https://img-service.csdnimg.cn/img_convert/cc5ae74901ef0e9468de3f9e99ad9e54.png" />
         </a>
-    <!-- raw HTML omitted --> FFmpeg给视频加图片水印有两种方式，一种是通过movie指定水印文件路径，另外一种方式是通过filter读取输入文件的流并指定为水印</p>
+    <br> FFmpeg给视频加图片水印有两种方式，一种是通过movie指定水印文件路径，另外一种方式是通过filter读取输入文件的流并指定为水印</p>
 <h3 id="使用movie的方式添加水印">使用movie的方式添加水印</h3>
 <p>给视频input.mp4 添加logo.png的logo ， logo的格式也可以为 <strong>jpeg</strong></p>
 <pre><code>ffmpeg -i input.mp4 -vf  &quot;movie=logo.png[wm]; [in][wm]overlay=30:10[out]&quot; movie.mp4
 </code></pre><p>将透明水印加入到视频中效果会更好一点，当只有纯色背景的logo，可以考虑使用movie 与colorkey滤镜配合做成半透明的效果：</p>
 <pre><code>ffmpeg -i input.mp4 -vf  &quot;movie=logo.png, colorkey=black:1.0:1.0 [wm]; [in][wm]overlay=30:10[out]&quot; colorkey.mp4
 </code></pre>
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/09/ffmpegvideo/">https://zfunnily.github.io/2020/09/ffmpegvideo/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -308,31 +324,34 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -346,6 +365,10 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -372,6 +395,7 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -389,28 +413,28 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -439,9 +463,9 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -618,6 +642,8 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -763,11 +789,11 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -784,6 +810,9 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

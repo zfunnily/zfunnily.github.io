@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>node.js on 留白</title>
+    <title>node.js on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/node.js/</link>
-    <description>Recent content in node.js on 留白</description>
+    <description>Recent content in node.js on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 09 Aug 2020 09:34:36 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/licode/</guid>
-      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;quot;MIN_PORT=30000&amp;quot; -e &amp;quot;MAX_PORT=30050&amp;quot; -e &amp;quot;PUBLIC_IP=your_ip_address&amp;quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个</description>
+      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;quot;MIN_PORT=30000&amp;quot; -e &amp;quot;MAX_PORT=30050&amp;quot; -e &amp;quot;PUBLIC_IP=your_ip_address&amp;quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Wed, 05 Aug 2020 09:47:22 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owtservercomplie/</guid>
-      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。客户端系列web/windows/linux/ios/android都有相应的sd</description>
+      <description>概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。 客</description>
     </item>
     
   </channel>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>共享桌面 on 留白</title>
+    <title>共享桌面 on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/</link>
-    <description>Recent content in 共享桌面 on 留白</description>
+    <description>Recent content in 共享桌面 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 15 Nov 2021 11:23:24 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcdesk/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回</description>
+      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr</description>
     </item>
     
   </channel>

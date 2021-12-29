@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>协程解析二 | 云风的coroutine | 留白</title>
-    <meta property="og:title" content="协程解析二 | 云风的coroutine - 留白">
+    <title>协程解析二 | 云风的coroutine | Zzz记忆</title>
+    <meta property="og:title" content="协程解析二 | 云风的coroutine - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -148,10 +153,10 @@
     <li><a href="#环境">环境</a></li>
     <li><a href="#写一个生产者和消费者的demo">写一个生产者和消费者的<code>demo</code></a>
       <ul>
-        <li><a href="#a-id_68a编译运行"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译&amp;运行</a></li>
-        <li><a href="#a-idvscode_80a在vscode中调试"><!-- raw HTML omitted --><!-- raw HTML omitted -->在vscode中调试</a></li>
-        <li><a href="#a-idcoroutine_resume_94acoroutine_resume"><!-- raw HTML omitted --><!-- raw HTML omitted -->coroutine_resume</a></li>
-        <li><a href="#a-idcoroutine_yield_157acoroutine_yield"><!-- raw HTML omitted --><!-- raw HTML omitted -->coroutine_yield</a></li>
+        <li><a href="#a-id_68a编译运行"><a id="_68"></a>编译&amp;运行</a></li>
+        <li><a href="#a-idvscode_80a在vscode中调试"><a id="vscode_80"></a>在vscode中调试</a></li>
+        <li><a href="#a-idcoroutine_resume_94acoroutine_resume"><a id="coroutine_resume_94"></a>coroutine_resume</a></li>
+        <li><a href="#a-idcoroutine_yield_157acoroutine_yield"><a id="coroutine_yield_157"></a>coroutine_yield</a></li>
       </ul>
     </li>
   </ul>
@@ -266,7 +271,7 @@ int main() {
 <pre><code>procus : procus.c coroutine.c
 	gcc -g -Wall -o $@ $^
 
-</code></pre><h3 id="a-id_68a编译运行"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译&amp;运行</h3>
+</code></pre><h3 id="a-id_68a编译运行"><a id="_68"></a>编译&amp;运行</h3>
 <pre><code>$ make procus
 $ ./procus
 co: 0
@@ -277,7 +282,7 @@ get int 4
 get int 5
 stop consumer
 
-</code></pre><h3 id="a-idvscode_80a在vscode中调试"><!-- raw HTML omitted --><!-- raw HTML omitted -->在vscode中调试</h3>
+</code></pre><h3 id="a-idvscode_80a在vscode中调试"><a id="vscode_80"></a>在vscode中调试</h3>
 <p>按下 F5， 生成<code>lunch.json</code>文件， 在文中加入下列行：</p>
 <pre><code>&quot;program&quot;: &quot;${workspaceFolder}/procus&quot;,
 
@@ -287,7 +292,7 @@ stop consumer
 <li>coroutine_open： 打开调度器， 分配协程共享栈，<code>char stack[STACK_SIZE]</code>大小为 1M- coroutine_new： 创建一个协程，返回协程ID- coroutine_resume： 重新启动一个协程- coroutine_yield： 挂起一个协程
 详细讲讲<code>coroutine_resume</code>和<code>coroutine_yield</code>。</li>
 </ul>
-<h3 id="a-idcoroutine_resume_94acoroutine_resume"><!-- raw HTML omitted --><!-- raw HTML omitted -->coroutine_resume</h3>
+<h3 id="a-idcoroutine_resume_94acoroutine_resume"><a id="coroutine_resume_94"></a>coroutine_resume</h3>
 <p>1.<code>coroutine_new</code>创建一个协程后，协程的状态是<code>COROUTINE_READY</code>，调用<code>coroutine_resume</code>，协程状态变为<code>COROUTINE_RUNNING</code>。</p>
 <pre><code>getcontext(&amp;C-&gt;ctx);
 C-&gt;ctx.uc_stack.ss_sp = S-&gt;stack;
@@ -340,7 +345,7 @@ swapcontext(&amp;S-&gt;main, &amp;C-&gt;ctx);
 <ul>
 <li>拷贝协程私有运行栈<code>C-&gt;stack</code>到共享栈 <code>S-&gt;stack</code>，大小为<code>C-&gt;size</code>- 设置此时正在运行的协程的协程ID，此时协程的状态修改为<code>COROUTINE_RUNNING</code>- 保存此时<code>context</code>到<code>S-&gt;main</code>，切换<code>context</code>到<code>C-&gt;ctx</code>。<code>C-&gt;ctx</code>上运行的函数是<code>mainfunc</code>，也就是<code>product</code>函数。</li>
 </ul>
-<h3 id="a-idcoroutine_yield_157acoroutine_yield"><!-- raw HTML omitted --><!-- raw HTML omitted -->coroutine_yield</h3>
+<h3 id="a-idcoroutine_yield_157acoroutine_yield"><a id="coroutine_yield_157"></a>coroutine_yield</h3>
 <p><code>C-&gt;func</code>函数指针指向的是<code>product</code>函数，<code>product</code>函数中调用了<code>coroutine_yield</code>，有以下代码：</p>
 <pre><code>static void _save_stack(struct coroutine *C, char *top) {
 	char dummy = 0;
@@ -379,9 +384,20 @@ void coroutine_yield(struct schedule * S) {
 </ul>
 <p>至此，coroutine的整体流程就说完了。</p>
 
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2021/03/coroutinetwo/">https://zfunnily.github.io/2021/03/coroutinetwo/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -427,31 +443,34 @@ void coroutine_yield(struct schedule * S) {
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -465,6 +484,10 @@ void coroutine_yield(struct schedule * S) {
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -491,6 +514,7 @@ void coroutine_yield(struct schedule * S) {
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -508,28 +532,28 @@ void coroutine_yield(struct schedule * S) {
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -558,9 +582,9 @@ void coroutine_yield(struct schedule * S) {
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -737,6 +761,8 @@ void coroutine_yield(struct schedule * S) {
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -882,11 +908,11 @@ void coroutine_yield(struct schedule * S) {
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -903,6 +929,9 @@ void coroutine_yield(struct schedule * S) {
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

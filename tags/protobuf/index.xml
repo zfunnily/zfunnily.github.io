@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>protobuf on 留白</title>
+    <title>protobuf on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/protobuf/</link>
-    <description>Recent content in protobuf on 留白</description>
+    <description>Recent content in protobuf on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 25 Jan 2021 14:25:07 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/skynetprotobuf/</guid>
-      <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4版本，于是我找到了解析protobuf的lua库–lua-protobuf。在最</description>
+      <description>概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Fri, 22 Jan 2021 16:41:16 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/pbempty/</guid>
-      <description>参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&amp;lt;!-- --&amp;gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字可以自定义。 //server.proto import &amp;quot;google/protobuf/empty.proto&amp;quot;; service pbservice{ rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty} } 以golang语言为例子，在go中对应的函数为： func</description>
+      <description>参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&amp;lt;!-- --&amp;gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Sun, 13 Dec 2020 10:22:38 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
-      <description>缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防止沾包。我在想都用了protobuf了为啥不直接用grpc呢。一时想不出，于是我</description>
+      <description>缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防</description>
     </item>
     
   </channel>

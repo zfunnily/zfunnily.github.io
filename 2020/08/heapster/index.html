@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>K8S | 集群资源监控 heapster | 留白</title>
-    <meta property="og:title" content="K8S | 集群资源监控 heapster - 留白">
+    <title>K8S | 集群资源监控 heapster | Zzz记忆</title>
+    <meta property="og:title" content="K8S | 集群资源监控 heapster - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -149,7 +154,7 @@
     <li><a href="#下载镜像">下载镜像</a></li>
     <li><a href="#安装">安装</a>
       <ul>
-        <li><a href="#a-id_72a可能会遇到的错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->可能会遇到的错误</a></li>
+        <li><a href="#a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</a></li>
       </ul>
     </li>
     <li><a href="#错误解决">错误解决</a></li>
@@ -244,8 +249,8 @@ done
 <p>查看这些文件，看看所使用的镜像版本是否是你上面所下载的镜像的版本。确认无误之后运行下面的命令即可配置完成:</p>
 <pre><code>$ sudo kubectl create -f  heapster/deploy/kube-config/influxdb/
 </code></pre><p>这样，我们再次进入到k8s-dashboard就可以看到各种以图表形式展示的系统，各个pod的实时的监控数据了。</p>
-<h3 id="a-id_72a可能会遇到的错误"><!-- raw HTML omitted --><!-- raw HTML omitted -->可能会遇到的错误</h3>
-<p>参考链接：<a href="https://cloud.tencent.com/developer/article/1394657">https://cloud.tencent.com/developer/article/1394657</a><!-- raw HTML omitted --> 错误1：</p>
+<h3 id="a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</h3>
+<p>参考链接：<a href="https://cloud.tencent.com/developer/article/1394657">https://cloud.tencent.com/developer/article/1394657</a><br> 错误1：</p>
 <pre><code>error: error validating &quot;test_pod_svc.yaml&quot;: error validating data: ValidationError(Deployment.spec): missing required field &quot;selector&quot; in io.k8s.api.apps.v1.DeploymentSpec; if you choose to ignore these errors, turn validation off with --validate=false
 </code></pre><p>修改文件heapster/deploy/kube-config/influxdb/grafana.yaml</p>
 <pre><code>apiVersion: apps/v1
@@ -290,7 +295,7 @@ unable to recognize &quot;heapster/deploy/kube-config/influxdb/heapster.yaml&quo
 </code></pre><p>执行删除命令</p>
 <pre><code>sudo kubectl delete -f heapster/deploy/kube-config/influxdb/
 </code></pre><h2 id="错误解决">错误解决</h2>
-<p>参考：<a href="https://my.oschina.net/u/4335103/blog/4280880/print">https://my.oschina.net/u/4335103/blog/4280880/print</a><!-- raw HTML omitted --> 查看dashboard状态</p>
+<p>参考：<a href="https://my.oschina.net/u/4335103/blog/4280880/print">https://my.oschina.net/u/4335103/blog/4280880/print</a><br> 查看dashboard状态</p>
 <pre><code>$ sudo kubectl get pods --all-namespaces | grep dashboard
 kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
 kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
@@ -300,7 +305,7 @@ kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Runn
 2020/04/08 01:54:31 [2020-04-08T01:54:31Z] Outcoming response to 192.168.122.21:7788 with 200 status code
 2020/04/08 01:54:31 Getting list of all replication controllers in the cluster
 2020/04/08 01:54:31 Non-critical error occurred during resource retrieval: replicationcontrollers is forbidden: User &quot;system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard&quot; cannot list resource &quot;replicationcontrollers&quot; in API group &quot;&quot; in the namespace &quot;default&quot;
-</code></pre><p>解决方法<!-- raw HTML omitted --> 写入文件<code>vim heapster-rbac.yaml</code></p>
+</code></pre><p>解决方法<br> 写入文件<code>vim heapster-rbac.yaml</code></p>
 <pre><code>kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -316,9 +321,20 @@ rules:
 </code></pre><p>执行生成命令：</p>
 <pre><code>$ sudo kubectl create -f heapster-rbac.yaml
 </code></pre>
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/08/heapster/">https://zfunnily.github.io/2020/08/heapster/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -360,31 +376,34 @@ rules:
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -398,6 +417,10 @@ rules:
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -424,6 +447,7 @@ rules:
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -441,28 +465,28 @@ rules:
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -491,9 +515,9 @@ rules:
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -670,6 +694,8 @@ rules:
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -815,11 +841,11 @@ rules:
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -836,6 +862,9 @@ rules:
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

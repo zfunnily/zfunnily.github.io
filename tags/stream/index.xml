@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>stream on 留白</title>
+    <title>stream on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/stream/</link>
-    <description>Recent content in stream on 留白</description>
+    <description>Recent content in stream on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 16 Aug 2020 23:04:13 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 16 Aug 2020 23:04:13 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/owt-client-javascript/</guid>
-      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js (function initSampleRoom () { icsREST.API.getRooms(pageOption, function(rooms){ ... // 获取房间信息，如果有房间，直接跳出，如果没有房间则创建一个房间 if</description>
+      <description>概述 天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。 获取一个会议室 owt-client-javascript的时候有一个初始化房间的过程 ///owt-client-javascript/src/samples/conference/samplertcservice.js</description>
     </item>
     
   </channel>

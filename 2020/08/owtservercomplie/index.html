@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Owt-server | 编译运行 | 留白</title>
-    <meta property="og:title" content="Owt-server | 编译运行 - 留白">
+    <title>Owt-server | 编译运行 | Zzz记忆</title>
+    <meta property="og:title" content="Owt-server | 编译运行 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
@@ -36,6 +36,11 @@
     
     
     
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 
@@ -46,7 +51,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://zfunnily.github.io/">
-                        留白
+                        Zzz记忆
                     </a>
                 
 
@@ -56,7 +61,7 @@
                 <nav id="nav-menu" class="clearfix">
                     <a class="current" href="https://zfunnily.github.io/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随笔">随笔</a>
+                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
                     
                     <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
                     
@@ -144,29 +149,29 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#a-id_5a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</a></li>
-    <li><a href="#a-idowtserverdocker_14aowt-server的docker版使用"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的Docker版使用</a></li>
-    <li><a href="#a-idowt_server__36aowt-server-源码编译部署"><!-- raw HTML omitted --><!-- raw HTML omitted -->OWT Server 源码编译、部署</a></li>
-    <li><a href="#a-id_nodejs__39a安装-nodejs-环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装 nodejs 环境</a></li>
-    <li><a href="#a-id_43a下载源码"><!-- raw HTML omitted --><!-- raw HTML omitted -->下载源码</a></li>
-    <li><a href="#a-id_51a安装依赖"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装依赖</a></li>
-    <li><a href="#a-idowtserver_62a编译owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译OWT-Server</a></li>
-    <li><a href="#a-id_owtclientjavascript_67a编译-owt-client-javascript"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译 owt-client-javascript</a></li>
-    <li><a href="#a-id_owtserver_79a打包-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->打包 owt-server</a></li>
-    <li><a href="#a-id_owtserver_88a配置-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->配置 owt-server</a></li>
-    <li><a href="#a-id_owtserver_102a运行-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->运行 owt-server</a></li>
-    <li><a href="#a-id_108a验证结果"><!-- raw HTML omitted --><!-- raw HTML omitted -->验证结果</a>
+    <li><a href="#a-id_5a概述"><a id="_5"></a>概述</a></li>
+    <li><a href="#a-idowtserverdocker_14aowt-server的docker版使用"><a id="owtserverDocker_14"></a>owt-server的Docker版使用</a></li>
+    <li><a href="#a-idowt_server__36aowt-server-源码编译部署"><a id="OWT_Server__36"></a>OWT Server 源码编译、部署</a></li>
+    <li><a href="#a-id_nodejs__39a安装-nodejs-环境"><a id="_nodejs__39"></a>安装 nodejs 环境</a></li>
+    <li><a href="#a-id_43a下载源码"><a id="_43"></a>下载源码</a></li>
+    <li><a href="#a-id_51a安装依赖"><a id="_51"></a>安装依赖</a></li>
+    <li><a href="#a-idowtserver_62a编译owt-server"><a id="OWTServer_62"></a>编译OWT-Server</a></li>
+    <li><a href="#a-id_owtclientjavascript_67a编译-owt-client-javascript"><a id="_owtclientjavascript_67"></a>编译 owt-client-javascript</a></li>
+    <li><a href="#a-id_owtserver_79a打包-owt-server"><a id="_owtserver_79"></a>打包 owt-server</a></li>
+    <li><a href="#a-id_owtserver_88a配置-owt-server"><a id="_owtserver_88"></a>配置 owt-server</a></li>
+    <li><a href="#a-id_owtserver_102a运行-owt-server"><a id="_owtserver_102"></a>运行 owt-server</a></li>
+    <li><a href="#a-id_108a验证结果"><a id="_108"></a>验证结果</a>
       <ul>
-        <li><a href="#a-idmcu_110a测试mcu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试mcu功能</a></li>
-        <li><a href="#a-idsfu_112a测试sfu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试sfu功能</a></li>
+        <li><a href="#a-idmcu_110a测试mcu功能"><a id="mcu_110"></a>测试mcu功能</a></li>
+        <li><a href="#a-idsfu_112a测试sfu功能"><a id="sfu_112"></a>测试sfu功能</a></li>
       </ul>
     </li>
-    <li><a href="#a-id_128a问题处理"><!-- raw HTML omitted --><!-- raw HTML omitted -->问题处理</a>
+    <li><a href="#a-id_128a问题处理"><a id="_128"></a>问题处理</a>
       <ul>
-        <li><a href="#a-idchromiumgooglesourcecomwebrtc_136a构建无法下载chromiumgooglesourcecom中的代码webrtc代码的下载使用代理"><!-- raw HTML omitted --><!-- raw HTML omitted -->构建无法下载chromium.googlesource.com中的代码webrtc代码的下载使用代理</a></li>
-        <li><a href="#a-idlicode_146alicode的修改"><!-- raw HTML omitted --><!-- raw HTML omitted -->licode的修改</a></li>
-        <li><a href="#a-idowtserver_159aowt-server的打包问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的打包问题</a></li>
-        <li><a href="#a-idcould_not_run_pkgconfig_166a错误could-not-run-pkg-config"><!-- raw HTML omitted --><!-- raw HTML omitted -->错误Could not run pkg-config</a></li>
+        <li><a href="#a-idchromiumgooglesourcecomwebrtc_136a构建无法下载chromiumgooglesourcecom中的代码webrtc代码的下载使用代理"><a id="chromiumgooglesourcecomwebrtc_136"></a>构建无法下载chromium.googlesource.com中的代码webrtc代码的下载使用代理</a></li>
+        <li><a href="#a-idlicode_146alicode的修改"><a id="licode_146"></a>licode的修改</a></li>
+        <li><a href="#a-idowtserver_159aowt-server的打包问题"><a id="owtserver_159"></a>owt-server的打包问题</a></li>
+        <li><a href="#a-idcould_not_run_pkgconfig_166a错误could-not-run-pkg-config"><a id="Could_not_run_pkgconfig_166"></a>错误Could not run pkg-config</a></li>
       </ul>
     </li>
   </ul>
@@ -219,14 +224,14 @@
         
         
         <div class="post-content">
-            <h2 id="a-id_5a概述"><!-- raw HTML omitted --><!-- raw HTML omitted -->概述</h2>
+            <h2 id="a-id_5a概述"><a id="_5"></a>概述</h2>
 <p>owt是一套完整的webrtc视频会议系统。包含的功能模块有：</p>
 <ol>
 <li>视频会议1. p2p
-服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。<!-- raw HTML omitted --> 客户端系列web/windows/linux/ios/android都有相应的sdk。</li>
+服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。<br> 客户端系列web/windows/linux/ios/android都有相应的sdk。</li>
 </ol>
-<h2 id="a-idowtserverdocker_14aowt-server的docker版使用"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的Docker版使用</h2>
-<p>参考链接:<a href="https://gitee.com/winlinvip/owt-docker">https://gitee.com/winlinvip/owt-docker</a><!-- raw HTML omitted --> 下载镜像</p>
+<h2 id="a-idowtserverdocker_14aowt-server的docker版使用"><a id="owtserverDocker_14"></a>owt-server的Docker版使用</h2>
+<p>参考链接:<a href="https://gitee.com/winlinvip/owt-docker">https://gitee.com/winlinvip/owt-docker</a><br> 下载镜像</p>
 <pre><code>sudo docker run -it -p 3004:3004 -p 3300:3300 -p 8080:8080 -p 60000-60050:60000-60050/udp \
     registry.cn-hangzhou.aliyuncs.com/ossrs/owt:config bash
 
@@ -243,35 +248,35 @@ ip_address = &quot;192.168.1.4&quot; #default: &quot;&quot;
 <pre><code>(cd dist &amp;&amp; ./bin/init-all.sh &amp;&amp; ./bin/start-all.sh)
 
 </code></pre><p>需要有摄像头，访问页面：https://ip:3004,，这样就可以看到画面了。</p>
-<h2 id="a-idowt_server__36aowt-server-源码编译部署"><!-- raw HTML omitted --><!-- raw HTML omitted -->OWT Server 源码编译、部署</h2>
+<h2 id="a-idowt_server__36aowt-server-源码编译部署"><a id="OWT_Server__36"></a>OWT Server 源码编译、部署</h2>
 <ol>
 <li>Ubuntu 18.041. CentOS 7.6</li>
 </ol>
-<h2 id="a-id_nodejs__39a安装-nodejs-环境"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装 nodejs 环境</h2>
+<h2 id="a-id_nodejs__39a安装-nodejs-环境"><a id="_nodejs__39"></a>安装 nodejs 环境</h2>
 <pre><code>apt-get install nodejs  npm -y
 
-</code></pre><h2 id="a-id_43a下载源码"><!-- raw HTML omitted --><!-- raw HTML omitted -->下载源码</h2>
+</code></pre><h2 id="a-id_43a下载源码"><a id="_43"></a>下载源码</h2>
 <pre><code>apt-get update 
 &amp;&amp; apt-get install -y git htop unzip  make wget unzip\
 &amp;&amp;  git config --global user.name z \
 &amp;&amp;  git config --global user.email 2@gmail.com \
 &amp;&amp; git clone -b 4.2.x https://github.com/open-webrtc-toolkit/owt-server.git
 
-</code></pre><h2 id="a-id_51a安装依赖"><!-- raw HTML omitted --><!-- raw HTML omitted -->安装依赖</h2>
+</code></pre><h2 id="a-id_51a安装依赖"><a id="_51"></a>安装依赖</h2>
 <p>注意安装依赖环境的脚本有两个，运行任意一个都可以，但是为了安装简便性，建议运行非交互式安装脚本。</p>
-<p>交互式安装，scripts/installDeps.sh，在安装每个依赖包前需要操作者手动确认yes/no，比较繁琐<!-- raw HTML omitted --> 非交互式安装，./scripts/installDepsUnattended.sh，自动安装所有依赖的软件包，不需要手动确认，方便快捷，推荐使用。</p>
+<p>交互式安装，scripts/installDeps.sh，在安装每个依赖包前需要操作者手动确认yes/no，比较繁琐<br> 非交互式安装，./scripts/installDepsUnattended.sh，自动安装所有依赖的软件包，不需要手动确认，方便快捷，推荐使用。</p>
 <pre><code>cd owt-server-4.3
 ./scripts/installDepsUnattended.sh
  &amp;&amp; \
  npm install  -g node-gyp graceful-fs grunt-cli
 
-</code></pre><h2 id="a-idowtserver_62a编译owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译OWT-Server</h2>
+</code></pre><h2 id="a-idowtserver_62a编译owt-server"><a id="OWTServer_62"></a>编译OWT-Server</h2>
 <pre><code>./scripts/build.js -t mcu --check
 
 </code></pre><blockquote>
 </blockquote>
 <p><a href="https://github.com/open-webrtc-toolkit/owt-server">OWT-Server</a>在GitHub README 上描述的是 -t all，但是对于不支持硬件加速的云主机或者虚拟机来说这样 build 会失败，所以如果不支持硬件加速或者不需要硬件加速的话，请使用-t mcu</p>
-<h2 id="a-id_owtclientjavascript_67a编译-owt-client-javascript"><!-- raw HTML omitted --><!-- raw HTML omitted -->编译 owt-client-javascript</h2>
+<h2 id="a-id_owtclientjavascript_67a编译-owt-client-javascript"><a id="_owtclientjavascript_67"></a>编译 owt-client-javascript</h2>
 <pre><code>git clone -b 4.3x https://github.com/open-webrtc-toolkit/owt-client-javascript.git 
 cd owt-client-javascript/scripts/
 npm install
@@ -281,7 +286,7 @@ grunt
 <pre><code>npm i --unsafe-perm
 然后重新执行`npm install`和`grunt`
 
-</code></pre><h2 id="a-id_owtserver_79a打包-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->打包 owt-server</h2>
+</code></pre><h2 id="a-id_owtserver_79a打包-owt-server"><a id="_owtserver_79"></a>打包 owt-server</h2>
 <pre><code>npm config set unsafe-perm false
 npm --unsafe-perm=true --user=0 i
 cd ~/owt-server-4.3/
@@ -289,8 +294,8 @@ cd ~/owt-server-4.3/
 
 </code></pre><blockquote>
 </blockquote>
-<p>说明：<!-- raw HTML omitted --> pack 成功后，会生成dist目录，dist目录里就是我们运行需要的所有文件。如果你修改了源码，需要重新执行pack。</p>
-<h2 id="a-id_owtserver_88a配置-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->配置 owt-server</h2>
+<p>说明：<br> pack 成功后，会生成dist目录，dist目录里就是我们运行需要的所有文件。如果你修改了源码，需要重新执行pack。</p>
+<h2 id="a-id_owtserver_88a配置-owt-server"><a id="_owtserver_88"></a>配置 owt-server</h2>
 <p>如果你的机器有多块网卡，或者对外提供服务的IP不是你本地网卡的IP，而是公网IP，你需要做如下配置。</p>
 <p><strong>配置公网IP或域名，参考<a href="https://gitee.com/winlinvip/owt-docker#use-internet-name">Use Internet Name</a>。</strong></p>
 <pre><code># vi dist/webrtc_agent/agent.toml
@@ -301,16 +306,16 @@ network_interfaces = [{name=&quot;eth0&quot;,replaced_ip_address=&quot;182.28.12
 [portal]
 ip_address = &quot;182.28.12.12&quot; #default: &quot;&quot;
 
-</code></pre><h2 id="a-id_owtserver_102a运行-owt-server"><!-- raw HTML omitted --><!-- raw HTML omitted -->运行 owt-server</h2>
+</code></pre><h2 id="a-id_owtserver_102a运行-owt-server"><a id="_owtserver_102"></a>运行 owt-server</h2>
 <pre><code>cd ~/owt-server/dist
 ./bin/init-all.sh --deps
 ./bin/start-all.sh
 
-</code></pre><h2 id="a-id_108a验证结果"><!-- raw HTML omitted --><!-- raw HTML omitted -->验证结果</h2>
+</code></pre><h2 id="a-id_108a验证结果"><a id="_108"></a>验证结果</h2>
 <p>如果以上流程都顺利，接下来你就可以访问服务器的demo体验mcu功能了。</p>
-<h3 id="a-idmcu_110a测试mcu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试mcu功能</h3>
+<h3 id="a-idmcu_110a测试mcu功能"><a id="mcu_110"></a>测试mcu功能</h3>
 <p>访问页面：https://ip:3004</p>
-<h3 id="a-idsfu_112a测试sfu功能"><!-- raw HTML omitted --><!-- raw HTML omitted -->测试sfu功能</h3>
+<h3 id="a-idsfu_112a测试sfu功能"><a id="sfu_112"></a>测试sfu功能</h3>
 <p>访问页面：https://ip:3004/?forward=true</p>
 <p>打开OWT的默认演示页面，私有证书需要选择<code>Advanced =&gt; Proceed to 192.168.1.4 (unsafe)</code>：</p>
 <ul>
@@ -320,12 +325,12 @@ ip_address = &quot;182.28.12.12&quot; #default: &quot;&quot;
 访问管理后台，注意启动服务时有个sampleServiceId和sampleServiceKey，打开页面会要求输入这个信息：</li>
 <li><a href="https://192.168.1.4:3300/console">https://192.168.1.4:3300/console</a></li>
 </ul>
-<h2 id="a-id_128a问题处理"><!-- raw HTML omitted --><!-- raw HTML omitted -->问题处理</h2>
-<p>ffmpeg这些依赖在根目录build/libdeps目录下。<!-- raw HTML omitted --> webrtc源码目录在third_party目录下。<!-- raw HTML omitted --> node：请从头到尾使用 v8.15版本的node</p>
+<h2 id="a-id_128a问题处理"><a id="_128"></a>问题处理</h2>
+<p>ffmpeg这些依赖在根目录build/libdeps目录下。<br> webrtc源码目录在third_party目录下。<br> node：请从头到尾使用 v8.15版本的node</p>
 <pre><code>nvm install v8.15 
 nvm use v8.15 
 
-</code></pre><h3 id="a-idchromiumgooglesourcecomwebrtc_136a构建无法下载chromiumgooglesourcecom中的代码webrtc代码的下载使用代理"><!-- raw HTML omitted --><!-- raw HTML omitted -->构建无法下载chromium.googlesource.com中的代码webrtc代码的下载使用代理</h3>
+</code></pre><h3 id="a-idchromiumgooglesourcecomwebrtc_136a构建无法下载chromiumgooglesourcecom中的代码webrtc代码的下载使用代理"><a id="chromiumgooglesourcecomwebrtc_136"></a>构建无法下载chromium.googlesource.com中的代码webrtc代码的下载使用代理</h3>
 <p>需要修改wget代理, 编辑 ~/.wgetrc 文件, 设置如下内容:</p>
 <pre><code>1.  `https_proxy = http://127.0.0.1:8123/`
 2.  `http_proxy = http://127.0.0.1:8123/`
@@ -334,26 +339,37 @@ nvm use v8.15
 5.  `# If you do not want to use proxy at all, set this to off.`
 6.  `use_proxy = on`
 
-</code></pre><h3 id="a-idlicode_146alicode的修改"><!-- raw HTML omitted --><!-- raw HTML omitted -->licode的修改</h3>
-<p>licode 需要用到patch文件 可能会出现removeRemoteCandidate成员变量不存在<!-- raw HTML omitted --> 需要打补丁，是因为脚本<code>installCommonDeps.sh</code>执行不成功导致的：</p>
+</code></pre><h3 id="a-idlicode_146alicode的修改"><a id="licode_146"></a>licode的修改</h3>
+<p>licode 需要用到patch文件 可能会出现removeRemoteCandidate成员变量不存在<br> 需要打补丁，是因为脚本<code>installCommonDeps.sh</code>执行不成功导致的：</p>
 <pre><code>291 行  git am $PATHNAME/patches/licode/*.patch
 
 </code></pre><p>手动执行：</p>
 <pre><code>git am ./source/patches/licode/*.patch
 
 </code></pre><p>source/agent/webrtc/webrtcLib/ 目录下的文件是licode的文件的软链接。需要直接在linux系统上git clone下来使用。而不能从,windows上git clone 然后再上传到linux机器上。</p>
-<h3 id="a-idowtserver_159aowt-server的打包问题"><!-- raw HTML omitted --><!-- raw HTML omitted -->owt-server的打包问题</h3>
+<h3 id="a-idowtserver_159aowt-server的打包问题"><a id="owtserver_159"></a>owt-server的打包问题</h3>
 <p>owt-server的pack的细节，可能会有错误需要执行指令：</p>
 <pre><code>npm --unsafe-perm=true --user=0 i
 
-</code></pre><h3 id="a-idcould_not_run_pkgconfig_166a错误could-not-run-pkg-config"><!-- raw HTML omitted --><!-- raw HTML omitted -->错误Could not run pkg-config</h3>
+</code></pre><h3 id="a-idcould_not_run_pkgconfig_166a错误could-not-run-pkg-config"><a id="Could_not_run_pkgconfig_166"></a>错误Could not run pkg-config</h3>
 <pre><code>apt-get install -y pkg-config
 apt-get install libglib2.0-dev
 
 </code></pre>
+
+            <h4 align="center">--完--</h4>
         </div>
 
         
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2020/08/owtservercomplie/">https://zfunnily.github.io/2020/08/owtservercomplie/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
 
 
         
@@ -387,31 +403,34 @@ apt-get install libglib2.0-dev
 
     
     
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "zfunnily/zfunnily.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
     
 </div>
 
-                    <meting-js
-        server=""
-        type=""
-        mini="true"
-        fixed="true"
-        autoplay=""
-        loop=""
-        id="">
-</meting-js>
+                    
+
+
+
+
+
+
+
+
+
 
 <footer id="footer">
+
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">留白 By 留白</a>
+        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -425,6 +444,10 @@ apt-get install libglib2.0-dev
         <div class="github-badge">
             <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
         </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
     </div>
 </footer>
 
@@ -451,6 +474,7 @@ apt-get install libglib2.0-dev
     <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
 
 
+
                 </div>
 
                 <div id="secondary">
@@ -468,28 +492,28 @@ apt-get install libglib2.0-dev
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法">A*算法</a>
+        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 给网站加一个音乐播放器">Blog | 给网站加一个音乐播放器</a>
+        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 给网站添加暗黑模式">Blog | 给网站添加暗黑模式</a>
+        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/openresty-upload/" title="Openresty三 | 上传文件接口">Openresty三 | 上传文件接口</a>
+        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/11/webrtcdesk/" title="Webrtc二 | 共享桌面">Webrtc二 | 共享桌面</a>
+        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
     </li>
     
 </ul>
 
-<h3 class="widget-title">最近随笔</h3>
+<h3 class="widget-title">随想</h3>
 <ul class="widget-list">
     
     <li>
@@ -518,9 +542,9 @@ apt-get install libglib2.0-dev
     
     <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (3)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
     
@@ -697,6 +721,8 @@ apt-get install libglib2.0-dev
     
     <a href="https://zfunnily.github.io/tags/shell/">shell</a>
     
+    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
+    
     <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
     
     <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
@@ -842,11 +868,11 @@ apt-get install libglib2.0-dev
     <ul class="widget-list">
         
         <li>
-            <a target="_blank" href="https://zfunnily.github.io/" title="留白的博客">留白的博客</a>
+            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
         </li>
         
         <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白的github</a>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
         </li>
         
     </ul>
@@ -863,6 +889,9 @@ apt-get install libglib2.0-dev
             </div>
         </div>
     </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
 </body>
 
 </html>

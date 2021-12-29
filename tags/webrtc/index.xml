@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>webrtc on 留白</title>
+    <title>webrtc on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/webrtc/</link>
-    <description>Recent content in webrtc on 留白</description>
+    <description>Recent content in webrtc on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 15 Nov 2021 11:23:24 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcdesk/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webrtc::DesktopCapturer::Callback, 用于桌面数据捕获与回</description>
+      <description>环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sun, 14 Nov 2021 16:20:31 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/11/webrtcpeerconnection/</guid>
-      <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，需要在应用层和底层一帧数据做一个桥接层，以隔离上下层。 桥接层的代码主要位于med</description>
+      <description>环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，</description>
     </item>
     
   </channel>

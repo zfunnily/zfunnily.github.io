@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>char数组 on 留白</title>
+    <title>char数组 on Zzz记忆</title>
     <link>https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/</link>
-    <description>Recent content in char数组 on 留白</description>
+    <description>Recent content in char数组 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 05 Jan 2021 15:45:36 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 05 Jan 2021 15:45:36 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/01/chararray/</guid>
-      <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*和char数组有什么区别 常用来构成缓冲区。比起指针，用空数组有这样的优势： 不需要</description>
+      <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*</description>
     </item>
     
   </channel>
