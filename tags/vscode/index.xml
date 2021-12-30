@@ -6,11 +6,7 @@
     <description>Recent content in vscode on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 12 Jan 2021 14:25:29 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 12 Jan 2021 14:25:29 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis源码解析 | VScode调试</title>
       <link>https://zfunnily.github.io/2021/01/vscodedebugredis/</link>

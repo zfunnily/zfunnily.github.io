@@ -221,7 +221,7 @@
 以至于没有找到博客，我把改动的部分贴下来：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -253,11 +253,11 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_article_info</span>(url):
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_article_info</span>(url):
     html <span style="color:#000;font-weight:bold">=</span> requests<span style="color:#000;font-weight:bold">.</span>get(url, headers<span style="color:#000;font-weight:bold">=</span>headers)<span style="color:#000;font-weight:bold">.</span>text
     selector <span style="color:#000;font-weight:bold">=</span> parsel<span style="color:#000;font-weight:bold">.</span>Selector(html)
     urls <span style="color:#000;font-weight:bold">=</span> selector<span style="color:#000;font-weight:bold">.</span>css(<span style="color:#d14">&#39;article.blog-list-box &gt; a&#39;</span>)<span style="color:#000;font-weight:bold">.</span>xpath(<span style="color:#d14">&#39;.//@href&#39;</span>)<span style="color:#000;font-weight:bold">.</span>getall() <span style="color:#998;font-style:italic">##改动</span>
-    <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#39;共找到</span><span style="color:#d14">%d</span><span style="color:#d14">篇文章...&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">len</span>(urls))
+    <span style="color:#0086b3">print</span>(<span style="color:#d14">&#39;共找到</span><span style="color:#d14">%d</span><span style="color:#d14">篇文章...&#39;</span> <span style="color:#000;font-weight:bold">%</span> <span style="color:#0086b3">len</span>(urls))
     <span style="color:#000;font-weight:bold">return</span> urls
 <span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">get_html_from_csdn</span>(url):
     <span style="color:#000;font-weight:bold">...</span>
@@ -272,10 +272,10 @@
 
 <span style="color:#998;font-style:italic">## 新增函数, 按需使用</span>
 <span style="color:#998;font-style:italic">## 这个函数可以替换文件中的html标签</span>
-<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relmd</span>(<span style="color:#0086b3">file</span>):
-    <span style="color:#000;font-weight:bold">with</span> <span style="color:#0086b3">open</span>(<span style="color:#0086b3">file</span>, <span style="color:#d14">&#34;r&#34;</span>) <span style="color:#000;font-weight:bold">as</span> r:
+<span style="color:#000;font-weight:bold">def</span> <span style="color:#900;font-weight:bold">relmd</span>(file):
+    <span style="color:#000;font-weight:bold">with</span> <span style="color:#0086b3">open</span>(file, <span style="color:#d14">&#34;r&#34;</span>) <span style="color:#000;font-weight:bold">as</span> r:
         lines<span style="color:#000;font-weight:bold">=</span>r<span style="color:#000;font-weight:bold">.</span>readlines()
-    <span style="color:#000;font-weight:bold">with</span> <span style="color:#0086b3">open</span>(<span style="color:#0086b3">file</span>, <span style="color:#d14">&#34;w&#34;</span>) <span style="color:#000;font-weight:bold">as</span> w:
+    <span style="color:#000;font-weight:bold">with</span> <span style="color:#0086b3">open</span>(file, <span style="color:#d14">&#34;w&#34;</span>) <span style="color:#000;font-weight:bold">as</span> w:
         <span style="color:#000;font-weight:bold">for</span> html <span style="color:#000;font-weight:bold">in</span> lines:
             html <span style="color:#000;font-weight:bold">=</span> html<span style="color:#000;font-weight:bold">.</span>replace(<span style="color:#d14">&#39;&amp;quot;&#39;</span>, <span style="color:#d14">&#39;&#34;&#39;</span>)
             html <span style="color:#000;font-weight:bold">=</span> html<span style="color:#000;font-weight:bold">.</span>replace(<span style="color:#d14">&#39;&amp;amp;&#39;</span>, <span style="color:#d14">&#39;&amp;&#39;</span>)

@@ -6,11 +6,7 @@
     <description>Recent content in masm on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Jan 2021 11:25:39 +0000</lastBuildDate>
-    
-	<atom:link href="https://zfunnily.github.io/tags/masm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 31 Jan 2021 11:25:39 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/masm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>汇编 | AT&amp;T和Intel规范的区别</title>
       <link>https://zfunnily.github.io/2021/01/attandintel/</link>

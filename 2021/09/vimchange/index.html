@@ -220,11 +220,11 @@
 <p>我们需要在 用户目录下创建 <code>.ideavimrc</code> 文件, 并输入以下内容</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0086b3">set</span> keep-english-in-normal 
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0086b3">set</span> keep-english-in-normal 
 <span style="color:#0086b3">set</span> keep-english-in-normal-and-restore-in-insert
 </code></pre></td></tr></table>
 </div>
@@ -262,13 +262,33 @@ com.apple.keylayout.ABC
 &quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,
 &quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;/usr/local/bin/im-select&quot;,
 &quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;/usr/local/bin/im-select {im}&quot;
-</code></pre><p>settings.json 参数解析:
-|参数| 解析 |
-|&ndash;|&ndash;|
-| vim.autoSwitchInputMethod.enable| 控制是否自动切换|
-| vim.autoSwitchInputMethod.defaultIM| 默认的输入法，其实就是在Normal模式下需要输入法|
-| vim.autoSwitchInputMethod.obtainIMCmd| 获得当前输入法的命令| 
-| vim.autoSwitchInputMethod.switchIMCmd| 切换输入法的命令，{im}代表要切换到输入法名，其实就是设置的defaultIM|</p>
+</code></pre><p>settings.json 参数解析:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vim.autoSwitchInputMethod.enable</td>
+<td>控制是否自动切换</td>
+</tr>
+<tr>
+<td>vim.autoSwitchInputMethod.defaultIM</td>
+<td>默认的输入法，其实就是在Normal模式下需要输入法</td>
+</tr>
+<tr>
+<td>vim.autoSwitchInputMethod.obtainIMCmd</td>
+<td>获得当前输入法的命令</td>
+</tr>
+<tr>
+<td>vim.autoSwitchInputMethod.switchIMCmd</td>
+<td>切换输入法的命令，{im}代表要切换到输入法名，其实就是设置的defaultIM</td>
+</tr>
+</tbody>
+</table>
 <p>至此 vscode vim 自动切换输入法就完成了。</p>
 
 

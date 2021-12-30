@@ -215,9 +215,9 @@
     
 寻路步骤</p>
 <ol>
-<li>从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&rdquo;, 开启列表就是一个等待检查方格的列表.</li>
-<li>寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&rdquo;, 并设置它们的&quot;父方格&quot;为A.</li>
-<li>从&quot;开启列表&quot;中删除起点 A, 并将起点 A 加入&quot;关闭列表&rdquo;, &ldquo;关闭列表&quot;中存放的都是不需要再次检查的方格</li>
+<li>从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表.</li>
+<li>寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quot;, 并设置它们的&quot;父方格&quot;为A.</li>
+<li>从&quot;开启列表&quot;中删除起点 A, 并将起点 A 加入&quot;关闭列表&quot;, &ldquo;关闭列表&quot;中存放的都是不需要再次检查的方格</li>
 <li>从 &ldquo;开启列表&rdquo; 中选择 F 值最低的方格 C (绿色起始方块 A 右边的方块), 把它从 &ldquo;开启列表&rdquo; 中删除, 并放到 &ldquo;关闭列表&rdquo; 中.</li>
 <li>检查它所有相邻并且可以到达 (障碍物和 &ldquo;关闭列表&rdquo; 的方格都不考虑) 的方格. 如果这些方格还不在 &ldquo;开启列表&rdquo; 里的话, 将它们加入 &ldquo;开启列表&rdquo;, 计算这些方格的 G, H 和 F 值各是多少, 并设置它们的 &ldquo;父方格&rdquo; 为 C.</li>
 <li>如果某个相邻方格 D 已经在 &ldquo;开启列表&rdquo; 里了, 检查如果用新的路径 (就是经过C 的路径) 到达它的话, G值是否会更低一些, 如果新的G值更低, 那就把它的 &ldquo;父方格&rdquo; 改为目前选中的方格 C, 然后重新计算它的 F 值和 G 值 (H 值不需要重新计算, 因为对于每个方块, H 值是不变的).
@@ -238,7 +238,7 @@
     </summary>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
@@ -402,7 +402,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#999;font-weight:bold;font-style:italic">#! /usr/local/bin/lua</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#999;font-weight:bold;font-style:italic">#! /usr/local/bin/lua</span>
 <span style="color:#998;font-style:italic">--参考： https://blog.csdn.net/u012234115/article/details/47152137</span>
 <span style="color:#000;font-weight:bold">local</span> kCost1<span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>; <span style="color:#998;font-style:italic">--直移一格消耗</span>
 <span style="color:#000;font-weight:bold">local</span> kCost2<span style="color:#000;font-weight:bold">=</span><span style="color:#099">14</span>; <span style="color:#998;font-style:italic">--移一格消耗</span>
@@ -574,7 +574,7 @@ print(<span style="color:#d14">&#34;end.....&#34;</span>)
     </summary>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -591,7 +591,7 @@ print(<span style="color:#d14">&#34;end.....&#34;</span>)
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lua astart.lua
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ lua astart.lua
 
 start .....
 &lt;2,2&gt;
