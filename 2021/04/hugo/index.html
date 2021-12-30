@@ -290,12 +290,12 @@ cd ..
 <p>假设站点的一个[块sections][]名为post, 您想基于年份、月份和文章标题来构建规范化的路径,可以像下面相应的TOML的配置中一样来设置:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#998;font-style:italic">## 路由</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#998;font-style:italic">## 路由</span>
 [permalinks]
   post = <span style="color:#d14">&#34;/:year/:month/:filename/&#34;</span>
 </code></pre></td></tr></table>
@@ -322,7 +322,7 @@ cd ..
 <p>复制主题下的<code>themes/maupassant/layouts/archives/single.html</code>文件 ,放到博客目录下<code>layouts/archives/single.html</code>, 并修改为如下内容：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -343,7 +343,7 @@ cd ..
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
 &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;post-archive&#34;</span>&gt;
     {{ range (where (where .Site.Pages &#34;Type&#34; &#34;in&#34; (slice &#34;post&#34; &#34;posts&#34;)) &#34;Kind&#34; &#34;page&#34;).GroupByDate &#34;2006&#34; }}
         {{if ne .Key &#34;0001&#34;}} 
@@ -883,10 +883,6 @@ cd ..
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>

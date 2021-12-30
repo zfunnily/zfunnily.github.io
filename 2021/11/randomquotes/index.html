@@ -214,12 +214,12 @@
 <p>复制主题里的文件<code>themes/maupassant/static</code>到自己的博客根目录下。新增文件<code>static/js/quotes.json</code>,内容于下：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[
   [<span style="color:#d14">&#34;时来谁不来,时不来谁来&#34;</span>, <span style="color:#d14">&#34;兰陵笑笑声&#34;</span>, <span style="color:#d14">&#34;金瓶梅&#34;</span>]
 ]
 </code></pre></td></tr></table>
@@ -228,7 +228,7 @@
 <p>然后在<code>static/js/totop.js</code> 文件下，新增如下内容:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -258,7 +258,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
 <span style="color:#000;font-weight:bold">function</span> randomQuotesIdx(start <span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>, end <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>) {
     <span style="color:#000;font-weight:bold">return</span> <span style="color:#0086b3">parseInt</span>((end <span style="color:#000;font-weight:bold">-</span> start <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span>) <span style="color:#000;font-weight:bold">*</span> <span style="color:#0086b3">Math</span>.random() <span style="color:#000;font-weight:bold">+</span> start);
 }
@@ -291,13 +291,13 @@ $(<span style="color:#0086b3">document</span>).ready(<span style="color:#000;fon
 </div><p>执行<code>hugo</code>命令,重新生成public文件, 这样就能看到在博客页面上看到随机的名人名言, 如果想要新加名人名言，则在<code>static/js/quotes.json</code>文件新增如下格式的内容：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
   [<span style="color:#d14">&#34;名言&#34;</span>, <span style="color:#d14">&#34;作者&#34;</span>, <span style="color:#d14">&#34;书名&#34;</span>],
   [<span style="color:#d14">&#34;名言&#34;</span>, <span style="color:#d14">&#34;作者&#34;</span>, <span style="color:#d14">&#34;书名&#34;</span>]
 ]
@@ -820,10 +820,6 @@ $(<span style="color:#0086b3">document</span>).ready(<span style="color:#000;fon
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>

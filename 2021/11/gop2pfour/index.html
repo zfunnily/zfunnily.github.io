@@ -230,7 +230,7 @@
 </ol>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
@@ -401,7 +401,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//chat.go
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//chat.go
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">package</span> main
 
 <span style="color:#000;font-weight:bold">const</span> RelayProtocolRequest = <span style="color:#d14">&#34;/relay/relayreq/1.0.0&#34;</span>
@@ -575,24 +575,24 @@
 </div><p>编译</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go build chat.go
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go build chat.go
 go build relay-server.go
 </code></pre></td></tr></table>
 </div>
 </div><p>启动中继服务</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay -sp <span style="color:#099">3001</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay -sp <span style="color:#099">3001</span>
 2021/11/08 15:10:01 Run <span style="color:#d14">&#39;./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd&#39;</span> on another console.
 2021/11/08 15:10:01 You can replace 192.168.0.100 with public IP as well.
 2021/11/08 15:10:01 Waiting <span style="color:#000;font-weight:bold">for</span> incoming connection
@@ -601,12 +601,12 @@ go build relay-server.go
 </div><p>在窗口A启动chat 连上中继</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
 2021/11/08 15:10:09 start ConnectNodeByRelay.... QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom /ip4/172.16.3.205/tcp/56309
 2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw
 </code></pre></td></tr></table>
@@ -614,7 +614,7 @@ go build relay-server.go
 </div><p>在窗口B启动chat 连上中继</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -622,7 +622,7 @@ go build relay-server.go
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
 2021/11/08 15:10:09 start ConnectNodeByRelay.... QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw /ip4/172.16.3.205/tcp/56306
 2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom
 2021/11/08 15:10:14 Cmdp2p start ....
@@ -638,7 +638,7 @@ go build relay-server.go
 <p>这里p2p的打洞流程参考 <code>coordination.go</code>:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -647,7 +647,7 @@ go build relay-server.go
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> (hs <span style="color:#000;font-weight:bold">*</span>Service) <span style="color:#900;font-weight:bold">handleNewStream</span>(s network.Stream) {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#000;font-weight:bold">func</span> (hs <span style="color:#000;font-weight:bold">*</span>Service) <span style="color:#900;font-weight:bold">handleNewStream</span>(s network.Stream) {
 <span style="color:#998;font-style:italic">// Check directionality of the underlying connection.
 </span><span style="color:#998;font-style:italic">// Peer A receives an inbound connection from peer B.
 </span><span style="color:#998;font-style:italic">// Peer A opens a new hole punch stream to peer B.
@@ -1180,10 +1180,6 @@ go build relay-server.go
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>

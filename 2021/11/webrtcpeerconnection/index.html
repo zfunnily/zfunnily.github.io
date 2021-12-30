@@ -234,7 +234,7 @@
 初始化socket连接跟 绑定回调</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -246,7 +246,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#458;font-weight:bold">void</span> PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>InitSocketSignals() {
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#458;font-weight:bold">void</span> PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>InitSocketSignals() {
   control_socket_<span style="color:#000;font-weight:bold">-&gt;</span>SignalCloseEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnClose);  <span style="color:#998;font-style:italic">//连接关闭回调
 </span><span style="color:#998;font-style:italic"></span>  hanging_get_<span style="color:#000;font-weight:bold">-&gt;</span>SignalCloseEvent.connect(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#000;font-weight:bold">&amp;</span>PeerConnectionClient<span style="color:#000;font-weight:bold">::</span>OnClose);     <span style="color:#998;font-style:italic">//同上
 </span><span style="color:#998;font-style:italic"></span>  
@@ -886,10 +886,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>

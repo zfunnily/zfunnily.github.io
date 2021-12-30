@@ -222,7 +222,7 @@ hugo有shortcodes的功能结合这个新标签可以满足我的需求</p>
     </summary>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -230,7 +230,7 @@ hugo有shortcodes的功能结合这个新标签可以满足我的需求</p>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">details</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span> <span style="color:#008080">with</span> <span style="color:#a61717;background-color:#e3d2d2">.</span><span style="color:#008080">Get</span> <span style="color:#008080">1</span><span style="color:#a61717;background-color:#e3d2d2">}}</span> <span style="color:#008080">open</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&#34;</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span><span style="color:#008080">else</span><span style="color:#a61717;background-color:#e3d2d2">}}</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span> <span style="color:#008080">end</span> <span style="color:#a61717;background-color:#e3d2d2">}}</span> &gt;
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">details</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span> <span style="color:#008080">with</span> <span style="color:#a61717;background-color:#e3d2d2">.</span><span style="color:#008080">Get</span> <span style="color:#008080">1</span><span style="color:#a61717;background-color:#e3d2d2">}}</span> <span style="color:#008080">open</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&#34;</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span><span style="color:#008080">else</span><span style="color:#a61717;background-color:#e3d2d2">}}</span> <span style="color:#a61717;background-color:#e3d2d2">{{</span> <span style="color:#008080">end</span> <span style="color:#a61717;background-color:#e3d2d2">}}</span> &gt;
     &lt;<span style="color:#000080">summary</span> <span style="color:#008080">style</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;&#34;</span>&gt;
         {{ with .Get 0}}{{.}}{{else}} 代码 {{ end }}
     &lt;/<span style="color:#000080">summary</span>&gt;
@@ -788,10 +788,6 @@ end.....
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>

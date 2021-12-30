@@ -211,7 +211,7 @@
 <p>数据结构<code>message_queue *q</code>是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用<code>skynet.send(...)</code>, 或者调用<code>skynet.call(...)</code>函数发送消息，其实调用的都是<code>c.send(...)</code>,实际上调用的是c接口：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -232,7 +232,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//lua-skynet.c
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//lua-skynet.c
 </span><span style="color:#998;font-style:italic"></span>lsend(lua_State <span style="color:#000;font-weight:bold">*</span>L) {
 	<span style="color:#000;font-weight:bold">return</span> <span style="color:#900;font-weight:bold">send_message</span>(L, <span style="color:#099">0</span>, <span style="color:#099">2</span>);
 }
@@ -260,7 +260,7 @@
 <p>消费消息主要在<code>threa_work</code>线程中:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -276,7 +276,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.start.c
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.start.c
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">thread_worker</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>p) {
     ...
     <span style="color:#998;font-style:italic">//声明一个空的消息队列
@@ -299,7 +299,7 @@
 <p>继续深入看<code>skynet_context_message_dispatch</code>函数做了哪些事情:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -376,7 +376,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.server.c
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#998;font-style:italic">//skynet.server.c
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">skynet_context_message_dispatch</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_monitor</span> <span style="color:#000;font-weight:bold">*</span>sm, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">message_queue</span> <span style="color:#000;font-weight:bold">*</span>q, <span style="color:#458;font-weight:bold">int</span> weight) {
     ...
     <span style="color:#998;font-style:italic">//从次级消息队列中获取该消息队列属于哪个服务
@@ -987,10 +987,6 @@
 <section class="widget">
     <h3 class="widget-title">友情链接</h3>
     <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://www.pttime.org" title="PTTime网站">PTTime</a>
-        </li>
         
         <li>
             <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
