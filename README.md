@@ -1,13 +1,13 @@
 ## 概述
-这是hugo静态博客的源码
-访问: https://zfunnily.github.io/
+这是hugo写的静态博客
 
+访问: https://zfunnily.github.io/
 ## 主题
 ```
 https://github.com/flysnow-org/maupassant-hugo
 ```
 ## 评论系统
-使用valines
+配置valine评论 教程参考 https://valine.js.org/quickstart.html
 
 ## 随机名言
 添加随机名言,往static/js/quotes.json文件中加入，["名言", "作者", "书名"], 例如：
