@@ -219,90 +219,81 @@
 <li>hugo</li>
 </ul>
 <p>安装brew</p>
-<pre><code>/bin/zsh -c &quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;
 $ brew update
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p>选择中科大源</p>
 </blockquote>
 <p>安装hugo</p>
-<pre><code>$ brew install hugo
-</code></pre><h2 id="使用">使用</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ brew install hugo
+</code></pre></div><h2 id="使用">使用</h2>
 <p>新建站点</p>
-<pre><code>$ hugo new site myblog
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new site myblog
 $ cd myblog
-</code></pre><p>新建一个页面</p>
-<pre><code>$ hugo new about.md
-</code></pre><p>开始服务</p>
-<pre><code>$ hugo server --buildDrafts
-</code></pre><h2 id="主题">主题</h2>
+</code></pre></div><p>新建一个页面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new about.md
+</code></pre></div><p>开始服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo server --buildDrafts
+</code></pre></div><h2 id="主题">主题</h2>
 <p>我使用的主题是<a href="https://blog.jimmycai.com/p/hugo-theme-stack/">hugo-theme-stack</a>
 安装主题</p>
-<pre><code>git 
-</code></pre><h2 id="部署到github个人页面">部署到Github个人页面</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git 
+</code></pre></div><h2 id="部署到github个人页面">部署到Github个人页面</h2>
 <ul>
 <li>在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件</li>
 <li>再创建一个名称为<username>.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容
 进入本地网站目录</li>
 </ul>
-<pre><code>$ cd &lt;YOUR PROJECT&gt;
-</code></pre><p>关联远程blog仓库</p>
-<pre><code>$ git remote add origin git@github.com:jeshs/blog.git
-</code></pre><p>将本地网站全部内容推送到远程blog仓库</p>
-<pre><code>$ git push -u origin master
-</code></pre><p>关闭本地Hugo服务器Ctrl+C，然后删除本地网站目录下的public文件夹,创建public子模块，注意下面是一行命令，不是两行</p>
-<pre><code>$ git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public
-</code></pre><p>然后就可以执行hugo命令，此命令会自动将网站静态内容生成到public文件夹，然后提交到远程blog仓库</p>
-<pre><code>hugo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cd &lt;YOUR PROJECT&gt;
+</code></pre></div><p>关联远程blog仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git remote add origin git@github.com:jeshs/blog.git
+</code></pre></div><p>将本地网站全部内容推送到远程blog仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git push -u origin master
+</code></pre></div><p>关闭本地Hugo服务器Ctrl+C，然后删除本地网站目录下的public文件夹,创建public子模块，注意下面是一行命令，不是两行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public
+</code></pre></div><p>然后就可以执行hugo命令，此命令会自动将网站静态内容生成到public文件夹，然后提交到远程blog仓库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo
 cd public
 git status
 git add .
-git commit -m &quot;first commit&quot;
+git commit -m &#34;first commit&#34;
 git push -u orgin master
-</code></pre><p>过一会就可以打开<username>.github.io查看网站了
+</code></pre></div><p>过一会就可以打开<username>.github.io查看网站了
 注意：本地网站是关联的blog仓库，本地网站下的public文件夹是以子模块的形式关联的github.io仓库，他们是相对独立的</p>
 <h2 id="自动部署脚本">自动部署脚本</h2>
 <p>将以上步骤添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布</p>
-<pre><code>#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+echo -e <span style="color:#e6db74">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
 
-echo -e &quot;\033[0;32mDeploying updates to GitHub...\033[0m&quot;
+<span style="color:#75715e"># Build the project.</span>
+hugo <span style="color:#75715e"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
 
-# Build the project.
-hugo # if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`
-
-# Go To Public folder
+<span style="color:#75715e"># Go To Public folder</span>
 cd public
-# Add changes to git.
+<span style="color:#75715e"># Add changes to git.</span>
 git add .
 
-# Commit changes.
-msg=&quot;rebuilding site `date`&quot;
-if [ $# -eq 1 ]
-  then msg=&quot;$1&quot;
-fi
-git commit -m &quot;$msg&quot;
+<span style="color:#75715e"># Commit changes.</span>
+msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rebuilding site `date`&#34;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -eq <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>
+  <span style="color:#66d9ef">then</span> msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+<span style="color:#66d9ef">fi</span>
+git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 
-# Push source and build repos.
+<span style="color:#75715e"># Push source and build repos.</span>
 git push origin master
 
-# Come Back up to the Project Root
+<span style="color:#75715e"># Come Back up to the Project Root</span>
 cd ..
-</code></pre><h2 id="评论系统">评论系统</h2>
+</code></pre></div><h2 id="评论系统">评论系统</h2>
 <p>配置 utteranc评论,教程参考 <a href="https://utteranc.es/">https://utteranc.es/</a></p>
 <h2 id="路由配置">路由配置</h2>
 <p>假设站点的一个[块sections][]名为post, 您想基于年份、月份和文章标题来构建规范化的路径,可以像下面相应的TOML的配置中一样来设置:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#998;font-style:italic">## 路由</span>
-[permalinks]
-  post = <span style="color:#d14">&#34;/:year/:month/:filename/&#34;</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>对于标签分类的永久链接也可以如此配置，使用标签的复数形式而不是使用标签块。可能仅仅需要配置:slug 或者 :title
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e">## 路由</span>
+[<span style="color:#a6e22e">permalinks</span>]
+  <span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;/:year/:month/:filename/&#34;</span>
+</code></pre></div><p>对于标签分类的永久链接也可以如此配置，使用标签的复数形式而不是使用标签块。可能仅仅需要配置:slug 或者 :title
 永久链接配置的值:</p>
 <ul>
 <li>:year: the 4-digit year 4位数年份</li>
@@ -322,51 +313,26 @@ cd ..
 <h2 id="归档消除0001">归档消除0001</h2>
 <p>我是用的是<a href="https://github.com/flysnow-org/maupassant-hugo">飞雪</a>的主题</p>
 <p>复制主题下的<code>themes/maupassant/layouts/archives/single.html</code>文件 ,放到博客目录下<code>layouts/archives/single.html</code>, 并修改为如下内容：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
-&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;post-archive&#34;</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
+&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-archive&#34;</span>&gt;
     {{ range (where (where .Site.Pages &#34;Type&#34; &#34;in&#34; (slice &#34;post&#34; &#34;posts&#34;)) &#34;Kind&#34; &#34;page&#34;).GroupByDate &#34;2006&#34; }}
         {{if ne .Key &#34;0001&#34;}} 
-        &lt;<span style="color:#000080">h2</span>&gt;{{ .Key }}&lt;/<span style="color:#000080">h2</span>&gt;
-        &lt;<span style="color:#000080">ul</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;listing&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h2</span>&gt;{{ .Key }}&lt;/<span style="color:#f92672">h2</span>&gt;
+        &lt;<span style="color:#f92672">ul</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;listing&#34;</span>&gt;
             {{ range .Pages }}
-            &lt;<span style="color:#000080">li</span>&gt;
-                &lt;<span style="color:#000080">span</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;date&#34;</span>&gt;{{ .Date.Format &#34;2006/01/02&#34; }}&lt;/<span style="color:#000080">span</span>&gt;
-                &lt;<span style="color:#000080">a</span> <span style="color:#008080">href</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;{{ .Permalink }}&#34;</span> <span style="color:#008080">title</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;{{ .Title }}&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#000080">a</span>&gt;
-            &lt;/<span style="color:#000080">li</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;
+                &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;date&#34;</span>&gt;{{ .Date.Format &#34;2006/01/02&#34; }}&lt;/<span style="color:#f92672">span</span>&gt;
+                &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Permalink }}&#34;</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .Title }}&#34;</span>&gt;{{ .Title }}&lt;/<span style="color:#f92672">a</span>&gt;
+            &lt;/<span style="color:#f92672">li</span>&gt;
             {{ end }}
-        &lt;/<span style="color:#000080">ul</span>&gt;
+        &lt;/<span style="color:#f92672">ul</span>&gt;
         {{ end }}
     {{ end }}
 
 
-&lt;/<span style="color:#000080">div</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;
 {{ end }}
-</code></pre></td></tr></table>
-</div>
-</div><p>其实一般不会出现0001的情况，如果出现了，经检查文件中是否有格式不正确的地方，比如，我检查了下，我public/目录下生成了 <code>1/01/except/index.html</code>,
+</code></pre></div><p>其实一般不会出现0001的情况，如果出现了，经检查文件中是否有格式不正确的地方，比如，我检查了下，我public/目录下生成了 <code>1/01/except/index.html</code>,
 所以我检查了下我的 <code>except.md</code>文件，然后发现，文件头部少了 <code>---</code>, 无意中删除了一行，补上后，执行<code>hugo</code>指令，重新生成 public文件，则发现没有这些文件，并且归档路径下也没有0001了。</p>
 
 

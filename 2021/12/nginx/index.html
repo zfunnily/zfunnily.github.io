@@ -232,7 +232,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         nginx.conf
     </summary>
-<pre><code>worker_processes  1;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
 pid        nginx.pid;
 
 events {
@@ -267,7 +267,8 @@ http {
         }
     }
 }
-</code></pre></details>
+</code></pre></div></details>
+<br/>
 <ul>
 <li>root: 表示网站根目录</li>
 <li>autoindex: on 显示目录, off 关闭目录展示</li>
@@ -283,7 +284,7 @@ http {
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         nginx.conf
     </summary>
-<pre><code>    server {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    server {
             listen 80;
             charset utf-8;
             server_name pc.com;
@@ -320,7 +321,8 @@ http {
             index  index.html index.htm;
         }
     }
-</code></pre></details>
+</code></pre></div></details>
+<br/>
 <ul>
 <li>http公共部分的配置我隐去了，参考上面静态网站配置</li>
 <li>pc.com和h5.com两个域名都解析在同一个ip上(也就是网站部署所在的服务器ip)</li>

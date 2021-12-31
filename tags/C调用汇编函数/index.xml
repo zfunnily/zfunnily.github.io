@@ -13,7 +13,7 @@
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/02/compilation/</guid>
-      <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp</description>
+      <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;#34;hello world!\n&amp;#34;); } 搭建AT&amp;amp</description>
     </item>
     
   </channel>

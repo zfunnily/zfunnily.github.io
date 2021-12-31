@@ -220,7 +220,7 @@
 <ul>
 <li>新建客户端连接 poListener-&gt;OnAccept(bRet, pstPerIoData);- 接受消息 poSock-&gt;OnRecv(dwByteTrabsferred);- 发送消息 poSock-&gt;OnSend(dwByteTrabsferred);</li>
 </ul>
-<pre><code>void OnExecute()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void OnExecute()
 {
     CCPSock*		poSock;
          //代表一个套接字类
@@ -247,7 +247,7 @@
         			}
         			else
         			{
-        				INFO(_SDT(&quot;[%s:%d]CCPSock connID=%d error %d, close it, socket :%d &quot;), 
+        				INFO(_SDT(&#34;[%s:%d]CCPSock connID=%d error %d, close it, socket :%d &#34;), 
         					MSG_MARK, poSock-&gt;GetConnectionID(), ::WSAGetLastError(), poSock-&gt;GetSock());
         				poSock-&gt;OnClose();
         			}
@@ -263,7 +263,7 @@
         			}
         			else
         			{
-        				INFO(_SDT(&quot;[%s:%d]CCPSock connID=%d error %d, close it&quot;), 
+        				INFO(_SDT(&#34;[%s:%d]CCPSock connID=%d error %d, close it&#34;), 
         					MSG_MARK, poSock-&gt;GetConnectionID(), ::WSAGetLastError());
         				poSock-&gt;OnClose();
         			}
@@ -282,9 +282,9 @@
    ...
 }
 
-</code></pre><h2 id="a-idccplistener_iocp_78accplistener-iocp监听器"><a id="CCpListener_IOCP_78"></a>CCpListener： IOCP监听器</h2>
+</code></pre></div><h2 id="a-idccplistener_iocp_78accplistener-iocp监听器"><a id="CCpListener_IOCP_78"></a>CCpListener： IOCP监听器</h2>
 <p>IOCP控制类在有新客户端连接上来时调用监听器的OnAccept函数</p>
-<pre><code>void CCpListener::OnAccept(BOOL bSucc, SPerIoData* pstPerIoData)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCpListener::OnAccept(BOOL bSucc, SPerIoData* pstPerIoData)
 {
     ...
     CUCConnection* poConnection = &amp; pConnData-&gt;connection;
@@ -311,9 +311,9 @@
         }
 }
 
-</code></pre><h2 id="a-idccpsock_108accpsock套接字类"><a id="CCPSock_108"></a>CCPSock：套接字类</h2>
+</code></pre></div><h2 id="a-idccpsock_108accpsock套接字类"><a id="CCPSock_108"></a>CCPSock：套接字类</h2>
 <p>在CCPSocket::PostRecv();接收数据到内存， 并且接受数据计数+1</p>
-<pre><code>bool CCPSocket::PostIRecv()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CCPSocket::PostIRecv()
 {
    ...
     if (0 != WSARecv(m_hSock, &amp;m_stRecvIoData.stWsaBuf, 1, &amp;dwReadLen, &amp;dwFlags, &amp;m_stRecvIoData.stOverlapped, NULL))
@@ -322,7 +322,7 @@
 
 		if (errNo != WSA_IO_PENDING)
         {
-            WARN(_SDT(&quot;[%s:%d]post WSARecv failed, errNo=%d, %p &quot;), MSG_MARK, errNo, m_pRecvBuf);
+            WARN(_SDT(&#34;[%s:%d]post WSARecv failed, errNo=%d, %p &#34;), MSG_MARK, errNo, m_pRecvBuf);
 			return false;
         }
 	}
@@ -330,25 +330,25 @@
     ...
 }
 
-</code></pre><p>CCPSock::OnRecv(DWORD dwBytes) 添加一个完整的数据包到接收数据事件中</p>
-<pre><code>void CCPSock::OnRecv(DWORD dwBytes)
+</code></pre></div><p>CCPSock::OnRecv(DWORD dwBytes) 添加一个完整的数据包到接收数据事件中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCPSock::OnRecv(DWORD dwBytes)
 {
         ...
 	CEventMgr::Instance()-&gt;PushRecvEvt(m_pConnData, GetConnectionID(), p, nUsed);
         ...
 }
 
-</code></pre><h2 id="a-idinetsessionmgr_138ainetsessionmgr网络会话管理类"><a id="INetSessionMgr_138"></a>INetSessionMgr：网络会话管理类</h2>
+</code></pre></div><h2 id="a-idinetsessionmgr_138ainetsessionmgr网络会话管理类"><a id="INetSessionMgr_138"></a>INetSessionMgr：网络会话管理类</h2>
 <p>主线程定时调用 INetSessionMgr::GetInstance()-&gt;Update();</p>
-<pre><code>void INetSessionMgr::Update()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void INetSessionMgr::Update()
 {
     mNetModule-&gt;Run();
     ...
 }
 
-</code></pre><h2 id="a-idiucnet_mnetmodule____148aiucnet-mnetmodule--网络模块"><a id="IUCNet_mNetModule____148"></a>IUCNet* mNetModule : 网络模块</h2>
+</code></pre></div><h2 id="a-idiucnet_mnetmodule____148aiucnet-mnetmodule--网络模块"><a id="IUCNet_mNetModule____148"></a>IUCNet* mNetModule : 网络模块</h2>
 <p>获取 NETEVT_RECV 接收数据事件</p>
-<pre><code>bool CUCODENetWin::Run(INT32 nCount)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CUCODENetWin::Run(INT32 nCount)
 {
        ...
         switch(stEvent.nType)
@@ -361,16 +361,16 @@
 		CEventMgr::Instance()-&gt;ReleaseNetEvt(pstEvent); 
 }
 
-</code></pre><pre><code>void CUCODENetWin::_ProcRecvEvt(SRecvEvt* pstEvent)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCODENetWin::_ProcRecvEvt(SRecvEvt* pstEvent)
 {
     ...
     pConnData-&gt;connection.OnRecv(m_pRecvBuf, pstEvent-&gt;nLen);
     ...
 }
 
-</code></pre><h2 id="a-idcclientsession___172acclientsession--客户端会话类"><a id="CClientSession___172"></a>CClientSession : 客户端会话类</h2>
+</code></pre></div><h2 id="a-idcclientsession___172acclientsession--客户端会话类"><a id="CClientSession___172"></a>CClientSession : 客户端会话类</h2>
 <p>客户端连接类 CClientSession 收到数据回调</p>
-<pre><code>void CUCConnection::OnRecv(const char* pData, INT32 nLen)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCConnection::OnRecv(const char* pData, INT32 nLen)
 {
         if(m_nConnStat != CONN_ASSOCIATE)
 		{
@@ -381,24 +381,24 @@
 		m_poSession-&gt;OnRecv(pData, nLen);  //回调
 }
 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 </blockquote>
 <p>ISDSession<strong>m_poSession 基类指针指向子类 CClientSession</strong></p>
 <p>回调到 类 INetSession中，因为 CClientSession 是 INetSession子类</p>
-<pre><code>void UCAPI INetSession::OnRecv(const char* pBuf, UINT32 dwLen){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void UCAPI INetSession::OnRecv(const char* pBuf, UINT32 dwLen){
 ···
 bool bRet = pNode-&gt;mHandle(pMsgData, n32MsgLen, this, pNetHeader-&gt;type);
 ···
 }
 
-</code></pre><p>在类 CClientSession 中 收到第1消息：请求登录，放入登录队列</p>
-<pre><code>bool CClientSession::Msg_Handle_Init(const char* pMsg, int n32MsgLength, INetSession* vthis, int n32MsgID)
+</code></pre></div><p>在类 CClientSession 中 收到第1消息：请求登录，放入登录队列</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CClientSession::Msg_Handle_Init(const char* pMsg, int n32MsgLength, INetSession* vthis, int n32MsgID)
 {
 
 	// 收到第1消息：请求登录，放入登录队列
 	boost::shared_ptr&lt;GCToLS::AskLogin&gt; sLogin = ParseProtoMsg&lt;GCToLS::AskLogin&gt;(pMsg, n32MsgLength);
 	if (!sLogin){
-		//ELOG(LOG_ERROR, &quot;Login Fail With Msg Analysis Error.&quot;);
+		//ELOG(LOG_ERROR, &#34;Login Fail With Msg Analysis Error.&#34;);
 		SDKAsynHandler::GetInstance().PostToLoginFailQueue(eEC_TBInvalidToken, vthis-&gt;GetID());
 		return 0;
 	}
@@ -408,12 +408,12 @@ bool bRet = pNode-&gt;mHandle(pMsgData, n32MsgLen, this, pNetHeader-&gt;type);
 	return true;
 }
 
-</code></pre><pre><code>int SDKAsynHandler::CheckLogin(GCToLS::AskLogin&amp; sAskLogin, int gcnetid){
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int SDKAsynHandler::CheckLogin(GCToLS::AskLogin&amp; sAskLogin, int gcnetid){
 ...
     switch(un32platform)
 	{
         case ePlatform_PC:
-		    sSendData = &quot;PCTest&quot;;
+		    sSendData = &#34;PCTest&#34;;
 		    break;
         }
 
@@ -421,27 +421,27 @@ bool bRet = pNode-&gt;mHandle(pMsgData, n32MsgLen, this, pNetHeader-&gt;type);
 PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserPlatform)un32platform);
 }
 
-</code></pre><h2 id="a-id1_229a生产消费者模型1"><a id="1_229"></a>生产消费者模型1</h2>
+</code></pre></div><h2 id="a-id1_229a生产消费者模型1"><a id="1_229"></a>生产消费者模型1</h2>
 <p>通过 PostMsg()函数生产消息，往队列 m_SDKCallbackQueue 里加数据</p>
-<pre><code>void PostMsg(const char* pMsg, int length, int msgid, int gcnetid, EUserPlatform eplat);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void PostMsg(const char* pMsg, int length, int msgid, int gcnetid, EUserPlatform eplat);
 
-</code></pre><p>在一个线程里，启动一个定时器 newtimer_cb,消费队列 m_SDKCallbackQueue</p>
+</code></pre></div><p>在一个线程里，启动一个定时器 newtimer_cb,消费队列 m_SDKCallbackQueue</p>
 <h2 id="a-id2_239a生产消费者模型2"><a id="2_239"></a>生产消费者模型2</h2>
 <p>SendToInsertData()函数生产消息 推送到队列 m_DBCallbackQueue</p>
-<pre><code>SdkConnector::GetInstance().SendToInsertData(sUserData.uin, sTempInfo, gcnetid);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().SendToInsertData(sUserData.uin, sTempInfo, gcnetid);
 
 
-</code></pre><p>主线程，循环消费 m_DBCallbackQueue</p>
-<pre><code>SdkConnector::GetInstance().Update();
+</code></pre></div><p>主线程，循环消费 m_DBCallbackQueue</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().Update();
 
-</code></pre><p>登录成功, 给客户端推送BS服务器列表</p>
-<pre><code>void SdkConnector::Update(){
+</code></pre></div><p>登录成功, 给客户端推送BS服务器列表</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void SdkConnector::Update(){
 	...
 	PostMsgToGC_NotifyServerList(gcnetid);
 	...
 }
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

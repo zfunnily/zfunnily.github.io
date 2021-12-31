@@ -205,22 +205,22 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。<br> 网上几乎都在说在<code>监视栏</code>添加下面的<code>表达式</code>可以解决问题， 可以查看<code>int arr_name[10]</code>的值：</p>
-<pre><code>*(int(*)[10])arr_name
-</code></pre><p>还有一种表达式也可以查看<code>int arr_name[10]</code>的值：</p>
-<pre><code>*(int*)arr_name@10
-</code></pre><h2 id="获取robj-argv中的robj-">获取<code>robj **argv</code>中的robj *</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(int(*)[10])arr_name
+</code></pre></div><p>还有一种表达式也可以查看<code>int arr_name[10]</code>的值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(int*)arr_name@10
+</code></pre></div><h2 id="获取robj-argv中的robj-">获取<code>robj **argv</code>中的robj *</h2>
 <p>变量类型是<code>robj **argv</code>，获取其中某一个 <code>robj*</code></p>
-<pre><code>*(robj(*)[10])(argv)
-</code></pre><p>第二种写法</p>
-<pre><code>*(robj*)c-&gt;argv@10
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(robj(*)[10])(argv)
+</code></pre></div><p>第二种写法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(robj*)c-&gt;argv@10
+</code></pre></div><blockquote>
 <p>ps: 10表示数组长度</p>
 </blockquote>
 <p>再举一个简单的例子， <code>char* key</code> ，查看<code>char*</code>指向的值。</p>
-<pre><code>*(char(*)[10]key)
-</code></pre><p>也可以用下面的表达式：</p>
-<pre><code>*(char*)key@10
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(char(*)[10]key)
+</code></pre></div><p>也可以用下面的表达式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">*(char*)key@10
+</code></pre></div><blockquote>
 <p>ps: 10表示数组长度</p>
 </blockquote>
 

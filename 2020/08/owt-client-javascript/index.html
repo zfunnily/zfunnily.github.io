@@ -210,7 +210,7 @@
 <p>天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。</p>
 <h2 id="获取一个会议室">获取一个会议室</h2>
 <p>owt-client-javascript的时候有一个初始化房间的过程</p>
-<pre><code>///owt-client-javascript/src/samples/conference/samplertcservice.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
 (function initSampleRoom () {
     
     icsREST.API.getRooms(pageOption, function(rooms){
@@ -225,38 +225,38 @@
 
     if (!sampleRoom) {
         room = {
-        name: 'sampleRoom'
+        name: &#39;sampleRoom&#39;
       };
         //创建房间
       tryCreate(room, function(Id) {
         sampleRoom = Id;
-        console.log('sampleRoom Id:', sampleRoom);
+        console.log(&#39;sampleRoom Id:&#39;, sampleRoom);
       });
     }
 })
-</code></pre><h2 id="获取token">获取token</h2>
+</code></pre></div><h2 id="获取token">获取token</h2>
 <p>从owt-client-javascript的rest-sample.js开始发送获取token请求。</p>
-<pre><code>///owt-client-javascript/src/samples/conference/public/scripts/rest-sample.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/rest-sample.js
 var createToken = function (room, user, role, callback, host) {
   ...
-  send('POST', '/tokens/', body, callback, host);
+  send(&#39;POST&#39;, &#39;/tokens/&#39;, body, callback, host);
 };
-</code></pre><p>请求到本地服务</p>
-<pre><code>///owt-client-javascript/src/samples/conference/samplertcservice.js
-app.post('/tokens', function(req, res) {
+</code></pre></div><p>请求到本地服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
+app.post(&#39;/tokens&#39;, function(req, res) {
     ...
     icsREST.API.createToken(room, user, role, preference, ...});
 }
-</code></pre><p>本地服务开始请求到owt-server的接口创建token，并且返回token</p>
-<pre><code>///owt-server/source/management_api/resource/v1/index.js
-router.post('/rooms/:room/tokens', tokensResource.create);
+</code></pre></div><p>本地服务开始请求到owt-server的接口创建token，并且返回token</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-server/source/management_api/resource/v1/index.js
+router.post(&#39;/rooms/:room/tokens&#39;, tokensResource.create);
 
-</code></pre><h2 id="加入会议并且获取房间中的流">加入会议并且获取房间中的流</h2>
+</code></pre></div><h2 id="加入会议并且获取房间中的流">加入会议并且获取房间中的流</h2>
 <p>加入会议：</p>
-<pre><code>///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
 conference.join(token).then(resp =&gt; {}
-</code></pre><p>通过返回的token解析出host, 连接上房间,并且把房间中的流信息加入到map里</p>
-<pre><code>///owt-client-javascript/src/samples/conference/public/scripts/index.js
+</code></pre></div><p>通过返回的token解析出host, 连接上房间,并且把房间中的流信息加入到map里</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
 signaling.connect(host, isSecured, loginInfo).then((resp) =&gt; {
         //修改连接状态
         signalingState = SignalingState.CONNECTED;   
@@ -264,7 +264,7 @@ signaling.connect(host, isSecured, loginInfo).then((resp) =&gt; {
         if (room.streams !== undefined) {
           for (const st of room.streams) {
             //判断流的状态
-            if (st.type === 'mixed') {      
+            if (st.type === &#39;mixed&#39;) {      
               st.viewport = st.info.label;
             }
             //把房间的流信息加入到列表里
@@ -273,8 +273,8 @@ signaling.connect(host, isSecured, loginInfo).then((resp) =&gt; {
         }
        ...
 }
-</code></pre><p>设置好房间的流后，开始获取本地流并且开始推流。</p>
-<pre><code>///owt-client-javascript/src/samples/conference/public/scripts/index.js
+</code></pre></div><p>设置好房间的流后，开始获取本地流并且开始推流。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
                     ...
 let mediaStream;
 Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
@@ -282,47 +282,47 @@ Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
     let publishOption;
     if (simulcast) {
         publishOption = {video:[
-            {rid: 'q', active: true/*, scaleResolutionDownBy: 4.0*/},
-            {rid: 'h', active: true/*, scaleResolutionDownBy: 2.0*/},
-            {rid: 'f', active: true}
+            {rid: &#39;q&#39;, active: true/*, scaleResolutionDownBy: 4.0*/},
+            {rid: &#39;h&#39;, active: true/*, scaleResolutionDownBy: 2.0*/},
+            {rid: &#39;f&#39;, active: true}
         ]};
     }
 // 获取本地流
     mediaStream = stream;
     localStream = new Owt.Base.LocalStream(
         mediaStream, new Owt.Base.StreamSourceInfo(
-            'mic', 'camera'));
-    $('.local video').get(0).srcObject = stream;
+            &#39;mic&#39;, &#39;camera&#39;));
+    $(&#39;.local video&#39;).get(0).srcObject = stream;
 // 推流
     conference.publish(localStream, publishOption).then(publication =&gt; {
         publicationGlobal = publication;
-        mixStream(myRoom, publication.id, 'common')
-        publication.addEventListener('error', (err) =&gt; {
-            console.log('Publication error: ' + err.error.message);
+        mixStream(myRoom, publication.id, &#39;common&#39;)
+        publication.addEventListener(&#39;error&#39;, (err) =&gt; {
+            console.log(&#39;Publication error: &#39; + err.error.message);
         });
     });
 }, err =&gt; {
-    console.error('Failed to create MediaStream, ' +
+    console.error(&#39;Failed to create MediaStream, &#39; +
         err);
 });
-</code></pre><h2 id="拉流">拉流</h2>
+</code></pre></div><h2 id="拉流">拉流</h2>
 <p>开始拉流</p>
-<pre><code>///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
  for (const stream of streams) {
         if(!subscribeForward){
-          if (stream.source.audio === 'mixed' || stream.source.video ===
-            'mixed') {
+          if (stream.source.audio === &#39;mixed&#39; || stream.source.video ===
+            &#39;mixed&#39;) {
             //开始拉流
             subscribeAndRenderVideo(stream);
           }
-        } else if (stream.source.audio !== 'mixed') {
+        } else if (stream.source.audio !== &#39;mixed&#39;) {
             //开始拉流
             subscribeAndRenderVideo(stream);
         }
     }
 
-</code></pre><p>拉流所在的函数</p>
-<pre><code>function subscribeAndRenderVideo(stream){
+</code></pre></div><p>拉流所在的函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">function subscribeAndRenderVideo(stream){
     let subscirptionLocal=null;
     function subscribeDifferentResolution(stream, resolution){
         subscirptionLocal &amp;&amp; subscirptionLocal.stop();
@@ -345,25 +345,25 @@ Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
     conference.subscribe(stream)
     .then((subscription)=&gt;{
         subscirptionLocal = subscription;
-        let $video = $(`&lt;video controls autoplay id=${stream.id} style=&quot;display:block&quot; &gt;this browser does not supported video tag&lt;/video&gt;`);
+        let $video = $(`&lt;video controls autoplay id=${stream.id} style=&#34;display:block&#34; &gt;this browser does not supported video tag&lt;/video&gt;`);
        $video.get(0).srcObject = stream.mediaStream;
        $p.append($video);
-    }, (err)=&gt;{ console.log('subscribe failed', err);
+    }, (err)=&gt;{ console.log(&#39;subscribe failed&#39;, err);
     });
 
     //流结束的事件
-    stream.addEventListener('ended', () =&gt; {
+    stream.addEventListener(&#39;ended&#39;, () =&gt; {
         removeUi(stream.id);
         $(`#${stream.id}resolutions`).remove();
     });
     // 更新流的事件
-    stream.addEventListener('updated', () =&gt; {
+    stream.addEventListener(&#39;updated&#39;, () =&gt; {
         // Update resolution buttons
-        $p.children('button').remove();
+        $p.children(&#39;button&#39;).remove();
         createResolutionButtons(stream, subscribeDifferentResolution);
     });
 }
-</code></pre><p>至此，owt-server的获取房间，创建token，推本地流和拉会议室的所有流的流程就完成了。</p>
+</code></pre></div><p>至此，owt-server的获取房间，创建token，推本地流和拉会议室的所有流的流程就完成了。</p>
 
 
             <h4 align="center">--完--</h4>

@@ -232,71 +232,36 @@
 <ol>
 <li>创建<code>snlua</code>服务，先调用 <code>snlua_create</code>，</li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">snlua</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#900;font-weight:bold">snlua_create</span>(<span style="color:#458;font-weight:bold">void</span>) {
-    <span style="color:#998;font-style:italic">//初始化snlua结构
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">snlua</span> <span style="color:#000;font-weight:bold">*</span> l <span style="color:#000;font-weight:bold">=</span> skynet_malloc(<span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#000;font-weight:bold">*</span>l));
-	memset(l,<span style="color:#099">0</span>,<span style="color:#000;font-weight:bold">sizeof</span>(<span style="color:#000;font-weight:bold">*</span>l));
-	l<span style="color:#000;font-weight:bold">-&gt;</span>mem_report <span style="color:#000;font-weight:bold">=</span> MEMORY_WARNING_REPORT;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">snlua_create</span>(<span style="color:#66d9ef">void</span>) {
+    <span style="color:#75715e">//初始化snlua结构
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> l <span style="color:#f92672">=</span> skynet_malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
+	memset(l,<span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
+	l<span style="color:#f92672">-&gt;</span>mem_report <span style="color:#f92672">=</span> MEMORY_WARNING_REPORT;
     ...
-    <span style="color:#998;font-style:italic">//初始化一个lua虚拟机
-</span><span style="color:#998;font-style:italic"></span>	l<span style="color:#000;font-weight:bold">-&gt;</span>L <span style="color:#000;font-weight:bold">=</span> lua_newstate(lalloc, l);
+    <span style="color:#75715e">//初始化一个lua虚拟机
+</span><span style="color:#75715e"></span>	l<span style="color:#f92672">-&gt;</span>L <span style="color:#f92672">=</span> lua_newstate(lalloc, l);
     ...
-	<span style="color:#000;font-weight:bold">return</span> l;
+	<span style="color:#66d9ef">return</span> l;
 }
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</code></pre></div><ul>
 <li>创建一个snlua结构，创建一个Lua虚拟机，内存分配指定的是lalloc，目的是为了监控Lua分配的内存。<code>MEMORY_WARNING_REPORT</code>为Lua服务的内存阀值，超过该值，会报警</li>
 </ul>
 <ol start="2">
 <li><code>snlua</code>服务被创建后，初始化，调用的 <code>snlua_init</code></li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">snlua_init</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">snlua</span> <span style="color:#000;font-weight:bold">*</span>l, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span>ctx, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> args) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">snlua_init</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args) {
     ...
-    <span style="color:#998;font-style:italic">//指定回掉函数
-</span><span style="color:#998;font-style:italic"></span>	skynet_callback(ctx, l , launch_cb);
-    <span style="color:#998;font-style:italic">//取本地服务的句柄
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> self <span style="color:#000;font-weight:bold">=</span> skynet_command(ctx, <span style="color:#d14">&#34;REG&#34;</span>, <span style="color:#0086b3">NULL</span>);
-   	<span style="color:#458;font-weight:bold">uint32_t</span> handle_id <span style="color:#000;font-weight:bold">=</span> strtoul(self<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>, <span style="color:#0086b3">NULL</span>, <span style="color:#099">16</span>);
-	<span style="color:#998;font-style:italic">// it must be first message
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">//发送第一条消息，在launc_cb可见
-</span><span style="color:#998;font-style:italic"></span>	skynet_send(ctx, <span style="color:#099">0</span>, handle_id, PTYPE_TAG_DONTCOPY,<span style="color:#099">0</span>, tmp, sz);
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
+    <span style="color:#75715e">//指定回掉函数
+</span><span style="color:#75715e"></span>	skynet_callback(ctx, l , launch_cb);
+    <span style="color:#75715e">//取本地服务的句柄
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;REG&#34;</span>, NULL);
+   	<span style="color:#66d9ef">uint32_t</span> handle_id <span style="color:#f92672">=</span> strtoul(self<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, NULL, <span style="color:#ae81ff">16</span>);
+	<span style="color:#75715e">// it must be first message
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//发送第一条消息，在launc_cb可见
+</span><span style="color:#75715e"></span>	skynet_send(ctx, <span style="color:#ae81ff">0</span>, handle_id, PTYPE_TAG_DONTCOPY,<span style="color:#ae81ff">0</span>, tmp, sz);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</code></pre></div><ul>
 <li>指定初始化的回调函数,launch_cb</li>
 <li>取得本地服务句柄</li>
 <li>向服务发送第一条消息, 打上<code>PTYPE_TAG_DONTCOPY</code>的tag，这表示skynet内部不会重新分配内存拷贝tmp。</li>
@@ -305,95 +270,48 @@
 <li>launch_cb函数处理<code>snlua</code>服务收到自己给自己发送的第一条消息，删除回调函数，并且调用init_cb函数，前面删除了回调，后面必定会把回调函数给加上(下文启动lua服务的时候会在lua脚本里设置回调)，直接看init_cb函数的逻辑。
 代码太长，我就只贴关键的代码：</li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">init_cb</span>(<span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">snlua</span> <span style="color:#000;font-weight:bold">*</span>l, <span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_context</span> <span style="color:#000;font-weight:bold">*</span>ctx, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> args, size_t sz) {
-	lua_State <span style="color:#000;font-weight:bold">*</span>L <span style="color:#000;font-weight:bold">=</span> l<span style="color:#000;font-weight:bold">-&gt;</span>L;
-	l<span style="color:#000;font-weight:bold">-&gt;</span>ctx <span style="color:#000;font-weight:bold">=</span> ctx;
-	lua_gc(L, LUA_GCSTOP, <span style="color:#099">0</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">init_cb</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args, size_t sz) {
+	lua_State <span style="color:#f92672">*</span>L <span style="color:#f92672">=</span> l<span style="color:#f92672">-&gt;</span>L;
+	l<span style="color:#f92672">-&gt;</span>ctx <span style="color:#f92672">=</span> ctx;
+	lua_gc(L, LUA_GCSTOP, <span style="color:#ae81ff">0</span>);
     ...
-    <span style="color:#998;font-style:italic">//LUA_PATH：Lua搜索路径，在config.lua_path指定。
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>path <span style="color:#000;font-weight:bold">=</span> optstring(ctx, <span style="color:#d14">&#34;lua_path&#34;</span>,<span style="color:#d14">&#34;./lualib/?.lua;./lualib/?/init.lua&#34;</span>);
+    <span style="color:#75715e">//LUA_PATH：Lua搜索路径，在config.lua_path指定。
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>path <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_path&#34;</span>,<span style="color:#e6db74">&#34;./lualib/?.lua;./lualib/?/init.lua&#34;</span>);
 	lua_pushstring(L, path);
-	lua_setglobal(L, <span style="color:#d14">&#34;LUA_PATH&#34;</span>);
+	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PATH&#34;</span>);
 
-    <span style="color:#998;font-style:italic">//LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>cpath <span style="color:#000;font-weight:bold">=</span> optstring(ctx, <span style="color:#d14">&#34;lua_cpath&#34;</span>,<span style="color:#d14">&#34;./luaclib/?.so&#34;</span>);
+    <span style="color:#75715e">//LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cpath <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_cpath&#34;</span>,<span style="color:#e6db74">&#34;./luaclib/?.so&#34;</span>);
 	lua_pushstring(L, cpath);
-	lua_setglobal(L, <span style="color:#d14">&#34;LUA_CPATH&#34;</span>);
+	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_CPATH&#34;</span>);
 
-    <span style="color:#998;font-style:italic">//LUA_SERVICE：Lua服务的搜索路径，在config.luaservice指定。
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>service <span style="color:#000;font-weight:bold">=</span> optstring(ctx, <span style="color:#d14">&#34;luaservice&#34;</span>, <span style="color:#d14">&#34;./service/?.lua&#34;</span>);
+    <span style="color:#75715e">//LUA_SERVICE：Lua服务的搜索路径，在config.luaservice指定。
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>service <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;luaservice&#34;</span>, <span style="color:#e6db74">&#34;./service/?.lua&#34;</span>);
 	lua_pushstring(L, service);
-	lua_setglobal(L, <span style="color:#d14">&#34;LUA_SERVICE&#34;</span>);
+	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_SERVICE&#34;</span>);
 
-    <span style="color:#998;font-style:italic">//LUA_PRELOAD：预加载脚本，这些脚本会在所有服务开始之前执行，可以用它来初始化一些全局的设置。执行loader.lua，把要执行的脚本传进去，由loader去加载执行，skynet初始执行bootstrap.lua。
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span>preload <span style="color:#000;font-weight:bold">=</span> skynet_command(ctx, <span style="color:#d14">&#34;GETENV&#34;</span>, <span style="color:#d14">&#34;preload&#34;</span>);
+    <span style="color:#75715e">//LUA_PRELOAD：预加载脚本，这些脚本会在所有服务开始之前执行，可以用它来初始化一些全局的设置。执行loader.lua，把要执行的脚本传进去，由loader去加载执行，skynet初始执行bootstrap.lua。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>preload <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;GETENV&#34;</span>, <span style="color:#e6db74">&#34;preload&#34;</span>);
 	lua_pushstring(L, preload);
-	lua_setglobal(L, <span style="color:#d14">&#34;LUA_PRELOAD&#34;</span>);
-	<span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">char</span> <span style="color:#000;font-weight:bold">*</span> loader <span style="color:#000;font-weight:bold">=</span> optstring(ctx, <span style="color:#d14">&#34;lualoader&#34;</span>, <span style="color:#d14">&#34;./lualib/loader.lua&#34;</span>);
+	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PRELOAD&#34;</span>);
+	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> loader <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lualoader&#34;</span>, <span style="color:#e6db74">&#34;./lualib/loader.lua&#34;</span>);
 
-	<span style="color:#458;font-weight:bold">int</span> r <span style="color:#000;font-weight:bold">=</span> luaL_loadfile(L,loader);
+	<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> luaL_loadfile(L,loader);
     ...
 	lua_pushlstring(L, args, sz);
-    <span style="color:#998;font-style:italic">//执行lua脚本，调用脚本里 skynet.start的地方
-</span><span style="color:#998;font-style:italic"></span>	r <span style="color:#000;font-weight:bold">=</span> lua_pcall(L,<span style="color:#099">1</span>,<span style="color:#099">0</span>,<span style="color:#099">1</span>);
-	<span style="color:#000;font-weight:bold">if</span> (r <span style="color:#000;font-weight:bold">!=</span> LUA_OK) {
-		skynet_error(ctx, <span style="color:#d14">&#34;lua loader error : %s&#34;</span>, lua_tostring(L, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>));
+    <span style="color:#75715e">//执行lua脚本，调用脚本里 skynet.start的地方
+</span><span style="color:#75715e"></span>	r <span style="color:#f92672">=</span> lua_pcall(L,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+	<span style="color:#66d9ef">if</span> (r <span style="color:#f92672">!=</span> LUA_OK) {
+		skynet_error(ctx, <span style="color:#e6db74">&#34;lua loader error : %s&#34;</span>, lua_tostring(L, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
 		report_launcher_error(ctx);
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">1</span>;
+		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
 	}
     ...
-	lua_gc(L, LUA_GCRESTART, <span style="color:#099">0</span>);
+	lua_gc(L, LUA_GCRESTART, <span style="color:#ae81ff">0</span>);
 
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></td></tr></table>
-</div>
-</div><p>总结一下<code>init_cb</code>做的事情，设置lua全局变量：</p>
+</code></pre></div><p>总结一下<code>init_cb</code>做的事情，设置lua全局变量：</p>
 <ul>
 <li>LUA_PATH：Lua搜索路径，在config.lua_path指定。</li>
 <li>LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。</li>
@@ -423,253 +341,122 @@
 <ul>
 <li><code>skynet.newservice()</code>函数实现</li>
 </ul>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">skynet</span>.<span style="color:#900;font-weight:bold">newservice</span>(name, ...)
-	<span style="color:#000;font-weight:bold">return</span> skynet.call(<span style="color:#d14">&#34;.launcher&#34;</span>, <span style="color:#d14">&#34;lua&#34;</span> , <span style="color:#d14">&#34;LAUNCH&#34;</span>, <span style="color:#d14">&#34;snlua&#34;</span>, name, ...)
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>调用的是<code>.launcher</code>服务的<code>LAUNCH</code>函数，参数是<code>snlua name</code>, <code>.launcher</code>服务收到了消息后的处理：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#998;font-style:italic">--launcher.lua</span>
-<span style="color:#000;font-weight:bold">local</span> <span style="color:#000;font-weight:bold">function</span> <span style="color:#900;font-weight:bold">launch_service</span>(service, ...)
-	<span style="color:#000;font-weight:bold">local</span> param <span style="color:#000;font-weight:bold">=</span> table.concat({...}, <span style="color:#d14">&#34; &#34;</span>)
-    <span style="color:#998;font-style:italic">--创建一个服务，并返回服务句柄</span>
-	<span style="color:#000;font-weight:bold">local</span> inst <span style="color:#000;font-weight:bold">=</span> skynet.launch(service, param)
-	<span style="color:#000;font-weight:bold">local</span> session <span style="color:#000;font-weight:bold">=</span> skynet.context()
-    <span style="color:#998;font-style:italic">--取一个resonse闭包，先存起来，等skynet.start返回再调用。</span>
-	<span style="color:#000;font-weight:bold">local</span> response <span style="color:#000;font-weight:bold">=</span> skynet.response()
-	<span style="color:#000;font-weight:bold">if</span> inst <span style="color:#000;font-weight:bold">then</span>
-		services[inst] <span style="color:#000;font-weight:bold">=</span> service <span style="color:#000;font-weight:bold">..</span> <span style="color:#d14">&#34; &#34;</span> <span style="color:#000;font-weight:bold">..</span> param
-		instance[inst] <span style="color:#000;font-weight:bold">=</span> response
-		launch_session[inst] <span style="color:#000;font-weight:bold">=</span> session
-	<span style="color:#000;font-weight:bold">else</span>
-		response(<span style="color:#000;font-weight:bold">false</span>)
-		<span style="color:#000;font-weight:bold">return</span>
-	<span style="color:#000;font-weight:bold">end</span>
-	<span style="color:#000;font-weight:bold">return</span> inst
-<span style="color:#000;font-weight:bold">end</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">newservice</span>(name, ...)
+	<span style="color:#66d9ef">return</span> skynet.call(<span style="color:#e6db74">&#34;.launcher&#34;</span>, <span style="color:#e6db74">&#34;lua&#34;</span> , <span style="color:#e6db74">&#34;LAUNCH&#34;</span>, <span style="color:#e6db74">&#34;snlua&#34;</span>, name, ...)
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>调用的是<code>.launcher</code>服务的<code>LAUNCH</code>函数，参数是<code>snlua name</code>, <code>.launcher</code>服务收到了消息后的处理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--launcher.lua</span>
+<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">launch_service</span>(service, ...)
+	<span style="color:#66d9ef">local</span> param <span style="color:#f92672">=</span> table.concat({...}, <span style="color:#e6db74">&#34; &#34;</span>)
+    <span style="color:#75715e">--创建一个服务，并返回服务句柄</span>
+	<span style="color:#66d9ef">local</span> inst <span style="color:#f92672">=</span> skynet.launch(service, param)
+	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> skynet.context()
+    <span style="color:#75715e">--取一个resonse闭包，先存起来，等skynet.start返回再调用。</span>
+	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> skynet.response()
+	<span style="color:#66d9ef">if</span> inst <span style="color:#66d9ef">then</span>
+		services[inst] <span style="color:#f92672">=</span> service <span style="color:#f92672">..</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">..</span> param
+		instance[inst] <span style="color:#f92672">=</span> response
+		launch_session[inst] <span style="color:#f92672">=</span> session
+	<span style="color:#66d9ef">else</span>
+		response(<span style="color:#66d9ef">false</span>)
+		<span style="color:#66d9ef">return</span>
+	<span style="color:#66d9ef">end</span>
+	<span style="color:#66d9ef">return</span> inst
+<span style="color:#66d9ef">end</span>
 
-<span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">command</span>.<span style="color:#900;font-weight:bold">LAUNCH</span>(_, service, ...)
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCH</span>(_, service, ...)
 	launch_service(service, ...)
-	<span style="color:#000;font-weight:bold">return</span> NORET
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+	<span style="color:#66d9ef">return</span> NORET
+<span style="color:#66d9ef">end</span>
+</code></pre></div><ul>
 <li>实际上只用看<code>launch_service</code>函数即可, <code>service=snlua</code> <code>param=服务名B</code></li>
 <li>通过<code>snlua</code>创建lua服务B，并返回B的句柄</li>
 <li>取一个resonse闭包，先存起来，等<code>skynet.start</code>返回再调用。</li>
 </ul>
 <p>B服务创建后，调用B.lua脚本，调用脚本里的<code>skynet.start</code>函数</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">skynet</span>.<span style="color:#900;font-weight:bold">start</span>(start_func)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">start</span>(start_func)
 	c.callback(skynet.dispatch_message)
-	init_thread <span style="color:#000;font-weight:bold">=</span> skynet.timeout(<span style="color:#099">0</span>, <span style="color:#000;font-weight:bold">function</span>()
+	init_thread <span style="color:#f92672">=</span> skynet.timeout(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">function</span>()
 		skynet.init_service(start_func)
-		init_thread <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nil</span>
-	<span style="color:#000;font-weight:bold">end</span>)
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+		init_thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+	<span style="color:#66d9ef">end</span>)
+<span style="color:#66d9ef">end</span>
+</code></pre></div><ul>
 <li>前文snlua启动的时候，在函数<code>launch_cb</code>中，删除了回调函数，这里<code>c.callback</code>,重新设置了收到消息后的回调。</li>
 <li><code>c.callback</code>,代码在<code>lua-skynet.c</code>中，，以后向这个服务发消息，<code>skynet.dispatch_message</code>就会被调用。</li>
 </ul>
 <p>调用skynet.init_service(start_func):</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">skynet</span>.<span style="color:#900;font-weight:bold">init_service</span>(start)
-	<span style="color:#000;font-weight:bold">local</span> <span style="color:#000;font-weight:bold">function</span> <span style="color:#900;font-weight:bold">main</span>()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">init_service</span>(start)
+	<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>()
 		skynet_require.init_all()
 		start()
-	<span style="color:#000;font-weight:bold">end</span>
-	<span style="color:#000;font-weight:bold">local</span> ok, err <span style="color:#000;font-weight:bold">=</span> xpcall(main, traceback)
-	<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">not</span> ok <span style="color:#000;font-weight:bold">then</span>
-		skynet.error(<span style="color:#d14">&#34;init service failed: &#34;</span> <span style="color:#000;font-weight:bold">..</span> tostring(err))
-		skynet.send(<span style="color:#d14">&#34;.launcher&#34;</span>,<span style="color:#d14">&#34;lua&#34;</span>, <span style="color:#d14">&#34;ERROR&#34;</span>)
+	<span style="color:#66d9ef">end</span>
+	<span style="color:#66d9ef">local</span> ok, err <span style="color:#f92672">=</span> xpcall(main, traceback)
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ok <span style="color:#66d9ef">then</span>
+		skynet.error(<span style="color:#e6db74">&#34;init service failed: &#34;</span> <span style="color:#f92672">..</span> tostring(err))
+		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;ERROR&#34;</span>)
 		skynet.exit()
-	<span style="color:#000;font-weight:bold">else</span>
-		skynet.send(<span style="color:#d14">&#34;.launcher&#34;</span>,<span style="color:#d14">&#34;lua&#34;</span>, <span style="color:#d14">&#34;LAUNCHOK&#34;</span>)
-	<span style="color:#000;font-weight:bold">end</span>
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>B服务在<code>skynet.start</code>调用完毕之后，会发送 <code>LAUNCHOK</code>消息：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">command</span>.<span style="color:#900;font-weight:bold">LAUNCHOK</span>(address)
-	<span style="color:#998;font-style:italic">-- init notice</span>
-	<span style="color:#000;font-weight:bold">local</span> response <span style="color:#000;font-weight:bold">=</span> instance[address]
-	<span style="color:#000;font-weight:bold">if</span> response <span style="color:#000;font-weight:bold">then</span>
-		response(<span style="color:#000;font-weight:bold">true</span>, address)
-		instance[address] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nil</span>
-		launch_session[address] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nil</span>
-	<span style="color:#000;font-weight:bold">end</span>
+	<span style="color:#66d9ef">else</span>
+		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;LAUNCHOK&#34;</span>)
+	<span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>B服务在<code>skynet.start</code>调用完毕之后，会发送 <code>LAUNCHOK</code>消息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCHOK</span>(address)
+	<span style="color:#75715e">-- init notice</span>
+	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> instance[address]
+	<span style="color:#66d9ef">if</span> response <span style="color:#66d9ef">then</span>
+		response(<span style="color:#66d9ef">true</span>, address)
+		instance[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+		launch_session[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+	<span style="color:#66d9ef">end</span>
 
-	<span style="color:#000;font-weight:bold">return</span> NORET
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+	<span style="color:#66d9ef">return</span> NORET
+<span style="color:#66d9ef">end</span>
+</code></pre></div><ul>
 <li>从<code>instance</code>取出<code>response</code>函数，调用它，传入true表示成功，后面跟的address就是skynet.call的返回值，这样A服务终于从<code>skynet.newservice</code>返回，并得到了B的地址(句柄)。</li>
 <li>所有经过skynet.newsevice创建的服务，都会记录在launcher服务中，launcher提供了些函数用于查询服务的状态。</li>
 </ul>
 <h3 id="为什么skynetnewservice阻塞">为什么skynet.newservice阻塞</h3>
 <p>为什么A创建B服务的时候<code>skynet.newservice</code>会阻塞，并等到到B服务创建成功并返回句柄，才继续往下走，请看 skynet.call的代码</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">function</span> <span style="color:#458;font-weight:bold">skynet</span>.<span style="color:#900;font-weight:bold">call</span>(addr, typename, ...)
-	<span style="color:#000;font-weight:bold">local</span> tag <span style="color:#000;font-weight:bold">=</span> session_coroutine_tracetag[running_thread]
-	<span style="color:#000;font-weight:bold">if</span> tag <span style="color:#000;font-weight:bold">then</span>
-		c.trace(tag, <span style="color:#d14">&#34;call&#34;</span>, <span style="color:#099">2</span>)
-		c.send(addr, skynet.PTYPE_TRACE, <span style="color:#099">0</span>, tag)
-	<span style="color:#000;font-weight:bold">end</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">call</span>(addr, typename, ...)
+	<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[running_thread]
+	<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span>
+		c.trace(tag, <span style="color:#e6db74">&#34;call&#34;</span>, <span style="color:#ae81ff">2</span>)
+		c.send(addr, skynet.PTYPE_TRACE, <span style="color:#ae81ff">0</span>, tag)
+	<span style="color:#66d9ef">end</span>
 
-	<span style="color:#000;font-weight:bold">local</span> p <span style="color:#000;font-weight:bold">=</span> proto[typename]
-	<span style="color:#000;font-weight:bold">local</span> session <span style="color:#000;font-weight:bold">=</span> c.send(addr, p.id , <span style="color:#000;font-weight:bold">nil</span> , p.pack(...))
-	<span style="color:#000;font-weight:bold">if</span> session <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">then</span>
-		error(<span style="color:#d14">&#34;call to invalid address &#34;</span> <span style="color:#000;font-weight:bold">..</span> skynet.address(addr))
-	<span style="color:#000;font-weight:bold">end</span>
-	<span style="color:#000;font-weight:bold">return</span> p.unpack(yield_call(addr, session))
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+	<span style="color:#66d9ef">local</span> p <span style="color:#f92672">=</span> proto[typename]
+	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> c.send(addr, p.id , <span style="color:#66d9ef">nil</span> , p.pack(...))
+	<span style="color:#66d9ef">if</span> session <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+		error(<span style="color:#e6db74">&#34;call to invalid address &#34;</span> <span style="color:#f92672">..</span> skynet.address(addr))
+	<span style="color:#66d9ef">end</span>
+	<span style="color:#66d9ef">return</span> p.unpack(yield_call(addr, session))
+<span style="color:#66d9ef">end</span>
+</code></pre></div><ul>
 <li><code>c.send</code>直接返回，阻塞在<code>return p.unpack(yield_call(addr, session))</code></li>
 <li>yield_call是挂起了当前协程</li>
 </ul>
 <p>在B服务创建成功，并且调用<code>skynet.repsonse()</code>之后,往A服务发送了一个协议<code>skynet.PTYPE_RESPONSE</code></p>
-<pre><code>ret = c.send(co_address, skynet.PTYPE_RESPONSE, co_session, pack(...))
-</code></pre><p>A服务收到skynet.PTYPE_RESPONSE协议后,会回到yield_call挂起协程的地方</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#000;font-weight:bold">local</span> <span style="color:#000;font-weight:bold">function</span> <span style="color:#900;font-weight:bold">raw_dispatch_message</span>(prototype, msg, sz, session, source)
-	<span style="color:#998;font-style:italic">-- skynet.PTYPE_RESPONSE = 1, read skynet.h</span>
-	<span style="color:#000;font-weight:bold">if</span> prototype <span style="color:#000;font-weight:bold">==</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">then</span>
-		<span style="color:#000;font-weight:bold">local</span> co <span style="color:#000;font-weight:bold">=</span> session_id_coroutine[session]
-		<span style="color:#000;font-weight:bold">if</span> co <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;BREAK&#34;</span> <span style="color:#000;font-weight:bold">then</span>
-			session_id_coroutine[session] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nil</span>
-		<span style="color:#000;font-weight:bold">elseif</span> co <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">then</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ret = c.send(co_address, skynet.PTYPE_RESPONSE, co_session, pack(...))
+</code></pre></div><p>A服务收到skynet.PTYPE_RESPONSE协议后,会回到yield_call挂起协程的地方</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">raw_dispatch_message</span>(prototype, msg, sz, session, source)
+	<span style="color:#75715e">-- skynet.PTYPE_RESPONSE = 1, read skynet.h</span>
+	<span style="color:#66d9ef">if</span> prototype <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+		<span style="color:#66d9ef">local</span> co <span style="color:#f92672">=</span> session_id_coroutine[session]
+		<span style="color:#66d9ef">if</span> co <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;BREAK&#34;</span> <span style="color:#66d9ef">then</span>
+			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+		<span style="color:#66d9ef">elseif</span> co <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
 			unknown_response(session, source, msg, sz)
-		<span style="color:#000;font-weight:bold">else</span>
-			<span style="color:#000;font-weight:bold">local</span> tag <span style="color:#000;font-weight:bold">=</span> session_coroutine_tracetag[co]
-			<span style="color:#000;font-weight:bold">if</span> tag <span style="color:#000;font-weight:bold">then</span> c.trace(tag, <span style="color:#d14">&#34;resume&#34;</span>) <span style="color:#000;font-weight:bold">end</span>
-			session_id_coroutine[session] <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nil</span>
-            <span style="color:#998;font-style:italic">-- 在这一步重新调用协程函数</span>
-			suspend(co, coroutine_resume(co, <span style="color:#000;font-weight:bold">true</span>, msg, sz))
-		<span style="color:#000;font-weight:bold">end</span>
+		<span style="color:#66d9ef">else</span>
+			<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[co]
+			<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span> c.trace(tag, <span style="color:#e6db74">&#34;resume&#34;</span>) <span style="color:#66d9ef">end</span>
+			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+            <span style="color:#75715e">-- 在这一步重新调用协程函数</span>
+			suspend(co, coroutine_resume(co, <span style="color:#66d9ef">true</span>, msg, sz))
+		<span style="color:#66d9ef">end</span>
         ...
-<span style="color:#000;font-weight:bold">end</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><ul>
 <li>这样就能解释为为什么skynet.newservice是阻塞的了。</li>
 <li>同理skynet.call是阻塞的.</li>
 </ul>

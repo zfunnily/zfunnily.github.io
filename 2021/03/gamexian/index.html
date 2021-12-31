@@ -212,23 +212,23 @@
 <li>win10- sdl1.2- sdlpal- vs2017- DirectX SDK10
 下载<code>sdlpal</code></li>
 </ul>
-<pre><code>$ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git
 
-</code></pre><p>下载<code>sdl1.2</code></p>
-<pre><code>$ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/
+</code></pre></div><p>下载<code>sdl1.2</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/
 
-</code></pre><p>下载 <a href="https://www.microsoft.com/zh-CN/download/confirmation.aspx?id=6812">DirectX SDK10</a>， 双击安装即可</p>
+</code></pre></div><p>下载 <a href="https://www.microsoft.com/zh-CN/download/confirmation.aspx?id=6812">DirectX SDK10</a>， 双击安装即可</p>
 <h2 id="a-idsdlpal_24a编译sdlpal"><a id="sdlpal_24"></a>编译sdlpal</h2>
 <p>打开解决方案： <code>sdlpal\win32\sdlpal.sln</code><br> sdl解决方案右键属性，附加依赖项加入如下内容</p>
-<pre><code>d3d8.lib
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">d3d8.lib
 dxerr8.lib
 uuid.lib
 dxguid.lib
 dinput8.lib
 d3dxof.lib
 
-</code></pre><p>否则会出现如下错误</p>
-<pre><code>1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RzAxis
+</code></pre></div><p>否则会出现如下错误</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RzAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RyAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RxAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_ZAxis
@@ -244,11 +244,11 @@ d3dxof.lib
 1&gt;sdl.lib(SDL\_dx5events.obj) : error LNK2001: 无法解析的外部符号 \_IID\_IDirectInputDevice2A
 1&gt;.\\Release\\sdlpal.exe : fatal error LNK1120: 15 个无法解析的外部命令
 
-</code></pre><h2 id="a-idsdlpal_53a运行sdlpal"><a id="sdlpal_53"></a>运行sdlpal</h2>
+</code></pre></div><h2 id="a-idsdlpal_53a运行sdlpal"><a id="sdlpal_53"></a>运行sdlpal</h2>
 <p>编译出可执行文件<code>sdlpal.exe</code>,运行发现需要资源文件。<br> 下载资源文件</p>
-<pre><code>git clone https://github.com.cnpmjs.org/paldn/sdlpal.git  DATA
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com.cnpmjs.org/paldn/sdlpal.git  DATA
 
-</code></pre><p>资源文件在<code>DATA/Data</code>目录下，运行程序，需要指定资源文件。</p>
+</code></pre></div><p>资源文件在<code>DATA/Data</code>目录下，运行程序，需要指定资源文件。</p>
 <blockquote>
 </blockquote>
 <p><code>sdlpal</code>配置文件和可执行文件在同级目录：<code>sdlpal.cfg</code></p>

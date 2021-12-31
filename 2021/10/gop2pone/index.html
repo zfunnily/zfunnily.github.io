@@ -213,149 +213,75 @@
         
         <div class="post-content">
             <h2 id="代码下载">代码下载</h2>
-<pre><code>git clone https://github.com/libp2p/go-libp2p.git
-</code></pre><h2 id="chat实例分析">chat实例分析</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/libp2p/go-libp2p.git
+</code></pre></div><h2 id="chat实例分析">chat实例分析</h2>
 <p>进入目录<code>go-libp2p/examples/chat/</code>, 编译 <code>go build</code>
 先看<code>README.md</code>， 可以了解到使用chat的方式</p>
 <ol>
 <li>在节点 B</li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -sp <span style="color:#099">3001</span>
-2021/10/28 11:01:25 Run <span style="color:#d14">&#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39;</span> on another console.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -sp <span style="color:#ae81ff">3001</span>
+2021/10/28 11:01:25 Run <span style="color:#e6db74">&#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39;</span> on another console.
 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well.
-2021/10/28 11:01:25 Waiting <span style="color:#000;font-weight:bold">for</span> incoming connection
+2021/10/28 11:01:25 Waiting <span style="color:#66d9ef">for</span> incoming connection
 2021/10/28 11:01:25 
 2021/10/28 11:03:03 Got a new stream!
 &gt; hello
-</code></pre></td></tr></table>
-</div>
-</div><ol start="2">
+</code></pre></div><ol start="2">
 <li>在节点 A, 如果B有公网IP，则把<code>127.0.0.1</code>替换成B的公网IP</li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs
-2021/10/28 11:03:03 This node<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>s multiaddresses:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs
+2021/10/28 11:03:03 This node<span style="color:#960050;background-color:#1e0010">&#39;</span>s multiaddresses:
 2021/10/28 11:03:03  - /ip4/172.16.3.205/tcp/53084
 2021/10/28 11:03:03  - /ip4/127.0.0.1/tcp/53084
 2021/10/28 11:03:03 
 2021/10/28 11:03:03 Established connection to destination
 &gt; hello
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="作为被连接方b">作为被连接方B</h2>
+</code></pre></div><h2 id="作为被连接方b">作为被连接方B</h2>
 <p>先看代码:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//创建host
-</span><span style="color:#998;font-style:italic"></span>h, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort, r)
-<span style="color:#000;font-weight:bold">...</span>
-<span style="color:#998;font-style:italic">//监听 并设置回调Handler streamHandler
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">startPeer</span>(ctx context.Context, h host.Host, streamHandler network.StreamHandler) {
-	<span style="color:#998;font-style:italic">// Set a function as stream handler.
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">// This function is called when a peer connects, and starts a stream with this protocol.
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">// Only applies on the receiving side.
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">//给host 设置协议&#39;/chat/1.0.0&#39;, 并设置回调~~~~
-</span><span style="color:#998;font-style:italic"></span>	h.<span style="color:#900;font-weight:bold">SetStreamHandler</span>(<span style="color:#d14">&#34;/chat/1.0.0&#34;</span>, streamHandler)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">makeHost</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">sourcePort</span>, <span style="color:#a6e22e">r</span>)
+<span style="color:#f92672">...</span>
+<span style="color:#75715e">//监听 并设置回调Handler streamHandler
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">startPeer</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">h</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">streamHandler</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">StreamHandler</span>) {
+	<span style="color:#75715e">// Set a function as stream handler.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// This function is called when a peer connects, and starts a stream with this protocol.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Only applies on the receiving side.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//给host 设置协议&#39;/chat/1.0.0&#39;, 并设置回调~~~~
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">SetStreamHandler</span>(<span style="color:#e6db74">&#34;/chat/1.0.0&#34;</span>, <span style="color:#a6e22e">streamHandler</span>)
 
-	<span style="color:#998;font-style:italic">// Let&#39;s get the actual TCP port from our listen multiaddr, in case we&#39;re using 0 (default; random available port).
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">var</span> port <span style="color:#458;font-weight:bold">string</span>
-	<span style="color:#000;font-weight:bold">for</span> _, la <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> h.<span style="color:#900;font-weight:bold">Network</span>().<span style="color:#900;font-weight:bold">ListenAddresses</span>() {
-		<span style="color:#000;font-weight:bold">if</span> p, err <span style="color:#000;font-weight:bold">:=</span> la.<span style="color:#900;font-weight:bold">ValueForProtocol</span>(multiaddr.P_TCP); err <span style="color:#000;font-weight:bold">==</span> <span style="color:#000;font-weight:bold">nil</span> {
-			port = p
-			<span style="color:#000;font-weight:bold">break</span>
+	<span style="color:#75715e">// Let&#39;s get the actual TCP port from our listen multiaddr, in case we&#39;re using 0 (default; random available port).
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">port</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">la</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Network</span>().<span style="color:#a6e22e">ListenAddresses</span>() {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">p</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">la</span>.<span style="color:#a6e22e">ValueForProtocol</span>(<span style="color:#a6e22e">multiaddr</span>.<span style="color:#a6e22e">P_TCP</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">port</span> = <span style="color:#a6e22e">p</span>
+			<span style="color:#66d9ef">break</span>
 		}
 	}
 
-	<span style="color:#000;font-weight:bold">if</span> port <span style="color:#000;font-weight:bold">==</span> <span style="color:#d14">&#34;&#34;</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;was not able to find actual local port&#34;</span>)
-		<span style="color:#000;font-weight:bold">return</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;was not able to find actual local port&#34;</span>)
+		<span style="color:#66d9ef">return</span>
 	}
 
-	log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Run &#39;./chat -d /ip4/127.0.0.1/tcp/%v/p2p/%s&#39; on another console.\n&#34;</span>, port, h.<span style="color:#900;font-weight:bold">ID</span>().<span style="color:#900;font-weight:bold">Pretty</span>())
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;You can replace 127.0.0.1 with public IP as well.&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Waiting for incoming connection&#34;</span>)
-	log.<span style="color:#900;font-weight:bold">Println</span>()
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Run &#39;./chat -d /ip4/127.0.0.1/tcp/%v/p2p/%s&#39; on another console.\n&#34;</span>, <span style="color:#a6e22e">port</span>, <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">ID</span>().<span style="color:#a6e22e">Pretty</span>())
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;You can replace 127.0.0.1 with public IP as well.&#34;</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Waiting for incoming connection&#34;</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>()
 }
-<span style="color:#998;font-style:italic">//回调的handler
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">handleStream</span>(s network.Stream) {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Got a new stream!&#34;</span>)
+<span style="color:#75715e">//回调的handler
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handleStream</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Got a new stream!&#34;</span>)
 
-	<span style="color:#998;font-style:italic">// Create a buffer stream for non blocking read and write.
-</span><span style="color:#998;font-style:italic"></span>	rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
+	<span style="color:#75715e">// Create a buffer stream for non blocking read and write.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">rw</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReadWriter</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">s</span>), <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">s</span>))
 
-	<span style="color:#000;font-weight:bold">go</span> <span style="color:#900;font-weight:bold">readData</span>(rw)
-	<span style="color:#000;font-weight:bold">go</span> <span style="color:#900;font-weight:bold">writeData</span>(rw)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">readData</span>(<span style="color:#a6e22e">rw</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">writeData</span>(<span style="color:#a6e22e">rw</span>)
 
-	<span style="color:#998;font-style:italic">// stream &#39;s&#39; will stay open until you close it (or the other side closes it).
-</span><span style="color:#998;font-style:italic"></span>}
-</code></pre></td></tr></table>
-</div>
-</div><p>从代码上看，节点B所做的事情：</p>
+	<span style="color:#75715e">// stream &#39;s&#39; will stay open until you close it (or the other side closes it).
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>从代码上看，节点B所做的事情：</p>
 <ol>
 <li>创建host</li>
 <li>设置协议id，并设置回调, 有种写接口接口的即视感。</li>
@@ -363,103 +289,52 @@
 </ol>
 <h2 id="作为连接方a">作为连接方A</h2>
 <p>代码如下:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#998;font-style:italic">//创建host
-</span><span style="color:#998;font-style:italic"></span>h, err <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">makeHost</span>(<span style="color:#000;font-weight:bold">*</span>sourcePort, r)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">makeHost</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">sourcePort</span>, <span style="color:#a6e22e">r</span>)
 
-<span style="color:#998;font-style:italic">//建立对等连接发送消息
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">startPeerAndConnect</span>(ctx context.Context, h host.Host, destination <span style="color:#458;font-weight:bold">string</span>) (<span style="color:#000;font-weight:bold">*</span>bufio.ReadWriter, <span style="color:#458;font-weight:bold">error</span>) {
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;This node&#39;s multiaddresses:&#34;</span>)
-	<span style="color:#000;font-weight:bold">for</span> _, la <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> h.<span style="color:#900;font-weight:bold">Addrs</span>() {
-		log.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34; - %v\n&#34;</span>, la)
+<span style="color:#75715e">//建立对等连接发送消息
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">startPeerAndConnect</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">h</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">destination</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">ReadWriter</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;This node&#39;s multiaddresses:&#34;</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">la</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Addrs</span>() {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34; - %v\n&#34;</span>, <span style="color:#a6e22e">la</span>)
 	}
-	log.<span style="color:#900;font-weight:bold">Println</span>()
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>()
 
-	<span style="color:#998;font-style:italic">//通过被连接方B的地址destination创建 maddr
-</span><span style="color:#998;font-style:italic"></span>	maddr, err <span style="color:#000;font-weight:bold">:=</span> multiaddr.<span style="color:#900;font-weight:bold">NewMultiaddr</span>(destination)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+	<span style="color:#75715e">//通过被连接方B的地址destination创建 maddr
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">maddr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">multiaddr</span>.<span style="color:#a6e22e">NewMultiaddr</span>(<span style="color:#a6e22e">destination</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
 
-	<span style="color:#998;font-style:italic">// Extract the peer ID from the multiaddr.
-</span><span style="color:#998;font-style:italic"></span>	info, err <span style="color:#000;font-weight:bold">:=</span> peer.<span style="color:#900;font-weight:bold">AddrInfoFromP2pAddr</span>(maddr)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+	<span style="color:#75715e">// Extract the peer ID from the multiaddr.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">info</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfoFromP2pAddr</span>(<span style="color:#a6e22e">maddr</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
 
-	<span style="color:#998;font-style:italic">//把被连接方B的地址加入到连接方A的host中
-</span><span style="color:#998;font-style:italic"></span>	h.<span style="color:#900;font-weight:bold">Peerstore</span>().<span style="color:#900;font-weight:bold">AddAddrs</span>(info.ID, info.Addrs, peerstore.PermanentAddrTTL)
+	<span style="color:#75715e">//把被连接方B的地址加入到连接方A的host中
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">Peerstore</span>().<span style="color:#a6e22e">AddAddrs</span>(<span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">Addrs</span>, <span style="color:#a6e22e">peerstore</span>.<span style="color:#a6e22e">PermanentAddrTTL</span>)
 
-	<span style="color:#998;font-style:italic">//用被连接方B的ID新建一个数据流, 并与被连接方A监听的协议设置成一致的 &#34;/chat/1.0.0&#34;
-</span><span style="color:#998;font-style:italic"></span>	s, err <span style="color:#000;font-weight:bold">:=</span> h.<span style="color:#900;font-weight:bold">NewStream</span>(context.<span style="color:#900;font-weight:bold">Background</span>(), info.ID, <span style="color:#d14">&#34;/chat/1.0.0&#34;</span>)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Println</span>(err)
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+	<span style="color:#75715e">//用被连接方B的ID新建一个数据流, 并与被连接方A监听的协议设置成一致的 &#34;/chat/1.0.0&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">NewStream</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#e6db74">&#34;/chat/1.0.0&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
 	}
-	log.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;Established connection to destination&#34;</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Established connection to destination&#34;</span>)
 
-	<span style="color:#998;font-style:italic">// Create a buffered stream so that read and writes are non blocking.
-</span><span style="color:#998;font-style:italic"></span>	rw <span style="color:#000;font-weight:bold">:=</span> bufio.<span style="color:#900;font-weight:bold">NewReadWriter</span>(bufio.<span style="color:#900;font-weight:bold">NewReader</span>(s), bufio.<span style="color:#900;font-weight:bold">NewWriter</span>(s))
+	<span style="color:#75715e">// Create a buffered stream so that read and writes are non blocking.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">rw</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReadWriter</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">s</span>), <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">s</span>))
 
-	<span style="color:#000;font-weight:bold">return</span> rw, <span style="color:#000;font-weight:bold">nil</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rw</span>, <span style="color:#66d9ef">nil</span>
 }
 
-<span style="color:#998;font-style:italic">// 创建读写协程 
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">go</span> <span style="color:#900;font-weight:bold">writeData</span>(rw)
-<span style="color:#000;font-weight:bold">go</span> <span style="color:#900;font-weight:bold">readData</span>(rw)
-</code></pre></td></tr></table>
-</div>
-</div><p>被连接方别名为B， 连接方别名为A
+<span style="color:#75715e">// 创建读写协程 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">writeData</span>(<span style="color:#a6e22e">rw</span>)
+<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">readData</span>(<span style="color:#a6e22e">rw</span>)
+</code></pre></div><p>被连接方别名为B， 连接方别名为A
 从代码上看，节点A所做的事情：</p>
 <ol>
 <li>A创建host</li>

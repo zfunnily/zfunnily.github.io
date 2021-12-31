@@ -206,32 +206,32 @@
         <div class="post-content">
             <h2 id="libevent-实现定时器流程">libevent 实现定时器流程</h2>
 <p>首先初始化libevent库，并保存返回的指针</p>
-<pre><code>struct event_base * base = event_init();  
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct event_base * base = event_init();  
+</code></pre></div><blockquote>
 <p>实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。</p>
 </blockquote>
 <p>初始化事件event，设置回调函数和关注的事件 ,事实上这等价于调用event_set(&amp;ev, -1, 0, timer_cb, NULL);</p>
-<pre><code>evtimer_set(&amp;ev, timer_cb, NULL);  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">evtimer_set(&amp;ev, timer_cb, NULL);  
 
-</code></pre><p>设置event从属的event_base ,这一步相当于指明event要注册到哪个event_base实例上；</p>
-<pre><code>event_base_set(base, &amp;ev); 
+</code></pre></div><p>设置event从属的event_base ,这一步相当于指明event要注册到哪个event_base实例上；</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">event_base_set(base, &amp;ev); 
 
-</code></pre><p>是正式的添加事件的时候了</p>
-<pre><code>event_add(&amp;ev, timeout);  
+</code></pre></div><p>是正式的添加事件的时候了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">event_add(&amp;ev, timeout);  
 
-</code></pre><p>基本信息都已设置完成，只要简单的调用event_add()函数即可完成，其中timeout是定时值；<br> 这一步相当于调用Reactor::register_handler()函数注册事件。
+</code></pre></div><p>基本信息都已设置完成，只要简单的调用event_add()函数即可完成，其中timeout是定时值；<br> 这一步相当于调用Reactor::register_handler()函数注册事件。
 程序进入无限循环，等待就绪事件并执行事件处理</p>
-<pre><code>event_base_dispatch(base);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">event_base_dispatch(base);
 
-</code></pre><h2 id="完整的示例代码">完整的示例代码</h2>
-<pre><code>#include &lt;iostream&gt;
-#include &quot;event.h&quot;
+</code></pre></div><h2 id="完整的示例代码">完整的示例代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &#34;event.h&#34;
 
 struct timeval tv;
 struct event ev;
 static void time_cb(evutil_socket_t fd, short event, void* arg)
 {
-    std::cout &lt;&lt; &quot;timer wakeup&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &#34;timer wakeup&#34; &lt;&lt; std::endl;
     event_add(&amp;ev, &amp;tv); // reschedule timer
 }
 
@@ -250,18 +250,18 @@ int main()
     return 1;
 }
 
-</code></pre><h2 id="libevent实现定时器的第二种方法">libevent实现定时器的第二种方法</h2>
+</code></pre></div><h2 id="libevent实现定时器的第二种方法">libevent实现定时器的第二种方法</h2>
 <p>定义一个定时器事件，使用event_new()创建了一个定时器事件.替换上述的步骤2和3</p>
-<pre><code>struct event *event_new(struct event_base *, evutil_socket_t, short, event_callback_fn, void *);
-</code></pre><p>完整示例代码</p>
-<pre><code>#include &lt;iostream&gt;
-#include &quot;event.h&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct event *event_new(struct event_base *, evutil_socket_t, short, event_callback_fn, void *);
+</code></pre></div><p>完整示例代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;iostream&gt;
+#include &#34;event.h&#34;
 
 struct timeval tv;
 struct event ev;
 static void time_cb(evutil_socket_t fd, short event, void* arg)
 {
-    std::cout &lt;&lt; &quot;timer wakeup&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &#34;timer wakeup&#34; &lt;&lt; std::endl;
 }
 
 int main()
@@ -276,7 +276,7 @@ int main()
     event_base_dispatch(base);
     return 1;
 }
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

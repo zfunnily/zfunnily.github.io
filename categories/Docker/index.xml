@@ -13,7 +13,7 @@
       <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/</guid>
-      <description>docker查看退出码指令 $ docker ps --filter &amp;quot;status=exited&amp;quot; $ docker inspect container-id --format=&#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
+      <description>docker查看退出码指令 $ docker ps --filter &amp;#34;status=exited&amp;#34; $ docker inspect container-id --format=&amp;#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&amp;#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
     </item>
     
     <item>

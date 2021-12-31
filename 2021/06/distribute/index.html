@@ -215,117 +215,117 @@
 </ul>
 <h2 id="a-idgolang_15agolang代码"><a id="golang_15"></a>golang代码</h2>
 <p>推荐使用redis的连接池</p>
-<pre><code>pool := redis.Pool{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pool := redis.Pool{
 		MaxIdle:         8,
 		MaxActive:       0,
 		IdleTimeout:     100,
 		Dial: func() (redis.Conn, error) {
-			return redis.Dial(&quot;tcp&quot;, &quot;127.0.0.1:6100&quot;)
+			return redis.Dial(&#34;tcp&#34;, &#34;127.0.0.1:6100&#34;)
 		},
 	}
 
-</code></pre><p>通过lua脚本保证<code>获取锁/加过期时间</code>和<code>获取锁的值/删除锁</code>为原子操作</p>
-<pre><code>var (
+</code></pre></div><p>通过lua脚本保证<code>获取锁/加过期时间</code>和<code>获取锁的值/删除锁</code>为原子操作</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">var (
 	updateLockExpireUidScript = redis.NewScript(1, `
-		local res = redis.call(&quot;SETNX&quot;, KEYS[1], ARGV[1]) 
+		local res = redis.call(&#34;SETNX&#34;, KEYS[1], ARGV[1]) 
 		if res == 1 then
-			return redis.call(&quot;EXPIRE&quot;, KEYS[1], ARGV[2])
+			return redis.call(&#34;EXPIRE&#34;, KEYS[1], ARGV[2])
 		end
 		return res
 	`)
 	deleteLockByUidScript = redis.NewScript(1, `
-		local res = redis.call(&quot;GET&quot;, KEYS[1]) 
+		local res = redis.call(&#34;GET&#34;, KEYS[1]) 
 		if res == ARGV[1] then
-			return redis.call(&quot;DEL&quot;, KEYS[1])
+			return redis.call(&#34;DEL&#34;, KEYS[1])
 		end
 		return res 
 	`)
 )
 
-</code></pre><p>golang完整代码</p>
-<pre><code>package main
+</code></pre></div><p>golang完整代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;fmt&quot;
-	&quot;github.com/gomodule/redigo/redis&quot;
-	&quot;time&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/gomodule/redigo/redis&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
 )
 
-func getLock(conn redis.Conn, key []string, uid int, expire int) bool  {
-	lock := false
-	for !lock {
-		res, err := updateLockExpireUidScript.Do(conn, key, uid, expire)
-		if err != nil {
-			fmt.Println(err.Error())
-			break
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getLock</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Conn</span>, <span style="color:#a6e22e">key</span> []<span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">uid</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">expire</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>  {
+	<span style="color:#a6e22e">lock</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+	<span style="color:#66d9ef">for</span> !<span style="color:#a6e22e">lock</span> {
+		<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">updateLockExpireUidScript</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">uid</span>, <span style="color:#a6e22e">expire</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+			<span style="color:#66d9ef">break</span>
 		}
-		if res.(int64) == 1 {
-			lock = true
-			fmt.Println(&quot;获取锁成功&quot;)
-			return true
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">res</span>.(<span style="color:#66d9ef">int64</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> {
+			<span style="color:#a6e22e">lock</span> = <span style="color:#66d9ef">true</span>
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;获取锁成功&#34;</span>)
+			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 		}
 	}
-	fmt.Println(&quot;获取锁失败&quot;)
-	return false
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;获取锁失败&#34;</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 }
 
-func delLock(conn redis.Conn, key []string, uid int) bool {
-	_, err := deleteLockByUidScript.Do(conn, key, uid)
-	if err != nil {
-		fmt.Println(&quot;删除锁失败&quot;)
-		fmt.Println(err.Error())
-		return false
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">delLock</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Conn</span>, <span style="color:#a6e22e">key</span> []<span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">uid</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">deleteLockByUidScript</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">uid</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;删除锁失败&#34;</span>)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 	}
-	fmt.Println(&quot;删除锁成功&quot;)
-	return true
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;删除锁成功&#34;</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 }
 
-var (
-	updateLockExpireUidScript = redis.NewScript(1, `
-		local res = redis.call(&quot;SETNX&quot;, KEYS[1], ARGV[1]) 
-		if res == 1 then
-			return redis.call(&quot;EXPIRE&quot;, KEYS[1], ARGV[2])
-		end
-		return res
-	`)
-	deleteLockByUidScript = redis.NewScript(1, `
-		local res = redis.call(&quot;GET&quot;, KEYS[1]) 
-		if res == ARGV[1] then
-			return redis.call(&quot;DEL&quot;, KEYS[1])
-		end
-		return res 
-	`)
+<span style="color:#66d9ef">var</span> (
+	<span style="color:#a6e22e">updateLockExpireUidScript</span> = <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">NewScript</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">`
+</span><span style="color:#e6db74">		local res = redis.call(&#34;SETNX&#34;, KEYS[1], ARGV[1]) 
+</span><span style="color:#e6db74">		if res == 1 then
+</span><span style="color:#e6db74">			return redis.call(&#34;EXPIRE&#34;, KEYS[1], ARGV[2])
+</span><span style="color:#e6db74">		end
+</span><span style="color:#e6db74">		return res
+</span><span style="color:#e6db74">	`</span>)
+	<span style="color:#a6e22e">deleteLockByUidScript</span> = <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">NewScript</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">`
+</span><span style="color:#e6db74">		local res = redis.call(&#34;GET&#34;, KEYS[1]) 
+</span><span style="color:#e6db74">		if res == ARGV[1] then
+</span><span style="color:#e6db74">			return redis.call(&#34;DEL&#34;, KEYS[1])
+</span><span style="color:#e6db74">		end
+</span><span style="color:#e6db74">		return res 
+</span><span style="color:#e6db74">	`</span>)
 )
 
-func main() {
-	pool := redis.Pool{
-		MaxIdle:         8,
-		MaxActive:       0,
-		IdleTimeout:     100,
-		Dial: func() (redis.Conn, error) {
-			return redis.Dial(&quot;tcp&quot;, &quot;127.0.0.1:6100&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">pool</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Pool</span>{
+		<span style="color:#a6e22e">MaxIdle</span>:         <span style="color:#ae81ff">8</span>,
+		<span style="color:#a6e22e">MaxActive</span>:       <span style="color:#ae81ff">0</span>,
+		<span style="color:#a6e22e">IdleTimeout</span>:     <span style="color:#ae81ff">100</span>,
+		<span style="color:#a6e22e">Dial</span>: <span style="color:#66d9ef">func</span>() (<span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Conn</span>, <span style="color:#66d9ef">error</span>) {
+			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#e6db74">&#34;127.0.0.1:6100&#34;</span>)
 		},
 	}
-	key := []string{&quot;distribute&quot;}
-	uid := 1
-	expire := 20
+	<span style="color:#a6e22e">key</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;distribute&#34;</span>}
+	<span style="color:#a6e22e">uid</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#a6e22e">expire</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">20</span>
 
-	fmt.Println(time.Now())
-	for i:= 1; i&lt; 100; i++ {
-		go func() {
-			conn := pool.Get()
-			if getLock(conn, key, uid, expire) {
-				fmt.Println(&quot;开始执行逻辑...&quot;)
-				fmt.Println(&quot;逻辑结束，删除锁&quot;)
-				delLock(conn, key, uid)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>())
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span>&lt; <span style="color:#ae81ff">100</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+			<span style="color:#a6e22e">conn</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pool</span>.<span style="color:#a6e22e">Get</span>()
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">getLock</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">uid</span>, <span style="color:#a6e22e">expire</span>) {
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;开始执行逻辑...&#34;</span>)
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;逻辑结束，删除锁&#34;</span>)
+				<span style="color:#a6e22e">delLock</span>(<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">uid</span>)
 			}
 		}()
 	}
-	fmt.Println(time.Now())
-	time.Sleep(time.Second * 20)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>())
+	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">20</span>)
 }
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

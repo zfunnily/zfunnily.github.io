@@ -204,18 +204,18 @@
         <div class="post-content">
             <h2 id="参数为空的grpc请求怎么定义">参数为空的grpc请求怎么定义</h2>
 <p>google protobuf已经提供了空参数</p>
-<pre><code>//empty.proto
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//empty.proto
 
 message Empty {&lt;!-- --&gt;}
-</code></pre><p>使用方法，在proto文件中导入<code>empty.proto</code>, 定义一个请求参数和返回值为空的函数<code>emptyfunction</code>， 函数名字可以自定义。</p>
-<pre><code>//server.proto
-import &quot;google/protobuf/empty.proto&quot;;
+</code></pre></div><p>使用方法，在proto文件中导入<code>empty.proto</code>, 定义一个请求参数和返回值为空的函数<code>emptyfunction</code>， 函数名字可以自定义。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//server.proto
+import &#34;google/protobuf/empty.proto&#34;;
 service  pbservice{
     rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty}
 }
-</code></pre><p>以golang语言为例子，在go中对应的函数为：</p>
-<pre><code>func (s *service) emptyfunction(ctx context.Context, g *google_protobuf.Empty) (*google_protobuf.Empty, error) {&lt;!-- --&gt;}
-</code></pre><p>到此，空请求和空返回的grpc就完成了。</p>
+</code></pre></div><p>以golang语言为例子，在go中对应的函数为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (s *service) emptyfunction(ctx context.Context, g *google_protobuf.Empty) (*google_protobuf.Empty, error) {&lt;!-- --&gt;}
+</code></pre></div><p>到此，空请求和空返回的grpc就完成了。</p>
 
 
             <h4 align="center">--完--</h4>

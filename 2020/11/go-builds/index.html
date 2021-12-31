@@ -210,46 +210,46 @@
 <h2 id="a-idbuild_tags_8abuild-tags自定义配置"><a id="build_tags_8"></a>build tags自定义配置</h2>
 <p>这个可以使用 build tags 来自定义配置。</p>
 <p>假设我们现在有两个环境，dev 和 prod，那么我们可以新建一个 config 文件夹，放入 dev.go 和 prod.go 两个文件，分别写入对应的配置，如下所示。<strong>同一个包，同样的变量名，但是不会因为重复声明和报错，因为这里加了 tag</strong>，如下所示：</p>
-<pre><code>// +build dev
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build dev
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">config</span>
 
-package config
-
-// config list
-const (
-	Redis = &quot;redis://127.0.0.1:6379/0&quot;
+<span style="color:#75715e">// config list
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> (
+	<span style="color:#a6e22e">Redis</span> = <span style="color:#e6db74">&#34;redis://127.0.0.1:6379/0&#34;</span>
 )
 
-</code></pre><pre><code>// +build prod
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build prod
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">config</span>
 
-package config
-
-const (
-	Redis = &quot;redis://192.168.0.1:6379&quot;
+<span style="color:#66d9ef">const</span> (
+	<span style="color:#a6e22e">Redis</span> = <span style="color:#e6db74">&#34;redis://192.168.0.1:6379&#34;</span>
 )
 
-</code></pre><p>在 main 包引入尝试以下：</p>
-<pre><code>$ go build -o=test -tags=dev .
+</code></pre></div><p>在 main 包引入尝试以下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go build -o=test -tags=dev .
 $ ./test
 redis://127.0.0.1:6379/0
 $ go build -o=test -tags=prod .
 $ ./test
 redis://192.168.0.1:6379
 
-</code></pre><p>可以了！</p>
+</code></pre></div><p>可以了！</p>
 <p>gin-gonic 也有一个编译指令，用于把 encoding/json 包替换为处理速度更快 jsoniter 包，也是使用的构建 tag：<code>$ go build -tags=jsoniter .</code>，实现也很简单，一个加上<code>// +build jsoniter</code>另一个默认使用<code>// +build !jsoniter</code>。</p>
 <p>这里 tag 前加上 ! 就代表非构建指令下的配置。</p>
 <p>tag 常用于交叉编译的配置，例如有些文件针对 linux 而有些文件针对 windows，底层使用的系统调用是不同的，go 源码就包含了很多这样的构建指令：</p>
 <p>一行中使用空格就代表“或”的关系，下面指的是在<code>linux</code>或者<code>darwin</code>环境中使用。</p>
-<pre><code>// +build linux darwin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux darwin
 
-</code></pre><p>如果要指定“与”的关系，那么可以使用<code>,</code>，下面就是指使用 “linux” 和 “cgo” 两个环境同时满足才使用。</p>
-<pre><code>// +build linux,cgo
+</code></pre></div><p>如果要指定“与”的关系，那么可以使用<code>,</code>，下面就是指使用 “linux” 和 “cgo” 两个环境同时满足才使用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux,cgo
 
-</code></pre><p>当然可以分成多行，下面的指令表述和上面一致：</p>
-<pre><code>// +build linux
+</code></pre></div><p>当然可以分成多行，下面的指令表述和上面一致：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux
 // +build cgo
 
-</code></pre><p>更多还有 ignore 指令来忽略使用这个文件，更多可以查看<a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">官方文档</a></p>
+</code></pre></div><p>更多还有 ignore 指令来忽略使用这个文件，更多可以查看<a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">官方文档</a></p>
 
 
             <h4 align="center">--完--</h4>

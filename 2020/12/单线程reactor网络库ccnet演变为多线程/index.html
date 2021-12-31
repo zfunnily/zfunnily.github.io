@@ -265,7 +265,7 @@
 <li><code>EventLoopThread</code>: on loop peer thread，负责开启一个线程一个事件循环。- <code>EventLoopThreadPool</code>: 是事件循环线程池。- <code>TcpServer</code>: 增加<code>EventLoopThreadPool</code>组件。
 修改<code>TcpServer.cc</code>的代码：</li>
 </ul>
-<pre><code>void TcpServer::newConnection(int sockfd, const TcpAddr&amp; peerAddr)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void TcpServer::newConnection(int sockfd, const TcpAddr&amp; peerAddr)
 {
     ...
     EventLoop *io_loop = thread_pool_-&gt;getNextLoop(); //增加的行
@@ -278,8 +278,8 @@
     io_loop-&gt;runInLoop(std::bind(&amp;TcpConnection::connectEstablished, conn));//修改的行
 }
 
-</code></pre><p>修改<code>TcpServer.h</code>代码：</p>
-<pre><code>class TcpServer
+</code></pre></div><p>修改<code>TcpServer.h</code>代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class TcpServer
 {
     ...
     //thread pool
@@ -287,10 +287,10 @@
     ...
 }
 
-</code></pre><p>修改example中的<code>EchoServer.cc</code>代码：</p>
-<pre><code>server_.setNumThreads(4); //设置线程数量
+</code></pre></div><p>修改example中的<code>EchoServer.cc</code>代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server_.setNumThreads(4); //设置线程数量
 
-</code></pre><p>详细代码请参考：github: <a href="https://github.com/diycat1024/ccnet">https://github.com/diycat1024/ccnet</a></p>
+</code></pre></div><p>详细代码请参考：github: <a href="https://github.com/diycat1024/ccnet">https://github.com/diycat1024/ccnet</a></p>
 
 
             <h4 align="center">--完--</h4>

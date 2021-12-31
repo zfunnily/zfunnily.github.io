@@ -209,18 +209,18 @@
         <div class="post-content">
             <h2 id="a-id_3a缘由"><a id="_3"></a>缘由</h2>
 <p>在看statefluset基础教程的时候遇到pod状态为pending</p>
-<pre><code>kubectl describe pod web-0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl describe pod web-0
 
-</code></pre><p>日志内容是</p>
-<pre><code> pod has unbound immediate PersistentVolumeClaims
+</code></pre></div><p>日志内容是</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> pod has unbound immediate PersistentVolumeClaims
 
-</code></pre><p>于是就对PV和PVC进行研究。<br> 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述<code>kubectl describe pod podname</code>或者日志<code>kubectl logs -f podname</code>，自然知晓怎么处理pod的状态为pending的问题了。</p>
+</code></pre></div><p>于是就对PV和PVC进行研究。<br> 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV和PVC的概念弄懂了，还有学会查看pod的描述<code>kubectl describe pod podname</code>或者日志<code>kubectl logs -f podname</code>，自然知晓怎么处理pod的状态为pending的问题了。</p>
 <h2 id="a-idpv_15apv"><a id="PV_15"></a>PV</h2>
 <p>PersistentVolume（PV）是集群之中的一块网络存储。跟 Node 一样，也是集群的资源。PV 跟 Volume (卷) 类似，不过会有独立于 Pod 的生命周期。比如一个 NFS 的 PV 可以定义为</p>
-<pre><code>apiVersion: v1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &quot;www-data-pv&quot;
+  name: &#34;www-data-pv&#34;
   labels:
     name: www-data-pv
     release: stable
@@ -234,7 +234,7 @@ spec:
     path: /nfs/www/data
     server: 192.168.84.75
 
-</code></pre><p>PV 的访问模式（accessModes）有三种：</p>
+</code></pre></div><p>PV 的访问模式（accessModes）有三种：</p>
 <ul>
 <li>ReadWriteOnce（RWO）：是最基本的方式，可读可写，但只支持被单个节点挂载。- ReadOnlyMany（ROX）：可以以只读的方式被多个节点挂载。- ReadWriteMany（RWX）：这种存储可以以读写的方式被多个节点共享。不是每一种存储都支持这三种方式，像共享方式，目前支持的还比较少，比较常用的是 NFS。在 PVC 绑定 PV 时通常根据两个条件来绑定，一个是存储的大小，另一个就是访问模式。
 PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 PV 该如何操作）也有三种</li>
@@ -242,7 +242,7 @@ PV 的回收策略（persistentVolumeReclaimPolicy，即 PVC 释放卷的时候 
 </ul>
 <h2 id="a-idpvc_49apvc"><a id="PVC_49"></a>PVC</h2>
 <p>PV 是存储资源，而 PersistentVolumeClaim (PVC) 是对 PV 的请求。PVC 跟 Pod 类似：Pod 消费 Node 资源，而 PVC 消费 PV 资源；Pod 能够请求 CPU 和内存资源，而 PVC 请求特定大小和访问模式的数据卷。</p>
-<pre><code>apiVersion: v1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: www-data-pvc
@@ -257,13 +257,13 @@ spec:
       name: www-data-pv
       release: stable
 
-</code></pre><p>PVC 可以直接挂载到 Pod/StatefulSet 中：</p>
-<pre><code>apiVersion: apps/v1
+</code></pre></div><p>PVC 可以直接挂载到 Pod/StatefulSet 中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: web
 spec:
-  serviceName: &quot;nginx&quot;
+  serviceName: &#34;nginx&#34;
   replicas: 2
   selector:
     matchLabels:
@@ -287,8 +287,8 @@ spec:
           persistentVolumeClaim:
             claimName:  www-data-pvc
 
-</code></pre><h2 id="a-id_103a完整示例"><a id="_103"></a>完整示例</h2>
-<pre><code>apiVersion: v1
+</code></pre></div><h2 id="a-id_103a完整示例"><a id="_103"></a>完整示例</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: Service
 metadata:
   name: nginx
@@ -307,7 +307,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &quot;www-data-pv&quot;
+  name: &#34;www-data-pv&#34;
   labels:
     name: www-data-pv
     release: stable
@@ -344,7 +344,7 @@ kind: StatefulSet
 metadata:
   name: web
 spec:
-  serviceName: &quot;nginx&quot;
+  serviceName: &#34;nginx&#34;
   replicas: 2
   selector:
     matchLabels:
@@ -368,10 +368,10 @@ spec:
           persistentVolumeClaim:
             claimName:  www-data-pvc
 
-</code></pre><p>nfs是需要另外安装的</p>
-<pre><code>sudo apt install nfs-kernel-server
+</code></pre></div><p>nfs是需要另外安装的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt install nfs-kernel-server
 
-</code></pre><p>需要手动创建一个NFS Volume，具体细节看这里：<a href="nfs%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8.md">nfs的安装和使用</a></p>
+</code></pre></div><p>需要手动创建一个NFS Volume，具体细节看这里：<a href="nfs%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8.md">nfs的安装和使用</a></p>
 <h2 id="a-idstorageclass_192astorageclass"><a id="StorageClass_192"></a>StorageClass</h2>
 <p>上面通过手动的方式创建了一个 NFS Volume，这在管理很多 Volume 的时候不太方便。Kubernetes 还提供了<a href="https://kubernetes.io/docs/user-guide/persistent-volumes/#storageclasses">StorageClass</a>来动态创建 PV，不仅节省了管理员的时间，还可以封装不同类型的存储供 PVC 选用。</p>
 <p>StorageClass 包括四个部分</p>
@@ -381,20 +381,20 @@ spec:
 </ul>
 <h2 id="a-idkuberntes__pv__206a技巧kuberntes-中无法删除-pv-的解决方法"><a id="Kuberntes__PV__206"></a>技巧：Kuberntes 中无法删除 PV 的解决方法</h2>
 <p>系统内有一个已经不再使用的 PV ，已经删除了与其关联的 Pod 及 PVC ，并对其执行了删除命令，但是无法正常删除，一直出于如下状态：</p>
-<pre><code>$ kubectl get pv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl get pv
 NAME          CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                                    STORAGECLASS          REASON   AGE
 pv-nfs-gysl   1Gi        RWO            Recycle          Terminating   default/www-vct-statefulset-pvc-gysl-0   managed-nfs-storage            22h
 
-</code></pre><p>解决方法</p>
-<pre><code>$ kubectl patch pv pv-nfs-gysl -p '{&quot;metadata&quot;:{&quot;finalizers&quot;:null}}'
+</code></pre></div><p>解决方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl patch pv pv-nfs-gysl -p &#39;{&#34;metadata&#34;:{&#34;finalizers&#34;:null}}&#39;
 persistentvolume/pv-nfs-gysl patched
 $ kubectl get pv
 No resources found.
 
-</code></pre><p>通过系统帮助信息，我们可以获取patch的简要使用说明：</p>
-<pre><code>patch： 使用 strategic merge patch 更新一个资源的 field(s)
+</code></pre></div><p>通过系统帮助信息，我们可以获取patch的简要使用说明：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">patch： 使用 strategic merge patch 更新一个资源的 field(s)
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

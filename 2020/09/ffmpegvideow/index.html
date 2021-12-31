@@ -212,23 +212,23 @@
 </ul>
 <h2 id="a-idffmpeg__dshow__7affmpeg-使用-dshow-采集音视频设备"><a id="FFmpeg__dshow__7"></a>FFmpeg 使用 dshow 采集音视频设备</h2>
 <p>使用 dshow 枚举设备</p>
-<pre><code>ffmpeg -f dshow -list_devices true -i dymmy
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f dshow -list_devices true -i dymmy
 
-</code></pre><p>输出</p>
-<pre><code>[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
-[dshow @ 000002622302e340]  &quot;Altair USB2.0 Camera&quot;
-[dshow @ 000002622302e340]     Alternative name &quot;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&quot;
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
+[dshow @ 000002622302e340]  &#34;Altair USB2.0 Camera&#34;
+[dshow @ 000002622302e340]     Alternative name &#34;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&#34;
 [dshow @ 000002622302e340] DirectShow audio devices
 
-</code></pre><p>``<br> 使用 dshow 展示摄像头, 摄像头的参数为 video=“摄像头名称”</p>
-<pre><code>ffplay -f dshow  -i video=&quot;Altair USB2.0 Camera&quot;
+</code></pre></div><p>``<br> 使用 dshow 展示摄像头, 摄像头的参数为 video=“摄像头名称”</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow  -i video=&#34;Altair USB2.0 Camera&#34;
 
-</code></pre><p>``<br> 获得摄像头支持的分辨率</p>
-<pre><code>ffmpeg -list_options true -f dshow -i video=&quot;Altair USB2.0 Camera&quot;
+</code></pre></div><p>``<br> 获得摄像头支持的分辨率</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -list_options true -f dshow -i video=&#34;Altair USB2.0 Camera&#34;
 
-</code></pre><p>输出</p>
-<pre><code>[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
-[dshow @ 000001b88b90e380]  Pin &quot;捕获&quot; (alternative pin name &quot;0&quot;)
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
+[dshow @ 000001b88b90e380]  Pin &#34;捕获&#34; (alternative pin name &#34;0&#34;)
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
@@ -240,23 +240,23 @@
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
 
-</code></pre><p>可以加上分辨率的参数 <strong>-video_size</strong></p>
-<pre><code>ffplay -f dshow -video_size 640x480  -i video=&quot;Altair USB2.0 Camera&quot;
+</code></pre></div><p>可以加上分辨率的参数 <strong>-video_size</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow -video_size 640x480  -i video=&#34;Altair USB2.0 Camera&#34;
 
-</code></pre><h2 id="a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><a id="FFmpeg__vfwcap__50"></a>FFmpeg 使用 vfwcap 采集视频设备</h2>
+</code></pre></div><h2 id="a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><a id="FFmpeg__vfwcap__50"></a>FFmpeg 使用 vfwcap 采集视频设备</h2>
 <p>vfwcap 主要支持两个参数 video_size framerate ，分别指示采集图像的大小和帧率<br> 使用 vfwcap 枚举支持采集的设备</p>
-<pre><code>ffmpeg -f vfwcap -i list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i list
 
-</code></pre><p>输出</p>
-<pre><code>[vfwcap @ 0000025a6d60d080] Driver 0
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[vfwcap @ 0000025a6d60d080] Driver 0
 [vfwcap @ 0000025a6d60d080]  Microsoft WDM Image Capture (Win32)
 [vfwcap @ 0000025a6d60d080]  Version:  10.0.17134.1
 list: I/O error
 
-</code></pre><p>使用 vfwcap 生成 MP4 文件</p>
-<pre><code>ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
+</code></pre></div><p>使用 vfwcap 生成 MP4 文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
 
-</code></pre><p>我们通过 -i 指定了待录像的摄像头 索引号，-r 则指定了 需要录像 的帧, -vcodec 指定了录像视频的编码格式，输出 out.mp4</p>
+</code></pre></div><p>我们通过 -i 指定了待录像的摄像头 索引号，-r 则指定了 需要录像 的帧, -vcodec 指定了录像视频的编码格式，输出 out.mp4</p>
 <h2 id="a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><a id="FFmpeg__gdigrab__69"></a>FFmpeg 使用 gdigrab 采集窗口</h2>
 <p>Windows 平台， FFmpeg 支持采集基于 gdi 的屏幕采集设备，这个设备同时支持采 集显示器的某 块区域， gdigrab 支持的主要参数如表 7-5 所示<br> 
         <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/4438f7c7f5f2079933d3db9b77bfe333.png">
@@ -268,12 +268,12 @@ list: I/O error
 <li>desktop title = window_title ，其中 desktop 代表采 集整个桌面，1. ttitle = window title 则是采集标题为 window title 的窗口
 使用 gdigrab 采集整个桌面</li>
 </ol>
-<pre><code>ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
 
-</code></pre><p>使用gdigrab采集某个窗口</p>
-<pre><code>ffmpeg -f gdigrab -framerate 6 -i title=&quot;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&quot; gdi.mp4
+</code></pre></div><p>使用gdigrab采集某个窗口</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i title=&#34;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&#34; gdi.mp4
 
-</code></pre><p>该窗口是我用spy++抓的</p>
+</code></pre></div><p>该窗口是我用spy++抓的</p>
 
 
             <h4 align="center">--完--</h4>

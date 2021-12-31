@@ -210,7 +210,7 @@
             <h2 id="lua_pop和lua_settop">lua_pop和lua_settop</h2>
 <h3 id="lua_settop">lua_settop</h3>
 <p>我们直接来看<code>lua_settop</code>，文档解释</p>
-<pre><code>/*
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/*
 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小
 假设栈里有2个元素。
 如果index=0，那么移除栈上所有元素
@@ -218,61 +218,35 @@
 如果index=4，那么压入2个nil元素
 */
 void lua_settop (lua_State *L, int index);
-</code></pre><p>使用代码测试</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#458;font-weight:bold">int</span> <span style="color:#900;font-weight:bold">lua_test</span>(lua_State <span style="color:#000;font-weight:bold">*</span>L)
+</code></pre></div><p>使用代码测试</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lua_test</span>(lua_State <span style="color:#f92672">*</span>L)
 {
-    <span style="color:#458;font-weight:bold">int</span> pop_num <span style="color:#000;font-weight:bold">=</span> lua_tointeger(L,<span style="color:#099">1</span>);
-    printf(<span style="color:#d14">&#34;pop_num= %d</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>, pop_num);
-    lua_settop(L,<span style="color:#099">0</span>);
-    printf(<span style="color:#d14">&#34;1-top %d</span><span style="color:#d14">\r\n</span><span style="color:#d14">&#34;</span>,lua_gettop(L));
-    lua_pushinteger(L,<span style="color:#099">31</span>);
-    lua_pushinteger(L,<span style="color:#099">32</span>);
-    lua_pushinteger(L,<span style="color:#099">33</span>);
-    lua_pushinteger(L,<span style="color:#099">34</span>);
-    printf(<span style="color:#d14">&#34;2-top %d</span><span style="color:#d14">\r\n</span><span style="color:#d14">&#34;</span>,lua_gettop(L));
+    <span style="color:#66d9ef">int</span> pop_num <span style="color:#f92672">=</span> lua_tointeger(L,<span style="color:#ae81ff">1</span>);
+    printf(<span style="color:#e6db74">&#34;pop_num= %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, pop_num);
+    lua_settop(L,<span style="color:#ae81ff">0</span>);
+    printf(<span style="color:#e6db74">&#34;1-top %d</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>,lua_gettop(L));
+    lua_pushinteger(L,<span style="color:#ae81ff">31</span>);
+    lua_pushinteger(L,<span style="color:#ae81ff">32</span>);
+    lua_pushinteger(L,<span style="color:#ae81ff">33</span>);
+    lua_pushinteger(L,<span style="color:#ae81ff">34</span>);
+    printf(<span style="color:#e6db74">&#34;2-top %d</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>,lua_gettop(L));
  
     lua_pop(L,pop_num);
-    lua_settop(L, <span style="color:#000;font-weight:bold">-</span><span style="color:#099">2</span>); <span style="color:#998;font-style:italic">//清除一个栈顶
-</span><span style="color:#998;font-style:italic"></span> 
-    printf(<span style="color:#d14">&#34;3-top %d</span><span style="color:#d14">\r\n</span><span style="color:#d14">&#34;</span>,lua_gettop(L));
-    printf(<span style="color:#d14">&#34;栈底 %d</span><span style="color:#d14">\r\n</span><span style="color:#d14">&#34;</span>,lua_tointeger(L,<span style="color:#099">1</span>));
-    printf(<span style="color:#d14">&#34;栈顶 %d</span><span style="color:#d14">\r\n</span><span style="color:#d14">&#34;</span>,lua_tointeger(L,<span style="color:#000;font-weight:bold">-</span><span style="color:#099">1</span>));
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#099">0</span>;
+    lua_settop(L, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>); <span style="color:#75715e">//清除一个栈顶
+</span><span style="color:#75715e"></span> 
+    printf(<span style="color:#e6db74">&#34;3-top %d</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>,lua_gettop(L));
+    printf(<span style="color:#e6db74">&#34;栈底 %d</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>,lua_tointeger(L,<span style="color:#ae81ff">1</span>));
+    printf(<span style="color:#e6db74">&#34;栈顶 %d</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>,lua_tointeger(L,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></td></tr></table>
-</div>
-</div><p>输出</p>
-<pre><code>pop_num= 0
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pop_num= 0
 1-top 0
 2-top 4
 3-top 3
 栈底 31
 栈顶 33
-</code></pre><p>总结<code>lua_settop(L, idx)</code>函数</p>
+</code></pre></div><p>总结<code>lua_settop(L, idx)</code>函数</p>
 <ul>
 <li>idx=0 栈中元素全部移除</li>
 <li>idx&gt;0 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小</li>
@@ -280,15 +254,15 @@ void lua_settop (lua_State *L, int index);
 </ul>
 <h3 id="lua_pop">lua_pop</h3>
 <p>从代码里看到</p>
-<pre><code>#define lua_pop(L,n)		lua_settop(L, -(n)-1)
-</code></pre><p>因为<code>lua_pop</code>是<code>lua_settop</code>宏定义, lua_pop(L,num)函数表示从栈顶开始移除。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#define lua_pop(L,n)		lua_settop(L, -(n)-1)
+</code></pre></div><p>因为<code>lua_pop</code>是<code>lua_settop</code>宏定义, lua_pop(L,num)函数表示从栈顶开始移除。</p>
 <ul>
 <li>当num&gt;0时从栈顶移除指定个数 。</li>
 <li>当num=0时栈不受影响</li>
 <li>当num&lt;0，当num=-1时栈中元素全部移除; num=-2表示清除一个栈顶元素,一次类推；</li>
 <li>但是负数编号不能超出栈底的负数索引，超出会抛出异常</li>
 </ul>
-<pre><code>/**
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/**
  * 把给定索引处的 Lua 值转换为 lua_Integer 这样一个有符号整数类型
  * 必须：数字/字符串类型数字
  */
@@ -301,7 +275,7 @@ void lua_settop (lua_State *L, int index);
  * 同时也是栈顶元素的索引，因为栈底是1
  */
 LUA_API int lua_gettop (lua_State *L)
-</code></pre><p>参考链接：http://www.daileinote.com/computer/lua/17</p>
+</code></pre></div><p>参考链接：http://www.daileinote.com/computer/lua/17</p>
 
 
             <h4 align="center">--完--</h4>

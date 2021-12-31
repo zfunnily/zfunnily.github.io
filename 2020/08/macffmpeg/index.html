@@ -206,7 +206,7 @@
         <div class="post-content">
             <h2 id="设备枚举">设备枚举</h2>
 <p>查看设备列表</p>
-<pre><code>$ ffmpeg -hide_banner -devices
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ffmpeg -hide_banner -devices
 
 Devices:
 D. = Demuxing supported
@@ -216,19 +216,19 @@ D avfoundation AVFoundation input device
 D lavfi  Libavfilter virtual input device
  E sdl,sdl2 SDL2 output device
 
-</code></pre><p>可以看到输入设备有：avfoundation，lavfi<br> 输出设备有：sdl<br> ``<br> 设备采集举例：</p>
-<pre><code>$  ffmpeg -f avfoundation -list_devices true -i &quot; &quot;
+</code></pre></div><p>可以看到输入设备有：avfoundation，lavfi<br> 输出设备有：sdl<br> ``<br> 设备采集举例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$  ffmpeg -f avfoundation -list_devices true -i &#34; &#34;
 
-</code></pre><p>看到了 如下设备</p>
-<pre><code>[AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices:
+</code></pre></div><p>看到了 如下设备</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[AVFoundation input device @ 0x7fac75c048c0] AVFoundation video devices:
 [AVFoundation input device @ 0x7fac75c048c0] [0] FaceTime高清摄像头（内建）
 [AVFoundation input device @ 0x7fac75c048c0] [1] Capture screen 0
 [AVFoundation input device @ 0x7fac75c048c0] AVFoundation audio devices:
 [AVFoundation input device @ 0x7fac75c048c0] [0] Built-in Microphone
 
-</code></pre><h2 id="采集摄像头">采集摄像头</h2>
+</code></pre></div><h2 id="采集摄像头">采集摄像头</h2>
 <p>采集内置摄像头</p>
-<pre><code>$ ffmpeg -f avfoundation -i  &quot;FaceTime高清摄像头&quot; out.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ffmpeg -f avfoundation -i  &#34;FaceTime高清摄像头&#34; out.mp4
 //或者使用索引号 0 来代替摄像头设备名称
 ffmpeg -f avfoundation -i  0 out.mp4
 
@@ -240,23 +240,23 @@ ffmpeg -f avfoundation -i  0 out.mp4
 [avfoundation @ 0x7fbf16808200]   640x480@[27.000027 27.000027]fps
 [avfoundation @ 0x7fbf16808200]   640x480@[26.000026 26.000026]fps
 [avfoundation @ 0x7fbf16808200]   640x480@[25.000000 25.000000]fps
-</code></pre><p>日志告诉我们 <strong>Selected framerate (29.970030) is not supported by the device</strong> ，默认的framerate 不被设备支持，下面也给出了支持的分辨率和framerate<br> 所以我们要改一下命令,选取第一个吧 <strong>640x480@[30.000030 30.000030]fps</strong></p>
-<pre><code>ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -i  &quot;FaceTime高清摄像头&quot; out.mp4
-</code></pre><p>把<strong>摄像头和麦克风</strong>的数据存到一个文件里，使用命令：</p>
-<pre><code>ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -video_device_index 0 -i &quot;:0&quot; out.mp4
+</code></pre></div><p>日志告诉我们 <strong>Selected framerate (29.970030) is not supported by the device</strong> ，默认的framerate 不被设备支持，下面也给出了支持的分辨率和framerate<br> 所以我们要改一下命令,选取第一个吧 <strong>640x480@[30.000030 30.000030]fps</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -i  &#34;FaceTime高清摄像头&#34; out.mp4
+</code></pre></div><p>把<strong>摄像头和麦克风</strong>的数据存到一个文件里，使用命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -video_device_index 0 -i &#34;:0&#34; out.mp4
 //或者
-ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -i &quot;0:0&quot;  out.mp4
-</code></pre><p>播放录制的视频数据</p>
-<pre><code>ffplay out.mp4
-</code></pre><h2 id="采集桌面">采集桌面</h2>
-<pre><code>ffmpeg -f avfoundation -i &quot;Capture screen 0&quot; -r:v 30 screen.mp4
+ffmpeg -f avfoundation -video_size 640x480 -framerate 30 -i &#34;0:0&#34;  out.mp4
+</code></pre></div><p>播放录制的视频数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay out.mp4
+</code></pre></div><h2 id="采集桌面">采集桌面</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f avfoundation -i &#34;Capture screen 0&#34; -r:v 30 screen.mp4
 //或者使用索引号1 来代替屏幕设备名称
 ffmpeg -f avfoundation -i 1 -r:v 30 screen.mp4
-</code></pre><p>播放采集到的桌面数据</p>
-<pre><code>ffplay screen.mp4
-</code></pre><p>参数&quot;Capture screen 0&quot;指定了输入设备，我们也可以将桌面图像带上鼠标一起录制下来，加上参数-capture_cursor</p>
-<pre><code>ffmpeg -f avfoundation -capture-cursor 1 -i &quot;Capture screen 0&quot; -r:v 30 screen.mp4
-</code></pre><p>然后播放screen.mp4验证。<code>ffplay screen.mp4</code></p>
+</code></pre></div><p>播放采集到的桌面数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay screen.mp4
+</code></pre></div><p>参数&quot;Capture screen 0&quot;指定了输入设备，我们也可以将桌面图像带上鼠标一起录制下来，加上参数-capture_cursor</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f avfoundation -capture-cursor 1 -i &#34;Capture screen 0&#34; -r:v 30 screen.mp4
+</code></pre></div><p>然后播放screen.mp4验证。<code>ffplay screen.mp4</code></p>
 
 
             <h4 align="center">--完--</h4>

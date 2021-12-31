@@ -210,31 +210,16 @@
             <h2 id="入口文件">入口文件</h2>
 <p>skynet_main.c</p>
 <h2 id="加载配置">加载配置</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#000;font-weight:bold">struct</span> <span style="color:#458;font-weight:bold">skynet_config</span> config;
-config.<span style="color:#000;font-weight:bold">thread</span> <span style="color:#000;font-weight:bold">=</span>  optint(<span style="color:#d14">&#34;thread&#34;</span>,<span style="color:#099">8</span>);
-config.module_path <span style="color:#000;font-weight:bold">=</span> optstring(<span style="color:#d14">&#34;cpath&#34;</span>,<span style="color:#d14">&#34;./cservice/?.so&#34;</span>);
-config.harbor <span style="color:#000;font-weight:bold">=</span> optint(<span style="color:#d14">&#34;harbor&#34;</span>, <span style="color:#099">1</span>);
-config.bootstrap <span style="color:#000;font-weight:bold">=</span> optstring(<span style="color:#d14">&#34;bootstrap&#34;</span>,<span style="color:#d14">&#34;snlua bootstrap&#34;</span>);
-config.daemon <span style="color:#000;font-weight:bold">=</span> optstring(<span style="color:#d14">&#34;daemon&#34;</span>, <span style="color:#0086b3">NULL</span>);
-config.logger <span style="color:#000;font-weight:bold">=</span> optstring(<span style="color:#d14">&#34;logger&#34;</span>, <span style="color:#0086b3">NULL</span>);
-config.logservice <span style="color:#000;font-weight:bold">=</span> optstring(<span style="color:#d14">&#34;logservice&#34;</span>, <span style="color:#d14">&#34;logger&#34;</span>);
-config.profile <span style="color:#000;font-weight:bold">=</span> optboolean(<span style="color:#d14">&#34;profile&#34;</span>, <span style="color:#099">1</span>);
-</code></pre></td></tr></table>
-</div>
-</div><p>从上述代码可以看到，配置都已经加载到变量<code>struct skynet_config config;</code>中了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_config</span> config;
+config.<span style="color:#66d9ef">thread</span> <span style="color:#f92672">=</span>  optint(<span style="color:#e6db74">&#34;thread&#34;</span>,<span style="color:#ae81ff">8</span>);
+config.module_path <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;cpath&#34;</span>,<span style="color:#e6db74">&#34;./cservice/?.so&#34;</span>);
+config.harbor <span style="color:#f92672">=</span> optint(<span style="color:#e6db74">&#34;harbor&#34;</span>, <span style="color:#ae81ff">1</span>);
+config.bootstrap <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;bootstrap&#34;</span>,<span style="color:#e6db74">&#34;snlua bootstrap&#34;</span>);
+config.daemon <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;daemon&#34;</span>, NULL);
+config.logger <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;logger&#34;</span>, NULL);
+config.logservice <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;logservice&#34;</span>, <span style="color:#e6db74">&#34;logger&#34;</span>);
+config.profile <span style="color:#f92672">=</span> optboolean(<span style="color:#e6db74">&#34;profile&#34;</span>, <span style="color:#ae81ff">1</span>);
+</code></pre></div><p>从上述代码可以看到，配置都已经加载到变量<code>struct skynet_config config;</code>中了。</p>
 <h2 id="初始化">初始化</h2>
 <ol>
 <li>初始化<code>skynet_context</code>管理模块, <code>skynet_handle_init(config-&gt;harbor);</code>;</li>

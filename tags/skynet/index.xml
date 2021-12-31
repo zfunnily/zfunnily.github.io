@@ -40,7 +40,7 @@
       <pubDate>Tue, 19 Oct 2021 17:28:45 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/skynetone/</guid>
-      <description>入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet</description>
+      <description>入口文件 skynet_main.c 加载配置 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管</description>
     </item>
     
     <item>

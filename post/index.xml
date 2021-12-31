@@ -58,7 +58,7 @@
       <pubDate>Wed, 08 Dec 2021 16:42:17 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/12/openresty-upload/</guid>
-      <description>上传文件接口 nginx.conf 的server 增加一个location: location /upload { resolver 8.8.8.8 ipv6=off; content_by_lua_file lua/upload.lua; } upload.lua lua 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62</description>
+      <description>上传文件接口 nginx.conf 的server 增加一个location: location /upload { resolver 8.8.8.8 ipv6=off; content_by_lua_file lua/upload.lua; } upload.lua lua -- upload.lua --========================================== -- 文件上传 --========================================== local chunk_size = 4096 local form, err = upload:new(chunk_size) if not form then ngx.log(ngx.ERR, &amp;#34;failed to new upload: &amp;#34;, err) ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR) end form:set_timeout(1000) -- 文件保存的根路径 local saveRootPath = &amp;#34;./download/&amp;#34; -- 保存的文件对象 local fileToSave --文件是否成</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@
       <pubDate>Fri, 29 Oct 2021 11:15:42 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/gop2ptwo/</guid>
-      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening</description>
+      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/gop2pone/</guid>
-      <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25</description>
+      <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP</description>
     </item>
     
     <item>
@@ -166,7 +166,7 @@
       <pubDate>Tue, 19 Oct 2021 17:28:45 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/skynetone/</guid>
-      <description>入口文件 skynet_main.c 加载配置 1 2 3 4 5 6 7 8 9 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet</description>
+      <description>入口文件 skynet_main.c 加载配置 struct skynet_config config; config.thread = optint(&amp;#34;thread&amp;#34;,8); config.module_path = optstring(&amp;#34;cpath&amp;#34;,&amp;#34;./cservice/?.so&amp;#34;); config.harbor = optint(&amp;#34;harbor&amp;#34;, 1); config.bootstrap = optstring(&amp;#34;bootstrap&amp;#34;,&amp;#34;snlua bootstrap&amp;#34;); config.daemon = optstring(&amp;#34;daemon&amp;#34;, NULL); config.logger = optstring(&amp;#34;logger&amp;#34;, NULL); config.logservice = optstring(&amp;#34;logservice&amp;#34;, &amp;#34;logger&amp;#34;); config.profile = optboolean(&amp;#34;profile&amp;#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@
       <pubDate>Tue, 07 Sep 2021 10:02:16 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/09/screen/</guid>
-      <description>screen命令 screen 是一个非常有用的命令。应用场景： 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip; screen使用 创建一个窗口 1 $ screen -S name 执行自己</description>
+      <description>screen命令 screen 是一个非常有用的命令。应用场景： 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip; screen使用 创建一个窗口 $ screen -S name 执行自己需</description>
     </item>
     
     <item>
@@ -229,7 +229,7 @@
       <pubDate>Wed, 01 Sep 2021 18:13:41 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/09/upgradegcc/</guid>
-      <description>环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 1 2 $ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 1 2 3 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd</description>
+      <description>环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 $ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果</description>
     </item>
     
     <item>
@@ -238,7 +238,7 @@
       <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/08/except/</guid>
-      <description>Except 参数 1 2 3 4 5 6 7 8 9 10 11 12 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相</description>
+      <description>Except 参数 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的ech</description>
     </item>
     
     <item>
@@ -274,7 +274,7 @@
       <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/05/lua_next/</guid>
-      <description>lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&amp;quot;a&amp;quot;] = 1, [&amp;quot;b&amp;quot;]</description>
+      <description>lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&amp;#34;a&amp;#34;] = 1, [&amp;#34;b&amp;#34;]</description>
     </item>
     
     <item>
@@ -301,7 +301,7 @@
       <pubDate>Tue, 23 Mar 2021 16:10:02 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/gomod/</guid>
-      <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;quot;gitlab.com/xxx/zz&amp;quot;: found meta tag get.metaImport{Prefix:&amp;quot;gitlab.com/xxx/zz&amp;quot;, VCS:&amp;quot;git&amp;quot;, RepoRoot:&amp;quot;https://gitlab.com/xxx/zz.git&amp;quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g</description>
+      <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;#34;gitlab.com/xxx/zz&amp;#34;: found meta tag get.metaImport{Prefix:&amp;#34;gitlab.com/xxx/zz&amp;#34;, VCS:&amp;#34;git&amp;#34;, RepoRoot:&amp;#34;https://gitlab.com/xxx/zz.git&amp;#34;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g</description>
     </item>
     
     <item>
@@ -355,7 +355,7 @@
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/02/timer/</guid>
-      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)</description>
+      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;#34;NewTicker...&amp;#34;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)</description>
     </item>
     
     <item>
@@ -391,7 +391,7 @@
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/02/compilation/</guid>
-      <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;quot;hello world!\n&amp;quot;); } 搭建AT&amp;amp</description>
+      <description>概述 我使用AT&amp;amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&amp;#34;hello world!\n&amp;#34;); } 搭建AT&amp;amp</description>
     </item>
     
     <item>
@@ -589,7 +589,7 @@
       <pubDate>Sat, 28 Nov 2020 15:03:04 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/glibcnotfound/</guid>
-      <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 1 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录</description>
+      <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录,</description>
     </item>
     
     <item>
@@ -598,7 +598,7 @@
       <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/</guid>
-      <description>docker查看退出码指令 $ docker ps --filter &amp;quot;status=exited&amp;quot; $ docker inspect container-id --format=&#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
+      <description>docker查看退出码指令 $ docker ps --filter &amp;#34;status=exited&amp;#34; $ docker inspect container-id --format=&amp;#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&amp;#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
     </item>
     
     <item>
@@ -652,7 +652,7 @@
       <pubDate>Fri, 13 Nov 2020 16:40:42 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
-      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;quot;event.h&amp;quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;quot;timer wakeup\n&amp;quot;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
+      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;#34;event.h&amp;#34; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;#34;timer wakeup\n&amp;#34;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
     </item>
     
     <item>
@@ -679,7 +679,7 @@
       <pubDate>Thu, 05 Nov 2020 09:45:23 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
-      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;quot;%s\n&amp;quot;, str); } */ import &amp;quot;C&amp;quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;quot;unsafe&amp;quot; func main() { s := &amp;quot;Hello Cgo&amp;quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g</description>
+      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;#34;%s\n&amp;#34;, str); } */ import &amp;#34;C&amp;#34; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;#34;unsafe&amp;#34; func main() { s := &amp;#34;Hello Cgo&amp;#34; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g</description>
     </item>
     
     <item>
@@ -751,7 +751,7 @@
       <pubDate>Mon, 14 Sep 2020 18:29:33 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/09/ffmpegpicture/</guid>
-      <description>FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &amp;quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&amp;quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到</description>
+      <description>FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &amp;#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&amp;#34; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到</description>
     </item>
     
     <item>
@@ -778,7 +778,7 @@
       <pubDate>Sat, 29 Aug 2020 17:20:40 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/macffmpeg/</guid>
-      <description>设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &amp;quot; &amp;quot; 看到了 如下设</description>
+      <description>设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &amp;#34; &amp;#34; 看到了 如下设</description>
     </item>
     
     <item>
@@ -859,7 +859,7 @@
       <pubDate>Sun, 09 Aug 2020 09:34:36 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/08/licode/</guid>
-      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;quot;MIN_PORT=30000&amp;quot; -e &amp;quot;MAX_PORT=30050&amp;quot; -e &amp;quot;PUBLIC_IP=your_ip_address&amp;quot; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之</description>
+      <description>拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &amp;#34;MIN_PORT=30000&amp;#34; -e &amp;#34;MAX_PORT=30050&amp;#34; -e &amp;#34;PUBLIC_IP=your_ip_address&amp;#34; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之</description>
     </item>
     
     <item>

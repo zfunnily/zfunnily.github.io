@@ -210,28 +210,28 @@
 <li>先判断正负</li>
 <li>遍历字符串，转换字符为整数</li>
 </ul>
-<pre><code>//atoi.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//atoi.cc
 #include  &lt;stdio.h&gt;
 int my_atoi(char *str)
 {
     bool bmin = false;
     int result = 0;
     //先判断正负
-    if ((*str &gt; '9' || *str &lt; '0') &amp;&amp; (*str == '+' || *str == '-'))
+    if ((*str &gt; &#39;9&#39; || *str &lt; &#39;0&#39;) &amp;&amp; (*str == &#39;+&#39; || *str == &#39;-&#39;))
     {
-        if (*str == '-') bmin = true;
+        if (*str == &#39;-&#39;) bmin = true;
         str++;
     }
     
-    while (*str != '\0')
+    while (*str != &#39;\0&#39;)
     {
-        if (*str &gt; '9' || *str &lt; '0') break;
+        if (*str &gt; &#39;9&#39; || *str &lt; &#39;0&#39;) break;
 
-        //printf(&quot;befter str: %s\n&quot;, str);
-        result = result * 10 + (*str++ - '0');
-        //printf(&quot;after str: %s\n&quot;, str);
+        //printf(&#34;befter str: %s\n&#34;, str);
+        result = result * 10 + (*str++ - &#39;0&#39;);
+        //printf(&#34;after str: %s\n&#34;, str);
     }
-    if (*str != '\0')    return 0;
+    if (*str != &#39;\0&#39;)    return 0;
 
     return bmin ? -result : result;
     
@@ -240,19 +240,19 @@ int my_atoi(char *str)
 
 int main()
 {
-    char a[] = &quot;13579&quot;;
-    char b[] = &quot;246810&quot;;
+    char a[] = &#34;13579&#34;;
+    char b[] = &#34;246810&#34;;
 
-    printf(&quot;a: %d\n&quot;, my_atoi(a));
-    printf(&quot;b: %d\n&quot;, my_atoi(b));
+    printf(&#34;a: %d\n&#34;, my_atoi(a));
+    printf(&#34;b: %d\n&#34;, my_atoi(b));
 }
 
-</code></pre><p>编译&amp;运行</p>
-<pre><code>$ g++ -o atoi atoi.cc
+</code></pre></div><p>编译&amp;运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -o atoi atoi.cc
 $ ./atoi
 a: 13579
 b: 246810
-</code></pre><h2 id="基础知识补充">基础知识补充</h2>
+</code></pre></div><h2 id="基础知识补充">基础知识补充</h2>
 <ul>
 <li><code>*str++</code>: 它的运算顺序是先返回<code>*str</code>的值，然后<code>str</code>再<code>++</code>。</li>
 <li><code>(*str)++</code>: 它的运算顺序是先返回<code>*str</code>的值，然后 <code>*str</code>的值再++</li>
@@ -262,20 +262,20 @@ b: 246810
 <li><code>* (++str)</code>，先将<code>str</code>的值<code>++</code>，然后再返回 <code>* str</code>的值，和 <code>*++str</code>是等价的。
 <code>*str++ - '0'</code>： 表达式的意思是<code>字符 - ’0‘ = 整数</code>，可以通过ASCII码来计算。举个例子：</li>
 </ul>
-<pre><code>//ascii.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//ascii.cc
 int main()
 {
     int a = 2;
-    char c = '3';
-    char b = '0' + a;
-    int d = a + (c -'0');
-    printf(&quot;int + char = %c, d: %d\n&quot;,b,d);
+    char c = &#39;3&#39;;
+    char b = &#39;0&#39; + a;
+    int d = a + (c -&#39;0&#39;);
+    printf(&#34;int + char = %c, d: %d\n&#34;,b,d);
 }
-</code></pre><p>编译运行</p>
-<pre><code>$ gcc -g -o ascii ascii.cc
+</code></pre></div><p>编译运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -o ascii ascii.cc
 $ ./ascii
 int + char = 2, d: 5
-</code></pre><p>可以看到 <code>char b = '0' + a;</code></p>
+</code></pre></div><p>可以看到 <code>char b = '0' + a;</code></p>
 <ul>
 <li><code>'0'</code>的十进制<code>ascii</code>值是<code>48</code></li>
 <li><code>48 + 2 = 50</code></li>
@@ -296,7 +296,7 @@ int + char = 2, d: 5
 <li>求出整数的最大位（个/十/百/千/万）</li>
 <li>遍历位数，将整数转化为字符</li>
 </ul>
-<pre><code>// itoa.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// itoa.cc
 int my_itoa(long i, char* str)
 {
     int power = 0, j = 0;
@@ -307,22 +307,22 @@ int my_itoa(long i, char* str)
     //遍历位数，将整数转化为字符
     for (; power&gt;0; power /= 10)
     {
-        *str++ = '0' + i / power;
+        *str++ = &#39;0&#39; + i / power;
         i %= power;
     }
-    *str = '\0';
+    *str = &#39;\0&#39;;
 }
 int main()
 {
     char str[7];
     my_itoa(123456, str);
-    printf(&quot;str: %s\n&quot;, str);
+    printf(&#34;str: %s\n&#34;, str);
 }
-</code></pre><p>编译&amp;运行</p>
-<pre><code>$ g++ -g -o itoa itoa.cc -std=c++11
+</code></pre></div><p>编译&amp;运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -g -o itoa itoa.cc -std=c++11
 $ ./itoa
 str: 123456
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

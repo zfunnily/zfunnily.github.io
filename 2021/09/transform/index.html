@@ -227,69 +227,30 @@
 <p>脚本中类中的方法就是对它们的改变。 而我们也可以在Scene中和Inspector中直接进行设置。</p>
 <h2 id="修改属性">修改属性</h2>
 <p>修改 <code>Position</code></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#458;font-weight:bold">var</span> pos =transform.position;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">var</span> pos =transform.position;
 transform.position.x;
 transform.position.y;
 transform.position.z;
-transform.position = <span style="color:#000;font-weight:bold">new</span> Vector3(<span style="color:#099">1f</span>,<span style="color:#099">1f</span>,<span style="color:#099">1f</span>);
-</code></pre></td></tr></table>
-</div>
-</div><p>修改<code>Rotation</code></p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localEulerAngles.x;
+transform.position = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
+</code></pre></div><p>修改<code>Rotation</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localEulerAngles.x;
 transform.localEulerAngles.y;
 transform.localEulerAngles.z;
 
-transform.localEulerAngles = <span style="color:#000;font-weight:bold">new</span> Vector3(<span style="color:#099">90f</span>,<span style="color:#099">0</span>,<span style="color:#099">0</span>);
-rotation = <span style="color:#000;font-weight:bold">new</span> Rotation(x,y,z,w);
+transform.localEulerAngles = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">90f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+rotation = <span style="color:#66d9ef">new</span> Rotation(x,y,z,w);
 
-<span style="color:#998;font-style:italic">//修改2：
-</span><span style="color:#998;font-style:italic">//如果物体面板Rotation (x=22.5,y=0,z=0)
-</span><span style="color:#998;font-style:italic">//用代码实现方法:
-</span><span style="color:#998;font-style:italic"></span>transform.Rotate(<span style="color:#099">22.5f</span>,<span style="color:#099">0</span>,<span style="color:#099">0</span>);
-</code></pre></td></tr></table>
-</div>
-</div><p>修改<code>Scale</code>, 缩放,没有本地和世界分别</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localScale.x;
+<span style="color:#75715e">//修改2：
+</span><span style="color:#75715e">//如果物体面板Rotation (x=22.5,y=0,z=0)
+</span><span style="color:#75715e">//用代码实现方法:
+</span><span style="color:#75715e"></span>transform.Rotate(<span style="color:#ae81ff">22.5f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+</code></pre></div><p>修改<code>Scale</code>, 缩放,没有本地和世界分别</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localScale.x;
 transform.localScale.y;
 transform.localScale.z;
 
-transform.localScale = <span style="color:#000;font-weight:bold">new</span> Vector3(<span style="color:#099">1f</span>,<span style="color:#099">1f</span>,<span style="color:#099">1f</span>);
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="在unity中不能对transformpositionxyz直接赋值的原因">在Unity中不能对transform.position.x/y/z直接赋值的原因</h2>
+transform.localScale = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
+</code></pre></div><h2 id="在unity中不能对transformpositionxyz直接赋值的原因">在Unity中不能对transform.position.x/y/z直接赋值的原因</h2>
 <ol>
 <li>Vector3是一个结构体，而position是一个自动实现的属性。</li>
 <li>在C#里，结构体是值类型的，值类型在通过方法传递的时候，所传递的只是值的副本。C#的属性可以说是两个分别名为get和set的方法</li>
@@ -323,9 +284,9 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
 <h3 id="跟欧拉角有关的函数">跟欧拉角有关的函数</h3>
 <p>Quaternion.Euler
 基本语法：</p>
-<pre><code>（1）public static Quaternion Euler(Vector3 euler);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">（1）public static Quaternion Euler(Vector3 euler);
 （2）public static Quaternion Euler(float x, float y, float z);
-</code></pre><p>功能说明：此方法用于返回欧拉角Vector3(x,y,z)对应的四元数Quaternion实例。</p>
+</code></pre></div><p>功能说明：此方法用于返回欧拉角Vector3(x,y,z)对应的四元数Quaternion实例。</p>
 <p>四元数Quaternion(qx,qy,qz,qw)与其欧拉角eulerAngles(ex,ey,ez)之间的对应关系如下。</p>
 
 

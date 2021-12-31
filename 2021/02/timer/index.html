@@ -215,69 +215,69 @@
 </ul>
 <h2 id="ticker">Ticker</h2>
 <p>通过 time.NewTicker(d)的方式实现定时器</p>
-<pre><code>	d := time.Duration(time.Second * 2)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	d := time.Duration(time.Second * 2)
 	t1 := time.NewTicker(d)
 	defer t1.Stop()
 	go func() {
 		for  {
 			&lt;- t1.C
-			fmt.Println(&quot;NewTicker...&quot;)
+			fmt.Println(&#34;NewTicker...&#34;)
 		}
 	}()
-</code></pre><h2 id="timer">Timer</h2>
+</code></pre></div><h2 id="timer">Timer</h2>
 <p>通过 time.NewTimer(d)的方式实现定时器</p>
-<pre><code>	t2 := time.NewTimer(d)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	t2 := time.NewTimer(d)
 	defer t2.Stop()
 	go func() {
 		for {
 			&lt;- t2.C
-			fmt.Println(&quot;NewTimer...&quot;)
+			fmt.Println(&#34;NewTimer...&#34;)
 		}
 	}()
-</code></pre><h2 id="select">select</h2>
+</code></pre></div><h2 id="select">select</h2>
 <p>通过select的方式实现定时器：</p>
-<pre><code>for {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">for {
 		select {
 		case &lt;- time.After(d):
-			fmt.Println(&quot;select...&quot;)
+			fmt.Println(&#34;select...&#34;)
 		}
 	}
-</code></pre><h2 id="三种定时器示例代码">三种定时器示例代码</h2>
-<pre><code>package main
+</code></pre></div><h2 id="三种定时器示例代码">三种定时器示例代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;fmt&quot;
-	&quot;time&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
 )
 
-func main() {
-	d := time.Duration(time.Second * 2)
-	t1 := time.NewTicker(d)
-	defer t1.Stop()
-	go func() {
-		for  {
-			&lt;- t1.C
-			fmt.Println(&quot;NewTicker...&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+	<span style="color:#a6e22e">t1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTicker</span>(<span style="color:#a6e22e">d</span>)
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">t1</span>.<span style="color:#a6e22e">Stop</span>()
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">for</span>  {
+			<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t1</span>.<span style="color:#a6e22e">C</span>
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;NewTicker...&#34;</span>)
 		}
 	}()
 
-	t2 := time.NewTimer(d)
-	defer t2.Stop()
-	go func() {
-		for {
-			&lt;- t2.C
-			fmt.Println(&quot;NewTimer...&quot;)
+	<span style="color:#a6e22e">t2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTimer</span>(<span style="color:#a6e22e">d</span>)
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">t2</span>.<span style="color:#a6e22e">Stop</span>()
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">for</span> {
+			<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">t2</span>.<span style="color:#a6e22e">C</span>
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;NewTimer...&#34;</span>)
 		}
 	}()
 
-	for {
-		select {
-		case &lt;- time.After(d):
-			fmt.Println(&quot;select...&quot;)
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#66d9ef">select</span> {
+		<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">After</span>(<span style="color:#a6e22e">d</span>):
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;select...&#34;</span>)
 		}
 	}
 }
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

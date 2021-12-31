@@ -214,7 +214,7 @@
         <div class="post-content">
             <h2 id="a-idlibevent_1a使用libevent库作为例子"><a id="libevent_1"></a>使用libevent库作为例子</h2>
 <p>下载 &amp; 编译 &amp; 安装libevent</p>
-<pre><code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 $ git clone https://github.com.cnpmjs.org/libevent/libevent.git
 
 $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build
@@ -225,11 +225,11 @@ $ cmake ..
 $ make
 
 
-</code></pre><h2 id="a-idlibevent_18alibevent实现的定时器"><a id="libevent_18"></a>libevent实现的定时器</h2>
-<pre><code>
+</code></pre></div><h2 id="a-idlibevent_18alibevent实现的定时器"><a id="libevent_18"></a>libevent实现的定时器</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 // main.cpp
 
-#include &quot;event.h&quot;
+#include &#34;event.h&#34;
 
 
 struct event ev;
@@ -240,7 +240,7 @@ void time_cb(evutil_socket_t fd, short event, void *argc)
 
 {
 
-  printf(&quot;timer wakeup\n&quot;);
+  printf(&#34;timer wakeup\n&#34;);
 
   event_add(&amp;ev, &amp;tv); // reschedule timer
 
@@ -271,9 +271,9 @@ int main()
 }
 
 
-</code></pre><h2 id="a-idgolibevent_67ago调用libevent实现定时器"><a id="golibevent_67"></a>go调用libevent实现定时器</h2>
+</code></pre></div><h2 id="a-idgolibevent_67ago调用libevent实现定时器"><a id="golibevent_67"></a>go调用libevent实现定时器</h2>
 <p>把编译好的头文件和库文件放到go工程里</p>
-<pre><code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 /go_libevent
 
 ├── libevent
@@ -286,142 +286,142 @@ int main()
 ├──  main.go
 
 
-</code></pre><p>main.go</p>
-<pre><code>
-package main
+</code></pre></div><p>main.go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 
-/*
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">#cgo CFLAGS: -I ${SRCDIR}/libevent/include
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">#cgo LDFLAGS: -L ${SRCDIR}/libevent/lib -levent -levent_core -levent_extra -lcrypto -lssl -lpthread
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include &#34;event.h&#34;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include &#34;event2/event.h&#34;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">typedef void(*cb)(evutil_socket_t, short, void *);
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct event evg;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct timeval tvg;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct event* getEventPtr()  {
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">return &amp;evg;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">}
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct timeval* getTvPtr()  {
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">tvg.tv_sec = 1;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">tvg.tv_usec = 0;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">return &amp;tvg;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">}
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">void timer_cb(evutil_socket_t fd, short event , void* argc) {
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct timeval tv;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">tv.tv_sec = 2;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">tv.tv_usec = 0;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">printf(&#34;timer wakeup\n&#34;);
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">struct event* ev = (struct event*)argc;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">event_add(ev, &amp;tv); // reschedule timer
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">}
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">void ev_set_timer(struct event* evt, cb c)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">{
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">evtimer_set(evt, c, (void*)evt);
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">}
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">*/</span>
 
-#cgo CFLAGS: -I ${SRCDIR}/libevent/include
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;C&#34;</span>
 
-#cgo LDFLAGS: -L ${SRCDIR}/libevent/lib -levent -levent_core -levent_extra -lcrypto -lssl -lpthread
+<span style="color:#f92672">import</span> (
 
-#include &quot;event.h&quot;
+<span style="color:#e6db74">&#34;fmt&#34;</span>
 
-#include &quot;event2/event.h&quot;
-
-
-typedef void(*cb)(evutil_socket_t, short, void *);
-
-
-struct event evg;
-
-struct timeval tvg;
-
-
-struct event* getEventPtr()  {
-
-return &amp;evg;
-
-}
-
-
-struct timeval* getTvPtr()  {
-
-tvg.tv_sec = 1;
-
-tvg.tv_usec = 0;
-
-return &amp;tvg;
-
-}
-
-
-void timer_cb(evutil_socket_t fd, short event , void* argc) {
-
-struct timeval tv;
-
-tv.tv_sec = 2;
-
-tv.tv_usec = 0;
-
-printf(&quot;timer wakeup\n&quot;);
-
-struct event* ev = (struct event*)argc;
-
-event_add(ev, &amp;tv); // reschedule timer
-
-}
-
-
-void ev_set_timer(struct event* evt, cb c)
-
-{
-
-evtimer_set(evt, c, (void*)evt);
-
-}
-
-*/
-
-import &quot;C&quot;
-
-import (
-
-&quot;fmt&quot;
-
-&quot;unsafe&quot;
+<span style="color:#e6db74">&#34;unsafe&#34;</span>
 
 )
 
 
-func main() {
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 
-fmt.Printf(&quot;asdfafad\n&quot;)
-
-
-var pev *C.struct_event = C.getEventPtr()
-
-var ptv *C.struct_timeval = C.getTvPtr()
-
-var base *C.struct_event_base
+<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;asdfafad\n&#34;</span>)
 
 
-base   = C.event_base_new()  //*C.struct_event_base
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pev</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">struct_event</span> = <span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">getEventPtr</span>()
 
-var pbase *C.struct_event_base  = (*C.struct_event_base)(unsafe.Pointer(base))
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ptv</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">struct_timeval</span> = <span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">getTvPtr</span>()
 
-
-C.ev_set_timer(pev, (C.cb)(unsafe.Pointer(C.timer_cb)))
-
-C.event_base_set(pbase, pev)
-
-C.event_add(pev, ptv)
-
-C.event_base_dispatch(pbase)
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">base</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">struct_event_base</span>
 
 
-C.event_base_free(pbase)
+<span style="color:#a6e22e">base</span>   = <span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">event_base_new</span>()  <span style="color:#75715e">//*C.struct_event_base
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pbase</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">struct_event_base</span>  = (<span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">struct_event_base</span>)(<span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>(<span style="color:#a6e22e">base</span>))
+
+
+<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">ev_set_timer</span>(<span style="color:#a6e22e">pev</span>, (<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">cb</span>)(<span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span>(<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">timer_cb</span>)))
+
+<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">event_base_set</span>(<span style="color:#a6e22e">pbase</span>, <span style="color:#a6e22e">pev</span>)
+
+<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">event_add</span>(<span style="color:#a6e22e">pev</span>, <span style="color:#a6e22e">ptv</span>)
+
+<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">event_base_dispatch</span>(<span style="color:#a6e22e">pbase</span>)
+
+
+<span style="color:#a6e22e">C</span>.<span style="color:#a6e22e">event_base_free</span>(<span style="color:#a6e22e">pbase</span>)
 
 }
 
 
-</code></pre><h2 id="a-id_200a知识点总结"><a id="_200"></a>知识点总结</h2>
+</code></pre></div><h2 id="a-id_200a知识点总结"><a id="_200"></a>知识点总结</h2>
 <h3 id="a-idcogolibeventstruct_202acogo调用libevent库的struct"><a id="cogolibeventstruct_202"></a>cogo调用libevent库的struct</h3>
 <p>调用libevent库的 struct event:</p>
-<pre><code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 C.struct_event
 
 
-</code></pre><h3 id="a-id_212a函数指针"><a id="_212"></a>函数指针</h3>
-<pre><code>
+</code></pre></div><h3 id="a-id_212a函数指针"><a id="_212"></a>函数指针</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 typedef void(*cb)(evutil_socket_t, short, void *);
 
 
-</code></pre><h3 id="a-idcgo_220a调用cgo宏功能"><a id="cgo_220"></a>调用cgo宏功能</h3>
+</code></pre></div><h3 id="a-idcgo_220a调用cgo宏功能"><a id="cgo_220"></a>调用cgo宏功能</h3>
 <p>libevent 中 有个宏函数 evtimer_set</p>
-<pre><code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 #define evtimer_set(ev, cb, arg)    event_set((ev), -1, 0, (cb), (arg))
 
 
-</code></pre><p>cgo直接调用 <code>C.evtimer_set</code> 会报错</p>
-<pre><code>
+</code></pre></div><p>cgo直接调用 <code>C.evtimer_set</code> 会报错</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 could  not  determine  kind  of  name  for  C.evtimer_set
 
 
-</code></pre><p>解决办法是封装一下</p>
-<pre><code>
+</code></pre></div><p>解决办法是封装一下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 void ev_set_timer(struct event* ev, cb c)
 
 {
@@ -431,12 +431,12 @@ evtimer_set(ev, c,ev1);
 }
 
 
-</code></pre><p>然后调用方式为:</p>
-<pre><code>
+</code></pre></div><p>然后调用方式为:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
 C.ev_set_timer()
 
 
-</code></pre><h2 id="a-idgoc_261ago和c互相调用指针"><a id="GoC_261"></a>Go和C互相调用指针</h2>
+</code></pre></div><h2 id="a-idgoc_261ago和c互相调用指针"><a id="GoC_261"></a>Go和C互相调用指针</h2>
 <p>参考链接：https://blog.csdn.net/weixin_34055787/article/details/88883037</p>
 <p>参考链接：https://chai2010.cn/advanced-go-programming-book/ch2-cgo/ch2-07-memory.html</p>
 <blockquote>

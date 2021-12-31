@@ -267,10 +267,10 @@
     </p>
 <h2 id="a-id_49a总结"><a id="_49"></a>总结</h2>
 <p>IO分两阶段：</p>
-<pre><code>1.数据准备阶段
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1.数据准备阶段
 2.内核空间复制回用户进程缓冲区阶段
 
-</code></pre><p>一般来讲：阻塞IO模型、非阻塞IO模型、IO复用模型(select/poll/epoll)、信号驱动IO模型都属于同步IO，因为阶段2是阻塞的(尽管时间很短)。只有异步IO模型是符合POSIX异步IO操作含义的，不管在阶段1还是阶段2都可以干别的事。</p>
+</code></pre></div><p>一般来讲：阻塞IO模型、非阻塞IO模型、IO复用模型(select/poll/epoll)、信号驱动IO模型都属于同步IO，因为阶段2是阻塞的(尽管时间很短)。只有异步IO模型是符合POSIX异步IO操作含义的，不管在阶段1还是阶段2都可以干别的事。</p>
 <blockquote>
 </blockquote>
 <p>ps：以上图片均截自UNIX网络编程卷1。</p>

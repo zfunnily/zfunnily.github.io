@@ -151,7 +151,7 @@
         </div>
         
         <div class="post-content">
-            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &quot;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&quot; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到……
+            FFmpeg生成画中画 静态画中画 将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置 ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&#34; -vcodec libx264 output.flv 显示在画面的右下角，则需要用到……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/09/ffmpegpicture/">阅读全文</a></p>
     </article>
@@ -226,7 +226,7 @@
         </div>
         
         <div class="post-content">
-            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &quot; &quot; 看到了 如下设……
+            设备枚举 查看设备列表 $ ffmpeg -hide_banner -devices Devices: D. = Demuxing supported .E = Muxing supported -- D avfoundation AVFoundation input device D lavfi Libavfilter virtual input device E sdl,sdl2 SDL2 output device 可以看到输入设备有：avfoundation，lavfi 输出设备有：sdl `` 设备采集举例： $ ffmpeg -f avfoundation -list_devices true -i &#34; &#34; 看到了 如下设……
         </div>
         <p class="readmore"><a href="https://zfunnily.github.io/2020/08/macffmpeg/">阅读全文</a></p>
     </article>

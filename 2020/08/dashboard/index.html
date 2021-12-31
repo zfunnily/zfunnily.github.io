@@ -217,12 +217,12 @@
         <div class="post-content">
             <h2 id="安装部署dashboard">安装部署Dashboard</h2>
 <p>通过一下命令来部署, <a href="dashboard%E7%9A%84yaml%E6%96%87%E4%BB%B6.md">recommended.yaml</a></p>
-<pre><code>$ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
-</code></pre><p><code>https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml</code>这个地址却很难打开，如果能打开，直接执行即可，如果不能，可以这样做：</p>
-<pre><code>到github地址上一步步找：`https://github.com/kubernetes/dashboard/tree/v2.0.0-beta4/aio/deploy`下的`recommended.yaml`文件;
-</code></pre><h3 id="nodeport方式访问web">NodePort方式访问web</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+</code></pre></div><p><code>https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml</code>这个地址却很难打开，如果能打开，直接执行即可，如果不能，可以这样做：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">到github地址上一步步找：`https://github.com/kubernetes/dashboard/tree/v2.0.0-beta4/aio/deploy`下的`recommended.yaml`文件;
+</code></pre></div><h3 id="nodeport方式访问web">NodePort方式访问web</h3>
 <p>为了测试方便，我们将<code>Service</code>改成<code>NodePort</code>类型，注意 YAML 中最下面的 Service 部分新增一个<code>type=NodePort</code>：</p>
-<pre><code>kind: Service
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kind: Service
 apiVersion: v1
 metadata:
   labels:
@@ -238,87 +238,87 @@ spec:
   selector:
     k8s-app: kubernetes-dashboard
 
-</code></pre><p>然后直接部署新版本的<code>dashboard</code>即可：</p>
-<pre><code>$ sudo kubectl create -f recommended.yaml
+</code></pre></div><p>然后直接部署新版本的<code>dashboard</code>即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl create -f recommended.yaml
 或者
 $ sudo  kubectl apply -f recommended.yaml
 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 </blockquote>
 <p>删除的指令 sudo kubectl delete -f recommended.yaml</p>
 <p>查看服务暴露的端口</p>
-<pre><code>$ sudo kubectl get service -n kubernetes-dashboard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get service -n kubernetes-dashboard
 NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
 dashboard-metrics-scraper   ClusterIP   10.103.34.200   &lt;none&gt;        8000/TCP        4s
 kubernetes-dashboard        NodePort    10.98.254.205   &lt;none&gt;        443:31038/TCP   4s
 
-</code></pre><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
+</code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
 <p>查看dashboard状态</p>
-<pre><code>$ sudo kubectl get pods --all-namespaces | grep dashboard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get pods --all-namespaces | grep dashboard
 kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
 kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
 
-</code></pre><p>查看dashboard的日志</p>
-<pre><code>$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
+</code></pre></div><p>查看dashboard的日志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
 
-</code></pre><p>如果安装后，dashboard状态直接爆错，没有处于Running状态，可以执行下面命令删除插件与镜像，使用docker pull安装镜像的可以更换其他版本镜像与yaml进行安装</p>
-<pre><code># 删除dashboard插件，recommended.yaml为安装时的名称，执行删除后，docker里对应的镜像没不会同步删除
+</code></pre></div><p>如果安装后，dashboard状态直接爆错，没有处于Running状态，可以执行下面命令删除插件与镜像，使用docker pull安装镜像的可以更换其他版本镜像与yaml进行安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 删除dashboard插件，recommended.yaml为安装时的名称，执行删除后，docker里对应的镜像没不会同步删除
 sudo kubectl delete -f recommended.yaml
 
-</code></pre><h2 id="a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</h2>
+</code></pre></div><h2 id="a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</h2>
 <h3 id="a-idnodeport_65a开启nodeport访问的另一种方式"><a id="NodePort_65"></a>开启NodePort访问的另一种方式</h3>
 <p>查看 kubernetes-dashboard</p>
-<pre><code>sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
 
 [root@k8s ~]# kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
 NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes-dashboard   ClusterIP   10.97.154.42   &lt;none&gt;        443/TCP   28m
 
-</code></pre><p>编辑<code>kubernetes-dashboard</code>, 将里面的<code>type: ClusterIP</code>改为<code>type: NodePort</code>即可。</p>
-<pre><code>$ kubectl --namespace=kubernetes-dashboard edit service kubernetes-dashboard
+</code></pre></div><p>编辑<code>kubernetes-dashboard</code>, 将里面的<code>type: ClusterIP</code>改为<code>type: NodePort</code>即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl --namespace=kubernetes-dashboard edit service kubernetes-dashboard
 
-</code></pre><p><code>wq</code>保存即可。等一会儿，重新查看，就变为NodePort了。</p>
-<pre><code>$ sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
+</code></pre></div><p><code>wq</code>保存即可。等一会儿，重新查看，就变为NodePort了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
 NAME                   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
 kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/TCP   59s
 
-</code></pre><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
+</code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
 <h3 id="a-idapi_server_87aapi-server访问"><a id="API_Server_87"></a>API Server访问</h3>
 <p>启动Web访问，accept-hosts需要绑定当前服务器ip，即绑定接收请求的地址（可以使用正则表达式），不绑定访问可能会被拒绝，直接返回“Forbidden”</p>
-<pre><code>nohup sudo kubectl proxy --address='0.0.0.0' --port=8001 --accept-hosts='.*' &amp;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nohup sudo kubectl proxy --address=&#39;0.0.0.0&#39; --port=8001 --accept-hosts=&#39;.*&#39; &amp;
 
-</code></pre><p>直接用curl在服务器测试访问</p>
-<pre><code>curl http://localhost:8001/api/
+</code></pre></div><p>直接用curl在服务器测试访问</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8001/api/
 
-</code></pre><p>如果能返回下面json串，就表示Dashboard已安装成功</p>
-<pre><code>{
-  &quot;kind&quot;: &quot;APIVersions&quot;,
-  &quot;versions&quot;: [
-    &quot;v1&quot;
+</code></pre></div><p>如果能返回下面json串，就表示Dashboard已安装成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
+  &#34;kind&#34;: &#34;APIVersions&#34;,
+  &#34;versions&#34;: [
+    &#34;v1&#34;
   ],
-  &quot;serverAddressByClientCIDRs&quot;: [
+  &#34;serverAddressByClientCIDRs&#34;: [
     {
-      &quot;clientCIDR&quot;: &quot;0.0.0.0/0&quot;,
-      &quot;serverAddress&quot;: &quot;192.168.10.161:6443&quot;
+      &#34;clientCIDR&#34;: &#34;0.0.0.0/0&#34;,
+      &#34;serverAddress&#34;: &#34;192.168.10.161:6443&#34;
     }
   ]
 }
 
-</code></pre><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
+</code></pre></div><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
 <h2 id="a-id_113a创建用户"><a id="_113"></a>创建用户</h2>
 <p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<br> ``<br> <strong>新建文件(文件名随意)<code>admin-user.yaml</code>：</strong><br> 输入内容：</p>
-<pre><code>apiVersion: v1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: admin-user
   namespace: kubernetes-dashboard
 
-</code></pre><p>执行：</p>
-<pre><code>sudo kubectl create -f admin-user.yaml
+</code></pre></div><p>执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f admin-user.yaml
 
-</code></pre><h2 id="a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</h2>
+</code></pre></div><h2 id="a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</h2>
 <p><strong>新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：</strong><br> 输入内容：</p>
-<pre><code>apiVersion: rbac.authorization.k8s.io/v1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: admin-user
@@ -330,13 +330,13 @@ subjects:
 - kind: ServiceAccount
   name: admin-user
   namespace: kubernetes-dashboard
-</code></pre><p>执行：</p>
-<pre><code>sudo kubectl create -f admin-user-role-binding.yaml
-</code></pre><p><strong>如果过程中提示存在或者需要删除，只需要<code>kubectl delete -f 相应的yaml文件</code>即可。</strong></p>
+</code></pre></div><p>执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f admin-user-role-binding.yaml
+</code></pre></div><p><strong>如果过程中提示存在或者需要删除，只需要<code>kubectl delete -f 相应的yaml文件</code>即可。</strong></p>
 <h2 id="获取token">获取token</h2>
 <p>按照官网提示的获取token方法：</p>
-<pre><code>$ sudo kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
-</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;{print $1}&#39;)
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

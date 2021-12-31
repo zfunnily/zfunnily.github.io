@@ -209,18 +209,18 @@
         
         <div class="post-content">
             <h3 id="拉取镜像">拉取镜像</h3>
-<pre><code>$ docker pull portainer/portainer
-</code></pre><h3 id="运行启动portainer">运行启动portainer</h3>
-<pre><code>docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer
-</code></pre><p>admin<br> bigant.cn</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker pull portainer/portainer
+</code></pre></div><h3 id="运行启动portainer">运行启动portainer</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer
+</code></pre></div><p>admin<br> bigant.cn</p>
 <h3 id="a-id_14a汉化"><a id="_14"></a>汉化</h3>
 <p><a href="https://dl.quchao.net/Soft/Portainer-CN.zip">Portainer-CN.zip</a><br> 百度云盘: <a href="https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw">https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw</a> 提取码: <code>nzue</code><br> 新建文件夹命名为<code>public</code>，把<code>Portainer-CN.zip</code>解压至里面。 2、<code>public</code>文件夹传输至系统根目录 3、然后按需执行以下命令 x86-64系统使用</p>
-<pre><code>docker volume create portainer_data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock   -v portainer_data:/data -v /public:/public  --name portainer --restart=always portainer/portainer
-</code></pre><p>ARM64系统使用</p>
-<pre><code>docker volume create portainer_data
+</code></pre></div><p>ARM64系统使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -v /public:/public portainer/portainer:linux-arm64-1.20.2
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

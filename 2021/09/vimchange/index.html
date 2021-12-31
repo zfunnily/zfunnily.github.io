@@ -220,27 +220,19 @@
 <li>IdeaVimExtension</li>
 </ul>
 <p>我们需要在 用户目录下创建 <code>.ideavimrc</code> 文件, 并输入以下内容</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0086b3">set</span> keep-english-in-normal 
-<span style="color:#0086b3">set</span> keep-english-in-normal-and-restore-in-insert
-</code></pre></td></tr></table>
-</div>
-</div><pre><code>$ source ~/.ideavimrc
-</code></pre><p>重启 <code>idea</code> 可以看到效果了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">set keep-english-in-normal 
+set keep-english-in-normal-and-restore-in-insert
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ source ~/.ideavimrc
+</code></pre></div><p>重启 <code>idea</code> 可以看到效果了。</p>
 <p>IdeaVimExtension插件的文档：
 为<code>IdeaVim</code>插件增加自动切换为英文输入法的功能
 输入法自动切换功能不会默认启用
 编辑器中normal模式下输入输入下面的指令以启用自动切换输入法功能：</p>
-<pre><code>:set keep-english-in-normal 开启输入法自动切换功能
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">:set keep-english-in-normal 开启输入法自动切换功能
 :set keep-english-in-normal-and-restore-in-insert 回到insert模式时恢复输入法
 :set nokeep-english-in-normal-and-restore-in-insert 保留输入法自动切换功能，但是回到insert模式不恢复输入法
 :set nokeep-english-in-normal 关闭输入法自动切换功能
-</code></pre><p>也可以通过将<code>set keep-english-in-normal[-and-restore-in-insert]</code>加入到<code>~/.ideavimrc</code>文件中并重启IDE来启用插件功能。
+</code></pre></div><p>也可以通过将<code>set keep-english-in-normal[-and-restore-in-insert]</code>加入到<code>~/.ideavimrc</code>文件中并重启IDE来启用插件功能。
 注意:支持MacOS和Windows, 通过fcitx-remote支持Linux
 MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国键盘 Linux需要使用fcitx输入法，通过fcitx-remote切换
 在macOS中,normal模式的输入法可以通过<code>keep_input_source_in_normal</code> 来设置,例如<code>let keep_input_source_in_normal=&quot;com.apple.keylayout.ABC&quot;</code></p>
@@ -253,18 +245,18 @@ MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国�
 <li>im-select</li>
 </ul>
 <h3 id="安装-im-select">安装 im-select</h3>
-<pre><code>$ git clone https://github.com.cnpmjs.org/daipeihust/im-select.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/daipeihust/im-select.git
 $ mv im-select/im-select-mac/out/im-select /usr/local/bin/
 $ chmod 777 /usr/local/bin/im-select
-</code></pre><p>查看当前输入法</p>
-<pre><code>$ /usr/local/bin/im-select
+</code></pre></div><p>查看当前输入法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ /usr/local/bin/im-select
 com.apple.keylayout.ABC
-</code></pre><h3 id="全局配置-settingsjson">全局配置 settings.json</h3>
-<pre><code>&quot;vim.autoSwitchInputMethod.enable&quot;: true,
-&quot;vim.autoSwitchInputMethod.defaultIM&quot;: &quot;com.apple.keylayout.ABC&quot;,
-&quot;vim.autoSwitchInputMethod.obtainIMCmd&quot;: &quot;/usr/local/bin/im-select&quot;,
-&quot;vim.autoSwitchInputMethod.switchIMCmd&quot;: &quot;/usr/local/bin/im-select {im}&quot;
-</code></pre><p>settings.json 参数解析:</p>
+</code></pre></div><h3 id="全局配置-settingsjson">全局配置 settings.json</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;vim.autoSwitchInputMethod.enable&#34;: true,
+&#34;vim.autoSwitchInputMethod.defaultIM&#34;: &#34;com.apple.keylayout.ABC&#34;,
+&#34;vim.autoSwitchInputMethod.obtainIMCmd&#34;: &#34;/usr/local/bin/im-select&#34;,
+&#34;vim.autoSwitchInputMethod.switchIMCmd&#34;: &#34;/usr/local/bin/im-select {im}&#34;
+</code></pre></div><p>settings.json 参数解析:</p>
 <table>
 <thead>
 <tr>

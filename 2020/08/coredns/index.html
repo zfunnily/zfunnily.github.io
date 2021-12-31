@@ -218,9 +218,9 @@
 <li>删除<code>ServiceAccount</code>、<code>ClusterRole</code>和<code>ClusterRoleBinding</code>部分
 在最佳的案例场景中，使用CoreDNS替换Kube-DNS只需要使用下面的两个命令：</li>
 </ol>
-<pre><code>$ ./deploy.sh | kubectl apply -f -
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./deploy.sh | kubectl apply -f -
 $ kubectl delete --namespace=kube-system deployment kube-dns
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

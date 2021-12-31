@@ -220,44 +220,44 @@
 <p>用Untiy 4.6 打开工程 Client根目录<br> 直接编译即可<br> 生成的cs.exe 和 cs_Data 就是客户端文件了</p>
 <h2 id="客户端遇到的问题">客户端遇到的问题</h2>
 <p>排除Shader错误 ‘vert’: output parameter ‘o’ not completely initialized<br> 现象</p>
-<pre><code>vert': output parameter 'o' not completely initialized
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vert&#39;: output parameter &#39;o&#39; not completely initialized
 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 </blockquote>
 <p>即vert输出参数o没有初始化。</p>
 <p>解决方法:直接找到该shader文件的vert方法，在其中添加如下代码（第3行）：</p>
-<pre><code>void vert (inout appdata_full v, out Input o) {  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void vert (inout appdata_full v, out Input o) {  
 ...
 UNITY_INITIALIZE_OUTPUT(Input, o);}
 }
 
-</code></pre><h2 id="编译服务器">编译服务器</h2>
+</code></pre></div><h2 id="编译服务器">编译服务器</h2>
 <p>用vs2010打开 Server/AllServer，直接编译即可。</p>
 <h2 id="服务端数据库安装">服务端数据库安装</h2>
 <p>Server\Bin\x64\Release\dbsql 这里就是数据库的位置了<br> 文件说明</p>
 <p>Rebuild.bat为创建数据库, 需要把数据库的账号密码改为自己搭建的mysql服务的账号密码 <code>mysql -uroot -p123321&lt;...</code></p>
-<pre><code>schedule_db_back.bat为系统计划任务备份数据库脚本，如果需要修改路径，则需要打开该脚本并且修改到实际路径
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">schedule_db_back.bat为系统计划任务备份数据库脚本，如果需要修改路径，则需要打开该脚本并且修改到实际路径
 
 pr_de_time_over_mail.sql为清理邮件脚本，如需要修改清理时间，则需要修改该脚本里注明的参数 
 
-</code></pre><h2 id="局域网客户端服务器配置">局域网客户端服务器配置</h2>
+</code></pre></div><h2 id="局域网客户端服务器配置">局域网客户端服务器配置</h2>
 <h3 id="客户端配置">客户端配置</h3>
 <p>编译客户端时可在Unity页面点击左侧的JxBlGame<br> 然后修改右面弹出来的很多 127.0.0.1 然后点击菜单栏中 File – Save Sence<br> Client\Assets\Scripts\JxBlGame.cs中 51行</p>
-<pre><code>public string LoginServerAdress = &quot;127.0.0.1&quot;;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public string LoginServerAdress = &#34;127.0.0.1&#34;;
  // 修改成你需要的ip地址 并保存
-public int LoginServerPort = 49998;&quot;; 
+public int LoginServerPort = 49998;&#34;; 
 
-</code></pre><h3 id="服务端配置">服务端配置</h3>
+</code></pre></div><h3 id="服务端配置">服务端配置</h3>
 <p>服务端只需要配置视频中提到的 Server\Bin\x64\Release\LSConfig\Serverlist.ini中</p>
-<pre><code>Addr1 = 0.0.0.0:49998
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Addr1 = 0.0.0.0:49998
 
-</code></pre><p>也就是第一个服务器的ip地址，之后重启登录服务器即可</p>
+</code></pre></div><p>也就是第一个服务器的ip地址，之后重启登录服务器即可</p>
 <p>配置数据库的文件<br> Server\Bin\x64\Release\CSConfig\DBConfig.xml</p>
 <p>Server\Bin\x64\Release\LGCfg\DBConfig.xml</p>
 <h2 id="启动服务器">启动服务器</h2>
-<pre><code>Server\Bin\x64\Release\start.bat
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Server\Bin\x64\Release\start.bat
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

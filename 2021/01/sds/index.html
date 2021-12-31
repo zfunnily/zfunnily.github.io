@@ -217,10 +217,10 @@
 <li>sds.h: sds声明- sdsalloc.h： 为sds分配内存
 源码文件<code>sds.h</code>中有这样一行代码</li>
 </ul>
-<pre><code>typedef  char *sds;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef  char *sds;
 
-</code></pre><p>很清晰、明了，<code>sds</code>其实就是<code>char*</code>。<br> 最新的6.2分支的代码：</p>
-<pre><code>struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt;
+</code></pre></div><p>很清晰、明了，<code>sds</code>其实就是<code>char*</code>。<br> 最新的6.2分支的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct __attribute__ ((__packed__)) sdshdr5 {&lt;!-- --&gt;
     unsigned char flags; /* 3 lsb of type, and 5 msb of string length */
     char buf[];
 };
@@ -249,17 +249,17 @@ struct __attribute__ ((__packed__)) sdshdr64 {&lt;!-- --&gt;
     char buf[];
 };
 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 </blockquote>
 <p><code>__attribute__ ((__packed__))</code>的设置是告诉编译器取消字节对齐，则结构体的大小就是按照结构体成员实际大小相加得到的。<br> Redis是在3.2版本(包括3.2)之后把<code>sdshdr</code>改为现在这样的。</p>
 <p>看到这五个结构体有点懵，我想程序都有个初始版本，万变不离其宗，我切换到2.2版本的分支上,看到了<code>sdshdr</code>最初的模样</p>
-<pre><code>struct  sdshdr {&lt;!-- --&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct  sdshdr {&lt;!-- --&gt;
 int  len;
 int  free;
 char  buf[];
 };
 
-</code></pre><p>注意:这里的len是buf字符数组中，不包括最后的空字符的字符个数。<code>sdshdr</code> 是一个包含字符串数组和长度的结构体。</p>
+</code></pre></div><p>注意:这里的len是buf字符数组中，不包括最后的空字符的字符个数。<code>sdshdr</code> 是一个包含字符串数组和长度的结构体。</p>
 <h2 id="a-idcsds_55a相比c字符串sds的优势"><a id="CSDS_55"></a>相比<code>C</code>字符串，<code>SDS</code>的优势</h2>
 <p><code>sdshdr</code>和C字符串有什么优势和劣势呢？请继续往下看</p>
 <h3 id="a-id_58a获取字符串的时间复杂度"><a id="_58"></a>获取字符串的时间复杂度</h3>
@@ -292,38 +292,38 @@ char  buf[];
         </a>
     </p>
 <p>想要得到<code>sdshdr</code>的属性，需要知道<code>header</code>类型，<code>flags</code>字段存储了<code>header</code>类型，假如我们定义了<code>sds* s</code>，那么获取<code>flags</code>字段仅仅需要将s向前移动一个字节，即<code>unsigned char flags = s[-1]</code> , <code>header</code>的五类型如下：</p>
-<pre><code>#define  SDS_TYPE_5  0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#define  SDS_TYPE_5  0
 #define  SDS_TYPE_8  1
 #define  SDS_TYPE_16  2
 #define  SDS_TYPE_32  3
 #define  SDS_TYPE_64  4
 
-</code></pre><p>然后通过以下宏定义来对header进行操作：</p>
-<pre><code>#define SDS_TYPE_MASK 7 // 类型掩码
+</code></pre></div><p>然后通过以下宏定义来对header进行操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#define SDS_TYPE_MASK 7 // 类型掩码
 #define SDS_TYPE_BITS 3 
 #define SDS_HDR_VAR(T,s) struct sdshdr##T *sh = (void*)((s)-(sizeof(struct sdshdr##T))); // 获取header头指针
 #define SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T)))) // 获取header头指针
 #define SDS_TYPE_5_LEN(f) ((f)&gt;&gt;SDS_TYPE_BITS) // 获取sdshdr5的长度
 
-</code></pre><h2 id="a-idsds_____103asds的创建--扩容--销毁"><a id="SDS_____103"></a>SDS的创建 &amp; 扩容 &amp; 销毁</h2>
+</code></pre></div><h2 id="a-idsds_____103asds的创建--扩容--销毁"><a id="SDS_____103"></a>SDS的创建 &amp; 扩容 &amp; 销毁</h2>
 <p>创建一个sds字符串函数：</p>
-<pre><code>sds  sdsnew(const  char *init) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sds  sdsnew(const  char *init) {
     size_t  initlen = (init == NULL) ? 0 : strlen(init);
     return  sdsnewlen(init, initlen);
 }
 
-</code></pre><p>触发扩容操作：</p>
-<pre><code>sds sdscatfmt(sds s, char const *fmt, ...) {
+</code></pre></div><p>触发扩容操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sds sdscatfmt(sds s, char const *fmt, ...) {
     ...
         switch(*f) {
-        case '%':
+        case &#39;%&#39;:
             next = *(f+1);
             f++;
             switch(next) {
-            case 's':
-            case 'S':
+            case &#39;s&#39;:
+            case &#39;S&#39;:
                 str = va_arg(ap,char*);
-                l = (next == 's') ? strlen(str) : sdslen(str);
+                l = (next == &#39;s&#39;) ? strlen(str) : sdslen(str);
                 if (sdsavail(s) &lt; l) {  //当剩余空间小于要加入数据的大小时需要扩容
                     s = sdsMakeRoomFor(s,l);  //扩容
                 }
@@ -338,41 +338,41 @@ char  buf[];
     va_end(ap);
 
     /* Add null-term */
-    s[i] = '\0';
+    s[i] = &#39;\0&#39;;
     return s;
 }
 
 
-</code></pre><p>惰性删除操作， 设置 <code>len</code>字段为0，但是并没有释放内存。这是一个比较极端的例子，</p>
-<pre><code>void sdsclear(sds s) {
+</code></pre></div><p>惰性删除操作， 设置 <code>len</code>字段为0，但是并没有释放内存。这是一个比较极端的例子，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void sdsclear(sds s) {
     sdssetlen(s, 0);
-    s[0] = '\0';
+    s[0] = &#39;\0&#39;;
 }
 
-</code></pre><p>惰性删除操作，这个例子比较正常，如果新数据的长度小于等于当前数据的长度则不进行扩容，不扩容只需要修改<code>len</code>这个字段的值即可，不需要释放内存。反之则需要进行扩容。</p>
-<pre><code>sds sdsgrowzero(sds s, size_t len) {
+</code></pre></div><p>惰性删除操作，这个例子比较正常，如果新数据的长度小于等于当前数据的长度则不进行扩容，不扩容只需要修改<code>len</code>这个字段的值即可，不需要释放内存。反之则需要进行扩容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sds sdsgrowzero(sds s, size_t len) {
     size_t curlen = sdslen(s);
 
     if (len &lt;= curlen) return s;  //新数据的长度小于等于数据的长度则不进行扩容。
     s = sdsMakeRoomFor(s,len-curlen); //扩容操作
     if (s == NULL) return NULL;
 
-    /* Make sure added region doesn't contain garbage */
+    /* Make sure added region doesn&#39;t contain garbage */
     memset(s+curlen,0,(len-curlen+1)); /* also set trailing \0 byte */
     sdssetlen(s, len); //设置已使用数据长度，len字段
     return s;
 }
 
-</code></pre><p>释放空闲空间</p>
-<pre><code>sds sdsRemoveFreeSpace(sds s) {}
+</code></pre></div><p>释放空闲空间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sds sdsRemoveFreeSpace(sds s) {}
 
-</code></pre><p>销毁<code>SDS</code></p>
-<pre><code>void  sdsfree(sds  s) {
+</code></pre></div><p>销毁<code>SDS</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void  sdsfree(sds  s) {
 if (s == NULL) return;
 s_free((char*)s-sdsHdrSize(s[-1]));
 }
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

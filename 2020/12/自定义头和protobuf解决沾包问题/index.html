@@ -217,159 +217,159 @@
 <li>包头 
   <ul>- size ：表示body长度，int32，占位4字节- cmd ： 表示指令，int32，占位 4字节
 ## <a id="proto_10"></a>.proto文件
-<pre><code>// msg.proto
-syntax = &quot;proto3&quot;;
-option go_package = &quot;.;GCToLs&quot;;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// msg.proto
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
+<span style="color:#a6e22e">option</span> <span style="color:#a6e22e">go_package</span> = <span style="color:#e6db74">&#34;.;GCToLs&#34;</span>;
 
-package GCToLS;
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">GCToLS</span>;
 
-enum MsgID
+<span style="color:#a6e22e">enum</span> <span style="color:#a6e22e">MsgID</span>
 {
-  eMsgToLSFromGC_Unknow = 0;
-  eMsgToLSFromGC_Begin = 40960;
-  eMsgToLSFromGC_AskLogin = 40961;
-  eMsgToLSFromGC_End = 40970;
+  <span style="color:#a6e22e">eMsgToLSFromGC_Unknow</span> = <span style="color:#ae81ff">0</span>;
+  <span style="color:#a6e22e">eMsgToLSFromGC_Begin</span> = <span style="color:#ae81ff">40960</span>;
+  <span style="color:#a6e22e">eMsgToLSFromGC_AskLogin</span> = <span style="color:#ae81ff">40961</span>;
+  <span style="color:#a6e22e">eMsgToLSFromGC_End</span> = <span style="color:#ae81ff">40970</span>;
 }
 
-message AskLogin
+<span style="color:#a6e22e">message</span> <span style="color:#a6e22e">AskLogin</span>
 {
-  MsgID msgid = 1;
-  uint32 platform = 2;
-  string uin = 3;
-  string sessionid = 4;
+  <span style="color:#a6e22e">MsgID</span> <span style="color:#a6e22e">msgid</span> = <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">uint32</span> <span style="color:#a6e22e">platform</span> = <span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">uin</span> = <span style="color:#ae81ff">3</span>;
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">sessionid</span> = <span style="color:#ae81ff">4</span>;
 }
 
 
-</code></pre><p>执行命令,生成 msg.pb.go文件</p>
-<pre><code>protoc ./*.proto --go_out=protos -I ./
+</code></pre></div><p>执行命令,生成 msg.pb.go文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">protoc ./*.proto --go_out=protos -I ./
 
-</code></pre><h2 id="a-idserver_39aserver示例代码"><a id="Server_39"></a>Server示例代码</h2>
-<pre><code>package main
+</code></pre></div><h2 id="a-idserver_39aserver示例代码"><a id="Server_39"></a>Server示例代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;bufio&quot;
-	&quot;bytes&quot;
-	&quot;encoding/binary&quot;
-	&quot;fmt&quot;
-	&quot;github.com/golang/protobuf/proto&quot;
-	pb &quot;m1/protos&quot;
-	&quot;net&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;bufio&#34;</span>
+	<span style="color:#e6db74">&#34;bytes&#34;</span>
+	<span style="color:#e6db74">&#34;encoding/binary&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/golang/protobuf/proto&#34;</span>
+	<span style="color:#a6e22e">pb</span> <span style="color:#e6db74">&#34;m1/protos&#34;</span>
+	<span style="color:#e6db74">&#34;net&#34;</span>
 )
-func doServerStuf(conn net.Conn)  {
-	defer conn.Close()
-	for {
-		scanner := bufio.NewScanner(conn)
-		scanner.Split(func(data []byte, atEOF bool) (advance int, token []byte, err error) {
-			if !atEOF {
-				if len(data) &gt; 8  {  //4字节数据包长度  4字节指令
-					length := int32(0)
-					binary.Read(bytes.NewReader(data[0:4]),binary.BigEndian, &amp;length)
-					if length &lt;= 0 {
-						return 0, nil, fmt.Errorf(&quot;length is 0&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">doServerStuf</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>)  {
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">conn</span>)
+		<span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">byte</span>, <span style="color:#a6e22e">atEOF</span> <span style="color:#66d9ef">bool</span>) (<span style="color:#a6e22e">advance</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">token</span> []<span style="color:#66d9ef">byte</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+			<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">atEOF</span> {
+				<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">data</span>) &gt; <span style="color:#ae81ff">8</span>  {  <span style="color:#75715e">//4字节数据包长度  4字节指令
+</span><span style="color:#75715e"></span>					<span style="color:#a6e22e">length</span> <span style="color:#f92672">:=</span> int32(<span style="color:#ae81ff">0</span>)
+					<span style="color:#a6e22e">binary</span>.<span style="color:#a6e22e">Read</span>(<span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]),<span style="color:#a6e22e">binary</span>.<span style="color:#a6e22e">BigEndian</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">length</span>)
+					<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> {
+						<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;length is 0&#34;</span>)
 					}
-					fmt.Printf(&quot;len_data %d; length: %d\n&quot;, len(data), length)
-					if int(length) + 8 &lt;= len(data) {
-						return int(length), data[8:int(length) + 8], nil
+					<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;len_data %d; length: %d\n&#34;</span>, len(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">length</span>)
+					<span style="color:#66d9ef">if</span> int(<span style="color:#a6e22e">length</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&lt;=</span> len(<span style="color:#a6e22e">data</span>) {
+						<span style="color:#66d9ef">return</span> int(<span style="color:#a6e22e">length</span>), <span style="color:#a6e22e">data</span>[<span style="color:#ae81ff">8</span>:int(<span style="color:#a6e22e">length</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>], <span style="color:#66d9ef">nil</span>
 					}
 				}
 			}
-			return
+			<span style="color:#66d9ef">return</span>
 		})
 
-		for scanner.Scan() {
-			fmt.Println(&quot;scanner msg: &quot;, string(scanner.Bytes()))
-			msg := new(pb.AskLogin)
-			err := proto.Unmarshal(scanner.Bytes(), msg)
-			if err != nil {
-				fmt.Printf(&quot;proto Unmarshal err: %s\n&quot;, err.Error())
-				return
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Scan</span>() {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;scanner msg: &#34;</span>, string(<span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Bytes</span>()))
+			<span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">AskLogin</span>)
+			<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">proto</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Bytes</span>(), <span style="color:#a6e22e">msg</span>)
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;proto Unmarshal err: %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+				<span style="color:#66d9ef">return</span>
 			}
-			fmt.Printf(&quot;msg.msgid: %d, msg.session: %s\n&quot;, msg.Msgid, msg.Sessionid)
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;msg.msgid: %d, msg.session: %s\n&#34;</span>, <span style="color:#a6e22e">msg</span>.<span style="color:#a6e22e">Msgid</span>, <span style="color:#a6e22e">msg</span>.<span style="color:#a6e22e">Sessionid</span>)
 		}
 
-		if err := scanner.Err(); err != nil {
-			fmt.Println(&quot;无数据包！&quot;)
-			return
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Err</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;无数据包！&#34;</span>)
+			<span style="color:#66d9ef">return</span>
 		}
 	}
 }
 
-func main() {
-	errs := make(chan error)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">errs</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">error</span>)
 
-	l, err := net.Listen(&quot;tcp&quot;,&quot;:9091&quot;)
-	if err != nil {
-		errs &lt;- err
+	<span style="color:#a6e22e">l</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Listen</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>,<span style="color:#e6db74">&#34;:9091&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">errs</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">err</span>
 	}
-	fmt.Println(&quot;Accept...9001&quot;)
-	go func() {
-		conn ,err := l.Accept()
-		if err != nil {
-			errs &lt;- err
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Accept...9001&#34;</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#a6e22e">conn</span> ,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">l</span>.<span style="color:#a6e22e">Accept</span>()
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">errs</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">err</span>
 		}
-		go doServerStuf(conn)
+		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">doServerStuf</span>(<span style="color:#a6e22e">conn</span>)
 	}()
-	fmt.Errorf(&quot;%s\n&quot;, &lt;- errs)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">errs</span>)
 }
 
-</code></pre><h2 id="a-idclient_109aclient示例代码"><a id="Client_109"></a>Client示例代码</h2>
-<pre><code>package main
+</code></pre></div><h2 id="a-idclient_109aclient示例代码"><a id="Client_109"></a>Client示例代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;bytes&quot;
-	&quot;encoding/binary&quot;
-	&quot;fmt&quot;
-	&quot;github.com/golang/protobuf/proto&quot;
-	pb &quot;m1/protos&quot;
-	&quot;net&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;bytes&#34;</span>
+	<span style="color:#e6db74">&#34;encoding/binary&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/golang/protobuf/proto&#34;</span>
+	<span style="color:#a6e22e">pb</span> <span style="color:#e6db74">&#34;m1/protos&#34;</span>
+	<span style="color:#e6db74">&#34;net&#34;</span>
 )
 
-func main() {
-	conn, err := net.Dial(&quot;tcp&quot;,&quot;127.0.0.1:9091&quot;)
-	if err != nil {
-		fmt.Errorf(&quot;%s\n&quot;, err.Error())
-		return
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>,<span style="color:#e6db74">&#34;127.0.0.1:9091&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
 	}
-	msg := &amp;pb.AskLogin{
-		Msgid: 1,
-		Platform: 1,
-		Uin: &quot;1&quot;,
-		Sessionid: &quot;1001&quot;,
-	}
-
-	msgbyte,err := proto.Marshal(msg)
-	if err != nil {
-		fmt.Errorf(&quot;msg Marshal error %s\n&quot;, err.Error())
-		return
+	<span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">AskLogin</span>{
+		<span style="color:#a6e22e">Msgid</span>: <span style="color:#ae81ff">1</span>,
+		<span style="color:#a6e22e">Platform</span>: <span style="color:#ae81ff">1</span>,
+		<span style="color:#a6e22e">Uin</span>: <span style="color:#e6db74">&#34;1&#34;</span>,
+		<span style="color:#a6e22e">Sessionid</span>: <span style="color:#e6db74">&#34;1001&#34;</span>,
 	}
 
-	buf := &amp;bytes.Buffer{}
-	var head []byte
-	head = make([]byte, 8)
-	binary.BigEndian.PutUint32(head[0:4], uint32(bytes.Count(msgbyte,nil) -1))
-	binary.BigEndian.PutUint32(head[4:8], uint32(pb.MsgID_eMsgToLSFromGC_AskLogin))
-	buf.Write(head[:8])
-	buf.Write(msgbyte)
-	fmt.Printf(&quot;%v\n&quot;, string(buf.Bytes()))
+	<span style="color:#a6e22e">msgbyte</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">proto</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">msg</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;msg Marshal error %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
 
-	conn.Write(buf.Bytes())
-	defer conn.Close()
+	<span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>{}
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">head</span> []<span style="color:#66d9ef">byte</span>
+	<span style="color:#a6e22e">head</span> = make([]<span style="color:#66d9ef">byte</span>, <span style="color:#ae81ff">8</span>)
+	<span style="color:#a6e22e">binary</span>.<span style="color:#a6e22e">BigEndian</span>.<span style="color:#a6e22e">PutUint32</span>(<span style="color:#a6e22e">head</span>[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>], uint32(<span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Count</span>(<span style="color:#a6e22e">msgbyte</span>,<span style="color:#66d9ef">nil</span>) <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+	<span style="color:#a6e22e">binary</span>.<span style="color:#a6e22e">BigEndian</span>.<span style="color:#a6e22e">PutUint32</span>(<span style="color:#a6e22e">head</span>[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">8</span>], uint32(<span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">MsgID_eMsgToLSFromGC_AskLogin</span>))
+	<span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">head</span>[:<span style="color:#ae81ff">8</span>])
+	<span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">msgbyte</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, string(<span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Bytes</span>()))
+
+	<span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Bytes</span>())
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
 }
 
-</code></pre><h2 id="a-id_154a知识点"><a id="_154"></a>知识点</h2>
+</code></pre></div><h2 id="a-id_154a知识点"><a id="_154"></a>知识点</h2>
 <p>一、golang的net网路库的使用<br> 二、golang的goroutine<br> 三、golang的channel使用<br> 四、bufio.Scan可以很好的分割一个数据包。</p>
 <h3 id="a-idbufioscan_160abufioscan的使用"><a id="bufioScan_160"></a>bufio.Scan的使用</h3>
-<pre><code>//生成一个 scanner
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//生成一个 scanner
 scanner := bufio.NewScanner(conn)
 //自定义解包方法
 scanner.Split(func(data []byte, atEOF bool) (advance int, token []byte, err error) {})
 //获取解析出的body
 for bufio.Scan{
-        fmt.printf(&quot;%s\n&quot;, string(scanner.Bytes()));
+        fmt.printf(&#34;%s\n&#34;, string(scanner.Bytes()));
 }
 
-</code></pre><p>包头是8字节，表示body长度的是 head[0:4]。表示指令的是head[4:8], 解析出body如下：</p>
-<pre><code>func doServerStuf(conn net.Conn)  {
+</code></pre></div><p>包头是8字节，表示body长度的是 head[0:4]。表示指令的是head[4:8], 解析出body如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func doServerStuf(conn net.Conn)  {
 	defer conn.Close()
 	for {
 		scanner := bufio.NewScanner(conn)
@@ -379,9 +379,9 @@ for bufio.Scan{
 					length := int32(0)
 					binary.Read(bytes.NewReader(data[0:4]),binary.BigEndian, &amp;length)
 					if length &lt;= 0 {
-						return 0, nil, fmt.Errorf(&quot;length is 0&quot;)
+						return 0, nil, fmt.Errorf(&#34;length is 0&#34;)
 					}
-					fmt.Printf(&quot;len_data %d; length: %d\n&quot;, len(data), length)
+					fmt.Printf(&#34;len_data %d; length: %d\n&#34;, len(data), length)
 					if int(length) + 8 &lt;= len(data) {
 						return int(length), data[8:int(length) + 8], nil
 					}
@@ -391,24 +391,24 @@ for bufio.Scan{
 		})
 
 		for scanner.Scan() {
-			fmt.Println(&quot;scanner msg: &quot;, string(scanner.Bytes()))
+			fmt.Println(&#34;scanner msg: &#34;, string(scanner.Bytes()))
 			msg := new(pb.AskLogin)
 			err := proto.Unmarshal(scanner.Bytes(), msg)
 			if err != nil {
-				fmt.Printf(&quot;proto Unmarshal err: %s\n&quot;, err.Error())
+				fmt.Printf(&#34;proto Unmarshal err: %s\n&#34;, err.Error())
 				return
 			}
-			fmt.Printf(&quot;msg.msgid: %d, msg.session: %s\n&quot;, msg.Msgid, msg.Sessionid)
+			fmt.Printf(&#34;msg.msgid: %d, msg.session: %s\n&#34;, msg.Msgid, msg.Sessionid)
 		}
 
 		if err := scanner.Err(); err != nil {
-			fmt.Println(&quot;无数据包！&quot;)
+			fmt.Println(&#34;无数据包！&#34;)
 			return
 		}
 	}
 }
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

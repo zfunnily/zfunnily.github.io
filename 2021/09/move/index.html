@@ -232,81 +232,41 @@
 </ol>
 <h2 id="rigid-body--capsule-collider">Rigid body + Capsule Collider</h2>
 <p>控制摄像头旋转 FPMouseLook.cs 跟main camera 绑定</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections.Generic</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">UnityEngine</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">UnityEngine.UI</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">using</span> System.Collections;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> UnityEngine;
+<span style="color:#66d9ef">using</span> UnityEngine.UI;
 
-<span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">FPMouseLook</span> : MonoBehaviour
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMouseLook</span> : MonoBehaviour
 {
-    <span style="color:#000;font-weight:bold">private</span> Transform cameraTransform;
-<span style="color:#008080">    [SerializeField]</span> <span style="color:#000;font-weight:bold">private</span> Transform characterTransform;
-    <span style="color:#000;font-weight:bold">private</span> Vector3 cameraRotation;
+    <span style="color:#66d9ef">private</span> Transform cameraTransform;
+<span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> Transform characterTransform;
+    <span style="color:#66d9ef">private</span> Vector3 cameraRotation;
 
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> MouseSensitivity;
-    <span style="color:#000;font-weight:bold">public</span> Vector2 MaxMinAngle;
-    <span style="color:#998;font-style:italic">// Start is called before the first frame update
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">void</span> Start()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MouseSensitivity;
+    <span style="color:#66d9ef">public</span> Vector2 MaxMinAngle;
+    <span style="color:#75715e">// Start is called before the first frame update
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Start()
     {
         cameraTransform = transform;
     }
 
-    <span style="color:#998;font-style:italic">// Update is called once per frame
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">void</span> Update()
+    <span style="color:#75715e">// Update is called once per frame
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Update()
     {
-        <span style="color:#458;font-weight:bold">var</span> tmp_MouseX = Input.GetAxis(<span style="color:#d14">&#34;Mouse X&#34;</span>);
-        <span style="color:#458;font-weight:bold">var</span> tmp_MouseY = Input.GetAxis(<span style="color:#d14">&#34;Mouse Y&#34;</span>);
+        <span style="color:#66d9ef">var</span> tmp_MouseX = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse X&#34;</span>);
+        <span style="color:#66d9ef">var</span> tmp_MouseY = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse Y&#34;</span>);
 
-        cameraRotation.x -= tmp_MouseY * MouseSensitivity;<span style="color:#998;font-style:italic">//MouseSensitivity=18
-</span><span style="color:#998;font-style:italic"></span>        cameraRotation.y += tmp_MouseX * MouseSensitivity;<span style="color:#998;font-style:italic">//MouseSensitivity=18
-</span><span style="color:#998;font-style:italic"></span>
+        cameraRotation.x -= tmp_MouseY * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18
+</span><span style="color:#75715e"></span>        cameraRotation.y += tmp_MouseX * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18
+</span><span style="color:#75715e"></span>
         cameraRotation.x = Mathf.Clamp(cameraRotation.x, MaxMinAngle.x, MaxMinAngle.y);
-        cameraTransform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, <span style="color:#099">0</span>);
+        cameraTransform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, <span style="color:#ae81ff">0</span>);
 
-        characterTransform.rotation = Quaternion.Euler(<span style="color:#099">0</span>, cameraRotation.y, <span style="color:#099">0</span>);
+        characterTransform.rotation = Quaternion.Euler(<span style="color:#ae81ff">0</span>, cameraRotation.y, <span style="color:#ae81ff">0</span>);
     }
 }
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="函数解析">函数解析</h2>
+</code></pre></div><h2 id="函数解析">函数解析</h2>
 <h3 id="inputgetaxis">Input.GetAxis</h3>
 <p>一、触屏类
 1、Mouse X 鼠标沿屏幕X移动时触发
@@ -316,178 +276,91 @@
 1、Vertical 键盘按上或下键时触发
 2、Horizontal 键盘按左或右键时触发</p>
 <p>使用示例：</p>
-<pre><code>Input.GetAxis(&quot;Mouse Y&quot;);
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Input.GetAxis(&#34;Mouse Y&#34;);
+</code></pre></div><blockquote>
 <p>返回值是一个数，正负代表方向</p>
 </blockquote>
 <h3 id="mathfclamp">Mathf.Clamp</h3>
 <p>函数定义：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#000;font-weight:bold">static</span> function Clamp (<span style="color:#000;font-weight:bold">value</span> : <span style="color:#458;font-weight:bold">float</span>, min : <span style="color:#458;font-weight:bold">float</span>, max : <span style="color:#458;font-weight:bold">float</span>) : <span style="color:#458;font-weight:bold">float</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>解释： 限制<code>value</code>的值在<code>min</code>和<code>max</code>之间， 如果<code>value</code>小于<code>min</code>，返回<code>min</code>。 如果<code>value</code>大于<code>max</code>，返回<code>max</code>，否则返回<code>value</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">static</span> function Clamp (<span style="color:#66d9ef">value</span> : <span style="color:#66d9ef">float</span>, min : <span style="color:#66d9ef">float</span>, max : <span style="color:#66d9ef">float</span>) : <span style="color:#66d9ef">float</span>
+</code></pre></div><p>解释： 限制<code>value</code>的值在<code>min</code>和<code>max</code>之间， 如果<code>value</code>小于<code>min</code>，返回<code>min</code>。 如果<code>value</code>大于<code>max</code>，返回<code>max</code>，否则返回<code>value</code></p>
 <h2 id="控制降落--跳跃">控制降落 + 跳跃</h2>
 <p>FPMoveMent.cs</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections.Generic</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">UnityEngine</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> UnityEngine;
 
-<span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">FPMoveMent</span> : MonoBehaviour
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMoveMent</span> : MonoBehaviour
 {
-    <span style="color:#998;font-style:italic">//自由落体速度
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> Speed;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> grativty;
+    <span style="color:#75715e">//自由落体速度
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Speed;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> grativty;
     
-    <span style="color:#998;font-style:italic">//跳跃
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> JumpHeight;
-    <span style="color:#000;font-weight:bold">private</span> Transform characterTransform;
-    <span style="color:#000;font-weight:bold">private</span> Rigidbody characterRigidbody;
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#458;font-weight:bold">bool</span> isGrounded = <span style="color:#000;font-weight:bold">true</span>;
-    <span style="color:#998;font-style:italic">// Start is called before the first frame update
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">void</span> Start()
+    <span style="color:#75715e">//跳跃
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
+    <span style="color:#66d9ef">private</span> Transform characterTransform;
+    <span style="color:#66d9ef">private</span> Rigidbody characterRigidbody;
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isGrounded = <span style="color:#66d9ef">true</span>;
+    <span style="color:#75715e">// Start is called before the first frame update
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Start()
     {
         characterTransform = transform;
         characterRigidbody = GetComponent&lt;Rigidbody&gt;();
     }
 
-    <span style="color:#998;font-style:italic">// Update is called once per frame
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">void</span> Update()
+    <span style="color:#75715e">// Update is called once per frame
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Update()
     {
         
     }
 
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">void</span> FixedUpdate()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> FixedUpdate()
     {
         Debug.Log(isGrounded);
-        <span style="color:#000;font-weight:bold">if</span> (isGrounded)
+        <span style="color:#66d9ef">if</span> (isGrounded)
         {
-            <span style="color:#458;font-weight:bold">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#d14">&#34;Horizontal&#34;</span>);
-            <span style="color:#458;font-weight:bold">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#d14">&#34;Vertical&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
 
 
-            <span style="color:#458;font-weight:bold">var</span> tmp_CurrentDirection = <span style="color:#000;font-weight:bold">new</span> Vector3(tmp_Horizontal, <span style="color:#099">0</span>, tmp_Vertical);
-            <span style="color:#998;font-style:italic">//自身坐标转化为世界坐标
-</span><span style="color:#998;font-style:italic"></span>            tmp_CurrentDirection = characterTransform.TransformDirection(tmp_CurrentDirection);
+            <span style="color:#66d9ef">var</span> tmp_CurrentDirection = <span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical);
+            <span style="color:#75715e">//自身坐标转化为世界坐标
+</span><span style="color:#75715e"></span>            tmp_CurrentDirection = characterTransform.TransformDirection(tmp_CurrentDirection);
             tmp_CurrentDirection *= Speed;
 
-            <span style="color:#458;font-weight:bold">var</span> tmp_CurrentVelocity = characterRigidbody.velocity;
-            <span style="color:#458;font-weight:bold">var</span> tmp_VelocityChange = tmp_CurrentDirection - tmp_CurrentVelocity;
-            tmp_VelocityChange.y = <span style="color:#099">0</span>;
+            <span style="color:#66d9ef">var</span> tmp_CurrentVelocity = characterRigidbody.velocity;
+            <span style="color:#66d9ef">var</span> tmp_VelocityChange = tmp_CurrentDirection - tmp_CurrentVelocity;
+            tmp_VelocityChange.y = <span style="color:#ae81ff">0</span>;
 
             characterRigidbody.AddForce(tmp_VelocityChange, ForceMode.VelocityChange);
 
-Debug.Log(<span style="color:#d14">&#34;button: &#34;</span> + Input.GetButtonDown(<span style="color:#d14">&#34;Jump&#34;</span>));
-            <span style="color:#000;font-weight:bold">if</span> (Input.GetButtonDown(<span style="color:#d14">&#34;Jump&#34;</span>))
+Debug.Log(<span style="color:#e6db74">&#34;button: &#34;</span> + Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>));
+            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
             {
-                characterRigidbody.velocity = <span style="color:#000;font-weight:bold">new</span> Vector3(tmp_CurrentVelocity.x, CalculateJumpHeightSpeed(), tmp_CurrentVelocity.z);
+                characterRigidbody.velocity = <span style="color:#66d9ef">new</span> Vector3(tmp_CurrentVelocity.x, CalculateJumpHeightSpeed(), tmp_CurrentVelocity.z);
             }
         }
 
-        characterRigidbody.AddForce(<span style="color:#000;font-weight:bold">new</span> Vector3(<span style="color:#099">0</span>, -grativty * characterRigidbody.mass,<span style="color:#099">0</span>));
+        characterRigidbody.AddForce(<span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">0</span>, -grativty * characterRigidbody.mass,<span style="color:#ae81ff">0</span>));
     }
 
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#458;font-weight:bold">float</span> CalculateJumpHeightSpeed()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> CalculateJumpHeightSpeed()
     {
-        <span style="color:#000;font-weight:bold">return</span> Mathf.Sqrt(<span style="color:#099">2</span> * grativty * JumpHeight);
+        <span style="color:#66d9ef">return</span> Mathf.Sqrt(<span style="color:#ae81ff">2</span> * grativty * JumpHeight);
     }
 
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">void</span> OnCollisionStay(Collision <span style="color:#099">_</span>other)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionStay(Collision <span style="color:#ae81ff">_</span>other)
     {
-        isGrounded = <span style="color:#000;font-weight:bold">true</span>;
+        isGrounded = <span style="color:#66d9ef">true</span>;
     }
 
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">void</span> OnCollisionExit(Collision <span style="color:#099">_</span>other)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionExit(Collision <span style="color:#ae81ff">_</span>other)
     {
-        isGrounded = <span style="color:#000;font-weight:bold">false</span>;
+        isGrounded = <span style="color:#66d9ef">false</span>;
     }
 }
 
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="函数解析-1">函数解析</h2>
+</code></pre></div><h2 id="函数解析-1">函数解析</h2>
 <p>OnCollisionStay()</p>
 <p>OnCollisionStay与OnCollisionEnter的区别
 OnCollisionStay();</p>
@@ -537,249 +410,113 @@ OnCollisionStay();</p>
 </ul>
 <p>参考： physicalSystyme.md</p>
 <h2 id="移动-方案2">移动 方案2</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections.Generic</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">UnityEngine</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> UnityEngine;
 
-<span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">FPCharacterControllerMovement</span> : MonoBehaviour
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
 {
-    <span style="color:#000;font-weight:bold">private</span> CharacterController characterController;
-    <span style="color:#000;font-weight:bold">private</span> Transform characterTransForm;
-    <span style="color:#000;font-weight:bold">private</span> Vector3 movementDirection;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> MovementSpeed;
+    <span style="color:#66d9ef">private</span> CharacterController characterController;
+    <span style="color:#66d9ef">private</span> Transform characterTransForm;
+    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed;
 
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> Gravity = <span style="color:#099">9.8f</span>;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> JumpHeight;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
 
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">void</span> Start()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
     {
         characterController = GetComponent&lt;CharacterController&gt;();
-        <span style="color:#998;font-style:italic">// characterForm = GetComponent&lt;Transform&gt;();
-</span><span style="color:#998;font-style:italic"></span>        characterTransForm = transform;
+        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();
+</span><span style="color:#75715e"></span>        characterTransForm = transform;
     }
 
-    <span style="color:#000;font-weight:bold">void</span> Update()
+    <span style="color:#66d9ef">void</span> Update()
     {
 
 Debug.Log(characterController.isGrounded);
-        <span style="color:#998;font-style:italic">//如果在地面 则返回 true
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">if</span> (characterController.isGrounded)
+        <span style="color:#75715e">//如果在地面 则返回 true
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
         {
-            <span style="color:#458;font-weight:bold">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#d14">&#34;Horizontal&#34;</span>);
-            <span style="color:#458;font-weight:bold">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#d14">&#34;Vertical&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
 
-            movementDirection =  characterTransForm.TransformDirection(<span style="color:#000;font-weight:bold">new</span> Vector3(tmp_Horizontal, <span style="color:#099">0</span>, tmp_Vertical));
-            <span style="color:#998;font-style:italic">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
-</span><span style="color:#998;font-style:italic"></span>            <span style="color:#998;font-style:italic">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
-</span><span style="color:#998;font-style:italic"></span>
-            <span style="color:#000;font-weight:bold">if</span> (Input.GetButtonDown(<span style="color:#d14">&#34;Jump&#34;</span>))
+            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
+            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
+</span><span style="color:#75715e"></span>
+            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
             {
                movementDirection.y = JumpHeight; 
             }
         }
         movementDirection.y -=  Gravity * Time.deltaTime;
-        characterController.Move(movementDirection * Time.deltaTime * MovementSpeed);<span style="color:#998;font-style:italic">//不具备重力算法
-</span><span style="color:#998;font-style:italic"></span>    }
+        characterController.Move(movementDirection * Time.deltaTime * MovementSpeed);<span style="color:#75715e">//不具备重力算法
+</span><span style="color:#75715e"></span>    }
 }
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="shift-奔跑--下蹲">shift 奔跑 + 下蹲</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">System.Collections.Generic</span>;
-<span style="color:#000;font-weight:bold">using</span> <span style="color:#555">UnityEngine</span>;
+</code></pre></div><h2 id="shift-奔跑--下蹲">shift 奔跑 + 下蹲</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<span style="color:#66d9ef">using</span> System.Collections.Generic;
+<span style="color:#66d9ef">using</span> UnityEngine;
 
-<span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">FPCharacterControllerMovement</span> : MonoBehaviour
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
 {
-    <span style="color:#000;font-weight:bold">private</span> CharacterController characterController;
-    <span style="color:#000;font-weight:bold">private</span> Transform characterTransForm;
-    <span style="color:#000;font-weight:bold">private</span> Vector3 movementDirection;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> MovementSpeed; <span style="color:#998;font-style:italic">//移动速度
-</span><span style="color:#998;font-style:italic"></span>
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> Gravity = <span style="color:#099">9.8f</span>;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> JumpHeight; <span style="color:#998;font-style:italic">//跳跃高度
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> SprintingSpeed = <span style="color:#099">8</span>;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> WalkSpeed = <span style="color:#099">4</span>;
-    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> SprintingSpeedWhenCrouch = <span style="color:#099">4</span>;<span style="color:#998;font-style:italic">//当下蹲时
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> WalkSpeedWhenCrouch = <span style="color:#099">2</span>;<span style="color:#998;font-style:italic">//当下蹲时
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">float</span> CrouchHeight = <span style="color:#099">1f</span>; <span style="color:#998;font-style:italic">//下蹲高度
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">private</span> <span style="color:#458;font-weight:bold">bool</span> isCrouched; <span style="color:#998;font-style:italic">//是否下蹲
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">private</span> <span style="color:#458;font-weight:bold">float</span> originHeight; <span style="color:#998;font-style:italic">//原来的高度
-</span><span style="color:#998;font-style:italic"></span>
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">void</span> Start()
+    <span style="color:#66d9ef">private</span> CharacterController characterController;
+    <span style="color:#66d9ef">private</span> Transform characterTransForm;
+    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed; <span style="color:#75715e">//移动速度
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight; <span style="color:#75715e">//跳跃高度
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeed = <span style="color:#ae81ff">8</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeed = <span style="color:#ae81ff">4</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeedWhenCrouch = <span style="color:#ae81ff">4</span>;<span style="color:#75715e">//当下蹲时
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeedWhenCrouch = <span style="color:#ae81ff">2</span>;<span style="color:#75715e">//当下蹲时
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> CrouchHeight = <span style="color:#ae81ff">1f</span>; <span style="color:#75715e">//下蹲高度
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isCrouched; <span style="color:#75715e">//是否下蹲
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> originHeight; <span style="color:#75715e">//原来的高度
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
     {
         characterController = GetComponent&lt;CharacterController&gt;();
-        <span style="color:#998;font-style:italic">// characterForm = GetComponent&lt;Transform&gt;();
-</span><span style="color:#998;font-style:italic"></span>        characterTransForm = transform;
+        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();
+</span><span style="color:#75715e"></span>        characterTransForm = transform;
         originHeight = characterController.height;
-        isCrouched = <span style="color:#000;font-weight:bold">false</span>;
+        isCrouched = <span style="color:#66d9ef">false</span>;
     }
 
-    <span style="color:#000;font-weight:bold">void</span> Update()
+    <span style="color:#66d9ef">void</span> Update()
     {
 
 Debug.Log(characterController.isGrounded);
-        <span style="color:#458;font-weight:bold">float</span> currentSpeed = WalkSpeed;
-        <span style="color:#998;font-style:italic">//如果在地面 则返回 true
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">if</span> (characterController.isGrounded)
+        <span style="color:#66d9ef">float</span> currentSpeed = WalkSpeed;
+        <span style="color:#75715e">//如果在地面 则返回 true
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
         {
-            <span style="color:#458;font-weight:bold">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#d14">&#34;Horizontal&#34;</span>);
-            <span style="color:#458;font-weight:bold">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#d14">&#34;Vertical&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
 
-            movementDirection =  characterTransForm.TransformDirection(<span style="color:#000;font-weight:bold">new</span> Vector3(tmp_Horizontal, <span style="color:#099">0</span>, tmp_Vertical));
-            <span style="color:#998;font-style:italic">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
-</span><span style="color:#998;font-style:italic"></span>            <span style="color:#998;font-style:italic">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
-</span><span style="color:#998;font-style:italic"></span>
-            <span style="color:#000;font-weight:bold">if</span> (Input.GetButtonDown(<span style="color:#d14">&#34;Jump&#34;</span>))
+            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
+            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
+</span><span style="color:#75715e"></span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
+</span><span style="color:#75715e"></span>
+            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
             {
                movementDirection.y = JumpHeight; 
             }
 
-            <span style="color:#000;font-weight:bold">if</span> (Input.GetKeyDown(KeyCode.C))
+            <span style="color:#66d9ef">if</span> (Input.GetKeyDown(KeyCode.C))
             {
-                <span style="color:#458;font-weight:bold">var</span> tmpCrouchHeight = isCrouched?originHeight:CrouchHeight ;
+                <span style="color:#66d9ef">var</span> tmpCrouchHeight = isCrouched?originHeight:CrouchHeight ;
                 StartCoroutine(DoCrouch(tmpCrouchHeight));
                 isCrouched = !isCrouched;
             }
-            <span style="color:#998;font-style:italic">//shift奔跑
-</span><span style="color:#998;font-style:italic"></span>            <span style="color:#000;font-weight:bold">if</span> (isCrouched)
+            <span style="color:#75715e">//shift奔跑
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (isCrouched)
             {
                 currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeedWhenCrouch : WalkSpeedWhenCrouch;
             }
-            <span style="color:#000;font-weight:bold">else</span>
+            <span style="color:#66d9ef">else</span>
 
             {
                 currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeed : WalkSpeed;
@@ -787,22 +524,20 @@ Debug.Log(characterController.isGrounded);
             }
         }
         movementDirection.y -=  Gravity * Time.deltaTime;
-        characterController.Move(movementDirection * Time.deltaTime * currentSpeed);<span style="color:#998;font-style:italic">//不具备重力算法
-</span><span style="color:#998;font-style:italic"></span>    }
+        characterController.Move(movementDirection * Time.deltaTime * currentSpeed);<span style="color:#75715e">//不具备重力算法
+</span><span style="color:#75715e"></span>    }
 
-    <span style="color:#000;font-weight:bold">private</span> IEnumerator DoCrouch(<span style="color:#458;font-weight:bold">float</span> target)
+    <span style="color:#66d9ef">private</span> IEnumerator DoCrouch(<span style="color:#66d9ef">float</span> target)
     {
-        <span style="color:#458;font-weight:bold">float</span> tmp_CurrentHeight = <span style="color:#099">0</span>;
-        <span style="color:#000;font-weight:bold">while</span>(Mathf.Abs(characterController.height - target) &gt; <span style="color:#099">0.1f</span>)
+        <span style="color:#66d9ef">float</span> tmp_CurrentHeight = <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">while</span>(Mathf.Abs(characterController.height - target) &gt; <span style="color:#ae81ff">0.1f</span>)
         {
-            <span style="color:#000;font-weight:bold">yield</span> <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">null</span>;
-            characterController.height = Mathf.SmoothDamp(characterController.height, target, <span style="color:#000;font-weight:bold">ref</span> tmp_CurrentHeight, Time.deltaTime * <span style="color:#099">5</span> );
+            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+            characterController.height = Mathf.SmoothDamp(characterController.height, target, <span style="color:#66d9ef">ref</span> tmp_CurrentHeight, Time.deltaTime * <span style="color:#ae81ff">5</span> );
         }
     }
 }
-</code></pre></td></tr></table>
-</div>
-</div>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

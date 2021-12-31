@@ -206,7 +206,7 @@
             <h2 id="问题">问题</h2>
 <p>编写<code>lua</code>程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？</p>
 <h2 id="代码">代码</h2>
-<pre><code>-----------------------------------------------------------------------------
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----------------------------------------------------------------------------
 --公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？
 -----------------------------------------------------------------------------
 
@@ -223,18 +223,18 @@ for malenum = 0, 20 do --公鸡的最大数量=100/4
             local tolsum = malenum * malePrice + femalenum * femalePrice + smallnum * smallPrice
             local num = malenum + femalenum + smallnum
             if tolsum == 100 and num == 100 then
-                print(string.format(&quot;小鸡：%d只，母鸡：%d只，公鸡：%d只\n&quot;,smallnum, femalenum, malenum))
+                print(string.format(&#34;小鸡：%d只，母鸡：%d只，公鸡：%d只\n&#34;,smallnum, femalenum, malenum))
             end
         end
     end
 end
-</code></pre><p>输出</p>
-<pre><code>$ lua test.lua
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ lua test.lua
 小鸡：75只，母鸡：25只，公鸡：0只
 小鸡：78只，母鸡：18只，公鸡：4只
 小鸡：81只，母鸡：11只，公鸡：8只
 小鸡：84只，母鸡：4只，公鸡：12只
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

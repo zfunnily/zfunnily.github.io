@@ -31,7 +31,7 @@
       <pubDate>Fri, 29 Oct 2021 11:15:42 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/gop2ptwo/</guid>
-      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B 1 2 3 4 5 6 7 $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening</description>
+      <description>go-libp2p的echo例子分析 进入目录go-libp2p/examples/echo/, 编译 go build 先看README.md， 可以了解到使用echo的方式: 终端B $ ./echo -l 3001 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX 2021/10/28 11:25:33 listening for connections 2021/10/28 11:25:33 Now run &amp;#34;./echo</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Thu, 28 Oct 2021 14:40:02 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2021/10/gop2pone/</guid>
-      <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B 1 2 3 4 5 6 7 $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25</description>
+      <description>代码下载 git clone https://github.com/libp2p/go-libp2p.git chat实例分析 进入目录go-libp2p/examples/chat/, 编译 go build 先看README.md， 可以了解到使用chat的方式 在节点 B $ ./chat -sp 3001 2021/10/28 11:01:25 Run &amp;#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&amp;#39; on another console. 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP</description>
     </item>
     
     <item>
@@ -76,7 +76,7 @@
       <pubDate>Tue, 23 Mar 2021 16:10:02 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/gomod/</guid>
-      <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;quot;gitlab.com/xxx/zz&amp;quot;: found meta tag get.metaImport{Prefix:&amp;quot;gitlab.com/xxx/zz&amp;quot;, VCS:&amp;quot;git&amp;quot;, RepoRoot:&amp;quot;https://gitlab.com/xxx/zz.git&amp;quot;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g</description>
+      <description>概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &amp;#34;gitlab.com/xxx/zz&amp;#34;: found meta tag get.metaImport{Prefix:&amp;#34;gitlab.com/xxx/zz&amp;#34;, VCS:&amp;#34;git&amp;#34;, RepoRoot:&amp;#34;https://gitlab.com/xxx/zz.git&amp;#34;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@
       <pubDate>Thu, 25 Feb 2021 16:02:13 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/02/timer/</guid>
-      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;quot;NewTicker...&amp;quot;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)</description>
+      <description>概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &amp;lt;- t1.C fmt.Println(&amp;#34;NewTicker...&amp;#34;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)</description>
     </item>
     
     <item>
@@ -148,7 +148,7 @@
       <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/Docker%E5%AE%B9%E5%99%A8%E9%80%80%E5%87%BA%E7%A0%81%E8%AF%A6%E8%A7%A3/</guid>
-      <description>docker查看退出码指令 $ docker ps --filter &amp;quot;status=exited&amp;quot; $ docker inspect container-id --format=&#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
+      <description>docker查看退出码指令 $ docker ps --filter &amp;#34;status=exited&amp;#34; $ docker inspect container-id --format=&amp;#39;{&amp;lt;!-- --&amp;gt;{.State.ExitCode}}&amp;#39; 常见退出码 Exit Code 0 退出代码0表示特定容器没有附加前台进程。- 该退出代码是所有其他后续退出代码的例外。- 这不一定意味着发生了不好的事情。如果开发人员想要在容</description>
     </item>
     
     <item>
@@ -157,7 +157,7 @@
       <pubDate>Fri, 13 Nov 2020 16:40:42 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
-      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;quot;event.h&amp;quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;quot;timer wakeup\n&amp;quot;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
+      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;#34;event.h&amp;#34; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;#34;timer wakeup\n&amp;#34;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@
       <pubDate>Thu, 05 Nov 2020 09:45:23 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</guid>
-      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;quot;%s\n&amp;quot;, str); } */ import &amp;quot;C&amp;quot; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;quot;unsafe&amp;quot; func main() { s := &amp;quot;Hello Cgo&amp;quot; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g</description>
+      <description>使用自己的C函数 文件名：testC.go package main /* #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; void c_print(char *str) { printf(&amp;#34;%s\n&amp;#34;, str); } */ import &amp;#34;C&amp;#34; //import “C” 必须单起一行，并且紧跟在注释行之后 import &amp;#34;unsafe&amp;#34; func main() { s := &amp;#34;Hello Cgo&amp;#34; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g</description>
     </item>
     
     <item>

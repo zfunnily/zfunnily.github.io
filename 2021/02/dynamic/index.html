@@ -212,8 +212,8 @@
             <h2 id="概述">概述</h2>
 <p>最近在学习 云风的<code>skynet</code>库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。</p>
 <p>当我们需要在<code>Lua</code>里面调用<code>c/c++</code>函数时，所有的函数都必须满足以下函数签名：</p>
-<pre><code>typedef int (*lua_CFunction) (lua_State *L);
-</code></pre><p>换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用Lua栈作为参数，所以它可以从栈里面读取任意数量和任意类型的参数。而这个函数的返回值则表示函数返回时有多少返回值被压入Lua栈。（因为Lua的函数是可以返回多个值的）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef int (*lua_CFunction) (lua_State *L);
+</code></pre></div><p>换句话说，所有的函数必须接收一个lua_State作为参数，同时返回一个整数值。因为这个函数使用Lua栈作为参数，所以它可以从栈里面读取任意数量和任意类型的参数。而这个函数的返回值则表示函数返回时有多少返回值被压入Lua栈。（因为Lua的函数是可以返回多个值的）。</p>
 <h2 id="lua调用cc的动态库">lua调用C/C++的动态库</h2>
 <p>lua调用C动态库有如下几个步骤：</p>
 <ul>
@@ -227,13 +227,13 @@
 </ul>
 <h3 id="示例">示例</h3>
 <p>看一个示例：</p>
-<pre><code>//snpccfg.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//snpccfg.cc
 #ifdef __cplusplus
-extern &quot;C&quot; {
+extern &#34;C&#34; {
 #endif
-    #include &quot;lua.h&quot;
-    #include &quot;lauxlib.h&quot;
-    #include &quot;lualib.h&quot;
+    #include &#34;lua.h&#34;
+    #include &#34;lauxlib.h&#34;
+    #include &#34;lualib.h&#34;
 #ifdef __cplusplus
 }
 #endif
@@ -244,14 +244,14 @@ static int test(lua_State *L)
     size_t len = 0;
 	int num = luaL_checkinteger(L, 1);
 	const char* str = luaL_checklstring(L, 2, &amp;len);
-	printf(&quot;come from test: num = %d,str = %s,len = %d\n&quot;, num, str, len);
+	printf(&#34;come from test: num = %d,str = %s,len = %d\n&#34;, num, str, len);
 	return 0;
 }
 
-extern &quot;C&quot; int luaopen_snpccfg(lua_State *L)
+extern &#34;C&#34; int luaopen_snpccfg(lua_State *L)
 {
     luaL_Reg l[] = {
-        {&quot;test&quot;,test},	// key-val，相当于{&quot;(lua调用时使用的函数名)&quot;,C定义函数名(函数指针)}
+        {&#34;test&#34;,test},	// key-val，相当于{&#34;(lua调用时使用的函数名)&#34;,C定义函数名(函数指针)}
         {NULL,NULL}		// 必不可少
     };
     luaL_checkversion(L);
@@ -259,37 +259,37 @@ extern &quot;C&quot; int luaopen_snpccfg(lua_State *L)
     return 1;
 }
 
-</code></pre><p><code>luaL_checkinteger()</code> 和 <code>luaL_checklstring()</code>是用来获取参数的。<br> 生成动态库：</p>
-<pre><code>gcc -fPIC -shared -o snpccfg.so snpccfg.cc -I./lua -L./lua -llua
+</code></pre></div><p><code>luaL_checkinteger()</code> 和 <code>luaL_checklstring()</code>是用来获取参数的。<br> 生成动态库：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gcc -fPIC -shared -o snpccfg.so snpccfg.cc -I./lua -L./lua -llua
 
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 </blockquote>
 <p>需要通过-I和-L指定lua头文件和liblua.a库的路径</p>
-<pre><code>--test.lua
-package.cpath = &quot;./?.so&quot;  --库路径
-local snpccfg = require  &quot;snpccfg&quot;
-snpccfg.test(1, &quot;12312&quot;)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">--test.lua
+package.cpath = &#34;./?.so&#34;  --库路径
+local snpccfg = require  &#34;snpccfg&#34;
+snpccfg.test(1, &#34;12312&#34;)
 
-</code></pre><p>执行脚本</p>
-<pre><code>$ lua test.lua
+</code></pre></div><p>执行脚本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ lua test.lua
 come from test: num = 1 str = 12312     len = 5
 
-</code></pre><h3 id="遇到的问题">遇到的问题</h3>
+</code></pre></div><h3 id="遇到的问题">遇到的问题</h3>
 <p>relocation R_X86_64_32S against <code>luaT_typenames_’ can not be used when making a shared object; recompile with -fPIC</code></p>
 <p>解决办法：重新编译liblua.a库，<code>Makefile:CFLAGS=</code>加上<code>-fPIC</code> ，而后再编译安装</p>
-<pre><code>$ make linux &amp;&amp; make install
-</code></pre><h3 id="需要注意的几个点">需要注意的几个点</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ make linux &amp;&amp; make install
+</code></pre></div><h3 id="需要注意的几个点">需要注意的几个点</h3>
 <ol>
 <li>在C++中编译成动态库，需要在函数 <code>luaopen_snpccfg</code>前面增加 extern “C”，否则在使用该动态库时会有如下错误：</li>
 </ol>
-<pre><code>lua: error loading module 'snpccfg' from file './snpccfg.so':
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua: error loading module &#39;snpccfg&#39; from file &#39;./snpccfg.so&#39;:
         ./snpccfg.so: undefined symbol: luaopen_snpccfg
 stack traceback:
         [C]: in ?
-        [C]: in function 'require'
+        [C]: in function &#39;require&#39;
         test.lua:2: in main chunk
         [C]: in
-</code></pre><ol start="2">
+</code></pre></div><ol start="2">
 <li>在C中则使用extern来修饰函数<code>luaopen_snpccfg</code>， 引用书中的话：</li>
 </ol>
 <ul>

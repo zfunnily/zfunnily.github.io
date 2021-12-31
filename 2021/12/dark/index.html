@@ -227,84 +227,40 @@
 <h2 id="快速使用">快速使用</h2>
 <p>使用<code>Darkmode.js</code>给网站快速部署上暗/浅色切换。
 在网站的html中加入如下代码:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#000;font-weight:bold">&lt;</span>script src<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js&#34;</span><span style="color:#000;font-weight:bold">&gt;&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
-<span style="color:#000;font-weight:bold">&lt;</span>script<span style="color:#000;font-weight:bold">&gt;</span>
-  <span style="color:#000;font-weight:bold">function</span> addDarkmodeWidget() {
-    <span style="color:#000;font-weight:bold">new</span> Darkmode().showWidget();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addDarkmodeWidget</span>() {
+    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Darkmode</span>().<span style="color:#a6e22e">showWidget</span>();
   }
-  <span style="color:#0086b3">window</span>.addEventListener(<span style="color:#d14">&#39;load&#39;</span>, addDarkmodeWidget);
-<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/script&gt;</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
+  window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;load&#39;</span>, <span style="color:#a6e22e">addDarkmodeWidget</span>);
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre></div><blockquote>
 <p>可以把文件<a href="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js">darkmod-js.min.js</a>下载下来放在本地，这样加载速度更快。</p>
 </blockquote>
 <h2 id="自定义参数">自定义参数</h2>
 <p>可以使用如下参数来控制:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#000;font-weight:bold">const</span> options <span style="color:#000;font-weight:bold">=</span> {
-  bottom<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;64px&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;32px&#39;
-</span><span style="color:#998;font-style:italic"></span>  right<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;unset&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;32px&#39;
-</span><span style="color:#998;font-style:italic"></span>  left<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;32px&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;unset&#39;
-</span><span style="color:#998;font-style:italic"></span>  time<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;0.5s&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;0.3s&#39;
-</span><span style="color:#998;font-style:italic"></span>  mixColor<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;#fff&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;#fff&#39;
-</span><span style="color:#998;font-style:italic"></span>  backgroundColor<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;#fff&#39;</span>,  <span style="color:#998;font-style:italic">// default: &#39;#fff&#39;
-</span><span style="color:#998;font-style:italic"></span>  buttonColorDark<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;#100f2c&#39;</span>,  <span style="color:#998;font-style:italic">// default: &#39;#100f2c&#39;
-</span><span style="color:#998;font-style:italic"></span>  buttonColorLight<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;#fff&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;#fff&#39;
-</span><span style="color:#998;font-style:italic"></span>  saveInCookies<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">false</span>, <span style="color:#998;font-style:italic">// default: true,
-</span><span style="color:#998;font-style:italic"></span>  label<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;🌓&#39;</span>, <span style="color:#998;font-style:italic">// default: &#39;&#39;
-</span><span style="color:#998;font-style:italic"></span>  autoMatchOsTheme<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">true</span> <span style="color:#998;font-style:italic">// default: true
-</span><span style="color:#998;font-style:italic"></span>}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">bottom</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;64px&#39;</span>, <span style="color:#75715e">// default: &#39;32px&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">right</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;unset&#39;</span>, <span style="color:#75715e">// default: &#39;32px&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;32px&#39;</span>, <span style="color:#75715e">// default: &#39;unset&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">time</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0.5s&#39;</span>, <span style="color:#75715e">// default: &#39;0.3s&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">mixColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#fff&#39;</span>, <span style="color:#75715e">// default: &#39;#fff&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#fff&#39;</span>,  <span style="color:#75715e">// default: &#39;#fff&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">buttonColorDark</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#100f2c&#39;</span>,  <span style="color:#75715e">// default: &#39;#100f2c&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">buttonColorLight</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#fff&#39;</span>, <span style="color:#75715e">// default: &#39;#fff&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">saveInCookies</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#75715e">// default: true,
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">label</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;🌓&#39;</span>, <span style="color:#75715e">// default: &#39;&#39;
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">autoMatchOsTheme</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> <span style="color:#75715e">// default: true
+</span><span style="color:#75715e"></span>}
 
-<span style="color:#000;font-weight:bold">const</span> darkmode <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Darkmode(options);
-darkmode.showWidget();
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="无开关模式">无开关模式</h2>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">darkmode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Darkmode</span>(<span style="color:#a6e22e">options</span>);
+<span style="color:#a6e22e">darkmode</span>.<span style="color:#a6e22e">showWidget</span>();
+</code></pre></div><h2 id="无开关模式">无开关模式</h2>
 <p>darkmod可以不使用开关，直接给网页设置成暗黑模式</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#000;font-weight:bold">const</span> darkmode <span style="color:#000;font-weight:bold">=</span>  <span style="color:#000;font-weight:bold">new</span> Darkmode();
-darkmode.toggle();
-console.log(darkmode.isActivated()) <span style="color:#998;font-style:italic">// will return true
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id="自定义cssjs">自定义css/js</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">darkmode</span> <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Darkmode</span>();
+<span style="color:#a6e22e">darkmode</span>.<span style="color:#a6e22e">toggle</span>();
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">darkmode</span>.<span style="color:#a6e22e">isActivated</span>()) <span style="color:#75715e">// will return true
+</span></code></pre></div><h2 id="自定义cssjs">自定义css/js</h2>
 <ul>
 <li>darkmode&ndash;activated: css class, 添加到body标签中，可以自定义style</li>
 <li>darkmode-ignore: css class, 忽略darkmode</li>
@@ -312,43 +268,19 @@ console.log(darkmode.isActivated()) <span style="color:#998;font-style:italic">/
 <li>mix-blend-mode: difference: style, 还原到dark-mod</li>
 </ul>
 <p>例子:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">darkmode--activated</span> <span style="color:#000080">p</span><span style="color:#000;font-weight:bold">,</span> .<span style="color:#458;font-weight:bold">darkmode--activated</span> <span style="color:#000080">li</span> {
-  <span style="color:#000;font-weight:bold">color</span>: <span style="color:#099">#000</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#a6e22e">darkmode--activated</span> <span style="color:#f92672">p</span><span style="color:#f92672">,</span> .<span style="color:#a6e22e">darkmode--activated</span> <span style="color:#f92672">li</span> {
+  <span style="color:#66d9ef">color</span>: <span style="color:#ae81ff">#000</span>;
 }
 
-.<span style="color:#458;font-weight:bold">button</span> {
-  <span style="color:#000;font-weight:bold">isolation</span>: <span style="color:#000;font-weight:bold">isolate</span>;
+.<span style="color:#a6e22e">button</span> {
+  <span style="color:#66d9ef">isolation</span>: <span style="color:#66d9ef">isolate</span>;
 }
 
-.<span style="color:#458;font-weight:bold">darkmode--activated</span> .<span style="color:#458;font-weight:bold">logo</span> {
-  <span style="color:#000;font-weight:bold">mix-blend-mode</span>: <span style="color:#000;font-weight:bold">difference</span>;
+.<span style="color:#a6e22e">darkmode--activated</span> .<span style="color:#a6e22e">logo</span> {
+  <span style="color:#66d9ef">mix-blend-mode</span>: <span style="color:#66d9ef">difference</span>;
 }
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">span</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;darkmode-ignore&#34;</span>&gt;😬&lt;<span style="color:#000080">span</span>&gt;
-</code></pre></td></tr></table>
-</div>
-</div><p>翻译 &amp; 详情参考: <a href="https://darkmodejs.learn.uno">https://darkmodejs.learn.uno</a></p>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;darkmode-ignore&#34;</span>&gt;😬&lt;<span style="color:#f92672">span</span>&gt;
+</code></pre></div><p>翻译 &amp; 详情参考: <a href="https://darkmodejs.learn.uno">https://darkmodejs.learn.uno</a></p>
 
 
             <h4 align="center">--完--</h4>

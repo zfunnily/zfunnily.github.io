@@ -213,184 +213,184 @@
 <li>一个中间件，拦截请求，进行token认证，根据认证通是否过来决定是否继续执行请求；
 <code>JWT</code>身份认证可以解决第一个问题，<code>mux.Router</code>的<code>Use</code>方法函数可以作为一个中间件， 拦截请求。</li>
 </ol>
-<pre><code>func (r *Router) Use(mwf ...MiddlewareFunc) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (r *Router) Use(mwf ...MiddlewareFunc) {
 	for _, fn := range mwf {
 		r.middlewares = append(r.middlewares, fn)
 	}
 }
 
-</code></pre><h2 id="jwt-身份认证">JWT 身份认证</h2>
+</code></pre></div><h2 id="jwt-身份认证">JWT 身份认证</h2>
 <p>下载地址：</p>
-<pre><code>github.com/dgrijalva/jwt-go&quot;
-</code></pre><p>实现的功能如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">github.com/dgrijalva/jwt-go&#34;
+</code></pre></div><p>实现的功能如下：</p>
 <ol>
 <li>token生成</li>
 <li>中间件拦截请求进行token认证
 结合代码：</li>
 </ol>
-<pre><code>// jwt_svr.go
-package main
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// jwt_svr.go
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;context&quot;
-	&quot;fmt&quot;
-	&quot;github.com/dgrijalva/jwt-go&quot;
-	&quot;github.com/dgrijalva/jwt-go/request&quot;
-	&quot;github.com/gorilla/mux&quot;
-	&quot;net/http&quot;
-	&quot;strings&quot;
-	&quot;time&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/dgrijalva/jwt-go/request&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/gorilla/mux&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
 )
 
-//自定义Claims结构体
-type LoginClaims struct {
-	Uid  string
-	Name string
-	Pwd  string
-	LoginTime time.Duration
-	token string
-	jwt.StandardClaims
+<span style="color:#75715e">//自定义Claims结构体
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LoginClaims</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Uid</span>  <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Pwd</span>  <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">LoginTime</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
+	<span style="color:#a6e22e">token</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">StandardClaims</span>
 }
 
-//var nowDate = time.Now().Format(&quot;2020-02-22 15&quot;)
-var nowDate = &quot;123123123&quot;
-var secretKey = fmt.Sprintf(&quot;%v%v&quot;,nowDate,&quot;dingding&quot;)
+<span style="color:#75715e">//var nowDate = time.Now().Format(&#34;2020-02-22 15&#34;)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">nowDate</span> = <span style="color:#e6db74">&#34;123123123&#34;</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">secretKey</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%v%v&#34;</span>,<span style="color:#a6e22e">nowDate</span>,<span style="color:#e6db74">&#34;dingding&#34;</span>)
 
-//生成token
-func Sign(uid, name, pwd string) (string, error) {
-	//开始生成token
-	now := time.Now()
-	exp := now.Add(time.Duration(2) * time.Minute)  //2分钟后过期
-	claims := LoginClaims{
-		Uid: 	uid,
-		Name: 	name,
-		Pwd : 	pwd,
-		LoginTime : time.Duration(now.Unix()),
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: exp.Unix(),
+<span style="color:#75715e">//生成token
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sign</span>(<span style="color:#a6e22e">uid</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">pwd</span> <span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#75715e">//开始生成token
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">now</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>()
+	<span style="color:#a6e22e">exp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">now</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Minute</span>)  <span style="color:#75715e">//2分钟后过期
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">claims</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">LoginClaims</span>{
+		<span style="color:#a6e22e">Uid</span>: 	<span style="color:#a6e22e">uid</span>,
+		<span style="color:#a6e22e">Name</span>: 	<span style="color:#a6e22e">name</span>,
+		<span style="color:#a6e22e">Pwd</span> : 	<span style="color:#a6e22e">pwd</span>,
+		<span style="color:#a6e22e">LoginTime</span> : <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#a6e22e">now</span>.<span style="color:#a6e22e">Unix</span>()),
+		<span style="color:#a6e22e">StandardClaims</span>: <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">StandardClaims</span>{
+			<span style="color:#a6e22e">ExpiresAt</span>: <span style="color:#a6e22e">exp</span>.<span style="color:#a6e22e">Unix</span>(),
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte(secretKey))
+	<span style="color:#a6e22e">token</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">NewWithClaims</span>(<span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">SigningMethodHS256</span>, <span style="color:#a6e22e">claims</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">SignedString</span>([]byte(<span style="color:#a6e22e">secretKey</span>))
 }
 
-//解析token
-func ParseToken(token string, secret string) (*LoginClaims, error) {
-	loginclaims := new(LoginClaims)
-	claim, err := jwt.ParseWithClaims(token, loginclaims, func(token *jwt.Token) (interface{}, error) {
-		return []byte(secret), nil
+<span style="color:#75715e">//解析token
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">token</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">secret</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">LoginClaims</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">loginclaims</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">LoginClaims</span>)
+	<span style="color:#a6e22e">claim</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">ParseWithClaims</span>(<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">loginclaims</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">token</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">Token</span>) (<span style="color:#66d9ef">interface</span>{}, <span style="color:#66d9ef">error</span>) {
+		<span style="color:#66d9ef">return</span> []byte(<span style="color:#a6e22e">secret</span>), <span style="color:#66d9ef">nil</span>
 	})
-	if err != nil {
-		return loginclaims, err
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">loginclaims</span>, <span style="color:#a6e22e">err</span>
 	}
-	if !claim.Valid {
-		return loginclaims, fmt.Errorf(&quot;claim.Valid error&quot;)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">claim</span>.<span style="color:#a6e22e">Valid</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">loginclaims</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;claim.Valid error&#34;</span>)
 	}
-	return loginclaims, nil
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">loginclaims</span>, <span style="color:#66d9ef">nil</span>
 }
 
-func stripBearerPrefixFromTokenString(tok string ) (string, error)  {
-	if len(tok) &gt; 4 &amp;&amp; strings.ToUpper(tok[0:4]) == &quot;JWT &quot; {
-		return tok[4:], nil
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">stripBearerPrefixFromTokenString</span>(<span style="color:#a6e22e">tok</span> <span style="color:#66d9ef">string</span> ) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>)  {
+	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">tok</span>) &gt; <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">ToUpper</span>(<span style="color:#a6e22e">tok</span>[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;JWT &#34;</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tok</span>[<span style="color:#ae81ff">4</span>:], <span style="color:#66d9ef">nil</span>
 	}
-	return tok, nil
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tok</span>, <span style="color:#66d9ef">nil</span>
 }
 
-func main () {
-	r := mux.NewRouter()
-	//生成token
-	t, err := Sign(&quot;1&quot;, &quot;zjjj&quot;, &quot;123&quot;)
-	if nil != err {
-		fmt.Errorf(err.Error())
-		return
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span> () {
+	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">NewRouter</span>()
+	<span style="color:#75715e">//生成token
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Sign</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;zjjj&#34;</span>, <span style="color:#e6db74">&#34;123&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">err</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
 	}
-	//解析token
-	l, err := ParseToken(t, secretKey)
-	if err != nil {
-		fmt.Printf(err.Error())
-		return
+	<span style="color:#75715e">//解析token
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">l</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">secretKey</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
 	}
 
-	fmt.Printf(&quot;generate token:  %s\n&quot;, t)
-	fmt.Printf(&quot;uid:  %s\n&quot;, l.Uid)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;generate token:  %s\n&#34;</span>, <span style="color:#a6e22e">t</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;uid:  %s\n&#34;</span>, <span style="color:#a6e22e">l</span>.<span style="color:#a6e22e">Uid</span>)
 
-	//中间件  拦截请求，用来token认证。
-	r.Use(func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			mapClaims := new(LoginClaims) //自定义类型
-			var myToken string
-			// 如果token存在于Authorization中
-			token, err := request.ParseFromRequest(r, &amp;request.PostExtractionFilter{
-				Extractor: request.HeaderExtractor{&quot;Authorization&quot;},
-				Filter:    stripBearerPrefixFromTokenString,
-			}, func(token *jwt.Token) (interface{}, error) {
-				return []byte(secretKey), nil
-			}, request.WithClaims(mapClaims))
+	<span style="color:#75715e">//中间件  拦截请求，用来token认证。
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">next</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handler</span>) <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handler</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+			<span style="color:#a6e22e">mapClaims</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">LoginClaims</span>) <span style="color:#75715e">//自定义类型
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myToken</span> <span style="color:#66d9ef">string</span>
+			<span style="color:#75715e">// 如果token存在于Authorization中
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">ParseFromRequest</span>(<span style="color:#a6e22e">r</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">PostExtractionFilter</span>{
+				<span style="color:#a6e22e">Extractor</span>: <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">HeaderExtractor</span>{<span style="color:#e6db74">&#34;Authorization&#34;</span>},
+				<span style="color:#a6e22e">Filter</span>:    <span style="color:#a6e22e">stripBearerPrefixFromTokenString</span>,
+			}, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">token</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">Token</span>) (<span style="color:#66d9ef">interface</span>{}, <span style="color:#66d9ef">error</span>) {
+				<span style="color:#66d9ef">return</span> []byte(<span style="color:#a6e22e">secretKey</span>), <span style="color:#66d9ef">nil</span>
+			}, <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">WithClaims</span>(<span style="color:#a6e22e">mapClaims</span>))
 
-			if !token.Valid {
-				// 如果token存在于header中
-				for k, v := range r.Header {
-					if strings.ToLower(k) == &quot;token&quot; {
-						myToken = v[0]
-						break
+			<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Valid</span> {
+				<span style="color:#75715e">// 如果token存在于header中
+</span><span style="color:#75715e"></span>				<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Header</span> {
+					<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">ToLower</span>(<span style="color:#a6e22e">k</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;token&#34;</span> {
+						<span style="color:#a6e22e">myToken</span> = <span style="color:#a6e22e">v</span>[<span style="color:#ae81ff">0</span>]
+						<span style="color:#66d9ef">break</span>
 					}
 				}
-				mapClaims, err = ParseToken(myToken, secretKey)
-				if err != nil {
-					w.Write([]byte(&quot;token invalid\n&quot;))
-					return
+				<span style="color:#a6e22e">mapClaims</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">myToken</span>, <span style="color:#a6e22e">secretKey</span>)
+				<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+					<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;token invalid\n&#34;</span>))
+					<span style="color:#66d9ef">return</span>
 				}
-			}else {
-				//myToken = strings.Split(r.Header[&quot;Authorization&quot;][0], &quot; &quot;)[1] //第二种获取Authorization的方式
-				fmt.Printf(&quot;id: %s\n&quot;, mapClaims.Uid)
+			}<span style="color:#66d9ef">else</span> {
+				<span style="color:#75715e">//myToken = strings.Split(r.Header[&#34;Authorization&#34;][0], &#34; &#34;)[1] //第二种获取Authorization的方式
+</span><span style="color:#75715e"></span>				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;id: %s\n&#34;</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Uid</span>)
 			}
-			//把解析好的token数据放到context中
-			longtext := fmt.Sprintf(&quot;解析好的tokne数据 id: %s, name: %s, pwd: %s\n&quot;, mapClaims.Uid, mapClaims.Name, mapClaims.Pwd)
-			w.Write([]byte(longtext))
-			ctx := context.WithValue(r.Context(), &quot;id&quot;, mapClaims.Uid)
-			ctx = context.WithValue(ctx, &quot;name&quot;, mapClaims.Name)
-			r = r.WithContext(ctx)
-			next.ServeHTTP(w, r)
+			<span style="color:#75715e">//把解析好的token数据放到context中
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">longtext</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;解析好的tokne数据 id: %s, name: %s, pwd: %s\n&#34;</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Uid</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Pwd</span>)
+			<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#a6e22e">longtext</span>))
+			<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithValue</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>(), <span style="color:#e6db74">&#34;id&#34;</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Uid</span>)
+			<span style="color:#a6e22e">ctx</span> = <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithValue</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#a6e22e">mapClaims</span>.<span style="color:#a6e22e">Name</span>)
+			<span style="color:#a6e22e">r</span> = <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">WithContext</span>(<span style="color:#a6e22e">ctx</span>)
+			<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
 		})
 	})
 
-	r.HandleFunc(&quot;/test&quot;, func(w http.ResponseWriter, r *http.Request) {
-		fmt.Printf(&quot;handleFunc test\n&quot;)
-		w.Write([]byte(&quot;test is success&quot;))
+	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/test&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;handleFunc test\n&#34;</span>)
+		<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;test is success&#34;</span>))
 	})
-    r.HandleFunc(&quot;/login&quot;, func(w http.ResponseWriter, r *http.Request) {
-		r.ParseForm()
-		//fmt.Fprintln(w,r.Form)
-		name := r.FormValue(&quot;name&quot;)
-		pwd := r.FormValue(&quot;pwd&quot;)
-		fmt.Printf(&quot;login: name: %s, pwd: %s\n&quot;, name, pwd)
-		login, err := Sign(&quot;1&quot;, name, pwd)
-		if nil != err {
-			fmt.Errorf(err.Error())
-			w.Write([]byte(err.Error()))
-			return
+    <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/login&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+		<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ParseForm</span>()
+		<span style="color:#75715e">//fmt.Fprintln(w,r.Form)
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">FormValue</span>(<span style="color:#e6db74">&#34;name&#34;</span>)
+		<span style="color:#a6e22e">pwd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">FormValue</span>(<span style="color:#e6db74">&#34;pwd&#34;</span>)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;login: name: %s, pwd: %s\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">pwd</span>)
+		<span style="color:#a6e22e">login</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Sign</span>(<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">pwd</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">err</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+			<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>()))
+			<span style="color:#66d9ef">return</span>
 		}
-		w.Write([]byte(login))
+		<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#a6e22e">login</span>))
 	})
-	fmt.Printf(&quot;Server listen on 8080...\n&quot;)
-	http.ListenAndServe(&quot;:8080&quot;, r)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Server listen on 8080...\n&#34;</span>)
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#a6e22e">r</span>)
 }
 
-</code></pre><p>验证一下， 启动程序：</p>
-<pre><code>$ go run jwt_svr.go
+</code></pre></div><p>验证一下， 启动程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go run jwt_svr.go
 generate token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
 uid:  1
 Server listen on 8080...
 
-</code></pre><p>已经监听8080端口，使用idea的<code>rest client</code>来模拟请求，在<code>Headers</code>中加入</p>
-<pre><code>Authorization：jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
+</code></pre></div><p>已经监听8080端口，使用idea的<code>rest client</code>来模拟请求，在<code>Headers</code>中加入</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Authorization：jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
 
-</code></pre><p>点击 <code>rest client</code>的运行按钮，得到数据：</p>
-<pre><code>解析好的tokne数据 id: 1, name: zjjj, pwd: 123
+</code></pre></div><p>点击 <code>rest client</code>的运行按钮，得到数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">解析好的tokne数据 id: 1, name: zjjj, pwd: 123
 test is success
 
-</code></pre><p>第二种方法是请求<code>login</code>接口生成token，参数 <code>name=''</code>, <code>pwd=''</code>, 生成token后再按照上述方法，请求<code>test</code>接口</p>
+</code></pre></div><p>第二种方法是请求<code>login</code>接口生成token，参数 <code>name=''</code>, <code>pwd=''</code>, 生成token后再按照上述方法，请求<code>test</code>接口</p>
 
 
             <h4 align="center">--完--</h4>

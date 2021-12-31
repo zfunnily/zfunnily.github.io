@@ -211,91 +211,91 @@
 <li>make</li>
 </ul>
 <p>下载<a href="https://github.com/redis/redis/tree/6.2">6.2</a>版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。</p>
-<pre><code>$ git clone https://github.com.cnpmjs.org/redis/redis.git redis
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/redis/redis.git redis
 $ git checkout -b 6.2 remotes/origin/6.2
-</code></pre><h2 id="vscode不参与编译只充当可视化的调试工具">vscode<strong>不参与编译</strong>，只充当<strong>可视化的调试工具</strong>。</h2>
+</code></pre></div><h2 id="vscode不参与编译只充当可视化的调试工具">vscode<strong>不参与编译</strong>，只充当<strong>可视化的调试工具</strong>。</h2>
 <p>使用插件：</p>
 <ul>
 <li>C/C++
 先编译redis</li>
 </ul>
-<pre><code>cd redis &amp;&amp; make -j4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd redis &amp;&amp; make -j4
 
-</code></pre><p>打开redis目录后直接按F5，会出现选择启动调试。选择<code>c++(GDB/LLDB)</code><br> 选择之后在左边的.vscode目录下会出现launch.json文件,将<code>program</code>修改为<code>${workspaceFolder}/src/redis-server</code></p>
-<pre><code>{&lt;!-- --&gt;
-    &quot;version&quot;: &quot;0.2.0&quot;,
-    &quot;configurations&quot;: [
+</code></pre></div><p>打开redis目录后直接按F5，会出现选择启动调试。选择<code>c++(GDB/LLDB)</code><br> 选择之后在左边的.vscode目录下会出现launch.json文件,将<code>program</code>修改为<code>${workspaceFolder}/src/redis-server</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&lt;!-- --&gt;
+    &#34;version&#34;: &#34;0.2.0&#34;,
+    &#34;configurations&#34;: [
         {&lt;!-- --&gt;
-            &quot;name&quot;: &quot;(gdb) 启动&quot;,
-            &quot;type&quot;: &quot;cppdbg&quot;,
-            &quot;request&quot;: &quot;launch&quot;,
-            &quot;program&quot;: &quot;${workspaceFolder}/src/redis-server&quot;,
-            &quot;args&quot;: [&quot;redis.conf&quot;],
-            &quot;stopAtEntry&quot;: false,
-            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
-            &quot;environment&quot;: [],
-            &quot;externalConsole&quot;: false,
-            &quot;MIMode&quot;: &quot;gdb&quot;,
-            &quot;setupCommands&quot;: [
+            &#34;name&#34;: &#34;(gdb) 启动&#34;,
+            &#34;type&#34;: &#34;cppdbg&#34;,
+            &#34;request&#34;: &#34;launch&#34;,
+            &#34;program&#34;: &#34;${workspaceFolder}/src/redis-server&#34;,
+            &#34;args&#34;: [&#34;redis.conf&#34;],
+            &#34;stopAtEntry&#34;: false,
+            &#34;cwd&#34;: &#34;${workspaceFolder}&#34;,
+            &#34;environment&#34;: [],
+            &#34;externalConsole&#34;: false,
+            &#34;MIMode&#34;: &#34;gdb&#34;,
+            &#34;setupCommands&#34;: [
                 {&lt;!-- --&gt;
-                    &quot;description&quot;: &quot;为 gdb 启用整齐打印&quot;,
-                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
-                    &quot;ignoreFailures&quot;: true
+                    &#34;description&#34;: &#34;为 gdb 启用整齐打印&#34;,
+                    &#34;text&#34;: &#34;-enable-pretty-printing&#34;,
+                    &#34;ignoreFailures&#34;: true
                 }
             ]
         }
     ]
 }
 
-</code></pre><p>这样配置了之后可以按F5直接运行调试啦。</p>
+</code></pre></div><p>这样配置了之后可以按F5直接运行调试啦。</p>
 <h2 id="a-idvscoderedis_50avscode编译调试redis"><a id="VScoderedis_50"></a>VScode<strong>编译调试</strong>redis</h2>
 <p>使用插件：</p>
 <ul>
 <li>C/C++
 在<code>.vscode</code>目录下新建 <code>tasks.json</code>(“CFLAGS=&quot;-g -O0&quot;“参数是为了编译debug版本),</li>
 </ul>
-<pre><code>{&lt;!-- --&gt;
-    &quot;version&quot;: &quot;2.0.0&quot;,
-    &quot;tasks&quot;: [
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&lt;!-- --&gt;
+    &#34;version&#34;: &#34;2.0.0&#34;,
+    &#34;tasks&#34;: [
         {&lt;!-- --&gt;
-            &quot;label&quot;: &quot;build&quot;,
-            &quot;type&quot;: &quot;shell&quot;,
-            &quot;command&quot;: &quot;make&quot;,
-            &quot;args&quot;: [
-                &quot;CFLAGS=\&quot;-g -O0\&quot;&quot;
+            &#34;label&#34;: &#34;build&#34;,
+            &#34;type&#34;: &#34;shell&#34;,
+            &#34;command&#34;: &#34;make&#34;,
+            &#34;args&#34;: [
+                &#34;CFLAGS=\&#34;-g -O0\&#34;&#34;
             ]
         }
     ]
 }
 
-</code></pre><p>修改<code>launch.json</code>-&gt;<code>preLaunchTask: Build</code>使得<code>tasks.json</code>可以被加载</p>
-<pre><code>{&lt;!-- --&gt;
-    &quot;version&quot;: &quot;0.2.0&quot;,
-    &quot;configurations&quot;: [
+</code></pre></div><p>修改<code>launch.json</code>-&gt;<code>preLaunchTask: Build</code>使得<code>tasks.json</code>可以被加载</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&lt;!-- --&gt;
+    &#34;version&#34;: &#34;0.2.0&#34;,
+    &#34;configurations&#34;: [
         {&lt;!-- --&gt;
-            &quot;name&quot;: &quot;(gdb) 启动&quot;,
-            &quot;type&quot;: &quot;cppdbg&quot;,
-            &quot;request&quot;: &quot;launch&quot;,
-            &quot;program&quot;: &quot;${workspaceFolder}/src/redis-server&quot;,
-            &quot;args&quot;: [&quot;redis.conf&quot;],
-            &quot;stopAtEntry&quot;: false,
-            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
-            &quot;environment&quot;: [],
-            &quot;externalConsole&quot;: false,
-            &quot;MIMode&quot;: &quot;gdb&quot;,
-            &quot;preLaunchTask&quot;: &quot;build&quot;,
-            &quot;setupCommands&quot;: [
+            &#34;name&#34;: &#34;(gdb) 启动&#34;,
+            &#34;type&#34;: &#34;cppdbg&#34;,
+            &#34;request&#34;: &#34;launch&#34;,
+            &#34;program&#34;: &#34;${workspaceFolder}/src/redis-server&#34;,
+            &#34;args&#34;: [&#34;redis.conf&#34;],
+            &#34;stopAtEntry&#34;: false,
+            &#34;cwd&#34;: &#34;${workspaceFolder}&#34;,
+            &#34;environment&#34;: [],
+            &#34;externalConsole&#34;: false,
+            &#34;MIMode&#34;: &#34;gdb&#34;,
+            &#34;preLaunchTask&#34;: &#34;build&#34;,
+            &#34;setupCommands&#34;: [
                 {&lt;!-- --&gt;
-                    &quot;description&quot;: &quot;为 gdb 启用整齐打印&quot;,
-                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
-                    &quot;ignoreFailures&quot;: true
+                    &#34;description&#34;: &#34;为 gdb 启用整齐打印&#34;,
+                    &#34;text&#34;: &#34;-enable-pretty-printing&#34;,
+                    &#34;ignoreFailures&#34;: true
                 }
             ]
         }
     ]
 }
 
-</code></pre><p>这样配置了之后可以按F5直接编译运行调试啦。</p>
+</code></pre></div><p>这样配置了之后可以按F5直接编译运行调试啦。</p>
 
 
             <h4 align="center">--完--</h4>

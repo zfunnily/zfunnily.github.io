@@ -228,16 +228,16 @@
 <p>mvc架构<br> 模型渲染库：https://github.com/bungle/lua-resty-template<br> resty http请求库： <a href="https://github.com/bungle/lua-resty-template">https://github.com/bungle/lua-resty-template</a></p>
 <h2 id="参照-mvc模型来做postman工具">参照 mvc模型来做postman工具</h2>
 <h3 id="配置文件说明">配置文件说明</h3>
-<pre><code>worker_processes  1;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
 error_log logs/error.log;
 events {
     worker_connections 1024;
 }
 http {
-    lua_package_path &quot;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&quot;;
+    lua_package_path &#34;/open_resty/lualib/?.lua;/usr/local/openresty/lualib/?.lua;&#34;;
     server {
         listen 8080;
-        default_type 'application/json;charset=utf8';
+        default_type &#39;application/json;charset=utf8&#39;;
         lua_code_cache off;
 
         location /  {
@@ -250,38 +250,38 @@ http {
     }
 }
 
-</code></pre><ul>
+</code></pre></div><ul>
 <li>lua_code_cache off; 是为了修改lua脚本后不用重启nginx自动加载lua。- lua_package_path: lua脚本路径- root static: 静态目录是static</li>
 </ul>
 <h3 id="入口文件解析uri">入口文件/解析uri</h3>
 <p>mvc.lua</p>
-<pre><code>#!/usr/bin/lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/lua
 
-ngx.say(&quot;&lt;br/&gt;&quot;)
+ngx.say(&#34;&lt;br/&gt;&#34;)
 
 local uri = ngx.var.uri
-ngx.header.content_type=&quot;application/json;charset=utf8&quot;
+ngx.header.content_type=&#34;application/json;charset=utf8&#34;
 
 ---- 默认首页
-if uri == &quot;&quot; or uri == &quot;/&quot; then
-    local res = ngx.location.capture(&quot;/index.html&quot;,{})
+if uri == &#34;&#34; or uri == &#34;/&#34; then
+    local res = ngx.location.capture(&#34;/index.html&#34;,{})
     ngx.say(res.body)
     return
 end
 
 --- uri解析
-local m, err = ngx.re.match(uri, &quot;([a-zA-Z0-9-]+)/*([a-zA-Z0-9-]+)*&quot;)
+local m, err = ngx.re.match(uri, &#34;([a-zA-Z0-9-]+)/*([a-zA-Z0-9-]+)*&#34;)
 local moduleName = m[1]     -- 模块名
 local method = m[2]         -- 方法名
 if not method then
-    method = &quot;index&quot;        -- 默认访问index方法
+    method = &#34;index&#34;        -- 默认访问index方法
 else
-    method = ngx.re.gsub(method, &quot;-&quot;, &quot;_&quot;)
+    method = ngx.re.gsub(method, &#34;-&#34;, &#34;_&#34;)
 end
 
 ---动态Controller模块
 -- 控制器默认在web包下面
-local prefix = &quot;web.&quot;
+local prefix = &#34;web.&#34;
 local path = prefix .. moduleName
 -- 尝试引入模块，不存在则报错
 local ret, ctrl, err = pcall(require, path)
@@ -289,7 +289,7 @@ local is_debug = true       -- 调试阶段，会输出错误信息到页面上
 if ret == false then
     if is_debug then
         ngx.status = 404
-        ngx.say(&quot;&lt;p style='font-size: 50px'&gt;Error: &lt;span style='color:red'&gt;&quot; .. ctrl .. &quot;&lt;/span&gt; module not found !&lt;/p&gt;&quot;)
+        ngx.say(&#34;&lt;p style=&#39;font-size: 50px&#39;&gt;Error: &lt;span style=&#39;color:red&#39;&gt;&#34; .. ctrl .. &#34;&lt;/span&gt; module not found !&lt;/p&gt;&#34;)
     end
     ngx.exit(404)
 end
@@ -299,7 +299,7 @@ local req_method = ctrl[method]
 if req_method == nil then
     if is_debug then
         ngx.status = 404
-        ngx.say(&quot;&lt;p style='font-size: 50px'&gt;Error: &lt;span style='color:red'&gt;&quot; .. method .. &quot;()&lt;/span&gt; method not found in &lt;span style='color:red'&gt;&quot; .. moduleName .. &quot;&lt;/span&gt; lua module !&lt;/p&gt;&quot;)
+        ngx.say(&#34;&lt;p style=&#39;font-size: 50px&#39;&gt;Error: &lt;span style=&#39;color:red&#39;&gt;&#34; .. method .. &#34;()&lt;/span&gt; method not found in &lt;span style=&#39;color:red&#39;&gt;&#34; .. moduleName .. &#34;&lt;/span&gt; lua module !&lt;/p&gt;&#34;)
     end
     ngx.exit(404)
 end
@@ -308,27 +308,27 @@ ret, err = pcall(req_method)
 if ret == false then
     if is_debug then
         ngx.status = 404
-        ngx.say(&quot;&lt;p style='font-size: 50px'&gt;Error: &lt;span style='color:red'&gt;&quot; .. err .. &quot;&lt;/span&gt;&lt;/p&gt;&quot;)
+        ngx.say(&#34;&lt;p style=&#39;font-size: 50px&#39;&gt;Error: &lt;span style=&#39;color:red&#39;&gt;&#34; .. err .. &#34;&lt;/span&gt;&lt;/p&gt;&#34;)
     else
         ngx.exit(500)
     end
 end
 
-</code></pre><h3 id="控制器">控制器</h3>
+</code></pre></div><h3 id="控制器">控制器</h3>
 <p>控制器路径：　lua/web/index.lua, lua/web/postman.lua<br> lua/web/index.lua 渲染模板 lua/tpl/index.html</p>
-<pre><code>local template = require &quot;resty.template&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
 local _M = {}
 function _M.index()
-    local model = {reqUrl = &quot;hello template&quot;, reqBody = &quot;body&quot;}
+    local model = {reqUrl = &#34;hello template&#34;, reqBody = &#34;body&#34;}
     
     -- 1、外部模板文件
-     template.render(&quot;/index.html&quot;, model)
+     template.render(&#34;/index.html&#34;, model)
 end
 return _M
 
-</code></pre><p>lua/web/postman.lua实现接收表单数据并处理Post逻辑</p>
-<pre><code>local template = require &quot;resty.template&quot;
-local postman = require(&quot;cus.postman&quot;)
+</code></pre></div><p>lua/web/postman.lua实现接收表单数据并处理Post逻辑</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
+local postman = require(&#34;cus.postman&#34;)
 
 local _M = {}
 local function Parse()
@@ -340,9 +340,9 @@ local function Parse()
     local CheckSum = nil
     local MD5 = nil
     local host = nil
-    if &quot;GET&quot; == request_method then
+    if &#34;GET&#34; == request_method then
         args = ngx.req.get_uri_args()
-    elseif &quot;POST&quot; == request_method then
+    elseif &#34;POST&#34; == request_method then
         ngx.req.read_body()
         --获取post请求的参数
         local post_args_tab = ngx.req.get_post_args()
@@ -351,45 +351,45 @@ local function Parse()
         end
         Body = ngx.req.get_body_data()
     end
-    model[&quot;resp&quot;] = postman.httpPost(model[&quot;reqUrl&quot;], model[&quot;reqBody&quot;])
+    model[&#34;resp&#34;] = postman.httpPost(model[&#34;reqUrl&#34;], model[&#34;reqBody&#34;])
     return model
 end
 function _M.index()
     local model = Parse()
     -- 1、外部模板文件
-     template.render(&quot;/index.html&quot;, model)
+     template.render(&#34;/index.html&#34;, model)
 
 end
 return _M
 
-</code></pre><h3 id="模板代码">模板代码</h3>
+</code></pre></div><h3 id="模板代码">模板代码</h3>
 <p>lua/tpl/index.html</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
 &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
     &lt;title&gt;PostMan&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div style=&quot;text-align: center; float: left&quot;&gt;
+&lt;div style=&#34;text-align: center; float: left&#34;&gt;
     &lt;div&gt;&lt;h1&gt;PostMain&lt;/h1&gt;&lt;/div&gt;
     &lt;div&gt;
-        &lt;form action=&quot;/postman/index&quot; method=&quot;post&quot; name=&quot;postman&quot;&gt;
-            &lt;table style=&quot;width: 500px;height: 200px&quot;&gt;
+        &lt;form action=&#34;/postman/index&#34; method=&#34;post&#34; name=&#34;postman&#34;&gt;
+            &lt;table style=&#34;width: 500px;height: 200px&#34;&gt;
                 &lt;tr&gt;
                     &lt;td&gt;请求地址：&lt;/td&gt;
-                    &lt;td&gt;&lt;input id=&quot;reqUrl&quot; name=&quot;reqUrl&quot; type=&quot;text&quot; style=&quot;width: 300px;height: 35px;&quot;  value=&quot;{*reqUrl*}&quot;/&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;input id=&#34;reqUrl&#34; name=&#34;reqUrl&#34; type=&#34;text&#34; style=&#34;width: 300px;height: 35px;&#34;  value=&#34;{*reqUrl*}&#34;/&gt;&lt;/td&gt;
                 &lt;/tr&gt;
                 &lt;tr&gt;
                     &lt;td&gt;请求body：&lt;/td&gt;
-                    &lt;td&gt;&lt;textarea id=&quot;reqBody&quot; name=&quot;reqBody&quot; type=&quot;text&quot;  style=&quot;width: 300px;height: 55px&quot;&gt;{*reqBody*}&lt;/textarea&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;textarea id=&#34;reqBody&#34; name=&#34;reqBody&#34; type=&#34;text&#34;  style=&#34;width: 300px;height: 55px&#34;&gt;{*reqBody*}&lt;/textarea&gt;&lt;/td&gt;
                 &lt;/tr&gt;
                 &lt;tr&gt;
                     &lt;td&gt;返回值：&lt;/td&gt;
-                    &lt;td&gt;&lt;textarea id=&quot;resp&quot; name=&quot;resp&quot; disabled style=&quot;width: 300px;height: 105px&quot;&gt;{*resp*}&lt;/textarea&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;textarea id=&#34;resp&#34; name=&#34;resp&#34; disabled style=&#34;width: 300px;height: 105px&#34;&gt;{*resp*}&lt;/textarea&gt;&lt;/td&gt;
                 &lt;/tr&gt;
             &lt;/table&gt;
-            &lt;input id=&quot;btn&quot; type=&quot;submit&quot; value=&quot;提交&quot;/&gt;
+            &lt;input id=&#34;btn&#34; type=&#34;submit&#34; value=&#34;提交&#34;/&gt;
         &lt;/form&gt;
 
     &lt;/div&gt;
@@ -400,45 +400,45 @@ return _M
 
 &lt;/html&gt;
 
-</code></pre><h2 id="使用方法">使用方法</h2>
+</code></pre></div><h2 id="使用方法">使用方法</h2>
 <p>访问地址： http://ip:8080/index/index<br> 第一个index代表lua/web/index.lua<br> 第二个index代表lua/web/index.lua文件中的index方法。</p>
 <h3 id="lua_resty_template模板渲染方法">lua_resty_template模板渲染方法</h3>
 <ol>
 <li>使用template.render</li>
 </ol>
-<pre><code>local template = require &quot;resty.template&quot;
-template.render(&quot;/index.html&quot;, model)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
+template.render(&#34;/index.html&#34;, model)
 
-</code></pre><p>2.使用template.new</p>
-<pre><code>local template = require &quot;resty.template&quot; -- Using template.new
+</code></pre></div><p>2.使用template.new</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; -- Using template.new
 
- local view = template.new  &quot;view.html&quot; view.message = &quot;Hello, World!&quot; view:render()
+ local view = template.new  &#34;view.html&#34; view.message = &#34;Hello, World!&#34; view:render()
 
-</code></pre><ol>
+</code></pre></div><ol>
 <li>使用template.compile</li>
 </ol>
-<pre><code>local template = require &quot;resty.template&quot; 
-local func = template.compile(&quot;view.html&quot;) 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; 
+local func = template.compile(&#34;view.html&#34;) 
 --执行函数，得到渲染之后的内容 
 local content = func(context) ngx.say(content)
 
-</code></pre><h3 id="模板语法">模板语法</h3>
+</code></pre></div><h3 id="模板语法">模板语法</h3>
 <ul>
 <li><code>{&lt;!-- --&gt;{expression}}</code>：输出传递的值，转义<code>html</code>相关标签- <code>{*expression*}</code>：输出传递的值- <code>{% lua code %}</code>：使用<code>lua</code>代码- <code>{(template)}</code>：引入<code>html</code>共用页面- <code>{(base.html, { title = &quot;Hello, World&quot; } )}</code>：引入<code>html</code>共用页面，并传递相关值- <code>{-verbatim-}...{-verbatim-}</code>/<code>{-raw-}...{-raw-}</code>：可原样输出模板语法- <code>{# comments #}</code>：在模板中使用注释，不会被执行和输出</li>
 </ul>
 <h2 id="遇到的坑">遇到的坑</h2>
 <p>网页上直接输出了html字符串。而不是正常网页<br> 解决办法<br> nginx.conf配置文件加上default_type text/html;</p>
-<pre><code>server {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
     default_type text/html;
     location / {
             default_type text/html;
     }
 }
 
-</code></pre><p>入口文件mvc.lua开头加上下面的内容：</p>
-<pre><code>ngx.say(&quot;&lt;br/&gt;&quot;)
+</code></pre></div><p>入口文件mvc.lua开头加上下面的内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.say(&#34;&lt;br/&gt;&#34;)
 
-</code></pre><h2 id="项目地址">项目地址</h2>
+</code></pre></div><h2 id="项目地址">项目地址</h2>
 <p><a href="https://github.com/diycat1024/OpenRestyPostman">https://github.com/diycat1024/OpenRestyPostman</a></p>
 
 

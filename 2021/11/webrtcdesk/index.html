@@ -223,475 +223,235 @@
 添加<code>class VideoRenderer : public rtc::VideoSinkInterface&lt;webrtc::VideoFrame&gt; </code>的回调</li>
 </ul>
 <p>详细代码：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#999;font-weight:bold;font-style:italic">#ifndef __RCRTC_DESKTOP_CAPTURER__
-</span><span style="color:#999;font-weight:bold;font-style:italic">#define __RCRTC_DESKTOP_CAPTURER__
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;api/video/i420_buffer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;third_party/libyuv/include/libyuv/convert.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;third_party/libyuv/include/libyuv/video_common.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;media/base/video_broadcaster.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;media/base/video_common.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;modules/desktop_capture/desktop_and_cursor_composer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;rtc_base/thread.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;system_wrappers/include/sleep.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;test/vcm_capturer.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic">#include</span> <span style="color:#999;font-weight:bold;font-style:italic">&#34;rtc_base/platform_thread.h&#34;</span><span style="color:#999;font-weight:bold;font-style:italic">
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span>
-<span style="color:#000;font-weight:bold">typedef</span> <span style="color:#900;font-weight:bold">void</span> (<span style="color:#000;font-weight:bold">*</span>desktop_capture_frame_callback)(<span style="color:#458;font-weight:bold">int</span> width, <span style="color:#458;font-weight:bold">int</span> height, <span style="color:#458;font-weight:bold">int</span> y_stride, <span style="color:#458;font-weight:bold">int</span> u_stride, <span style="color:#458;font-weight:bold">int</span> v_stride, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>y, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>u, <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">uint8_t</span> <span style="color:#000;font-weight:bold">*</span>v, <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>context);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#ifndef __RCRTC_DESKTOP_CAPTURER__
+</span><span style="color:#75715e">#define __RCRTC_DESKTOP_CAPTURER__
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;api/video/i420_buffer.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/convert.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/video_common.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_broadcaster.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_common.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;modules/desktop_capture/desktop_and_cursor_composer.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/thread.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;system_wrappers/include/sleep.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test/vcm_capturer.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/platform_thread.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>desktop_capture_frame_callback)(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> y_stride, <span style="color:#66d9ef">int</span> u_stride, <span style="color:#66d9ef">int</span> v_stride, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>y, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>u, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>v, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>context);
 
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">RcrtcDesktopCapturerTrackSource</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Callback,
-                                        <span style="color:#000;font-weight:bold">public</span> rtc<span style="color:#000;font-weight:bold">::</span>VideoSourceInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RcrtcDesktopCapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Callback,
+                                        <span style="color:#66d9ef">public</span> rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span>
 {
-<span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
-  RcrtcDesktopCapturerTrackSource(<span style="color:#998;font-style:italic">/*const std::map&lt;std::string, std::string&gt;&amp; opts*/</span>) {
-    Start(<span style="color:#000;font-weight:bold">nullptr</span>);
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  RcrtcDesktopCapturerTrackSource(<span style="color:#75715e">/*const std::map&lt;std::string, std::string&gt;&amp; opts*/</span>) {
+    Start(<span style="color:#66d9ef">nullptr</span>);
   }
-  <span style="color:#000;font-weight:bold">inline</span> <span style="color:#000;font-weight:bold">~</span>RcrtcDesktopCapturerTrackSource() <span style="color:#000;font-weight:bold">override</span> {}
+  <span style="color:#66d9ef">inline</span> <span style="color:#f92672">~</span>RcrtcDesktopCapturerTrackSource() <span style="color:#66d9ef">override</span> {}
 
-  <span style="color:#000;font-weight:bold">static</span> RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*</span><span style="color:#900;font-weight:bold">Create</span>()
+  <span style="color:#66d9ef">static</span> RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span><span style="color:#a6e22e">Create</span>()
   {
-    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk(<span style="color:#000;font-weight:bold">new</span> RcrtcDesktopCapturerTrackSource);
-    <span style="color:#000;font-weight:bold">return</span> desk.release();
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(<span style="color:#66d9ef">new</span> RcrtcDesktopCapturerTrackSource);
+    <span style="color:#66d9ef">return</span> desk.release();
   }
-  <span style="color:#998;font-style:italic">// overide webrtc::DesktopCapturer::Callback
-</span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">OnCaptureResult</span>(webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Result result,
-                       std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopFrame<span style="color:#000;font-weight:bold">&gt;</span> frame) <span style="color:#000;font-weight:bold">override</span>
+  <span style="color:#75715e">// overide webrtc::DesktopCapturer::Callback
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnCaptureResult</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result result,
+                       std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopFrame<span style="color:#f92672">&gt;</span> frame) <span style="color:#66d9ef">override</span>
   {
-    <span style="color:#000;font-weight:bold">if</span> (result <span style="color:#000;font-weight:bold">==</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Result<span style="color:#000;font-weight:bold">::</span>SUCCESS)
+    <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result<span style="color:#f92672">::</span>SUCCESS)
     {
-      <span style="color:#458;font-weight:bold">int</span> width <span style="color:#000;font-weight:bold">=</span> frame<span style="color:#000;font-weight:bold">-&gt;</span>size().width();
-      <span style="color:#458;font-weight:bold">int</span> height <span style="color:#000;font-weight:bold">=</span> frame<span style="color:#000;font-weight:bold">-&gt;</span>size().height();
+      <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().width();
+      <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().height();
 
-      rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>I420Buffer<span style="color:#000;font-weight:bold">&gt;</span> I420buffer <span style="color:#000;font-weight:bold">=</span>
-          webrtc<span style="color:#000;font-weight:bold">::</span>I420Buffer<span style="color:#000;font-weight:bold">::</span>Create(width, height);
+      rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">&gt;</span> I420buffer <span style="color:#f92672">=</span>
+          webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">::</span>Create(width, height);
 
-      <span style="color:#458;font-weight:bold">int</span> stride<span style="color:#000;font-weight:bold">=</span>width;
-      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> yplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataY();
-      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> uplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataU();
-      <span style="color:#458;font-weight:bold">uint8_t</span><span style="color:#000;font-weight:bold">*</span> vplane<span style="color:#000;font-weight:bold">=</span>I420buffer<span style="color:#000;font-weight:bold">-&gt;</span>MutableDataV();
-      <span style="color:#000;font-weight:bold">const</span> <span style="color:#458;font-weight:bold">int</span> conversionResult <span style="color:#000;font-weight:bold">=</span> libyuv<span style="color:#000;font-weight:bold">::</span>ConvertToI420( frame<span style="color:#000;font-weight:bold">-&gt;</span>data(), <span style="color:#099">0</span>, 
+      <span style="color:#66d9ef">int</span> stride<span style="color:#f92672">=</span>width;
+      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> yplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataY();
+      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> uplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataU();
+      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> vplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataV();
+      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> conversionResult <span style="color:#f92672">=</span> libyuv<span style="color:#f92672">::</span>ConvertToI420( frame<span style="color:#f92672">-&gt;</span>data(), <span style="color:#ae81ff">0</span>, 
           yplane,stride,
-          uplane,(stride<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2</span>,
-          vplane,(stride<span style="color:#000;font-weight:bold">+</span><span style="color:#099">1</span>)<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2</span>,
-          <span style="color:#099">0</span>, <span style="color:#099">0</span>,
+          uplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
+          vplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
+          <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>,
           width,height,
           width,height,
-          <span style="color:#998;font-style:italic">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
-</span><span style="color:#998;font-style:italic"></span>          <span style="color:#998;font-style:italic">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
-</span><span style="color:#998;font-style:italic"></span>          libyuv<span style="color:#000;font-weight:bold">::</span>kRotate0, <span style="color:#000;font-weight:bold">::</span>libyuv<span style="color:#000;font-weight:bold">::</span>FOURCC_ARGB);
+          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span><span style="color:#75715e"></span>          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span><span style="color:#75715e"></span>          libyuv<span style="color:#f92672">::</span>kRotate0, <span style="color:#f92672">::</span>libyuv<span style="color:#f92672">::</span>FOURCC_ARGB);
 
-      <span style="color:#000;font-weight:bold">if</span> (conversionResult <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">0</span>)
+      <span style="color:#66d9ef">if</span> (conversionResult <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
       {
-        <span style="color:#998;font-style:italic">// webrtc::VideoFrame videoFrame(I420buffer,
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                               webrtc::VideoRotation::kVideoRotation_0,
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                               rtc::TimeMicros());
-</span><span style="color:#998;font-style:italic"></span>
-        <span style="color:#998;font-style:italic">// rtc::scoped_refptr&lt;webrtc::I420BufferInterface&gt; buffer(
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//     videoFrame.video_frame_buffer()-&gt;ToI420());
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">// _frameCallback(buffer-&gt;width(), buffer-&gt;height(), buffer-&gt;StrideY(),
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                buffer-&gt;StrideU(), buffer-&gt;StrideV(), buffer-&gt;DataY(),
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">//                buffer-&gt;DataU(), buffer-&gt;DataV(), this-&gt;_userContext);
-</span><span style="color:#998;font-style:italic"></span>        
-        webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame videoFrame<span style="color:#000;font-weight:bold">=</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame(I420buffer,<span style="color:#099">0</span>,<span style="color:#099">0</span>,webrtc<span style="color:#000;font-weight:bold">::</span>kVideoRotation_0);
-        _sink<span style="color:#000;font-weight:bold">-&gt;</span>OnFrame(videoFrame);
+        <span style="color:#75715e">// webrtc::VideoFrame videoFrame(I420buffer,
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               webrtc::VideoRotation::kVideoRotation_0,
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               rtc::TimeMicros());
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// rtc::scoped_refptr&lt;webrtc::I420BufferInterface&gt; buffer(
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     videoFrame.video_frame_buffer()-&gt;ToI420());
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// _frameCallback(buffer-&gt;width(), buffer-&gt;height(), buffer-&gt;StrideY(),
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;StrideU(), buffer-&gt;StrideV(), buffer-&gt;DataY(),
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;DataU(), buffer-&gt;DataV(), this-&gt;_userContext);
+</span><span style="color:#75715e"></span>        
+        webrtc<span style="color:#f92672">::</span>VideoFrame videoFrame<span style="color:#f92672">=</span>webrtc<span style="color:#f92672">::</span>VideoFrame(I420buffer,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,webrtc<span style="color:#f92672">::</span>kVideoRotation_0);
+        _sink<span style="color:#f92672">-&gt;</span>OnFrame(videoFrame);
       }
     }
   }
 
-  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">setExccludeWindow</span>(webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>Source windowId)
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setExccludeWindow</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Source windowId)
   {
     _excludeWindowList.push_back(windowId);
   }
 
-  <span style="color:#000;font-weight:bold">static</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">CaptureDeskThread</span>(<span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>obj)
+  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureDeskThread</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>obj)
   {
-    RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*</span>capture <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">static_cast</span><span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource <span style="color:#000;font-weight:bold">*&gt;</span>(obj);
-    capture<span style="color:#000;font-weight:bold">-&gt;</span>CaptureProcess();
+    RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span>capture <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*&gt;</span>(obj);
+    capture<span style="color:#f92672">-&gt;</span>CaptureProcess();
   }
-  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">CaptureProcess</span>()
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureProcess</span>()
   {
-    webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCaptureOptions opts <span style="color:#000;font-weight:bold">=</span>
-        webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCaptureOptions<span style="color:#000;font-weight:bold">::</span>CreateDefault();
-    <span style="color:#998;font-style:italic">// opts.set_allow_use_magnification_api(true);  //设置过滤窗口选项
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// 使用 DesktopAndCursorComposer 可以采集鼠标
-</span><span style="color:#998;font-style:italic"></span>    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer <span style="color:#000;font-weight:bold">=</span>
-        std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">&gt;</span>(
-            <span style="color:#000;font-weight:bold">new</span> webrtc<span style="color:#000;font-weight:bold">::</span>DesktopAndCursorComposer(
-                webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>CreateScreenCapturer(opts), opts));
+    webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions opts <span style="color:#f92672">=</span>
+        webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions<span style="color:#f92672">::</span>CreateDefault();
+    <span style="color:#75715e">// opts.set_allow_use_magnification_api(true);  //设置过滤窗口选项
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 使用 DesktopAndCursorComposer 可以采集鼠标
+</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span> capturer <span style="color:#f92672">=</span>
+        std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span>(
+            <span style="color:#66d9ef">new</span> webrtc<span style="color:#f92672">::</span>DesktopAndCursorComposer(
+                webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>CreateScreenCapturer(opts), opts));
 
-    <span style="color:#998;font-style:italic">// 设置开始采集状态
-</span><span style="color:#998;font-style:italic"></span>    capturer<span style="color:#000;font-weight:bold">-&gt;</span>Start(<span style="color:#000;font-weight:bold">this</span>);
+    <span style="color:#75715e">// 设置开始采集状态
+</span><span style="color:#75715e"></span>    capturer<span style="color:#f92672">-&gt;</span>Start(<span style="color:#66d9ef">this</span>);
 
-    <span style="color:#998;font-style:italic">// 设置要过滤的窗口
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#000;font-weight:bold">auto</span> <span style="color:#900;font-weight:bold">source</span> : _excludeWindowList)
+    <span style="color:#75715e">// 设置要过滤的窗口
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> source : _excludeWindowList)
     {
-      capturer<span style="color:#000;font-weight:bold">-&gt;</span>SetExcludedWindow(source.id);
+      capturer<span style="color:#f92672">-&gt;</span>SetExcludedWindow(source.id);
     }
 
-    <span style="color:#000;font-weight:bold">while</span> (_isrunning)
+    <span style="color:#66d9ef">while</span> (_isrunning)
     {
-      webrtc<span style="color:#000;font-weight:bold">::</span>SleepMs(_msPerFrame);
-      <span style="color:#998;font-style:italic">// 采集桌面图像
-</span><span style="color:#998;font-style:italic"></span>      capturer<span style="color:#000;font-weight:bold">-&gt;</span>CaptureFrame();
+      webrtc<span style="color:#f92672">::</span>SleepMs(_msPerFrame);
+      <span style="color:#75715e">// 采集桌面图像
+</span><span style="color:#75715e"></span>      capturer<span style="color:#f92672">-&gt;</span>CaptureFrame();
     }
   }
 
-  <span style="color:#458;font-weight:bold">bool</span> <span style="color:#900;font-weight:bold">Start</span>(desktop_capture_frame_callback back)
+  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Start</span>(desktop_capture_frame_callback back)
   {
-    printf(<span style="color:#d14">&#34;start desk capturer...</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>_capture_thread)
+    printf(<span style="color:#e6db74">&#34;start desk capturer...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>_capture_thread)
     {
-      _frameCallback <span style="color:#000;font-weight:bold">=</span> back;
-      _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">true</span>;
-      _capture_thread.reset(<span style="color:#000;font-weight:bold">new</span> rtc<span style="color:#000;font-weight:bold">::</span>PlatformThread(RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">::</span>CaptureDeskThread, <span style="color:#000;font-weight:bold">this</span>,
-                                                    <span style="color:#d14">&#34;CaptureThread&#34;</span>, rtc<span style="color:#000;font-weight:bold">::</span>ThreadPriority<span style="color:#000;font-weight:bold">::</span>kHighPriority));
+      _frameCallback <span style="color:#f92672">=</span> back;
+      _isrunning <span style="color:#f92672">=</span> true;
+      _capture_thread.reset(<span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>PlatformThread(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>CaptureDeskThread, <span style="color:#66d9ef">this</span>,
+                                                    <span style="color:#e6db74">&#34;CaptureThread&#34;</span>, rtc<span style="color:#f92672">::</span>ThreadPriority<span style="color:#f92672">::</span>kHighPriority));
 
-      _capture_thread<span style="color:#000;font-weight:bold">-&gt;</span>Start();
+      _capture_thread<span style="color:#f92672">-&gt;</span>Start();
     }
-    <span style="color:#998;font-style:italic">// CaptureThread();
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread = rtc::Thread::Create();
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread-&gt;Start();
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// _capture_thread-&gt;PostTask(RTC_FROM_HERE, [&amp;]
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">//                           { CaptureThread(); });
-</span><span style="color:#998;font-style:italic"></span>  }
+    <span style="color:#75715e">// CaptureThread();
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread = rtc::Thread::Create();
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;Start();
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;PostTask(RTC_FROM_HERE, [&amp;]
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//                           { CaptureThread(); });
+</span><span style="color:#75715e"></span>  }
 
-  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">Stop</span>()
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Stop</span>()
   {
-    <span style="color:#000;font-weight:bold">if</span> (_isrunning)
+    <span style="color:#66d9ef">if</span> (_isrunning)
     {
-      _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">false</span>;
-      _capture_thread<span style="color:#000;font-weight:bold">-&gt;</span>Stop();
+      _isrunning <span style="color:#f92672">=</span> false;
+      _capture_thread<span style="color:#f92672">-&gt;</span>Stop();
       _capture_thread.reset();
     }
   }
 
-  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">AddOrUpdateSink</span>(
-      rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>sink,
-      <span style="color:#000;font-weight:bold">const</span> rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkWants <span style="color:#000;font-weight:bold">&amp;</span>wants)
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">AddOrUpdateSink</span>(
+      rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink,
+      <span style="color:#66d9ef">const</span> rtc<span style="color:#f92672">::</span>VideoSinkWants <span style="color:#f92672">&amp;</span>wants)
   {
-    <span style="color:#998;font-style:italic">// Start(nullptr);
-</span><span style="color:#998;font-style:italic"></span>    _sink <span style="color:#000;font-weight:bold">=</span> sink;
+    <span style="color:#75715e">// Start(nullptr);
+</span><span style="color:#75715e"></span>    _sink <span style="color:#f92672">=</span> sink;
   }
 
-  <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">RemoveSink</span>(rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>sink)
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RemoveSink</span>(rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink)
   {
-    <span style="color:#000;font-weight:bold">if</span> (sink <span style="color:#000;font-weight:bold">==</span> _sink)
+    <span style="color:#66d9ef">if</span> (sink <span style="color:#f92672">==</span> _sink)
     {
-      _sink <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+      _sink <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
     }
 
     Stop();
   }
 
-<span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
-  <span style="color:#458;font-weight:bold">int</span> _msPerFrame <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">100</span>;                                   <span style="color:#998;font-style:italic">// 100毫秒采集一次，每秒钟采集10帧
-</span><span style="color:#998;font-style:italic"></span>  webrtc<span style="color:#000;font-weight:bold">::</span>DesktopCapturer<span style="color:#000;font-weight:bold">::</span>SourceList _excludeWindowList;  <span style="color:#998;font-style:italic">//需要过滤的窗口列表
-</span><span style="color:#998;font-style:italic"></span>  desktop_capture_frame_callback _frameCallback <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>; <span style="color:#998;font-style:italic">//视频输出回调
-</span><span style="color:#998;font-style:italic"></span>  <span style="color:#458;font-weight:bold">void</span> <span style="color:#000;font-weight:bold">*</span>_userContext <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">int</span> _msPerFrame <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;                                   <span style="color:#75715e">// 100毫秒采集一次，每秒钟采集10帧
+</span><span style="color:#75715e"></span>  webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>SourceList _excludeWindowList;  <span style="color:#75715e">//需要过滤的窗口列表
+</span><span style="color:#75715e"></span>  desktop_capture_frame_callback _frameCallback <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; <span style="color:#75715e">//视频输出回调
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>_userContext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
 
-<span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
-  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>rtc<span style="color:#000;font-weight:bold">::</span>PlatformThread<span style="color:#000;font-weight:bold">&gt;</span> _capture_thread;
-  <span style="color:#458;font-weight:bold">bool</span> _isrunning <span style="color:#000;font-weight:bold">=</span> <span style="color:#0086b3">false</span>;
-  rtc<span style="color:#000;font-weight:bold">::</span>VideoSinkInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">*</span>_sink;
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>rtc<span style="color:#f92672">::</span>PlatformThread<span style="color:#f92672">&gt;</span> _capture_thread;
+  <span style="color:#66d9ef">bool</span> _isrunning <span style="color:#f92672">=</span> false;
+  rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>_sink;
 };
-<span style="color:#999;font-weight:bold;font-style:italic">#endif
-</span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">peerconnection.cc
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">CapturerTrackSource</span> <span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">public</span> webrtc<span style="color:#000;font-weight:bold">::</span>VideoTrackSource {
- <span style="color:#000;font-weight:bold">public</span><span style="color:#000;font-weight:bold">:</span>
-  <span style="color:#000;font-weight:bold">static</span> rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> Create() {
-    <span style="color:#000;font-weight:bold">const</span> size_t kWidth <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">640</span>;
-    <span style="color:#000;font-weight:bold">const</span> size_t kHeight <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">480</span>;
-    <span style="color:#000;font-weight:bold">const</span> size_t kFps <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">30</span>;
-    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer;
-    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoCaptureModule<span style="color:#000;font-weight:bold">::</span>DeviceInfo<span style="color:#000;font-weight:bold">&gt;</span> info(
-        webrtc<span style="color:#000;font-weight:bold">::</span>VideoCaptureFactory<span style="color:#000;font-weight:bold">::</span>CreateDeviceInfo());
-    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>info) {
-      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+<span style="color:#75715e">#endif
+</span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">peerconnection.cc
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>VideoTrackSource {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> Create() {
+    <span style="color:#66d9ef">const</span> size_t kWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">640</span>;
+    <span style="color:#66d9ef">const</span> size_t kHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">480</span>;
+    <span style="color:#66d9ef">const</span> size_t kFps <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer;
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoCaptureModule<span style="color:#f92672">::</span>DeviceInfo<span style="color:#f92672">&gt;</span> info(
+        webrtc<span style="color:#f92672">::</span>VideoCaptureFactory<span style="color:#f92672">::</span>CreateDeviceInfo());
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>info) {
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
     }
-    <span style="color:#458;font-weight:bold">int</span> num_devices <span style="color:#000;font-weight:bold">=</span> info<span style="color:#000;font-weight:bold">-&gt;</span>NumberOfDevices();
-    <span style="color:#000;font-weight:bold">for</span> (<span style="color:#458;font-weight:bold">int</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i <span style="color:#000;font-weight:bold">&lt;</span> num_devices; <span style="color:#000;font-weight:bold">++</span>i) {
-      capturer <span style="color:#000;font-weight:bold">=</span> absl<span style="color:#000;font-weight:bold">::</span>WrapUnique(
-          webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">::</span>Create(kWidth, kHeight, kFps, i));
-      <span style="color:#000;font-weight:bold">if</span> (capturer) {
-        <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">new</span>
-            rtc<span style="color:#000;font-weight:bold">::</span>RefCountedObject<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span>(std<span style="color:#000;font-weight:bold">::</span>move(capturer));
+    <span style="color:#66d9ef">int</span> num_devices <span style="color:#f92672">=</span> info<span style="color:#f92672">-&gt;</span>NumberOfDevices();
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> num_devices; <span style="color:#f92672">++</span>i) {
+      capturer <span style="color:#f92672">=</span> absl<span style="color:#f92672">::</span>WrapUnique(
+          webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">::</span>Create(kWidth, kHeight, kFps, i));
+      <span style="color:#66d9ef">if</span> (capturer) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span>
+            rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(capturer));
       }
     }
 
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
   }
 
-  <span style="color:#000;font-weight:bold">static</span> rtc<span style="color:#000;font-weight:bold">::</span>scoped_refptr<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> CreateDesk()
+  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> CreateDesk()
   {
-    std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk(RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">::</span>Create());
-    <span style="color:#000;font-weight:bold">if</span> (desk) {
-      printf(<span style="color:#d14">&#34;CreateDesk success</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-      <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">new</span> rtc<span style="color:#000;font-weight:bold">::</span>RefCountedObject<span style="color:#000;font-weight:bold">&lt;</span>CapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span>(std<span style="color:#000;font-weight:bold">::</span>move(desk));
+    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>Create());
+    <span style="color:#66d9ef">if</span> (desk) {
+      printf(<span style="color:#e6db74">&#34;CreateDesk success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(desk));
     }
-      printf(<span style="color:#d14">&#34;CreateDesk failed...</span><span style="color:#d14">\n</span><span style="color:#d14">&#34;</span>);
-    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nullptr</span>;
+      printf(<span style="color:#e6db74">&#34;CreateDesk failed...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
   }
 
- <span style="color:#000;font-weight:bold">protected</span><span style="color:#000;font-weight:bold">:</span>
-  <span style="color:#000;font-weight:bold">explicit</span> CapturerTrackSource(
-      std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer)
-      <span style="color:#000;font-weight:bold">:</span> VideoTrackSource(<span style="color:#998;font-style:italic">/*remote=*/</span><span style="color:#0086b3">false</span>), capturer_(std<span style="color:#000;font-weight:bold">::</span>move(capturer)) {}
-  <span style="color:#000;font-weight:bold">explicit</span> <span style="color:#900;font-weight:bold">CapturerTrackSource</span>(
-      std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk)
-      <span style="color:#000;font-weight:bold">:</span> VideoTrackSource(<span style="color:#998;font-style:italic">/*remote=*/</span><span style="color:#0086b3">false</span>), desk_(std<span style="color:#000;font-weight:bold">::</span>move(desk)) {}
- <span style="color:#000;font-weight:bold">private</span><span style="color:#000;font-weight:bold">:</span>
-  rtc<span style="color:#000;font-weight:bold">::</span>VideoSourceInterface<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>VideoFrame<span style="color:#000;font-weight:bold">&gt;*</span> source() <span style="color:#000;font-weight:bold">override</span> {
-    <span style="color:#000;font-weight:bold">return</span> desk_.get();
-    <span style="color:#998;font-style:italic">// return capturer_.get();
-</span><span style="color:#998;font-style:italic"></span>  }
-  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>webrtc<span style="color:#000;font-weight:bold">::</span>test<span style="color:#000;font-weight:bold">::</span>VcmCapturer<span style="color:#000;font-weight:bold">&gt;</span> capturer_;
-  std<span style="color:#000;font-weight:bold">::</span>unique_ptr<span style="color:#000;font-weight:bold">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#000;font-weight:bold">&gt;</span> desk_;
+ <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">explicit</span> CapturerTrackSource(
+      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer)
+      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), capturer_(std<span style="color:#f92672">::</span>move(capturer)) {}
+  <span style="color:#66d9ef">explicit</span> <span style="color:#a6e22e">CapturerTrackSource</span>(
+      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk)
+      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), desk_(std<span style="color:#f92672">::</span>move(desk)) {}
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;*</span> source() <span style="color:#66d9ef">override</span> {
+    <span style="color:#66d9ef">return</span> desk_.get();
+    <span style="color:#75715e">// return capturer_.get();
+</span><span style="color:#75715e"></span>  }
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer_;
+  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk_;
 };
-</code></pre></td></tr></table>
-</div>
-</div><p>参考： <a href="https://blog.csdn.net/weixin_29405665/article/details/107320004">https://blog.csdn.net/weixin_29405665/article/details/107320004</a></p>
+</code></pre></div><p>参考： <a href="https://blog.csdn.net/weixin_29405665/article/details/107320004">https://blog.csdn.net/weixin_29405665/article/details/107320004</a></p>
 
 
             <h4 align="center">--完--</h4>

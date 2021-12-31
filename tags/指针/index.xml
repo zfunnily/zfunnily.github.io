@@ -76,7 +76,7 @@
       <pubDate>Fri, 13 Nov 2020 16:40:42 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
-      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;quot;event.h&amp;quot; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;quot;timer wakeup\n&amp;quot;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
+      <description>使用libevent库作为例子 下载 &amp;amp; 编译 &amp;amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;amp;&amp;amp; mkdir build &amp;amp;&amp;amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &amp;#34;event.h&amp;#34; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&amp;#34;timer wakeup\n&amp;#34;); event_add(&amp;amp;ev, &amp;amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;</description>
     </item>
     
     <item>

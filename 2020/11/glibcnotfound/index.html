@@ -211,7 +211,7 @@
             <h2 id="version-glibc_227-not-found错误">version `GLIBC_2.27’ not found错误</h2>
 <p>执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_
 结果显示如下：</p>
-<pre><code>GLIBC_2.2.5
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">GLIBC_2.2.5
 GLIBC_2.2.6
 GLIBC_2.3
 GLIBC_2.3.2
@@ -236,46 +236,29 @@ GLIBC_2.22
 GLIBC_2.23
 GLIBC_2.24
 GLIBC_PRIVATE
-</code></pre><p>去清华开源站点下载glibc： <a href="https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/">https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/</a><br> 下载好文件后解压</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ tar -zxvf glibc-2.27.tar.gz
-</code></pre></td></tr></table>
-</div>
-</div><p>进入 glibc-2.27 目录,创建 build 目录</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#0086b3">cd</span> glibc-2.27 <span style="color:#000;font-weight:bold">&amp;&amp;</span> mkdir build
-$ ../configure --prefix<span style="color:#000;font-weight:bold">=</span>/opt/glibc-2.27
-$ make <span style="color:#000;font-weight:bold">&amp;&amp;</span>  make install
+</code></pre></div><p>去清华开源站点下载glibc： <a href="https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/">https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/</a><br> 下载好文件后解压</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ tar -zxvf glibc-2.27.tar.gz
+</code></pre></div><p>进入 glibc-2.27 目录,创建 build 目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd glibc-2.27 <span style="color:#f92672">&amp;&amp;</span> mkdir build
+$ ../configure --prefix<span style="color:#f92672">=</span>/opt/glibc-2.27
+$ make <span style="color:#f92672">&amp;&amp;</span>  make install
 
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="安装错误">安装错误</h2>
+</code></pre></div><h2 id="安装错误">安装错误</h2>
 <h3 id="错误1">错误1</h3>
 <p>configure过程中报错：</p>
-<pre><code>These critical programs are missing or too old: gawk  bison
-</code></pre><p>安装 <code>gawk bison</code></p>
-<pre><code>$ sudo apt-get install gawk bison
-</code></pre><h3 id="错误2">错误2</h3>
-<pre><code>checking LD_LIBRARY_PATH variable... contains current directory  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">These critical programs are missing or too old: gawk  bison
+</code></pre></div><p>安装 <code>gawk bison</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install gawk bison
+</code></pre></div><h3 id="错误2">错误2</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">checking LD_LIBRARY_PATH variable... contains current directory  
 configure: error:  LD_LIBRARY_PATH shouldn t contain the current directory when  
 building glibc.
 Please change the environment variable and run configure again.
-</code></pre><p>这是因为<code>LD_LIBRARY_PATH</code>不能以终结符作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下<code>LD_LIBRARY_PATH</code>即可</p>
-<pre><code>$ echo $LD_LIBRARY_PATH
-</code></pre><p>把变量中的多余的 <code>：</code>去掉再重新赋值给<code>LD_LIBRARY_PATH</code>即可</p>
-<pre><code>$ export LD_LIBRARY_PATH=
-</code></pre>
+</code></pre></div><p>这是因为<code>LD_LIBRARY_PATH</code>不能以终结符作为开始和最后一个字符，不能有2个终结符连在一起，所以修改下<code>LD_LIBRARY_PATH</code>即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ echo $LD_LIBRARY_PATH
+</code></pre></div><p>把变量中的多余的 <code>：</code>去掉再重新赋值给<code>LD_LIBRARY_PATH</code>即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export LD_LIBRARY_PATH=
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

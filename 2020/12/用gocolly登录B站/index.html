@@ -211,25 +211,25 @@
             <h2 id="a-id_2a概述"><a id="_2"></a>概述</h2>
 <p>gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录，<br> 目标已经确立，开始行动。</p>
 <h3 id="a-id_6a下载"><a id="_6"></a>下载</h3>
-<pre><code>go get -u github.com/gocolly/colly
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">go get -u github.com/gocolly/colly
 
-</code></pre><h3 id="a-idcookie_10a获取cookie"><a id="cookie_10"></a>获取cookie</h3>
+</code></pre></div><h3 id="a-idcookie_10a获取cookie"><a id="cookie_10"></a>获取cookie</h3>
 <p>登录网站：https://www.bilibili.com/<br> 获取cookie：</p>
 <ul>
 <li>google浏览器访问<code>bilibili</code>- 按F12- 查看<code>NetWork</code>选项- 点击<code>Doc</code>- 查看 cookie信息</li>
 </ul>
 <h2 id="a-idcolly_19acolly爬虫代码流程"><a id="colly_19"></a>colly爬虫代码流程</h2>
 <p>初始化一个<code>Collector</code>收集器</p>
-<pre><code>c := colly.NewCollector(
-		colly.AllowedDomains(&quot;www.bilibili.com&quot;),
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">c := colly.NewCollector(
+		colly.AllowedDomains(&#34;www.bilibili.com&#34;),
 		colly.AllowURLRevisit(),
-		colly.UserAgent(&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36&quot;))
+		colly.UserAgent(&#34;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36&#34;))
 
-</code></pre><p>爬取网站的规则设置：</p>
-<pre><code>err := c.Limit(&amp;colly.LimitRule{
+</code></pre></div><p>爬取网站的规则设置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">err := c.Limit(&amp;colly.LimitRule{
 		// Filter domains affected by this rule
 		// 筛选受此规则影响的域
-		DomainGlob: &quot;bilibili.com/*&quot;,
+		DomainGlob: &#34;bilibili.com/*&#34;,
 		// Set a delay between requests to these domains
 		// 设置对这些域的请求之间的延迟
 		Delay: 1 * time.Second,
@@ -240,125 +240,125 @@
 		Parallelism: 5,
 	})
 
-</code></pre><p>开始爬取</p>
-<pre><code>err = c.Visit(url)
+</code></pre></div><p>开始爬取</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">err = c.Visit(url)
 c.Wait()
 
-</code></pre><p>代码示例</p>
-<pre><code>package main
+</code></pre></div><p>代码示例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;fmt&quot;
-	&quot;github.com/gocolly/colly&quot;
-	&quot;net/http&quot;
-	&quot;os&quot;
-	&quot;strings&quot;
-	&quot;time&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/gocolly/colly&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
 )
-/*
-请求执行之前调用
-	- OnRequest
-响应返回之后调用
-	- OnResponse
-监听执行 selector
-	- OnHTML
-监听执行 selector
-	- OnXML
-错误回调
-	- OnError
-完成抓取后执行，完成所有工作后执行
-	- OnScraped
-取消监听，参数为 selector 字符串
-	- OnHTMLDetach
-取消监听，参数为 selector 字符串
-	- OnXMLDetach
-*/
-// set cookies raw
-func setCookieRaw(cookieRaw string) []*http.Cookie {
-	// 可以添加多个cookie
-	var cookies []*http.Cookie
-	cookieList := strings.Split(cookieRaw, &quot;; &quot;)
-	for _, item := range cookieList {
-		keyValue := strings.Split(item, &quot;=&quot;)
-		// fmt.Println(keyValue)
-		name := keyValue[0]
-		valueList := keyValue[1:]
-		cookieItem := http.Cookie{
-			Name:  name,
-			Value: strings.Join(valueList, &quot;=&quot;),
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">请求执行之前调用
+</span><span style="color:#75715e">	- OnRequest
+</span><span style="color:#75715e">响应返回之后调用
+</span><span style="color:#75715e">	- OnResponse
+</span><span style="color:#75715e">监听执行 selector
+</span><span style="color:#75715e">	- OnHTML
+</span><span style="color:#75715e">监听执行 selector
+</span><span style="color:#75715e">	- OnXML
+</span><span style="color:#75715e">错误回调
+</span><span style="color:#75715e">	- OnError
+</span><span style="color:#75715e">完成抓取后执行，完成所有工作后执行
+</span><span style="color:#75715e">	- OnScraped
+</span><span style="color:#75715e">取消监听，参数为 selector 字符串
+</span><span style="color:#75715e">	- OnHTMLDetach
+</span><span style="color:#75715e">取消监听，参数为 selector 字符串
+</span><span style="color:#75715e">	- OnXMLDetach
+</span><span style="color:#75715e">*/</span>
+<span style="color:#75715e">// set cookies raw
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">setCookieRaw</span>(<span style="color:#a6e22e">cookieRaw</span> <span style="color:#66d9ef">string</span>) []<span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Cookie</span> {
+	<span style="color:#75715e">// 可以添加多个cookie
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cookies</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Cookie</span>
+	<span style="color:#a6e22e">cookieList</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">cookieRaw</span>, <span style="color:#e6db74">&#34;; &#34;</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">cookieList</span> {
+		<span style="color:#a6e22e">keyValue</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">item</span>, <span style="color:#e6db74">&#34;=&#34;</span>)
+		<span style="color:#75715e">// fmt.Println(keyValue)
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">keyValue</span>[<span style="color:#ae81ff">0</span>]
+		<span style="color:#a6e22e">valueList</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">keyValue</span>[<span style="color:#ae81ff">1</span>:]
+		<span style="color:#a6e22e">cookieItem</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Cookie</span>{
+			<span style="color:#a6e22e">Name</span>:  <span style="color:#a6e22e">name</span>,
+			<span style="color:#a6e22e">Value</span>: <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">valueList</span>, <span style="color:#e6db74">&#34;=&#34;</span>),
 		}
-		cookies = append(cookies, &amp;cookieItem)
+		<span style="color:#a6e22e">cookies</span> = append(<span style="color:#a6e22e">cookies</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">cookieItem</span>)
 	}
-	return cookies
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cookies</span>
 }
 
-func main() {
-	c := colly.NewCollector(
-		colly.AllowedDomains(&quot;www.bilibili.com&quot;),
-		colly.AllowURLRevisit(),
-		colly.UserAgent(&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36&quot;))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">NewCollector</span>(
+		<span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">AllowedDomains</span>(<span style="color:#e6db74">&#34;www.bilibili.com&#34;</span>),
+		<span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">AllowURLRevisit</span>(),
+		<span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">UserAgent</span>(<span style="color:#e6db74">&#34;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36&#34;</span>))
 
-	err := c.Limit(&amp;colly.LimitRule{
-		// Filter domains affected by this rule
-		// 筛选受此规则影响的域
-		DomainGlob: &quot;bilibili.com/*&quot;,
-		// Set a delay between requests to these domains
-		// 设置对这些域的请求之间的延迟
-		Delay: 1 * time.Second,
-		// Add an additional random delay
-		// 添加额外的随机延迟
-		RandomDelay: 1 * time.Second,
-		// 设置并发
-		Parallelism: 5,
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Limit</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">LimitRule</span>{
+		<span style="color:#75715e">// Filter domains affected by this rule
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 筛选受此规则影响的域
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">DomainGlob</span>: <span style="color:#e6db74">&#34;bilibili.com/*&#34;</span>,
+		<span style="color:#75715e">// Set a delay between requests to these domains
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 设置对这些域的请求之间的延迟
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">Delay</span>: <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+		<span style="color:#75715e">// Add an additional random delay
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// 添加额外的随机延迟
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">RandomDelay</span>: <span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+		<span style="color:#75715e">// 设置并发
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">Parallelism</span>: <span style="color:#ae81ff">5</span>,
 	})
-	if err != nil {
-		fmt.Println(&quot;fad:&quot;, err)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;fad:&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
 
-	header := map[string]string{
-		&quot;Accept&quot;:     &quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;,
-		&quot;Connection&quot;: &quot;keep-alive&quot;,
-		&quot;Host&quot;:       &quot;https://www.bilibili.com/&quot;,
-		&quot;User-Agent&quot;: &quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36&quot;,
+	<span style="color:#a6e22e">header</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+		<span style="color:#e6db74">&#34;Accept&#34;</span>:     <span style="color:#e6db74">&#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;</span>,
+		<span style="color:#e6db74">&#34;Connection&#34;</span>: <span style="color:#e6db74">&#34;keep-alive&#34;</span>,
+		<span style="color:#e6db74">&#34;Host&#34;</span>:       <span style="color:#e6db74">&#34;https://www.bilibili.com/&#34;</span>,
+		<span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36&#34;</span>,
 	}
-	url := &quot;https://www.bilibili.com/&quot;
+	<span style="color:#a6e22e">url</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;https://www.bilibili.com/&#34;</span>
 
-	// 在提出请求之前打印 &quot;访问…&quot;
-	c.OnRequest(func(r *colly.Request) {
-		for key, value := range header {
-			r.Headers.Add(key, value)
+	<span style="color:#75715e">// 在提出请求之前打印 &#34;访问…&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">OnRequest</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">Request</span>) {
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">header</span> {
+			<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Headers</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>)
 		}
-		fmt.Println(&quot;url: &quot;, r.URL.String())
-		cookie := &quot;xxx&quot;
-		err := c.SetCookies(url, setCookieRaw(cookie))
-		if err != nil {
-			fmt.Println(&quot;fad:&quot;, err)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;url: &#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">String</span>())
+		<span style="color:#a6e22e">cookie</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;xxx&#34;</span>
+		<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">SetCookies</span>(<span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">setCookieRaw</span>(<span style="color:#a6e22e">cookie</span>))
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;fad:&#34;</span>, <span style="color:#a6e22e">err</span>)
 		}
 	})
-	c.OnHTML(&quot;a[href]&quot;, func(e *colly.HTMLElement) {
-		target := e.Attr(&quot;target&quot;)
-		name := e.ChildText(&quot;span&quot;)
-		if len(name) &gt; 0 {
-			fmt.Println(&quot;name: &quot;, name)
-			if target == &quot;_blank&quot; &amp;&amp; name == &quot;动态&quot;{
-				link := e.Attr(&quot;href&quot;)
-				fmt.Println(&quot;link: &quot;, link)
+	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">OnHTML</span>(<span style="color:#e6db74">&#34;a[href]&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">colly</span>.<span style="color:#a6e22e">HTMLElement</span>) {
+		<span style="color:#a6e22e">target</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Attr</span>(<span style="color:#e6db74">&#34;target&#34;</span>)
+		<span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">ChildText</span>(<span style="color:#e6db74">&#34;span&#34;</span>)
+		<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">name</span>) &gt; <span style="color:#ae81ff">0</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;name: &#34;</span>, <span style="color:#a6e22e">name</span>)
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">target</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;动态&#34;</span>{
+				<span style="color:#a6e22e">link</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Attr</span>(<span style="color:#e6db74">&#34;href&#34;</span>)
+				<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;link: &#34;</span>, <span style="color:#a6e22e">link</span>)
 			}
 		}
 	})
-	err = c.Visit(url)
-	if err != nil {
-		fmt.Errorf(&quot;fffffff %s\n&quot;, err.Error())
-		os.Exit(-1)
+	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Visit</span>(<span style="color:#a6e22e">url</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;fffffff %s\n&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
 	}
-	c.Wait()
+	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Wait</span>()
 
-	fmt.Println(&quot;程序结束&quot;)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;程序结束&#34;</span>)
 
 }
 
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

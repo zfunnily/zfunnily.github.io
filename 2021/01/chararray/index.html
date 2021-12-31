@@ -206,12 +206,12 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>最近在看redis的源码，刚开始看sds，看到这块代码</p>
-<pre><code>struct __attribute__ ((__packed__)) sdshdr5 {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">struct __attribute__ ((__packed__)) sdshdr5 {
     unsigned char flags; /* 3 lsb of type, and 5 msb of string length */
     char buf[];
 };
 
-</code></pre><p>好奇为什么使用 <code>char buf[]</code>,而不用<code>char *buf</code>，找到答案记录一下。</p>
+</code></pre></div><p>好奇为什么使用 <code>char buf[]</code>,而不用<code>char *buf</code>，找到答案记录一下。</p>
 <h2 id="struct中的char和char数组有什么区别">struct中的char*和char数组有什么区别</h2>
 <p>常用来构成缓冲区。比起指针，用空数组有这样的优势：</p>
 <ul>
@@ -227,7 +227,7 @@
 <p>结构体中最后一个成员为<code>[1]</code>长度数组的用法：与长度为<code>[0]</code>数组的用法相同，改写为<code>[1]</code>是出于可移植性的考虑。有些编译器不支持<code>[0]</code>数组，可将其改成<code>[]</code>或<code>[1]</code>.一般使用<code>char []</code>.</p>
 </blockquote>
 <h2 id="代码示例">代码示例：</h2>
-<pre><code>#include &lt;stdlib.h&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 
 struct __attribute__ ((__packed__)) t_char1
@@ -249,21 +249,21 @@ int main()
     char *b = &amp;a;
     t_char1 c;
     t_char2 d;
-    printf(&quot;char: %d, char*: %d, char[]: %d\n&quot;, sizeof(a), sizeof(b), sizeof(a1));
-    printf(&quot;t_char1: %d, c.a: %p, c.b: %p\n&quot;,  sizeof(c), &amp;c.a, c.b);
-    printf(&quot;t_char2: %d, d.a: %p, d.b: %p\n&quot;,  sizeof(d), &amp;d.a, d.b);
+    printf(&#34;char: %d, char*: %d, char[]: %d\n&#34;, sizeof(a), sizeof(b), sizeof(a1));
+    printf(&#34;t_char1: %d, c.a: %p, c.b: %p\n&#34;,  sizeof(c), &amp;c.a, c.b);
+    printf(&#34;t_char2: %d, d.a: %p, d.b: %p\n&#34;,  sizeof(d), &amp;d.a, d.b);
 }
-</code></pre><blockquote>
+</code></pre></div><blockquote>
 <p><code>__attribute__ ((__packed__))</code>的作用是为了取消内存对齐。</p>
 </blockquote>
 <p>编译输出</p>
-<pre><code>$ g++ -o test main.cc -std=c++11
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -o test main.cc -std=c++11
 $ ./test
 
 char: 1, char*: 8, char[]: 0
 t_char1: 1, c.a: 0x7ffd906865b6, c.b: 0x7ffd906865b7
 t_char2: 9, d.a: 0x7ffd906865a0, d.b: 0xa000000000004006
-</code></pre><p>总结：</p>
+</code></pre></div><p>总结：</p>
 <ul>
 <li><code>struct t_char1</code>中空数组没有分配内存，sizeof©-sizeof(a) = 1-1=0; <code>struct t_char2</code>中指针的内存占用了八字节 。</li>
 <li>通过观察得到，在<code>struct t_char1</code>中, 空数组虽然不占用内存，但是可以获取结构体尾部的地址。</li>

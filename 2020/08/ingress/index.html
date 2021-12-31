@@ -205,7 +205,7 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。<br> 结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefulset示例：</p>
-<pre><code>apiVersion: v1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: Service
 metadata:
   name: nginx
@@ -224,7 +224,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &quot;www-data-pv&quot;
+  name: &#34;www-data-pv&#34;
   labels:
     name: www-data-pv
     release: stable
@@ -261,7 +261,7 @@ kind: StatefulSet
 metadata:
   name: web
 spec:
-  serviceName: &quot;nginx&quot;
+  serviceName: &#34;nginx&#34;
   replicas: 2
   selector:
     matchLabels:
@@ -285,9 +285,9 @@ spec:
           persistentVolumeClaim:
             claimName:  www-data-pvc
 
-</code></pre><h2 id="a-idingress_86aingress"><a id="Ingress_86"></a>Ingress</h2>
+</code></pre></div><h2 id="a-idingress_86aingress"><a id="Ingress_86"></a>Ingress</h2>
 <p>我们知道前面我们使用 NodePort 和 LoadBlancer 类型的 Service 可以实现把应用暴露给外部用户使用，除此之外，Kubernetes 还为我们提供了一个非常重要的资源对象可以用来暴露服务给外部用户，那就是 ingress。<br> 创建一个 ingress 对象：(ingress.yaml)</p>
-<pre><code># Ingress 配置
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Ingress 配置
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -305,17 +305,17 @@ spec:
               servicePort: 80
             path: /
 
-</code></pre><p>然后为 traefik dashboard 创建对应的 ingress 对象：</p>
-<pre><code>$ kubectl create -f ingress.yaml
+</code></pre></div><p>然后为 traefik dashboard 创建对应的 ingress 对象：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl create -f ingress.yaml
 
-</code></pre><p>可以查看ingress是否创建成功</p>
-<pre><code>kubectl describe ingress web-cluster-external
+</code></pre></div><p>可以查看ingress是否创建成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl describe ingress web-cluster-external
 
-</code></pre><p>要注意上面的 ingress 对象的规则，特别是 rules 区域，我们这里是要为 ngin 建立一个 ingress 对象，所以这里的 serviceName 对应的是上面我们创建的 web-cluster-external<br> ，端口也要注意对应 80端口，为了避免端口更改，这里的 servicePort 的值也可以替换成上面定义的 port 的名字： web<br> ``<br> 创建完成后，我们应该怎么来测试呢？</p>
+</code></pre></div><p>要注意上面的 ingress 对象的规则，特别是 rules 区域，我们这里是要为 ngin 建立一个 ingress 对象，所以这里的 serviceName 对应的是上面我们创建的 web-cluster-external<br> ，端口也要注意对应 80端口，为了避免端口更改，这里的 servicePort 的值也可以替换成上面定义的 port 的名字： web<br> ``<br> 创建完成后，我们应该怎么来测试呢？</p>
 <ul>
 <li>第一步，在本地的**/etc/hosts**里面添加上 nginx.com<br> 与 节点外网 IP 的映射关系- 第二步，在浏览器中访问：nginx.com 我们会发现并没有得到我们期望的 inde.html界面，这是因为我们上面statefulset 部署 nginx 的时候没有外放NodePort端口。需要配置。ClusterIP都是集群内部访问的。需要我们建立一个名为service对象node.yaml</li>
 </ul>
-<pre><code># cluster ip
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># cluster ip
 apiVersion: v1
 kind: Service
 metadata:
@@ -332,9 +332,9 @@ spec:
       targetPort: 80
       nodePort: 32002 #增加
   type: NodePort
-</code></pre><p>创建service对象</p>
-<pre><code>kubectl  apply node.yaml
-</code></pre><p>这样就可以通过节点 ip:32002来访问nginx或者是通过域名来访问啦</p>
+</code></pre></div><p>创建service对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl  apply node.yaml
+</code></pre></div><p>这样就可以通过节点 ip:32002来访问nginx或者是通过域名来访问啦</p>
 
 
             <h4 align="center">--完--</h4>

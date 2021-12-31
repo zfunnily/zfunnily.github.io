@@ -233,25 +233,25 @@
 <p>项目中有个用到http请求,我用shell脚本+curl简单实现了一下.但是我想用一个我不熟悉的语言来做该功能, 在网上搜索到可以通过lua来实现我的需求… 于是我找到了OpenResty框架 . lua发送http请求一般有两种方式, 使用 socket.http 或者 resty.http</p>
 <h2 id="环境安装-openresty">环境＆安装 OpenResty</h2>
 <p>参考:https://openresty.org/cn/linux-packages.html<br> 环境：Ubuntu<br> 安装</p>
-<pre><code>$ sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
-$ echo  &quot;deb http://openresty.org/package/ubuntu $(lsb_release -sc) main&quot;  | sudo tee /etc/apt/sources.list.d/openresty.list
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
+$ echo  &#34;deb http://openresty.org/package/ubuntu $(lsb_release -sc) main&#34;  | sudo tee /etc/apt/sources.list.d/openresty.list
 $ sudo apt-get update
 $ sudo apt-get -y install openresty
 
-</code></pre><p>设置环境变量</p>
-<pre><code>$ sudo vim ~/.bashrc
+</code></pre></div><p>设置环境变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo vim ~/.bashrc
 /usr/local/openresty/nginx/sbin/
 
 $ source ~/.bashrc
 
-</code></pre><h2 id="开始第一个程序">开始第一个程序</h2>
+</code></pre></div><h2 id="开始第一个程序">开始第一个程序</h2>
 <p>创建项目目录</p>
-<pre><code>mkdir ~/openrestry
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mkdir ~/openrestry
 cd ~/openrestry
 mkdir logs/ conf/
 
-</code></pre><p>写配置文件</p>
-<pre><code>worker_processes  1;
+</code></pre></div><p>写配置文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
 error_log logs/error.log;
 events {
    worker_connections 1024;
@@ -262,22 +262,22 @@ http {
          location / {
             default_type text/html;
             content_by_lua_block {
-            ngx.say(&quot;&lt;p&gt;hello, world&lt;/p&gt;&quot;)
+            ngx.say(&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;)
          }
       }
    }
 }
 
-</code></pre><p>启动</p>
-<pre><code>nginx -p `pwd`/ -c conf/nginx.conf
+</code></pre></div><p>启动</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">nginx <span style="color:#f92672">-</span>p <span style="color:#f92672">`</span>pwd<span style="color:#f92672">`/</span> <span style="color:#f92672">-</span>c conf<span style="color:#f92672">/</span>nginx.conf
 
-</code></pre><p>验证是否成功</p>
-<pre><code>curl http://localhost:8080/
+</code></pre></div><p>验证是否成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080/
 
-</code></pre><p>返回结果<code>&lt;p&gt;hello, world &lt;/p&gt;</code></p>
+</code></pre></div><p>返回结果<code>&lt;p&gt;hello, world &lt;/p&gt;</code></p>
 <h2 id="openresty使用lua脚本写http-请求">OpenResty使用lua脚本写http 请求</h2>
 <p>lua脚本可以写在 conf/nginx.conf 配置文件的 localtion 中.也可以写在单独的 lua 脚本文件中.需加上配置参数 <code>content_by_lua_file</code></p>
-<pre><code> worker_processes  1;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> worker_processes  1;
 error_log logs/error.log;
 events {
     worker_connections 1024;
@@ -292,73 +292,73 @@ http {
     }
 }
 
-</code></pre><h3 id="get请求">Get请求</h3>
+</code></pre></div><h3 id="get请求">Get请求</h3>
 <p>hello.lua脚本</p>
-<pre><code>//hello.lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
 
-local http = require('resty.http')
+local http = require(&#39;resty.http&#39;)
 local httpc = http.new()
-local res, err = httpc:request_uri('http://localhost/hello', {
+local res, err = httpc:request_uri(&#39;http://localhost/hello&#39;, {
     keepalive_timeout = 2000 -- 毫秒
 })
 
 if not res or res.status then
-    ngx.log(ngx.ERR, &quot;request error#&quot;, err)
+    ngx.log(ngx.ERR, &#34;request error#&#34;, err)
     return
 end
 
-ngx.log(ngx.ERR, &quot;request status#&quot;, res.status)
+ngx.log(ngx.ERR, &#34;request status#&#34;, res.status)
 ngx.say(res.body)
 
-</code></pre><h3 id="post请求">Post请求</h3>
+</code></pre></div><h3 id="post请求">Post请求</h3>
 <p>hello.lua脚本</p>
-<pre><code>//hello.lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
 
-local http = require &quot;resty.http&quot;
+local http = require &#34;resty.http&#34;
 local httpc = http.new()
-local res, err = httpc:request_uri(&quot;http://localhost/hello&quot;, {
-    method = &quot;POST&quot;,
-    body = &quot;a=1&amp;b=2&quot;,
+local res, err = httpc:request_uri(&#34;http://localhost/hello&#34;, {
+    method = &#34;POST&#34;,
+    body = &#34;a=1&amp;b=2&#34;,
     headers = {
-        [&quot;Content-Type&quot;] = &quot;application/x-www-form-urlencoded&quot;,
+        [&#34;Content-Type&#34;] = &#34;application/x-www-form-urlencoded&#34;,
     },
     keepalive_timeout = 60,
     keepalive_pool = 10
 })
 
 if not res or res.status then
-    ngx.log(ngx.ERR, &quot;request error#&quot;, err)
+    ngx.log(ngx.ERR, &#34;request error#&#34;, err)
     return
 end
 
-ngx.log(ngx.ERR, &quot;request status#&quot;, res.status)
+ngx.log(ngx.ERR, &#34;request status#&#34;, res.status)
 ngx.say(res.body)
 
-</code></pre><h3 id="重启nginx">重启nginx</h3>
-<pre><code>nginx -p `pwd`/ -s reload
+</code></pre></div><h3 id="重启nginx">重启nginx</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">nginx <span style="color:#f92672">-</span>p <span style="color:#f92672">`</span>pwd<span style="color:#f92672">`/</span> <span style="color:#f92672">-</span>s reload
 
-</code></pre><h3 id="验证">验证</h3>
-<pre><code>curl http://localhost:8080
+</code></pre></div><h3 id="验证">验证</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080
 
-</code></pre><h2 id="常用方法">常用方法</h2>
+</code></pre></div><h2 id="常用方法">常用方法</h2>
 <p>创建<code>HTTP</code>请求对象，失败返回<code>nil</code>和错误信息。</p>
-<pre><code>httpc = http.new()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc = http.new()
 
-</code></pre><p>发送请求，填入请求链接和参数。</p>
-<pre><code>res, err = httpc:request_uri(uri, params)
+</code></pre></div><p>发送请求，填入请求链接和参数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">res, err = httpc:request_uri(uri, params)
 
-</code></pre><p>设置请求超时时间，单位：毫秒。</p>
-<pre><code>httpc:set_timeout(time)
+</code></pre></div><p>设置请求超时时间，单位：毫秒。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc:set_timeout(time)
 
-</code></pre><h2 id="遇到的问题">遇到的问题</h2>
+</code></pre></div><h2 id="遇到的问题">遇到的问题</h2>
 <h3 id="openresty返回中文乱码问题">OpenResty返回中文乱码问题</h3>
 <h4 id="描述">描述</h4>
 <p>接口中使用<code>ngx.say(json.encode)</code>编码<code>json</code>字符串，返回中文乱码。</p>
-<pre><code>{&quot;msg&quot;:&quot;è¯·æ±‚æˆåŠŸ&quot;,&quot;code&quot;:0}｀
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&#34;msg&#34;:&#34;è¯·æ±‚æˆåŠŸ&#34;,&#34;code&#34;:0}｀
 
-</code></pre><h4 id="解决">解决</h4>
+</code></pre></div><h4 id="解决">解决</h4>
 <p>设置<code>Content-Type</code>时加上<code>charset=utf8</code>。</p>
-<pre><code>server {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
     listen       8080;
     server_name  localhost;
     default_type  text/html;
@@ -366,10 +366,10 @@ ngx.say(res.body)
     ...
 }
 
-</code></pre><p>也可以在<code>header_filter</code>阶段赋值<code>header</code>。</p>
-<pre><code>ngx.header.content_type=&quot;application/json;charset=utf8&quot;
+</code></pre></div><p>也可以在<code>header_filter</code>阶段赋值<code>header</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.header.content_type=&#34;application/json;charset=utf8&#34;
 
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>

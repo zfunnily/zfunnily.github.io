@@ -237,13 +237,13 @@ x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不�
 <li>ubuntu16.04 或 ubuntu18.04- vscode- dosbox- 文件后缀：.asm
 安装dosbox</li>
 </ul>
-<pre><code>sudo apt-get install dosbox
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt-get install dosbox
 
-</code></pre><p>下载<code>vscode</code>插件<code>MASM/TASM</code></p>
+</code></pre></div><p>下载<code>vscode</code>插件<code>MASM/TASM</code></p>
 <h2 id="intel的helloasm">Intel的hello.asm</h2>
-<pre><code>;description
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;description
 DATA SEGMENT USE16
-    MYWORD DB &quot;hello world!!!&quot;
+    MYWORD DB &#34;hello world!!!&#34;
 DATA ENDS
 
 ;description
@@ -261,18 +261,18 @@ CODE ENDS
 
 END main
 
-</code></pre><p>在文件中点击鼠标右键<code>运行程序</code></p>
+</code></pre></div><p>在文件中点击鼠标右键<code>运行程序</code></p>
 <h2 id="a-idatt_63a搭建att的环境"><a id="ATT_63"></a>搭建AT&amp;T的环境</h2>
 <ul>
 <li>ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc
 下载<code>vscode</code>插件<code>GNU Assembler Language Support</code></li>
 </ul>
 <h2 id="a-idatthellos_71aatt的hellos"><a id="ATThellos_71"></a>AT&amp;T的hello.s</h2>
-<pre><code>#hello.s
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#hello.s
  
 .data#数据段声明
  
-msg : .string &quot;Hello, world\n&quot; #要输出的字符串
+msg : .string &#34;Hello, world\n&#34; #要输出的字符串
 len = . - msg       #字串长度
  
 .text               #代码段声明
@@ -291,12 +291,12 @@ main:             #在屏幕上显示一个字符串
     movl $1,%eax        #系统调用号(sys_exit)
     int  $0x80            #调用内核功能
 
-</code></pre><p>编译运行</p>
-<pre><code>$ gcc hello.s -o hello_att
+</code></pre></div><p>编译运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc hello.s -o hello_att
 $ ./hello_att
 
-</code></pre><h2 id="a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构"><a id="objdumpcpu_101"></a>通过objdump查看到的几种cpu架构</h2>
-<pre><code>$ objdump --help
+</code></pre></div><h2 id="a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构"><a id="objdumpcpu_101"></a>通过objdump查看到的几种cpu架构</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ objdump --help
 objdump：支持的体系结构： i386 i386:x86-64 i386:x64-32 i8086 i386:intel i386:x86-64:intel i386:x64-32:intel i386:nacl i386:x86-64:nacl i386:x64-32:nacl iamcu iamcu:intel l1om l1om:intel k1om k1om:intel plugin
 
 下列 i386/x86-64 特定的反汇编器选项在使用 -M 开关时可用（使用逗号分隔多个选项）：
@@ -318,7 +318,7 @@ objdump：支持的体系结构： i386 i386:x86-64 i386:x64-32 i8086 i386:intel
   amd64       Display instruction in AMD64 ISA
   intel64     Display instruction in Intel64 ISA
 
-</code></pre><p>汇编学习地址：http://c.biancheng.net/view/3463.html</p>
+</code></pre></div><p>汇编学习地址：http://c.biancheng.net/view/3463.html</p>
 
 
             <h4 align="center">--完--</h4>
