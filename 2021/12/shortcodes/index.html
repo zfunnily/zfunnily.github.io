@@ -36,6 +36,8 @@
     
     
     
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
 
     
     <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
@@ -150,7 +152,8 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#缘由">缘由</a></li>
-    <li><a href="#shortcodesdetails">shortcodes+details</a></li>
+    <li><a href="#代码显示隐藏">代码显示/隐藏</a></li>
+    <li><a href="#bilibili播放器">bilibili播放器</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -214,7 +217,8 @@
 后面还是在网上发现h5有个新的标签<code>&lt;details&gt;&lt;summary&gt;&lt;/summary&gt;&lt;/details&gt;</code>可以实现显示/隐藏的功能。</p>
 <p>每篇博客是markdown写的，再使用hugo生成出静态的html, 怎么结合到静态博客上呢，咱肯定不会手动的一个一个的贴标签上去，
 hugo有shortcodes的功能结合这个新标签可以满足我的需求</p>
-<h2 id="shortcodesdetails">shortcodes+details</h2>
+<h2 id="代码显示隐藏">代码显示/隐藏</h2>
+<p>使用shortcodes+details标签</p>
 <p>在目录 <code>themes/[themename]/layouts/shortcodes</code>下新建<code>code.html</code>文件，内容如下</p>
 <details  open=""  >
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
@@ -268,6 +272,78 @@ start .....
 &lt;7,11&gt;
 end.....
 </code></pre></details>
+<h2 id="bilibili播放器">bilibili播放器</h2>
+<p>copy的DoIt主题的shortcodes</p>
+<p>shortcodes/bilibili.html 文件内容如下</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;bilibili&#34;</span>&gt;
+    {{- if .IsNamedParams -}}
+        &lt;<span style="color:#000080">iframe</span> <span style="color:#008080">src</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;//player.bilibili.com/player.html?bvid={{ .Get `id` }}&amp;page={{ .Get `p` | default 1 }}&#34;</span> <span style="color:#008080">scrolling</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;no&#34;</span> <span style="color:#008080">border</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;0&#34;</span> <span style="color:#008080">frameborder</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;no&#34;</span> <span style="color:#008080">framespacing</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;0&#34;</span> <span style="color:#008080">allowfullscreen</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;true&#34;</span>&gt;&lt;/<span style="color:#000080">iframe</span>&gt;
+    {{- else -}}
+        &lt;<span style="color:#000080">iframe</span> <span style="color:#008080">src</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;//player.bilibili.com/player.html?bvid={{ .Get 0 }}&amp;page={{ .Get 1 | default 1 }}&#34;</span> <span style="color:#008080">scrolling</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;no&#34;</span> <span style="color:#008080">border</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;0&#34;</span> <span style="color:#008080">frameborder</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;no&#34;</span> <span style="color:#008080">framespacing</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;0&#34;</span> <span style="color:#008080">allowfullscreen</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;true&#34;</span>&gt;&lt;/<span style="color:#000080">iframe</span>&gt;
+    {{- end -}}
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>static/css/bilibili.css 文件内容如下</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">bilibili</span> {
+    <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">relative</span>;
+    <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">%</span>;
+    <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">0</span>;
+    <span style="color:#000;font-weight:bold">padding-bottom</span>: <span style="color:#099">75</span><span style="color:#458;font-weight:bold">%</span>;
+    <span style="color:#000;font-weight:bold">margin</span>: <span style="color:#099">3</span><span style="color:#458;font-weight:bold">%</span> <span style="color:#000;font-weight:bold">auto</span>;
+    <span style="color:#000;font-weight:bold">text-align</span>: <span style="color:#000;font-weight:bold">center</span>;
+}
+
+.<span style="color:#458;font-weight:bold">bilibili</span> <span style="color:#000080">iframe</span> {
+    <span style="color:#000;font-weight:bold">position</span>: <span style="color:#000;font-weight:bold">absolute</span>;
+    <span style="color:#000;font-weight:bold">width</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">%</span>;
+    <span style="color:#000;font-weight:bold">height</span>: <span style="color:#099">100</span><span style="color:#458;font-weight:bold">%</span>;
+    <span style="color:#000;font-weight:bold">left</span>: <span style="color:#099">0</span>;
+    <span style="color:#000;font-weight:bold">top</span>: <span style="color:#099">0</span>;
+}
+</code></pre></td></tr></table>
+</div>
+</div></details>
+<p>使用方式, <code>{{&lt;&gt;}}</code> 符号可以替换为<code>{{%%}}</code></p>
+<pre><code>{{&lt; bilibili BV1Sx411T7QQ &gt;}}
+Or
+{{&lt; bilibili id=BV1Sx411T7QQ &gt;}}
+</code></pre><div class="bilibili"><iframe src="//player.bilibili.com/player.html?bvid=BV1Sx411T7QQ&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe></div>
 <h2 id="参考">参考</h2>
 <p><a href="https://gohugo.io/templates/shortcode-templates">hugo的shortcodes功能详情参考</a></p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details">detials标签的使用参考</a></p>
