@@ -339,10 +339,19 @@ end.....
 </code></pre></td></tr></table>
 </div>
 </div></details>
-<p>使用方式, <code>{{&lt;&gt;}}</code> 符号可以替换为<code>{{%%}}</code></p>
-<pre><code>{{&lt; bilibili BV1Sx411T7QQ &gt;}}
+<p>引入自定义的bilibili.css, 在config.toml中加入如下参数值</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">customCSS = [<span style="color:#d14">&#39;bilibili.css&#39;</span>]
+</code></pre></td></tr></table>
+</div>
+</div><p>使用方式, <code>{{&lt;&gt;}}</code> 符号可以替换为<code>{{%%}}</code></p>
+<pre><code>{{&lt; bilibili BV1CP4y1H7SB &gt;}}
 Or
-{{&lt; bilibili id=BV1Sx411T7QQ &gt;}}
+{{&lt; bilibili id=BV1CP4y1H7SB &gt;}}
 </code></pre><div class="bilibili"><iframe src="//player.bilibili.com/player.html?bvid=BV1CP4y1H7SB&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe></div>
 <h2 id="参考">参考</h2>
 <p><a href="https://gohugo.io/templates/shortcode-templates">hugo的shortcodes功能详情参考</a></p>
