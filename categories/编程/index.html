@@ -139,6 +139,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/12/astar/">A*算法 | Lua版本</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月23日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a>
+            
+        </div>
+        
+        <div class="post-content">
+            A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quo……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/12/astar/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/12/music/">Blog | 音乐播放器</a>
             </h1>
         </header>
@@ -208,6 +233,81 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/11/webrtcdesk/">Webrtc二 | 共享桌面</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月15日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/11/webrtcdesk/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/">Webrtc一 | peerconnection</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月14日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/11/gop2pfour/">Go-libp2p四 | 穿透NAT</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月7日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            本文目的 上文Go-libp2p三 | relay例子已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事： 交换两个节点的在交换机上的信息，帮助……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/11/gop2pfour/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/11/randomquotes/">Blog | 随机名人名言</a>
             </h1>
         </header>
@@ -228,98 +328,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/four/">Skynet源码赏析四 | 消息调度</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月21日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-        </div>
-        
-        <div class="post-content">
-            服务间消息流转 发送消息 数据结构message_queue *q是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用skynet.send(...), 或者调用skynet.c……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/10/four/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/skynetthree/">Skynet源码赏析三 | 服务启动</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月20日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-        </div>
-        
-        <div class="post-content">
-            skynet启动一个C服务 查看怎么启动C服务的最好的办法是打断点，看源码。 启动logger日志服务 我拿日志服务来举例子，怎么启动日志服务的呢？ 传参数name = &quot;logger&quot;, param = null， struct skynet_context *ctx = skynet_context_new(config-&gt;logservice, config-&gt;logger);; 从module……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetthree/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/skynettwo/">Skynet源码赏析二 | 基础数据结构</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月19日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-        </div>
-        
-        <div class="post-content">
-            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynettwo/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/10/skynetone/">Skynet源码赏析一 | 启动初始化的过程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月19日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-        </div>
-        
-        <div class="post-content">
-            入口文件 skynet_main.c 加载配置 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管……
-            <p class="readmore"><a href="https://zfunnily.github.io/2021/10/skynetone/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -335,6 +343,30 @@
     
     <li >
         <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/4/">4</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/5/">5</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/6/">6</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/7/">7</a>
+    </li>
+    
+    <li >
+        <a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/page/8/">8</a>
     </li>
     
 
@@ -457,13 +489,15 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
+    <li><a href="https://zfunnily.github.io/categories/IT/">IT (10)</a></li>
+    
     <li><a href="https://zfunnily.github.io/categories/IT.Linux/">IT.Linux (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (19)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (76)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -484,6 +518,8 @@
     <li><a href="https://zfunnily.github.io/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     

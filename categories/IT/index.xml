@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IT on Zzz记忆</title>
+    <link>https://zfunnily.github.io/categories/IT/</link>
+    <description>Recent content in IT on Zzz记忆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Sep 2021 10:46:58 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/IT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vim | 切换模式/输入法</title>
+      <link>https://zfunnily.github.io/2021/09/vimchange/</link>
+      <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/09/vimchange/</guid>
+      <description>vim 在退出输入模式的时候切换为原来的输入法 在敲代码的时候使用我们使用的英文，当遇到问题，我们需要搜索引擎的时候需要中文输入法，这个时候，自动切换输入法可以帮助我们节省手动切换输入法的时间。 跟编辑器结合，</description>
+    </item>
+    
+    <item>
+      <title>Linux | Screen</title>
+      <link>https://zfunnily.github.io/2021/09/screen/</link>
+      <pubDate>Tue, 07 Sep 2021 10:02:16 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/09/screen/</guid>
+      <description>screen命令 screen 是一个非常有用的命令。应用场景： 单个 SSH 会话中使用多个 shell 窗口（会话）的能力 服务器开发，一个单独运行进程的窗口。可以避免单独再开一个窗口。 &amp;hellip; screen使用 创建一个窗口 $ screen -S name 执行自己需</description>
+    </item>
+    
+    <item>
+      <title>Centos7.2 | gcc4.8升级为4.9</title>
+      <link>https://zfunnily.github.io/2021/09/upgradegcc/</link>
+      <pubDate>Wed, 01 Sep 2021 18:13:41 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/09/upgradegcc/</guid>
+      <description>环境 CentOS 7.2.1511 Docker 我是用 docker 拉取镜像 CentOS 7.2.1511, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。 $ docker $ yum update &amp;amp;&amp;amp; yum install gcc gcc-c++ make zlib-devel.x86_6 下载依赖包 升级 gcc， 下载安装包下载依赖。 $ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2 $ tar xfv gcc-4.9.3.tar.bz2 &amp;amp;&amp;amp; cd gcc-4.9.3 $ ./contrib/download_prerequisites 如果</description>
+    </item>
+    
+    <item>
+      <title>Shell | Except 使用</title>
+      <link>https://zfunnily.github.io/2021/08/except/</link>
+      <pubDate>Mon, 30 Aug 2021 17:13:33 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/08/except/</guid>
+      <description>Except 参数 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的ech</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu16.04.6 | 安装Cinnamon3.0</title>
+      <link>https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
+      <pubDate>Tue, 01 Dec 2020 15:43:58 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</guid>
+      <description>概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu | version `GLIBC_2.27‘ not found错误</title>
+      <link>https://zfunnily.github.io/2020/11/glibcnotfound/</link>
+      <pubDate>Sat, 28 Nov 2020 15:03:04 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/11/glibcnotfound/</guid>
+      <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录,</description>
+    </item>
+    
+    <item>
+      <title>Vim | vimplus快捷键</title>
+      <link>https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <pubDate>Wed, 28 Oct 2020 09:14:28 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/10/vimplus%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
+      <description>插件相关 |快捷键|说明 |&amp;mdash;&amp;mdash; |,|Leader Key |&amp;lt;leader&amp;gt;n|打开 / 关闭代码资源管理器 |&amp;lt;leader&amp;gt;t|打开 / 关闭函数列表 |&amp;lt;leader&amp;gt;a|.h .cpp 文件切换 |&amp;lt;leader&amp;gt;u|转到函数声明 |&amp;</description>
+    </item>
+    
+    <item>
+      <title>Vim | 打造编C&#43;&#43;IDE</title>
+      <link>https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/</link>
+      <pubDate>Wed, 28 Oct 2020 09:11:32 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/</guid>
+      <description>使用 vimplus 打造C++ IDE GitHub： https://github.com/chxuan/vimplus 支持平台： macos/linux 安装vimplus // 原来的链接， 国内速度较慢 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus // github修改为镜像的链接 $ git clone --depth=1 https://github.com.cnpmjs.org/chxuan/vimplus.git ~/.vimplus $ cd ~/.vimplus //不加sudo $ ./install.sh 设置Nerd Font 为防止vimplu</description>
+    </item>
+    
+    <item>
+      <title>Linux | 删除大量文件指令--rsync</title>
+      <link>https://zfunnily.github.io/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</link>
+      <pubDate>Tue, 13 Oct 2020 16:29:34 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/10/linux%E7%B3%BB%E7%BB%9F%E5%88%A0%E9%99%A4%E5%A4%A7%E9%87%8F%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4-rsync/</guid>
+      <description>rsync的安装 rsync安装，有些系统默认安装有该命令 ubuntu系统 sudo apt-get install rsync centos系统 sudo yum install rsync rsync参数详解 rsync提供了一些跟删除有关的参数 rsync --help | grep delete -del an alias for --delete-during --delete delete extraneous files from destination dirs --delete-before receiver deletes before</description>
+    </item>
+    
+    <item>
+      <title>Linux | nsf服务的搭建和使用</title>
+      <link>https://zfunnily.github.io/2020/08/nsf/</link>
+      <pubDate>Fri, 14 Aug 2020 17:17:54 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/08/nsf/</guid>
+      <description>搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &amp;gt;&amp;gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &amp;gt;&amp;gt; /etc/exports 可以设定的参数主要</description>
+    </item>
+    
+  </channel>
+</rss>
