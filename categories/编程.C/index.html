@@ -93,7 +93,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2021/03/sort/">C/C&#43;&#43; | 八个基础排序</a>
+                <a href="https://zfunnily.github.io/2021/03/sort/">八个基础排序</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -110,6 +110,29 @@
         <div class="post-content">
             sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &lt;algorithm&gt;，它使用的排序方法是类似于……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/03/sort/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/03/atoianditoa/">实现atoi和itoa函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月17日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a>
+            
+        </div>
+        
+        <div class="post-content">
+            题目1： 把字符串转化为整数 有整数字符串，&quot;13579&quot;, 和 &quot;246810&quot;. 请写一个函数把这两个字符串转化为整数 步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &lt;stdio.h&gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/03/atoianditoa/">阅读全文</a></p>
         </div>
     </article>
     
@@ -179,6 +202,98 @@
         <div class="post-content">
             缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*……
             <p class="readmore"><a href="https://zfunnily.github.io/2021/01/chararray/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">CCnet | 单线程reactor演变为多线程</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月30日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a>
+            
+        </div>
+        
+        <div class="post-content">
+            [ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reac……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">CCnet | 一个reactor单线程网络库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月27日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proact……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月25日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a>
+            
+        </div>
+        
+        <div class="post-content">
+            reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2020/09/libeventimer/">Libevent | 定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月16日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a>
+            
+        </div>
+        
+        <div class="post-content">
+            libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函……
+            <p class="readmore"><a href="https://zfunnily.github.io/2020/09/libeventimer/">阅读全文</a></p>
         </div>
     </article>
     
@@ -307,9 +422,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (19)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (4)</a></li>
-    
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C&#43;&#43;/">编程.C&#43;&#43; (5)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     

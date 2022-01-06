@@ -8,12 +8,21 @@
     <language>zh-CN</language>
     <lastBuildDate>Tue, 23 Mar 2021 10:13:31 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>C/C&#43;&#43; | 八个基础排序</title>
+      <title>八个基础排序</title>
       <link>https://zfunnily.github.io/2021/03/sort/</link>
       <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
       
       <guid>https://zfunnily.github.io/2021/03/sort/</guid>
       <description>sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于</description>
+    </item>
+    
+    <item>
+      <title>实现atoi和itoa函数</title>
+      <link>https://zfunnily.github.io/2021/03/atoianditoa/</link>
+      <pubDate>Wed, 17 Mar 2021 16:43:20 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/03/atoianditoa/</guid>
+      <description>题目1： 把字符串转化为整数 有整数字符串，&amp;quot;13579&amp;quot;, 和 &amp;quot;246810&amp;quot;. 请写一个函数把这两个字符串转化为整数 步骤： 先判断正负 遍历字符串，转换字符为整数 //atoi.cc #include &amp;lt;stdio.h&amp;gt; int my_atoi(char *str) { bool bmin = false; int result = 0; //先判断正</description>
     </item>
     
     <item>
@@ -41,6 +50,42 @@
       
       <guid>https://zfunnily.github.io/2021/01/chararray/</guid>
       <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*</description>
+    </item>
+    
+    <item>
+      <title>CCnet | 单线程reactor演变为多线程</title>
+      <link>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>[ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reac</description>
+    </item>
+    
+    <item>
+      <title>CCnet | 一个reactor单线程网络库</title>
+      <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
+      <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</guid>
+      <description>缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proact</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; | vector中的resize()函数 VS reserve()函数</title>
+      <link>https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 25 Dec 2020 11:04:29 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/</guid>
+      <description>reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即</description>
+    </item>
+    
+    <item>
+      <title>Libevent | 定时器</title>
+      <link>https://zfunnily.github.io/2020/09/libeventimer/</link>
+      <pubDate>Wed, 16 Sep 2020 23:20:28 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2020/09/libeventimer/</guid>
+      <description>libevent 实现定时器流程 首先初始化libevent库，并保存返回的指针 struct event_base * base = event_init(); 实际上这一步相当于初始化一个Reactor实例；在初始化libevent后，就可以注册事件了。 初始化事件event，设置回调函</description>
     </item>
     
   </channel>
