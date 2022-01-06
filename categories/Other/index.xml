@@ -26,15 +26,6 @@
     </item>
     
     <item>
-      <title>Blog | 网站暗模式</title>
-      <link>https://zfunnily.github.io/2021/12/dark/</link>
-      <pubDate>Tue, 21 Dec 2021 11:05:00 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/12/dark/</guid>
-      <description>Wordpress 如果你的网站是wordpress，则可以参考以Darkmode.js为基础的插件: blackout-darkmode-widget darkmode Nuxt.js 如果你正在使用Nuxt.js,则可以使用下面的模块 nuxtjs-darkmode-js-module 快速使用 使用Darkmode.js给网站快速部署上暗/浅色</description>
-    </item>
-    
-    <item>
       <title>Blog | 随机名人名言</title>
       <link>https://zfunnily.github.io/2021/11/randomquotes/</link>
       <pubDate>Fri, 05 Nov 2021 15:50:16 +0800</pubDate>

@@ -44,15 +44,6 @@
     </item>
     
     <item>
-      <title>Lua | 调用C/C&#43;&#43;的动态库</title>
-      <link>https://zfunnily.github.io/2021/02/dynamic/</link>
-      <pubDate>Sat, 20 Feb 2021 11:11:51 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/02/dynamic/</guid>
-      <description>概述 最近在学习 云风的skynet库，想自定义一个模块，目标是使用lua调用C/C++所编写的库。 当我们需要在Lua里面调用c/c++函数时，所有的函数都必须满足以下函数签名： typedef int (*lua_CFunction) (lua_State *L); 换句话说，所有的</description>
-    </item>
-    
-    <item>
       <title>Skynet | lua-protobuf</title>
       <link>https://zfunnily.github.io/2021/01/skynetprotobuf/</link>
       <pubDate>Mon, 25 Jan 2021 14:25:07 +0000</pubDate>

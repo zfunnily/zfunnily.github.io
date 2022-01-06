@@ -6,16 +6,7 @@
     <description>Recent content in music on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 21 Dec 2021 16:55:23 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/music/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Blog | 音乐播放器</title>
-      <link>https://zfunnily.github.io/2021/12/music/</link>
-      <pubDate>Tue, 21 Dec 2021 16:55:23 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/12/music/</guid>
-      <description>概述 今天给我的个人博客加了个暗模式，这样可以在晚上阅读博客的时候不伤害眼睛。突然想到如果在阅读博客的时候可以听听音乐就更好了。 于是在github上找到了一个开源的项目MetingJS，看最后一次com</description>
-    </item>
-    
+    <lastBuildDate>Wed, 08 Sep 2021 14:47:14 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/tags/music/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>免费Music</title>
       <link>https://zfunnily.github.io/2021/09/music/</link>

@@ -35,15 +35,6 @@
     </item>
     
     <item>
-      <title>VScode | 调试Redis源码，指针显示的问题</title>
-      <link>https://zfunnily.github.io/2021/01/vscoderedis/</link>
-      <pubDate>Tue, 12 Jan 2021 14:17:22 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/01/vscoderedis/</guid>
-      <description>缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在</description>
-    </item>
-    
-    <item>
       <title>Cgo | 遍历C结构体数组</title>
       <link>https://zfunnily.github.io/2021/01/cgostruct/</link>
       <pubDate>Mon, 11 Jan 2021 17:18:35 +0000</pubDate>

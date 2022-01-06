@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程.C on Zzz记忆</title>
+    <link>https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/</link>
+    <description>Recent content in 编程.C on Zzz记忆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 23 Mar 2021 10:13:31 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C/C&#43;&#43; | 八个基础排序</title>
+      <link>https://zfunnily.github.io/2021/03/sort/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/03/sort/</guid>
+      <description>sort排序 冒泡排序 选择排序 插入排序 快速排序 希尔排序 堆排序 归并排序 sort排序 std::sort( )函数是库函数提供的排序函数，必须包括头文件#include &amp;lt;algorithm&amp;gt;，它使用的排序方法是类似于</description>
+    </item>
+    
+    <item>
+      <title>协程解析二 | 云风的coroutine</title>
+      <link>https://zfunnily.github.io/2021/03/coroutinetwo/</link>
+      <pubDate>Wed, 10 Mar 2021 11:11:47 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/03/coroutinetwo/</guid>
+      <description>概述 云风的coroutine是通过ucontext来控制程序运行时上下文的，我们来根据该库提供的几个接口，和一个demo来解释协程的运行原理。如果不了解ucontext的，建议先了解ucontxt 环境</description>
+    </item>
+    
+    <item>
+      <title>协程解析一 | ucontext</title>
+      <link>https://zfunnily.github.io/2021/03/coroutineone/</link>
+      <pubDate>Tue, 09 Mar 2021 09:43:00 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/03/coroutineone/</guid>
+      <description>概述 最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 uncontext来保存程序运行上</description>
+    </item>
+    
+    <item>
+      <title>struct中使用char[]</title>
+      <link>https://zfunnily.github.io/2021/01/chararray/</link>
+      <pubDate>Tue, 05 Jan 2021 15:45:36 +0000</pubDate>
+      
+      <guid>https://zfunnily.github.io/2021/01/chararray/</guid>
+      <description>缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -35,33 +35,6 @@
     </item>
     
     <item>
-      <title>Skynet | echo服务</title>
-      <link>https://zfunnily.github.io/2021/01/skynetecho/</link>
-      <pubDate>Fri, 15 Jan 2021 16:07:51 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2021/01/skynetecho/</guid>
-      <description>概述 引用云风博客的话：“skynet 是一个为网络游戏服务器设计的轻量框架。但它本身并没有任何为网络游戏业务而特别设计的部分，所以尽可以把它用于其它领域。skynet 并不是一个开箱即用的引擎，使用它需要</description>
-    </item>
-    
-    <item>
-      <title>CCnet | 单线程reactor演变为多线程</title>
-      <link>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
-      <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2020/12/%E5%8D%95%E7%BA%BF%E7%A8%8Breactor%E7%BD%91%E7%BB%9C%E5%BA%93ccnet%E6%BC%94%E5%8F%98%E4%B8%BA%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
-      <description>[ccnet从单线程演变为多线程](#ccnet_2)- [单线程的ccnet](#ccnet_11)- [单线程的Reactor](#Reactor_24)- [主从Reactor多线程模型](#Reac</description>
-    </item>
-    
-    <item>
-      <title>CCnet | 一个reactor单线程网络库</title>
-      <link>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</link>
-      <pubDate>Sun, 27 Dec 2020 18:41:25 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/</guid>
-      <description>缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proact</description>
-    </item>
-    
-    <item>
       <title>Ubuntu16.04.6 | 安装Cinnamon3.0</title>
       <link>https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/</link>
       <pubDate>Tue, 01 Dec 2020 15:43:58 +0000</pubDate>
@@ -77,15 +50,6 @@
       
       <guid>https://zfunnily.github.io/2020/11/glibcnotfound/</guid>
       <description>version `GLIBC_2.27’ not found错误 执行strings /lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC_ 结果显示如下： GLIBC_2.2.5 GLIBC_2.2.6 GLIBC_2.3 GLIBC_2.3.2 GLIBC_2.3.3 GLIBC_2.3.4 GLIBC_2.4 GLIBC_2.5 GLIBC_2.6 GLIBC_2.7 GLIBC_2.8 GLIBC_2.9 GLIBC_2.10 GLIBC_2.11 GLIBC_2.12 GLIBC_2.13 GLIBC_2.14 GLIBC_2.15 GLIBC_2.16 GLIBC_2.17 GLIBC_2.18 GLIBC_2.22 GLIBC_2.23 GLIBC_2.24 GLIBC_PRIVATE 去清华开源站点下载glibc： https://mirrors.tuna.tsinghua.edu.cn/gnu/libc/ 下载好文件后解压 $ tar -zxvf glibc-2.27.tar.gz 进入 glibc-2.27 目录,</description>
-    </item>
-    
-    <item>
-      <title>Openresty一 | 初探</title>
-      <link>https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/</link>
-      <pubDate>Mon, 23 Nov 2020 16:21:34 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/2020/11/OpenResty%E5%88%9D%E6%8E%A2/</guid>
-      <description>概述 OpenResty®是一个基于Nginx与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。</description>
     </item>
     
     <item>
