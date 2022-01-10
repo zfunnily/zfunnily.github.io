@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zfunnily.github.io/categories/</loc>
-    <lastmod>2022-01-06T19:04:52+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/</loc>
     <lastmod>2022-01-06T19:04:52+08:00</lastmod>
@@ -12,7 +12,7 @@
     <lastmod>2022-01-06T18:56:26+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/</loc>
-    <lastmod>2022-01-06T19:04:52+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/%E8%BD%AC%E8%BD%BD/</loc>
     <lastmod>2022-01-06T16:55:49+08:00</lastmod>
@@ -27,13 +27,13 @@
     <lastmod>2022-01-06T15:57:55+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/post/</loc>
-    <lastmod>2022-01-06T19:04:52+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/shortcodes/</loc>
     <lastmod>2022-01-06T15:57:55+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2022-01-06T19:04:52+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/tags/nginx/</loc>
     <lastmod>2022-01-06T15:23:26+08:00</lastmod>
@@ -51,10 +51,13 @@
     <lastmod>2022-01-06T18:56:26+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/12/astar/</loc>
-    <lastmod>2022-01-06T19:04:12+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
+  </url><url>
+    <loc>https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/</loc>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-01-06T19:04:12+08:00</lastmod>
+    <lastmod>2022-01-10T10:16:43+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/12/music/</loc>
     <lastmod>2022-01-06T15:58:32+08:00</lastmod>
@@ -177,9 +180,6 @@
     <lastmod>2022-01-06T19:01:50+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/05/lua_next/</loc>
-    <lastmod>2022-01-06T19:02:58+08:00</lastmod>
-  </url><url>
-    <loc>https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/</loc>
     <lastmod>2022-01-06T19:02:58+08:00</lastmod>
   </url><url>
     <loc>https://zfunnily.github.io/2021/05/settopandpop/</loc>
