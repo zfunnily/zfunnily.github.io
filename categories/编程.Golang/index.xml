@@ -6,7 +6,16 @@
     <description>Recent content in 编程.Golang on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 07 Nov 2021 15:49:46 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Feb 2022 14:22:41 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>grpc ｜ 通过SSL/TLS建立安全连接</title>
+      <link>https://zfunnily.github.io/2022/02/san/</link>
+      <pubDate>Tue, 22 Feb 2022 14:22:41 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2022/02/san/</guid>
+      <description>使用golang的grpc库作为例子 grpc使用TLS建立安全连接需要有SAN证书， go 1.15 版本开始废弃 CommonName。 什么是SAN证书 SAN(Subject Alternative Name) 是 SSL 标准 x509 中定义的一个扩展。使用了 SAN 字段的 SSL 证书，可以扩</description>
+    </item>
+    
     <item>
       <title>Go-libp2p四 | 穿透NAT</title>
       <link>https://zfunnily.github.io/2021/11/gop2pfour/</link>

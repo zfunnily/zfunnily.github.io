@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-02-22T14:22:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-22T15:38:06&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-22T18:46:51&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="grpc ｜ 通过SSL/TLS建立安全连接">
@@ -198,7 +198,9 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/Golang'>Golang</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
             
         </div>
         
@@ -226,14 +228,14 @@
         -days 3650 \
         -subj &#34;/C=CN/ST=ZheJiang/L=ZheJiang/O=Global/CN=servername Security/OU=IT&#34;
 </code></pre></div><blockquote>
-<p>-sub 后面参数的意义
-C  =&gt; Country
-ST =&gt; State
-L  =&gt; City
-O  =&gt; Organization
-OU =&gt; Organization Unit
-CN =&gt; Common Name (证书所请求的域名)
-emailAddress =&gt; main administrative point of contact for the certificate</p>
+<p>-sub 后面参数的意义;
+C  =&gt; Country;
+ST =&gt; State;
+L  =&gt; City;
+O  =&gt; Organization;
+OU =&gt; Organization Unit;
+CN =&gt; Common Name (证书所请求的域名);
+emailAddress =&gt; main administrative point of contact for the certificate ;</p>
 </blockquote>
 <p>生成私钥 &amp; 根据私钥server.key生成证书请求文件server.csr：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ openssl genpkey -algorithm RSA -out server.key
@@ -273,7 +275,7 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
   <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">HelloWorld</span>) <span style="color:#a6e22e">returns</span>(<span style="color:#a6e22e">HelloWorld</span>) {}
 }
 </code></pre></div><p>生成*.pb.go文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">protoc -I. --go_out=.  --go-grpc_out=. ./*proto
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc -I. --go_out=.  --go-grpc_out=. ./*proto
 </code></pre></div></details>
 <br/>
 <p>server端</p>
@@ -384,7 +386,7 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
                 <a href="https://zfunnily.github.io/2022/02/san/">https://zfunnily.github.io/2022/02/san/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-22 15:38:06</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-22 18:46:51</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -414,11 +416,7 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/grpc'>grpc</a></li>
-                
-            </ul>
+            没有标签
             
         </div>
     </article>
@@ -558,8 +556,6 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (1)</a></li>
-    
     <li><a href="https://zfunnily.github.io/categories/IT/">IT (10)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/IT.Linux/">IT.Linux (10)</a></li>
@@ -568,11 +564,11 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
     
     <li><a href="https://zfunnily.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (76)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (77)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (23)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
@@ -614,8 +610,6 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
     <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
     
     <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
-    
-    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
     
     <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
     
