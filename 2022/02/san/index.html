@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-02-22T14:22:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-22T15:03:38&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-22T15:38:06&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="grpc ｜ 通过SSL/TLS建立安全连接">
@@ -154,7 +154,7 @@
     <li><a href="#使用golang的grpc库作为例子">使用golang的grpc库作为例子</a></li>
     <li><a href="#什么是san证书">什么是SAN证书</a></li>
     <li><a href="#制作san证书">制作SAN证书</a></li>
-    <li><a href="#grpc-使用san证书建立安全通道">Grpc 使用san证书建立安全通道</a></li>
+    <li><a href="#grpc-使用san证书建立安全通道">Grpc 使用SAN证书建立安全通道</a></li>
   </ul>
 </nav>
     </div>
@@ -253,8 +253,12 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
 <p>查看SAN信息在证书内容(可选)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ openssl x509 -noout -text -in server.pem
 </code></pre></div><p>现在证书已经生成完毕， server.pem 和 server.key正式我们需要的证书和密钥</p>
-<h2 id="grpc-使用san证书建立安全通道">Grpc 使用san证书建立安全通道</h2>
+<h2 id="grpc-使用san证书建立安全通道">Grpc 使用SAN证书建立安全通道</h2>
 <p>proto文件</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        proto
+    </summary>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//Hello.proto
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
 <span style="color:#a6e22e">option</span> <span style="color:#a6e22e">go_package</span> = <span style="color:#e6db74">&#34;./pb;pb&#34;</span>;
@@ -270,7 +274,13 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
 }
 </code></pre></div><p>生成*.pb.go文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">protoc -I. --go_out=.  --go-grpc_out=. ./*proto
-</code></pre></div><p>server端</p>
+</code></pre></div></details>
+<br/>
+<p>server端</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -315,7 +325,13 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
 		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;grpcServer.Serve err: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
 }
-</code></pre></div><p>client端</p>
+</code></pre></div></details>
+<br/>
+<p>client端</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -345,7 +361,9 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
 	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;sayhello rsp: %v&#34;</span>, <span style="color:#a6e22e">rsp</span>)
 }
 
-</code></pre></div><blockquote>
+</code></pre></div></details>
+<br/>
+<blockquote>
 <p>主意<code>creds, err := credentials.NewClientTLSFromFile(&quot;keys/server.pem&quot;, &quot;servername&quot;)</code>这里的<code>servernaem</code>参数要与证书申请的一致</p>
 </blockquote>
 
@@ -366,7 +384,7 @@ $ openssl req -new -nodes -key server.key -out server.csr -days 3650 \
                 <a href="https://zfunnily.github.io/2022/02/san/">https://zfunnily.github.io/2022/02/san/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-22 15:03:38</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-22 15:38:06</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
