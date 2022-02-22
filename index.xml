@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Tue, 22 Feb 2022 15:39:30 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>grpc | Token认证和自定义认证</title>
+      <title>Grpc | Token认证和自定义认证</title>
       <link>https://zfunnily.github.io/2022/02/jwt/</link>
       <pubDate>Tue, 22 Feb 2022 15:39:30 +0800</pubDate>
       
@@ -17,7 +17,7 @@
     </item>
     
     <item>
-      <title>grpc ｜ 通过SSL/TLS建立安全连接</title>
+      <title>Grpc ｜ 通过SSL/TLS建立安全连接</title>
       <link>https://zfunnily.github.io/2022/02/san/</link>
       <pubDate>Tue, 22 Feb 2022 14:22:41 +0800</pubDate>
       
