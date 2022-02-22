@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/02/timer/">Golang | 定时器</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年2月25日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&#34;NewTicker...&#34;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/02/timer/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/02/JWT/">Golang | JWT身份认证</a>
             </h1>
         </header>
@@ -315,31 +340,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">Golang | 利用指针进行数据转换</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月12日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHead……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -443,6 +443,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2022/02/jwt/" title="grpc | Token认证和自定义认证">grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2022/02/san/" title="grpc ｜ 通过SSL/TLS建立安全连接">grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
@@ -456,10 +460,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
     </li>
     
 </ul>
@@ -493,11 +493,11 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (77)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (78)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (23)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (24)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
