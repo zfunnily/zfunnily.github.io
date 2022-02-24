@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-31T10:13:40&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:00:04&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-24T09:49:59&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Go-libp2p三 | relay例子">
@@ -267,6 +267,10 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <li>监听一条协议<code>RelayProtocolRequest</code>，当有一个节点上来，需要记录，当有两个节点时，返回两个节点的信息给对方节点。</li>
 <li>有一个公网IP</li>
 </ol>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//relay-server
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
@@ -398,7 +402,9 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
    <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>()
    <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">serverHost</span>.<span style="color:#a6e22e">Ctx</span>.<span style="color:#a6e22e">Done</span>()
 }
-</code></pre></div><h2 id="节点代码">节点代码</h2>
+</code></pre></div></details>
+<br/>
+<h2 id="节点代码">节点代码</h2>
 <p>节点需要的组件:</p>
 <ol>
 <li>创建host</li>
@@ -408,6 +414,10 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <li>通过中继服务连接其他节点<code>n.ConnectNode()</code> ,</li>
 <li>并且往其他节点发送<code>RelayMsg</code>协议,  <code>n.CmdRelay</code></li>
 </ol>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//chat.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
@@ -680,15 +690,17 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
       <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">Ctx</span>.<span style="color:#a6e22e">Err</span>().<span style="color:#a6e22e">Error</span>())
    }
 }
-</code></pre></div><p>编译</p>
+</code></pre></div></details>
+<br/>
+<p>编译</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o relay-server relay-server.go
 $ go build -o chat chat.go
 </code></pre></div><p>使用，先启动中继服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./relay-server -sp <span style="color:#ae81ff">3001</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./relay-server -sp <span style="color:#ae81ff">3001</span>
 </code></pre></div><p>启动A窗口, 连上relay服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./chat -relay 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./chat -relay 
 </code></pre></div><p>再启动B窗，连上relay服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./chat -relay
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./chat -relay
 </code></pre></div><p>这样A和B两个节点就可以通过relay服务进行数据传输了。 下篇文章，改造relay服务，relay服务交换节点信息后，使节点间可以进行p2p传输，传输数据不通过relay服务。 <a href="https://github.com/zfunnily/hole-punching-go-libp2p">详细代码</a></p>
 <p>未完待续&hellip;</p>
 
@@ -709,7 +721,7 @@ $ go build -o chat chat.go
                 <a href="https://zfunnily.github.io/2021/10/gop2pthree/">https://zfunnily.github.io/2021/10/gop2pthree/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:00:04</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 09:49:59</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
