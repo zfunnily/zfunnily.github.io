@@ -86,7 +86,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/" title="CCnet | 一个reactor单线程网络库">CCnet | 一个reactor单线程网络库</a>
+                <a href="https://zfunnily.github.io/2020/12/ccnetone/" title="CCnet | 一个reactor单线程网络库">CCnet | 一个reactor单线程网络库</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -100,12 +100,14 @@
             
             <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a></span>
             
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>编程.网络编程</a></span>
+            
         </div>
         
         <div class="post-content">
             缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proact……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/ccnetone/">阅读全文</a></p>
     </article>
     
     
@@ -113,7 +115,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/" title="C&#43;&#43; | vector中的resize()函数 VS reserve()函数">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
+                <a href="https://zfunnily.github.io/2020/12/reserve/" title="C&#43;&#43; | vector中的resize()函数 VS reserve()函数">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -132,7 +134,7 @@
         <div class="post-content">
             reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/reserve/">阅读全文</a></p>
     </article>
     
     
@@ -140,7 +142,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/" title="Golang | 用gocolly登录B站">Golang | 用gocolly登录B站</a>
+                <a href="https://zfunnily.github.io/2020/12/gocolly/" title="Golang | 用gocolly登录B站">Golang | 用gocolly登录B站</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -157,9 +159,9 @@
         </div>
         
         <div class="post-content">
-            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com……
+            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 $ go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.co……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/gocolly/">阅读全文</a></p>
     </article>
     
     
@@ -167,7 +169,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/" title="Protobuf | 解决沾包问题">Protobuf | 解决沾包问题</a>
+                <a href="https://zfunnily.github.io/2020/12/tcp/" title="Protobuf | 沾包问题">Protobuf | 沾包问题</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -186,7 +188,7 @@
         <div class="post-content">
             缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/tcp/">阅读全文</a></p>
     </article>
     
     
@@ -194,7 +196,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/" title="Golang | grpc">Golang | grpc</a>
+                <a href="https://zfunnily.github.io/2020/12/grpc/" title="Grpc | 概述">Grpc | 概述</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -213,7 +215,7 @@
         <div class="post-content">
             OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/grpc/">阅读全文</a></p>
     </article>
     
     
@@ -221,7 +223,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/" title="Ubuntu16.04.6 | 安装Cinnamon3.0">Ubuntu16.04.6 | 安装Cinnamon3.0</a>
+                <a href="https://zfunnily.github.io/2020/12/cinnamon3.0/" title="Ubuntu16.04.6 | 安装Cinnamon3.0">Ubuntu16.04.6 | 安装Cinnamon3.0</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -240,7 +242,7 @@
         <div class="post-content">
             概述 Cinnamon[1]是Linux Mint[2]的默认桌面环境。不同于 Ubuntu 的 Unity 桌面环境，Cinnamon 是一个更加传统而优雅的桌面环境，其带有底部面板和应用菜单。由于 Cinnamon 桌面以及它类 Windows 的用户界面，许多……
         </div>
-        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/Ubuntu16.04.6%E5%AE%89%E8%A3%85Cinnamon3.0/">阅读全文</a></p>
+        <p class="readmore"><a href="https://zfunnily.github.io/2020/12/cinnamon3.0/">阅读全文</a></p>
     </article>
     
     
@@ -574,7 +576,7 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     

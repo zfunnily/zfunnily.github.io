@@ -108,37 +108,37 @@
     
     <item>
       <title>Golang | sync.Mutex详解</title>
-      <link>https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://zfunnily.github.io/2020/12/syncmutex/</link>
       <pubDate>Tue, 29 Dec 2020 13:17:18 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/12/Go-sync.Mutex%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://zfunnily.github.io/2020/12/syncmutex/</guid>
       <description>概述 自己做的一个golang项目需要优化，优化方向是减少gpu内存的使用。同一个模型被重复加载多次，使用更多的gpu内存，也增加 sync.Mutex的使用。 优化的方向是: 减少代码量的改动- 减少gpu内</description>
     </item>
     
     <item>
       <title>Golang | 用gocolly登录B站</title>
-      <link>https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/</link>
+      <link>https://zfunnily.github.io/2020/12/gocolly/</link>
       <pubDate>Sun, 13 Dec 2020 14:51:53 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/12/%E7%94%A8gocolly%E7%99%BB%E5%BD%95B%E7%AB%99/</guid>
-      <description>概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.com</description>
+      <guid>https://zfunnily.github.io/2020/12/gocolly/</guid>
+      <description>概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 $ go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.co</description>
     </item>
     
     <item>
-      <title>Protobuf | 解决沾包问题</title>
-      <link>https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</link>
+      <title>Protobuf | 沾包问题</title>
+      <link>https://zfunnily.github.io/2020/12/tcp/</link>
       <pubDate>Sun, 13 Dec 2020 10:22:38 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/12/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%B4%E5%92%8Cprotobuf%E8%A7%A3%E5%86%B3%E6%B2%BE%E5%8C%85%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://zfunnily.github.io/2020/12/tcp/</guid>
       <description>缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防</description>
     </item>
     
     <item>
-      <title>Golang | grpc</title>
-      <link>https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/</link>
+      <title>Grpc | 概述</title>
+      <link>https://zfunnily.github.io/2020/12/grpc/</link>
       <pubDate>Sun, 13 Dec 2020 09:10:42 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/2020/12/Golang%E7%9A%84grpc/</guid>
+      <guid>https://zfunnily.github.io/2020/12/grpc/</guid>
       <description>OverView gRPC是由Google主导开发的RPC框架，使用HTTP/2协议并用ProtoBuf作为序列化工具。其客户端提供Objective-C、Java接口，服务器侧则有Java、Golang、C++等接</description>
     </item>
     
