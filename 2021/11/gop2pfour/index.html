@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Go-libp2p四 | 穿透NAT | Zzz记忆</title>
+    <meta property="og:title" content="Go-libp2p四 | 穿透NAT - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2021-11-07T15:49:46&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="Go-libp2p四 | 穿透NAT">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="http://blog.rakfree.tk/2021/11/gop2pfour/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.rakfree.tk/">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
+                    
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#本文目的">本文目的</a></li>
+    <li><a href="#relay例子代码">relay例子代码</a></li>
+    <li><a href="#节点代码">节点代码</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Go-libp2p四 | 穿透NAT</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.P2P'>编程.P2P</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="本文目的">本文目的</h2>
+<p>上文<code>Go-libp2p三 | relay例子</code>已经分析过relay例子，并解释了两个节点如果通过中继服务进行通信。本文改造relay例子 并让这个服务做如下两件事：</p>
+<ol>
+<li>交换两个节点的在交换机上的信息，帮助两个节点进行P2P打洞。</li>
+<li>在打洞不成功的情况下能提供中继服务，转发两节点发送的数据。</li>
+</ol>
+<p>我是看到源码中有<code>hole punching</code>协议，我是看了测试用例后才明白的。 利用libp2p的<code>hole punching</code>协议，NAT穿透打洞。打洞成功后进行p2p传输</p>
+<h2 id="relay例子代码">relay例子代码</h2>
+<p>relay-server 代码基本不用改变</p>
+<h2 id="节点代码">节点代码</h2>
+<p>节点需要的组件:</p>
+<ol>
+<li>创建host, 绑定holepunching服务， <code>hps := AddHolePunchService(h)</code></li>
+<li>监听<code>RelayProtocolResponse</code>,<code>P2PMsg</code> 和<code>FirstP2PMsg</code>协议</li>
+<li>连接中继服务 n.ConnectRelay()</li>
+<li>节点发送<code>RelayProtocolRequest</code>协议给中继服务,服务会返回<code>RelayProtocolResponse</code>协议给节点 其他节点的peerID</li>
+<li>通过中继服务连接其他节点<code>n.ConnectNode()</code> , 发送<code>FirstP2PMsg</code>协议(很关键),方便后续打洞成功</li>
+<li>收到其他节点发来的<code>FirstP2PMsg</code>协议，5s钟后（已经开始打洞，防止在打洞过程中进行直连操作）开始直连<code>p.node.CmdP2P()</code>, <code>DirectConnect</code></li>
+<li>直连成功，往其他节点发送<code>P2PMsg</code>协议</li>
+</ol>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//chat.go
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RelayProtocolRequest</span> = <span style="color:#e6db74">&#34;/relay/relayreq/1.0.0&#34;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RelayProtocolResponse</span> = <span style="color:#e6db74">&#34;/relay/relayrsp/1.0.0&#34;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">FirstP2PMsg</span> = <span style="color:#e6db74">&#34;/First/P2PMsg/1.0.0&#34;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">P2PMsg</span> = <span style="color:#e6db74">&#34;/Start/P2PMsg/1.0.0&#34;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RelayMsg</span> = <span style="color:#e6db74">&#34;/relay/relaymsg/1.0.0&#34;</span>
+
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">NodeProtocol</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">node</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewNodeProtocol</span>(<span style="color:#a6e22e">server</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">NodeProtocol</span> {
+	<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">NodeProtocol</span>{ <span style="color:#a6e22e">node</span>: <span style="color:#a6e22e">server</span>}
+	<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">SetStreamHandler</span>(<span style="color:#a6e22e">RelayProtocolResponse</span>, <span style="color:#a6e22e">protocol</span>.<span style="color:#a6e22e">onRsp</span>)
+	<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">SetStreamHandler</span>(<span style="color:#a6e22e">FirstP2PMsg</span>, <span style="color:#a6e22e">protocol</span>.<span style="color:#a6e22e">onFirstP2PMsg</span>)
+	<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">SetStreamHandler</span>(<span style="color:#a6e22e">P2PMsg</span>, <span style="color:#a6e22e">protocol</span>.<span style="color:#a6e22e">onP2PMsg</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">protocol</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">NodeProtocol</span>) <span style="color:#a6e22e">onFirstP2PMsg</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>)  {
+	<span style="color:#a6e22e">buf</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">s</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;receive onFirstP2PMsg: &#34;</span>, string(<span style="color:#a6e22e">buf</span>))
+	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">5</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">CmdP2P</span>()
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">NodeProtocol</span>) <span style="color:#a6e22e">onP2PMsg</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>)  {
+	<span style="color:#a6e22e">rw</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReadWriter</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">s</span>), <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">s</span>))
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">writeData</span>(<span style="color:#a6e22e">rw</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">readData</span>(<span style="color:#a6e22e">rw</span>)
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Node</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>
+	<span style="color:#a6e22e">HoleService</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">holepunch</span>.<span style="color:#a6e22e">Service</span>
+	<span style="color:#f92672">*</span><span style="color:#a6e22e">NodeProtocol</span>
+
+	<span style="color:#a6e22e">chatP2PAddr</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfo</span>
+	<span style="color:#a6e22e">Ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>
+	<span style="color:#75715e">//记录RelayServer
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ServerAddrInfo</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfo</span>
+	<span style="color:#75715e">//记录peers
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Mutex</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
+	<span style="color:#a6e22e">Peers</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">List</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewNode</span>(<span style="color:#a6e22e">host</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">hps</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">holepunch</span>.<span style="color:#a6e22e">Service</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span> {
+	<span style="color:#a6e22e">relayServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Node</span>{ <span style="color:#a6e22e">Host</span>: <span style="color:#a6e22e">host</span>, <span style="color:#a6e22e">HoleService</span>: <span style="color:#a6e22e">hps</span>, <span style="color:#a6e22e">chatP2PAddr</span>: new(<span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfo</span>), <span style="color:#a6e22e">Ctx</span>: <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#a6e22e">Mutex</span>: new(<span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>), <span style="color:#a6e22e">Peers</span>: new(<span style="color:#a6e22e">list</span>.<span style="color:#a6e22e">List</span>)}
+	<span style="color:#a6e22e">relayServer</span>.<span style="color:#a6e22e">NodeProtocol</span> = <span style="color:#a6e22e">NewNodeProtocol</span>(<span style="color:#a6e22e">relayServer</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">relayServer</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span><span style="color:#f92672">*</span> <span style="color:#a6e22e">Node</span>)<span style="color:#a6e22e">ConnectNode</span>(<span style="color:#a6e22e">nodePeerID</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">nodeAddr</span> <span style="color:#66d9ef">string</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;start ConnectNodeByRelay....&#34;</span>, <span style="color:#a6e22e">nodePeerID</span>, <span style="color:#a6e22e">nodeAddr</span>)
+	<span style="color:#a6e22e">peerID</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">Decode</span>(<span style="color:#a6e22e">nodePeerID</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Network</span>().(<span style="color:#f92672">*</span><span style="color:#a6e22e">swarm</span>.<span style="color:#a6e22e">Swarm</span>).<span style="color:#a6e22e">Backoff</span>().<span style="color:#a6e22e">Clear</span>(<span style="color:#a6e22e">peerID</span>)
+
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">address</span> = <span style="color:#a6e22e">nodeAddr</span> <span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/p2p/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">ServerAddrInfo</span>.<span style="color:#a6e22e">ID</span>.<span style="color:#a6e22e">Pretty</span>()  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/p2p-circuit/p2p/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">peerID</span>.<span style="color:#a6e22e">Pretty</span>()
+	<span style="color:#75715e">//var address = nodeAddr +&#34;/p2p/&#34; + peerID.Pretty() + &#34;/p2p-circuit&#34;
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//var address = nodeAddr +&#34;/p2p/&#34; + peerID.Pretty()
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//var address = &#34;/p2p/&#34;+ peerID.Pretty()
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">chatTargetAddr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">multiaddr</span>.<span style="color:#a6e22e">NewMultiaddr</span>(<span style="color:#a6e22e">address</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;chatTargetAddr is err&#34;</span>)
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">chatTargetAddrInfo</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfo</span>{
+		<span style="color:#a6e22e">ID</span>:    <span style="color:#a6e22e">peerID</span>,
+		<span style="color:#a6e22e">Addrs</span>: []<span style="color:#a6e22e">multiaddr</span>.<span style="color:#a6e22e">Multiaddr</span>{<span style="color:#a6e22e">chatTargetAddr</span>},
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Connect</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Ctx</span>, <span style="color:#a6e22e">chatTargetAddrInfo</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;chatTargetAddr connect err&#34;</span>)
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">chatP2PAddr</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">chatTargetAddrInfo</span>
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">sendMessage</span>(<span style="color:#a6e22e">chatTargetAddrInfo</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#a6e22e">FirstP2PMsg</span>, <span style="color:#e6db74">&#34;Hello Im &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">chatTargetAddrInfo</span>.<span style="color:#a6e22e">ID</span>.<span style="color:#a6e22e">Pretty</span>())
+	<span style="color:#75715e">//n.CmdRelay()
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span>)<span style="color:#a6e22e">CmdP2P</span>()  {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Cmdp2p start ....&#34;</span>)
+	<span style="color:#a6e22e">peerInfo</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">chatP2PAddr</span>
+
+	<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Peerstore</span>().<span style="color:#a6e22e">AddAddrs</span>(<span style="color:#a6e22e">peerInfo</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#a6e22e">peerInfo</span>.<span style="color:#a6e22e">Addrs</span>, <span style="color:#a6e22e">peerstore</span>.<span style="color:#a6e22e">ConnectedAddrTTL</span>)
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">HoleService</span>.<span style="color:#a6e22e">DirectConnect</span>(<span style="color:#a6e22e">peerInfo</span>.<span style="color:#a6e22e">ID</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;DirectConnect error: &#34;</span>)
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">NewStream</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Ctx</span>, <span style="color:#a6e22e">peerInfo</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#a6e22e">P2PMsg</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;p2p NewStream err&#34;</span>)
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">rw</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReadWriter</span>(<span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">s</span>), <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewWriter</span>(<span style="color:#a6e22e">s</span>))
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;opening p2p chat stream&#34;</span>)
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;[INFO] p2p chat connected!&#34;</span>)
+
+	<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#e6db74">&#34;Hello this is  msg&#34;</span>)
+	<span style="color:#a6e22e">rw</span>.<span style="color:#a6e22e">Flush</span>()
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">writeData</span>(<span style="color:#a6e22e">rw</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">readData</span>(<span style="color:#a6e22e">rw</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">makeRandomNode</span>(<span style="color:#a6e22e">relay</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Node</span> {
+	<span style="color:#a6e22e">peerInfo</span> ,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getPeerInfoByDest</span>(<span style="color:#a6e22e">relay</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+	}
+
+	<span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">New</span>(
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">ListenAddrs</span>(<span style="color:#a6e22e">multiaddr</span>.<span style="color:#a6e22e">StringCast</span>(<span style="color:#e6db74">&#34;/ip4/127.0.0.1/tcp/0/&#34;</span>)),
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">EnableRelay</span>(),
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">EnableAutoRelay</span>(),
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">ForceReachabilityPrivate</span>(),
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">StaticRelays</span>([]<span style="color:#a6e22e">peer</span>.<span style="color:#a6e22e">AddrInfo</span>{<span style="color:#f92672">*</span><span style="color:#a6e22e">peerInfo</span>}),
+		<span style="color:#a6e22e">libp2p</span>.<span style="color:#a6e22e">EnableHolePunching</span>(),
+	)
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+	}
+	<span style="color:#a6e22e">hps</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">AddHolePunchService</span>(<span style="color:#a6e22e">h</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">hps</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">NewNode</span>(<span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">hps</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">relay</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;relay&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;relay addrs&#34;</span>)
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">relay</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Please Use -relay &#34;</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+
+	<span style="color:#a6e22e">node</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">makeRandomNode</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">relay</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">ConnectRelay</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">relay</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Connect relay success Next Login...&#34;</span>)
+	<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">Login</span>()
+
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Im &#34;</span>, <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">ID</span>())
+	<span style="color:#66d9ef">select</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">Ctx</span>.<span style="color:#a6e22e">Done</span>():
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">Ctx</span>.<span style="color:#a6e22e">Err</span>().<span style="color:#a6e22e">Error</span>())
+	}
+}
+</code></pre></div></details>
+<br/>
+<p>编译</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build chat.go
+$ go build relay-server.go
+</code></pre></div><p>启动中继服务</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./relay -sp <span style="color:#ae81ff">3001</span>
+2021/11/08 15:10:01 Run <span style="color:#e6db74">&#39;./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd&#39;</span> on another console.
+2021/11/08 15:10:01 You can replace 192.168.0.100 with public IP as well.
+2021/11/08 15:10:01 Waiting <span style="color:#66d9ef">for</span> incoming connection
+</code></pre></div><p>在窗口A启动chat 连上中继</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+2021/11/08 15:10:09 start ConnectNodeByRelay.... QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom /ip4/172.16.3.205/tcp/56309
+2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw
+</code></pre></div><p>在窗口B启动chat 连上中继</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+2021/11/08 15:10:09 start ConnectNodeByRelay.... QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw /ip4/172.16.3.205/tcp/56306
+2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom
+2021/11/08 15:10:14 Cmdp2p start ....
+2021/11/08 15:10:14 opening p2p chat stream
+2021/11/08 15:10:14 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> p2p chat connected!
+</code></pre></div><ul>
+<li>A和B连上了中继后，中继服务会返回对方的地址 s.Conn.RemoteMultiaddr()</li>
+<li>A和B接收到了地址后，发送了第一条消息<code>FirstP2PMsg</code>后，则过了5秒后直连对方节点<code>n.HoleService.DirectConnect(peerInfo.ID)</code>，代码可见,(自动p2p打洞).</li>
+<li>A和B可以进行p2p沟通。可以试着把relay-server关闭，然后继续发送消息。可见消息能发送成功。</li>
+</ul>
+<p>这里p2p的打洞流程参考 <code>coordination.go</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">hs</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Service</span>) <span style="color:#a6e22e">handleNewStream</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>) {
+<span style="color:#75715e">// Check directionality of the underlying connection.
+</span><span style="color:#75715e">// Peer A receives an inbound connection from peer B.
+</span><span style="color:#75715e">// Peer A opens a new hole punch stream to peer B.
+</span><span style="color:#75715e">// Peer B receives this stream, calling this function.
+</span><span style="color:#75715e">// Peer B sees the underlying connection as an outbound connection.
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>用go-libp2p进行p2p传输的流程就理清楚了。我只贴了改动和新增的代码, <a href="https://github.com/zfunnily/hole-punching-go-libp2p">详细代码</a></p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2021/11/gop2pfour/">http://blog.rakfree.tk/2021/11/gop2pfour/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2021/10/gop2pthree/">Go-libp2p三 | relay例子</a></li>
+        
+        <li><a href="/2021/10/gop2ptwo/">Go-libp2p二 | echo例子</a></li>
+        
+        <li><a href="/2021/10/gop2pone/">Go-libp2p一 | chat例子</a></li>
+        
+        <li><a href="/2021/11/randomquotes/">Blog | 随机名人名言</a></li>
+        
+        <li><a href="/2021/10/blogmigration/">Blog | 新的开始</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/p2p'>p2p</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
+</body>
+
+</html>

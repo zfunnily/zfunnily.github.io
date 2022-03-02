@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>FFmpeg | 录制摄像头和桌面数据windows | Zzz记忆</title>
+    <meta property="og:title" content="FFmpeg | 录制摄像头和桌面数据windows - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2020-09-09T09:36:49&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="FFmpeg | 录制摄像头和桌面数据windows">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="http://blog.rakfree.tk/2020/09/ffmpegvideow/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.rakfree.tk/">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
+                    
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-id_1a概述"><a id="_1"></a>概述</a></li>
+    <li><a href="#ffmpeg-使用-dshow-采集音视频设备">FFmpeg 使用 dshow 采集音视频设备</a></li>
+    <li><a href="#a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><a id="FFmpeg__vfwcap__50"></a>FFmpeg 使用 vfwcap 采集视频设备</a></li>
+    <li><a href="#a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><a id="FFmpeg__gdigrab__69"></a>FFmpeg 使用 gdigrab 采集窗口</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">FFmpeg | 录制摄像头和桌面数据windows</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年9月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="a-id_1a概述"><a id="_1"></a>概述</h2>
+<p>FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中</p>
+<ul>
+<li><strong>dshow 可以用来抓 取摄像头、采集卡、麦克风等</strong>，- <strong>vfwcap 主要用来采集摄像头类设备</strong>，- <strong>gdigrab 则是抓取 Windows 窗口程序</strong></li>
+</ul>
+<h2 id="ffmpeg-使用-dshow-采集音视频设备">FFmpeg 使用 dshow 采集音视频设备</h2>
+<p>使用 dshow 枚举设备</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f dshow -list_devices true -i dymmy
+
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
+[dshow @ 000002622302e340]  &#34;Altair USB2.0 Camera&#34;
+[dshow @ 000002622302e340]     Alternative name &#34;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&#34;
+[dshow @ 000002622302e340] DirectShow audio devices
+
+</code></pre></div><p>``<br> 使用 dshow 展示摄像头, 摄像头的参数为 video=“摄像头名称”</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow  -i video=&#34;Altair USB2.0 Camera&#34;
+
+</code></pre></div><p>``<br> 获得摄像头支持的分辨率</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -list_options true -f dshow -i video=&#34;Altair USB2.0 Camera&#34;
+
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
+[dshow @ 000001b88b90e380]  Pin &#34;捕获&#34; (alternative pin name &#34;0&#34;)
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=352x288 fps=15 max s=352x288 fps=30
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=320x240 fps=30 max s=320x240 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=320x240 fps=30 max s=320x240 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=176x144 fps=30 max s=176x144 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=176x144 fps=30 max s=176x144 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
+[dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
+
+</code></pre></div><p>可以加上分辨率的参数 <strong>-video_size</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow -video_size 640x480  -i video=&#34;Altair USB2.0 Camera&#34;
+
+</code></pre></div><h2 id="a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><a id="FFmpeg__vfwcap__50"></a>FFmpeg 使用 vfwcap 采集视频设备</h2>
+<p>vfwcap 主要支持两个参数 video_size framerate ，分别指示采集图像的大小和帧率<br> 使用 vfwcap 枚举支持采集的设备</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i list
+
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[vfwcap @ 0000025a6d60d080] Driver 0
+[vfwcap @ 0000025a6d60d080]  Microsoft WDM Image Capture (Win32)
+[vfwcap @ 0000025a6d60d080]  Version:  10.0.17134.1
+list: I/O error
+
+</code></pre></div><p>使用 vfwcap 生成 MP4 文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
+
+</code></pre></div><p>我们通过 -i 指定了待录像的摄像头 索引号，-r 则指定了 需要录像 的帧, -vcodec 指定了录像视频的编码格式，输出 out.mp4</p>
+<h2 id="a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><a id="FFmpeg__gdigrab__69"></a>FFmpeg 使用 gdigrab 采集窗口</h2>
+<p>Windows 平台， FFmpeg 支持采集基于 gdi 的屏幕采集设备，这个设备同时支持采 集显示器的某 块区域， gdigrab 支持的主要参数如表 7-5 所示<br> 
+        <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/4438f7c7f5f2079933d3db9b77bfe333.png">
+            <img class="mx-auto" alt="4438f7c7f5f2079933d3db9b77bfe333.png" src="https://img-service.csdnimg.cn/img_convert/4438f7c7f5f2079933d3db9b77bfe333.png" />
+        </a>
+    </p>
+<p>gdigrab 的输入主要有两种方式：</p>
+<ol>
+<li>desktop title = window_title ，其中 desktop 代表采 集整个桌面，1. ttitle = window title 则是采集标题为 window title 的窗口
+使用 gdigrab 采集整个桌面</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
+
+</code></pre></div><p>使用gdigrab采集某个窗口</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i title=&#34;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&#34; gdi.mp4
+
+</code></pre></div><p>该窗口是我用spy++抓的</p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2020/09/ffmpegvideow/">http://blog.rakfree.tk/2020/09/ffmpegvideow/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2020/08/macffmpeg/">FFmpeg | 录制摄像头和桌面数据mac</a></li>
+        
+        <li><a href="/2020/08/prometheusgrafana/">K8S | Prometheus&#43;Grafana监控</a></li>
+        
+        <li><a href="/2020/08/owt-client-javascript/">Owt-server | owt-client-javascript</a></li>
+        
+        <li><a href="/2020/08/ingress/">K8S | Ingress的基本使用</a></li>
+        
+        <li><a href="/2020/08/pvc/">K8S | Statefluset的持久存储PVC</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/ffmpeg'>ffmpeg</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
+</body>
+
+</html>

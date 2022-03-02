@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Grpc | Token认证和自定义认证 | Zzz记忆</title>
+    <meta property="og:title" content="Grpc | Token认证和自定义认证 - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2022-02-22T15:39:30&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="Grpc | Token认证和自定义认证">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="http://blog.rakfree.tk/2022/02/jwt/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.rakfree.tk/">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
+                    
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#token认证">Token认证</a></li>
+    <li><a href="#自定义信息验证">自定义信息验证</a></li>
+    <li><a href="#关于grpc和认证相关的一些想法">关于grpc和认证相关的一些想法</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Grpc | Token认证和自定义认证</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年2月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="概述">概述</h2>
+<p>现在有个需求，需要在grpc的拦截器中，通过token进行身份认证。如果认证不通过则返回错误; 认证通过，则放行;</p>
+<p>TLS是用作加密通讯通道的，与该需求无关。</p>
+<h2 id="token认证">Token认证</h2>
+<p>具体流程</p>
+<ul>
+<li>客户端通过账号密码登录服务器，登录成功服务器返回一个token给客户端。</li>
+<li>客户端携带token信息往服务器请求业务逻辑的接口，，服务器收到请求，解析验证token，验证通过，则放行。</li>
+</ul>
+<p>协议文件</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        proto
+    </summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//hello.proto
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
+<span style="color:#a6e22e">option</span> <span style="color:#a6e22e">go_package</span> = <span style="color:#e6db74">&#34;./pb;pb&#34;</span>;
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;google/protobuf/empty.proto&#34;</span>;
+
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">hello</span>;
+
+<span style="color:#a6e22e">message</span> <span style="color:#a6e22e">Login</span>{
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">login</span> = <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">password</span> = <span style="color:#ae81ff">2</span>;
+}
+
+<span style="color:#a6e22e">message</span> <span style="color:#a6e22e">TokenInfo</span> {
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">token</span> = <span style="color:#ae81ff">1</span>;
+}
+
+<span style="color:#a6e22e">message</span> <span style="color:#a6e22e">HelloWorld</span> {
+  <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">msg</span> = <span style="color:#ae81ff">1</span>;
+}
+
+<span style="color:#a6e22e">service</span> <span style="color:#a6e22e">Hello</span> {
+  <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">CreateToken</span>(<span style="color:#a6e22e">Login</span>) <span style="color:#a6e22e">returns</span>(<span style="color:#a6e22e">TokenInfo</span>) {}
+  <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">protobuf</span>.<span style="color:#a6e22e">Empty</span>) <span style="color:#a6e22e">returns</span>(<span style="color:#a6e22e">HelloWorld</span>) {}
+}
+</code></pre></div></details>
+<br/>
+<p>生成*.pb.go文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc -I. --go_out=.  --go-grpc_out=. ./*proto
+</code></pre></div><p>使用的是<code>jwt-go</code>包。来帮助服务端创建&amp;解析token</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//jwt.go
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">jwt</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/conf&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/utils&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+
+	<span style="color:#a6e22e">jwt</span> <span style="color:#e6db74">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/grpc/metadata&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CreateToken</span>(<span style="color:#a6e22e">uid</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">tokenString</span> <span style="color:#66d9ef">string</span>) {
+	<span style="color:#a6e22e">token</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">NewWithClaims</span>(<span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">SigningMethodHS256</span>, <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">MapClaims</span>{
+		<span style="color:#e6db74">&#34;iss&#34;</span>:      <span style="color:#e6db74">&#34;pro2d-app-server&#34;</span>,
+		<span style="color:#e6db74">&#34;aud&#34;</span>:      <span style="color:#e6db74">&#34;pro2d-app-server&#34;</span>,
+		<span style="color:#e6db74">&#34;nbf&#34;</span>:      <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Unix</span>(),
+		<span style="color:#e6db74">&#34;exp&#34;</span>:      <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Hour</span>).<span style="color:#a6e22e">Unix</span>(),
+		<span style="color:#e6db74">&#34;sub&#34;</span>:      <span style="color:#e6db74">&#34;pro2d&#34;</span>,
+		<span style="color:#e6db74">&#34;uid&#34;</span>: <span style="color:#a6e22e">uid</span>,
+	})
+	<span style="color:#a6e22e">tokenString</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">SignedString</span>([]byte(<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Pro2DTokenSignedString</span>))
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		panic(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">tokenString</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">tokenStr</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">clientClaims</span> <span style="color:#a6e22e">Claims</span>
+	<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">ParseWithClaims</span>(<span style="color:#a6e22e">tokenStr</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">clientClaims</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">token</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">Token</span>) (<span style="color:#66d9ef">interface</span>{}, <span style="color:#66d9ef">error</span>) {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Header</span>[<span style="color:#e6db74">&#34;alg&#34;</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;HS256&#34;</span> {
+			<span style="color:#75715e">//panic(&#34;ErrInvalidAlgorithm&#34;)
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Sugar</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;ErrInvalidAlgorithm&#34;</span>)
+			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#66d9ef">nil</span>
+		}
+		<span style="color:#66d9ef">return</span> []byte(<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Pro2DTokenSignedString</span>), <span style="color:#66d9ef">nil</span>
+	})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Sugar</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;jwt parse error&#34;</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+	}
+
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Valid</span> {
+		<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Sugar</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#e6db74">&#34;ErrInvalidToken&#34;</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">clientClaims</span>.<span style="color:#a6e22e">Uid</span>
+}
+
+
+<span style="color:#75715e">// Claims defines the struct containing the token claims.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Claims</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">StandardClaims</span>
+	<span style="color:#a6e22e">Uid</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#75715e">// 从 context 的 metadata 中，取出 token
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getTokenFromContext</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#a6e22e">md</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">FromIncomingContext</span>(<span style="color:#a6e22e">ctx</span>)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;ErrNoMetadataInContext&#34;</span>)
+	}
+	<span style="color:#75715e">// md 的类型是 type MD map[string][]string
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">md</span>[<span style="color:#e6db74">&#34;authorization&#34;</span>]
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">token</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;ErrNoAuthorizationInMetadata&#34;</span>)
+	}
+	<span style="color:#75715e">// 因此，token 是一个字符串数组，我们只用了 token[0]
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">token</span>[<span style="color:#ae81ff">0</span>], <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">CheckAuth</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">string</span> {
+	<span style="color:#a6e22e">tokenStr</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getTokenFromContext</span>(<span style="color:#a6e22e">ctx</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Sugar</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;get token from context error&#34;</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">tokenStr</span>)
+}
+
+<span style="color:#75715e">// AuthToken 自定义认证 客户端使用
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">AuthToken</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Token</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">AuthToken</span>) <span style="color:#a6e22e">GetRequestMetadata</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">uri</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+		<span style="color:#e6db74">&#34;authorization&#34;</span>: <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Token</span>,
+	}, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">AuthToken</span>) <span style="color:#a6e22e">RequireTransportSecurity</span>() <span style="color:#66d9ef">bool</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+}
+</code></pre></div></details>
+<br/>
+<p>server端</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/grpc&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/grpc/credentials&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/protobuf/types/known/emptypb&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;net&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/components/jwt&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/protos/pb&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Server</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">UnimplementedHelloServer</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">CreateToken</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">in</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">Login</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">TokenInfo</span>, <span style="color:#66d9ef">error</span>)  {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">in</span>.<span style="color:#a6e22e">Login</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;login&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">in</span>.<span style="color:#a6e22e">Password</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;123456&#34;</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">TokenInfo</span>{<span style="color:#a6e22e">Token</span>: <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">CreateToken</span>(<span style="color:#a6e22e">in</span>.<span style="color:#a6e22e">Login</span>)}, <span style="color:#66d9ef">nil</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;login error&#34;</span>)
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">empty</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">emptypb</span>.<span style="color:#a6e22e">Empty</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">HelloWorld</span>, <span style="color:#66d9ef">error</span>)  {
+	<span style="color:#a6e22e">md</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">FromIncomingContext</span>(<span style="color:#a6e22e">ctx</span>)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">codes</span>.<span style="color:#a6e22e">Unauthenticated</span>,<span style="color:#e6db74">&#34;ErrNoMetadataInContext&#34;</span>)
+	}
+	<span style="color:#75715e">// md 的类型是 type MD map[string][]string
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">md</span>[<span style="color:#e6db74">&#34;authorization&#34;</span>]
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">token</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">codes</span>.<span style="color:#a6e22e">Unauthenticated</span>,<span style="color:#e6db74">&#34;ErrNoAuthorizationInMetadata&#34;</span>)
+	}
+	<span style="color:#a6e22e">login</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">ParseToken</span>(<span style="color:#a6e22e">token</span>[<span style="color:#ae81ff">0</span>])
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">HelloWorld</span>{<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;Hello world: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">login</span>}, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// 监听本地端口
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">listener</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Listen</span>(<span style="color:#e6db74">&#34;tcp&#34;</span>, <span style="color:#e6db74">&#34;:8948&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;net.Listen err: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">opts</span> []<span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ServerOption</span>
+	<span style="color:#75715e">// 从输入证书文件和密钥文件为服务端构造TLS凭证
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">creds</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">credentials</span>.<span style="color:#a6e22e">NewServerTLSFromFile</span>(<span style="color:#e6db74">&#34;keys/server.pem&#34;</span>, <span style="color:#e6db74">&#34;keys/server.key&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Failed to generate credentials %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#a6e22e">opts</span> = append(<span style="color:#a6e22e">opts</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Creds</span>(<span style="color:#a6e22e">creds</span>))
+	<span style="color:#75715e">// 新建gRPC服务器实例,并开启TLS认证
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">grpcServer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+
+	<span style="color:#75715e">// 在gRPC服务器注册我们的服务
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">RegisterHelloServer</span>(<span style="color:#a6e22e">grpcServer</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Server</span>{})
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34; net.Listing whth TLS&#34;</span>)
+	<span style="color:#75715e">//用服务器 Serve() 方法以及我们的端口信息区实现阻塞等待，直到进程被杀死或者 Stop() 被调用
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">grpcServer</span>.<span style="color:#a6e22e">Serve</span>(<span style="color:#a6e22e">listener</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;grpcServer.Serve err: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+	}
+}
+</code></pre></div></details>
+<br/>
+<p>client端</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/grpc&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/grpc/credentials&#34;</span>
+	<span style="color:#e6db74">&#34;google.golang.org/protobuf/types/known/emptypb&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/components/jwt&#34;</span>
+	<span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;pro2d/conf&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/protos/pb&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/utils&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">opts</span> []<span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">DialOption</span>
+	<span style="color:#a6e22e">creds</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">credentials</span>.<span style="color:#a6e22e">NewClientTLSFromFile</span>(<span style="color:#e6db74">&#34;keys/server.pem&#34;</span>, <span style="color:#e6db74">&#34;pro2d&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">opts</span> = append(<span style="color:#a6e22e">opts</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">WithTransportCredentials</span>(<span style="color:#a6e22e">creds</span>))
+	<span style="color:#a6e22e">conn</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;localhost:8948&#34;</span>, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+
+	<span style="color:#a6e22e">helloClient</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">NewHelloClient</span>(<span style="color:#a6e22e">conn</span>)
+	<span style="color:#a6e22e">token</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">helloClient</span>.<span style="color:#a6e22e">CreateToken</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">TODO</span>(), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">Login</span>{
+		<span style="color:#a6e22e">Login</span>:    <span style="color:#e6db74">&#34;login&#34;</span>,
+		<span style="color:#a6e22e">Password</span>: <span style="color:#e6db74">&#34;123456&#34;</span>,
+	})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">Sugar</span>.<span style="color:#a6e22e">Debugf</span>(<span style="color:#e6db74">&#34;token: %s&#34;</span>, <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Token</span>)
+
+	<span style="color:#a6e22e">opts</span> = append(<span style="color:#a6e22e">opts</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">WithPerRPCCredentials</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">AuthToken</span>{<span style="color:#a6e22e">Token</span>: <span style="color:#a6e22e">token</span>.<span style="color:#a6e22e">Token</span>}))
+	<span style="color:#a6e22e">conn2</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Dial</span>(<span style="color:#e6db74">&#34;localhost:8948&#34;</span>,<span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">helloClient2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">NewHelloClient</span>(<span style="color:#a6e22e">conn2</span>)
+	<span style="color:#a6e22e">rsp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">helloClient2</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">TODO</span>(), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">emptypb</span>.<span style="color:#a6e22e">Empty</span>{})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;sayhello rsp: %v&#34;</span>, <span style="color:#a6e22e">rsp</span>)
+}
+</code></pre></div></details>
+<br/>
+<ul>
+<li>
+<p>客户端调用CreateToken， 获得token</p>
+</li>
+<li>
+<p>客户端通过<code>grpc.WithPerRPCCredentials</code>, 携带token信息，重新发起grpc请求，再调用<code>SayHello</code>,接口，结果返回成功</p>
+</li>
+<li>
+<p>服务器在收到<code>SayHello</code>请求的时候，从上下文<code>ctx</code>取出token信息，再解析token获得<code>login</code>的信息。</p>
+</li>
+</ul>
+<h2 id="自定义信息验证">自定义信息验证</h2>
+<p>上面的token认证是通过客户端传递token信息到服务器，服务器从进行解析来做的。 还有一种是客户端和服务器约定固定信息，当客户顿请求接口时，把信息放在请求头部。</p>
+<p>server端， 修改<code>SayHello</code>函数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Server</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">empty</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">emptypb</span>.<span style="color:#a6e22e">Empty</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">HelloWorld</span>, <span style="color:#66d9ef">error</span>)  {
+	<span style="color:#a6e22e">md</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">FromIncomingContext</span>(<span style="color:#a6e22e">ctx</span>)
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">codes</span>.<span style="color:#a6e22e">Unauthenticated</span>, <span style="color:#e6db74">&#34;无Token认证信息&#34;</span>)
+	}
+	<span style="color:#66d9ef">var</span> (
+		<span style="color:#a6e22e">appId</span>  <span style="color:#66d9ef">string</span>
+		<span style="color:#a6e22e">appKey</span> <span style="color:#66d9ef">string</span>
+	)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">val</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">md</span>[<span style="color:#e6db74">&#34;appId&#34;</span>]; <span style="color:#a6e22e">ok</span> {
+		<span style="color:#a6e22e">appId</span> = <span style="color:#a6e22e">val</span>[<span style="color:#ae81ff">0</span>]
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">val</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">md</span>[<span style="color:#e6db74">&#34;appkey&#34;</span>]; <span style="color:#a6e22e">ok</span> {
+		<span style="color:#a6e22e">appKey</span> = <span style="color:#a6e22e">val</span>[<span style="color:#ae81ff">0</span>]
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appId</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;100&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">appKey</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;token&#34;</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">codes</span>.<span style="color:#a6e22e">Unauthenticated</span>, <span style="color:#e6db74">&#34;Token认证信息无效: appid=%s, appkey=%s&#34;</span>, <span style="color:#a6e22e">appId</span>, <span style="color:#a6e22e">appKey</span>)
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">HelloWorld</span>{<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;Hello world&#34;</span>}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p>客户端需要改的地方是把<code>	opts = append(opts, grpc.WithPerRPCCredentials(&amp;jwt.AuthToken{Token: token.Token})) </code> 改为
+<code>opts = append(opts, grpc.WithPerRPCCredentials(&amp;CustomToken{}))</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CustomToken</span> <span style="color:#66d9ef">struct</span> {
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">CustomToken</span>) <span style="color:#a6e22e">GetRequestMetadata</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">uri</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">string</span>) (<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+		<span style="color:#e6db74">&#34;appId&#34;</span>: <span style="color:#e6db74">&#34;100&#34;</span>,
+		<span style="color:#e6db74">&#34;appKey&#34;</span>: <span style="color:#e6db74">&#34;token&#34;</span>,
+	}, <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">CustomToken</span>) <span style="color:#a6e22e">RequireTransportSecurity</span>() <span style="color:#66d9ef">bool</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+}
+</code></pre></div><p>SAN证书生成参考: <a href="../san">SAN</a></p>
+<h2 id="关于grpc和认证相关的一些想法">关于grpc和认证相关的一些想法</h2>
+<p>我们在开发过程中往往更复杂, 下面是优化过程</p>
+<ol>
+<li>grpc + tls + token验证 + 自定义认证</li>
+</ol>
+<ul>
+<li>tls: 目的是为了加密协议传输通道</li>
+<li>token认证：是为了能从token中获取用户信息，保障用户信息安全。服务器不用存储会话信息，减少内存。但是每次接口请求都增加了token解析操作。</li>
+<li>自定义认证：客户端服务器约定固定的参数， 客户端每次请求都会带上，服务器做验证(有token认证后，自定义认证没有必要了，个人观点)</li>
+</ul>
+<ol start="2">
+<li>在拦截器中统一身份token验证， 这样做的目的是减少代码冗余，但是这样没法传递信息给接口，直到我发现了<code>context.WithValue()</code></li>
+</ol>
+<ul>
+<li>服务器收到信息，解析token， 得到用户的唯一标识<code>uid</code>(这是客户端在创建token的时候加进去的)</li>
+<li>然后使用<code>context.WithValue(&quot;uid&quot;, uid)</code>, 把uid放到上下文中，传递给<code>SayHello(ctx context.Context, empty *emptypb.Empty) (*pb.HelloWorld, error)</code>
+可以通过 <code>ctx.Value(&quot;uid&quot;).(string)</code> 取出来。这样做逻辑处理的时候就知道是哪位用户在处理。</li>
+</ul>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2022/02/jwt/">http://blog.rakfree.tk/2022/02/jwt/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2022/02/san/">Grpc ｜ 通过SSL/TLS建立安全连接</a></li>
+        
+        <li><a href="/thinking/2022/01/jx/">转载｜江雪：长安十日</a></li>
+        
+        <li><a href="/2021/12/shortcodes/">Blog | 代码显示/隐藏</a></li>
+        
+        <li><a href="/2021/12/nginx/">Nginx的一些配置</a></li>
+        
+        <li><a href="/thinking/2021/12/pervert/">摘抄 ｜ 我的精神家园</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
+</body>
+
+</html>

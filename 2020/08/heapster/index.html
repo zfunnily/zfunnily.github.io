@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>K8S | 集群资源监控 heapster | Zzz记忆</title>
+    <meta property="og:title" content="K8S | 集群资源监控 heapster - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2020-08-06T09:06:05&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="K8S | 集群资源监控 heapster">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="http://blog.rakfree.tk/2020/08/heapster/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.rakfree.tk/">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
+                    
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装heapster的原因">安装heapster的原因</a></li>
+    <li><a href="#下载heapster的代码">下载heapster的代码</a></li>
+    <li><a href="#下载镜像">下载镜像</a></li>
+    <li><a href="#安装">安装</a>
+      <ul>
+        <li><a href="#a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</a></li>
+      </ul>
+    </li>
+    <li><a href="#错误解决">错误解决</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">K8S | 集群资源监控 heapster</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月6日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2'>自动部署</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="安装heapster的原因">安装heapster的原因</h2>
+<p>查看dashboard状态</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get pods --all-namespaces | grep dashboard
+kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
+kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
+</code></pre></div><p>查看dashboard的日志</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
+</code></pre></div><p>日志遇到这样的情况</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">No metric client provided. Skipping metrics.
+2020/08/03 09:02:22 [2020-08-03T09:02:22Z] Outcoming response to 192.168.84.241:40086 with 200 status code
+2020/08/03 09:02:23 Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds.
+</code></pre></div><h2 id="下载heapster的代码">下载heapster的代码</h2>
+<p>直接现在Github上的最新代码。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/kubernetes/heapster.git
+</code></pre></div><p>目前的最高版本是1.5.4。
+在heapster/deploy/kube-config/influxdb目录下有几个yaml文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-rw-r--r--. 1 root root 2276 10月  5 07:59 grafana.yaml
+-rw-r--r--. 1 root root 1100 10月  5 07:59 heapster.yaml
+-rw-r--r--. 1 root root  960 10月  5 07:59 influxdb.yaml
+</code></pre></div><p>我们再看下用了哪些镜像：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;image:&#39; *
+grafana.yaml:        image: k8s.gcr.io/heapster-grafana-amd64:v5.0.4
+heapster.yaml:        image: k8s.gcr.io/heapster-amd64:v1.5.4
+influxdb.yaml:        image: k8s.gcr.io/heapster-influxdb-amd64:v1.5.2
+</code></pre></div><h2 id="下载镜像">下载镜像</h2>
+<p>由于国内网络限制，不能直接下载k8s.gcr.io中的镜像，在阿里云（<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fcr.console.aliyun.com%2Fcn-hangzhou%2Finstances%2Fimages">https://cr.console.aliyun.com/cn-hangzhou/instances/images</a>）搜索到了下面的镜像：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/heapster-grafana-amd64:v5.0.4
+registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/heapster-amd64:v1.5.4
+registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/heapster-influxdb-amd64:v1.5.2
+</code></pre></div><p>创建脚本heapster.sh</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>images<span style="color:#f92672">=(</span>heapster-amd64:v1.5.4 heapster-influxdb-amd64:v1.5.2 heapster-grafana-amd64:v5.0.4<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">for</span> imageName in <span style="color:#e6db74">${</span>images[@]<span style="color:#e6db74">}</span> ; <span style="color:#66d9ef">do</span>
+        sudo  docker pull registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/$imageName
+        sudo  docker tag registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/$imageName k8s.gcr.io/$imageName
+        sudo  docker rmi registry.cn-hangzhou.aliyuncs.com/mirror_googlecontainers/$imageName
+<span style="color:#66d9ef">done</span>
+</code></pre></div><h2 id="安装">安装</h2>
+<p>查看这些文件，看看所使用的镜像版本是否是你上面所下载的镜像的版本。确认无误之后运行下面的命令即可配置完成:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl create -f  heapster/deploy/kube-config/influxdb/
+</code></pre></div><p>这样，我们再次进入到k8s-dashboard就可以看到各种以图表形式展示的系统，各个pod的实时的监控数据了。</p>
+<h3 id="a-id_72a可能会遇到的错误"><a id="_72"></a>可能会遇到的错误</h3>
+<p>参考链接：<a href="https://cloud.tencent.com/developer/article/1394657">https://cloud.tencent.com/developer/article/1394657</a><br> 错误1：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">error: error validating &#34;test_pod_svc.yaml&#34;: error validating data: ValidationError(Deployment.spec): missing required field &#34;selector&#34; in io.k8s.api.apps.v1.DeploymentSpec; if you choose to ignore these errors, turn validation off with --validate=false
+</code></pre></div><p>修改文件heapster/deploy/kube-config/influxdb/grafana.yaml</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-grafana
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: grafana
+</code></pre></div><p>修改文件heapster/deploy/kube-config/influxdb/influxdb.yaml</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-influxdb
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: influxdb
+</code></pre></div><p>修改文件heapster/deploy/kube-config/influxdb/heapster.yaml</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heapster
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      k8s-app: heapster
+</code></pre></div><p>错误2：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Error from server (AlreadyExists): error when creating &#34;heapster/deploy/kube-config/influxdb/grafana.yaml&#34;: deployments.apps &#34;monitoring-grafana&#34; already exists
+Error from server (AlreadyExists): error when creating &#34;heapster/deploy/kube-config/influxdb/grafana.yaml&#34;: services &#34;monitoring-grafana&#34; already exists
+Error from server (AlreadyExists): error when creating &#34;heapster/deploy/kube-config/influxdb/heapster.yaml&#34;: serviceaccounts &#34;heapster&#34; already exists
+Error from server (AlreadyExists): error when creating &#34;heapster/deploy/kube-config/influxdb/heapster.yaml&#34;: services &#34;heapster&#34; already exists
+Error from server (AlreadyExists): error when creating &#34;heapster/deploy/kube-config/influxdb/influxdb.yaml&#34;: services &#34;monitoring-influxdb&#34; already exists
+unable to recognize &#34;heapster/deploy/kube-config/influxdb/heapster.yaml&#34;: no matches for kind &#34;Deployment&#34; in version &#34;extensions/v1beta1&#34;
+</code></pre></div><p>执行删除命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl delete -f heapster/deploy/kube-config/influxdb/
+</code></pre></div><h2 id="错误解决">错误解决</h2>
+<p>参考：<a href="https://my.oschina.net/u/4335103/blog/4280880/print">https://my.oschina.net/u/4335103/blog/4280880/print</a><br> 查看dashboard状态</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get pods --all-namespaces | grep dashboard
+kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
+kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
+</code></pre></div><p>查看dashboard的日志</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2020/04/08 01:54:31 Non-critical error occurred during resource retrieval: events is forbidden: User &#34;system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard&#34; cannot list resource &#34;events&#34; in API group &#34;&#34; in the namespace &#34;default&#34;
+2020/04/08 01:54:31 [2020-04-08T01:54:31Z] Outcoming response to 192.168.122.21:7788 with 200 status code
+2020/04/08 01:54:31 Getting list of all replication controllers in the cluster
+2020/04/08 01:54:31 Non-critical error occurred during resource retrieval: replicationcontrollers is forbidden: User &#34;system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard&#34; cannot list resource &#34;replicationcontrollers&#34; in API group &#34;&#34; in the namespace &#34;default&#34;
+</code></pre></div><p>解决方法<br> 写入文件<code>vim heapster-rbac.yaml</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+rules:
+  # Allow Metrics Scraper to get metrics from the Metrics server
+  - apiGroups: [&#34;&#34;,&#34;apps&#34;,&#34;batch&#34;,&#34;extensions&#34;, &#34;metrics.k8s.io&#34;]
+    resources: [&#34;*&#34;]
+    verbs: [&#34;get&#34;, &#34;list&#34;, &#34;watch&#34;]
+
+</code></pre></div><p>执行生成命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl create -f heapster-rbac.yaml
+</code></pre></div>
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2020/08/heapster/">http://blog.rakfree.tk/2020/08/heapster/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2020/08/dashboard/">K8S | Dashboard界面管理</a></li>
+        
+        <li><a href="/2020/08/k8sinstall/">K8S | 安装</a></li>
+        
+        <li><a href="/2020/08/owtservercomplie/">Owt-server | 编译运行</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/search/">搜索</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/k8s'>k8s</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
+</body>
+
+</html>

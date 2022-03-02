@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Skynet源码赏析四 | 消息调度 | Zzz记忆</title>
+    <meta property="og:title" content="Skynet源码赏析四 | 消息调度 - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2021-10-21T10:06:39&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="Skynet源码赏析四 | 消息调度">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="http://blog.rakfree.tk/2021/10/four/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://blog.rakfree.tk/">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
+                    
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#服务间消息流转">服务间消息流转</a>
+      <ul>
+        <li><a href="#发送消息">发送消息</a></li>
+        <li><a href="#消费消息">消费消息</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">Skynet源码赏析四 | 消息调度</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="服务间消息流转">服务间消息流转</h2>
+<h3 id="发送消息">发送消息</h3>
+<p>数据结构<code>message_queue *q</code>是次级消息队列，每个服务都有与之绑定的唯一一个次级消息队列。当我们在lua层，调用<code>skynet.send(...)</code>, 或者调用<code>skynet.call(...)</code>函数发送消息，其实调用的都是<code>c.send(...)</code>,实际上调用的是c接口：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//lua-skynet.c
+</span><span style="color:#75715e"></span>lsend(lua_State <span style="color:#f92672">*</span>L) {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">send_message</span>(L, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>);
+}
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">send_message</span>(lua_State <span style="color:#f92672">*</span>L, <span style="color:#66d9ef">int</span> source, <span style="color:#66d9ef">int</span> idx_type) {...}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">skynet_send</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> context, <span style="color:#66d9ef">uint32_t</span> source, <span style="color:#66d9ef">uint32_t</span> destination , <span style="color:#66d9ef">int</span> type, <span style="color:#66d9ef">int</span> session, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> data, size_t sz){...}
+
+<span style="color:#75715e">//把消息push到次级消息中，如果次级消息不在全局消息中，则把次级消息push到全局消息中
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">skynet_context_push</span>(<span style="color:#66d9ef">uint32_t</span> handle, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_message</span> <span style="color:#f92672">*</span>message)
+{
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> ctx <span style="color:#f92672">=</span> skynet_handle_grab(handle);
+	<span style="color:#66d9ef">if</span> (ctx <span style="color:#f92672">==</span> NULL) {
+		<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+	}
+	skynet_mq_push(ctx<span style="color:#f92672">-&gt;</span>queue, message);
+	skynet_context_release(ctx);
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><ul>
+<li>发送消息所做的事情就是就是把消息push到与本地服务绑定的次级消息队列中。</li>
+</ul>
+<h3 id="消费消息">消费消息</h3>
+<p>消费消息主要在<code>threa_work</code>线程中:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//skynet.start.c
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">thread_worker</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p) {
+    ...
+    <span style="color:#75715e">//声明一个空的消息队列
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span> q <span style="color:#f92672">=</span> NULL;
+	<span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>m<span style="color:#f92672">-&gt;</span>quit) {
+	    <span style="color:#75715e">//从全局消息取出一个次级消息队列,并进行处理，处理过程都在skynet_context_message_dispatch
+</span><span style="color:#75715e"></span>		q <span style="color:#f92672">=</span> skynet_context_message_dispatch(sm, q, weight);
+		<span style="color:#66d9ef">if</span> (q <span style="color:#f92672">==</span> NULL) {
+		    ...
+		}
+	}
+	<span style="color:#66d9ef">return</span> NULL;
+}
+</code></pre></div><ul>
+<li>从代码层可以看到，消费消息就是把消息从全局消息队列中取出一个消息队列。然后进行消息处理. 工作线程就是处理这个全局消息的。</li>
+<li>从发送消息push到消息队列，再到工作线程从消息队列中取出消息进行处理，这整个工作流程就很明了。</li>
+</ul>
+<p>继续深入看<code>skynet_context_message_dispatch</code>函数做了哪些事情:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//skynet.server.c
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">skynet_context_message_dispatch</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_monitor</span> <span style="color:#f92672">*</span>sm, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>q, <span style="color:#66d9ef">int</span> weight) {
+    ...
+    <span style="color:#75715e">//从次级消息队列中获取该消息队列属于哪个服务
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle <span style="color:#f92672">=</span> skynet_mq_handle(q);
+
+    <span style="color:#75715e">//获取服务的ctx，这样就能获取服务实例指针mod了。
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> ctx <span style="color:#f92672">=</span> skynet_handle_grab(handle);
+	...
+
+	<span style="color:#66d9ef">int</span> i,n<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_message</span> msg;
+
+	<span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>n;i<span style="color:#f92672">++</span>) {
+	    <span style="color:#75715e">//循环处理
+</span><span style="color:#75715e"></span>	    ...
+		<span style="color:#75715e">//判断是否负载
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">int</span> overload <span style="color:#f92672">=</span> skynet_mq_overload(q);
+		<span style="color:#66d9ef">if</span> (overload) {
+			skynet_error(ctx, <span style="color:#e6db74">&#34;May overload, message queue length = %d&#34;</span>, overload);
+		}
+
+        <span style="color:#75715e">//触发监视器
+</span><span style="color:#75715e"></span>		skynet_monitor_trigger(sm, msg.source , handle);
+
+		<span style="color:#66d9ef">if</span> (ctx<span style="color:#f92672">-&gt;</span>cb <span style="color:#f92672">==</span> NULL) {
+			skynet_free(msg.data);
+		} <span style="color:#66d9ef">else</span> {
+		    <span style="color:#75715e">//消息处理
+</span><span style="color:#75715e"></span>			dispatch_message(ctx, <span style="color:#f92672">&amp;</span>msg);
+		}
+		<span style="color:#75715e">//解除监视器
+</span><span style="color:#75715e"></span>		skynet_monitor_trigger(sm, <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+	}
+
+	assert(q <span style="color:#f92672">==</span> ctx<span style="color:#f92672">-&gt;</span>queue);
+	<span style="color:#75715e">//再继续从全局消息中取消息
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>nq <span style="color:#f92672">=</span> skynet_globalmq_pop();
+	<span style="color:#66d9ef">if</span> (nq) {
+		<span style="color:#75715e">// If global mq is not empty , push q back, and return next queue (nq)
+</span><span style="color:#75715e"></span>		<span style="color:#75715e">// Else (global mq is empty or block, don&#39;t push q back, and return q again (for next dispatch)
+</span><span style="color:#75715e"></span>		skynet_globalmq_push(q);
+		q <span style="color:#f92672">=</span> nq;
+	} 
+	<span style="color:#75715e">//释放当前服务的ctx，实际操作是引用计数-1
+</span><span style="color:#75715e"></span>	skynet_context_release(ctx);
+
+	<span style="color:#66d9ef">return</span> q;
+}
+
+<span style="color:#75715e">//消息处理函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dispatch_message</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_message</span> <span style="color:#f92672">*</span>msg) {
+	assert(ctx<span style="color:#f92672">-&gt;</span>init);
+	CHECKCALLING_BEGIN(ctx)
+	pthread_setspecific(G_NODE.handle_key, (<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>)(uintptr_t)(ctx<span style="color:#f92672">-&gt;</span>handle));
+	<span style="color:#66d9ef">int</span> type <span style="color:#f92672">=</span> msg<span style="color:#f92672">-&gt;</span>sz <span style="color:#f92672">&gt;&gt;</span> MESSAGE_TYPE_SHIFT;
+	size_t sz <span style="color:#f92672">=</span> msg<span style="color:#f92672">-&gt;</span>sz <span style="color:#f92672">&amp;</span> MESSAGE_TYPE_MASK;
+	<span style="color:#75715e">//日志
+</span><span style="color:#75715e"></span>	FILE <span style="color:#f92672">*</span>f <span style="color:#f92672">=</span> (FILE <span style="color:#f92672">*</span>)ATOM_LOAD(<span style="color:#f92672">&amp;</span>ctx<span style="color:#f92672">-&gt;</span>logfile);
+	<span style="color:#66d9ef">if</span> (f) {
+		skynet_log_output(f, msg<span style="color:#f92672">-&gt;</span>source, type, msg<span style="color:#f92672">-&gt;</span>session, msg<span style="color:#f92672">-&gt;</span>data, sz);
+	}
+	<span style="color:#f92672">++</span>ctx<span style="color:#f92672">-&gt;</span>message_count;
+	<span style="color:#66d9ef">int</span> reserve_msg;
+	<span style="color:#66d9ef">if</span> (ctx<span style="color:#f92672">-&gt;</span>profile) {
+	    ...
+	} <span style="color:#66d9ef">else</span> {
+	    <span style="color:#75715e">//回调函数
+</span><span style="color:#75715e"></span>		reserve_msg <span style="color:#f92672">=</span> ctx<span style="color:#f92672">-&gt;</span>cb(ctx, ctx<span style="color:#f92672">-&gt;</span>cb_ud, type, msg<span style="color:#f92672">-&gt;</span>session, msg<span style="color:#f92672">-&gt;</span>source, msg<span style="color:#f92672">-&gt;</span>data, sz);
+	}
+	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>reserve_msg) {
+		skynet_free(msg<span style="color:#f92672">-&gt;</span>data);
+	}
+	CHECKCALLING_END(ctx)
+}
+</code></pre></div><p>消息处理过程</p>
+<ul>
+<li>从全局消息中取出次级消息队列</li>
+<li>根据次级消息队列找到对应的服务上下文</li>
+<li>遍历出次级消息队列的消息，并进行处理，调用<code>dispatch_message</code>函数</li>
+<li>然后<code>dispatch_message</code>调用回调函数，这个回调函数是在<code>skynet.lua</code>中,服务启动的时候调用<code>c.callback</code>设置的，于是我们就看到最后服务消息的处理逻辑是在服务启动的时候设置的<code>skynet.dispatch_message(...)</code>中。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>看到整个消息流转，其实不难看出skynet的架构，</p>
+<ol>
+<li>每个服务对应一个次级消息队列，然后每个服务所发送的消息全塞给这个消息队列。</li>
+<li>thread_work线程从全局消息队列中取出一个次级消息队列，然后就可以处理对应服务和对应的消息了。处理消息的逻辑在<code>skynet.dispatch_message(...)</code>.</li>
+</ol>
+<p>下图是skynet作为服务器，收到socket消息，并进行处理的整个过程,这个与上面内部的消息流转其实原理一样。都是把消息放到消息队列中，然后work线程从全局消息队列中取消息进行处理。
+
+        <a data-fancybox="gallery" href="https://files.catbox.moe/fbin3h.png">
+            <img class="mx-auto" alt="" src="https://files.catbox.moe/fbin3h.png" />
+        </a>
+    </p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2021/10/four/">http://blog.rakfree.tk/2021/10/four/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2021/10/skynetthree/">Skynet源码赏析三 | 服务启动</a></li>
+        
+        <li><a href="/2021/10/skynettwo/">Skynet源码赏析二 | 基础数据结构</a></li>
+        
+        <li><a href="/2021/10/skynetone/">Skynet源码赏析一 | 启动初始化的过程</a></li>
+        
+        <li><a href="/2021/01/skynetprotobuf/">Skynet | lua-protobuf</a></li>
+        
+        <li><a href="/2021/10/shell/">Golang | 调用带有后台进程shell脚本可能会被挂起</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/skynet'>skynet</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
+        })
+    </script>
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        <script type="text/javascript" src="//quote.51.la/q?id=21241103&mb=1"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="//js.users.51.la/21241103.js"></script>
+</body>
+
+</html>
