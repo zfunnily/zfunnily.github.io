@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Golang | http服务 | Zzz记忆</title>
-    <meta property="og:title" content="Golang | http服务 - Zzz记忆">
+    <title>Golang | http注解路由 | Zzz记忆</title>
+    <meta property="og:title" content="Golang | http注解路由 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
     <meta property="article:published_time" content='2022-03-02T14:51:22&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T15:36:50&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T15:47:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Golang | http服务">
+    <meta name="description" content="Golang | http注解路由">
         
     <meta name="author" content="留白">
     <meta property="og:url" content="https://zfunnily.github.io/2022/03/http/">
@@ -188,7 +188,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Golang | http服务</h1>
+            <h1 class="post-title">Golang | http注解路由</h1>
         </header>
         <date class="post-meta meta-date">
             2022年3月2日
@@ -216,7 +216,7 @@
 <p>Golang有一个很强大的官方http库了，使用上很方便。也有一些很强大的三方http框架， 比如gin，beego等等。
 自以为，框架在提供便利，提升开发效率的同时，也限制了我们的想象力。
 相对beego而言我更喜欢gin这样的简单高效框架，给我们提供了一些基础设施。剩下的有什么功能需要自己写进去就好了。</p>
-<p>在开发过程中，我需要有个注解路由的功能，百度无果，gin没有提供这样的功能。于是有了下文。</p>
+<p>在开发过程中，我需要有个注解路由的功能，也就是不用手动的把路由和对应的函数一个一个手写进行绑定，百度无果后，发现gin没有提供这样的功能。于是有了下文。</p>
 <h2 id="gin的注解路由">gin的注解路由</h2>
 <p>gin是没有注解路由功能的，但是使用golang的<code>reflect</code>包，加一点代码就能实现，代码如下</p>
 <details   >
@@ -284,7 +284,9 @@
 		<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#a6e22e">GetRoutePath</span>(<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">version</span>, <span style="color:#a6e22e">method</span>.<span style="color:#a6e22e">Name</span>), <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">HandlerFuncObj</span>(<span style="color:#a6e22e">method</span>.<span style="color:#a6e22e">Func</span>, <span style="color:#a6e22e">val</span>))
 	}
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Run</span>(<span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">port</span><span style="color:#f92672">...</span>) <span style="color:#75715e">// listen and serve on 0.0.0.0:8080 (for windows &#34;localhost:8080&#34;)
-</span></code></pre></div><p>主要逻辑在 <code>h.Start()</code> 上</p>
+</span></code></pre></div></details>
+<br/>
+<p>主要逻辑在 <code>h.Start()</code> 上</p>
 <ul>
 <li>h.Handler 是从外部绑定过来的Handler，也就是逻辑处理的Handler</li>
 <li>typ := reflect.TypeOf(h.Handler)  反射Handler类型</li>
@@ -313,39 +315,43 @@
 <p><code>obj reflect.Value</code>: 实际上是<code>reflect.ValueOf(h.Handler)</code></p>
 </li>
 <li>
-<p>reflect.Call用法: 函数用于使用输入参数in调用函数v</p>
+<p>reflect.Call用法: 函数用于使用输入参数in调用函数v; <code>func (v Value) Call(in []Value) []Value</code></p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">v</span> <span style="color:#a6e22e">Value</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">in</span> []<span style="color:#a6e22e">Value</span>) []<span style="color:#a6e22e">Value</span>
-</code></pre></div><h2 id="使用http服务器">使用Http服务器</h2>
+<h2 id="使用http服务器">使用Http服务器</h2>
 <p>声明一个结构体 <code>HttpAction struct</code>， 成员函数名字的小写就是路由，函数就是路由对应逻辑处理的地方。</p>
 <details   >
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<p><span style="color:#f92672">import</span> (
-<span style="color:#e6db74">&quot;github.com/gin-gonic/gin&quot;</span>
-)</p>
-<p><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HttpAction</span> <span style="color:#66d9ef">struct</span> {
-}</p>
-<p><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672"><em></span><span style="color:#a6e22e">HttpAction</span>) <span style="color:#a6e22e">PrintA</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672"></em></span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">interface</span>{}) {
-<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&quot;I'm A&quot;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;github.com/gin-gonic/gin&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HttpAction</span> <span style="color:#66d9ef">struct</span> {
 }
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672"><em></span><span style="color:#a6e22e">HttpAction</span>) <span style="color:#a6e22e">PrintB</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672"></em></span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">interface</span>{}) {
-<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&quot;I'm B&quot;</span>
-}</p>
-<p><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-<span style="color:#a6e22e">web</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewHttpServer</span>(<span style="color:#e6db74">&quot;v1&quot;</span>)
-<span style="color:#a6e22e">web</span>.<span style="color:#a6e22e">BindHandler</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">HttpAction</span>{})
-<span style="color:#a6e22e">web</span>.<span style="color:#a6e22e">Start</span>()
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">HttpAction</span>) <span style="color:#a6e22e">PrintA</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;I&#39;m A&#34;</span>
 }
-</code></pre></div></p>
-</details>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">HttpAction</span>) <span style="color:#a6e22e">PrintB</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">gin</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;I&#39;m B&#34;</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">web</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewHttpServer</span>(<span style="color:#e6db74">&#34;v1&#34;</span>)
+	<span style="color:#a6e22e">web</span>.<span style="color:#a6e22e">BindHandler</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">HttpAction</span>{})
+	<span style="color:#a6e22e">web</span>.<span style="color:#a6e22e">Start</span>()
+}
+</code></pre></div></details>
 <br/>
+<ul>
+<li>逻辑处理只用写在HttpAction的成员函数中</li>
+<li>不用一个一个手动的把路由和函数进行绑定。</li>
+</ul>
 <p>至此，一个结合gin框架的注解路由就写好了。</p>
-</details>
-<br/>
 
 
             <h4 align="center">--完--</h4>
@@ -364,7 +370,7 @@
                 <a href="https://zfunnily.github.io/2022/03/http/">https://zfunnily.github.io/2022/03/http/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 15:36:50</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 15:47:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -492,7 +498,7 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2022/03/http/" title="Golang | http服务">Golang | http服务</a>
+        <a href="https://zfunnily.github.io/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
     <li>
