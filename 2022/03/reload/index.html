@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-01T11:33:22&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T11:43:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T11:49:33&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Goang | 热更">
@@ -347,20 +347,25 @@ ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kil
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Hello, I am PluginB!
 </code></pre></div><h2 id="注意的点">注意的点</h2>
 <ol>
-<li>plugin插件必须在main包下</li>
-<li>golang文件会检测plugin.so文件是否已经加载。</li>
-</ol>
+<li>
+<p>plugin插件必须在main包下</p>
+</li>
+<li>
+<p>golang文件会检测plugin.so文件是否已经加载。</p>
 <ul>
 <li>解决办法1: 可以使用不同的文件名</li>
 <li>解决办法2: 编译插件时可以指定编译参数<code> -ldflags -pluginpath=&quot;plugin/hot-1&quot;</code> (不推荐)</li>
 </ul>
-<ol start="3">
-<li>怎么做到不修改plugin.so文件名字。</li>
-</ol>
+</li>
+<li>
+<p>怎么做到不修改plugin.so文件名字。</p>
 <ul>
-<li>解决办法: 每次新插件的生成新的文件名。然后使用软连接连接到固定的 plugin.so 上。</li>
+<li>解决办法: 每次新插件的生成新的文件名。然后使用软连接连接到固定的 plugin.so 上。可以参考<code>Makefile</code>文件的<code>make reall</code></li>
 </ul>
-<ol start="4">
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ rm -rf plugin.so &amp;&amp; ln -s $(pname) plugin.so
+</code></pre></div><ol start="4">
 <li>golang的plugin只支持linux &amp; macosx系统。</li>
 </ol>
 
@@ -381,7 +386,7 @@ ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kil
                 <a href="https://zfunnily.github.io/2022/03/reload/">https://zfunnily.github.io/2022/03/reload/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 11:43:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 11:49:33</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
