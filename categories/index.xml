@@ -2,170 +2,174 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Zzz记忆</title>
-    <link>https://zfunnily.github.io/categories/</link>
+    <link>http://blog.rakfree.tk/categories/</link>
     <description>Recent content in Categories on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 29 Dec 2021 13:50:28 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Mar 2022 14:51:22 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.rakfree.tk/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
-      <title>Other</title>
-      <link>https://zfunnily.github.io/categories/Other/</link>
-      <pubDate>Wed, 29 Dec 2021 13:50:28 +0800</pubDate>
+      <title>编程</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Wed, 02 Mar 2022 14:51:22 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Other/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>OpenResty</title>
-      <link>https://zfunnily.github.io/categories/OpenResty/</link>
-      <pubDate>Tue, 28 Dec 2021 16:04:10 +0800</pubDate>
+      <title>编程.Golang</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/</link>
+      <pubDate>Wed, 02 Mar 2022 14:51:22 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/OpenResty/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Thinking</title>
-      <link>https://zfunnily.github.io/categories/Thinking/</link>
+      <title>转载</title>
+      <link>http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/</link>
+      <pubDate>Thu, 06 Jan 2022 11:32:56 +0800</pubDate>
+      
+      <guid>http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>随笔</title>
+      <link>http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</link>
       <pubDate>Mon, 27 Dec 2021 21:44:21 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Thinking/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>游戏开发</title>
-      <link>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
+      <title>随笔.摘抄</title>
+      <link>http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/</link>
+      <pubDate>Mon, 27 Dec 2021 21:44:21 +0800</pubDate>
+      
+      <guid>http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编程.Lua</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/</link>
       <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>English</title>
-      <link>https://zfunnily.github.io/categories/English/</link>
-      <pubDate>Wed, 15 Dec 2021 11:14:10 +0800</pubDate>
+      <title>编程.游戏开发</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/English/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>音视频</title>
-      <link>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+      <title>编程.音视频</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
       <pubDate>Mon, 15 Nov 2021 11:23:24 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>P2P</title>
-      <link>https://zfunnily.github.io/categories/P2P/</link>
+      <title>编程.P2P</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/</link>
       <pubDate>Sun, 07 Nov 2021 15:49:46 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/P2P/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Skynet</title>
-      <link>https://zfunnily.github.io/categories/Skynet/</link>
-      <pubDate>Thu, 21 Oct 2021 10:06:39 +0800</pubDate>
+      <title>博客记事</title>
+      <link>http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/</link>
+      <pubDate>Fri, 22 Oct 2021 19:01:20 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Skynet/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Golang</title>
-      <link>https://zfunnily.github.io/categories/Golang/</link>
-      <pubDate>Wed, 13 Oct 2021 17:15:45 +0800</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/Golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Unity3D</title>
-      <link>https://zfunnily.github.io/categories/Unity3D/</link>
+      <title>编程.Unity3D</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/</link>
       <pubDate>Tue, 07 Sep 2021 15:55:59 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Unity3D/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>https://zfunnily.github.io/categories/Linux/</link>
+      <title>IT</title>
+      <link>http://blog.rakfree.tk/categories/IT/</link>
       <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Linux/</guid>
+      <guid>http://blog.rakfree.tk/categories/IT/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Lua</title>
-      <link>https://zfunnily.github.io/categories/Lua/</link>
-      <pubDate>Mon, 10 May 2021 16:39:50 +0800</pubDate>
+      <title>IT.Linux</title>
+      <link>http://blog.rakfree.tk/categories/IT.Linux/</link>
+      <pubDate>Tue, 07 Sep 2021 10:46:58 +0800</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Lua/</guid>
+      <guid>http://blog.rakfree.tk/categories/IT.Linux/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>汇编学习笔记</title>
-      <link>https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <title>编程.C</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/</link>
+      <pubDate>Tue, 23 Mar 2021 10:13:31 +0000</pubDate>
+      
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>编程.汇编</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/</link>
       <pubDate>Mon, 01 Feb 2021 14:40:51 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Redis源码解析</title>
-      <link>https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</link>
-      <pubDate>Wed, 13 Jan 2021 17:52:27 +0000</pubDate>
+      <title>编程.网络编程</title>
+      <link>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Wed, 30 Dec 2020 09:19:41 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>网络编程</title>
-      <link>https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Mon, 28 Dec 2020 11:57:04 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>https://zfunnily.github.io/categories/Docker/</link>
+      <title>自动部署</title>
+      <link>http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sat, 28 Nov 2020 13:32:57 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/Docker/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>k8s入门</title>
-      <link>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</link>
-      <pubDate>Mon, 17 Aug 2020 13:58:35 +0000</pubDate>
+      <title>科普</title>
+      <link>http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/</link>
+      <pubDate>Mon, 12 Oct 2020 16:29:34 +0000</pubDate>
       
-      <guid>https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C/C&#43;&#43;</title>
-      <link>https://zfunnily.github.io/categories/C/C&#43;&#43;/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://zfunnily.github.io/categories/C/C&#43;&#43;/</guid>
+      <guid>http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/</guid>
       <description></description>
     </item>
     

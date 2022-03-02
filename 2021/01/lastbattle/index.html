@@ -15,13 +15,13 @@
     <meta property="article:published_time" content='2021-01-02T23:19:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-01-02T23:19:58&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Lastbattle | 游戏场景服务器SS解析">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://zfunnily.github.io/2021/01/lastbattle/">
+    <meta property="og:url" content="http://blog.rakfree.tk/2021/01/lastbattle/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -35,6 +35,8 @@
     
     
     
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
     
 
     
@@ -50,7 +52,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://zfunnily.github.io/">
+                    <a id="logo" href="http://blog.rakfree.tk/">
                         Zzz记忆
                     </a>
                 
@@ -59,15 +61,15 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://zfunnily.github.io/">首页</a>
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
                     
-                    <a  href="https://zfunnily.github.io/thinking/" title="随想">随想</a>
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
                     
-                    <a  href="https://zfunnily.github.io/archives/" title="归档">归档</a>
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
                     
-                    <a  href="https://zfunnily.github.io/about/" title="关于">关于</a>
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
                     
-                    <a  href="https://zfunnily.github.io/search/" title="搜索">搜索</a>
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -202,7 +204,9 @@
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
             
         </div>
         
@@ -223,21 +227,21 @@
 <li>指令： eMsgToSSFromCS_CreateBattle</li>
 <li>GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数<code>INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)</code>中创建站场成功后，加入到战场管理器中:</li>
 </ul>
-<pre><code>m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
-</code></pre><p>发送创建结果给CS服务器</p>
-<pre><code>CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
-</code></pre><p>发送可以进入战场的消息给客户端</p>
-<pre><code>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
-</code></pre><h2 id="英雄移动">英雄移动</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
+</code></pre></div><p>发送创建结果给CS服务器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
+</code></pre></div><p>发送可以进入战场的消息给客户端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
+</code></pre></div><h2 id="英雄移动">英雄移动</h2>
 <ul>
 <li>指令：eMsgToGSToSSFromGC_AskMoveDir，eMsgToGSToSSFromGC_AskStopMove</li>
 <li>GSToSS： 客户端发往SS,fromGC
 收到客户端发来的移动信息， <code>GCToSS::MoveDir</code>, 转化为服务器能识别的参数 <code>CVector3D</code>, 开始计算客户端移动的位置</li>
 </ul>
-<pre><code>CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
 m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
-</code></pre><p>开始按照方向移动：</p>
-<pre><code>bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
+</code></pre></div><p>开始按照方向移动：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
 {&lt;!-- --&gt;
 ...
         //计算下一个100毫秒后的位置
@@ -251,33 +255,33 @@ m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
 		}
 		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
 }
-</code></pre><pre><code>INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
-</code></pre><p>同步移动状态到客户端</p>
-<pre><code>pcCurBattle-&gt;SyncState(this);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
+</code></pre></div><p>同步移动状态到客户端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pcCurBattle-&gt;SyncState(this);
 ...
 SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
 ...
 CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
-</code></pre><pre><code>INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
 void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
 
-</code></pre><h2 id="英雄技能">英雄技能</h2>
+</code></pre></div><h2 id="英雄技能">英雄技能</h2>
 <ul>
 <li>指令：eMsgToGSToSSFromGC_AskBuyGoods- GSToSS：客户端发往SS,fromGC
 SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGoods</code>， 转化数据为<code>GCToSS::UseSkill</code>格式 :</li>
 </ul>
-<pre><code>boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
 INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
-</code></pre><p>请求释放技能：</p>
-<pre><code>INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
+</code></pre></div><p>请求释放技能：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
 //检查是否是不能操作状态
 //检查是否被沉默了
 //检查是否在吸附中，如果是，不能使用技能
 //获取并检查技能是否存在
 //检查技能是否符合可用条件
 //检查是否是正在运行的技能
-</code></pre><p>开始使用技能</p>
-<pre><code>pSkill-&gt;Start();
+</code></pre></div><p>开始使用技能</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pSkill-&gt;Start();
 ```cpp
 准备技能的配置
 ```cpp
@@ -286,14 +290,14 @@ void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
 	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
 
 }
-</code></pre><p>从配置中添加技能</p>
-<pre><code>INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
+</code></pre></div><p>从配置中添加技能</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
 	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
 ...
 AddEffect(pEffect); 
 }
-</code></pre><p>添加效果到管理器中</p>
-<pre><code>INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
+</code></pre></div><p>添加效果到管理器中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
 ...
         //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
 		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
@@ -314,7 +318,7 @@ AddEffect(pEffect);
 //正在运行的效果列表
 m_UpdateEffectMap
 
-</code></pre><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
+</code></pre></div><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
 <ul>
 <li>SSSkillEffect_Buf.cpp： 附加的buff技能</li>
 <li>SSSkillEffect_Fly.cpp: 飞行技能</li>
@@ -351,7 +355,7 @@ m_UpdateEffectMap
 <li><code>n32CPCost</code>： 金币</li>
 </ul>
 <p>举例</p>
-<pre><code>	&lt;info un32GoodsID=&quot;30038&quot;&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	&lt;info un32GoodsID=&#34;30038&#34;&gt;
 		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
 		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
 		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
@@ -376,14 +380,14 @@ m_UpdateEffectMap
 		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
 		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
 	&lt;/info&gt;
-</code></pre><p>神果+65点魔法攻击， 售价是800金币。</p>
+</code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p>
 <h2 id="整个服务器的心跳">整个服务器的心跳</h2>
 <p>心跳的作用：</p>
 <ul>
 <li>检查掉线时间。如果玩家掉线超过30秒，则将其AI替换为机器人AI</li>
 <li>技能心跳- 移动心跳- NPC和hero的心跳</li>
 </ul>
-<pre><code>void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
 ...
     //移动心跳
     m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
@@ -398,7 +402,7 @@ m_UpdateEffectMap
     m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
 ...
 }
-</code></pre>
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -406,9 +410,18 @@ m_UpdateEffectMap
         
 <div class="post-archive">
     <ul class="post-copyright">
-        <li><strong>原文作者：</strong><a rel="author" href="https://zfunnily.github.io/">留白</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://zfunnily.github.io/2021/01/lastbattle/">https://zfunnily.github.io/2021/01/lastbattle/</a></li>
-        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="http://blog.rakfree.tk/2021/01/lastbattle/">http://blog.rakfree.tk/2021/01/lastbattle/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
 <br/>
@@ -421,15 +434,15 @@ m_UpdateEffectMap
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/12/%E4%B8%80%E4%B8%AAreactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E5%BA%93ccnet/">CCnet | 一个reactor单线程网络库</a></li>
+        <li><a href="/2020/12/ccnet/">CCnet | 单线程reactor演变为多线程</a></li>
         
-        <li><a href="/2020/12/C-vector%E4%B8%AD%E7%9A%84resize%E5%87%BD%E6%95%B0-VS-reserve%E5%87%BD%E6%95%B0/">C/C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a></li>
+        <li><a href="/2020/12/syncmutex/">Golang | sync.Mutex详解</a></li>
         
-        <li><a href="/2020/11/lastbattlelogin/">LastBattle | 登录流程(LS &amp; BS &amp; GS)</a></li>
+        <li><a href="/2020/12/iomodels/">五种网络IO模型总结</a></li>
         
-        <li><a href="/2020/11/lastbattleserver/">LastBattle | 服务架构</a></li>
+        <li><a href="/2020/12/ccnetone/">CCnet | 一个reactor单线程网络库</a></li>
         
-        <li><a href="/2020/11/lastbattleone/">LastBattle | 安装部署笔记</a></li>
+        <li><a href="/2020/12/reserve/">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a></li>
         
     </ul>
 </div>
@@ -437,19 +450,7 @@ m_UpdateEffectMap
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8'>游戏服务器</a></li>
-                
-                <li><a href='/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>游戏开发</a></li>
-                
-                <li><a href='/tags/C/C&#43;&#43;'>C/C&#43;&#43;</a></li>
-                
-                <li><a href='/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90'>最后一战服务器源码解析</a></li>
-                
-                <li><a href='/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8'>场景服务器</a></li>
-                
-            </ul>
+            没有标签
             
         </div>
     </article>
@@ -485,7 +486,7 @@ m_UpdateEffectMap
 <footer id="footer">
 
     <div>
-        &copy; 2021 <a href="https://zfunnily.github.io/">Zzz记忆 By 留白</a>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -534,10 +535,10 @@ m_UpdateEffectMap
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://zfunnily.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://zfunnily.github.io/">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -547,23 +548,23 @@ m_UpdateEffectMap
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/music/" title="Blog | 音乐播放器">Blog | 音乐播放器</a>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
     <li>
-        <a href="https://zfunnily.github.io/2021/12/dark/" title="Blog | 网站暗模式">Blog | 网站暗模式</a>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
 </ul>
@@ -572,7 +573,11 @@ m_UpdateEffectMap
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+    <li>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -585,41 +590,41 @@ m_UpdateEffectMap
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://zfunnily.github.io/categories/C/C&#43;&#43;/">C/C&#43;&#43; (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Docker/">Docker (3)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/English/">English (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Golang/">Golang (18)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Linux/">Linux (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Lua/">Lua (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/OpenResty/">OpenResty (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Other/">Other (8)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/P2P/">P2P (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析 (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Skynet/">Skynet (6)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Thinking/">Thinking (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/Unity3D/">Unity3D (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/k8s%E5%85%A5%E9%97%A8/">k8s入门 (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">汇编学习笔记 (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发 (7)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程 (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频 (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
 </ul>
     </section>
@@ -628,291 +633,45 @@ m_UpdateEffectMap
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://zfunnily.github.io/tags/ATT/">AT&amp;T</a>
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
     
-    <a href="https://zfunnily.github.io/tags/A%E7%AE%97%E6%B3%95/">A*算法</a>
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
     
-    <a href="https://zfunnily.github.io/tags/C/C&#43;&#43;/">C/C&#43;&#43;</a>
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
     
-    <a href="https://zfunnily.github.io/tags/C%E8%B0%83%E7%94%A8%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">C调用汇编函数</a>
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
     
-    <a href="https://zfunnily.github.io/tags/Darkmode.js/">Darkmode.js</a>
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
     
-    <a href="https://zfunnily.github.io/tags/Go%E5%88%87%E7%89%87/">Go切片</a>
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
     
-    <a href="https://zfunnily.github.io/tags/Go%E6%8C%87%E9%92%88/">Go指针</a>
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
     
-    <a href="https://zfunnily.github.io/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">IO多路复用</a>
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
     
-    <a href="https://zfunnily.github.io/tags/Intel%E8%A7%84%E8%8C%83/">Intel规范</a>
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
     
-    <a href="https://zfunnily.github.io/tags/Openresty/">Openresty</a>
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
     
-    <a href="https://zfunnily.github.io/tags/RPG/">RPG</a>
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
     
-    <a href="https://zfunnily.github.io/tags/Redis%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Redis源码解析</a>
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
     
-    <a href="https://zfunnily.github.io/tags/SDL1.2/">SDL1.2</a>
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
     
-    <a href="https://zfunnily.github.io/tags/asm/">asm</a>
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
     
-    <a href="https://zfunnily.github.io/tags/atoi/">atoi</a>
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
     
-    <a href="https://zfunnily.github.io/tags/cgo/">cgo</a>
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
     
-    <a href="https://zfunnily.github.io/tags/char%E6%95%B0%E7%BB%84/">char数组</a>
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     
-    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
     
-    <a href="https://zfunnily.github.io/tags/conjunctio/">conjunctio</a>
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
     
-    <a href="https://zfunnily.github.io/tags/coroutine/">coroutine</a>
-    
-    <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
-    
-    <a href="https://zfunnily.github.io/tags/docker/">docker</a>
-    
-    <a href="https://zfunnily.github.io/tags/epoll/">epoll</a>
-    
-    <a href="https://zfunnily.github.io/tags/event/">event</a>
-    
-    <a href="https://zfunnily.github.io/tags/except/">except</a>
-    
-    <a href="https://zfunnily.github.io/tags/ffmpeg/">ffmpeg</a>
-    
-    <a href="https://zfunnily.github.io/tags/fps/">fps</a>
-    
-    <a href="https://zfunnily.github.io/tags/game/">game</a>
-    
-    <a href="https://zfunnily.github.io/tags/gcc/">gcc</a>
-    
-    <a href="https://zfunnily.github.io/tags/git/">git</a>
-    
-    <a href="https://zfunnily.github.io/tags/github/">github</a>
-    
-    <a href="https://zfunnily.github.io/tags/glibc/">glibc</a>
-    
-    <a href="https://zfunnily.github.io/tags/go-libp2p/">go-libp2p</a>
-    
-    <a href="https://zfunnily.github.io/tags/golang/">golang</a>
-    
-    <a href="https://zfunnily.github.io/tags/golibp2p/">golibp2p</a>
-    
-    <a href="https://zfunnily.github.io/tags/gomod/">gomod</a>
-    
-    <a href="https://zfunnily.github.io/tags/grpc/">grpc</a>
-    
-    <a href="https://zfunnily.github.io/tags/grpc%E7%A9%BA%E8%AF%B7%E6%B1%82/">grpc空请求</a>
-    
-    <a href="https://zfunnily.github.io/tags/html/">html</a>
-    
-    <a href="https://zfunnily.github.io/tags/http/">http</a>
-    
-    <a href="https://zfunnily.github.io/tags/hugo/">hugo</a>
-    
-    <a href="https://zfunnily.github.io/tags/itoa/">itoa</a>
-    
-    <a href="https://zfunnily.github.io/tags/js/">js</a>
-    
-    <a href="https://zfunnily.github.io/tags/js/">js</a>
-    
-    <a href="https://zfunnily.github.io/tags/jwt/">jwt</a>
-    
-    <a href="https://zfunnily.github.io/tags/kubernetes/">kubernetes</a>
-    
-    <a href="https://zfunnily.github.io/tags/libevent/">libevent</a>
-    
-    <a href="https://zfunnily.github.io/tags/libp2p/">libp2p</a>
-    
-    <a href="https://zfunnily.github.io/tags/linux/">linux</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua/">lua</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua-pop/">lua-pop</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua-protobuf/">lua-protobuf</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua_api/">lua_api</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua_next/">lua_next</a>
-    
-    <a href="https://zfunnily.github.io/tags/lua_settop/">lua_settop</a>
-    
-    <a href="https://zfunnily.github.io/tags/masm/">masm</a>
-    
-    <a href="https://zfunnily.github.io/tags/move/">move</a>
-    
-    <a href="https://zfunnily.github.io/tags/music/">music</a>
-    
-    <a href="https://zfunnily.github.io/tags/mysql/">mysql</a>
-    
-    <a href="https://zfunnily.github.io/tags/nginx/">nginx</a>
-    
-    <a href="https://zfunnily.github.io/tags/node.js/">node.js</a>
-    
-    <a href="https://zfunnily.github.io/tags/nsf/">nsf</a>
-    
-    <a href="https://zfunnily.github.io/tags/other/">other</a>
-    
-    <a href="https://zfunnily.github.io/tags/p2p/">p2p</a>
-    
-    <a href="https://zfunnily.github.io/tags/peerconnection/">peerconnection</a>
-    
-    <a href="https://zfunnily.github.io/tags/preposition/">preposition</a>
-    
-    <a href="https://zfunnily.github.io/tags/protobuf/">protobuf</a>
-    
-    <a href="https://zfunnily.github.io/tags/randomquotes/">randomquotes</a>
-    
-    <a href="https://zfunnily.github.io/tags/reactor/">reactor</a>
-    
-    <a href="https://zfunnily.github.io/tags/redis/">redis</a>
-    
-    <a href="https://zfunnily.github.io/tags/relay/">relay</a>
-    
-    <a href="https://zfunnily.github.io/tags/screen/">screen</a>
-    
-    <a href="https://zfunnily.github.io/tags/select/epoll/">select/epoll</a>
-    
-    <a href="https://zfunnily.github.io/tags/shell/">shell</a>
-    
-    <a href="https://zfunnily.github.io/tags/shortcodes/">shortcodes</a>
-    
-    <a href="https://zfunnily.github.io/tags/skynet/">skynet</a>
-    
-    <a href="https://zfunnily.github.io/tags/skynet%E5%85%A5%E9%97%A8/">skynet入门</a>
-    
-    <a href="https://zfunnily.github.io/tags/socket/">socket</a>
-    
-    <a href="https://zfunnily.github.io/tags/stream/">stream</a>
-    
-    <a href="https://zfunnily.github.io/tags/sync/">sync</a>
-    
-    <a href="https://zfunnily.github.io/tags/sync.Mutex/">sync.Mutex</a>
-    
-    <a href="https://zfunnily.github.io/tags/tcpip/">tcpip</a>
-    
-    <a href="https://zfunnily.github.io/tags/thinking/">thinking</a>
-    
-    <a href="https://zfunnily.github.io/tags/transform/">transform</a>
-    
-    <a href="https://zfunnily.github.io/tags/ubuntu/">ubuntu</a>
-    
-    <a href="https://zfunnily.github.io/tags/ucontext/">ucontext</a>
-    
-    <a href="https://zfunnily.github.io/tags/ugui/">ugui</a>
-    
-    <a href="https://zfunnily.github.io/tags/unity3D/">unity3D</a>
-    
-    <a href="https://zfunnily.github.io/tags/upload/">upload</a>
-    
-    <a href="https://zfunnily.github.io/tags/vim/">vim</a>
-    
-    <a href="https://zfunnily.github.io/tags/vscode/">vscode</a>
-    
-    <a href="https://zfunnily.github.io/tags/web/">web</a>
-    
-    <a href="https://zfunnily.github.io/tags/webrtc/">webrtc</a>
-    
-    <a href="https://zfunnily.github.io/tags/windows/">windows</a>
-    
-    <a href="https://zfunnily.github.io/tags/ziplist/">ziplist</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E4%BB%8B%E8%AF%8D/">介词</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0/">仙剑奇侠传</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%85%B1%E4%BA%AB%E6%A1%8C%E9%9D%A2/">共享桌面</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%86%92%E6%B3%A1%E6%8E%92/">冒泡排</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%8D%8F%E7%A8%8B/">协程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%90%8C%E6%AD%A5/%E5%BC%82%E6%AD%A5/">同步/异步</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%9C%BA%E6%99%AF%E6%9C%8D%E5%8A%A1%E5%99%A8/">场景服务器</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/">堆排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%A0%86%E6%A0%88/">堆栈</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%AD%97%E7%AC%A6%E5%92%8C%E6%95%B4%E6%95%B0%E4%BA%92%E8%BD%AC/">字符和整数互转</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88/">指针</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%8C%87%E9%92%88%E8%BF%90%E7%AE%97/">指针运算</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%9A%97%E6%A8%A1%E5%BC%8F/">暗模式</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%9C%80%E5%90%8E%E4%B8%80%E6%88%98%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">最后一战服务器源码解析</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%9E%B6%E6%9E%84/">架构</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96/">汇编</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B1%87%E7%BC%96%E5%87%BD%E6%95%B0/">汇编函数</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8/">游戏服务器</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6/">游戏框架</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E5%92%8C%E6%B6%88%E8%B4%B9%E8%80%85/">生产者和消费者</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%99%BE%E5%85%83%E4%B9%B0%E9%B8%A1/">百元买鸡</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%A9%BA%E5%8F%82%E6%95%B0/">空参数</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%A9%BF%E9%80%8F/">穿透</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C/">网络</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%87%AA%E5%8A%A8%E5%AF%BB%E8%B7%AF/">自动寻路</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E8%BF%9E%E8%AF%8D/">连词</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%98%BB%E5%A1%9E/%E9%9D%9E%E9%98%BB%E5%A1%9E/">阻塞/非阻塞</a>
-    
-    <a href="https://zfunnily.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
 </div>
     </section>
@@ -933,7 +692,7 @@ m_UpdateEffectMap
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="https://zfunnily.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
