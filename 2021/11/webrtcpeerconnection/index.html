@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-11-14T16:20:31&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T15:41:17&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Webrtc一 | peerconnection">
@@ -153,7 +153,12 @@
   <ul>
     <li><a href="#环境">环境</a></li>
     <li><a href="#webrtc交互过程">webrtc交互过程</a></li>
-    <li><a href="#peer_connection-解析">peer_connection 解析</a></li>
+    <li><a href="#peer_connection-解析">peer_connection 解析</a>
+      <ul>
+        <li><a href="#peera">peerA:</a></li>
+        <li><a href="#peerb">peerB:</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -246,7 +251,7 @@
   control_socket_<span style="color:#f92672">-&gt;</span>SignalReadEvent.connect(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>PeerConnectionClient<span style="color:#f92672">::</span>OnRead); <span style="color:#75715e">//消息回调
 </span><span style="color:#75715e"></span>  hanging_get_<span style="color:#f92672">-&gt;</span>SignalReadEvent.connect( <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>PeerConnectionClient<span style="color:#f92672">::</span>OnHangingGetRead); <span style="color:#75715e">//同上
 </span><span style="color:#75715e"></span>}
-</code></pre></div><p>peerA:</p>
+</code></pre></div><h3 id="peera">peerA:</h3>
 <ol>
 <li>连接server，获得自己的<code>peer_id_</code>； 主动连接<code>PeerConnectionClient::DoConnect()</code>, 发送获取<code>peer_id_</code>的协议<code>GET /sign_in</code>， 回调<code>PeerConnectionClient::OnConnect(rtc::AsyncSocket* socket)</code>, 其他客户端连接服务，会添加到peerList</li>
 <li>主动连接<code>peerB</code>, <code>callback_-&gt;ConnectToPeer(id);</code></li>
@@ -278,10 +283,14 @@
 <li>Once a remote candidate is received from the peerB,<code>CreateIceCandidate</code>,<code>AddIceCandidate</code></li>
 <li>添加candidate <code>CreateIceCandidate</code>, <code>AddIceCandidate</code></li>
 </ul>
-<p>peerB:</p>
+<h3 id="peerb">peerB:</h3>
 <ol>
-<li>同 peerA</li>
-<li>收到peerA发来的连接信息， <code>OnMessageFromPeer</code></li>
+<li>
+<p>同 peerA</p>
+</li>
+<li>
+<p>收到peerA发来的连接信息， <code>OnMessageFromPeer</code></p>
+</li>
 </ol>
 <ul>
 <li>初始化peerconnection, <code>Conductor::InitializePeerConnection())</code>
@@ -353,8 +362,14 @@
 //
 // 7. Once a candidate has been gathered, the PeerConnection will call the
 // observer function OnIceCandidate. Send these candidates to the remote peer.
-</code></pre></div><p>webrtc交互流程图片来自: <a href="https://webrtc.mthli.com/connection/peer-connection/">webrtc学习指南-peer-connection</a>
-参考连接: <a href="https://blog.csdn.net/ice_ly000/article/details/103162838">https://blog.csdn.net/ice_ly000/article/details/103162838</a></p>
+</code></pre></div><ul>
+<li>
+<p>webrtc交互流程图片来自: <a href="https://webrtc.mthli.com/connection/peer-connection/">webrtc学习指南-peer-connection</a></p>
+</li>
+<li>
+<p>参考连接: <a href="https://blog.csdn.net/ice_ly000/article/details/103162838">https://blog.csdn.net/ice_ly000/article/details/103162838</a></p>
+</li>
+</ul>
 
 
             <h4 align="center">--完--</h4>
@@ -373,7 +388,7 @@
                 <a href="https://zfunnily.github.io/2021/11/webrtcpeerconnection/">https://zfunnily.github.io/2021/11/webrtcpeerconnection/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 15:41:17</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
