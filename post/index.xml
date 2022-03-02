@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 01 Mar 2022 11:33:22 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Mar 2022 14:51:22 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang | http服务</title>
+      <link>https://zfunnily.github.io/2022/03/http/</link>
+      <pubDate>Wed, 02 Mar 2022 14:51:22 +0800</pubDate>
+      
+      <guid>https://zfunnily.github.io/2022/03/http/</guid>
+      <description>Http服务器 Golang有一个很强大的官方http库了，使用上很方便。也有一些很强大的三方http框架， 比如gin，beego等等。 自以为，框架在提供便利，提升开发效率的同时，也限制了我们的想象力。</description>
+    </item>
+    
     <item>
       <title>Goang | Plugin插件热更</title>
       <link>https://zfunnily.github.io/2022/03/reload/</link>

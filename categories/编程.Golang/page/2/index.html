@@ -93,6 +93,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://zfunnily.github.io/2021/01/pbempty/">Protobuf | 请求参数为空的案例</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月22日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            参数为空的grpc请求怎么定义 google protobuf已经提供了空参数 //empty.proto message Empty {&lt;!-- --&gt;} 使用方法，在proto文件中导入empty.proto, 定义一个请求参数和返回值为空的函数emptyfunction， 函数名字……
+            <p class="readmore"><a href="https://zfunnily.github.io/2021/01/pbempty/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2021/01/goslience/">Golang | C数组转化为Golang的切片类型</a>
             </h1>
         </header>
@@ -315,31 +340,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Cgo | 简单使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月5日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&#34;%s\n&#34;, str); } */ import &#34;C&#34; //import “C” 必须单起一行，并且紧跟在注释行之后 import &#34;unsafe&#34; func main() { s := &#34;Hello Cgo&#34; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -443,6 +443,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2022/03/http/" title="Golang | http服务">Golang | http服务</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
@@ -456,10 +460,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
     </li>
     
 </ul>
@@ -493,11 +493,11 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (79)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (21)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
