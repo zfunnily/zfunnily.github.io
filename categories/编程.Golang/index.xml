@@ -13,7 +13,7 @@
       <pubDate>Tue, 01 Mar 2022 11:33:22 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2022/03/reload/</guid>
-      <description>热更新 动态脚本更新 golang插件 golang插件更新 plugin文件必须main包 plugin package main import ( &amp;#34;fmt&amp;#34; ) func IamPluginA() { fmt.Println(&amp;#34;Hello, I am PluginA!&amp;#34;) } main文件 maing.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;plugin&amp;#34; &amp;#34;pro2d/src/components/logger&amp;#34; &amp;#34;syscall&amp;#34; ) func LoadPlugin() { p, err := plugin.Open(&amp;#34;./plugin.so&amp;#34;) if err != nil { fmt.Println(err) return } s, err := p.Lookup(&amp;#34;IamPluginA&amp;#34;) if err != nil { fmt.Println(&amp;#34;error</description>
+      <description>热更新 动态脚本更新 (php) 短链接无状态服务器热更 (http) golang Plugin热更 (.so 动态库更新) golang插件更新 plugin文件必须main包 plugin package main import ( &amp;#34;fmt&amp;#34; ) func IamPluginA() { fmt.Println(&amp;#34;Hello, I am PluginA!&amp;#34;) } main文件 maing.go package main import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;plugin&amp;#34; &amp;#34;pro2d/src/components/logger&amp;#34; &amp;#34;syscall&amp;#34; ) func LoadPlugin() { p,</description>
     </item>
     
     <item>
