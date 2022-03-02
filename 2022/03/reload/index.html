@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Goang | 热更 | Zzz记忆</title>
-    <meta property="og:title" content="Goang | 热更 - Zzz记忆">
+    <title>Goang | plugin热更 | Zzz记忆</title>
+    <meta property="og:title" content="Goang | plugin热更 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
     <meta property="article:published_time" content='2022-03-01T11:33:22&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T11:49:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T11:55:54&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Goang | 热更">
+    <meta name="description" content="Goang | plugin热更">
         
     <meta name="author" content="留白">
     <meta property="og:url" content="https://zfunnily.github.io/2022/03/reload/">
@@ -188,7 +188,7 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Goang | 热更</h1>
+            <h1 class="post-title">Goang | plugin热更</h1>
         </header>
         <date class="post-meta meta-date">
             2022年3月1日
@@ -214,9 +214,24 @@
         <div class="post-content">
             <h2 id="热更新">热更新</h2>
 <ol>
-<li>动态脚本更新 (php)</li>
-<li>短链接无状态服务器热更 (http)</li>
-<li>golang Plugin热更 (.so 动态库更新)</li>
+<li>
+<p>动态脚本更新 (php)</p>
+</li>
+<li>
+<p>短链接无状态服务器热更 (http)</p>
+</li>
+<li>
+<p>长连接有状态，数据跟逻辑分离</p>
+<ul>
+<li>golang Plugin热更 (.so 动态库更新) &mdash;-逻辑热更</li>
+</ul>
+</li>
+<li>
+<p>长连接有状态,在运维层面, 利用容器部署热更(docker, k8s)</p>
+<ul>
+<li>服务不接受新连接,处理完剩余连接的逻辑，主动关闭。由已经更新过的服务接收新连接处理逻辑。</li>
+</ul>
+</li>
 </ol>
 <h2 id="golang插件更新">golang插件更新</h2>
 <p>下面代码实现的需求:</p>
@@ -386,7 +401,7 @@ ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kil
                 <a href="https://zfunnily.github.io/2022/03/reload/">https://zfunnily.github.io/2022/03/reload/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 11:49:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 11:55:54</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -514,7 +529,7 @@ ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kil
 <ul class="widget-list">
     
     <li>
-        <a href="https://zfunnily.github.io/2022/03/reload/" title="Goang | 热更">Goang | 热更</a>
+        <a href="https://zfunnily.github.io/2022/03/reload/" title="Goang | plugin热更">Goang | plugin热更</a>
     </li>
     
     <li>

@@ -8,12 +8,12 @@
     <language>zh-CN</language>
     <lastBuildDate>Tue, 01 Mar 2022 11:33:22 +0800</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Goang | 热更</title>
+      <title>Goang | plugin热更</title>
       <link>https://zfunnily.github.io/2022/03/reload/</link>
       <pubDate>Tue, 01 Mar 2022 11:33:22 +0800</pubDate>
       
       <guid>https://zfunnily.github.io/2022/03/reload/</guid>
-      <description>热更新 动态脚本更新 (php) 短链接无状态服务器热更 (http) golang Plugin热更 (.so 动态库更新) golang插件更新 下面代码实现的需求: 不修改主进程代码，不重新编译，在运行过程中 (包括不修改plugin.so文件名) 修改</description>
+      <description>热更新 动态脚本更新 (php) 短链接无状态服务器热更 (http) 长连接有状态，数据跟逻辑分离 golang Plugin热更 (.so 动态库更新) &amp;mdash;-逻辑热更 长连接有状态,在运维层面, 利用容器部署热更(docker, k8s) 服务不接受新</description>
     </item>
     
     <item>
