@@ -93,81 +93,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">Golang | 利用指针进行数据转换</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月12日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 在Go语言中，Slice本质是什么呢？是一个reflect.SliceHeader结构体和这个结构体中Data字段所指向的内存。String本质是什么呢？是一个reflect.StringHead……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/Golang-%E5%88%A9%E7%94%A8%E6%8C%87%E9%92%88%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/go-builds/">Golang | builds</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月12日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/go-builds/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Cgo | 简单使用</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月5日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&#34;%s\n&#34;, str); } */ import &#34;C&#34; //import “C” 必须单起一行，并且紧跟在注释行之后 import &#34;unsafe&#34; func main() { s := &#34;Hello Cgo&#34; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g……
-            <p class="readmore"><a href="https://zfunnily.github.io/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://zfunnily.github.io/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/">Golang | 使用Lumberjack&#43;zap进行日志切割归档</a>
             </h1>
         </header>
@@ -289,6 +214,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://zfunnily.github.io/2022/03/reload/" title="Goang | 热更">Goang | 热更</a>
+    </li>
+    
+    <li>
         <a href="https://zfunnily.github.io/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
     </li>
     
@@ -302,10 +231,6 @@
     
     <li>
         <a href="https://zfunnily.github.io/2021/12/nginx/" title="Nginx的一些配置">Nginx的一些配置</a>
-    </li>
-    
-    <li>
-        <a href="https://zfunnily.github.io/2021/12/astar/" title="A*算法 | Lua版本">A*算法 | Lua版本</a>
     </li>
     
 </ul>
@@ -339,21 +264,23 @@
     
     <li><a href="https://zfunnily.github.io/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (78)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B/">编程 (79)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (24)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (21)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (7)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (2)</a></li>
+    <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
     <li><a href="https://zfunnily.github.io/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     
@@ -371,8 +298,6 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
-    
-    <a href="https://zfunnily.github.io/tags/cinnamon/">cinnamon</a>
     
     <a href="https://zfunnily.github.io/tags/cpu/">cpu</a>
     

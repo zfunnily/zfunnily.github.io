@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Centos7.2 | gcc4.8升级为4.9 | Zzz记忆</title>
-    <meta property="og:title" content="Centos7.2 | gcc4.8升级为4.9 - Zzz记忆">
+    <title>Goang | 热更 | Zzz记忆</title>
+    <meta property="og:title" content="Goang | 热更 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
-    <meta property="article:published_time" content='2021-09-01T18:13:41&#43;08:00'>
+    <meta property="article:published_time" content='2022-03-01T11:33:22&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T18:57:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T10:45:42&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Centos7.2 | gcc4.8升级为4.9">
+    <meta name="description" content="Goang | 热更">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://zfunnily.github.io/2021/09/upgradegcc/">
+    <meta property="og:url" content="https://zfunnily.github.io/2022/03/reload/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -151,10 +151,8 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#环境">环境</a></li>
-    <li><a href="#下载依赖包">下载依赖包</a></li>
-    <li><a href="#编译">编译</a></li>
-    <li><a href="#说明">说明</a></li>
+    <li><a href="#热更新">热更新</a></li>
+    <li><a href="#golang插件更新">golang插件更新</a></li>
   </ul>
 </nav>
     </div>
@@ -189,58 +187,157 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Centos7.2 | gcc4.8升级为4.9</h1>
+            <h1 class="post-title">Goang | 热更</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年9月1日
+            2022年3月1日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/IT'>IT</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
             
-            <span class="meta-category"><a href='/categories/IT.Linux'>IT.Linux</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
             
         </div>
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <h2 id="环境">环境</h2>
-<ul>
-<li>CentOS 7.2.1511</li>
-<li>Docker</li>
-</ul>
-<p>我是用 docker 拉取镜像 <code>CentOS 7.2.1511</code>, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker
-$ yum update <span style="color:#f92672">&amp;&amp;</span> yum install gcc gcc-c++ make zlib-devel.x86_6
-</code></pre></div><h2 id="下载依赖包">下载依赖包</h2>
-<p>升级 gcc， 下载安装包下载依赖。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
-$ tar xfv gcc-4.9.3.tar.bz2 <span style="color:#f92672">&amp;&amp;</span> cd gcc-4.9.3
-$ ./contrib/download_prerequisites
-</code></pre></div><p>如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件放在gcc根目录，再屏蔽contrib/download_prerequisites文件里面的wget操作，再重新执行一次<code>./contrib/download_prerequisites</code>。这样的话，后面编译<code>gcc</code>时，这几个依赖库会自动先编译，不用自动手动一个个编译。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cloog-0.18.1.tar.gz
-gmp-4.3.2.tar.bz2
-isl-0.12.2.tar.bz2
-mpc-0.8.1.tar.gz
-mpfr-2.4.2.tar.bz2
-</code></pre></div><h2 id="编译">编译</h2>
-<p>创建编译目录，开始编译</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd .. <span style="color:#f92672">&amp;&amp;</span> mkdir build-gcc <span style="color:#f92672">&amp;&amp;</span> cd build-gcc
-$ ../gcc-4.9.3/configure --prefix<span style="color:#f92672">=</span>/usr --mandir<span style="color:#f92672">=</span>/usr/share/man --infodir<span style="color:#f92672">=</span>/usr/share/info --enable-bootstrap --enable-shared --enable-threads<span style="color:#f92672">=</span>posix --enable-checking<span style="color:#f92672">=</span>release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style<span style="color:#f92672">=</span>gnu --enable-languages<span style="color:#f92672">=</span>c,c++ --enable-plugin --enable-initfini-array --disable-libgcj --enable-gnu-indirect-function --with-tune<span style="color:#f92672">=</span>generic --disable-multilib
-$ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
-</code></pre></div><blockquote>
-<p>编译时间有点长，请耐心等待</p>
-</blockquote>
-<h2 id="说明">说明</h2>
-<p>gcc 编译配置参数说明:</p>
-<ul>
-<li>&ndash;enable-languages: 指定 gcc 能编译哪些语言的文件，每种语言用逗号分隔, 例如 c,c++,Java</li>
-<li>&ndash;disable-multilib: 默认gcc 能在32位系统上将代码编译成64位程序，或者在64位系统上编译成32位程序，如果加上这个编译选项则表示关闭这个gcc的交叉编译功能。</li>
-</ul>
+            <h2 id="热更新">热更新</h2>
+<ol>
+<li>动态脚本更新</li>
+<li>golang插件</li>
+</ol>
+<h2 id="golang插件更新">golang插件更新</h2>
+<ol>
+<li>plugin文件必须main包</li>
+</ol>
+<details  open=""  >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        plugin
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IamPluginA</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello, I am PluginA!&#34;</span>)
+}
+</code></pre></div></details>
+<br/>
+<p>main文件</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        maing.go
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;os/signal&#34;</span>
+	<span style="color:#e6db74">&#34;plugin&#34;</span>
+	<span style="color:#e6db74">&#34;pro2d/src/components/logger&#34;</span>
+	<span style="color:#e6db74">&#34;syscall&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LoadPlugin</span>()  {
+	<span style="color:#a6e22e">p</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;./plugin.so&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Lookup</span>(<span style="color:#e6db74">&#34;IamPluginA&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;error lookup IamPluginA: &#34;</span>, <span style="color:#a6e22e">err</span>)
+		<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+	}
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.(<span style="color:#66d9ef">func</span>()); <span style="color:#a6e22e">ok</span> {
+		<span style="color:#a6e22e">x</span>()
+	}
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">stopChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Signal</span>)
+	<span style="color:#a6e22e">signal</span>.<span style="color:#a6e22e">Notify</span>(<span style="color:#a6e22e">stopChan</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGTERM</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGINT</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGKILL</span>)
+
+	<span style="color:#a6e22e">userChan</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Signal</span>)
+	<span style="color:#a6e22e">signal</span>.<span style="color:#a6e22e">Notify</span>(<span style="color:#a6e22e">userChan</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGUSR1</span>, <span style="color:#a6e22e">syscall</span>.<span style="color:#a6e22e">SIGUSR2</span>)
+	<span style="color:#a6e22e">LoadPlugin</span>()
+
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#66d9ef">select</span> {
+		<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">stopChan</span>:
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;stop...&#34;</span>)
+			<span style="color:#66d9ef">return</span>
+		<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">userChan</span>:
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;userChan recv...&#34;</span>)
+			<span style="color:#a6e22e">LoadPlugin</span>()
+		}
+	}
+}
+</code></pre></div></details>
+<br/>
+<p>Makefile文件</p>
+<details  open=""  >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        Makefile
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Makefile" data-lang="Makefile">IMGTIME <span style="color:#f92672">:=</span> <span style="color:#66d9ef">$(</span>shell date <span style="color:#e6db74">&#34;+%G%m%d_%H%M%S&#34;</span><span style="color:#66d9ef">)</span>
+pname <span style="color:#f92672">=</span> plugin-<span style="color:#66d9ef">$(</span>IMGTIME<span style="color:#66d9ef">)</span>.so
+
+<span style="color:#a6e22e">all</span><span style="color:#f92672">:</span>plugin build
+	./plumain
+
+<span style="color:#a6e22e">reall</span><span style="color:#f92672">:</span>plugin
+	ps -ef|grep plumain |grep -v grep | awk <span style="color:#e6db74">&#39;{print $$2}&#39;</span>  | xargs -I <span style="color:#f92672">{}</span> kill -USR1 <span style="color:#f92672">{}</span>
+
+<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span>
+	go build -o ./plumain plumain.go
+
+<span style="color:#a6e22e">plugin</span><span style="color:#f92672">:</span>
+	go build --buildmode<span style="color:#f92672">=</span>plugin -o ./<span style="color:#66d9ef">$(</span>pname<span style="color:#66d9ef">)</span> ./*.go
+	rm -rf plugin.so <span style="color:#f92672">&amp;&amp;</span> ln -s <span style="color:#66d9ef">$(</span>pname<span style="color:#66d9ef">)</span> plugin.so
+
+<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all build plugin
+</code></pre></div></details>
+<br/>
+<p>编译 &amp; 运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ make 
+
+Hello, I am PluginA!
+</code></pre></div><p>修改插件函数<code>IamPluginA</code>内容</p>
+<details   >
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+        golang
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IamPluginA</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello, I am PluginB!&#34;</span>)
+}
+</code></pre></div></details>
+<br/>
+<p>给进程发送USR1自定义指令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ make reall
+ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kill -USR1 {}
+</code></pre></div><p>可以看到 进程输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Hello, I am PluginB!
+</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -255,10 +352,10 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
         </li>
         <li style="word-break:break-all"><strong> 原文链接：</strong>
             
-                <a href="https://zfunnily.github.io/2021/09/upgradegcc/">https://zfunnily.github.io/2021/09/upgradegcc/</a>
+                <a href="https://zfunnily.github.io/2022/03/reload/">https://zfunnily.github.io/2022/03/reload/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 10:45:42</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -272,15 +369,15 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2021/08/except/">Shell | Except 使用</a></li>
+        <li><a href="/2022/02/jwt/">Grpc | Token认证和自定义认证</a></li>
         
-        <li><a href="/2021/08/ugui/">Unity3D | UGUI</a></li>
+        <li><a href="/2022/02/san/">Grpc ｜ 通过SSL/TLS建立安全连接</a></li>
         
-        <li><a href="/2021/06/distribute/">Golang | redis实现分布式锁</a></li>
+        <li><a href="/thinking/2022/01/jx/">转载｜江雪：长安十日</a></li>
         
-        <li><a href="/2021/06/goredis/">Golang | redis</a></li>
+        <li><a href="/2021/12/shortcodes/">Blog | 代码显示/隐藏</a></li>
         
-        <li><a href="/2021/05/lua_next/">Lua | next的使用</a></li>
+        <li><a href="/2021/12/nginx/">Nginx的一些配置</a></li>
         
     </ul>
 </div>
@@ -288,11 +385,7 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
 
         <div class="post-meta meta-tags">
             
-            <ul class="clearfix">
-                
-                <li><a href='/tags/gcc'>gcc</a></li>
-                
-            </ul>
+            没有标签
             
         </div>
     </article>
