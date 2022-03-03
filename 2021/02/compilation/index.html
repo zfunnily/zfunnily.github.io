@@ -15,13 +15,13 @@
     <meta property="article:published_time" content='2021-02-01T14:40:51&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:03:42&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="汇编 | C/C&#43;&#43;调用汇编">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/02/compilation/">
+    <meta property="og:url" content="http://blog.rakfree.tk/2021/02/compilation/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -52,7 +52,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://blog.rakfree.tk">
+                    <a id="logo" href="http://blog.rakfree.tk/">
                         Zzz记忆
                     </a>
                 
@@ -61,15 +61,15 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://blog.rakfree.tk">首页</a>
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
                     
-                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
                     
-                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
                     
-                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
                     
-                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -210,12 +210,12 @@
         <div class="post-content">
             <h2 id="概述">概述</h2>
 <p>我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。<br> 目标：汇编函数提供输出。类似C语言的函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
 {
     printf(value);
 }
 </code></pre></div><p>提供给C语言调用：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int main()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int main()
 {
     hello_world(&#34;hello world!\n&#34;);
 }
@@ -226,7 +226,7 @@
 </ul>
 <h2 id="c代码生成为汇编代码">C代码生成为汇编代码</h2>
 <p>提供一个hello.c</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
 {
     printf(value);
 }
@@ -236,9 +236,9 @@ int main()
   hello_world(&#34;Hello World!\n&#34;);
 }
 </code></pre></div><p>为了达到使用C++调用汇编函数输出<code>hello world!</code>的目的，我们需要把<code>hello_world</code>函数转化为汇编语言编写，我们先将<br> gcc 将hello.c转化为汇编代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -S hello.c -o hello.s
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -S hello.c -o hello.s
 </code></pre></div><p>转化之后的汇编代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	.file	&#34;hello.c&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	.file	&#34;hello.c&#34;
 	.text
 	.globl	hello_world
 	.type	hello_world, @function
@@ -292,13 +292,13 @@ main:
 <ul>
 <li>在C中调用hello_world汇编函数，需要先声明：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern hello_world(char* value);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern hello_world(char* value);
 </code></pre></div><ul>
 <li>编写AT&amp;T规范的汇编代码，文件后缀是<code>.s</code></li>
 </ul>
 <h2 id="hello_world-汇编函数">hello_world 汇编函数</h2>
 <p>hello.s</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#hello.s
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#hello.s
 .globl hello_world
 .type hello_world, @function
 
@@ -320,19 +320,19 @@ hello_world:
 <li>压栈和把栈顶指针赋值给%rbp是汇编函数的常规操作，基本上每个汇编函数都需要。- 调整栈指针，给局部变量留出空间- <code>%rdi</code>代表是第一个参数- 最后字符串结尾需要加上<code>0</code>- <code>call printf</code>调用printf函数打印寄存器中的字符串
 hello.c</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern void hello_world(char* value);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern void hello_world(char* value);
 int main()
 {
   hello_world(&#34;Hello World!\n&#34;);
 }
 </code></pre></div><p>编译成可执行文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -o hello hello.c hello.s
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -o hello hello.c hello.s
 </code></pre></div><p>运行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./hello
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./hello
 Hello World!
 </code></pre></div><h2 id="x64">x64</h2>
 <p>在x64汇编中调用函数时，以下寄存器用作参数。 尝试将它们提交到内存中，因为将来您会经常使用它们</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">第一个参数：RDI
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">第一个参数：RDI
 第二个参数：RSI
 第三个参数：RDX
 第四个参数：RCX
@@ -348,15 +348,15 @@ Hello World!
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
             
-                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
             
         </li>
         <li style="word-break:break-all"><strong> 原文链接：</strong>
             
-                <a href="https://blog.rakfree.tk/2021/02/compilation/">https://blog.rakfree.tk/2021/02/compilation/</a>
+                <a href="http://blog.rakfree.tk/2021/02/compilation/">http://blog.rakfree.tk/2021/02/compilation/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:03:42</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -402,8 +402,7 @@ Hello World!
         new Valine({
             el: '#vcomments',
             appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
-            appKey: '8ldE7FzLmbPAA6DjVfACpMyO',
-            notify: 'false'
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
         })
     </script>
     
@@ -423,7 +422,7 @@ Hello World!
 <footer id="footer">
 
     <div>
-        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -472,10 +471,10 @@ Hello World!
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -485,23 +484,23 @@ Hello World!
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
 </ul>
@@ -510,11 +509,11 @@ Hello World!
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -527,41 +526,41 @@ Hello World!
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (6)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
 </ul>
     </section>
@@ -570,45 +569,45 @@ Hello World!
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
     
-    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
     
-    <a href="https://blog.rakfree.tk/tags/except/">except</a>
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
     
-    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
     
-    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
     
-    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
     
-    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
     
-    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
     
-    <a href="https://blog.rakfree.tk/tags/music/">music</a>
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
     
-    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
     
-    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
     
-    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
     
-    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
     
-    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
     
-    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
     
-    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
     
-    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     
-    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
     
-    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
     
-    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
 </div>
     </section>
@@ -629,7 +628,7 @@ Hello World!
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>

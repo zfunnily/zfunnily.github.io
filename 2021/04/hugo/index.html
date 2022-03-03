@@ -15,13 +15,13 @@
     <meta property="article:published_time" content='2021-04-17T00:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T16:01:20&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="hugo静态博客搭建">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/04/hugo/">
+    <meta property="og:url" content="http://blog.rakfree.tk/2021/04/hugo/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -52,7 +52,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://blog.rakfree.tk">
+                    <a id="logo" href="http://blog.rakfree.tk/">
                         Zzz记忆
                     </a>
                 
@@ -61,15 +61,15 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://blog.rakfree.tk">首页</a>
+                    <a class="current" href="http://blog.rakfree.tk/">首页</a>
                     
-                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
                     
-                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
                     
-                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
+                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
                     
-                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -219,40 +219,40 @@
 <li>hugo</li>
 </ul>
 <p>安装brew</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/bin/zsh -c &#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&#34;
 $ brew update
 </code></pre></div><blockquote>
 <p>选择中科大源</p>
 </blockquote>
 <p>安装hugo</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ brew install hugo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ brew install hugo
 </code></pre></div><h2 id="使用">使用</h2>
 <p>新建站点</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new site myblog
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new site myblog
 $ cd myblog
 </code></pre></div><p>新建一个页面</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new about.md
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo new about.md
 </code></pre></div><p>开始服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo server --buildDrafts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ hugo server --buildDrafts
 </code></pre></div><h2 id="主题">主题</h2>
 <p>我使用的主题是<a href="https://blog.jimmycai.com/p/hugo-theme-stack/">hugo-theme-stack</a>
 安装主题</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git 
 </code></pre></div><h2 id="部署到github个人页面">部署到Github个人页面</h2>
 <ul>
 <li>在Github创建一个仓库，例如名字叫blog，可以是私有的，这个仓库用来存放网站内容和源文件</li>
 <li>再创建一个名称为<username>.github.io的仓库，username为GitHub用户名，这个仓库用于存放最终发布的网站内容
 进入本地网站目录</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cd &lt;YOUR PROJECT&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cd &lt;YOUR PROJECT&gt;
 </code></pre></div><p>关联远程blog仓库</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git remote add origin git@github.com:jeshs/blog.git
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git remote add origin git@github.com:jeshs/blog.git
 </code></pre></div><p>将本地网站全部内容推送到远程blog仓库</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git push -u origin master
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git push -u origin master
 </code></pre></div><p>关闭本地Hugo服务器Ctrl+C，然后删除本地网站目录下的public文件夹,创建public子模块，注意下面是一行命令，不是两行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git submodule add -b master git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git public
 </code></pre></div><p>然后就可以执行hugo命令，此命令会自动将网站静态内容生成到public文件夹，然后提交到远程blog仓库</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo
 cd public
 git status
 git add .
@@ -262,7 +262,7 @@ git push -u orgin master
 注意：本地网站是关联的blog仓库，本地网站下的public文件夹是以子模块的形式关联的github.io仓库，他们是相对独立的</p>
 <h2 id="自动部署脚本">自动部署脚本</h2>
 <p>将以上步骤添加到自动执行脚本中deploy.sh，脚本commit提交信息会使用执行时的时间，将脚本放到网站项目路径下，写完博客后，双击运行即可自动部署发布</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 echo -e <span style="color:#e6db74">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
 
@@ -290,7 +290,7 @@ cd ..
 <p>配置 utteranc评论,教程参考 <a href="https://utteranc.es/">https://utteranc.es/</a></p>
 <h2 id="路由配置">路由配置</h2>
 <p>假设站点的一个[块sections][]名为post, 您想基于年份、月份和文章标题来构建规范化的路径,可以像下面相应的TOML的配置中一样来设置:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e">## 路由</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#75715e">## 路由</span>
 [<span style="color:#a6e22e">permalinks</span>]
   <span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;/:year/:month/:filename/&#34;</span>
 </code></pre></div><p>对于标签分类的永久链接也可以如此配置，使用标签的复数形式而不是使用标签块。可能仅仅需要配置:slug 或者 :title
@@ -313,7 +313,7 @@ cd ..
 <h2 id="归档消除0001">归档消除0001</h2>
 <p>我是用的是<a href="https://github.com/flysnow-org/maupassant-hugo">飞雪</a>的主题</p>
 <p>复制主题下的<code>themes/maupassant/layouts/archives/single.html</code>文件 ,放到博客目录下<code>layouts/archives/single.html</code>, 并修改为如下内容：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ define &#34;content&#34;}}
 &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post-archive&#34;</span>&gt;
     {{ range (where (where .Site.Pages &#34;Type&#34; &#34;in&#34; (slice &#34;post&#34; &#34;posts&#34;)) &#34;Kind&#34; &#34;page&#34;).GroupByDate &#34;2006&#34; }}
         {{if ne .Key &#34;0001&#34;}} 
@@ -344,15 +344,15 @@ cd ..
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
             
-                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+                <a rel="author" href="http://blog.rakfree.tk/"> 留白 </a>
             
         </li>
         <li style="word-break:break-all"><strong> 原文链接：</strong>
             
-                <a href="https://blog.rakfree.tk/2021/04/hugo/">https://blog.rakfree.tk/2021/04/hugo/</a>
+                <a href="http://blog.rakfree.tk/2021/04/hugo/">http://blog.rakfree.tk/2021/04/hugo/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 16:01:20</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -402,8 +402,7 @@ cd ..
         new Valine({
             el: '#vcomments',
             appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
-            appKey: '8ldE7FzLmbPAA6DjVfACpMyO',
-            notify: 'false'
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO'
         })
     </script>
     
@@ -423,7 +422,7 @@ cd ..
 <footer id="footer">
 
     <div>
-        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
+        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -472,10 +471,10 @@ cd ..
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
+      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -485,23 +484,23 @@ cd ..
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
+        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
     </li>
     
 </ul>
@@ -510,11 +509,11 @@ cd ..
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -527,41 +526,41 @@ cd ..
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (6)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
 </ul>
     </section>
@@ -570,45 +569,45 @@ cd ..
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
+    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
     
-    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
+    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
     
-    <a href="https://blog.rakfree.tk/tags/except/">except</a>
+    <a href="http://blog.rakfree.tk/tags/except/">except</a>
     
-    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
     
-    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
+    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
     
-    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
+    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
     
-    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
+    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
     
-    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
+    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
     
-    <a href="https://blog.rakfree.tk/tags/music/">music</a>
+    <a href="http://blog.rakfree.tk/tags/music/">music</a>
     
-    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
+    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
     
-    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
+    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
     
-    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
+    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
     
-    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
     
-    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
+    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
     
-    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
+    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
     
-    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
     
-    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     
-    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
+    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
     
-    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
     
-    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
 </div>
     </section>
@@ -629,7 +628,7 @@ cd ..
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
