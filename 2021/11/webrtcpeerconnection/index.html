@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-11-14T16:20:31&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T15:41:17&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Webrtc一 | peerconnection">
@@ -241,7 +241,7 @@
 </ol>
 <p>信令交互主要是<code>PeerConnectionClient</code>这个类
 初始化socket连接跟 绑定回调</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> PeerConnectionClient<span style="color:#f92672">::</span>InitSocketSignals() {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> PeerConnectionClient<span style="color:#f92672">::</span>InitSocketSignals() {
   control_socket_<span style="color:#f92672">-&gt;</span>SignalCloseEvent.connect(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>PeerConnectionClient<span style="color:#f92672">::</span>OnClose);  <span style="color:#75715e">//连接关闭回调
 </span><span style="color:#75715e"></span>  hanging_get_<span style="color:#f92672">-&gt;</span>SignalCloseEvent.connect(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>PeerConnectionClient<span style="color:#f92672">::</span>OnClose);     <span style="color:#75715e">//同上
 </span><span style="color:#75715e"></span>  
@@ -320,7 +320,7 @@
 <li><code>OnIceCandidate</code>,  并把<code>Candidate</code>信息发送给peerB</li>
 </ul>
 <p>在WebRTC的源码api/peer_connection_interface.h中，有很长一段注释，分别从呼叫方和被呼方的视角说明了整个流程,发起方:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// The following steps are needed to setup a typical call using WebRTC:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// The following steps are needed to setup a typical call using WebRTC:
 //
 // 1. Create a PeerConnectionFactoryInterface. Check constructors for more
 // information about input parameters.
@@ -346,7 +346,7 @@
 // 7. Once a remote candidate is received from the remote peer, provide it to
 // the PeerConnection by calling AddIceCandidate.
 </code></pre></div><p>接收方</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// If the application decides to accept the call, it should:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// If the application decides to accept the call, it should:
 // 1. Create PeerConnectionFactoryInterface if it doesn&#39;t exist.
 // 2. Create a new PeerConnection.
 // 3. Provide the remote offer to the new PeerConnection object by calling
@@ -388,7 +388,7 @@
                 <a href="http://blog.rakfree.tk/2021/11/webrtcpeerconnection/">http://blog.rakfree.tk/2021/11/webrtcpeerconnection/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 15:41:17</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

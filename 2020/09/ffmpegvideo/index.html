@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-09-12T12:47:57&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="FFmpeg | 给视频加文字和图片水印">
@@ -226,7 +226,7 @@
         <div class="post-content">
             <h2 id="ffmpeg给视频加上logo">FFmpeg给视频加上logo</h2>
 <h3 id="ffmpeg从视频中截取图像帧">ffmpeg从视频中截取图像帧</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i inputfile.avi -r 1 -f image2 image-%05d.jpeg
 ffmpeg -i inputfile.avi -r 1 -s 4cif -f image2 image-%05d.jpeg
 ffmpeg -i inputfile.avi -r 1 -t 4 -f image2 image-%05d.jpeg
 ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -f image2 image-%05d.jpeg  
@@ -236,7 +236,7 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
 </blockquote>
 <h3 id="ffmpeg给视频加logo">ffmpeg给视频加logo</h3>
 <p>ffmpeg 给视频input.mp4 加上logo.png的logo, logo的格式也可以用 <strong>.jepg</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -i logo.png -filter_complex &#34;[1:v] scale=176:144[logo];[0:v][logo]overlay=x=0:y=0&#34; output.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -i logo.png -filter_complex &#34;[1:v] scale=176:144[logo];[0:v][logo]overlay=x=0:y=0&#34; output.mp4
 </code></pre></div><p>从上述命令可以看，将logo.png的图像流缩放为176x144的分辨率，然后定义一个临时标记名logo，最后将缩放后的图像[logo]铺在输入视频input.mp4的视频流[0:v]的左上角。</p>
 <h2 id="ffmpeg给视频加水印文字">FFmpeg给视频加水印文字</h2>
 <p>FFmpeg可以为视频加水印，水印可以是文字，也可以是图片，主要用来标记视频所属标记。以下为参数列表<br> 
@@ -246,25 +246,25 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     </p>
 <h3 id="加文字">加文字</h3>
 <p>使用drawtext滤镜使用举例, 给视频加上<code>hello world</code>的文字水印</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20&#34; drawtext.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20&#34; drawtext.mp4
 </code></pre></div><h3 id="调节颜色">调节颜色</h3>
 <p>drawtext滤镜的fontcolor参数调节颜色，例如将字体的颜色设置为绿色</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:fontcolor=green&#34; textgreen.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:fontcolor=green&#34; textgreen.mp4
 </code></pre></div><blockquote>
 <p>如果想调整水印的位置，调整x和y参数的值即可</p>
 </blockquote>
 <h3 id="增加一个框和背景色">增加一个框和背景色</h3>
 <p>文字水印还可以增加一个框，然后给框加一个背景颜色</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:fontcolor=green:box=1:boxcolor=yellow&#34; box.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:fontcolor=green:box=1:boxcolor=yellow&#34; box.mp4
 </code></pre></div><h3 id="增加时间">增加时间</h3>
 <p>以本地时间为文字水印内容，可以在drawtext滤镜中配合一些特殊用法来完成。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;%{localtime\:%Y-\%m\-%d %H-%M-%s}]&#39;:x=0:y=20:fontcolor=green&#34; time.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;%{localtime\:%Y-\%m\-%d %H-%M-%s}]&#39;:x=0:y=20:fontcolor=green&#34; time.mp4
 </code></pre></div><h3 id="定时显示">定时显示</h3>
 <p>定时显示/不显示水印，使用drawtext和enable配合，例如没三秒钟显示一次文字水印</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:enable=lt(mod(t\, 3)\, 1)&#34; enable.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=FreeSerif.ttf:text=&#39;hello world&#39;:x=20:y=20:enable=lt(mod(t\, 3)\, 1)&#34; enable.mp4
 </code></pre></div><h3 id="中文水印">中文水印</h3>
 <p>中文水印，需要系统中包含中文字库与中文编码支持。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=/Library/Fonts/Songti.ttc:text=&#39;中文测试&#39;:x=20:y=20:enable=lt(mod(t\, 3)\, 1)&#34; chinese.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf &#34;drawtext=fontsize=100:fontfile=/Library/Fonts/Songti.ttc:text=&#39;中文测试&#39;:x=20:y=20:enable=lt(mod(t\, 3)\, 1)&#34; chinese.mp4
 </code></pre></div><h2 id="图片水印">图片水印</h2>
 <p>使用movie的滤镜参数<br> 
         <a data-fancybox="gallery" href="https://img-service.csdnimg.cn/img_convert/cc5ae74901ef0e9468de3f9e99ad9e54.png">
@@ -273,9 +273,9 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
     <br> FFmpeg给视频加图片水印有两种方式，一种是通过movie指定水印文件路径，另外一种方式是通过filter读取输入文件的流并指定为水印</p>
 <h3 id="使用movie的方式添加水印">使用movie的方式添加水印</h3>
 <p>给视频input.mp4 添加logo.png的logo ， logo的格式也可以为 <strong>jpeg</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf  &#34;movie=logo.png[wm]; [in][wm]overlay=30:10[out]&#34; movie.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf  &#34;movie=logo.png[wm]; [in][wm]overlay=30:10[out]&#34; movie.mp4
 </code></pre></div><p>将透明水印加入到视频中效果会更好一点，当只有纯色背景的logo，可以考虑使用movie 与colorkey滤镜配合做成半透明的效果：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf  &#34;movie=logo.png, colorkey=black:1.0:1.0 [wm]; [in][wm]overlay=30:10[out]&#34; colorkey.mp4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mp4 -vf  &#34;movie=logo.png, colorkey=black:1.0:1.0 [wm]; [in][wm]overlay=30:10[out]&#34; colorkey.mp4
 </code></pre></div>
 
             <h4 align="center">--完--</h4>
@@ -294,7 +294,7 @@ ffmpeg -i inputfile.avi -r 1 -ss 01:30:14 -vframes 120 4cif -f image2 image-%05d
                 <a href="http://blog.rakfree.tk/2020/09/ffmpegvideo/">http://blog.rakfree.tk/2020/09/ffmpegvideo/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

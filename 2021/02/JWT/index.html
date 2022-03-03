@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-02-24T14:22:04&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:01:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Golang | JWT身份认证">
@@ -215,7 +215,7 @@
 <li>一个中间件，拦截请求，进行token认证，根据认证通是否过来决定是否继续执行请求；
 <code>JWT</code>身份认证可以解决第一个问题，<code>mux.Router</code>的<code>Use</code>方法函数可以作为一个中间件， 拦截请求。</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (r *Router) Use(mwf ...MiddlewareFunc) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (r *Router) Use(mwf ...MiddlewareFunc) {
 	for _, fn := range mwf {
 		r.middlewares = append(r.middlewares, fn)
 	}
@@ -223,14 +223,14 @@
 
 </code></pre></div><h2 id="jwt-身份认证">JWT 身份认证</h2>
 <p>下载地址：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">github.com/dgrijalva/jwt-go&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">github.com/dgrijalva/jwt-go&#34;
 </code></pre></div><p>实现的功能如下：</p>
 <ol>
 <li>token生成</li>
 <li>中间件拦截请求进行token认证
 结合代码：</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// jwt_svr.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// jwt_svr.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -380,16 +380,16 @@
 }
 
 </code></pre></div><p>验证一下， 启动程序：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go run jwt_svr.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go run jwt_svr.go
 generate token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
 uid:  1
 Server listen on 8080...
 
 </code></pre></div><p>已经监听8080端口，使用idea的<code>rest client</code>来模拟请求，在<code>Headers</code>中加入</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Authorization：jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Authorization：jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVaWQiOiIxIiwiTmFtZSI6InpqamoiLCJQd2QiOiIxMjMiLCJMb2dpblRpbWUiOjE2MTQxMzg1MzIsImV4cCI6MTYxNDEzODY1Mn0.kHZKlpZXY_qLFaOfr8g1i9uPssjZB3vZFrMqx8S0Ef4
 
 </code></pre></div><p>点击 <code>rest client</code>的运行按钮，得到数据：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">解析好的tokne数据 id: 1, name: zjjj, pwd: 123
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">解析好的tokne数据 id: 1, name: zjjj, pwd: 123
 test is success
 
 </code></pre></div><p>第二种方法是请求<code>login</code>接口生成token，参数 <code>name=''</code>, <code>pwd=''</code>, 生成token后再按照上述方法，请求<code>test</code>接口</p>
@@ -411,7 +411,7 @@ test is success
                 <a href="http://blog.rakfree.tk/2021/02/JWT/">http://blog.rakfree.tk/2021/02/JWT/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:01:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

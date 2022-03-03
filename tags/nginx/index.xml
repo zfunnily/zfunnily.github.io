@@ -6,11 +6,7 @@
     <description>Recent content in nginx on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 28 Dec 2021 16:04:10 +0800</lastBuildDate>
-    
-	<atom:link href="http://blog.rakfree.tk/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 28 Dec 2021 16:04:10 +0800</lastBuildDate><atom:link href="http://blog.rakfree.tk/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx的一些配置</title>
       <link>http://blog.rakfree.tk/2021/12/nginx/</link>
