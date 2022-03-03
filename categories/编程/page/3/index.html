@@ -17,12 +17,12 @@
     <meta name="description" content="编程">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">
+    <meta property="og:url" content="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/index.xml" title="Zzz记忆" />
+    <link rel="alternate" type="application/rss+xml" href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -49,7 +49,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="http://blog.rakfree.tk/">
+                    <a id="logo" href="https://blog.rakfree.tk">
                         Zzz记忆
                     </a>
                 
@@ -58,15 +58,15 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="http://blog.rakfree.tk/">首页</a>
+                    <a class="" href="https://blog.rakfree.tk">首页</a>
                     
-                    <a  href="http://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
                     
-                    <a  href="http://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
                     
-                    <a  href="http://blog.rakfree.tk/about/" title="关于">关于</a>
+                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
                     
-                    <a  href="http://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
                     
                 </nav>
             </div>
@@ -93,7 +93,32 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/10/skynetone/">Skynet源码赏析一 | 启动初始化的过程</a>
+                <a href="https://blog.rakfree.tk/2021/10/skynettwo/">Skynet源码赏析二 | 基础数据结构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月19日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a>
+            
+        </div>
+        
+        <div class="post-content">
+            module管理模块 我们所写的C服务编译成.so文件后放在cpath变量路径下，程序会加载路径cpath = root..&quot;cservice/?.so&quot;下的.so文件，通过static……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/skynettwo/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/10/skynetone/">Skynet源码赏析一 | 启动初始化的过程</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -111,14 +136,14 @@
         
         <div class="post-content">
             入口文件 skynet_main.c 加载配置 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/10/skynetone/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/skynetone/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/10/shell/">Golang | 调用带有后台进程shell脚本可能会被挂起</a>
+                <a href="https://blog.rakfree.tk/2021/10/shell/">Golang | 调用带有后台进程shell脚本可能会被挂起</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -136,14 +161,14 @@
         
         <div class="post-content">
             起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/10/shell/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/shell/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/09/move/">FPS游戏 | 实现移动功能</a>
+                <a href="https://blog.rakfree.tk/2021/09/move/">FPS游戏 | 实现移动功能</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -161,14 +186,14 @@
         
         <div class="post-content">
             三种实现FPS Controller的区别 Transform Translate 允许移动物理，但无物理碰撞 Rigid body + Capsule Collider 符合物理学 不会鬼穿墙 无法滞空运动 可与Physics Object 交互 Charactor Controller 不会鬼穿墙 提供的API相对多 无法与Physic objects……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/09/move/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/09/move/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/09/music/">免费Music</a>
+                <a href="https://blog.rakfree.tk/2021/09/music/">免费Music</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -184,14 +209,14 @@
         
         <div class="post-content">
             介绍一个可以免费听音乐的方法 环境 docker mac 安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker $dir_name 是 你自己宿主机的目录。可以自定义 访问：127.0.0.1:264 就可以放心使用， 同事推荐的，贼好用。……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/09/music/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/09/music/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/09/transform/">Unity3D | Transform类</a>
+                <a href="https://blog.rakfree.tk/2021/09/transform/">Unity3D | Transform类</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -209,14 +234,14 @@
         
         <div class="post-content">
             Transform类 在unity中，把transform类理解为，transform类是在每个对象生成时自动附加的一个类。在Unity的视图中，点击Hierarchy中的对象，就可以在Inspecto……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/09/transform/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/09/transform/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/08/ugui/">Unity3D | UGUI</a>
+                <a href="https://blog.rakfree.tk/2021/08/ugui/">Unity3D | UGUI</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -234,14 +259,14 @@
         
         <div class="post-content">
             Text Text的属性 在 Unity 的 Hierarchy 面板上右键–&gt;UI–&gt;Text, 在 Inspector 面板上查看属性 属性 功能 Text 需要显示的文本 Font 显示文本的字体 如：微软雅黑，宋体等 Font Style 显示文本的样式，有普通，粗体，斜体，粗体和斜体四种……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/08/ugui/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/08/ugui/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/06/distribute/">Golang | redis实现分布式锁</a>
+                <a href="https://blog.rakfree.tk/2021/06/distribute/">Golang | redis实现分布式锁</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -259,14 +284,14 @@
         
         <div class="post-content">
             概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/06/distribute/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/06/distribute/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/06/goredis/">Golang | redis</a>
+                <a href="https://blog.rakfree.tk/2021/06/goredis/">Golang | redis</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -284,14 +309,14 @@
         
         <div class="post-content">
             概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/06/goredis/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/06/goredis/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/05/lua_next/">Lua | next的使用</a>
+                <a href="https://blog.rakfree.tk/2021/05/lua_next/">Lua | next的使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -309,32 +334,7 @@
         
         <div class="post-content">
             lua_next lua_next(L,index)：先把 表(lua栈 index所指的表), 的当前索引弹出，再把table 当前索引的值弹出，也就是先弹出 table的索引，再弹出table索引的值 举例： local t = { [&#34;a&#34;] = 1, [&#34;b&#34;]……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/05/lua_next/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="http://blog.rakfree.tk/2021/05/settopandpop/">Lua | API</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年5月10日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Lua'>编程.Lua</a>
-            
-        </div>
-        
-        <div class="post-content">
-            lua_pop和lua_settop lua_settop 我们直接来看lua_settop，文档解释 /* 设置栈的高度，如果之前的栈顶比新设置的更高，那么高出来的元素会被丢弃，反之压入nil来补足大小 假设栈里有2个元素。 如果……
-            <p class="readmore"><a href="http://blog.rakfree.tk/2021/05/settopandpop/">阅读全文</a></p>
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/05/lua_next/">阅读全文</a></p>
         </div>
     </article>
     
@@ -346,47 +346,51 @@
 <ol class="page-navigator">
     
     <li class="prev">
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/2/">上一页</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/2/">上一页</a>
     </li>
     
 
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">1</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">1</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/2/">2</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/2/">2</a>
     </li>
     
     <li  class="current">
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/3/">3</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/3/">3</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/4/">4</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/4/">4</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/5/">5</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/5/">5</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/6/">6</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/6/">6</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/7/">7</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/7/">7</a>
     </li>
     
     <li >
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/8/">8</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/9/">9</a>
     </li>
     
 
     
     <li class="next">
-        <a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/4/">下一页</a>
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/4/">下一页</a>
     </li>
     
 </ol>
@@ -409,7 +413,7 @@
 <footer id="footer">
 
     <div>
-        &copy; 2022 <a href="http://blog.rakfree.tk/">Zzz记忆 By 留白</a>
+        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
         
     </div>
     <br />
@@ -448,10 +452,10 @@
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='http://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="http://blog.rakfree.tk/">
+      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -461,23 +465,23 @@
 <ul class="widget-list">
     
     <li>
-        <a href="http://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
+        <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
     </li>
     
     <li>
-        <a href="http://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
+        <a href="https://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
     <li>
-        <a href="http://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
+        <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
     <li>
-        <a href="http://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
+        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
     </li>
     
     <li>
-        <a href="http://blog.rakfree.tk/2021/12/shortcodes/" title="Blog | 代码显示/隐藏">Blog | 代码显示/隐藏</a>
+        <a href="https://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
 </ul>
@@ -486,11 +490,11 @@
 <ul class="widget-list">
     
     <li>
-        <a href="http://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
     <li>
-        <a href="http://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
+        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -503,41 +507,41 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="http://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (2)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (6)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (80)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (10)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
     
-    <li><a href="http://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
 </ul>
     </section>
@@ -546,45 +550,45 @@
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="http://blog.rakfree.tk/tags/cpu/">cpu</a>
+    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     
-    <a href="http://blog.rakfree.tk/tags/docker/">docker</a>
+    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
     
-    <a href="http://blog.rakfree.tk/tags/except/">except</a>
+    <a href="https://blog.rakfree.tk/tags/except/">except</a>
     
-    <a href="http://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
     
-    <a href="http://blog.rakfree.tk/tags/gcc/">gcc</a>
+    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
     
-    <a href="http://blog.rakfree.tk/tags/glibc/">glibc</a>
+    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
     
-    <a href="http://blog.rakfree.tk/tags/hugo/">hugo</a>
+    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
     
-    <a href="http://blog.rakfree.tk/tags/k8s/">k8s</a>
+    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
     
-    <a href="http://blog.rakfree.tk/tags/music/">music</a>
+    <a href="https://blog.rakfree.tk/tags/music/">music</a>
     
-    <a href="http://blog.rakfree.tk/tags/nginx/">nginx</a>
+    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
     
-    <a href="http://blog.rakfree.tk/tags/nsf/">nsf</a>
+    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
     
-    <a href="http://blog.rakfree.tk/tags/p2p/">p2p</a>
+    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
     
-    <a href="http://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
     
-    <a href="http://blog.rakfree.tk/tags/redis/">redis</a>
+    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
     
-    <a href="http://blog.rakfree.tk/tags/rsync/">rsync</a>
+    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
     
-    <a href="http://blog.rakfree.tk/tags/screen/">screen</a>
+    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
     
-    <a href="http://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     
-    <a href="http://blog.rakfree.tk/tags/skynet/">skynet</a>
+    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
-    <a href="http://blog.rakfree.tk/tags/vim/">vim</a>
+    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
     
-    <a href="http://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
 </div>
     </section>
@@ -605,7 +609,7 @@
     <section class="widget">
         <h3 class="widget-title">其它</h3>
         <ul class="widget-list">
-            <li><a href="http://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
