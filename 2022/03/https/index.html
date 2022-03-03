@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-03T10:26:56&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-03T10:42:08&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-03T10:46:33&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Nginx | 给网站添加证书">
@@ -162,6 +162,7 @@
         <li><a href="#定时更新证书保持证书不过期">定时更新证书，保持证书不过期</a></li>
       </ul>
     </li>
+    <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
     </div>
@@ -221,6 +222,7 @@
             <h2 id="https">Https</h2>
 <p>最近在购买的云服务器上把个人博客搭建起来了，实际上是hugo生成静态网页，nginx加载静态网页。现在只能通过http访问，缺少个https。
 要搭建一个https的网站需要证书。之前在网上找的教程太麻烦，又是生成证书，又是放到指定地方。我想有个一键生成证书的软件或工具。功夫不负有心人，终于让我找到CertBot。</p>
+<p>在网上找到的方法， 我下面整理一下。</p>
 <h2 id="certbot">CertBot</h2>
 <p>我们的ssl证书是使用的Let’s Encrypt机构颁发的，每次生成的证书有90天的有效期，配置好后可以在过期之前自动续期。
 配置证书的软件我使用的是Let’s Encrypt机构推荐的Certbot，使用过几次还是很方便的，也有其它的软件提供。</p>
@@ -304,7 +306,9 @@ $ echo &#34;0 0,12 * * * root /opt/certbot/bin/python -c &#39;import random; imp
 
 # 可以使用这个命令检查自动更新程序是否正常配置了
 $ sudo certbot renew --dry-run
-</code></pre></div>
+</code></pre></div><h2 id="参考">参考</h2>
+<p><a href="https://blog.rmgee.com/2021/07/09/nginx-ssl-https/">https://blog.rmgee.com/2021/07/09/nginx-ssl-https/</a></p>
+
 
             <h4 align="center">--完--</h4>
         </div>
@@ -322,7 +326,7 @@ $ sudo certbot renew --dry-run
                 <a href="https://blog.rakfree.tk/2022/03/https/">https://blog.rakfree.tk/2022/03/https/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-03 10:42:08</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-03 10:46:33</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
