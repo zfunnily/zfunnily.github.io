@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-03T10:26:56&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-03T10:46:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-03T11:47:10&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Nginx | 给网站添加证书">
@@ -160,6 +160,7 @@
         <li><a href="#使用pip安装certbot">使用pip安装certbot</a></li>
         <li><a href="#配置certbot网站变成https访问">配置certbot，网站变成https访问</a></li>
         <li><a href="#定时更新证书保持证书不过期">定时更新证书，保持证书不过期</a></li>
+        <li><a href="#certbot的一些指令">certbot的一些指令</a></li>
       </ul>
     </li>
     <li><a href="#参考">参考</a></li>
@@ -301,13 +302,38 @@ If you like Certbot, please consider supporting our work by:
 </code></pre></div></details>
 <br/>
 <h3 id="定时更新证书保持证书不过期">定时更新证书，保持证书不过期</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 在系统定时命令中增加一条定时执行命令，每天0点、12点自动运行一下自动更新程序，检查ssl证书是否过期，过期自动更新
-$ echo &#34;0 0,12 * * * root /opt/certbot/bin/python -c &#39;import random; import time; time.sleep(random.random() * 3600)&#39; &amp;&amp; certbot renew -q&#34; | sudo tee -a /etc/crontab &gt; /dev/null
+<p>Let’s Encrypt机构颁发的，每次生成的证书有90天的有效期， 建议使用linux系统的定时任务crontab进行自动续期</p>
+<p>在用户目录root下写一个脚本文件<code>certbot-renew.sh</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>echo <span style="color:#e6db74">&#34;==================Certbot Renew=====================&#34;</span>
+echo <span style="color:#e6db74">&#34;==================`date`============================&#34;</span>
 
-# 可以使用这个命令检查自动更新程序是否正常配置了
-$ sudo certbot renew --dry-run
+<span style="color:#75715e"># 更新TLS证书</span>
+/usr/bin/certbot renew
+<span style="color:#75715e"># 重启Web服务器</span>
+nginx -s reload
+
+echo <span style="color:#e6db74">&#34;==================End===============================&#34;</span>
+</code></pre></div><p>给脚本执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ chmod +x certbot-renew.sh
+</code></pre></div><p>linux 定时任务, 编辑crontab文件 , <code>ctrl + x</code>可以退出编辑模式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ crontab -e
+
+0 0 1 * * /root/certbot-renew.sh
+</code></pre></div><p>可以使用这个命令检查自动更新程序是否正常配置了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo certbot renew --dry-run
+</code></pre></div><h3 id="certbot的一些指令">certbot的一些指令</h3>
+<p>查看过期时间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">certbot renew
+</code></pre></div><p>查看证书情况</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">certbot certificates
+</code></pre></div><p>手动续期证书（过期前一个月内）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot renew
+</code></pre></div><p>忽略证书过期时间，直接重置证书时间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot renew --force-renewal
 </code></pre></div><h2 id="参考">参考</h2>
-<p><a href="https://blog.rmgee.com/2021/07/09/nginx-ssl-https/">https://blog.rmgee.com/2021/07/09/nginx-ssl-https/</a></p>
+<p><a href="https://blog.rmgee.com/2021/07/09/nginx-ssl-https/">nginx</a></p>
+<p><a href="https://www.runoob.com/w3cnote/linux-crontab-tasks.html">linux定时任务</a></p>
 
 
             <h4 align="center">--完--</h4>
@@ -326,7 +352,7 @@ $ sudo certbot renew --dry-run
                 <a href="https://blog.rakfree.tk/2022/03/https/">https://blog.rakfree.tk/2022/03/https/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-03 10:46:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-03 11:47:10</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
