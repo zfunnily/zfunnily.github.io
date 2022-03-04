@@ -6,11 +6,7 @@
     <description>Recent content in 编程.P2P on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 07 Nov 2021 15:49:46 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 07 Nov 2021 15:49:46 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go-libp2p四 | 穿透NAT</title>
       <link>https://blog.rakfree.tk/2021/11/gop2pfour/</link>

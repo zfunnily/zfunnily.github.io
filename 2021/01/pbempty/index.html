@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-01-22T16:41:16&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:01:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Protobuf | 请求参数为空的案例">
@@ -206,17 +206,17 @@
         <div class="post-content">
             <h2 id="参数为空的grpc请求怎么定义">参数为空的grpc请求怎么定义</h2>
 <p>google protobuf已经提供了空参数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//empty.proto
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//empty.proto
 
 message Empty {&lt;!-- --&gt;}
 </code></pre></div><p>使用方法，在proto文件中导入<code>empty.proto</code>, 定义一个请求参数和返回值为空的函数<code>emptyfunction</code>， 函数名字可以自定义。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//server.proto
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//server.proto
 import &#34;google/protobuf/empty.proto&#34;;
 service  pbservice{
     rpc emptyfunction(google.protobuf.Empty) return{google.protobuf.Empty}
 }
 </code></pre></div><p>以golang语言为例子，在go中对应的函数为：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (s *service) emptyfunction(ctx context.Context, g *google_protobuf.Empty) (*google_protobuf.Empty, error) {&lt;!-- --&gt;}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func (s *service) emptyfunction(ctx context.Context, g *google_protobuf.Empty) (*google_protobuf.Empty, error) {&lt;!-- --&gt;}
 </code></pre></div><p>到此，空请求和空返回的grpc就完成了。</p>
 
 
@@ -236,7 +236,7 @@ service  pbservice{
                 <a href="https://blog.rakfree.tk/2021/01/pbempty/">https://blog.rakfree.tk/2021/01/pbempty/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:01:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

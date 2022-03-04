@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-10-28T09:11:32&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T18:57:07&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Vim | 打造编C&#43;&#43;IDE">
@@ -220,7 +220,7 @@
             <h2 id="a-id_vimplus_c_ide_2a使用-vimplus-打造c-ide"><a id="_vimplus_C_IDE_2"></a>使用 vimplus 打造C++ IDE</h2>
 <p>GitHub： <a href="https://github.com/chxuan/vimplus">https://github.com/chxuan/vimplus</a><br> 支持平台：<br> macos/linux</p>
 <h3 id="a-idvimplus_6a安装vimplus"><a id="vimplus_6"></a>安装vimplus</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// 原来的链接， 国内速度较慢
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// 原来的链接， 国内速度较慢
 $ git clone https://github.com/chxuan/vimplus.git ~/.vimplus
 
 // github修改为镜像的链接
@@ -234,12 +234,12 @@ $ ./install.sh
 <p>为防止vimplus显示乱码，需设置mac终端字体为<code>Droid Sans Mono Nerd Font</code>。</p>
 <h3 id="a-idvimplus_22a更新vimplus"><a id="vimplus_22"></a>更新vimplus</h3>
 <p>紧跟vimplus的步伐，尝鲜新特性</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./update.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./update.sh
 
 </code></pre></div><h2 id="a-id_30a出现过的问题"><a id="_30"></a>出现过的问题</h2>
 <h3 id="a-idycm_31aycm编译错误"><a id="YCM_31"></a>YCM编译错误</h3>
 <p>出现过问题”YouCompleteMe unavailable: No module named ycmd”, 解决办法</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd ~/.vim/plugged/YouCompleteMe  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd ~/.vim/plugged/YouCompleteMe  
 git pull  
 git submodule update --init --recursive
 
@@ -247,7 +247,7 @@ apt-get install python3-dev cmake
 ./install.sh --clang-completer
 
 </code></pre></div><p>如果是使用其他语言，官网也给出了安装命令，不过也要安装对应的开发语言环境：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">C++:   python3 install.py --clang-completer
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">C++:   python3 install.py --clang-completer
 C#：install Mono and run python3 install.py --clangd-completer
 Go：install Go and run python3 install.py --go-completer
 JS and TypeScript：install Node.js and rpm and run python3 install.py --ts-completer
@@ -255,11 +255,11 @@ Rust：python3 install.py --rust-completer
 Java：install JDK8 and python3 install.py --java-completer
 
 </code></pre></div><p>如果你想一劳永逸，也可以全部安装，不过也需要把每种语言的环境都安装好才可以：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">python3 install.py --all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">python3 install.py --all
 
 </code></pre></div><h3 id="a-idubuntu1604_vimplus_61aubuntu1604-更新安装vimplus不成功"><a id="ubuntu1604_vimplus_61"></a>ubuntu16.04 更新安装vimplus不成功</h3>
 <p>需要安装 gnupg</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt install --only-upgrade gnupg
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt install --only-upgrade gnupg
 
 </code></pre></div><h2 id="a-idvimc_66a使用vim打开项目c头文件找不到"><a id="vimC_66"></a>使用vim打开项目，C++头文件找不到</h2>
 <p>vimplus安装完毕之后，<code>~</code>目录下将会生成两个隐藏文件分别是.vimrc和.ycm_extra_conf.py，其中.vimrc是vim的配置文件，<code>.ycm_extra_conf.py</code>是ycm插件的配置文件，当你需要创建一个project时，<strong>需要将.ycm_extra_conf.py拷贝到project的顶层目录，通过修改该配置文件里面的<code>flags</code>变量来添加你的第三方库路径。</strong></p>
@@ -281,7 +281,7 @@ Java：install JDK8 and python3 install.py --java-completer
                 <a href="https://blog.rakfree.tk/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/">https://blog.rakfree.tk/2020/10/%E4%BD%BF%E7%94%A8vim%E6%89%93%E9%80%A0%E7%BC%96C-IDE/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:07</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

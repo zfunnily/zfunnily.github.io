@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-09-12T20:43:34&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="FPS游戏 | 实现移动功能">
@@ -234,7 +234,7 @@
 </ol>
 <h2 id="rigid-body--capsule-collider">Rigid body + Capsule Collider</h2>
 <p>控制摄像头旋转 FPMouseLook.cs 跟main camera 绑定</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">using</span> System.Collections;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">using</span> System.Collections;
 <span style="color:#66d9ef">using</span> System.Collections.Generic;
 <span style="color:#66d9ef">using</span> UnityEngine;
 <span style="color:#66d9ef">using</span> UnityEngine.UI;
@@ -278,17 +278,17 @@
 1、Vertical 键盘按上或下键时触发
 2、Horizontal 键盘按左或右键时触发</p>
 <p>使用示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Input.GetAxis(&#34;Mouse Y&#34;);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Input.GetAxis(&#34;Mouse Y&#34;);
 </code></pre></div><blockquote>
 <p>返回值是一个数，正负代表方向</p>
 </blockquote>
 <h3 id="mathfclamp">Mathf.Clamp</h3>
 <p>函数定义：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">static</span> function Clamp (<span style="color:#66d9ef">value</span> : <span style="color:#66d9ef">float</span>, min : <span style="color:#66d9ef">float</span>, max : <span style="color:#66d9ef">float</span>) : <span style="color:#66d9ef">float</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">static</span> function Clamp (<span style="color:#66d9ef">value</span> : <span style="color:#66d9ef">float</span>, min : <span style="color:#66d9ef">float</span>, max : <span style="color:#66d9ef">float</span>) : <span style="color:#66d9ef">float</span>
 </code></pre></div><p>解释： 限制<code>value</code>的值在<code>min</code>和<code>max</code>之间， 如果<code>value</code>小于<code>min</code>，返回<code>min</code>。 如果<code>value</code>大于<code>max</code>，返回<code>max</code>，否则返回<code>value</code></p>
 <h2 id="控制降落--跳跃">控制降落 + 跳跃</h2>
 <p>FPMoveMent.cs</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
 <span style="color:#66d9ef">using</span> System.Collections.Generic;
 <span style="color:#66d9ef">using</span> UnityEngine;
 
@@ -351,12 +351,12 @@ Debug.Log(<span style="color:#e6db74">&#34;button: &#34;</span> + Input.GetButto
         <span style="color:#66d9ef">return</span> Mathf.Sqrt(<span style="color:#ae81ff">2</span> * grativty * JumpHeight);
     }
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionStay(Collision _other)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionStay(Collision <span style="color:#ae81ff">_</span>other)
     {
         isGrounded = <span style="color:#66d9ef">true</span>;
     }
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionExit(Collision _other)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionExit(Collision <span style="color:#ae81ff">_</span>other)
     {
         isGrounded = <span style="color:#66d9ef">false</span>;
     }
@@ -412,7 +412,7 @@ OnCollisionStay();</p>
 </ul>
 <p>参考： physicalSystyme.md</p>
 <h2 id="移动-方案2">移动 方案2</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
 <span style="color:#66d9ef">using</span> System.Collections.Generic;
 <span style="color:#66d9ef">using</span> UnityEngine;
 
@@ -457,7 +457,7 @@ Debug.Log(characterController.isGrounded);
 </span><span style="color:#75715e"></span>    }
 }
 </code></pre></div><h2 id="shift-奔跑--下蹲">shift 奔跑 + 下蹲</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
 <span style="color:#66d9ef">using</span> System.Collections.Generic;
 <span style="color:#66d9ef">using</span> UnityEngine;
 
@@ -557,7 +557,7 @@ Debug.Log(characterController.isGrounded);
                 <a href="https://blog.rakfree.tk/2021/09/move/">https://blog.rakfree.tk/2021/09/move/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

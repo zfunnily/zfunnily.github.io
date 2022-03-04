@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-16T23:04:13&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Owt-server | owt-client-javascript">
@@ -212,7 +212,7 @@
 <p>天气燥热，不易出门。遂研究一下owt-server，从owt-client-javascript的流程开始吧。</p>
 <h2 id="获取一个会议室">获取一个会议室</h2>
 <p>owt-client-javascript的时候有一个初始化房间的过程</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
 (function initSampleRoom () {
     
     icsREST.API.getRooms(pageOption, function(rooms){
@@ -238,27 +238,27 @@
 })
 </code></pre></div><h2 id="获取token">获取token</h2>
 <p>从owt-client-javascript的rest-sample.js开始发送获取token请求。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/rest-sample.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/rest-sample.js
 var createToken = function (room, user, role, callback, host) {
   ...
   send(&#39;POST&#39;, &#39;/tokens/&#39;, body, callback, host);
 };
 </code></pre></div><p>请求到本地服务</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/samplertcservice.js
 app.post(&#39;/tokens&#39;, function(req, res) {
     ...
     icsREST.API.createToken(room, user, role, preference, ...});
 }
 </code></pre></div><p>本地服务开始请求到owt-server的接口创建token，并且返回token</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-server/source/management_api/resource/v1/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-server/source/management_api/resource/v1/index.js
 router.post(&#39;/rooms/:room/tokens&#39;, tokensResource.create);
 
 </code></pre></div><h2 id="加入会议并且获取房间中的流">加入会议并且获取房间中的流</h2>
 <p>加入会议：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
 conference.join(token).then(resp =&gt; {}
 </code></pre></div><p>通过返回的token解析出host, 连接上房间,并且把房间中的流信息加入到map里</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
 signaling.connect(host, isSecured, loginInfo).then((resp) =&gt; {
         //修改连接状态
         signalingState = SignalingState.CONNECTED;   
@@ -276,7 +276,7 @@ signaling.connect(host, isSecured, loginInfo).then((resp) =&gt; {
        ...
 }
 </code></pre></div><p>设置好房间的流后，开始获取本地流并且开始推流。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
                     ...
 let mediaStream;
 Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
@@ -309,7 +309,7 @@ Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
 });
 </code></pre></div><h2 id="拉流">拉流</h2>
 <p>开始拉流</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">///owt-client-javascript/src/samples/conference/public/scripts/index.js
  for (const stream of streams) {
         if(!subscribeForward){
           if (stream.source.audio === &#39;mixed&#39; || stream.source.video ===
@@ -324,7 +324,7 @@ Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
     }
 
 </code></pre></div><p>拉流所在的函数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">function subscribeAndRenderVideo(stream){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">function subscribeAndRenderVideo(stream){
     let subscirptionLocal=null;
     function subscribeDifferentResolution(stream, resolution){
         subscirptionLocal &amp;&amp; subscirptionLocal.stop();
@@ -384,7 +384,7 @@ Owt.Base.MediaStreamFactory.createMediaStream(new Owt.Base.StreamConstraints(
                 <a href="https://blog.rakfree.tk/2020/08/owt-client-javascript/">https://blog.rakfree.tk/2020/08/owt-client-javascript/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

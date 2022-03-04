@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-07T07:54:43&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T15:26:05&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Docker | web管理界面portainer">
@@ -209,16 +209,16 @@
         
         <div class="post-content">
             <h3 id="拉取镜像">拉取镜像</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker pull portainer/portainer
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker pull portainer/portainer
 </code></pre></div><h3 id="运行启动portainer">运行启动portainer</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /home/docker/portainer:/data --name portainer --restart=always portainer/portainer
 </code></pre></div><p>admin<br> bigant.cn</p>
 <h3 id="a-id_14a汉化"><a id="_14"></a>汉化</h3>
 <p><a href="https://dl.quchao.net/Soft/Portainer-CN.zip">Portainer-CN.zip</a><br> 百度云盘: <a href="https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw">https://pan.baidu.com/s/13ra6jXHR_7vajLLlf5GVEw</a> 提取码: <code>nzue</code><br> 新建文件夹命名为<code>public</code>，把<code>Portainer-CN.zip</code>解压至里面。 2、<code>public</code>文件夹传输至系统根目录 3、然后按需执行以下命令 x86-64系统使用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock   -v portainer_data:/data -v /public:/public  --name portainer --restart=always portainer/portainer
 </code></pre></div><p>ARM64系统使用</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker volume create portainer_data
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data -v /public:/public portainer/portainer:linux-arm64-1.20.2
 </code></pre></div>
 
@@ -238,7 +238,7 @@ docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v porta
                 <a href="https://blog.rakfree.tk/2020/08/dockerweb/">https://blog.rakfree.tk/2020/08/dockerweb/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:26:05</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
