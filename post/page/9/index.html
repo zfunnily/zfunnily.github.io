@@ -86,6 +86,33 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" title="Cgo | 简单使用">Cgo | 简单使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            使用自己的C函数 文件名：testC.go package main /* #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; void c_print(char *str) { printf(&#34;%s\n&#34;, str); } */ import &#34;C&#34; //import “C” 必须单起一行，并且紧跟在注释行之后 import &#34;unsafe&#34; func main() { s := &#34;Hello Cgo&#34; cs := C.CString(s) //字符串映射 C.c_print(cs) //调用C函数 defer C.free(unsafe.Pointer(cs)) //释放内存 } 说明： 1、g……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2020/11/cgo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2020/11/%E4%BD%BF%E7%94%A8Lumberjack-zap%E8%BF%9B%E8%A1%8C%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2%E5%BD%92%E6%A1%A3/" title="Golang | 使用Lumberjack&#43;zap进行日志切割归档">Golang | 使用Lumberjack&#43;zap进行日志切割归档</a>
             </h1>
         </header>
@@ -324,33 +351,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/09/ffmpegvideow/" title="FFmpeg | 录制摄像头和桌面数据windows">FFmpeg | 录制摄像头和桌面数据windows</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年9月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 FFmpeg Windows 设备操作 Windows 采集设备的主要方式是 dshow vfwcap gdigrab 其中 dshow 可以用来抓 取摄像头、采集卡、麦克风等，- vfwcap 主要用来采集摄像头类设备，- gdigrab 则是抓取 Windows 窗口程序 FFmpeg 使用 dshow 采集音视频设备 使用 dshow 枚举设备 ffmpeg -f dshow -list_devices true -i dymmy 输出 [dshow @ 000002622302e340]……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/09/ffmpegvideow/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -499,6 +499,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
     </li>
     
@@ -512,10 +516,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
 </ul>
@@ -545,7 +545,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (6)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     

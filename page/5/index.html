@@ -84,6 +84,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/03/gomod/" title="Golang | gomod拉取私有仓库">Golang | gomod拉取私有仓库</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年3月23日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。 get &#34;gitlab.com/xxx/zz&#34;: found meta tag get.metaImport{Prefix:&#34;gitlab.com/xxx/zz&#34;, VCS:&#34;git&#34;, RepoRoot:&#34;https://gitlab.com/xxx/zz.git&#34;} at //gitlab.com/xxx/zz?go-get=1 verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone 这个错误是因为新版本g……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/03/gomod/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2021/03/sort/" title="八个基础排序">八个基础排序</a>
             </h1>
         </header>
@@ -306,31 +331,6 @@
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/02/dynamic/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/02/compilation/" title="汇编 | C/C&#43;&#43;调用汇编">汇编 | C/C&#43;&#43;调用汇编</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96'>编程.汇编</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。 目标：汇编函数提供输出。类似C语言的函数 void hello_world(char* value) { printf(value); } 提供给C语言调用： int main() { hello_world(&#34;hello world!\n&#34;); } 搭建AT&amp……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/02/compilation/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -493,6 +493,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
     </li>
     
@@ -506,10 +510,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/san/" title="Grpc ｜ 通过SSL/TLS建立安全连接">Grpc ｜ 通过SSL/TLS建立安全连接</a>
     </li>
     
 </ul>
@@ -539,7 +539,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (6)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     

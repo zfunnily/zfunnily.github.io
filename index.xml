@@ -6,7 +6,16 @@
     <description>Recent content on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 03 Mar 2022 10:26:56 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Mar 2022 12:04:58 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用云服务器搭建个人博客</title>
+      <link>https://blog.rakfree.tk/2022/03/blog/</link>
+      <pubDate>Thu, 03 Mar 2022 12:04:58 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/03/blog/</guid>
+      <description>vps选择 最近关注了一个vps推广网站。价格合适，于是买了一个128元/年的云服务器。既可以用来做代理，又可以搭建个人博客 配置是2G/1M/40G(运存/带宽/硬盘) 使用技术 nginx: 静态博客 v2ray: 代理 https + nginx freenome: 域</description>
+    </item>
+    
     <item>
       <title>Nginx | 给网站添加证书</title>
       <link>https://blog.rakfree.tk/2022/03/https/</link>
