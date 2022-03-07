@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-11-12T17:15:17&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:00:04&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Golang | builds">
@@ -212,7 +212,7 @@
 <h2 id="a-idbuild_tags_8abuild-tags自定义配置"><a id="build_tags_8"></a>build tags自定义配置</h2>
 <p>这个可以使用 build tags 来自定义配置。</p>
 <p>假设我们现在有两个环境，dev 和 prod，那么我们可以新建一个 config 文件夹，放入 dev.go 和 prod.go 两个文件，分别写入对应的配置，如下所示。<strong>同一个包，同样的变量名，但是不会因为重复声明和报错，因为这里加了 tag</strong>，如下所示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build dev
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build dev
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">package</span> <span style="color:#a6e22e">config</span>
 
@@ -221,7 +221,7 @@
 	<span style="color:#a6e22e">Redis</span> = <span style="color:#e6db74">&#34;redis://127.0.0.1:6379/0&#34;</span>
 )
 
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build prod
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// +build prod
 </span><span style="color:#75715e"></span>
 <span style="color:#f92672">package</span> <span style="color:#a6e22e">config</span>
 
@@ -230,7 +230,7 @@
 )
 
 </code></pre></div><p>在 main 包引入尝试以下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go build -o=test -tags=dev .
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go build -o=test -tags=dev .
 $ ./test
 redis://127.0.0.1:6379/0
 $ go build -o=test -tags=prod .
@@ -242,13 +242,13 @@ redis://192.168.0.1:6379
 <p>这里 tag 前加上 ! 就代表非构建指令下的配置。</p>
 <p>tag 常用于交叉编译的配置，例如有些文件针对 linux 而有些文件针对 windows，底层使用的系统调用是不同的，go 源码就包含了很多这样的构建指令：</p>
 <p>一行中使用空格就代表“或”的关系，下面指的是在<code>linux</code>或者<code>darwin</code>环境中使用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux darwin
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux darwin
 
 </code></pre></div><p>如果要指定“与”的关系，那么可以使用<code>,</code>，下面就是指使用 “linux” 和 “cgo” 两个环境同时满足才使用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux,cgo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux,cgo
 
 </code></pre></div><p>当然可以分成多行，下面的指令表述和上面一致：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// +build linux
 // +build cgo
 
 </code></pre></div><p>更多还有 ignore 指令来忽略使用这个文件，更多可以查看<a href="https://golang.org/pkg/go/build/#hdr-Build_Constraints">官方文档</a></p>
@@ -258,6 +258,7 @@ redis://192.168.0.1:6379
         </div>
 
         
+
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
@@ -270,7 +271,7 @@ redis://192.168.0.1:6379
                 <a href="https://blog.rakfree.tk/2020/11/go-builds/">https://blog.rakfree.tk/2020/11/go-builds/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:00:04</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -424,6 +425,14 @@ redis://192.168.0.1:6379
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
@@ -473,7 +482,7 @@ redis://192.168.0.1:6379
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
@@ -521,6 +530,10 @@ redis://192.168.0.1:6379
     <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
     <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
