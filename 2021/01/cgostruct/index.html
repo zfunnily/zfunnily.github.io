@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-01-11T17:18:35&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:01:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Cgo | 遍历C结构体数组">
@@ -217,7 +217,7 @@
 </ul>
 <h2 id="举例">举例</h2>
 <p>声明一个C数组</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;stdio.h&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 typedef struct {&lt;!-- --&gt;
 	char *name;
@@ -248,7 +248,7 @@ void freePersonArray(person* pon, int len)
 }
 
 </code></pre></div><p>C已经做好了内存分配和内存释放，接下来看看在go中 怎么使用C的数据</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func main()  {&lt;!-- --&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">func main()  {&lt;!-- --&gt;
 	var person *C.person
 	n := 10
 	person = C.NewPersonArray(C.int(n))  //new一个长度为n的person数组
@@ -262,23 +262,23 @@ void freePersonArray(person* pon, int len)
 }
 
 </code></pre></div><p>关键的一步是计算偏移量并进行运算：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">p := *(*C.person)(unsafe.Pointer(uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">p := *(*C.person)(unsafe.Pointer(uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))))
 
 </code></pre></div><p>我们来把这个步骤分解一下：<br> 第一步，将C指针转化为<code>unsafe.Pointer</code>，然后转化为<code>uintptr</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(unsafe.Pointer(person))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(unsafe.Pointer(person))
 
 </code></pre></div><p>第二步，计算每个结构体所占用的大小 <code>C.sizeof_person</code>，并乘以 <code>i</code>，然后转化为<code>uintptr</code>，得到偏移量， 这个<code>person</code>是结构体名字。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(C.sizeof_person*C.int(i))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(C.sizeof_person*C.int(i))
 
 </code></pre></div><p>第三步，把第一步的<code>uintptr</code>和第二步得到的偏移量相加，得到一个新的<code>uintptr</code>值，</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))
 
 </code></pre></div><p>第四步，把第三部得到的<code>uintptr</code>转化为<code>unsafe.Pointer</code>，然后再强制转化为<code>*C.person</code>，这就类似<code>C语言</code>中的指针运算：<code>指针+偏移量</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">p := *(*C.person)(unsafe.Pointer(uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">p := *(*C.person)(unsafe.Pointer(uintptr(unsafe.Pointer(person)) + uintptr(C.sizeof_person*C.int(i))))
 
 </code></pre></div><h2 id="a-id_79a完整代码"><a id="_79"></a>完整代码</h2>
 <p>通过上面的四个步骤就可以利用<code>go</code>语言从<code>C</code>结构体数组中取出元素，完整代码如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 <span style="color:#75715e">/*
 </span><span style="color:#75715e">#include &lt;stdio.h&gt;
 </span><span style="color:#75715e">#include &lt;stdlib.h&gt;
@@ -328,7 +328,7 @@ void freePersonArray(person* pon, int len)
 }
 
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">i: 0, p.name: name:0, p.age: 0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">i: 0, p.name: name:0, p.age: 0
 i: 1, p.name: name:1, p.age: 1
 i: 2, p.name: name:2, p.age: 2
 i: 3, p.name: name:3, p.age: 3
@@ -358,7 +358,7 @@ i: 9, p.name: name:9, p.age: 9
                 <a href="https://blog.rakfree.tk/2021/01/cgostruct/">https://blog.rakfree.tk/2021/01/cgostruct/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:01:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -444,7 +444,7 @@ i: 9, p.name: name:9, p.age: 9
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

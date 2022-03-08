@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-09T09:34:36&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Licod | 安装和配置">
@@ -224,38 +224,38 @@
         <div class="post-content">
             <h2 id="拉取docker镜像并运行">拉取docker镜像并运行</h2>
 <p>licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run --name licode -p  3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001  -p 8080:8080 -e &#34;MIN_PORT=30000&#34; -e &#34;MAX_PORT=30050&#34; -e &#34;PUBLIC_IP=your_ip_address&#34; lynckia/licode
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run --name licode -p  3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001  -p 8080:8080 -e &#34;MIN_PORT=30000&#34; -e &#34;MAX_PORT=30050&#34; -e &#34;PUBLIC_IP=your_ip_address&#34; lynckia/licode
 
 </code></pre></div><p>注意命令里的<code>PUBLIC_IP</code>要改为服务器的公网IP。</p>
 <p>配置好之后，在地址栏输入ip:3001回车，chrome就会弹出是否允许摄像头麦克风那个窗口，点击确定，就可以看到你的视频了。</p>
 <h2 id="源码安装">源码安装</h2>
 <h3 id="下载代码">下载代码</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/lynckia/licode.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/lynckia/licode.git
 cd licode
 
 </code></pre></div><h3 id="安装依赖">安装依赖</h3>
 <p>Ubuntu16.04</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installUbuntuDeps.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installUbuntuDeps.sh
 
 </code></pre></div><p>Mac OSX</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installMacDeps.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installMacDeps.sh
 
 </code></pre></div><blockquote>
 </blockquote>
 <p>如果本机已经装了ffmpeg，请卸载</p>
 <h3 id="安装licode">安装licode</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installNuve.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installNuve.sh
 ./scripts/installErizo.sh
 </code></pre></div><h3 id="安装-basicexample">安装 basicExample</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installBasicExample.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/installBasicExample.sh
 </code></pre></div><h3 id="基本配置">基本配置</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">config.erizoController.publicIP = &#39;your_ip_address&#39;; 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">config.erizoController.publicIP = &#39;your_ip_address&#39;; 
 config.erizoController.hostname = &#39;your_ip_address&#39;;
 config.erizoAgent.publicIP = &#39;your_ip_address&#39;; //default value: &#39;&#39;
 
 config.erizoAgent.networkinterface = &#39;eth0&#39;; //default value: &#39;&#39;：w
 </code></pre></div><h3 id="配置ssl">配置SSL</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//配置turnserver服务器
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//配置turnserver服务器
 
 config.erizoController.iceServers = \[{&#39;url&#39;:&#39;stun:stun.l.google.com:19302&#39;},{&#39;url&#39;:&#39;stun:**服务器****IP**:3478&#39;}\];//**注意，配置的服务器必须是可访问的，否则启动失败**
 
@@ -273,16 +273,16 @@ config.erizoController.ssl\_key =&#39;/full/path/to/ssl.key&#39;;
 
 config.erizoController.ssl\_cert =&#39;/full/path/to/ssl.crt&#39;;
 </code></pre></div><h3 id="启动licode">启动licode</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/initLicode.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./scripts/initLicode.sh
 ./scripts/initBasicExample.sh
 </code></pre></div><p>运行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">http://ip:3001
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">http://ip:3001
 https://ip:3004  //需要开启tls
 
 </code></pre></div><h2 id="安装过程中的问题">安装过程中的问题</h2>
 <h3 id="boost库的问题">boost库的问题</h3>
 <p>我遇到了boost库的问题：Missing boost_property_tree/1.69.0@bincrafters/stable ,修改<code>./scripts/installErizo.sh</code>的65行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">conan install . --build IncludePathsGenerator --build boost
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">conan install . --build IncludePathsGenerator --build boost
 </code></pre></div><h3 id="神奇的npm---npm-i时提示sha512错误">神奇的npm - npm i时提示sha512错误</h3>
 <p>下载npm包的时候，会进行包的哈希检测，以防下载的包被人恶意篡改，然而有时候因为cnpm与npm混用导致这个问题，可以通过以下步骤解决</p>
 <p><strong>删除package-lock.json</strong>，重新执行npm i</p>
@@ -319,7 +319,7 @@ https://ip:3004  //需要开启tls
                 <a href="https://blog.rakfree.tk/2020/08/licode/">https://blog.rakfree.tk/2020/08/licode/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -405,7 +405,7 @@ https://ip:3004  //需要开启tls
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

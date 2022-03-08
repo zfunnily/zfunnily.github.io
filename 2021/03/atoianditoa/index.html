@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-17T16:43:20&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T18:57:55&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="实现atoi和itoa函数">
@@ -212,7 +212,7 @@
 <li>先判断正负</li>
 <li>遍历字符串，转换字符为整数</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//atoi.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//atoi.cc
 #include  &lt;stdio.h&gt;
 int my_atoi(char *str)
 {
@@ -250,7 +250,7 @@ int main()
 }
 
 </code></pre></div><p>编译&amp;运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -o atoi atoi.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -o atoi atoi.cc
 $ ./atoi
 a: 13579
 b: 246810
@@ -264,7 +264,7 @@ b: 246810
 <li><code>* (++str)</code>，先将<code>str</code>的值<code>++</code>，然后再返回 <code>* str</code>的值，和 <code>*++str</code>是等价的。
 <code>*str++ - '0'</code>： 表达式的意思是<code>字符 - ’0‘ = 整数</code>，可以通过ASCII码来计算。举个例子：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//ascii.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//ascii.cc
 int main()
 {
     int a = 2;
@@ -274,7 +274,7 @@ int main()
     printf(&#34;int + char = %c, d: %d\n&#34;,b,d);
 }
 </code></pre></div><p>编译运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -o ascii ascii.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -o ascii ascii.cc
 $ ./ascii
 int + char = 2, d: 5
 </code></pre></div><p>可以看到 <code>char b = '0' + a;</code></p>
@@ -298,7 +298,7 @@ int + char = 2, d: 5
 <li>求出整数的最大位（个/十/百/千/万）</li>
 <li>遍历位数，将整数转化为字符</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// itoa.cc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// itoa.cc
 int my_itoa(long i, char* str)
 {
     int power = 0, j = 0;
@@ -321,7 +321,7 @@ int main()
     printf(&#34;str: %s\n&#34;, str);
 }
 </code></pre></div><p>编译&amp;运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -g -o itoa itoa.cc -std=c++11
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ g++ -g -o itoa itoa.cc -std=c++11
 $ ./itoa
 str: 123456
 </code></pre></div>
@@ -343,7 +343,7 @@ str: 123456
                 <a href="https://blog.rakfree.tk/2021/03/atoianditoa/">https://blog.rakfree.tk/2021/03/atoianditoa/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:55</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -429,7 +429,7 @@ str: 123456
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

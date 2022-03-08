@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-11-25T16:30:39&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T15:23:48&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Openresty二 | postman小工具">
@@ -228,7 +228,7 @@
 <p>mvc架构<br> 模型渲染库：https://github.com/bungle/lua-resty-template<br> resty http请求库： <a href="https://github.com/bungle/lua-resty-template">https://github.com/bungle/lua-resty-template</a></p>
 <h2 id="参照-mvc模型来做postman工具">参照 mvc模型来做postman工具</h2>
 <h3 id="配置文件说明">配置文件说明</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
 error_log logs/error.log;
 events {
     worker_connections 1024;
@@ -255,7 +255,7 @@ http {
 </ul>
 <h3 id="入口文件解析uri">入口文件/解析uri</h3>
 <p>mvc.lua</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#!/usr/bin/lua
 
 ngx.say(&#34;&lt;br/&gt;&#34;)
 
@@ -316,7 +316,7 @@ end
 
 </code></pre></div><h3 id="控制器">控制器</h3>
 <p>控制器路径：　lua/web/index.lua, lua/web/postman.lua<br> lua/web/index.lua 渲染模板 lua/tpl/index.html</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
 local _M = {}
 function _M.index()
     local model = {reqUrl = &#34;hello template&#34;, reqBody = &#34;body&#34;}
@@ -327,7 +327,7 @@ end
 return _M
 
 </code></pre></div><p>lua/web/postman.lua实现接收表单数据并处理Post逻辑</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
 local postman = require(&#34;cus.postman&#34;)
 
 local _M = {}
@@ -364,7 +364,7 @@ return _M
 
 </code></pre></div><h3 id="模板代码">模板代码</h3>
 <p>lua/tpl/index.html</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
 &lt;html lang=&#34;en&#34;&gt;
 &lt;head&gt;
     &lt;meta charset=&#34;UTF-8&#34;&gt;
@@ -406,18 +406,18 @@ return _M
 <ol>
 <li>使用template.render</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34;
 template.render(&#34;/index.html&#34;, model)
 
 </code></pre></div><p>2.使用template.new</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; -- Using template.new
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; -- Using template.new
 
  local view = template.new  &#34;view.html&#34; view.message = &#34;Hello, World!&#34; view:render()
 
 </code></pre></div><ol>
 <li>使用template.compile</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local template = require &#34;resty.template&#34; 
 local func = template.compile(&#34;view.html&#34;) 
 --执行函数，得到渲染之后的内容 
 local content = func(context) ngx.say(content)
@@ -428,7 +428,7 @@ local content = func(context) ngx.say(content)
 </ul>
 <h2 id="遇到的坑">遇到的坑</h2>
 <p>网页上直接输出了html字符串。而不是正常网页<br> 解决办法<br> nginx.conf配置文件加上default_type text/html;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
     default_type text/html;
     location / {
             default_type text/html;
@@ -436,7 +436,7 @@ local content = func(context) ngx.say(content)
 }
 
 </code></pre></div><p>入口文件mvc.lua开头加上下面的内容：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.say(&#34;&lt;br/&gt;&#34;)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.say(&#34;&lt;br/&gt;&#34;)
 
 </code></pre></div><h2 id="项目地址">项目地址</h2>
 <p><a href="https://github.com/diycat1024/OpenRestyPostman">https://github.com/diycat1024/OpenRestyPostman</a></p>
@@ -459,7 +459,7 @@ local content = func(context) ngx.say(content)
                 <a href="https://blog.rakfree.tk/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/">https://blog.rakfree.tk/2020/11/%E4%BD%BF%E7%94%A8OpenResty%E5%81%9A%E4%B8%80%E4%B8%AApostman%E5%B0%8F%E5%B7%A5%E5%85%B7/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:23:48</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -545,7 +545,7 @@ local content = func(context) ngx.say(content)
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

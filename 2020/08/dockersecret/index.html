@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-07T07:56:52&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T15:26:05&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Docker | 远程访问加密">
@@ -216,15 +216,15 @@
             <h2 id="docker的远程访问">docker的远程访问</h2>
 <p>方法一 ：编辑docker.service文件
 编辑docker.service文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim /lib/systemd/system/docker.service
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim /lib/systemd/system/docker.service
 </code></pre></div><p>修改ExecStart行为下面内容</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock 
 </code></pre></div><p>重新加载docker配置</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl daemon-reload // 1，加载docker守护线程
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl daemon-reload // 1，加载docker守护线程
 sudo systemctl restart docker // 2，重启docker
 </code></pre></div><p>方法二：修改<code>daemon.json</code>的配置
 下面修改<code>daemon.json</code>的配置</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/docker/daemon.json
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/docker/daemon.json
 {
   &#34;hosts&#34;: [&#34;tcp://0.0.0.0:2375&#34;, &#34;unix:///var/run/docker.sock&#34;]
 }
@@ -232,16 +232,16 @@ sudo systemctl restart docker // 2，重启docker
 <p>&ldquo;unix:///var/run/docker.sock&rdquo;：unix socket，本地客户端将通过这个来连接 Docker Daemon。<br> “tcp://0.0.0.0:2375”：tcp socket，表示允许任何远程客户端通过 2375 端口连接 Docker Daemon。</p>
 </blockquote>
 <p>修改配置以后 然后让docker重新读取配置文件,并重启docker服务</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">systemctl daemon-reload
 systemctl restart docker
 
 </code></pre></div><p>方法三
 首先是怎么配置远程访问的API：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/default/docker
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vim /etc/default/docker
 </code></pre></div><p>加入下面一行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">DOCKER_OPTS=&#34;-H tcp://0.0.0.0:2375&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">DOCKER_OPTS=&#34;-H tcp://0.0.0.0:2375&#34;
 </code></pre></div><p>重启docker即可：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl restart docker
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl restart docker
 </code></pre></div><blockquote>
 <p>PS:这是网上给的配置方法，也是这种简单配置让Docker Daemon把服务暴露在tcp的2375端口上，这样就可以在网络上操作Docker了。Docker本身没有身份认证的功能，只要网络上能访问到服务端口，就可以操作Docker。</p>
 </blockquote>
@@ -249,64 +249,64 @@ systemctl restart docker
 <p>因为docker 默认是root 权限，允许所有人访问，直接把2375端口暴露在外网相当于直接把服务器的root 权限拱手送人，因此我们需要构建一个加密的TCP链接，以Https的方式连接到远程的docker 服务器</p>
 <h3 id="创建ca证书">创建ca证书</h3>
 <p>创建一个ca文件夹：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /usr/local/ca
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo mkdir -p /usr/local/ca
 cd /usr/local/ca
 </code></pre></div><p>创建一个key</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -aes256 -out ca-key.pem 4096
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -aes256 -out ca-key.pem 4096
 sudo openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
 </code></pre></div><blockquote>
 <p>提示你需要输入密码和确认密码，请记住这个密码<br> 填写一些基本的信息，国家啊，地区</p>
 </blockquote>
 <p>生成server-key.pem</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -out server-key.pem 4096
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -out server-key.pem 4096
 </code></pre></div><p>绑定IP或者域名<br> $HOST 这个值，填写你的服务器外网IP 或者服务器外网域名</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl req -subj &#34;/CN=$HOST&#34; -sha256 -new -key server-key.pem -out server.csr
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl req -subj &#34;/CN=$HOST&#34; -sha256 -new -key server-key.pem -out server.csr
 </code></pre></div><p>配置白名单</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim extfile.cnf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim extfile.cnf
 </code></pre></div><p>$HOST 是上一步设置的那个 $HOST,加入下列内容：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">subjectAltName = DNS:106.54.84.33,IP:106.54.84.33,IP:127.0.0.1,IP:0.0.0.0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">subjectAltName = DNS:106.54.84.33,IP:106.54.84.33,IP:127.0.0.1,IP:0.0.0.0
 extendedKeyUsage = serverAuth
 </code></pre></div><blockquote>
 <p>你如果希望只有指定的IP能够访问的话，请把0.0.0.0 改为指定IP，不过一般情况下，个人的网络是没有固定的公网IP的，所以建议设置成0.0.0.0，但是需要证书才能访问</p>
 </blockquote>
 <p>生成ca-key</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem -extfile extfile.cnf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem -extfile extfile.cnf
 </code></pre></div><blockquote>
 <p>执行这一句需要输入之前设置的密码</p>
 </blockquote>
 <p>创建客户端密钥和证书签名请求:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -out key.pem 4096
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl genrsa -out key.pem 4096
 sudo openssl req -subj &#39;/CN=client&#39; -new -key key.pem -out client.csr
 </code></pre></div><p>修改 <code>extfile.cnf</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">subjectAltName = DNS:106.54.84.33,IP:106.54.84.33,IP:127.0.0.1,IP:0.0.0.0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">subjectAltName = DNS:106.54.84.33,IP:106.54.84.33,IP:127.0.0.1,IP:0.0.0.0
 extendedKeyUsage = clientAuth
 </code></pre></div><p>生成签名私钥：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out cert.pem -extfile extfile.cnf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out cert.pem -extfile extfile.cnf
 </code></pre></div><blockquote>
 <p>需要输入之前设置的密码</p>
 </blockquote>
 <p>修改权限</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo chmod -v 0400 ca-key.pem key.pem server-key.pem
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo chmod -v 0400 ca-key.pem key.pem server-key.pem
 chmod -v 0444 ca.pem server-cert.pem cert.pem
 </code></pre></div><p>现在<code>client.csr</code>和<code>server.csr</code>两个文件可以删除了。</p>
 <h3 id="docker配置ca证书">docker配置ca证书</h3>
 <p>把证书复制过去</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo cp server-*.pem  /etc/docker/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo cp server-*.pem  /etc/docker/
 sudo cp ca.pem /etc/docker/
 </code></pre></div><p>将Docker服务停止了，然后：<br> 修改docker 的配置</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vi /lib/systemd/system/docker.service
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vi /lib/systemd/system/docker.service
 </code></pre></div><p>把ExecStart 的值设置为如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/bin/dockerd --tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server-cert.pem --tlskey=/etc/docker/server-key.pem -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/bin/dockerd --tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server-cert.pem --tlskey=/etc/docker/server-key.pem -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
 </code></pre></div><p>启动Docker守护进程，并将其挂载在2375端口。<br> 重启docker</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl daemon-reload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl daemon-reload
 sudo systemctl restart docker 
 </code></pre></div><h3 id="使用证书连接">使用证书连接</h3>
 <p>复制<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件到客户端<br> 执行命令连接：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=192.168.211.238:2375 version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem -H=192.168.211.238:2375 version
 </code></pre></div><h3 id="默认连接">默认连接</h3>
 <p>如果想默认连接该Docker服务器，可以进行如下配置：<br> 将<code>ca.pem</code>,<code>cert.pem</code>,<code>key.pem</code>三个文件移动到 ~/.docker</p>
 <p>设置环境变量：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export DOCKER_HOST=tcp://$HOST:2375 DOCKER_TLS_VERIFY=1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export DOCKER_HOST=tcp://$HOST:2375 DOCKER_TLS_VERIFY=1
 </code></pre></div><p>执行<code>docker xxx</code>即默认连接Docker服务器进行操作。</p>
 <h3 id="通过idea-的docker-插件进行连接">通过IDEA 的docker 插件进行连接</h3>
 <ul>
@@ -316,10 +316,10 @@ sudo systemctl restart docker
 <p>成功连接，连接不上的，查找如下原因</p>
 <p>1、tcp连接没换<br> 2、端口不对<br> 3、服务器防火墙没放端口<br> 4、云服务器防火墙没放端口<br> 5、证书没弄好</p>
 <h3 id="证书配置错误">证书配置错误</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Can&#39;t load /home/ubuntu/.rnd into RNG
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Can&#39;t load /home/ubuntu/.rnd into RNG
 139826195939776:error:2406F079:random number generator:RAND_load_file:Cannot open file:../crypto/rand/randfile.c:88:Filename=/home/ubuntu/.rnd
 </code></pre></div><p>解决办法<br> 进入.rnd所在目录</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd /home/ubuntu/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd /home/ubuntu/
 sudo     openssl rand -writerand .rnd
 </code></pre></div>
 
@@ -340,7 +340,7 @@ sudo     openssl rand -writerand .rnd
                 <a href="https://blog.rakfree.tk/2020/08/dockersecret/">https://blog.rakfree.tk/2020/08/dockersecret/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:26:05</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -430,7 +430,7 @@ sudo     openssl rand -writerand .rnd
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-28T14:40:02&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-24T09:58:29&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Go-libp2p一 | chat例子">
@@ -215,14 +215,14 @@
         
         <div class="post-content">
             <h2 id="代码下载">代码下载</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/libp2p/go-libp2p.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com/libp2p/go-libp2p.git
 </code></pre></div><h2 id="chat实例分析">chat实例分析</h2>
 <p>进入目录<code>go-libp2p/examples/chat/</code>, 编译 <code>go build</code>
 先看<code>README.md</code>， 可以了解到使用chat的方式</p>
 <ol>
 <li>在节点 B</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -sp <span style="color:#ae81ff">3001</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -sp <span style="color:#ae81ff">3001</span>
 2021/10/28 11:01:25 Run <span style="color:#e6db74">&#39;./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs&#39;</span> on another console.
 2021/10/28 11:01:25 You can replace 127.0.0.1 with public IP as well.
 2021/10/28 11:01:25 Waiting <span style="color:#66d9ef">for</span> incoming connection
@@ -232,7 +232,7 @@
 </code></pre></div><ol start="2">
 <li>在节点 A, 如果B有公网IP，则把<code>127.0.0.1</code>替换成B的公网IP</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -d /ip4/127.0.0.1/tcp/3001/p2p/QmXgEXt4CiqmVmDhPPQnyVkoj3Bsx3Nggq57PPsk5tLNTs
 2021/10/28 11:03:03 This node<span style="color:#960050;background-color:#1e0010">&#39;</span>s multiaddresses:
 2021/10/28 11:03:03  - /ip4/172.16.3.205/tcp/53084
 2021/10/28 11:03:03  - /ip4/127.0.0.1/tcp/53084
@@ -245,7 +245,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">makeHost</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">sourcePort</span>, <span style="color:#a6e22e">r</span>)
 <span style="color:#f92672">...</span>
 <span style="color:#75715e">//监听 并设置回调Handler streamHandler
@@ -301,7 +301,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//创建host
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">makeHost</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">sourcePort</span>, <span style="color:#a6e22e">r</span>)
 
 <span style="color:#75715e">//建立对等连接发送消息
@@ -363,7 +363,7 @@
 <li>被连接方的节点B需要设置协议ID，并设置数据流的回调handle, 这个回调handle中有读写协程</li>
 <li>连接方的节点A需要知道B的地址，并解析B的地址</li>
 <li>把节点B的地址添加到节点A的host</li>
-<li>节点A使用节点B的host.ID和B监听的协议&rdquo;/chat/1.0.0&quot;创建一个新的数据流, 创建读写协程</li>
+<li>节点A使用节点B的host.ID和B监听的协议&quot;/chat/1.0.0&quot;创建一个新的数据流, 创建读写协程</li>
 <li>这样节点A和B就能通讯了</li>
 </ol>
 <p>作为发送方比接收方多了第4步， <code>把节点B的地址添加到节点A的host</code></p>
@@ -386,7 +386,7 @@
                 <a href="https://blog.rakfree.tk/2021/10/gop2pone/">https://blog.rakfree.tk/2021/10/gop2pone/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 09:58:29</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -476,7 +476,7 @@
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

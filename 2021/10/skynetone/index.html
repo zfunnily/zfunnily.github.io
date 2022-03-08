@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-19T17:28:45&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-07T17:59:11&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Skynet源码赏析一 | 启动初始化的过程">
@@ -212,7 +212,7 @@
             <h2 id="入口文件">入口文件</h2>
 <p>skynet_main.c</p>
 <h2 id="加载配置">加载配置</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_config</span> config;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_config</span> config;
 config.<span style="color:#66d9ef">thread</span> <span style="color:#f92672">=</span>  optint(<span style="color:#e6db74">&#34;thread&#34;</span>,<span style="color:#ae81ff">8</span>);
 config.module_path <span style="color:#f92672">=</span> optstring(<span style="color:#e6db74">&#34;cpath&#34;</span>,<span style="color:#e6db74">&#34;./cservice/?.so&#34;</span>);
 config.harbor <span style="color:#f92672">=</span> optint(<span style="color:#e6db74">&#34;harbor&#34;</span>, <span style="color:#ae81ff">1</span>);
@@ -272,7 +272,7 @@ config.profile <span style="color:#f92672">=</span> optboolean(<span style="colo
                 <a href="https://blog.rakfree.tk/2021/10/skynetone/">https://blog.rakfree.tk/2021/10/skynetone/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-07 17:59:11</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -362,7 +362,7 @@ config.profile <span style="color:#f92672">=</span> optboolean(<span style="colo
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>

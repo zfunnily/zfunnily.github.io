@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-12-08T16:42:17&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T15:23:58&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Openresty三 | 上传文件">
@@ -212,7 +212,7 @@
         <div class="post-content">
             <h2 id="上传文件接口">上传文件接口</h2>
 <p>nginx.conf 的server 增加一个location:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">location /upload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">location /upload
 {
    resolver 8.8.8.8 ipv6=off;
    content_by_lua_file lua/upload.lua;
@@ -222,7 +222,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         lua
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">-- upload.lua</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">-- upload.lua</span>
 <span style="color:#75715e">--==========================================</span>
 <span style="color:#75715e">-- 文件上传</span>
 <span style="color:#75715e">--==========================================</span>
@@ -302,15 +302,15 @@ ngx.say(<span style="color:#e6db74">&#34;save file success filename: &#34;</span
 </code></pre></div></details>
 <br/>
 <h2 id="curl测试">curl测试</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl -X POST -F <span style="color:#e6db74">&#39;data=@foo.txt&#39;</span> http://127.0.0.1:9001/upload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl -X POST -F <span style="color:#e6db74">&#39;data=@foo.txt&#39;</span> http://127.0.0.1:9001/upload
 </code></pre></div><ul>
 <li>foo.txt: 本地文件名字</li>
 </ul>
 <h2 id="更改上传目录权限">更改上传目录权限</h2>
 <p>更改目录所有者命令</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chown -R 用户名称 目录名称
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chown -R 用户名称 目录名称
 </code></pre></div><p>更改目录权限命令</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod -R <span style="color:#ae81ff">755</span> 目录名称
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod -R <span style="color:#ae81ff">755</span> 目录名称
 </code></pre></div>
 
             <h4 align="center">--完--</h4>
@@ -330,7 +330,7 @@ ngx.say(<span style="color:#e6db74">&#34;save file success filename: &#34;</span
                 <a href="https://blog.rakfree.tk/2021/12/openresty-upload/">https://blog.rakfree.tk/2021/12/openresty-upload/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:23:58</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -416,7 +416,7 @@ ngx.say(<span style="color:#e6db74">&#34;save file success filename: &#34;</span
         
         
 
-
+    
     <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
     </div>
 </footer>
