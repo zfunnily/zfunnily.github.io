@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-01-25T14:25:07&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:35:50&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Skynet | lua-protobuf">
@@ -216,10 +216,10 @@
 </ul>
 <h2 id="install-skynet--luarocks--lua-protobuf">Install skynet &amp; luarocks &amp; lua-protobuf</h2>
 <p>编译安装<code>skynet</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/cloudwu/skynet.git 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/cloudwu/skynet.git 
 $ cd skynet &amp;&amp; make linux
 </code></pre></div><p>编译安装<code>luarocks</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ wget https://luarocks.github.io/luarocks/releases/luarocks-3.5.0.tar.gz
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ wget https://luarocks.github.io/luarocks/releases/luarocks-3.5.0.tar.gz
 $ tar -zxvf luarocks-3.5.0.tar.gz
 $ cd luarocks-3.5.0
 $ ./configure --prefix=/usr/local/luarocks --with-lua-bin=/aseit-data/work_zhang/cppCode/lastBattle_skynet/skynet/3rd/lua --with-lua-include=/aseit-data/work_zhang/cppCode/lastBattle_skynet/skynet/3rd/lua
@@ -227,14 +227,14 @@ $ ./configure --prefix=/usr/local/luarocks --with-lua-bin=/aseit-data/work_zhang
 <p><code>--prefix</code> 设置 <code>Luarocks</code> 安装路径，<code>--with-lua-bin</code> 指定<code>Luarocks</code>依赖的 Lua 路径。<code>--with-lua-bin</code>和<code>--with-lua-include</code>这两个参数指定的是skynet项目中所使用的lua5.4库路径。</p>
 </blockquote>
 <p>编译安装<code>lua-protobuf</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/starwing/lua-protobuf.git &amp;&amp; cd lua-protobuf
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/starwing/lua-protobuf.git &amp;&amp; cd lua-protobuf
 $ luarocks make rockspecs/lua-protobuf-scm-1.rockspec
 </code></pre></div><h2 id="在skynet中使用lua-protobuf">在skynet中使用lua-protobuf</h2>
 <p><code>lua-protobuf</code>编译成功的话，将<code>pb.so</code>放在config文件中<code>lua_cpath</code>项配置的目录下面，同时将<code>protoc.lua</code>放在config文件<code>lua_path</code>配置的目录下，就可以调用<code>protoc</code>中的库方法。我当前项目这两项的配置如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua_path = root..&#34;lualib/?.lua;&#34;..root..&#34;lualib/?/init.lua&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">lua_path = root..&#34;lualib/?.lua;&#34;..root..&#34;lualib/?/init.lua&#34;
 lua_cpath = root .. &#34;luaclib/?.so&#34;
 </code></pre></div><p>官方的例子是直接使用protoc加载一个protobuf。我们一般使用protobuf是先写<code>.proto</code>文件，然后用<code>protoc</code>命令生成<code>.pb</code>文件，然后在项目中使用 <code>.pb</code>文件<br> 示例<code>GCToLS.proto</code>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
 <span style="color:#f92672">package</span> <span style="color:#a6e22e">GCToLS</span>;
 
 <span style="color:#a6e22e">enum</span> <span style="color:#a6e22e">MsgID</span>
@@ -253,25 +253,25 @@ lua_cpath = root .. &#34;luaclib/?.so&#34;
 	<span style="color:#66d9ef">string</span> <span style="color:#a6e22e">Sessionid</span> = <span style="color:#ae81ff">4</span>;
 }
 </code></pre></div><p>使用<code>protoc</code>命令编译成<code>.pb</code>文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo protoc --descriptor_set_out ./pbs/gctols.pb ./ProtoFile/GCToLS.proto
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo protoc --descriptor_set_out ./pbs/gctols.pb ./ProtoFile/GCToLS.proto
 </code></pre></div><blockquote>
 <p>语法格式 protoc &ndash;descriptor_set_out 输出 输入</p>
 </blockquote>
 <h2 id="在skynet项目中使用lua-protobuf">在skynet项目中使用<code>lua-protobuf</code>.</h2>
 <p>1.载入gctols.pb文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local pb = require &#34;pb&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local pb = require &#34;pb&#34;
 assert(pb.loadfile &#34;./protos/pbs/gctols.pb&#34;)
 </code></pre></div><p>2.获取enum类型</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pb.enum(&#34;GCToLS.MsgID&#34;, &#34;eMsgToLSFromGC_AskLogin&#34;)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pb.enum(&#34;GCToLS.MsgID&#34;, &#34;eMsgToLSFromGC_AskLogin&#34;)
 </code></pre></div><p>3.编解码数据</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">function gctols.encode(asklogin)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">function gctols.encode(asklogin)
     return assert(pb.encode(&#34;GCToLS.AskLogin&#34;, asklogin))
 end
 function gctols.decode(asklogin)
     return assert(pb.decode(&#34;GCToLS.AskLogin&#34;,asklogin))
 end
 </code></pre></div><p>完整示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//gctols.lua
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//gctols.lua
 local pb = require &#34;pb&#34;
 assert(pb.loadfile &#34;./protos/pbs/gctols.pb&#34;) -- 载入刚才编译的pb文件
 
@@ -294,7 +294,7 @@ function gctols.decode(asklogin)
 end
 return gctols
 </code></pre></div><p>test.lua</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local gctols = require &#34;gctols&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local gctols = require &#34;gctols&#34;
 local asklogin = {
     msgid = &#34;eMsgToLSFromGC_AskLogin&#34;,
     platform = 1,
@@ -311,6 +311,7 @@ local decodedata = gctols.decode(encodedata)
         </div>
 
         
+
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
@@ -323,7 +324,7 @@ local decodedata = gctols.decode(encodedata)
                 <a href="https://blog.rakfree.tk/2021/01/skynetprotobuf/">https://blog.rakfree.tk/2021/01/skynetprotobuf/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:35:50</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -484,6 +485,14 @@ local decodedata = gctols.decode(encodedata)
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
@@ -533,7 +542,7 @@ local decodedata = gctols.decode(encodedata)
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
@@ -581,6 +590,10 @@ local decodedata = gctols.decode(encodedata)
     <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
     <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-09-09T09:36:49&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="FFmpeg | 录制摄像头和桌面数据windows">
@@ -214,22 +214,22 @@
 </ul>
 <h2 id="ffmpeg-使用-dshow-采集音视频设备">FFmpeg 使用 dshow 采集音视频设备</h2>
 <p>使用 dshow 枚举设备</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f dshow -list_devices true -i dymmy
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f dshow -list_devices true -i dymmy
 
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000002622302e340] DirectShow video devices (some may be both video and audio devices)
 [dshow @ 000002622302e340]  &#34;Altair USB2.0 Camera&#34;
 [dshow @ 000002622302e340]     Alternative name &#34;@device_pnp_\\?\usb#vid_0ac8&amp;pid_3450&amp;mi_00#6&amp;3b01315a&amp;0&amp;0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\global&#34;
 [dshow @ 000002622302e340] DirectShow audio devices
 
 </code></pre></div><p>``<br> 使用 dshow 展示摄像头, 摄像头的参数为 video=“摄像头名称”</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow  -i video=&#34;Altair USB2.0 Camera&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow  -i video=&#34;Altair USB2.0 Camera&#34;
 
 </code></pre></div><p>``<br> 获得摄像头支持的分辨率</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -list_options true -f dshow -i video=&#34;Altair USB2.0 Camera&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -list_options true -f dshow -i video=&#34;Altair USB2.0 Camera&#34;
 
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[dshow @ 000001b88b90e380] DirectShow video device options (from video devices)
 [dshow @ 000001b88b90e380]  Pin &#34;捕获&#34; (alternative pin name &#34;0&#34;)
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=640x480 fps=15 max s=640x480 fps=30
@@ -243,20 +243,20 @@
 [dshow @ 000001b88b90e380]   pixel_format=yuyv422  min s=160x120 fps=30 max s=160x120 fps=60.0002
 
 </code></pre></div><p>可以加上分辨率的参数 <strong>-video_size</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow -video_size 640x480  -i video=&#34;Altair USB2.0 Camera&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffplay -f dshow -video_size 640x480  -i video=&#34;Altair USB2.0 Camera&#34;
 
 </code></pre></div><h2 id="a-idffmpeg__vfwcap__50affmpeg-使用-vfwcap-采集视频设备"><a id="FFmpeg__vfwcap__50"></a>FFmpeg 使用 vfwcap 采集视频设备</h2>
 <p>vfwcap 主要支持两个参数 video_size framerate ，分别指示采集图像的大小和帧率<br> 使用 vfwcap 枚举支持采集的设备</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i list
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i list
 
 </code></pre></div><p>输出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[vfwcap @ 0000025a6d60d080] Driver 0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[vfwcap @ 0000025a6d60d080] Driver 0
 [vfwcap @ 0000025a6d60d080]  Microsoft WDM Image Capture (Win32)
 [vfwcap @ 0000025a6d60d080]  Version:  10.0.17134.1
 list: I/O error
 
 </code></pre></div><p>使用 vfwcap 生成 MP4 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f vfwcap -i 0 -r 25 -vcodec libx264 out.mp4
 
 </code></pre></div><p>我们通过 -i 指定了待录像的摄像头 索引号，-r 则指定了 需要录像 的帧, -vcodec 指定了录像视频的编码格式，输出 out.mp4</p>
 <h2 id="a-idffmpeg__gdigrab__69affmpeg-使用-gdigrab-采集窗口"><a id="FFmpeg__gdigrab__69"></a>FFmpeg 使用 gdigrab 采集窗口</h2>
@@ -270,10 +270,10 @@ list: I/O error
 <li>desktop title = window_title ，其中 desktop 代表采 集整个桌面，1. ttitle = window title 则是采集标题为 window title 的窗口
 使用 gdigrab 采集整个桌面</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i desktop screen.mp4
 
 </code></pre></div><p>使用gdigrab采集某个窗口</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i title=&#34;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&#34; gdi.mp4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -f gdigrab -framerate 6 -i title=&#34;TTR-TEST: ~/DetectAV/src/LiveDetect - Xshell 6&#34; gdi.mp4
 
 </code></pre></div><p>该窗口是我用spy++抓的</p>
 
@@ -282,6 +282,7 @@ list: I/O error
         </div>
 
         
+
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
@@ -294,7 +295,7 @@ list: I/O error
                 <a href="https://blog.rakfree.tk/2020/09/ffmpegvideow/">https://blog.rakfree.tk/2020/09/ffmpegvideow/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -455,6 +456,14 @@ list: I/O error
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
@@ -504,7 +513,7 @@ list: I/O error
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
@@ -552,6 +561,10 @@ list: I/O error
     <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
     <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

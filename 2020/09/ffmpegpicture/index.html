@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-09-14T18:29:33&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="FFmpeg | 画中画和视频多宫格处理">
@@ -213,22 +213,22 @@
             <h2 id="ffmpeg生成画中画">FFmpeg生成画中画</h2>
 <h3 id="静态画中画">静态画中画</h3>
 <p>将视频sub.mp4视频文件缩放成宽 480 、高 320 的视频,然后显示在 视频 input.mp4,x坐标为0,y 坐标为0 的位置</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&#34; -vcodec libx264 output.flv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay [out]&#34; -vcodec libx264 output.flv
 </code></pre></div><p>显示在画面的右下角，则需要用到 overlay 中x坐标与y坐标的内部变量：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&#34; -vcodec libx264 output.flv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=main_w-480:y=main_h-320 [out]&#34; -vcodec libx264 output.flv
 </code></pre></div><blockquote>
 </blockquote>
 <p>根据命令行可以分析出，除了显示在 overlay 画面中，子视频将会定位在主画面的 右边减去子视频的宽度，最下边减去子视频的高度的位置</p>
 <h3 id="动态画中画">动态画中画</h3>
 <p>使用 overlay 还可以配合正则表达式 进行跑马灯式画中画处理，动态改变子画面的 x坐标与 y坐标即可</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=&#39;if(gte(t,2), -w+(t-2)*20, NAN)&#39;:y=0 [out]&#34; -vcodec libx264 output.flv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input.mp4 -vf &#34;movie=sub.mp4, scale=480x320[test]; [in][test]overlay=x=&#39;if(gte(t,2), -w+(t-2)*20, NAN)&#39;:y=0 [out]&#34; -vcodec libx264 output.flv
 </code></pre></div><blockquote>
 </blockquote>
 <p>命令行执行之后，子视频将会从主视频的左侧开始渐入视频从左向右游动</p>
 <p>总结：视频画中画的基本处理至此已介绍完毕，重点为 overlay 滤镜的使用</p>
 <h2 id="ffmpeg视频多宫格处理">FFmpeg视频多宫格处理</h2>
 <p>通过 nullsrc 创建一个 overlay 画布，画布的大小为宽 640 像素、高 480 像素， 使用［O:v][l :v ][2:v ][3 :v ］将输入的 个视频流去除，分别 进行缩放处理，处理为宽 320 、高 240 的视频，然后基于 nullsrc 生成的画布进行视频平铺，</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input1.mp4 -re -i input2.mp4 -re -i input3.m2t -re -i input4.mp4 \
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i input1.mp4 -re -i input2.mp4 -re -i input3.m2t -re -i input4.mp4 \
 -filter_complex
 &#34;nullsrc=size=640x480 [base]; 
 [0:v] setpts=PTS-STARTPTS,scale=320x240 [upperleft];  
@@ -251,6 +251,7 @@
         </div>
 
         
+
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
@@ -263,7 +264,7 @@
                 <a href="https://blog.rakfree.tk/2020/09/ffmpegpicture/">https://blog.rakfree.tk/2020/09/ffmpegpicture/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -424,6 +425,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
@@ -473,7 +482,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
@@ -521,6 +530,10 @@
     <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
     <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

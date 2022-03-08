@@ -6,7 +6,20 @@
     <description>Recent content in Categories on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 03 Mar 2022 12:04:58 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Mar 2022 21:36:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.rakfree.tk/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>随笔</title>
+      <link>https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Mon, 07 Mar 2022 21:36:05 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>博客记事</title>
       <link>https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/</link>
@@ -40,15 +53,6 @@
       <pubDate>Thu, 06 Jan 2022 11:32:56 +0800</pubDate>
       
       <guid>https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>随笔</title>
-      <link>https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</link>
-      <pubDate>Mon, 27 Dec 2021 21:44:21 +0800</pubDate>
-      
-      <guid>https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/</guid>
       <description></description>
     </item>
     

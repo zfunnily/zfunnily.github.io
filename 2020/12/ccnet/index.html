@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-30T09:19:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T14:54:36&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="CCnet | 单线程reactor演变为多线程">
@@ -294,7 +294,7 @@
 <li><code>TcpServer</code>: 增加<code>EventLoopThreadPool</code>组件。
 修改<code>TcpServer.cc</code>的代码：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> TcpServer<span style="color:#f92672">::</span>newConnection(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">const</span> TcpAddr<span style="color:#f92672">&amp;</span> peerAddr)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> TcpServer<span style="color:#f92672">::</span>newConnection(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">const</span> TcpAddr<span style="color:#f92672">&amp;</span> peerAddr)
 {
     ...
     EventLoop <span style="color:#f92672">*</span>io_loop <span style="color:#f92672">=</span> thread_pool_<span style="color:#f92672">-&gt;</span>getNextLoop(); <span style="color:#75715e">//增加的行
@@ -307,7 +307,7 @@
     io_loop<span style="color:#f92672">-&gt;</span>runInLoop(std<span style="color:#f92672">::</span>bind(<span style="color:#f92672">&amp;</span>TcpConnection<span style="color:#f92672">::</span>connectEstablished, conn));<span style="color:#75715e">//修改的行
 </span><span style="color:#75715e"></span>}
 </code></pre></div><p>修改<code>TcpServer.h</code>代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TcpServer</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TcpServer</span>
 {
     ...
     <span style="color:#75715e">//thread pool
@@ -315,7 +315,7 @@
     ...
 }
 </code></pre></div><p>修改example中的<code>EchoServer.cc</code>代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">server_.setNumThreads(<span style="color:#ae81ff">4</span>); <span style="color:#75715e">//设置线程数量
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">server_.setNumThreads(<span style="color:#ae81ff">4</span>); <span style="color:#75715e">//设置线程数量
 </span></code></pre></div><p>详细代码请参考：github: <a href="https://github.com/zfunnily/ccnet">https://github.com/zfunnily/ccnet</a></p>
 
 
@@ -323,6 +323,7 @@
         </div>
 
         
+
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong>
@@ -335,7 +336,7 @@
                 <a href="https://blog.rakfree.tk/2020/12/ccnet/">https://blog.rakfree.tk/2020/12/ccnet/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:54:36</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -492,6 +493,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
     </li>
     
@@ -541,7 +550,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
     
@@ -589,6 +598,10 @@
     <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
     
     <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
