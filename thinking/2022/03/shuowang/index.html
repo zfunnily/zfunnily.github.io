@@ -7,22 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>except | Zzz记忆</title>
-    <meta property="og:title" content="except - Zzz记忆">
+    <title>无聊 &amp; 痛苦 | Zzz记忆</title>
+    <meta property="og:title" content="无聊 &amp; 痛苦 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
+    <meta property="article:published_time" content='2022-03-09T12:03:36&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-03-09T12:04:56&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="except">
+    <meta name="description" content="无聊 &amp; 痛苦">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/tags/except/">
+    <meta property="og:url" content="https://blog.rakfree.tk/thinking/2022/03/shuowang/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://blog.rakfree.tk/tags/except/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -81,47 +84,206 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">except</span>
-        的文章
-    </h3>
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-    
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/08/except/">Shell | Except 使用</a>
-            </h1>
+            <h1 class="post-title">无聊 &amp; 痛苦</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年8月30日
+            2022年3月9日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/IT'>IT</a>
+            <span class="meta-category"><a href='/categories/%E9%9A%8F%E7%AC%94'>随笔</a></span>
             
-            <a href='/categories/IT.Linux'>IT.Linux</a>
+            <span class="meta-category"><a href='/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84'>随笔.摘抄</a></span>
             
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
         </div>
         
         <div class="post-content">
-            Except 参数 spawn 交互程序开始后面跟命令或者指定程序 expect 获取匹配信息匹配成功则执行expect后面的程序动作 send exp_send 用于发送指定的字符串信息 exp_continue 在expect中多次匹配就需要用到 send_user 用来打印输出 相当于shell中的ech……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2021/08/except/">阅读全文</a></p>
+            <p>每天晚上我都睡得很晚，不是不困，而是不想睡，强迫自己不要睡。我似乎得了强迫症，我很忧郁。</p>
+<p>因为我总觉得一天什么都没干就这么过去了，实在不甘心！于是我就尽量延长这一天的时间。我真是个有志气的人，我很欣慰。</p>
+<p>志气是有了，可是找不到有志气的事情干，我很忧郁。幸好还有个电视，最妙的是还有个遥控器。</p>
+<p>遥控器真是个好东西，拿着它还真似乎有些上帝的味道，在你阴暗的小房子里终于有了你可以掌握的东西，不喜欢看！换台！太丑！换台！太平！换台！终于你发现你的生活还不是那么失败。</p>
+<p>我也是这样，可是时间不长，我发现换了半天台，都是些似曾相识的画面，于是我悲哀地发现我终究还是成不了上帝，上帝是那些做广告的人，你看不到他的人，但是你必须看他的广告。</p>
+<p>于是我更忧郁了，于是我去问叔本华。</p>
+<p>叔本华是谁？如果你不了解没关系，我也不了解，只要了解他不姓叔就好了。</p>
+<p>叔本华说：人在各种欲望得不到满足时处于痛苦的一端；得到满足时便处于无聊的一端。人的一生就像钟摆一样在这两端之间摆动。</p>
+<p>原来是这样啊，我有些似是而非，但我还是点点头，我不想让人知道我其实不太懂，有点丢人。梅兰芳说：“输不可怕，丢人最可怕！”</p>
+<p>我必须要提些问题以显示我的高明。</p>
+<p>我问：我有些无聊，也有些痛苦，它们并不是在两端，而是纠结在一起，这是为何？</p>
+<p>叔本华说：那是因为你的两端相距很短，你的钟摆像一个电子表，这一秒痛苦，下一秒无聊。知道你的两端为什么这么短吗？因为你的境界太低，你的痛苦、你的无聊大都基于你个人的生理需求。说穿了，你就是一个俗人！</p>
+<p>我问：我很无聊，但并没有得到什么满足啊，你不是说因为满足而无聊吗？</p>
+<p>叔本华说：你已经得到满足了，只是你没意识到而已，你们俗人大多如此。试问如果你没饭吃没衣穿没地住，你还会这么无聊地按遥控器换台吗？你的无聊正是来自这些满足，而你的痛苦则更显而易见了，比如说一个漂亮女人。</p>
+<p>我说：大师果然是大师！真的所有人都逃不过痛苦和无聊这两端吗？似乎有些人活得挺滋润啊，比如那些明星们。</p>
+<p>叔本华说：你错了！大错特错！你认为那些人活得滋润，是以你自己的欲望来衡量的，而那些人的欲望你又怎么能了解呢？只要有欲望，只要欲望没得到满足，他们就会痛苦，比如那些明星，可能没得奖，可能会过气，可能有流言，可能有艳照。这种痛苦并非撕心裂肺，可能只是些不舒服，这就是为什么有人会抑郁了。当他们的欲望得到满足了，一样会无聊，因为不管是明星还是高官，如果没了欲望，一样是个俗人，吃喝拉撒，一样无聊，于是自然有新的欲望，比如明星想过普通人的生活，比如高官想做个好官，这些都是欲望。</p>
+<p>不管是画画，还是唱歌，还是拍电影，还是所谓的这些那些所谓的艺术，还是什么博客播客堂客，起因都不过是无聊二字，因为无聊所以做这些事，然后给我们这些无聊的人看，如果没有我们这些无聊的人看，就更无聊了。</p>
+<p>我问：怎么样才能不痛苦不无聊呢？</p>
+<p>叔本华笑了，很迷人的样子，说：只有像我一样。</p>
+<p>我问：做个哲学家吗？</p>
+<p>叔本华又笑了，摇摇头说：做个死人。</p>
+<p>你一定要记住：人之所以为人，就因为无聊。动物也许会痛苦，但绝对不会无聊。你是个人，所以你感到无聊就对了，说明你是个很正常的人。否则你就是个禽兽！如果你连痛苦也没有，那你就禽兽不如！</p>
+<p>这一刻，我哭了，有些热泪盈眶。原来我是个正常的人，我一直以为我很变态呢！</p>
+<p>我问了最后一个问题：那我该怎么做呢？</p>
+<p>叔本华又笑了，三笑留情，说：该吃吃，该喝喝，该睡觉睡觉，该痛苦痛苦，该无聊无聊。</p>
+<p>我想了想，还是问了最最后一个问题，我觉得我必须要问：叔本华，你贵姓？</p>
+<p>摘自：《王朔随笔集》</p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/thinking/2022/03/think01/">爬楼有感</a></li>
+        
+        <li><a href="/thinking/2022/03/weekly01/">老纪</a></li>
+        
+        <li><a href="/thinking/2022/03/summarize/">2021焦虑总结</a></li>
+        
+        <li><a href="/2022/03/blog/">利用云服务器搭建个人博客</a></li>
+        
+        <li><a href="/2022/03/https/">Nginx | 给网站添加证书</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
         </div>
     </article>
     
-
     
 
+    
+    
 
-
-
-
+    
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'FnxrEVsP8hLHR1ssG8HYomzv-gzGzoHsz',
+            appKey: '8ldE7FzLmbPAA6DjVfACpMyO',
+            notify: 'false'
+        })
+    </script>
+    
 </div>
 
                     
@@ -163,6 +325,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
