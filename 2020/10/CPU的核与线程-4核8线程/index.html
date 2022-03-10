@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-10-12T16:29:34&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T16:02:34&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="CPU的核与线程-4核8线程">
@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -217,12 +219,12 @@
         
         <div class="post-content">
             <h2 id="a-idcpu_1a查看cpu信息"><a id="cpu_1"></a>查看cpu信息</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo
 
 </code></pre></div><h2 id="a-idcpu_7a物理cpu"><a id="CPU_7"></a>物理CPU</h2>
 <p>物理CPU就是计算机上实际配置的CPU个数。<br> 在linux上可以打开<strong>cat /proc/cpuinfo</strong> 来查看，其中的physical id就是每个物理CPU的ID，能找到几个<strong>physical id</strong>就代表计算机实际有几个CPU。</p>
 <p>在linux下可以通过指令 <strong>grep ‘physical id’ /proc/cpuinfo | sort -u | wc -l</strong> 来查看物理CPU个数。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
 
 1
 
@@ -230,7 +232,7 @@
 <p>linux的cpu核心总数也可以在/proc/cpuinfo里面通过指令cat /proc/cpuinfo查看的到，其中的core id指的是每个物理CPU下的cpu核的id，能找到几个core id就代表计算机有几个核心。</p>
 <h3 id="a-id_22a物理核"><a id="_22"></a>物理核</h3>
 <p>物理核数=cpu数(机子上装的cpu的数量)*每个cpu的物理核数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
 
 4
 
@@ -239,7 +241,7 @@
 <h2 id="a-idcpu_35a逻辑cpu"><a id="CPU_35"></a>逻辑CPU</h2>
 <p>操作系统可以使用逻辑CPU来模拟出真实CPU的效果。在之前没有多核处理器的时候，一个CPU只有一个核，而现在有了多核技术，其效果就好像把多个CPU集中在一个CPU上。</p>
 <p>当计算机没有开启超线程时，逻辑CPU的个数就是计算机的核数。而当超线程开启后，逻辑CPU的个数是核数的两倍。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;processor&#39; /proc/cpuinfo | sort -u | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;processor&#39; /proc/cpuinfo | sort -u | wc -l
 
 8
 
@@ -252,13 +254,13 @@
 <p>都是一个cpu，不同的是每个cpu上的核心数<br> 多核cpu是多个单核cpu的替代方案，多核cpu减小了体积，同时也减少了功耗<br> <strong>一个核心只能同时执行一个线程</strong></p>
 <h2 id="a-id_56a总结"><a id="_56"></a>总结</h2>
 <p>1.物理cpu数：主板上实际插入的cpu数量，可以数不重复的 physical id 有几个（physical id）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
 
 </code></pre></div><p>2.cpu核数：单块CPU上面能处理数据的芯片组的数量，如双核、四核等 （cpu cores）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
 
 </code></pre></div><p>3.逻辑cpu数：简单来说，它可使处理器中的1颗内核，如2颗内核那样在操作系统中发挥作用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo | grep &#39;cpu cores&#39; | wc -l
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo | grep &#39;cpu cores&#39; | wc -l
 
 </code></pre></div><p>这样一来，操作系统可使用的执行资源扩大了一倍，大幅提高了系统的整体性能，此时逻辑cpu=物理CPU个数×每颗核数x2。</p>
 <p>总核数 = 物理CPU个数 × 每颗物理CPU的核数。总逻辑CPU数 = 物理CPU个数 ×每颗物理CPU的核数 × 超线程数。</p>
@@ -282,7 +284,7 @@
                 <a href="https://blog.rakfree.tk/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">https://blog.rakfree.tk/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 16:02:34</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -397,8 +399,6 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -418,6 +418,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -433,14 +437,18 @@
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -452,10 +460,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -476,7 +480,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -500,9 +504,9 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -552,6 +556,8 @@
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

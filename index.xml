@@ -6,7 +6,38 @@
     <description>Recent content on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 07 Mar 2022 21:36:05 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>利用时间轮实现定时器</title>
+      <link>https://blog.rakfree.tk/2022/03/timer/</link>
+      <pubDate>Thu, 10 Mar 2022 14:38:23 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/03/timer/</guid>
+      <description>理解定时器 适用场景 定时任务(每隔1s钟打印一次数据) 超时控制(xx分钟没有动作就断开连接) 频率限制(最快只能每5s调用一次API) 定时器常用的数据结构有如下几种： 链表 双向有序链表 最小堆 时间轮 层级时间轮</description>
+    </item>
+    
+    <item>
+      <title>无聊 &amp; 痛苦</title>
+      <link>https://blog.rakfree.tk/thinking/2022/03/shuowang/</link>
+      <pubDate>Wed, 09 Mar 2022 12:03:36 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/thinking/2022/03/shuowang/</guid>
+      <description>每天晚上我都睡得很晚，不是不困，而是不想睡，强迫自己不要睡。我似乎得了强迫症，我很忧郁。 因为我总觉得一天什么都没干就这么过去了，实在不甘心！于是我就尽量延长这一天的时间。我真是个有志气的人，我很欣慰。</description>
+    </item>
+    
+    <item>
+      <title>爬楼有感</title>
+      <link>https://blog.rakfree.tk/thinking/2022/03/think01/</link>
+      <pubDate>Tue, 08 Mar 2022 21:54:25 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/thinking/2022/03/think01/</guid>
+      <description>28楼 今天放弃了常用乘电梯回家，决定爬楼。28楼真高呀。我还记得上次是和阿芳一起爬的。 那会爬的很轻松，还有功夫教她 &amp;ldquo;核心收紧，抬腿的时候膝盖沿着脚尖方向歪曲&amp;rdquo;。 一个人爬楼让我又</description>
+    </item>
+    
     <item>
       <title>老纪</title>
       <link>https://blog.rakfree.tk/thinking/2022/03/weekly01/</link>
@@ -121,7 +152,7 @@
       <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
       
       <guid>https://blog.rakfree.tk/2021/12/astar/</guid>
-      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;quo</description>
+      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;rd</description>
     </item>
     
     <item>

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-14T16:03:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:09:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | StatefulSet基本原理">
@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -227,11 +229,11 @@
 <li>唯一性 - 对于包含 N 个副本的 StatefulSet，每个 pod 会被分配一个 [0，N)范围内的唯一序号。1. 顺序性 - StatefulSet 中 pod 的启动、更新、销毁默认都是按顺序进行的。1. 稳定的网络身份标识 - pod 的主机名、DNS 地址不会随着 pod 被重新调度而发生变化。1. 稳定的持久化存储 - 当 pod 被重新调度后，仍然能挂载原有的 PersistentVolume，保证了数据的完整性和一致性。
 StatefulSet在Headless Service的基础上又为StatefulSet控制的每个Pod副本创建了一个DNS域名，这个域名的格式为：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$(podname).(headless server name)   
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$(podname).(headless server name)   
 FQDN： $(podname).(headless server name).namespace.svc.cluster.local
 </code></pre></div><h2 id="创建-statefulset">创建 StatefulSet</h2>
 <p>作为开始，使用如下示例创建一个 StatefulSet。它和<a href="https://kubernetes.io/zh/docs/concepts/abstractions/controllers/statefulsets/">StatefulSets</a>概念中的示例相似。它创建了一个<a href="https://kubernetes.io/zh/docs/user-guide/services/#headless-services">Headless Service</a><code>nginx</code>用来发布 StatefulSet<code>web</code>中的 Pod 的 IP 地址。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: Service
 metadata:
   name: nginx
@@ -318,9 +320,9 @@ spec:
 </ul>
 <blockquote>
 </blockquote>
-<p><strong>为什么需要 headless service 无头服务？</strong><br> 在用Deployment时，每一个Pod名称是没有顺序的，是随机字符串，因此是Pod名称是无序的，但是在statefulset中要求必须是有序 ，每一个pod不能被随意取代，pod重建后pod名称还是一样的。而pod IP是变化的，所以是以Pod名称来识别。pod名称是pod唯一性的标识符，必须持久稳定有效。这时候要用到无头服务，它可以给每个Pod一个唯一的名称 。</p>
+<p>**为什么需要 headless service 无头服务？**<br> 在用Deployment时，每一个Pod名称是没有顺序的，是随机字符串，因此是Pod名称是无序的，但是在statefulset中要求必须是有序 ，每一个pod不能被随意取代，pod重建后pod名称还是一样的。而pod IP是变化的，所以是以Pod名称来识别。pod名称是pod唯一性的标识符，必须持久稳定有效。这时候要用到无头服务，它可以给每个Pod一个唯一的名称 。</p>
 <p>使用<code>kubectl apply</code>中的 Headless Service 和 StatefulSet。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl apply -f web.yaml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl apply -f web.yaml
 service/nginx created
 statefulset.apps/web created
 
@@ -329,12 +331,12 @@ statefulset.apps/web created
 <p>最后三个Pod全部running且ready, 且顺序是web-0.web-1,web-2</p>
 <h2 id="a-idpod_126a测试pod间是否相通"><a id="pod_126"></a>测试pod间是否相通</h2>
 <p>每个 Pod 都拥有一个基于其顺序索引的稳定的主机名。使用<code>kubectl exec</code>在每个 Pod 中执行<code>hostname</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ for i in 0 1; do kubectl exec web-$i -- sh -c &#39;hostname&#39;; done
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ for i in 0 1; do kubectl exec web-$i -- sh -c &#39;hostname&#39;; done
 web-0
 web-1
 
 </code></pre></div><p>使用<code>kubectl run</code>运行一个提供<code>nslookup</code>命令的容器，该命令来自于<code>dnsutils</code>包。通过对 Pod 的主机名执行<code>nslookup</code>，你可以检查他们在集群内部的 DNS 地址。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm
 
 nslookup web-0.nginx
 Server:    10.0.0.10
@@ -351,7 +353,7 @@ Name:      web-1.nginx
 Address 1: 10.244.2.6
 
 </code></pre></div><p>另外一种方法是可以直接在web-0 pod中执行 nslookup + 域名 指令。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl exec web-0 -- nslookup web-1.nginx.svc.cluster.local
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl exec web-0 -- nslookup web-1.nginx.svc.cluster.local
 
 格式是：${podname}.${servername}.svc.cluster.local
 
@@ -359,19 +361,19 @@ Address 1: 10.244.2.6
 <p>扩容/缩容 StatefulSet 指增加或减少它的副本数。这通过更新<code>replicas</code>字段完成。你可以使用<a href="https://kubernetes.io/zh/docs/user-guide/kubectl/v1.18/#scale"><code>kubectl scale</code></a>或者<a href="https://kubernetes.io/zh/docs/user-guide/kubectl/v1.18/#patch"><code>kubectl patch</code></a>来扩容/缩容一个 StatefulSet。</p>
 <h3 id="a-id_160a扩容"><a id="_160"></a>扩容</h3>
 <p>在一个终端窗口观察 StatefulSet 的 Pod。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl get pods -w -l app=nginx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl get pods -w -l app=nginx
 
 </code></pre></div><p>在另一个终端窗口使用<code>kubectl scale</code>扩展副本数为 5。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl scale sts web --replicas=5
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl scale sts web --replicas=5
 statefulset.apps/web scaled
 
 </code></pre></div><p>在第一个 终端中检查<code>kubectl get</code>命令的输出，等待增加的 3 个 Pod 的状态变为 Running 和 Ready。<br> StatefulSet 控制器扩展了副本的数量。StatefulSet 按序号索引顺序的创建每个 Pod，并且会等待前一个 Pod 变为 Running 和 Ready 才会启动下一个 Pod。</p>
 <h3 id="a-id_173a缩容"><a id="_173"></a>缩容</h3>
 <p>在一个终端观察 StatefulSet 的 Pod。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl get pods -w -l app=nginx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl get pods -w -l app=nginx
 
 </code></pre></div><p>在另一个终端使用<code>kubectl patch</code>将 StatefulSet 缩容回三个副本。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl patch sts web -p &#39;{&#34;spec&#34;:{&#34;replicas&#34;:3}}&#39;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl patch sts web -p &#39;{&#34;spec&#34;:{&#34;replicas&#34;:3}}&#39;
 statefulset.apps/web patched
 
 </code></pre></div><h3 id="a-id_pod_186a顺序终止-pod"><a id="_Pod_186"></a>顺序终止 Pod</h3>
@@ -495,10 +497,10 @@ statefulset.apps/web patched
 <h2 id="外部访问集群内部">外部访问集群内部</h2>
 <h3 id="土方法">土方法</h3>
 <p>对pod打标签，然后映射成服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl label pod web-0 webInst=0 -n sy-platform-demo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl label pod web-0 webInst=0 -n sy-platform-demo
 kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 --type=NodePort -n sy-platform-demo
 </code></pre></div><p>修改web-0 的nodeport 端口号</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl edit  service web-0 -n sy-platform-demo
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl edit  service web-0 -n sy-platform-demo
 </code></pre></div>
 
             <h4 align="center">--完--</h4>
@@ -518,7 +520,7 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
                 <a href="https://blog.rakfree.tk/2020/08/statefulset/">https://blog.rakfree.tk/2020/08/statefulset/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:09:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -629,8 +631,6 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -650,6 +650,10 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -665,14 +669,18 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -684,10 +692,6 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -708,7 +712,7 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -732,9 +736,9 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -784,6 +788,8 @@ kubectl expose pod web-0 --port=80--target-port=80--name=web-0 --selector=web=0 
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-09-01T18:13:41&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T18:57:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Centos7.2 | gcc4.8升级为4.9">
@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -213,22 +215,22 @@
 <li>Docker</li>
 </ul>
 <p>我是用 docker 拉取镜像 <code>CentOS 7.2.1511</code>, 利用容器来作为我的开发环境。有条件的也可以用虚拟机或者实体机器。原理都一样。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker
 $ yum update <span style="color:#f92672">&amp;&amp;</span> yum install gcc gcc-c++ make zlib-devel.x86_6
 </code></pre></div><h2 id="下载依赖包">下载依赖包</h2>
 <p>升级 gcc， 下载安装包下载依赖。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ wget http://ftp.gnu.org/gnu/gcc/gcc-4.9.3/gcc-4.9.3.tar.bz2
 $ tar xfv gcc-4.9.3.tar.bz2 <span style="color:#f92672">&amp;&amp;</span> cd gcc-4.9.3
 $ ./contrib/download_prerequisites
 </code></pre></div><p>如果连接失败，无法下载的话，就打开此文件，手动下载下面5个文件，然后将文件放在gcc根目录，再屏蔽contrib/download_prerequisites文件里面的wget操作，再重新执行一次<code>./contrib/download_prerequisites</code>。这样的话，后面编译<code>gcc</code>时，这几个依赖库会自动先编译，不用自动手动一个个编译。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cloog-0.18.1.tar.gz
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cloog-0.18.1.tar.gz
 gmp-4.3.2.tar.bz2
 isl-0.12.2.tar.bz2
 mpc-0.8.1.tar.gz
 mpfr-2.4.2.tar.bz2
 </code></pre></div><h2 id="编译">编译</h2>
 <p>创建编译目录，开始编译</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd .. <span style="color:#f92672">&amp;&amp;</span> mkdir build-gcc <span style="color:#f92672">&amp;&amp;</span> cd build-gcc
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd .. <span style="color:#f92672">&amp;&amp;</span> mkdir build-gcc <span style="color:#f92672">&amp;&amp;</span> cd build-gcc
 $ ../gcc-4.9.3/configure --prefix<span style="color:#f92672">=</span>/usr --mandir<span style="color:#f92672">=</span>/usr/share/man --infodir<span style="color:#f92672">=</span>/usr/share/info --enable-bootstrap --enable-shared --enable-threads<span style="color:#f92672">=</span>posix --enable-checking<span style="color:#f92672">=</span>release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style<span style="color:#f92672">=</span>gnu --enable-languages<span style="color:#f92672">=</span>c,c++ --enable-plugin --enable-initfini-array --disable-libgcj --enable-gnu-indirect-function --with-tune<span style="color:#f92672">=</span>generic --disable-multilib
 $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
 </code></pre></div><blockquote>
@@ -259,7 +261,7 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
                 <a href="https://blog.rakfree.tk/2021/09/upgradegcc/">https://blog.rakfree.tk/2021/09/upgradegcc/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -374,8 +376,6 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -395,6 +395,10 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -410,14 +414,18 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -429,10 +437,6 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -453,7 +457,7 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -477,9 +481,9 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -529,6 +533,8 @@ $ make -j4 <span style="color:#f92672">&amp;&amp;</span> make install
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

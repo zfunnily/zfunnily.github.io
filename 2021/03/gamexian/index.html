@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-21T10:44:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《仙剑奇侠传》编译运行">
@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -214,15 +216,15 @@
 <li>win10- sdl1.2- sdlpal- vs2017- DirectX SDK10
 下载<code>sdlpal</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/sdlpal/sdlpal.git
 
 </code></pre></div><p>下载<code>sdl1.2</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/libsdl-org/SDL-1.2.git sdlpal/3rd/SDL/
 
 </code></pre></div><p>下载 <a href="https://www.microsoft.com/zh-CN/download/confirmation.aspx?id=6812">DirectX SDK10</a>， 双击安装即可</p>
 <h2 id="a-idsdlpal_24a编译sdlpal"><a id="sdlpal_24"></a>编译sdlpal</h2>
 <p>打开解决方案： <code>sdlpal\win32\sdlpal.sln</code><br> sdl解决方案右键属性，附加依赖项加入如下内容</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">d3d8.lib
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">d3d8.lib
 dxerr8.lib
 uuid.lib
 dxguid.lib
@@ -230,7 +232,7 @@ dinput8.lib
 d3dxof.lib
 
 </code></pre></div><p>否则会出现如下错误</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RzAxis
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RzAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RyAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_RxAxis
 1&gt;sdl.lib(SDL\_dx5video.obj) : error LNK2001: 无法解析的外部符号 \_GUID\_ZAxis
@@ -248,7 +250,7 @@ d3dxof.lib
 
 </code></pre></div><h2 id="a-idsdlpal_53a运行sdlpal"><a id="sdlpal_53"></a>运行sdlpal</h2>
 <p>编译出可执行文件<code>sdlpal.exe</code>,运行发现需要资源文件。<br> 下载资源文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com.cnpmjs.org/paldn/sdlpal.git  DATA
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone https://github.com.cnpmjs.org/paldn/sdlpal.git  DATA
 
 </code></pre></div><p>资源文件在<code>DATA/Data</code>目录下，运行程序，需要指定资源文件。</p>
 <blockquote>
@@ -273,7 +275,7 @@ d3dxof.lib
                 <a href="https://blog.rakfree.tk/2021/03/gamexian/">https://blog.rakfree.tk/2021/03/gamexian/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -384,8 +386,6 @@ d3dxof.lib
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -405,6 +405,10 @@ d3dxof.lib
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -420,14 +424,18 @@ d3dxof.lib
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -439,10 +447,6 @@ d3dxof.lib
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -463,7 +467,7 @@ d3dxof.lib
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -487,9 +491,9 @@ d3dxof.lib
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -539,6 +543,8 @@ d3dxof.lib
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

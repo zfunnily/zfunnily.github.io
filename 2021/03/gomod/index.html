@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-23T16:10:02&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:01:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Golang | gomod拉取私有仓库">
@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -208,7 +210,7 @@
         <div class="post-content">
             <h2 id="a-id_1a概述"><a id="_1"></a>概述</h2>
 <p>在使用go mod的过程中，依赖的包往往是第三方库，当我们自定义一个包并且放在github.com私有仓库时候，按照原来的方法则会有如下问题。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">get &#34;gitlab.com/xxx/zz&#34;: found meta tag get.metaImport{Prefix:&#34;gitlab.com/xxx/zz&#34;, VCS:&#34;git&#34;, RepoRoot:&#34;https://gitlab.com/xxx/zz.git&#34;} at //gitlab.com/xxx/zz?go-get=1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">get &#34;gitlab.com/xxx/zz&#34;: found meta tag get.metaImport{Prefix:&#34;gitlab.com/xxx/zz&#34;, VCS:&#34;git&#34;, RepoRoot:&#34;https://gitlab.com/xxx/zz.git&#34;} at //gitlab.com/xxx/zz?go-get=1
   verifying gitlab.com/xxx/zz@v0.0.1: gitlab.com/xxx/zz@v0.0.1: reading https://sum.golang.org/lookup/gitlab.com/xxx/zz@v0.0.1: 410 Gone
 
 </code></pre></div><p>这个错误是因为新版本<code>go mod</code>会对依赖包进行<code>checksum</code>校验，但是私有仓库对<code>sum.golang.org</code>是不可见的，它当然没有办法成功执行<code>checksum</code>。</p>
@@ -217,23 +219,23 @@
 <p>强制<code>git</code>采用<code>ssh</code>的解决办法在<code>1.13</code>版本之后<code>GG</code>了。</p>
 <h2 id="a-idgo_mod_10a使用go-mod拉取私有仓库"><a id="go_mod_10"></a>使用go mod拉取私有仓库</h2>
 <p>当然<code>Golang</code>在关闭了一扇门，就会打开一扇窗，它提供了一个更方便的解决方案：<code>GOPRIVATE</code>环境变量。解决以上的错误，可以这样配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GOPRIVATE=gitlab.aseit.cn/xxx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GOPRIVATE=gitlab.aseit.cn/xxx
 
 </code></pre></div><p>它可以声明指定域名为私有仓库，<code>go get</code>在处理该域名下的所有依赖时，会直接跳过<code>GOPROXY</code>和<code>CHECKSUM</code>等逻辑，从而规避掉前文遇到的所有问题。</p>
 <p>针对gitlab仓库如果是http，则有如下方案解决</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$  go get --insecure xxxx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$  go get --insecure xxxx
 
 </code></pre></div><p>此时就会去访问<code>http</code> 而不是 <code>https</code></p>
 <p>而我们发现又会报错</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">terminal prompts disabled
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">terminal prompts disabled
 
 </code></pre></div><p>实际上是因为我们需要拉仓库的代码时, 如果仓库是私有的, 肯定需要身份验证, 我们知道 <code>go get</code> 实际上是 <code>git</code> 拉取代码, 所以我们可以使用添加 SSH 的方式, 也可以直接在命令行中输入帐号密码, 本次介绍命令行, 而在 <code>go get</code>时默认是关闭 <code>git</code> 的输入的, 此时我们需要添加环境变量, 此处我们演示临时添加一个</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GIT_TERMINAL_PROMPT=1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GIT_TERMINAL_PROMPT=1
 
 </code></pre></div><p>再执行 <code>go get</code>就会发现提示输入帐号密码, 输入成功后就可以拉下来</p>
 <h2 id="a-id_33a总结"><a id="_33"></a>总结</h2>
 <p>总结以上方法就是:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GIT_TERMINAL_PROMPT=1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ export GIT_TERMINAL_PROMPT=1
 $ export GOPRIVATE=gitlab.aseit.cn/xxx
 $  go get --insecure xxxx
 
@@ -259,7 +261,7 @@ $  go get --insecure xxxx
                 <a href="https://blog.rakfree.tk/2021/03/gomod/">https://blog.rakfree.tk/2021/03/gomod/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:01:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -370,8 +372,6 @@ $  go get --insecure xxxx
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -391,6 +391,10 @@ $  go get --insecure xxxx
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -406,14 +410,18 @@ $  go get --insecure xxxx
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -425,10 +433,6 @@ $  go get --insecure xxxx
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -449,7 +453,7 @@ $  go get --insecure xxxx
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -473,9 +477,9 @@ $  go get --insecure xxxx
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -525,6 +529,8 @@ $  go get --insecure xxxx
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     

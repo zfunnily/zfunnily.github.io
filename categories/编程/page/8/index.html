@@ -37,9 +37,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -89,6 +91,31 @@
     </h3>
     
 
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/11/go-builds/">Golang | builds</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。 如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2020/11/go-builds/">阅读全文</a></p>
+        </div>
+    </article>
     
     <article class="post">
         <header>
@@ -315,31 +342,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/08/licode/">Licod | 安装和配置</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月9日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a>
-            
-        </div>
-        
-        <div class="post-content">
-            拉取docker镜像并运行 licode官方提供了配置好的docker镜像，使用以下命令拉下来跑就行。 docker run --name licode -p 3000:3000 -p $MIN_PORT-$MAX_PORT:30000-30050/udp -p 3001:3001 -p 8080:8080 -e &#34;MIN_PORT=30000&#34; -e &#34;MAX_PORT=30050&#34; -e &#34;PUBLIC_IP=your_ip_address&#34; lynckia/licode 注意命令里的PUBLIC_IP要改为服务器的公网IP。 配置好之……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/licode/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -449,8 +451,6 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
-
 
 
                 </div>
@@ -470,6 +470,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
     </li>
     
@@ -485,14 +489,18 @@
         <a href="https://blog.rakfree.tk/2022/03/reload/" title="Goang | Plugin插件热更">Goang | Plugin插件热更</a>
     </li>
     
-    <li>
-        <a href="https://blog.rakfree.tk/2022/02/jwt/" title="Grpc | Token认证和自定义认证">Grpc | Token认证和自定义认证</a>
-    </li>
-    
 </ul>
 
 <h3 class="widget-title">随想</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
@@ -504,10 +512,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2021/12/pervert/" title="摘抄 ｜ 我的精神家园">摘抄 ｜ 我的精神家园</a>
     </li>
     
 </ul>
@@ -528,7 +532,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (81)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (82)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -552,9 +556,9 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (3)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
     
 </ul>
     </section>
@@ -604,6 +608,8 @@
     <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
     
     <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
     
     <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
     
