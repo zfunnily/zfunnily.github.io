@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-10T14:38:23&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-10T15:00:43&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-10T15:11:05&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="利用时间轮实现定时器">
@@ -157,7 +157,14 @@
     <li><a href="#最小堆">最小堆</a></li>
     <li><a href="#时间轮">时间轮</a></li>
     <li><a href="#层级时间轮">层级时间轮</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li><a href="#总结">总结</a>
+      <ul>
+        <li><a href="#传统时间轮的问题">传统时间轮的问题：</a></li>
+        <li><a href="#层级时间轮-1">层级时间轮</a></li>
+        <li><a href="#什么时候使用层级定时器">什么时候使用层级定时器</a></li>
+        <li><a href="#还有什么问题">还有什么问题</a></li>
+      </ul>
+    </li>
     <li><a href="#参考">参考</a></li>
   </ul>
 </nav>
@@ -1073,29 +1080,21 @@
 </code></pre></div></details>
 <br/>
 <h2 id="总结">总结</h2>
-<ol>
-<li>传统时间轮的问题：</li>
-</ol>
+<h3 id="传统时间轮的问题">传统时间轮的问题：</h3>
 <ul>
 <li>当时间跨度较大的时候，提升单层时间轮的tick可以减少空转次数，但是会导致时间精度较低.</li>
 </ul>
-<ol start="2">
-<li>层级时间轮</li>
-</ol>
+<h3 id="层级时间轮-1">层级时间轮</h3>
 <ul>
 <li>层级时间轮既可以避免精度降低，又避免了指针空转的次数。</li>
 <li>上文中可以看到，使用单协程来调度 + 协程池的方式来处理业务</li>
 <li>应使用单例，全局化一个定时器</li>
 </ul>
-<ol start="3">
-<li>什么时候使用层级定时器</li>
-</ol>
+<h3 id="什么时候使用层级定时器">什么时候使用层级定时器</h3>
 <ul>
 <li>当时间跨度很大的时候</li>
 </ul>
-<ol start="4">
-<li>还有什么问题</li>
-</ol>
+<h3 id="还有什么问题">还有什么问题</h3>
 <ul>
 <li>当任务较少的时候，可以看到，虽然是单协程调度，但是避免不了指针空转的情况。 需求是那种可以知道任务快过期了抛出来给定时器。</li>
 </ul>
@@ -1125,7 +1124,7 @@
                 <a href="https://blog.rakfree.tk/2022/03/timer/">https://blog.rakfree.tk/2022/03/timer/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-10 15:00:43</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-10 15:11:05</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
