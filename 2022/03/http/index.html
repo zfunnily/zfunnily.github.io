@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -219,7 +221,7 @@
 <p>在开发过程中，我需要有个注解路由的功能，也就是不用手动的把路由和对应的函数一个一个手写进行绑定，百度无果后，发现gin没有提供这样的功能。于是有了下文。</p>
 <h2 id="gin的注解路由">gin的注解路由</h2>
 <p>gin是没有注解路由功能的，但是使用golang的<code>reflect</code>包，加一点代码就能实现，代码如下</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -320,7 +322,7 @@
 </ul>
 <h2 id="使用http服务器">使用Http服务器</h2>
 <p>声明一个结构体 <code>HttpAction struct</code>， 成员函数名字的小写就是路由，函数就是路由对应逻辑处理的地方。</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -482,7 +484,7 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 

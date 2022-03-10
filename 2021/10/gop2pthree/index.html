@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -267,7 +269,7 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <li>监听一条协议<code>RelayProtocolRequest</code>，当有一个节点上来，需要记录，当有两个节点时，返回两个节点的信息给对方节点。</li>
 <li>有一个公网IP</li>
 </ol>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -414,7 +416,7 @@ h1新建一个&quot;/cats&quot;的数据流，用于收发数据 <code>h1.NewStr
 <li>通过中继服务连接其他节点<code>n.ConnectNode()</code> ,</li>
 <li>并且往其他节点发送<code>RelayMsg</code>协议,  <code>n.CmdRelay</code></li>
 </ol>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -837,7 +839,7 @@ $ go build -o chat chat.go
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 

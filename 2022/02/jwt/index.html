@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -223,7 +225,7 @@
 <li>客户端携带token信息往服务器请求业务逻辑的接口，，服务器收到请求，解析验证token，验证通过，则放行。</li>
 </ul>
 <p>协议文件</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         proto
     </summary>
@@ -256,7 +258,7 @@
 <p>生成*.pb.go文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc -I. --go_out=.  --go-grpc_out=. ./*proto
 </code></pre></div><p>使用的是<code>jwt-go</code>包。来帮助服务端创建&amp;解析token</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -360,7 +362,7 @@
 </code></pre></div></details>
 <br/>
 <p>server端</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -431,7 +433,7 @@
 </code></pre></div></details>
 <br/>
 <p>client端</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -688,7 +690,7 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 

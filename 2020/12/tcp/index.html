@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -226,7 +228,7 @@
 </li>
 </ul>
 <h2 id="proto文件">.proto文件</h2>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         proto文件
     </summary>
@@ -258,7 +260,7 @@
 <p>执行命令,生成 msg.pb.go文件</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc ./*.proto --go_out=protos -I ./
 </code></pre></div><h2 id="server示例代码">Server示例代码</h2>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         server示例
     </summary>
@@ -333,7 +335,7 @@
 </code></pre></div></details>
 <br/>
 <h2 id="client示例代码">Client示例代码</h2>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         client示例
     </summary>
@@ -396,7 +398,7 @@
         <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, string(<span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Bytes</span>()));
 }
 </code></pre></div><p>包头是8字节，表示body长度的是 head[0:4]。表示指令的是head[4:8], 解析出body如下：</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -570,7 +572,7 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 

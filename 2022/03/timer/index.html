@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -306,7 +308,7 @@
 <li>监听关闭时间轮的channel</li>
 </ul>
 <p>详细看看tickHandler函数</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -362,7 +364,7 @@
 	<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">taskMap</span>[<span style="color:#a6e22e">task</span>.<span style="color:#a6e22e">key</span>] = <span style="color:#a6e22e">pos</span>
 }
 </code></pre></div><p>完整代码</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel
     </summary>
@@ -538,7 +540,7 @@
 </code></pre></div></details>
 <br/>
 <p>测试</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         testting
     </summary>
@@ -679,7 +681,7 @@
 </li>
 </ol>
 <p>再开看看添加定时器的函数 <code>AfterFunc</code>:</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         AfterFunc
     </summary>
@@ -734,7 +736,7 @@
 <li>如果 <code>t.expiration &gt;= currentTime + tw.wheelTime</code>,则说明当前定时任务不再当前层起中，需要添加到下层级时间轮。</li>
 </ol>
 <p>贴完整的代码</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel.go
     </summary>
@@ -905,7 +907,7 @@
 }
 </code></pre></div></details>
 <br/>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         bucket.go
     </summary>
@@ -996,7 +998,7 @@
 }
 </code></pre></div></details>
 <br/>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel_test.go
     </summary>
@@ -1033,7 +1035,7 @@
 
 </code></pre></div></details>
 <br/>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         workpool
     </summary>
@@ -1239,7 +1241,7 @@
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 

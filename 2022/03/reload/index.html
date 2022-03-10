@@ -40,9 +40,11 @@
     
 
 
-    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
     <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
+    <script src='/js/Valine.min.js'></script>
 </head>
 
 
@@ -240,7 +242,7 @@
 <li>修改插件代码，重新编译插件，给主进程发送指令，主进程重新加载插件。</li>
 </ol>
 <p>plugin文件必须main包</p>
-<details  open=""  >
+<details  open=""  class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         plugin
     </summary>
@@ -256,7 +258,7 @@
 </code></pre></div></details>
 <br/>
 <p>main文件</p>
-<details   >
+<details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         maing.go
     </summary>
@@ -309,7 +311,7 @@
 </code></pre></div></details>
 <br/>
 <p>Makefile文件</p>
-<details  open=""  >
+<details  open=""  class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         Makefile
     </summary>
@@ -340,7 +342,7 @@ pname <span style="color:#f92672">=</span> plugin-<span style="color:#66d9ef">$(
 
 Hello, I am PluginA!
 </code></pre></div><p>修改插件函数<code>PluginA</code>内容</p>
-<details  open=""  >
+<details  open=""  class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
@@ -513,7 +515,7 @@ ps -ef|grep plumain |grep -v grep | awk &#39;{print $$2}&#39;  | xargs -I {} kil
 
 
 
-    <script type="text/javascript" src='/js/darkmode-js.min.js'></script>
+    <script type="text/javascript" src='/js/clipboard.min.js'></script>
 
 
 
