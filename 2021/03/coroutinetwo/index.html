@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-10T11:11:47&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T18:58:26&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="协程解析二 | 云风的coroutine">
@@ -226,10 +226,10 @@
 <li>vscode</li>
 </ul>
 <p>下载代码 &amp; 编译</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/cloudwu/coroutine
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/cloudwu/coroutine
 $ cd coroutine &amp;&amp; make
 </code></pre></div><h2 id="写一个生产者和消费者的demo">写一个生产者和消费者的<code>demo</code></h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//procus.c
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//procus.c
 #include &#34;coroutine.h&#34;
 #include &lt;stdio.h&gt;
 
@@ -274,11 +274,11 @@ int main() {
 }
 
 </code></pre></div><p>在Makefile中加入</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">procus : procus.c coroutine.c
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">procus : procus.c coroutine.c
 	gcc -g -Wall -o $@ $^
 
 </code></pre></div><h3 id="a-id_68a编译运行"><a id="_68"></a>编译&amp;运行</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ make procus
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ make procus
 $ ./procus
 co: 0
 get int 1
@@ -290,7 +290,7 @@ stop consumer
 
 </code></pre></div><h3 id="a-idvscode_80a在vscode中调试"><a id="vscode_80"></a>在vscode中调试</h3>
 <p>按下 F5， 生成<code>lunch.json</code>文件， 在文中加入下列行：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;program&#34;: &#34;${workspaceFolder}/procus&#34;,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;program&#34;: &#34;${workspaceFolder}/procus&#34;,
 
 </code></pre></div><p>在 <code>flag 1</code> <code>flag 2</code> <code>fllag 3</code>这三个地方打断点。按一下F5，可以看到运行过程是 <code>flag 1</code>-&gt; <code>flag 2</code>-&gt; <code>fllag 3</code></p>
 <p>运行步骤：</p>
@@ -300,7 +300,7 @@ stop consumer
 </ul>
 <h3 id="a-idcoroutine_resume_94acoroutine_resume"><a id="coroutine_resume_94"></a>coroutine_resume</h3>
 <p>1.<code>coroutine_new</code>创建一个协程后，协程的状态是<code>COROUTINE_READY</code>，调用<code>coroutine_resume</code>，协程状态变为<code>COROUTINE_RUNNING</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">getcontext(&amp;C-&gt;ctx);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">getcontext(&amp;C-&gt;ctx);
 C-&gt;ctx.uc_stack.ss_sp = S-&gt;stack;
 C-&gt;ctx.uc_stack.ss_size = STACK_SIZE;
 C-&gt;ctx.uc_link = &amp;S-&gt;main;
@@ -316,7 +316,7 @@ swapcontext(&amp;S-&gt;main, &amp;C-&gt;ctx);
 <li>获取当前<code>context</code>- 协程栈顶指向内存 <code>S-&gt;stack</code>，栈大小为<code>STACK_SIZE</code>- <code>C-&gt;ctx.uc_link</code>保存当前<code>context</code>结束后继续执行的<code>context</code>记录- 修改协程运行状态为<code>COROUTINE_RUNNING</code>- makecontext：设置函数指针<code>mainfunc</code>和堆栈到对应context保存的sp和pc寄存器中- 保存当前<code>context</code>到<code>S-&gt;main</code>，切换<code>context</code>到<code>C-&gt;ctx</code>- 此时正在运行<code>mainfunc</code>函数 ，现在的上下文就是在 <code>(S-&gt;stack ，S-&gt;stack + STACK_SIZE)</code>运行的<code>C-&gt;ctx</code>，如果不懂这一步可以看<a href="%E5%8D%8F%E7%A8%8B%E8%A7%A3%E6%9E%90%E4%B8%80%28ucontext%E8%A7%A3%E6%9E%90%29.md">协程解析一(ucontext解析)</a>
 查看<code>mainfunc</code>函数</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">static void mainfunc(uint32_t low32, uint32_t hi32) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">static void mainfunc(uint32_t low32, uint32_t hi32) {
 ....
 	C-&gt;func(S,C-&gt;ud);
 	_co_delete(C);
@@ -329,7 +329,7 @@ swapcontext(&amp;S-&gt;main, &amp;C-&gt;ctx);
 <li><code>mainfunc</code>函数运行的是<code>C-&gt;func</code>，运行完<code>C-&gt;func</code>之后就把该协程的运行栈的内存空间给释放掉了。- 运行完<code>mainfunc</code>函数后，context切换到<code>S-&gt;main</code>。
 2.调用<code>coroutine_resume</code>，协程状态变为<code>COROUTINE_RUNNING</code>， 运行<code>mainfunc</code>函数，运行到<code>C-&gt;func</code>， 实际上是在运行<code>product</code>函数，<code>product</code>函数调用了<code>coroutine_yield</code>，此时协程状态变为<code>COROUTINE_SUSPEND</code>。保存此时协程的<code>context</code>-&gt; <code>C-ctx</code>，切换协程上下文为<code>S-&gt;main</code>。此时运行时所在函数<code>coroutine_resume</code>标记1的位置。</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void coroutine_resume(struct schedule * S, int id) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void coroutine_resume(struct schedule * S, int id) {
         ...
 	switch(status) {
 	case COROUTINE_READY:
@@ -353,7 +353,7 @@ swapcontext(&amp;S-&gt;main, &amp;C-&gt;ctx);
 </ul>
 <h3 id="a-idcoroutine_yield_157acoroutine_yield"><a id="coroutine_yield_157"></a>coroutine_yield</h3>
 <p><code>C-&gt;func</code>函数指针指向的是<code>product</code>函数，<code>product</code>函数中调用了<code>coroutine_yield</code>，有以下代码：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">static void _save_stack(struct coroutine *C, char *top) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">static void _save_stack(struct coroutine *C, char *top) {
 	char dummy = 0;
 		assert(top - &amp;dummy &lt;= STACK_SIZE);
 	if (C-&gt;cap &lt; top - &amp;dummy) {
@@ -408,7 +408,7 @@ void coroutine_yield(struct schedule * S) {
                 <a href="https://blog.rakfree.tk/2021/03/coroutinetwo/">https://blog.rakfree.tk/2021/03/coroutinetwo/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:58:26</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
