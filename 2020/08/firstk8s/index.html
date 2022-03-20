@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-13T15:28:31&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | 创建第一个应用">
@@ -207,7 +207,7 @@
         <div class="post-content">
             <h2 id="使用k8s部署第一个应用">使用k8s部署第一个应用</h2>
 <p>创建一个nginx.yaml文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: Pod
 metadata:
   name: nginx
@@ -243,27 +243,27 @@ spec:
     app: nginx          #这里选择器一定要选择容器的标签，之前写name:kube-node是错的。
 
 </code></pre></div><p>执行指令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f nginx.yaml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f nginx.yaml
 
 </code></pre></div><p>查看 服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get service
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get service
 
 </code></pre></div><p>查看 pod</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get pod
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get pod
 
 </code></pre></div><p>访问：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ip:32143
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ip:32143
 
 </code></pre></div><p>就可以看到ngixn的欢迎页面啦</p>
 <h2 id="同一个service开启多个端口">同一个service开启多个端口</h2>
 <p>一般我们只有一个端口的时候，在service的yaml文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
   - nodePort: 8482
     port: 8080
     protocol: TCP
     targetPort: 8080
 </code></pre></div><p>而如果你想开两个端口，直接复制粘贴可不行，k8s会提示你必须要加上name。所以,如果要开多端口，要为每个port都指定一个name，如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
   - name: http
     nodePort: 8482
     port: 8080
@@ -288,7 +288,7 @@ spec:
                 <a href="https://blog.rakfree.tk/2020/08/firstk8s/">https://blog.rakfree.tk/2020/08/firstk8s/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

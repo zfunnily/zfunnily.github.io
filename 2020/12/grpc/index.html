@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-13T09:10:42&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T14:36:51&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Grpc | 概述">
@@ -222,14 +222,14 @@
 </ul>
 <h2 id="installtion">Installtion</h2>
 <p>protobuf 安装，exec:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go get -u github.com/golang/protobuf/proto // golang protobuf 库
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go get -u github.com/golang/protobuf/proto // golang protobuf 库
 $ go get -u github.com/golang/protobuf/protoc-gen-go //protoc --go_out 工具
 </code></pre></div><p>gRPC-go可以通过golang 的get命令直接安装，非常方便。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go get google.golang.org/grpc
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go get google.golang.org/grpc
 </code></pre></div><h2 id="example">Example</h2>
 <h3 id="编写proto文件生成pbgo文件">编写.proto文件，生成pb.go文件</h3>
 <p>hello.proto</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
 <span style="color:#a6e22e">option</span> <span style="color:#a6e22e">objc_class_prefix</span> = <span style="color:#e6db74">&#34;HLW&#34;</span>;
 
 <span style="color:#f92672">package</span> <span style="color:#a6e22e">helloworld</span>;
@@ -250,7 +250,7 @@ $ go get -u github.com/golang/protobuf/protoc-gen-go //protoc --go_out 工具
   <span style="color:#66d9ef">string</span> <span style="color:#a6e22e">message</span> = <span style="color:#ae81ff">1</span>;
 }
 </code></pre></div><p>这里定义了一个服务Greeter，其中有个API <code>SayHello</code>。其接受参数为<code>HelloRequest</code>类型，返回<code>HelloReply</code>类型。这里<code>HelloRequest</code>和<code>HelloReply</code>就是普通的PB定义<br> 服务端的定义</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// The greeting service definition.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
@@ -264,12 +264,12 @@ service Greeter {
 <li>rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}<br> 客户端发起的请求是一个流式数据，比如数组中的逐个元素，二服务器返回的也是一个类似的数据结构</li>
 </ul>
 <p>使用protoc命令生成相关文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc --go_out=plugins=grpc:. helloworld.proto
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc --go_out=plugins=grpc:. helloworld.proto
 $ ls
 helloworld.pb.go    helloworld.proto
 </code></pre></div><h3 id="服务器端程序">服务器端程序</h3>
 <p>server.go</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;log&#34;</span>
@@ -302,7 +302,7 @@ helloworld.pb.go    helloworld.proto
 	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Serve</span>(<span style="color:#a6e22e">lis</span>)
 }
 </code></pre></div><p>client.go</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;log&#34;</span>
@@ -372,7 +372,7 @@ helloworld.pb.go    helloworld.proto
                 <a href="https://blog.rakfree.tk/2020/12/grpc/">https://blog.rakfree.tk/2020/12/grpc/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:36:51</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

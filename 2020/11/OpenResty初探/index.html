@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-11-23T16:21:34&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:23:48&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Openresty一 | 初探">
@@ -235,25 +235,25 @@
 <p>项目中有个用到http请求,我用shell脚本+curl简单实现了一下.但是我想用一个我不熟悉的语言来做该功能, 在网上搜索到可以通过lua来实现我的需求… 于是我找到了OpenResty框架 . lua发送http请求一般有两种方式, 使用 socket.http 或者 resty.http</p>
 <h2 id="环境安装-openresty">环境＆安装 OpenResty</h2>
 <p>参考:https://openresty.org/cn/linux-packages.html<br> 环境：Ubuntu<br> 安装</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
 $ echo  &#34;deb http://openresty.org/package/ubuntu $(lsb_release -sc) main&#34;  | sudo tee /etc/apt/sources.list.d/openresty.list
 $ sudo apt-get update
 $ sudo apt-get -y install openresty
 
 </code></pre></div><p>设置环境变量</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo vim ~/.bashrc
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo vim ~/.bashrc
 /usr/local/openresty/nginx/sbin/
 
 $ source ~/.bashrc
 
 </code></pre></div><h2 id="开始第一个程序">开始第一个程序</h2>
 <p>创建项目目录</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mkdir ~/openrestry
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mkdir ~/openrestry
 cd ~/openrestry
 mkdir logs/ conf/
 
 </code></pre></div><p>写配置文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
 error_log logs/error.log;
 events {
    worker_connections 1024;
@@ -271,15 +271,15 @@ http {
 }
 
 </code></pre></div><p>启动</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">nginx <span style="color:#f92672">-</span>p <span style="color:#f92672">`</span>pwd<span style="color:#f92672">`/</span> <span style="color:#f92672">-</span>c conf<span style="color:#f92672">/</span>nginx.conf
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nginx -p `pwd`/ -c conf/nginx.conf
 
 </code></pre></div><p>验证是否成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080/
 
 </code></pre></div><p>返回结果<code>&lt;p&gt;hello, world &lt;/p&gt;</code></p>
 <h2 id="openresty使用lua脚本写http-请求">OpenResty使用lua脚本写http 请求</h2>
 <p>lua脚本可以写在 conf/nginx.conf 配置文件的 localtion 中.也可以写在单独的 lua 脚本文件中.需加上配置参数 <code>content_by_lua_file</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> worker_processes  1;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> worker_processes  1;
 error_log logs/error.log;
 events {
     worker_connections 1024;
@@ -296,7 +296,7 @@ http {
 
 </code></pre></div><h3 id="get请求">Get请求</h3>
 <p>hello.lua脚本</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
 
 local http = require(&#39;resty.http&#39;)
 local httpc = http.new()
@@ -314,7 +314,7 @@ ngx.say(res.body)
 
 </code></pre></div><h3 id="post请求">Post请求</h3>
 <p>hello.lua脚本</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//hello.lua
 
 local http = require &#34;resty.http&#34;
 local httpc = http.new()
@@ -337,30 +337,30 @@ ngx.log(ngx.ERR, &#34;request status#&#34;, res.status)
 ngx.say(res.body)
 
 </code></pre></div><h3 id="重启nginx">重启nginx</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql">nginx <span style="color:#f92672">-</span>p <span style="color:#f92672">`</span>pwd<span style="color:#f92672">`/</span> <span style="color:#f92672">-</span>s reload
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nginx -p `pwd`/ -s reload
 
 </code></pre></div><h3 id="验证">验证</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8080
 
 </code></pre></div><h2 id="常用方法">常用方法</h2>
 <p>创建<code>HTTP</code>请求对象，失败返回<code>nil</code>和错误信息。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc = http.new()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc = http.new()
 
 </code></pre></div><p>发送请求，填入请求链接和参数。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">res, err = httpc:request_uri(uri, params)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">res, err = httpc:request_uri(uri, params)
 
 </code></pre></div><p>设置请求超时时间，单位：毫秒。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc:set_timeout(time)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">httpc:set_timeout(time)
 
 </code></pre></div><h2 id="遇到的问题">遇到的问题</h2>
 <h3 id="openresty返回中文乱码问题">OpenResty返回中文乱码问题</h3>
 <h4 id="描述">描述</h4>
 <p>接口中使用<code>ngx.say(json.encode)</code>编码<code>json</code>字符串，返回中文乱码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&#34;msg&#34;:&#34;è¯·æ±‚æˆåŠŸ&#34;,&#34;code&#34;:0}｀
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{&#34;msg&#34;:&#34;è¯·æ±‚æˆåŠŸ&#34;,&#34;code&#34;:0}｀
 
 </code></pre></div><h4 id="解决">解决</h4>
 <p>设置<code>Content-Type</code>时加上<code>charset=utf8</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">server {
     listen       8080;
     server_name  localhost;
     default_type  text/html;
@@ -369,7 +369,7 @@ ngx.say(res.body)
 }
 
 </code></pre></div><p>也可以在<code>header_filter</code>阶段赋值<code>header</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.header.content_type=&#34;application/json;charset=utf8&#34;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ngx.header.content_type=&#34;application/json;charset=utf8&#34;
 
 </code></pre></div>
 
@@ -390,7 +390,7 @@ ngx.say(res.body)
                 <a href="https://blog.rakfree.tk/2020/11/OpenResty%E5%88%9D%E6%8E%A2/">https://blog.rakfree.tk/2020/11/OpenResty%E5%88%9D%E6%8E%A2/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:23:48</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

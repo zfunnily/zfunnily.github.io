@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-29T11:15:42&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T09:58:19&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Go-libp2p二 | echo例子">
@@ -228,7 +228,7 @@
 <p>进入目录<code>go-libp2p/examples/echo/</code>, 编译 <code>go build</code></p>
 <p>先看<code>README.md</code>， 可以了解到使用echo的方式:
 终端B</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./echo -l <span style="color:#ae81ff">3001</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./echo -l <span style="color:#ae81ff">3001</span>
 2021/10/28 11:25:33 I am /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX
 2021/10/28 11:25:33 listening <span style="color:#66d9ef">for</span> connections
 2021/10/28 11:25:33 Now run <span style="color:#e6db74">&#34;./echo -l 3002 -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX&#34;</span> on a different terminal
@@ -236,7 +236,7 @@
 2021/10/28 11:25:59 listener received new stream
 2021/10/28 11:25:59 read: Hello, world!
 </code></pre></div><p>在另外一个终端输A入：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./echo -l <span style="color:#ae81ff">3002</span> -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./echo -l <span style="color:#ae81ff">3002</span> -d /ip4/127.0.0.1/tcp/3001/p2p/QmTu8sxDi3fSjz9ZMvkAj3qA9YAoGskroEnyLz2ZvfTBhX
 2021/10/28 11:25:59 I am /ip4/127.0.0.1/tcp/3002/p2p/QmPCxgAkhb9i6GeUr6QwTrfESShHqYQ4K9SHy6NWRQbagS
 2021/10/28 11:25:59 sender opening stream
 2021/10/28 11:25:59 sender saying hello
@@ -244,7 +244,7 @@
 </code></pre></div><h2 id="我改造了一下echo">我改造了一下<code>echo</code></h2>
 <p>我这么改造，是为了让echo例子更像chat例子,更容易做对比和理解libp2p这个库</p>
 <h3 id="改造了的函数">改造了的函数</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//echo.go
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//echo.go
 </span><span style="color:#75715e">//监听方 
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">startListener</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">ha</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">listenPort</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">insecure</span> <span style="color:#66d9ef">bool</span>) {
 	<span style="color:#75715e">// Set a stream handler on host A. /echo/1.0.0 is
@@ -330,26 +330,26 @@
 <p>节点B</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点B需要知道节点A的地址，并解析A的地址</li>
 <li>把节点A的地址添加到节点B的host</li>
-<li>节点B使用节点A的host.ID和节点A监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流</li>
+<li>节点B使用节点A的host.ID和节点A监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流</li>
 <li>节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <p>节点A</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点A需要知道节点B的地址，并解析B的地址</li>
 <li>把节点B的地址添加到节点A的host</li>
-<li>节点A使用节点B的host.ID和节点B监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流</li>
+<li>节点A使用节点B的host.ID和节点B监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流</li>
 <li>节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <h2 id="循环echo">循环echo</h2>
 <p>运行程序运行起来，其实可以看到，节点B作为发送方，只发送了一次消息就断开了。如果想把消息一直echo下去，则有两种思路</p>
 <h3 id="第一种--类似chat实例">第一种 | 类似chat实例</h3>
 <p>在chat示例中拿来三个函数<code>handleStream</code> <code>readData</code> <code>writeData</code>，然后把<code>runSender</code>下面的这段代码替换成调用<code>handleStream(s)</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;Hello, world!\n&#34;</span>))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;Hello, world!\n&#34;</span>))
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
 		<span style="color:#66d9ef">return</span>
@@ -363,12 +363,12 @@
 
 	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;read reply: %q\n&#34;</span>, <span style="color:#a6e22e">out</span>)
 </code></pre></div><p>在调用<code>runSender</code>函数下使用<code>&lt;-ctx.Done()</code>, 防止主协程退出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">runSender</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">ha</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">targetF</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">runSender</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">ha</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">targetF</span>)
 <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>()
 </code></pre></div><p>编译运行代码，可以看到，在两个终端下，发送方的任何消息接收方都会一模一样的返回回来。</p>
 <h3 id="第二种--改造doecho">第二种 | 改造<code>doEcho</code></h3>
 <p>调用<code>doEcho</code>的地方也需要修改</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">// doEcho reads a line of data a stream and writes it back
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">// doEcho reads a line of data a stream and writes it back
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">doEcho</span>(<span style="color:#a6e22e">h</span> <span style="color:#a6e22e">host</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>) <span style="color:#66d9ef">error</span> {
 	<span style="color:#a6e22e">buf</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">s</span>)
 	<span style="color:#a6e22e">str</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">ReadString</span>(<span style="color:#e6db74">&#39;\n&#39;</span>)
@@ -387,10 +387,10 @@
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 }
 </code></pre></div><p>在调用<code>runSender</code>函数下使用<code>&lt;-ctx.Done()</code>, 防止主协程退出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">runSender</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">ha</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">targetF</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">runSender</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">ha</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">targetF</span>)
 <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>()
 </code></pre></div><p>注释掉函数<code>runSender</code>下的这段代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//runSender
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//runSender
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">s</span>)
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
@@ -409,10 +409,10 @@
 <p>使用libp2p库让两个节点进行p2p通信一共分为如下几个步骤,以节点B为例子</p>
 <ol>
 <li>创建host (监听端口)</li>
-<li>设置协议ID=&quot;/echo/1.0.0&quot;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
+<li>设置协议ID=&rdquo;/echo/1.0.0&rdquo;，并设置数据流的回调handle, 这个回调handle中有读写协程，等待连接</li>
 <li>节点B需要知道节点A的地址，并解析A的地址</li>
 <li>把节点A的地址添加到节点B的host</li>
-<li>节点B使用节点A的host.ID和节点A监听的协议&quot;/echo/1.0.0&quot;创建一个新的数据流 , 节点B可以通过这个数据流和A进行通信</li>
+<li>节点B使用节点A的host.ID和节点A监听的协议&rdquo;/echo/1.0.0&quot;创建一个新的数据流 , 节点B可以通过这个数据流和A进行通信</li>
 </ol>
 <p>作为发送方比接收方多了第4步， <code>把节点A的地址添加到节点B的host</code></p>
 
@@ -434,7 +434,7 @@
                 <a href="https://blog.rakfree.tk/2021/10/gop2ptwo/">https://blog.rakfree.tk/2021/10/gop2ptwo/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 09:58:19</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
