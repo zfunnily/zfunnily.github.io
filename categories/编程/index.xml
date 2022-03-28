@@ -13,7 +13,7 @@
       <pubDate>Sun, 27 Mar 2022 12:39:12 +0800</pubDate>
       
       <guid>https://blog.rakfree.tk/2022/03/timerskynet/</guid>
-      <description>skynet定时器 要解析一个程序代码，先了解数据结构，这是基础，再看函数。 拿skynet定时器举例子。 skynet定时器数据结构 //定时器事件 用于抛出定时器事件到消息队列里。理解这个数据结构需要先了解</description>
+      <description>skynet定时器 要解析一个程序代码，先了解数据结构，这是基础，再看函数。 拿skynet定时器举例子。 数据结构 //定时器事件 用于抛出定时器事件到消息队列里。理解这个数据结构需要先了解skynet的框架</description>
     </item>
     
     <item>
