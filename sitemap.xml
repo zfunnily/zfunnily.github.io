@@ -2,19 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.rakfree.tk/categories/</loc>
-    <lastmod>2022-03-28T17:39:06+08:00</lastmod>
-  </url><url>
     <loc>https://blog.rakfree.tk/post/</loc>
+    <lastmod>2022-03-30T10:56:06+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.rakfree.tk/</loc>
+    <lastmod>2022-03-30T10:56:06+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.rakfree.tk/2022/03/afk/</loc>
+    <lastmod>2022-03-30T10:56:06+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.rakfree.tk/categories/</loc>
     <lastmod>2022-03-28T17:39:06+08:00</lastmod>
   </url><url>
     <loc>https://blog.rakfree.tk/tags/skynet/</loc>
     <lastmod>2022-03-28T17:39:06+08:00</lastmod>
   </url><url>
     <loc>https://blog.rakfree.tk/tags/</loc>
-    <lastmod>2022-03-28T17:39:06+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.rakfree.tk/</loc>
     <lastmod>2022-03-28T17:39:06+08:00</lastmod>
   </url><url>
     <loc>https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/</loc>

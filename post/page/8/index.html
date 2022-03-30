@@ -88,6 +88,33 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/12/tcp/" title="Protobuf | 沾包问题">Protobuf | 沾包问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 最近在研究一款游戏的源码。发现里面的通信协议是protobuf定义的，但还是自己定义了协议头部，类似 head + body。先解析头部里所存储的整个包的数据长度，然后再解析包剩余的数据，这样做的目的是为了防……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2020/12/tcp/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2020/12/grpc/" title="Grpc | 概述">Grpc | 概述</a>
             </h1>
         </header>
@@ -322,33 +349,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/" title="Cgo | 使用libevent库实现一个定时器">Cgo | 使用libevent库实现一个定时器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年11月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            使用libevent库作为例子 下载 &amp; 编译 &amp; 安装libevent $ git clone https://github.com.cnpmjs.org/libevent/libevent.git $ cd libevent &amp;&amp; mkdir build &amp;&amp; cd build $ cmake .. $ make libevent实现的定时器 // main.cpp #include &#34;event.h&#34; struct event ev; struct timeval tv; void time_cb(evutil_socket_t fd, short event, void *argc) { printf(&#34;timer wakeup\n&#34;); event_add(&amp;ev, &amp;tv); // reschedule timer } int main() { struct event_base *base = event_base_new(); tv.tv_sec = 2;……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/11/cgo%E4%BD%BF%E7%94%A8libevent%E5%BA%93%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%AE%9A%E6%97%B6%E5%99%A8/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -511,6 +511,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
     </li>
     
@@ -524,10 +528,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
     </li>
     
 </ul>
