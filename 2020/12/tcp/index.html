@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-13T10:22:38&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T14:45:20&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Protobuf | 沾包问题">
@@ -232,7 +232,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         proto文件
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// msg.proto
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// msg.proto
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">syntax</span> = <span style="color:#e6db74">&#34;proto3&#34;</span>;
 <span style="color:#a6e22e">option</span> <span style="color:#a6e22e">go_package</span> = <span style="color:#e6db74">&#34;.;GCToLs&#34;</span>;
 
@@ -258,13 +258,13 @@
 </code></pre></div></details>
 <br/>
 <p>执行命令,生成 msg.pb.go文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc ./*.proto --go_out=protos -I ./
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ protoc ./*.proto --go_out=protos -I ./
 </code></pre></div><h2 id="server示例代码">Server示例代码</h2>
 <details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         server示例
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;bufio&#34;</span>
@@ -339,7 +339,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         client示例
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;bytes&#34;</span>
@@ -389,7 +389,7 @@
 三、golang的channel使用<br>
 四、bufio.Scan可以很好的分割一个数据包。</p>
 <h3 id="bufioscan的使用">bufio.Scan的使用</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//生成一个 scanner
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//生成一个 scanner
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">conn</span>)
 <span style="color:#75715e">//自定义解包方法
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">scanner</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">data</span> []<span style="color:#66d9ef">byte</span>, <span style="color:#a6e22e">atEOF</span> <span style="color:#66d9ef">bool</span>) (<span style="color:#a6e22e">advance</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">token</span> []<span style="color:#66d9ef">byte</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {})
@@ -402,7 +402,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">doServerStuf</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>)  {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">doServerStuf</span>(<span style="color:#a6e22e">conn</span> <span style="color:#a6e22e">net</span>.<span style="color:#a6e22e">Conn</span>)  {
 	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">conn</span>.<span style="color:#a6e22e">Close</span>()
 	<span style="color:#66d9ef">for</span> {
 		<span style="color:#a6e22e">scanner</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">bufio</span>.<span style="color:#a6e22e">NewScanner</span>(<span style="color:#a6e22e">conn</span>)
@@ -461,7 +461,7 @@
                 <a href="https://blog.rakfree.tk/2020/12/tcp/">https://blog.rakfree.tk/2020/12/tcp/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:45:20</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>

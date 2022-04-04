@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-28T11:57:04&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T14:36:59&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="五种网络IO模型总结">
@@ -303,7 +303,7 @@
     </p>
 <h2 id="总结">总结</h2>
 <p>IO分两阶段：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1.数据准备阶段
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1.数据准备阶段
 2.内核空间复制回用户进程缓冲区阶段
 </code></pre></div><p>一般来讲：阻塞IO模型、非阻塞IO模型、IO复用模型(select/poll/epoll)、信号驱动IO模型都属于同步IO，因为阶段2是阻塞的(尽管时间很短)。只有异步IO模型是符合POSIX异步IO操作含义的，不管在阶段1还是阶段2都可以干别的事。</p>
 <blockquote>
@@ -328,7 +328,7 @@
                 <a href="https://blog.rakfree.tk/2020/12/iomodels/">https://blog.rakfree.tk/2020/12/iomodels/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:36:59</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
