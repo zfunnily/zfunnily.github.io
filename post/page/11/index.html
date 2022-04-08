@@ -88,6 +88,83 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/08/ingress/" title="K8S | Ingress的基本使用">K8S | Ingress的基本使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2'>自动部署</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。 结合Sta……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/ingress/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/08/pvc/" title="K8S | Statefluset的持久存储PVC">K8S | Statefluset的持久存储PVC</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2'>自动部署</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 在看statefluset基础教程的时候遇到pod状态为pending kubectl describe pod web-0 日志内容是 pod has unbound immediate PersistentVolumeClaims 于是就对PV和PVC进行研究。 有给出完整的 web.yaml查看最下面的完整示例。但是我建议先把PV……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/pvc/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2020/08/nsf/" title="Linux | nsf服务的搭建和使用">Linux | nsf服务的搭建和使用</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年8月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/IT'>IT</a></span>
+            
+            <span class="meta-category"><a href='/categories/IT.Linux'>IT.Linux</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            搭建nsf服务 sudo apt install nfs-kernel-server 默认情况下，在Ubuntu 18.04上，NFS版本2是禁用的。版本3和版本4已启用。您可以通过运行以下cat命令来验证： sudo cat /proc/fs/nfsd/versions 写入 exports cat /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports sudo echo /nfs/prometheus/data/ 192.168.84.75/24(rw,no_root_squash,no_all_squash,sync) &gt;&gt; /etc/exports 可以设定的参数主要……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/nsf/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2020/08/statefulset/" title="K8S | StatefulSet基本原理">K8S | StatefulSet基本原理</a>
             </h1>
         </header>
@@ -262,83 +339,6 @@
     
     
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/08/dashboard/" title="K8S | Dashboard界面管理">K8S | Dashboard界面管理</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2'>自动部署</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            安装部署Dashboard 通过一下命令来部署, recommended.yaml $ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/depl……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/dashboard/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/08/k8sinstall/" title="K8S | 安装">K8S | 安装</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2'>自动部署</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            安装k8s前的准备工作 环境 ubuntu18.04 docker 关闭 swap 暂时关闭 $ swapoff -a 永久关闭 注释掉这一行 sudo vim /etc/fstab # /swapfile none swap sw 0 0 重启机器 sudo reboot docker 的配置 安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/k8sinstall/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/08/owtservercomplie/" title="Owt-server | 编译运行">Owt-server | 编译运行</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年8月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 owt是一套完整的webrtc视频会议系统。包含的功能模块有： 视频会议1. p2p 服务器是owt-server通过nodejs编写的webrtc信令。依赖是licode。licode依赖webrtc。 客……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/08/owtservercomplie/">阅读全文</a></p>
-    </article>
-    
-    
-    
 
 
 
@@ -392,7 +392,20 @@
         </li>
         
     
+        
+        
+        <li >
+            <a href="https://blog.rakfree.tk/post/page/12/">12</a>
+        </li>
+        
+    
 
+    
+    
+
+    <li class="next">
+        <a href="https://blog.rakfree.tk/post/page/12/">下一页</a>
+    </li>
     
 </ol>
 
@@ -468,23 +481,23 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="Shader基本概念">Shader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
     </li>
     
     <li>
         <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
     </li>
     
 </ul>
@@ -530,7 +543,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (84)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (86)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -540,7 +553,13 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (1)</a></li>
+    
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
@@ -596,6 +615,8 @@
     <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
     
     <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
     
     <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     

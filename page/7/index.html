@@ -87,6 +87,75 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/01/ziplist/" title="Redis源码分析 | ziplist">Redis源码分析 | ziplist</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 Redis中的List是一个有序（按加入的时序排序）的数据结构，一般有序我们会采用数组或者是双向链表，其中双向链表由于有前后指针实际上会很浪费内存。3.2版本之前采用两种数据结构作为底层实现： 压缩……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/ziplist/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/01/vscodedebugredis/" title="Redis源码解析 | VScode调试">Redis源码解析 | VScode调试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 vscode- gcc5.4 ubuntu16.04 或者 ubuntu18.04 make 下载6.2版本. 我使用的是国内github镜像地址：github.com.cnpmjs.org，速度比较快。 $ git clone https://github.com.cnpmjs.org/redis/redis.git redis $ git checkout -b 6.2 remotes/origin/6.2 vscode不参与编译，只充当可视化的调试工具。 使用……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/vscodedebugredis/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/01/vscoderedis/" title="VScode | 调试Redis源码，指针显示的问题">VScode | 调试Redis源码，指针显示的问题</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            缘由 使用VScode的时候，断点看到指针显示的是一串地址，而不是指针指向的对象的值。上网找了一圈，没看到vscode有对应的插件来解决这个问题。vscode有对应的语法来解决这个问题。 网上几乎都在说在……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/vscoderedis/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2021/01/cgostruct/" title="Cgo | 遍历C结构体数组">Cgo | 遍历C结构体数组</a>
             </h1>
         </header>
@@ -259,83 +328,6 @@
         <p class="readmore"><a href="https://blog.rakfree.tk/2020/12/iomodels/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/12/ccnetone/" title="CCnet | 一个reactor单线程网络库">CCnet | 一个reactor单线程网络库</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月27日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B'>编程.网络编程</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在研究陈硕的网络库muduo，是一个基于reactor架构的网络库。我对网络库的感觉是易用，但是内容庞大，依赖颇多。比如boost网络库里面的一些语法让人生畏。关于reactor和proact……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/12/ccnetone/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/12/reserve/" title="C&#43;&#43; | vector中的resize()函数 VS reserve()函数">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月25日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            reserve void reserve (size_type n); reserver函数用来给vector预分配存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/12/reserve/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2020/12/gocolly/" title="Golang | 用gocolly登录B站">Golang | 用gocolly登录B站</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2020年12月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 gocolly是golang语言开发的爬虫包，通过gocolly来进行模拟网站的登录， 目标已经确立，开始行动。 下载 $ go get -u github.com/gocolly/colly 获取cookie 登录网站：https://www.bilibili.co……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2020/12/gocolly/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -413,7 +405,7 @@
         
         
         <li >
-            <a href="https://blog.rakfree.tk/page/11/">11</a>
+            <a href="https://blog.rakfree.tk/page/12/">12</a>
         </li>
         
     
@@ -499,23 +491,23 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="Shader基本概念">Shader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
     </li>
     
     <li>
         <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/timer/" title="利用时间轮实现定时器">利用时间轮实现定时器</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/blog/" title="利用云服务器搭建个人博客">利用云服务器搭建个人博客</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
     </li>
     
 </ul>
@@ -561,7 +553,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (84)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (86)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -571,7 +563,13 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (1)</a></li>
+    
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
     
@@ -627,6 +625,8 @@
     <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
     
     <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
     
     <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
     

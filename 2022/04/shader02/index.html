@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>《Unity Shader入门精要》第二章 | 渲染流水线 | Zzz记忆</title>
+    <meta property="og:title" content="《Unity Shader入门精要》第二章 | 渲染流水线 - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2022-04-07T11:55:55&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-04-08T21:10:17&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="《Unity Shader入门精要》第二章 | 渲染流水线">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="https://blog.rakfree.tk/2022/04/shader02/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+
+    
+    
+    
+        <link href="/js/jquery.fancybox.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
+    
+    <script src='/js/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://blog.rakfree.tk">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://blog.rakfree.tk">首页</a>
+                    
+                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#渲染流水线">渲染流水线</a>
+      <ul>
+        <li><a href="#应用阶段application-stage">应用阶段（Application Stage）</a></li>
+        <li><a href="#几何阶段geometry-stage">几何阶段（Geometry Stage）</a></li>
+        <li><a href="#光栅化阶段rasterizer-stage">光栅化阶段（Rasterizer Stage）</a></li>
+      </ul>
+    </li>
+    <li><a href="#cpu和gpu的通信">CPU和GPU的通信</a>
+      <ul>
+        <li><a href="#把数据加载到显存中">把数据加载到显存中</a></li>
+        <li><a href="#设置渲染状态">设置渲染状态</a></li>
+        <li><a href="#调用draw-call">调用Draw Call</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">《Unity Shader入门精要》第二章 | 渲染流水线</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.UnityShader'>编程.UnityShader</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="渲染流水线">渲染流水线</h2>
+<p>Render-Time Rendering, Third Edition》一书中将一个渲染流程分成3个阶段：应用阶段（Application Stage） 、几何阶段（Geometry Stage） 、光栅化阶段（Rasterizer Stage） 。</p>
+<h3 id="应用阶段application-stage">应用阶段（Application Stage）</h3>
+<p>开发者有3个主要任务：</p>
+<ul>
+<li>准备场景数据: 例如摄像机的位置、视锥体、场景中包含了哪些模型;</li>
+<li>裁剪: 为了提高渲染性能，我们往往需要做一个粗粒度剔除（culling）工作，以把那些不可见的物体剔除出去，这样就不需要再移交给几何阶段进行处理;</li>
+<li>设置渲染状态: 渲染状态包括但不限于它使用的材质（漫反射颜色、高光反射颜色）、使用的纹理、使用的Shader等。这一阶段最重要的输出是渲染所需的几何信息;</li>
+</ul>
+<p>这一阶段最重要的输出是渲染所需的几何信息，即渲染图元。 通俗来讲，渲染图元可以是点、线、三角面等。这些渲染图元将会被传递给下一个阶段——几何阶段。</p>
+<h3 id="几何阶段geometry-stage">几何阶段（Geometry Stage）</h3>
+<p>几何阶段用于处理所有和我们要绘制的几何相关的事情</p>
+<ul>
+<li>在GPU上进行</li>
+<li>和每个渲染图元打交道，进行逐顶点、逐多边形的操作</li>
+<li>把顶点坐标变换到屏幕空间中，再交给光栅器进行处理</li>
+<li>可分成更小的流水阶段</li>
+</ul>
+<p>这一阶段将会输出屏幕空间的二维顶点坐标、每个顶点对应的深度值、着色等相关信息，并传递给下一个阶段</p>
+<h3 id="光栅化阶段rasterizer-stage">光栅化阶段（Rasterizer Stage）</h3>
+<p>这一阶段将会使用上个阶段传递的数据来产生屏幕上的像素，并渲染出最终的图像</p>
+<ul>
+<li>在GPU上进行</li>
+<li>决定每个渲染图元中的哪些像素应该被绘制在屏幕上</li>
+<li>需要对上一个阶段得到的逐顶点数据（例如纹理坐标、顶点颜色等）进行插值，然后再进行逐像素处理</li>
+<li>可分成更小的流水阶段</li>
+</ul>
+<h2 id="cpu和gpu的通信">CPU和GPU的通信</h2>
+<p>渲染流水线的起点是CPU，即应用阶段。应用阶段大致可分为下面3个阶段：</p>
+<ul>
+<li>把数据加载到显存中。</li>
+<li>设置渲染状态。</li>
+<li>调用Draw Call</li>
+</ul>
+<h3 id="把数据加载到显存中">把数据加载到显存中</h3>
+<h3 id="设置渲染状态">设置渲染状态</h3>
+<h3 id="调用draw-call">调用Draw Call</h3>
+<h2 id="参考">参考</h2>
+<p>《Unity Shader入门精要》</p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="https://blog.rakfree.tk/2022/04/shader02/">https://blog.rakfree.tk/2022/04/shader02/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-08 21:10:17</li>
+        <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2022/04/shader01/">Shader基本概念</a></li>
+        
+        <li><a href="/2022/04/graphics/">Graphics</a></li>
+        
+        <li><a href="/2022/03/afk/">抽卡逻辑自述</a></li>
+        
+        <li><a href="/2022/03/timerskynet/">层级时间轮 ｜ skynet 定时器</a></li>
+        
+        <li><a href="/2022/03/timer/">利用时间轮实现定时器</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>shader学习笔记</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        
+
+    
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="Shader基本概念">Shader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (86)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="https://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="https://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+</body>
+
+</html>
