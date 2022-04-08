@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程.UnityShader on Zzz记忆</title>
+    <link>https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/</link>
+    <description>Recent content in 编程.UnityShader on Zzz记忆</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 07 Apr 2022 11:55:55 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《Unity Shader入门精要》第二章 | 渲染流水线</title>
+      <link>https://blog.rakfree.tk/2022/04/shader02/</link>
+      <pubDate>Thu, 07 Apr 2022 11:55:55 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/04/shader02/</guid>
+      <description>渲染流水线 Render-Time Rendering, Third Edition》一书中将一个渲染流程分成3个阶段：应用阶段（Application Stage） 、几何阶段（Geometry Stage） 、光栅化阶段（Rasterizer Stage） 。 应</description>
+    </item>
+    
+  </channel>
+</rss>
