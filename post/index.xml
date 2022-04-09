@@ -6,18 +6,27 @@
     <description>Recent content in Posts on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 07 Apr 2022 11:55:55 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Apr 2022 11:55:55 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《Unity Shader入门精要》第二章 | 渲染流水线</title>
-      <link>https://blog.rakfree.tk/2022/04/shader02/</link>
-      <pubDate>Thu, 07 Apr 2022 11:55:55 +0800</pubDate>
+      <link>https://blog.rakfree.tk/2022/04/shader03/</link>
+      <pubDate>Sat, 09 Apr 2022 11:55:55 +0800</pubDate>
       
-      <guid>https://blog.rakfree.tk/2022/04/shader02/</guid>
+      <guid>https://blog.rakfree.tk/2022/04/shader03/</guid>
       <description>渲染流水线 Render-Time Rendering, Third Edition》一书中将一个渲染流程分成3个阶段：应用阶段（Application Stage） 、几何阶段（Geometry Stage） 、光栅化阶段（Rasterizer Stage） 。 应</description>
     </item>
     
     <item>
-      <title>Shader基本概念</title>
+      <title>shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</title>
+      <link>https://blog.rakfree.tk/2022/04/shader02/</link>
+      <pubDate>Sat, 09 Apr 2022 10:34:56 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/04/shader02/</guid>
+      <description>给石头覆盖一层雪景 资源准备 石头模型 Unity2021.2.3f1c1 Mac &amp;amp; Windows 在Unity中创建一个项目，导入石头模型，下面就开始利用shader给石头做一个雪景覆盖. 实现效果 未覆盖雪景的样子 覆盖了雪景的样子 开始代码 我在代码中标注了1，</description>
+    </item>
+    
+    <item>
+      <title>UnityShader基本概念</title>
       <link>https://blog.rakfree.tk/2022/04/shader01/</link>
       <pubDate>Wed, 06 Apr 2022 11:54:02 +0800</pubDate>
       

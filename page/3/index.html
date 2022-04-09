@@ -87,6 +87,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/11/webrtcpeerconnection/" title="Webrtc一 | peerconnection">Webrtc一 | peerconnection</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年11月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            环境 Ubuntu18.04 webrtc M84 国内镜像：https://webrtc.org.cn/mirror/ webrtc交互过程 通过peerconnection的例子来分析webrtc的交互流程 peer_connection 解析 为了便于管理，如编码，回显等，……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/11/webrtcpeerconnection/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2021/11/gop2pfour/" title="Go-libp2p四 | 穿透NAT">Go-libp2p四 | 穿透NAT</a>
             </h1>
         </header>
@@ -305,31 +330,6 @@
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/skynettwo/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/10/skynetone/" title="Skynet源码赏析一 | 启动初始化的过程">Skynet源码赏析一 | 启动初始化的过程</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年10月19日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            入口文件 skynet_main.c 加载配置 struct skynet_config config; config.thread = optint(&#34;thread&#34;,8); config.module_path = optstring(&#34;cpath&#34;,&#34;./cservice/?.so&#34;); config.harbor = optint(&#34;harbor&#34;, 1); config.bootstrap = optstring(&#34;bootstrap&#34;,&#34;snlua bootstrap&#34;); config.daemon = optstring(&#34;daemon&#34;, NULL); config.logger = optstring(&#34;logger&#34;, NULL); config.logservice = optstring(&#34;logservice&#34;, &#34;logger&#34;); config.profile = optboolean(&#34;profile&#34;, 1); 从上述代码可以看到，配置都已经加载到变量struct skynet_config config;中了。 初始化 初始化skynet_context管……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/skynetone/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -479,11 +479,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+        <a href="https://blog.rakfree.tk/2022/04/shader03/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="Shader基本概念">Shader基本概念</a>
+        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
     </li>
     
     <li>
@@ -492,10 +496,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
     </li>
     
 </ul>
@@ -541,7 +541,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (86)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (87)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -551,11 +551,9 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (1)</a></li>
-    
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (3)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
