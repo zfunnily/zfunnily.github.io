@@ -6,7 +6,11 @@
     <description>Recent content in 编程.UnityShader on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 09 Apr 2022 11:55:55 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Apr 2022 11:55:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>《Unity Shader入门精要》第二章 | 渲染流水线</title>
       <link>https://blog.rakfree.tk/2022/04/shader03/</link>
