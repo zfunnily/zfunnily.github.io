@@ -6,10 +6,19 @@
     <description>Recent content in shader on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 09 Apr 2022 11:55:55 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 Apr 2022 14:51:19 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.rakfree.tk/tags/shader/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>《Unity Shader入门精要》第三章 | UnityShader基础</title>
+      <link>https://blog.rakfree.tk/2022/04/shader04/</link>
+      <pubDate>Sun, 10 Apr 2022 14:51:19 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/04/shader04/</guid>
+      <description>一对好兄弟：材质和Unity Shader 在Unity中我们需要配合使用材质 （Material） 和Unity Shader才能达到需要的效果。一个最常见的流程是 创建一个材质；活着导入一个材质 创建一个Unity Sha</description>
+    </item>
     
     <item>
       <title>《Unity Shader入门精要》第二章 | 渲染流水线</title>
