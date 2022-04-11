@@ -6,11 +6,7 @@
     <description>Recent content on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 10 Apr 2022 14:51:19 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《Unity Shader入门精要》第三章 | UnityShader基础</title>
       <link>https://blog.rakfree.tk/2022/04/shader04/</link>
@@ -215,7 +211,7 @@
       <pubDate>Thu, 23 Dec 2021 16:37:44 +0800</pubDate>
       
       <guid>https://blog.rakfree.tk/2021/12/astar/</guid>
-      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;rd</description>
+      <description>A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&amp;quot;开启列表&amp;quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&amp;quot;开启列表&amp;quo</description>
     </item>
     
     <item>
