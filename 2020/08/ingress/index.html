@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-15T00:05:15&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | Ingress的基本使用">
@@ -207,7 +207,7 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。<br> 结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefulset示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
 kind: Service
 metadata:
   name: nginx
@@ -289,7 +289,7 @@ spec:
 
 </code></pre></div><h2 id="a-idingress_86aingress"><a id="Ingress_86"></a>Ingress</h2>
 <p>我们知道前面我们使用 NodePort 和 LoadBlancer 类型的 Service 可以实现把应用暴露给外部用户使用，除此之外，Kubernetes 还为我们提供了一个非常重要的资源对象可以用来暴露服务给外部用户，那就是 ingress。<br> 创建一个 ingress 对象：(ingress.yaml)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Ingress 配置
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Ingress 配置
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -308,16 +308,16 @@ spec:
             path: /
 
 </code></pre></div><p>然后为 traefik dashboard 创建对应的 ingress 对象：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl create -f ingress.yaml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl create -f ingress.yaml
 
 </code></pre></div><p>可以查看ingress是否创建成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl describe ingress web-cluster-external
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl describe ingress web-cluster-external
 
 </code></pre></div><p>要注意上面的 ingress 对象的规则，特别是 rules 区域，我们这里是要为 ngin 建立一个 ingress 对象，所以这里的 serviceName 对应的是上面我们创建的 web-cluster-external<br> ，端口也要注意对应 80端口，为了避免端口更改，这里的 servicePort 的值也可以替换成上面定义的 port 的名字： web<br> ``<br> 创建完成后，我们应该怎么来测试呢？</p>
 <ul>
 <li>第一步，在本地的**/etc/hosts**里面添加上 nginx.com<br> 与 节点外网 IP 的映射关系- 第二步，在浏览器中访问：nginx.com 我们会发现并没有得到我们期望的 inde.html界面，这是因为我们上面statefulset 部署 nginx 的时候没有外放NodePort端口。需要配置。ClusterIP都是集群内部访问的。需要我们建立一个名为service对象node.yaml</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># cluster ip
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># cluster ip
 apiVersion: v1
 kind: Service
 metadata:
@@ -335,7 +335,7 @@ spec:
       nodePort: 32002 #增加
   type: NodePort
 </code></pre></div><p>创建service对象</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl  apply node.yaml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl  apply node.yaml
 </code></pre></div><p>这样就可以通过节点 ip:32002来访问nginx或者是通过域名来访问啦</p>
 
 
@@ -356,7 +356,7 @@ spec:
                 <a href="https://blog.rakfree.tk/2020/08/ingress/">https://blog.rakfree.tk/2020/08/ingress/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -490,10 +490,6 @@ spec:
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
-    </li>
-    
-    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -507,6 +503,10 @@ spec:
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -552,7 +552,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -564,7 +564,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

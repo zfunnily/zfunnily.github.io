@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-11-07T15:49:46&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-02-24T09:58:57&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Go-libp2p四 | 穿透NAT">
@@ -238,7 +238,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//chat.go
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//chat.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">RelayProtocolRequest</span> = <span style="color:#e6db74">&#34;/relay/relayreq/1.0.0&#34;</span>
@@ -410,19 +410,19 @@
 </code></pre></div></details>
 <br/>
 <p>编译</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build chat.go
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build chat.go
 $ go build relay-server.go
 </code></pre></div><p>启动中继服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./relay -sp <span style="color:#ae81ff">3001</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./relay -sp <span style="color:#ae81ff">3001</span>
 2021/11/08 15:10:01 Run <span style="color:#e6db74">&#39;./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd&#39;</span> on another console.
 2021/11/08 15:10:01 You can replace 192.168.0.100 with public IP as well.
 2021/11/08 15:10:01 Waiting <span style="color:#66d9ef">for</span> incoming connection
 </code></pre></div><p>在窗口A启动chat 连上中继</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
 2021/11/08 15:10:09 start ConnectNodeByRelay.... QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom /ip4/172.16.3.205/tcp/56309
 2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw
 </code></pre></div><p>在窗口B启动chat 连上中继</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ./chat -relay /ip4/172.16.3.205/tcp/3001/p2p/QmVJoYJC447ZVqQxWfWUecFAXPFd6QbT9mQvHuew3jaCBd
 2021/11/08 15:10:09 start ConnectNodeByRelay.... QmT2qBsSWkTHPHkgfd6aUZQiF7j2ArmWF9NwQ8R62Wixrw /ip4/172.16.3.205/tcp/56306
 2021/11/08 15:10:09 receive onFirstP2PMsg:  Hello Im QmWtaMSNakQ8x5LUf4TpMb9JQy3PPSTPS4yNjRFyxAmaom
 2021/11/08 15:10:14 Cmdp2p start ....
@@ -434,7 +434,7 @@ $ go build relay-server.go
 <li>A和B可以进行p2p沟通。可以试着把relay-server关闭，然后继续发送消息。可见消息能发送成功。</li>
 </ul>
 <p>这里p2p的打洞流程参考 <code>coordination.go</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">hs</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Service</span>) <span style="color:#a6e22e">handleNewStream</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">hs</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Service</span>) <span style="color:#a6e22e">handleNewStream</span>(<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">network</span>.<span style="color:#a6e22e">Stream</span>) {
 <span style="color:#75715e">// Check directionality of the underlying connection.
 </span><span style="color:#75715e">// Peer A receives an inbound connection from peer B.
 </span><span style="color:#75715e">// Peer A opens a new hole punch stream to peer B.
@@ -461,7 +461,7 @@ $ go build relay-server.go
                 <a href="https://blog.rakfree.tk/2021/11/gop2pfour/">https://blog.rakfree.tk/2021/11/gop2pfour/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 09:58:57</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -595,10 +595,6 @@ $ go build relay-server.go
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
-    </li>
-    
-    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -612,6 +608,10 @@ $ go build relay-server.go
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -657,7 +657,7 @@ $ go build relay-server.go
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -669,7 +669,7 @@ $ go build relay-server.go
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-13T17:15:45&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:02:39&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Golang | 调用带有后台进程shell脚本可能会被挂起">
@@ -214,7 +214,7 @@
             <h2 id="起因">起因</h2>
 <p>今天用<code>Golang</code>写一个调用外部shell脚本的程序，使用 <code>exec.Command</code>方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：<code>cmd.Output</code> 始终不会返回，一直挂起。导致我的Go程序也挂起了。</p>
 <h2 id="问题还原">问题还原</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//main.go
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#75715e">//main.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -232,14 +232,14 @@
 	print(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>, <span style="color:#a6e22e">out</span>))
 }
 </code></pre></div><p>test.sh</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 ping localhost &amp;
 </code></pre></div><p>启动<code>golang</code>程序 <code>go run main.go</code>, 此时会发现<code>cmd.Output()</code>始终不会返回。如果在终端直接执行<code>sh test.sh</code>就会直接返回了。
 是什么原因导致的这个问题？</p>
 <h2 id="脚本执行方式">脚本执行方式</h2>
 <p>由于<code>ping localhost</code>会一直运行并且输出，我换了一个立即会结束的脚本:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 ls -la
 </code></pre></div><blockquote>
@@ -258,7 +258,7 @@ ls -la
     </p>
 <p>结合这段代码再回到开始的<code>ping localhost &amp;</code>语句（它在被sh执行的脚本中）：</p>
 <p>其中<code>state, err := c.Process.Wait()</code>等待的是sh进程的结束，没问题，sh很快就退出了, 看到这段代码:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">copyError</span> <span style="color:#66d9ef">error</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">copyError</span> <span style="color:#66d9ef">error</span>
 <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">goroutine</span> {
     <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">errch</span>; <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">copyError</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
         <span style="color:#a6e22e">copyError</span> = <span style="color:#a6e22e">err</span>
@@ -285,7 +285,7 @@ ls -la
 <ol>
 <li>改脚本，可以把标准输出和标准错误重定向到文件中。还是参考菜鸟教程<a href="https://www.runoob.com/linux/linux-shell-io-redirections.html">Shell输入/输出重定向</a></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">#如果要保留输出，可以输出到文件</span>
 ping localhost &gt; test.txt 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
@@ -294,7 +294,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
 </code></pre></div><ol start="2">
 <li>改golang程序, 使用 <code>cmd.Start()</code> 替代 <code>cmd.Output()</code></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -307,7 +307,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
 	print(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>, <span style="color:#a6e22e">out</span>))
 }
 </code></pre></div><p>Cmd的几个方法介绍,有阻塞和非阻塞的，按需使用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Command</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Cmd</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Command</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Cmd</span>
 <span style="color:#a6e22e">方法返回一个</span><span style="color:#f92672">*</span><span style="color:#a6e22e">Cmd</span><span style="color:#960050;background-color:#1e0010">，</span> <span style="color:#a6e22e">用于执行name指定的程序</span>(<span style="color:#a6e22e">携带arg参数</span>)
 <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Cmd</span>) <span style="color:#a6e22e">Run</span>() <span style="color:#66d9ef">error</span>
 <span style="color:#a6e22e">执行Cmd中包含的命令</span><span style="color:#960050;background-color:#1e0010">，</span><span style="color:#a6e22e">阻塞直到命令执行完成</span>
@@ -344,7 +344,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
                 <a href="https://blog.rakfree.tk/2021/10/shell/">https://blog.rakfree.tk/2021/10/shell/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:02:39</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -474,10 +474,6 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
-    </li>
-    
-    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -491,6 +487,10 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -536,7 +536,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -548,7 +548,7 @@ ping localhost &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span> &am
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
