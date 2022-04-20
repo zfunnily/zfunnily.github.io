@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-10T14:38:23&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-10T20:25:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-10T15:16:00&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="利用时间轮实现定时器">
@@ -254,7 +254,7 @@
 <li>eg: 当前指针指向0，如果需要调度一个10ms后执行的任务，应该等指针走完(一轮+2格)的方格中。</li>
 </ul>
 <p>开始代码编写，一个时间轮的struct, 和任务的struct</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
 <span style="color:#75715e">// Job 延时任务回调函数
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Job</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">interface</span>{})
 
@@ -280,7 +280,7 @@
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ticker</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Ticker</span>
 }
 </code></pre></div><p>开始时间轮</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">Start</span>()  {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">Start</span>()  {
 	<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">ticker</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTicker</span>(<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">tick</span>) 
 	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
 		<span style="color:#66d9ef">for</span> {
@@ -312,7 +312,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         golang
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">tickHandler</span>()  {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">tickHandler</span>()  {
     <span style="color:#75715e">//获取指针指向的槽
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">l</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">slots</span>[<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">currentPos</span>]
     <span style="color:#75715e">//扫描当前槽中过期的定任务,时间复杂度为O(n)，并执行回调
@@ -346,7 +346,7 @@
 </code></pre></div></details>
 <br/>
 <p>再来看看添加定时任务函数 <code>addTask</code> :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">getRoundCount</span>(<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) (<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">getRoundCount</span>(<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) (<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) {
     <span style="color:#75715e">// 需要转动的圈数 = (过期时间/一滴答) / 槽数量
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">circle</span> <span style="color:#f92672">:=</span> int(<span style="color:#a6e22e">d</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">tick</span>)<span style="color:#f92672">/</span><span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">slotNum</span>
 
@@ -368,7 +368,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;container/list&#34;</span>
@@ -544,7 +544,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         testting
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -585,7 +585,7 @@
 &hellip;</li>
 </ol>
 <p>用golang来实现层级时间轮, 时间轮结构体</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TimeWheel</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TimeWheel</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#a6e22e">ticker</span>    <span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Ticker</span>
 	<span style="color:#a6e22e">tickMs</span>    <span style="color:#66d9ef">int64</span> <span style="color:#75715e">//一滴答的时间 1ms 可以自定义 我们这里选择使用1ms
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">wheelSize</span> <span style="color:#66d9ef">int64</span>
@@ -600,7 +600,7 @@
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">exitC</span>     <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">struct</span>{}
 }
 </code></pre></div><p>刻度bucket的struct</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">bucket</span> <span style="color:#66d9ef">struct</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">bucket</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#75715e">//过期时间
 </span><span style="color:#75715e"></span>	<span style="color:#a6e22e">expiration</span> <span style="color:#66d9ef">int64</span>
 
@@ -617,7 +617,7 @@
 }
 </code></pre></div><p>接下来的思路跟传统的时间轮是一样的，拨动时间轮的函数 + 添加定时任务函数</p>
 <p>开始时间轮</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">Start</span>()  {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">Start</span>()  {
 	<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">ticker</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">NewTicker</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">tickMs</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
 	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
 		<span style="color:#66d9ef">for</span> {
@@ -631,7 +631,7 @@
 	}()
 }
 </code></pre></div><p>拨动时间轮的函数 tw.advanceClock()</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//拨动时钟
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//拨动时钟
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">advanceClock</span>(<span style="color:#a6e22e">expiration</span> <span style="color:#66d9ef">int64</span>) {
 	<span style="color:#a6e22e">level</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">atomic</span>.<span style="color:#a6e22e">LoadInt64</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">level</span>)
 	<span style="color:#a6e22e">currentTime</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">truncate</span>(<span style="color:#a6e22e">expiration</span>, <span style="color:#a6e22e">tw</span>.<span style="color:#a6e22e">tickMs</span>)
@@ -685,7 +685,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         AfterFunc
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">AfterFunc</span>(<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>()) <span style="color:#f92672">*</span><span style="color:#a6e22e">Timer</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">tw</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TimeWheel</span>) <span style="color:#a6e22e">AfterFunc</span>(<span style="color:#a6e22e">d</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>()) <span style="color:#f92672">*</span><span style="color:#a6e22e">Timer</span> {
 	<span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Timer</span>{
 		<span style="color:#a6e22e">expiration</span>: <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">UTC</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#a6e22e">d</span>).<span style="color:#a6e22e">UnixMilli</span>(),
 		<span style="color:#a6e22e">task</span>:       <span style="color:#a6e22e">f</span>,
@@ -740,7 +740,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel.go
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;pro2d/src/common&#34;</span>
@@ -911,7 +911,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         bucket.go
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;container/list&#34;</span>
@@ -1002,7 +1002,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel_test.go
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">timewheel</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -1039,7 +1039,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         workpool
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">workpool</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">workpool</span>
 
 <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Job</span> <span style="color:#66d9ef">func</span>()
 
@@ -1126,7 +1126,7 @@
                 <a href="https://blog.rakfree.tk/2022/03/timer/">https://blog.rakfree.tk/2022/03/timer/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-10 20:25:12</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-10 15:16:00</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -1260,6 +1260,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -1273,10 +1277,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -1322,7 +1322,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -1334,7 +1334,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

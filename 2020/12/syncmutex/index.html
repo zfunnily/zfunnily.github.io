@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-29T13:17:18&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-24T14:34:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Golang | sync.Mutex详解">
@@ -225,7 +225,7 @@
 </ul>
 <h2 id="a-idsyncmutex_13asyncmutex是传值还是传引用"><a id="syncMutex_13"></a>sync.Mutex是传值还是传引用？</h2>
 <p>查看一个例子</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//test.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//test.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -254,14 +254,14 @@
 }
 
 </code></pre></div><p>运行程序后运行程序后输出</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">TestMutex21, s: 0xc00001e0c8
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">TestMutex21, s: 0xc00001e0c8
 sumMutexLock1, s: 0xc00001e100
 sumMutexLock2, s: 0xc00001e108
 
 </code></pre></div><p>说明<code>mutex</code>的值被拷贝了一份。我猜想，如果在调用函数 <code>sumMutexLock1</code>之前上锁 <code>mutex.Lock()</code>，则整个程序会进入死锁状态。代码加上，验证一下自己的想法，运行程序。没想到golang这么简单粗暴，程序直接panic。所以<strong>sync.Mutex是传值</strong>。</p>
 <h2 id="a-idcopy__52acopy-结构体操作可能导致非预期的死锁"><a id="copy__52"></a>copy 结构体操作可能导致非预期的死锁</h2>
 <p>copy 结构体时，如果结构体中有锁的话，记得重新初始化一个锁对象，否则会出现非预期的死锁：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// test.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// test.go
 </span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -288,14 +288,14 @@ sumMutexLock2, s: 0xc00001e108
  }
 
 </code></pre></div><p>运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go run test.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go run test.go
 c00000c060
 c00000c080
 fatal error: all goroutines are asleep - deadlock!
 
 </code></pre></div><h3 id="a-id_go_vet__88a使用-go-vet-工具检查代码中锁的使用问题"><a id="_go_vet__88"></a>使用 go vet 工具检查代码中锁的使用问题</h3>
 <p>可以通过<a href="https://golang.org/cmd/vet/">vet</a>这个命令行来检查上面的锁 copy 的问题。比如上面的例子的检查结果如下：:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go vet test.go
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ go vet test.go
 # command-line-arguments
 ./test.go:17:9: assignment copies lock value to tmp: command-line-arguments.User
 
@@ -304,7 +304,7 @@ fatal error: all goroutines are asleep - deadlock!
 <p>对于一个<strong>互斥锁</strong>，实现是一个int值 和一个uint值构成的结构体。两个值标识了锁的状态。<br> 如果锁可以copy,那锁状态也将被copy(由于struct 是值拷贝的)，当锁状态再次更新后，copy后的值将不再有效。<br> 因此，对于实现了<code>sync.Locker</code>接口的类型来说，理论上其实例是不能再次被赋值的。</p>
 <h3 id="golang-nocopy-的实现">golang noCopy 的实现</h3>
 <p>由于golang 中struct对象赋值是值拷贝，<br> golang sync 包中<br> -<code>sync.Cond</code><br> -<code>sync.Pool</code><br> -<code>sync.WaitGroup</code><br> -<code>sync.Mutex</code><br> -<code>sync.RWMutex</code><br> -<code>...</code><br> 禁止拷贝，实现方式采用noCopy 的方式。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
@@ -327,13 +327,13 @@ fatal error: all goroutines are asleep - deadlock!
 }
 
 </code></pre></div><p>golang 没有禁止对实现<code>sync.Locker</code>接口的对象实例赋值进行报错，只是在使用go vet 做静态语法分析时，会提示错误。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># command-line-arguments
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># command-line-arguments
 ./nocopy.go:19: assignment copies lock value to ss: main.S
 ./nocopy.go:20: call of fmt.Println copies lock value: main.S
 
 </code></pre></div><h2 id="a-idsyncmutex_143asyncmutex需要申明为指针么"><a id="syncMutex_143"></a>sync.Mutex需要申明为指针么？</h2>
 <p>如果使用 指针<code>*sync.Mutex</code>，拷贝指针是不是相当于持有了同一把锁了呢。虽然指针的基本原理都知道，指针存储的是指向对象的地址，拷贝指针也就是拷贝指向对象的地址，但我还是写代码验证一下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -388,7 +388,7 @@ fatal error: all goroutines are asleep - deadlock!
 }
 
 </code></pre></div><p>看到最后结果输出的是：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">start, counts: 1000
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">start, counts: 1000
 
 </code></pre></div><p><strong>说明拷贝锁的指针，相当于持有了同一把锁。</strong></p>
 <h2 id="a-id_206a总结"><a id="_206"></a>总结</h2>
@@ -414,7 +414,7 @@ fatal error: all goroutines are asleep - deadlock!
                 <a href="https://blog.rakfree.tk/2020/12/syncmutex/">https://blog.rakfree.tk/2020/12/syncmutex/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:34:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -544,6 +544,10 @@ fatal error: all goroutines are asleep - deadlock!
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -557,10 +561,6 @@ fatal error: all goroutines are asleep - deadlock!
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -606,7 +606,7 @@ fatal error: all goroutines are asleep - deadlock!
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -618,7 +618,7 @@ fatal error: all goroutines are asleep - deadlock!
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

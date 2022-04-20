@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-01-15T16:07:51&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T15:39:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Skynet | echo服务">
@@ -217,15 +217,15 @@
 <li>make
 从<a href="https://github.com/cloudwu/skynet">github</a>上下载</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/cloudwu/skynet.git 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/cloudwu/skynet.git 
 $ cd skynet &amp;&amp; make linux
 </code></pre></div><h2 id="解析示例">解析示例</h2>
 <p>启动一个服务端和客户端示例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./skynet examples/config	# Launch first skynet node  (Gate server) and a skynet-master (see config for standalone option)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./skynet examples/config	# Launch first skynet node  (Gate server) and a skynet-master (see config for standalone option)
 ./3rd/lua/lua examples/client.lua 	# Launch a client, and try to input hello.
 </code></pre></div><p>我是一个skynet小白，在我第一次看到官方示例的时候，只能看懂语法，但是不知道其中的逻辑关系。根据以往学习项目的经验，我先研究的怎么使用，然后再看源代码。在网上找到这个教程：https://blog.csdn.net/119365374/article/details/77790653， 写一个<code>echo</code>，可以很好的理解skynet的使用。
 写<code>echo</code>服务的脚本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- echo.lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- echo.lua
 local skynet = require(&#34;skynet&#34;)
 require (&#34;skynet.manager&#34;)
 
@@ -253,7 +253,7 @@ end)
 <li>cmd： 请求命令</li>
 </ul>
 <p>调用<code>echo</code>服务的test_echo.lua脚本</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- test_echo.lua
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- test_echo.lua
 local skynet = require &#34;skynet&#34;
 
 skynet.start(function ()
@@ -268,7 +268,7 @@ end)
 <li>call是阻塞式调用。</li>
 </ul>
 <p>写配置文件 <code>examples/config.echo</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- config.echo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-- config.echo
 include &#34;config.path&#34;
 -- preload = &#34;./examples/preload.lua&#34;	-- run preload.lua before every lua service run
 thread = 8
@@ -284,11 +284,11 @@ standalone = &#34;0.0.0.0:2013&#34;
 cpath = root..&#34;cservice/?.so&#34;
 -- daemon = &#34;./skynet.pid&#34;
 </code></pre></div><p>运行:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./skynet examples/config.echo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./skynet examples/config.echo
 </code></pre></div><p>这个例子让我们学习了<code>skynet.start</code>、<code>skynet.dispatch</code>、<code>skynet.register</code>、skynet.call、skynet.newservice这几个重要的方法</p>
 <h2 id="改造成cs架构的echo">改造成C/S架构的echo</h2>
 <p>了解了一下skynet的网络模型是actor模型，这样写起服务来更加得心应手了。<br> 一个<code>echo_server.lua</code> 监听服务</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local skynet = require &#34;skynet&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local skynet = require &#34;skynet&#34;
 local socket = require(&#34;skynet.socket&#34;)
 local echo
 
@@ -306,7 +306,7 @@ skynet.start(function()
     socket.start(listen_id, accept)
 end)
 </code></pre></div><p>读写服务 <code>echo_rw.lua</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local skynet = require(&#34;skynet&#34;)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">local skynet = require(&#34;skynet&#34;)
 local socket = require(&#34;skynet.socket&#34;)
 require (&#34;skynet.manager&#34;)
 
@@ -343,7 +343,7 @@ skynet.start(function()
 end)
 
 </code></pre></div><p>配置文件 <code>config.echo</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">include &#34;config.path&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">include &#34;config.path&#34;
 
 -- preload = &#34;./examples/preload.lua&#34;	-- run preload.lua before every lua service run
 thread = 8
@@ -359,9 +359,9 @@ standalone = &#34;0.0.0.0:2013&#34;
 cpath = root..&#34;cservice/?.so&#34;
 -- daemon = &#34;./skynet.pid&#34;
 </code></pre></div><p>启动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./skynet examples/config.echo
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./skynet examples/config.echo
 </code></pre></div><p>附上一个客户端测试一下服务器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span>.<span style="color:#a6e22e">cpath</span> = <span style="color:#e6db74">&#34;luaclib/?.so&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span>.<span style="color:#a6e22e">cpath</span> = <span style="color:#e6db74">&#34;luaclib/?.so&#34;</span>
 <span style="color:#f92672">package</span>.<span style="color:#a6e22e">path</span> = <span style="color:#e6db74">&#34;lualib/?.lua;examples/?.lua&#34;</span>
 
 <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_VERSION</span> <span style="color:#960050;background-color:#1e0010">~</span>= <span style="color:#e6db74">&#34;Lua 5.4&#34;</span> <span style="color:#a6e22e">then</span>
@@ -417,7 +417,7 @@ cpath = root..&#34;cservice/?.so&#34;
                 <a href="https://blog.rakfree.tk/2021/01/skynetecho/">https://blog.rakfree.tk/2021/01/skynetecho/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:39:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -547,6 +547,10 @@ cpath = root..&#34;cservice/?.so&#34;
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -560,10 +564,6 @@ cpath = root..&#34;cservice/?.so&#34;
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -609,7 +609,7 @@ cpath = root..&#34;cservice/?.so&#34;
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -621,7 +621,7 @@ cpath = root..&#34;cservice/?.so&#34;
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

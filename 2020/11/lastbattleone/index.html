@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-11-16T06:49:49&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="LastBattle | 安装部署笔记">
@@ -224,13 +224,13 @@
 <p>用Untiy 4.6 打开工程 Client根目录<br> 直接编译即可<br> 生成的cs.exe 和 cs_Data 就是客户端文件了</p>
 <h2 id="客户端遇到的问题">客户端遇到的问题</h2>
 <p>排除Shader错误 ‘vert’: output parameter ‘o’ not completely initialized<br> 现象</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vert&#39;: output parameter &#39;o&#39; not completely initialized
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vert&#39;: output parameter &#39;o&#39; not completely initialized
 
 </code></pre></div><blockquote>
 </blockquote>
 <p>即vert输出参数o没有初始化。</p>
 <p>解决方法:直接找到该shader文件的vert方法，在其中添加如下代码（第3行）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void vert (inout appdata_full v, out Input o) {  
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void vert (inout appdata_full v, out Input o) {  
 ...
 UNITY_INITIALIZE_OUTPUT(Input, o);}
 }
@@ -240,26 +240,26 @@ UNITY_INITIALIZE_OUTPUT(Input, o);}
 <h2 id="服务端数据库安装">服务端数据库安装</h2>
 <p>Server\Bin\x64\Release\dbsql 这里就是数据库的位置了<br> 文件说明</p>
 <p>Rebuild.bat为创建数据库, 需要把数据库的账号密码改为自己搭建的mysql服务的账号密码 <code>mysql -uroot -p123321&lt;...</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">schedule_db_back.bat为系统计划任务备份数据库脚本，如果需要修改路径，则需要打开该脚本并且修改到实际路径
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">schedule_db_back.bat为系统计划任务备份数据库脚本，如果需要修改路径，则需要打开该脚本并且修改到实际路径
 
 pr_de_time_over_mail.sql为清理邮件脚本，如需要修改清理时间，则需要修改该脚本里注明的参数 
 
 </code></pre></div><h2 id="局域网客户端服务器配置">局域网客户端服务器配置</h2>
 <h3 id="客户端配置">客户端配置</h3>
 <p>编译客户端时可在Unity页面点击左侧的JxBlGame<br> 然后修改右面弹出来的很多 127.0.0.1 然后点击菜单栏中 File – Save Sence<br> Client\Assets\Scripts\JxBlGame.cs中 51行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public string LoginServerAdress = &#34;127.0.0.1&#34;;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public string LoginServerAdress = &#34;127.0.0.1&#34;;
  // 修改成你需要的ip地址 并保存
 public int LoginServerPort = 49998;&#34;; 
 
 </code></pre></div><h3 id="服务端配置">服务端配置</h3>
 <p>服务端只需要配置视频中提到的 Server\Bin\x64\Release\LSConfig\Serverlist.ini中</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Addr1 = 0.0.0.0:49998
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Addr1 = 0.0.0.0:49998
 
 </code></pre></div><p>也就是第一个服务器的ip地址，之后重启登录服务器即可</p>
 <p>配置数据库的文件<br> Server\Bin\x64\Release\CSConfig\DBConfig.xml</p>
 <p>Server\Bin\x64\Release\LGCfg\DBConfig.xml</p>
 <h2 id="启动服务器">启动服务器</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Server\Bin\x64\Release\start.bat
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Server\Bin\x64\Release\start.bat
 
 </code></pre></div>
 
@@ -280,7 +280,7 @@ public int LoginServerPort = 49998;&#34;;
                 <a href="https://blog.rakfree.tk/2020/11/lastbattleone/">https://blog.rakfree.tk/2020/11/lastbattleone/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -410,6 +410,10 @@ public int LoginServerPort = 49998;&#34;;
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -423,10 +427,6 @@ public int LoginServerPort = 49998;&#34;;
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -472,7 +472,7 @@ public int LoginServerPort = 49998;&#34;;
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -484,7 +484,7 @@ public int LoginServerPort = 49998;&#34;;
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

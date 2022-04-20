@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-06T11:54:02&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-04-10T15:28:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-04-09T17:22:09&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="UnityShader基本概念">
@@ -280,7 +280,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         unity shader
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s"><span style="color:#f92672">//</span> Upgrade NOTE<span style="color:#f92672">:</span> replaced <span style="color:#e6db74">&#39;_Object2World&#39;</span> with <span style="color:#e6db74">&#39;unity_ObjectToWorld&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s"><span style="color:#f92672">//</span> Upgrade NOTE<span style="color:#f92672">:</span> replaced <span style="color:#e6db74">&#39;_Object2World&#39;</span> with <span style="color:#e6db74">&#39;unity_ObjectToWorld&#39;</span>
 
 Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
 {
@@ -353,7 +353,7 @@ Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
 <br/>
 <h3 id="property-属性定义">Property （属性定义）</h3>
 <p>在Properties{}中定义着色器属性，在这里定义的属性将被作为输入提供给所有的子着色器。每一条属性的定义的语法如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">_Name(&#34;Display Name&#34;, type) = defaultValue[{options}]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">_Name(&#34;Display Name&#34;, type) = defaultValue[{options}]
 </code></pre></div><ul>
 <li>_Name: 属性的名字，简单说就是变量名，在之后整个Shader代码中将使用这个名字来获取该属性的内容</li>
 <li>Display Name - 这个字符串将显示在Unity的材质编辑器中作为Shader的使用者可读的内容</li>
@@ -379,27 +379,27 @@ Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
 <li>{option}: 它只对2D，Rect或者Cube贴图有关，在写输入时我们最少要在贴图之后写一对什么都不含的空白的{}，当我们需要打开特定选项时可以把其写在这对花括号内。如果需要同时打开多个选项，可以使用空白分隔。</li>
 </ul>
 <p>一组属性的例子</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">_Color (<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">_Color (<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
 _MainTex (<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
 _Glossiness (<span style="color:#e6db74">&#34;Smoothness&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
 _Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
 </code></pre></div><h3 id="subshader子着色器">SubShader（子着色器）</h3>
 <p>一个Shader可以有多个子着色器，这些子着色器互不相干且只有一个会在最终的平台运行，编写多个的目的是解决兼容性问题，Unity会自己选择兼容终端平台的Shader运行。
 语法如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Subshader { [Tags] [CommonState] Passdef [Passdef ...] }
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Subshader { [Tags] [CommonState] Passdef [Passdef ...] }
 </code></pre></div><h4 id="tags">Tags</h4>
 <p>表面着色器可以被若干的标签（tags）所修饰，而硬件将通过判定这些标签来决定什么时候调用该着色器。比如我们的例子中SubShader的第一句</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
 </code></pre></div><p>Unity定义了一些列这样的渲染过程， 使用不同的标签来调用这些过程</p>
 <ul>
-<li>&ldquo;RenderType&quot;=&quot;Opaque&rdquo;: 表示系统应该在渲染非透明物体时调用我们</li>
+<li>&ldquo;RenderType&rdquo;=&ldquo;Opaque&rdquo;: 表示系统应该在渲染非透明物体时调用我们</li>
 <li>&ldquo;RenderType&rdquo; = &ldquo;Transparent&rdquo; 表示渲染含有透明效果的物体时调用</li>
 </ul>
 <p>其他常用标签:</p>
 <ul>
-<li>&ldquo;IgnoreProjector&quot;=&quot;True&rdquo;: 不被Projectors影响</li>
-<li>&ldquo;ForceNoShadowCasting&quot;=&quot;True&rdquo;: 从不产生阴影</li>
-<li>&ldquo;Queue&quot;=&quot;xxx&rdquo;: 指定渲染顺序队列</li>
+<li>&ldquo;IgnoreProjector&rdquo;=&ldquo;True&rdquo;: 不被Projectors影响</li>
+<li>&ldquo;ForceNoShadowCasting&rdquo;=&ldquo;True&rdquo;: 从不产生阴影</li>
+<li>&ldquo;Queue&rdquo;=&ldquo;xxx&rdquo;: 指定渲染顺序队列</li>
 </ul>
 <p>如果你使用Unity做过一些透明和不透明物体的混合的话，很可能已经遇到过不透明物体无法呈现在透明物体之后的情况,这种情况很可能是由于Shader的渲染顺序不正确导致的。Queue指定了物体的渲染顺序
 预定义的Queue有:</p>
@@ -411,7 +411,7 @@ _Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span st
 <li>Overlay - 用来渲染叠加的效果，是渲染的最后阶段（比如镜头光晕等特效）. Overlay = 4000;</li>
 </ul>
 <p>这些预定义的值本质上是一组定义整数, 在我们实际设置Queue值时，不仅能使用上面的几个预定义值，
-我们也可以指定自己的Queue值，写成类似这样：&ldquo;Queue&quot;=&quot;Transparent+100&rdquo;，表示一个在Transparent之后100的Queue上进行调用.</p>
+我们也可以指定自己的Queue值，写成类似这样：&ldquo;Queue&rdquo;=&ldquo;Transparent+100&rdquo;，表示一个在Transparent之后100的Queue上进行调用.</p>
 <h4 id="lod">LOD</h4>
 <p>LOD很简单，它是Level of Detail的缩写，在这里例子里我们指定了其为200（其实这是Unity的内建Diffuse着色器的设定值）。</p>
 <p>这个数值决定了我们能用什么样的Shader。在Unity的Quality Settings中我们可以设定允许的最大LOD，当设定的LOD小于SubShader所指定的LOD时，这个SubShader将不可用.</p>
@@ -431,7 +431,7 @@ _Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span st
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CGPROGRAM
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CGPROGRAM
 // Physically based Standard lighting model, and enable shadows on all light types
 #pragma surface surf CustomDiffuse
 // Use shader model 3.0 target, to get nicer looking lighting
@@ -475,7 +475,7 @@ ENDCG
 <li>#pragma surface surf CustomDiffuse
 编译指令，它声明了我们要写一个表面Shader，并指定了光照模型。它的写法是这样的</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#pragma surface surfaceFunction lightModel [optionalparams]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#pragma surface surfaceFunction lightModel [optionalparams]
 </code></pre></div><ul>
 <li>surface: 声明的是一个表面着色器</li>
 <li>surfaceFunction: 着色器代码的方法的名字</li>
@@ -491,7 +491,7 @@ ENDCG
 <ol start="4">
 <li>struct Input</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> Input
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> Input
 {
     float2 uv_MainTex;
 };
@@ -509,7 +509,7 @@ ENDCG
 <ol start="5">
 <li>函数surf</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">surf</span> (Input IN, inout SurfaceOutput o)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">surf</span> (Input IN, inout SurfaceOutput o)
 {
     <span style="color:#75715e">// Albedo comes from a texture tinted by color
 </span><span style="color:#75715e"></span>    fixed4 c <span style="color:#f92672">=</span> tex2D (_MainTex, IN.uv_MainTex) <span style="color:#f92672">*</span> _Color;
@@ -524,11 +524,11 @@ ENDCG
 <h3 id="fallback回滚">Fallback（回滚）</h3>
 <p>如果子着色器在终端平台上都无法运行，那么使用Fallback指定的备用Shader，俗称备胎。
 语法如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Fallback &#34;name&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Fallback &#34;name&#34;
 </code></pre></div><h3 id="pass">Pass</h3>
 <p>一个Pass就是一次绘制。对于表面着色器，只能有一个Pass，所以不存在Pass节。顶点片段着色器可以有多个Pass。多次Pass可以实现很多特殊效果，例如当人物被环境遮挡时还可以看到人物轮廓就可以用多Pass来实现。
 语法如下:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass { [Name and Tags] [RenderSetup] }
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass { [Name and Tags] [RenderSetup] }
 </code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://onevcat.com/2013/07/shader-tutorial-1/">shader基础教程</a></li>
@@ -552,7 +552,7 @@ ENDCG
                 <a href="https://blog.rakfree.tk/2022/04/shader01/">https://blog.rakfree.tk/2022/04/shader01/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-10 15:28:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-09 17:22:09</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -686,6 +686,10 @@ ENDCG
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -699,10 +703,6 @@ ENDCG
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -748,7 +748,7 @@ ENDCG
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -760,7 +760,7 @@ ENDCG
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

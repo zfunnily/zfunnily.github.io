@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-12-25T11:04:29&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-02T23:24:30&#43;08:00'>
+    <meta property="article:modified_time" content='2022-02-24T14:38:21&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="C&#43;&#43; | vector中的resize()函数 VS reserve()函数">
@@ -208,14 +208,14 @@
         
         <div class="post-content">
             <h2 id="reserve">reserve</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void reserve (size_type n);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void reserve (size_type n);
 </code></pre></div><p>reserver函数用来给vector<strong>预分配</strong>存储区大小，即capacity的值 ，但是没有给这段内存进行初始化。reserve 的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值，即n大于capacity的值，就会reallocate内存 capacity的值会大于或者等于n 。这样，当ector调用push_back函数使得size 超过原来的默认分配的capacity值时 避免了内存重分配开销。</p>
 <blockquote>
 <p>需要注意的是：reserve 函数分配出来的内存空间，<strong>只是表示vector可以利用这部分内存，但vector不能有效地访问这些内存空间</strong>，访问的时候就会出现越界现象，导致程序崩溃。</p>
 </blockquote>
 <h2 id="resize">resize</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void resize (size_type n);
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void resize (size_type n, value_type val);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void resize (size_type n);
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void resize (size_type n, value_type val);
 </code></pre></div><p>resize函数<strong>重新分配</strong>大小，改变容器的大小，并且创建对象</p>
 <ul>
 <li>当n小于当前size()值时候，vector首先会减少size()值 保存前n个元素，然后将超出n的元素删除(remove and destroy)</li>
@@ -243,7 +243,7 @@
                 <a href="https://blog.rakfree.tk/2020/12/reserve/">https://blog.rakfree.tk/2020/12/reserve/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-02 23:24:30</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-02-24 14:38:21</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -373,6 +373,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -386,10 +390,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -435,7 +435,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -447,7 +447,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

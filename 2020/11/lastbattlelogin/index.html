@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-11-20T17:27:08&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="LastBattle | 登录流程(LS &amp; BS &amp; GS)">
@@ -224,7 +224,7 @@
 <ul>
 <li>新建客户端连接 poListener-&gt;OnAccept(bRet, pstPerIoData);- 接受消息 poSock-&gt;OnRecv(dwByteTrabsferred);- 发送消息 poSock-&gt;OnSend(dwByteTrabsferred);</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void OnExecute()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void OnExecute()
 {
     CCPSock*		poSock;
          //代表一个套接字类
@@ -288,7 +288,7 @@
 
 </code></pre></div><h2 id="a-idccplistener_iocp_78accplistener-iocp监听器"><a id="CCpListener_IOCP_78"></a>CCpListener： IOCP监听器</h2>
 <p>IOCP控制类在有新客户端连接上来时调用监听器的OnAccept函数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCpListener::OnAccept(BOOL bSucc, SPerIoData* pstPerIoData)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCpListener::OnAccept(BOOL bSucc, SPerIoData* pstPerIoData)
 {
     ...
     CUCConnection* poConnection = &amp; pConnData-&gt;connection;
@@ -317,7 +317,7 @@
 
 </code></pre></div><h2 id="a-idccpsock_108accpsock套接字类"><a id="CCPSock_108"></a>CCPSock：套接字类</h2>
 <p>在CCPSocket::PostRecv();接收数据到内存， 并且接受数据计数+1</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CCPSocket::PostIRecv()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CCPSocket::PostIRecv()
 {
    ...
     if (0 != WSARecv(m_hSock, &amp;m_stRecvIoData.stWsaBuf, 1, &amp;dwReadLen, &amp;dwFlags, &amp;m_stRecvIoData.stOverlapped, NULL))
@@ -335,7 +335,7 @@
 }
 
 </code></pre></div><p>CCPSock::OnRecv(DWORD dwBytes) 添加一个完整的数据包到接收数据事件中</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCPSock::OnRecv(DWORD dwBytes)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CCPSock::OnRecv(DWORD dwBytes)
 {
         ...
 	CEventMgr::Instance()-&gt;PushRecvEvt(m_pConnData, GetConnectionID(), p, nUsed);
@@ -344,7 +344,7 @@
 
 </code></pre></div><h2 id="a-idinetsessionmgr_138ainetsessionmgr网络会话管理类"><a id="INetSessionMgr_138"></a>INetSessionMgr：网络会话管理类</h2>
 <p>主线程定时调用 INetSessionMgr::GetInstance()-&gt;Update();</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void INetSessionMgr::Update()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void INetSessionMgr::Update()
 {
     mNetModule-&gt;Run();
     ...
@@ -352,7 +352,7 @@
 
 </code></pre></div><h2 id="a-idiucnet_mnetmodule____148aiucnet-mnetmodule--网络模块"><a id="IUCNet_mNetModule____148"></a>IUCNet* mNetModule : 网络模块</h2>
 <p>获取 NETEVT_RECV 接收数据事件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CUCODENetWin::Run(INT32 nCount)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CUCODENetWin::Run(INT32 nCount)
 {
        ...
         switch(stEvent.nType)
@@ -365,7 +365,7 @@
 		CEventMgr::Instance()-&gt;ReleaseNetEvt(pstEvent); 
 }
 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCODENetWin::_ProcRecvEvt(SRecvEvt* pstEvent)
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCODENetWin::_ProcRecvEvt(SRecvEvt* pstEvent)
 {
     ...
     pConnData-&gt;connection.OnRecv(m_pRecvBuf, pstEvent-&gt;nLen);
@@ -374,7 +374,7 @@
 
 </code></pre></div><h2 id="a-idcclientsession___172acclientsession--客户端会话类"><a id="CClientSession___172"></a>CClientSession : 客户端会话类</h2>
 <p>客户端连接类 CClientSession 收到数据回调</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCConnection::OnRecv(const char* pData, INT32 nLen)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void CUCConnection::OnRecv(const char* pData, INT32 nLen)
 {
         if(m_nConnStat != CONN_ASSOCIATE)
 		{
@@ -389,14 +389,14 @@
 </blockquote>
 <p>ISDSession<strong>m_poSession 基类指针指向子类 CClientSession</strong></p>
 <p>回调到 类 INetSession中，因为 CClientSession 是 INetSession子类</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void UCAPI INetSession::OnRecv(const char* pBuf, UINT32 dwLen){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void UCAPI INetSession::OnRecv(const char* pBuf, UINT32 dwLen){
 ···
 bool bRet = pNode-&gt;mHandle(pMsgData, n32MsgLen, this, pNetHeader-&gt;type);
 ···
 }
 
 </code></pre></div><p>在类 CClientSession 中 收到第1消息：请求登录，放入登录队列</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CClientSession::Msg_Handle_Init(const char* pMsg, int n32MsgLength, INetSession* vthis, int n32MsgID)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CClientSession::Msg_Handle_Init(const char* pMsg, int n32MsgLength, INetSession* vthis, int n32MsgID)
 {
 
 	// 收到第1消息：请求登录，放入登录队列
@@ -412,7 +412,7 @@ bool bRet = pNode-&gt;mHandle(pMsgData, n32MsgLen, this, pNetHeader-&gt;type);
 	return true;
 }
 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int SDKAsynHandler::CheckLogin(GCToLS::AskLogin&amp; sAskLogin, int gcnetid){
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int SDKAsynHandler::CheckLogin(GCToLS::AskLogin&amp; sAskLogin, int gcnetid){
 ...
     switch(un32platform)
 	{
@@ -427,19 +427,19 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
 
 </code></pre></div><h2 id="a-id1_229a生产消费者模型1"><a id="1_229"></a>生产消费者模型1</h2>
 <p>通过 PostMsg()函数生产消息，往队列 m_SDKCallbackQueue 里加数据</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void PostMsg(const char* pMsg, int length, int msgid, int gcnetid, EUserPlatform eplat);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void PostMsg(const char* pMsg, int length, int msgid, int gcnetid, EUserPlatform eplat);
 
 </code></pre></div><p>在一个线程里，启动一个定时器 newtimer_cb,消费队列 m_SDKCallbackQueue</p>
 <h2 id="a-id2_239a生产消费者模型2"><a id="2_239"></a>生产消费者模型2</h2>
 <p>SendToInsertData()函数生产消息 推送到队列 m_DBCallbackQueue</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().SendToInsertData(sUserData.uin, sTempInfo, gcnetid);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().SendToInsertData(sUserData.uin, sTempInfo, gcnetid);
 
 
 </code></pre></div><p>主线程，循环消费 m_DBCallbackQueue</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().Update();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">SdkConnector::GetInstance().Update();
 
 </code></pre></div><p>登录成功, 给客户端推送BS服务器列表</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void SdkConnector::Update(){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void SdkConnector::Update(){
 	...
 	PostMsgToGC_NotifyServerList(gcnetid);
 	...
@@ -464,7 +464,7 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
                 <a href="https://blog.rakfree.tk/2020/11/lastbattlelogin/">https://blog.rakfree.tk/2020/11/lastbattlelogin/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -594,6 +594,10 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -607,10 +611,6 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -656,7 +656,7 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -668,7 +668,7 @@ PostMsg(sSendData.c_str(), sSendData.size(), sAskLogin.msgid(), gcnetid, (EUserP
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

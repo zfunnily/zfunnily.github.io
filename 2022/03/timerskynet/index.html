@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-27T12:39:12&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-04-04T21:47:37&#43;08:00'>
+    <meta property="article:modified_time" content='2022-03-28T17:39:06&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="层级时间轮 ｜ skynet 定时器">
@@ -228,17 +228,17 @@
 <p>要解析一个程序代码，先了解数据结构，这是基础，再看函数。
 拿skynet定时器举例子。</p>
 <h2 id="数据结构">数据结构</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">//定时器事件 用于抛出定时器事件到消息队列里。理解这个数据结构需要先了解skynet的框架原理，
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">//定时器事件 用于抛出定时器事件到消息队列里。理解这个数据结构需要先了解skynet的框架原理，
 </span><span style="color:#75715e">//不理解这个数据结构也不影响下面的论述
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> timer_event {
-	int32_t handle;
+	<span style="color:#66d9ef">int32_t</span> handle;
 	<span style="color:#66d9ef">int</span> session;
 };
 
 <span style="color:#75715e">//定时器节点
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> timer_node {
 	<span style="color:#66d9ef">struct</span> timer_node <span style="color:#f92672">*</span>next;
-	uint32_t expire;
+	<span style="color:#66d9ef">uint32_t</span> expire;
 };
 
 <span style="color:#75715e">//定时器链表
@@ -253,10 +253,10 @@
 	<span style="color:#66d9ef">struct</span> link_list near[TIME_NEAR]; <span style="color:#75715e">//最近的定时器
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> link_list t[<span style="color:#ae81ff">4</span>][TIME_LEVEL];<span style="color:#75715e">//更久远的定时器
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> spinlock lock;           <span style="color:#75715e">//全局锁
-</span><span style="color:#75715e"></span>	uint32_t time;                  <span style="color:#75715e">//当前滴答数
-</span><span style="color:#75715e"></span>	uint32_t starttime;             <span style="color:#75715e">//程序开始时间 绝对时间 时间戳，单位 s 秒
-</span><span style="color:#75715e"></span>	uint64_t current;               <span style="color:#75715e">//当前时间 相对时间 1cs 厘秒 =  10ms 毫秒
-</span><span style="color:#75715e"></span>	uint64_t current_point;         <span style="color:#75715e">//系统(pc)运行时间 相对时间 单位: cs 厘秒
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> time;                  <span style="color:#75715e">//当前滴答数
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> starttime;             <span style="color:#75715e">//程序开始时间 绝对时间 时间戳，单位 s 秒
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> current;               <span style="color:#75715e">//当前时间 相对时间 1cs 厘秒 =  10ms 毫秒
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> current_point;         <span style="color:#75715e">//系统(pc)运行时间 相对时间 单位: cs 厘秒
 </span><span style="color:#75715e"></span>};
 </code></pre></div><p>上面定时器的基本数据结构了解了，再来看下面的函数， 基本思路是一样的。</p>
 <ol>
@@ -266,14 +266,14 @@
 </ol>
 <h2 id="精度为什么是10ms">精度为什么是10ms</h2>
 <p>创建+初始化定时器的数据结构就不看了。直接看<code>skynet_updatetime</code>, 驱动时间轮向前进的地方。这也是为什么skynet定时器的精度是<code>10ms</code>也就是<code>1cs</code>的地方。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">skynet_updatetime</span>(<span style="color:#66d9ef">void</span>) {
-	uint64_t cp <span style="color:#f92672">=</span> gettime();
+	<span style="color:#66d9ef">uint64_t</span> cp <span style="color:#f92672">=</span> gettime();
 	<span style="color:#66d9ef">if</span>(cp <span style="color:#f92672">&lt;</span> TI<span style="color:#f92672">-&gt;</span>current_point) {
 		skynet_error(NULL, <span style="color:#e6db74">&#34;time diff error: change from %lld to %lld&#34;</span>, cp, TI<span style="color:#f92672">-&gt;</span>current_point);
 		TI<span style="color:#f92672">-&gt;</span>current_point <span style="color:#f92672">=</span> cp;
 	} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (cp <span style="color:#f92672">!=</span> TI<span style="color:#f92672">-&gt;</span>current_point) {
-		uint32_t diff <span style="color:#f92672">=</span> (uint32_t)(cp <span style="color:#f92672">-</span> TI<span style="color:#f92672">-&gt;</span>current_point);
+		<span style="color:#66d9ef">uint32_t</span> diff <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint32_t</span>)(cp <span style="color:#f92672">-</span> TI<span style="color:#f92672">-&gt;</span>current_point);
 		TI<span style="color:#f92672">-&gt;</span>current_point <span style="color:#f92672">=</span> cp;
 		TI<span style="color:#f92672">-&gt;</span>current <span style="color:#f92672">+=</span> diff;
 		skynet_error(NULL, <span style="color:#e6db74">&#34;%lld, %lld, %d .    &#34;</span>, TI<span style="color:#f92672">-&gt;</span>current, TI<span style="color:#f92672">-&gt;</span>current_point, diff);
@@ -284,8 +284,8 @@
 	}
 }
 </code></pre></div><p>从上面的函数可以看到，驱动时间轮向前进的两个重要的成员变量</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">uint64_t current;               <span style="color:#75715e">//当前时间 相对时间 1cs 厘秒 =  10ms 毫秒
-</span><span style="color:#75715e"></span>uint64_t current_point;         <span style="color:#75715e">//系统(pc)运行时间 相对时间 单位: cs 厘秒
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">uint64_t</span> current;               <span style="color:#75715e">//当前时间 相对时间 1cs 厘秒 =  10ms 毫秒
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">uint64_t</span> current_point;         <span style="color:#75715e">//系统(pc)运行时间 相对时间 单位: cs 厘秒
 </span></code></pre></div><ol>
 <li>获取系统当前启动的时间cp(单位: cs), 如果<code>cp &lt; TI-&gt;current_point</code>, 则把当前启动时间赋值给 <code>TI-&gt;current_point</code></li>
 <li>如果<code>cp != TI-&gt;current_point</code></li>
@@ -297,13 +297,13 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timer
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
-<span style="color:#a6e22e">systime</span>(uint32_t <span style="color:#f92672">*</span>sec, uint32_t <span style="color:#f92672">*</span>cs) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
+<span style="color:#a6e22e">systime</span>(<span style="color:#66d9ef">uint32_t</span> <span style="color:#f92672">*</span>sec, <span style="color:#66d9ef">uint32_t</span> <span style="color:#f92672">*</span>cs) {
 <span style="color:#75715e">#if !defined(__APPLE__) || defined(AVAILABLE_MAC_OS_X_VERSION_10_12_AND_LATER)
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> timespec ti;
 	clock_gettime(CLOCK_REALTIME, <span style="color:#f92672">&amp;</span>ti); <span style="color:#75715e">//获取真实时间, 绝对时间
-</span><span style="color:#75715e"></span>	<span style="color:#f92672">*</span>sec <span style="color:#f92672">=</span> (uint32_t)ti.tv_sec; <span style="color:#75715e">//单位s 当前时间戳
-</span><span style="color:#75715e"></span>	<span style="color:#f92672">*</span>cs <span style="color:#f92672">=</span> (uint32_t)(ti.tv_nsec <span style="color:#f92672">/</span> <span style="color:#ae81ff">10000000</span>);<span style="color:#75715e">//单位10ms， 当前时间戳
+</span><span style="color:#75715e"></span>	<span style="color:#f92672">*</span>sec <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint32_t</span>)ti.tv_sec; <span style="color:#75715e">//单位s 当前时间戳
+</span><span style="color:#75715e"></span>	<span style="color:#f92672">*</span>cs <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint32_t</span>)(ti.tv_nsec <span style="color:#f92672">/</span> <span style="color:#ae81ff">10000000</span>);<span style="color:#75715e">//单位10ms， 当前时间戳
 </span><span style="color:#75715e"></span><span style="color:#75715e">#else
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> timeval tv;
 	gettimeofday(<span style="color:#f92672">&amp;</span>tv, NULL);
@@ -312,18 +312,18 @@
 <span style="color:#75715e">#endif
 </span><span style="color:#75715e"></span>}
 
-<span style="color:#66d9ef">static</span> uint64_t
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">uint64_t</span>
 <span style="color:#a6e22e">gettime</span>() {
-	uint64_t t;
+	<span style="color:#66d9ef">uint64_t</span> t;
 <span style="color:#75715e">#if !defined(__APPLE__) || defined(AVAILABLE_MAC_OS_X_VERSION_10_12_AND_LATER)
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> timespec ti;
 	clock_gettime(CLOCK_MONOTONIC, <span style="color:#f92672">&amp;</span>ti); <span style="color:#75715e">//获取系统启动时间， 相对时间
-</span><span style="color:#75715e"></span>	t <span style="color:#f92672">=</span> (uint64_t)ti.tv_sec <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>; <span style="color:#75715e">//单位cs， 系统启动到现在的时间
+</span><span style="color:#75715e"></span>	t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint64_t</span>)ti.tv_sec <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>; <span style="color:#75715e">//单位cs， 系统启动到现在的时间
 </span><span style="color:#75715e"></span>	t <span style="color:#f92672">+=</span> ti.tv_nsec <span style="color:#f92672">/</span> <span style="color:#ae81ff">10000000</span>; <span style="color:#75715e">//单位cs
 </span><span style="color:#75715e"></span><span style="color:#75715e">#else
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> timeval tv;
 	gettimeofday(<span style="color:#f92672">&amp;</span>tv, NULL);
-	t <span style="color:#f92672">=</span> (uint64_t)tv.tv_sec <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>;
+	t <span style="color:#f92672">=</span> (<span style="color:#66d9ef">uint64_t</span>)tv.tv_sec <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>;
 	t <span style="color:#f92672">+=</span> tv.tv_usec <span style="color:#f92672">/</span> <span style="color:#ae81ff">10000</span>;
 <span style="color:#75715e">#endif
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> t;
@@ -335,7 +335,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timer_update
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> 
 <span style="color:#a6e22e">timer_update</span>(<span style="color:#66d9ef">struct</span> timer <span style="color:#f92672">*</span>T) {
 	SPIN_LOCK(T);
 
@@ -361,7 +361,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timer_execute
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">inline</span> <span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">timer_execute</span>(<span style="color:#66d9ef">struct</span> timer <span style="color:#f92672">*</span>T) {
 	<span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> T<span style="color:#f92672">-&gt;</span>time <span style="color:#f92672">&amp;</span> TIME_NEAR_MASK;
 	
@@ -385,14 +385,14 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timer_shift
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">timer_shift</span>(<span style="color:#66d9ef">struct</span> timer <span style="color:#f92672">*</span>T) {
 	<span style="color:#66d9ef">int</span> mask <span style="color:#f92672">=</span> TIME_NEAR;
-	uint32_t ct <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>T<span style="color:#f92672">-&gt;</span>time;
+	<span style="color:#66d9ef">uint32_t</span> ct <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>T<span style="color:#f92672">-&gt;</span>time;
 	<span style="color:#66d9ef">if</span> (ct <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
 		move_list(T, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>);
 	} <span style="color:#66d9ef">else</span> {
-		uint32_t time <span style="color:#f92672">=</span> ct <span style="color:#f92672">&gt;&gt;</span> TIME_NEAR_SHIFT;
+		<span style="color:#66d9ef">uint32_t</span> time <span style="color:#f92672">=</span> ct <span style="color:#f92672">&gt;&gt;</span> TIME_NEAR_SHIFT;
 		<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
 
 		<span style="color:#66d9ef">while</span> ((ct <span style="color:#f92672">&amp;</span> (mask<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) {
@@ -428,18 +428,18 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         add_node
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span>
 <span style="color:#a6e22e">add_node</span>(<span style="color:#66d9ef">struct</span> timer <span style="color:#f92672">*</span>T,<span style="color:#66d9ef">struct</span> timer_node <span style="color:#f92672">*</span>node) {
     <span style="color:#75715e">// 逾期时间是相对于 T-&gt;time的
-</span><span style="color:#75715e"></span>	uint32_t time<span style="color:#f92672">=</span>node<span style="color:#f92672">-&gt;</span>expire;
-	uint32_t current_time<span style="color:#f92672">=</span>T<span style="color:#f92672">-&gt;</span>time;
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> time<span style="color:#f92672">=</span>node<span style="color:#f92672">-&gt;</span>expire;
+	<span style="color:#66d9ef">uint32_t</span> current_time<span style="color:#f92672">=</span>T<span style="color:#f92672">-&gt;</span>time;
 	
     <span style="color:#75715e">// 高24位一致，表示在一个near周期内。
 </span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> ((time<span style="color:#f92672">|</span>TIME_NEAR_MASK)<span style="color:#f92672">==</span>(current_time<span style="color:#f92672">|</span>TIME_NEAR_MASK)) {
 		link(<span style="color:#f92672">&amp;</span>T<span style="color:#f92672">-&gt;</span>near[time<span style="color:#f92672">&amp;</span>TIME_NEAR_MASK],node);
 	} <span style="color:#66d9ef">else</span> {
 		<span style="color:#66d9ef">int</span> i;
-		uint32_t mask<span style="color:#f92672">=</span>TIME_NEAR <span style="color:#f92672">&lt;&lt;</span> TIME_LEVEL_SHIFT;
+		<span style="color:#66d9ef">uint32_t</span> mask<span style="color:#f92672">=</span>TIME_NEAR <span style="color:#f92672">&lt;&lt;</span> TIME_LEVEL_SHIFT;
 		<span style="color:#66d9ef">for</span> (i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>;i<span style="color:#f92672">++</span>) {
 			<span style="color:#66d9ef">if</span> ((time<span style="color:#f92672">|</span>(mask<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">==</span>(current_time<span style="color:#f92672">|</span>(mask<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))) {
 				<span style="color:#66d9ef">break</span>;
@@ -466,7 +466,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;container/list&#34;</span>
@@ -686,7 +686,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         workpool
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Job</span> <span style="color:#66d9ef">func</span>()
 
@@ -733,7 +733,7 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         timewheel_test
     </summary>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -773,7 +773,7 @@
                 <a href="https://blog.rakfree.tk/2022/03/timerskynet/">https://blog.rakfree.tk/2022/03/timerskynet/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-04 21:47:37</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-28 17:39:06</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -909,6 +909,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -922,10 +926,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -971,7 +971,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -983,7 +983,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

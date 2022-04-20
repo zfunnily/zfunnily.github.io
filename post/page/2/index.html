@@ -88,6 +88,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2022/03/https/" title="Nginx | 给网站添加证书">Nginx | 给网站添加证书</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Https 最近在购买的云服务器上把个人博客搭建起来了，实际上是hugo生成静态网页，nginx加载静态网页。现在只能通过http访问，缺少个https。 要搭建一个https的网站需要证书。之前在网上找的教程太……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/03/https/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2022/03/http/" title="Golang | http注解路由">Golang | http注解路由</a>
             </h1>
         </header>
@@ -267,7 +292,7 @@
         </div>
         
         <div class="post-content">
-            A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&rdquo;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&rd……
+            A*算法思路 寻路步骤 从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表. 寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quo……
         </div>
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/12/astar/">阅读全文</a></p>
     </article>
@@ -324,31 +349,6 @@
             Wordpress 如果你的网站是wordpress，则可以参考以Darkmode.js为基础的插件: blackout-darkmode-widget darkmode Nuxt.js 如果你正在使用Nuxt.js,则可以使用下面的模块 nuxtjs-darkmode-js-module 快速使用 使用Darkmode.js给网站快速部署上暗/浅色……
         </div>
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/12/dark/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/12/openresty-upload/" title="Openresty三 | 上传文件">Openresty三 | 上传文件</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            上传文件接口 nginx.conf 的server 增加一个location: location /upload { resolver 8.8.8.8 ipv6=off; content_by_lua_file lua/upload.lua; } upload.lua lua -- upload.lua --========================================== -- 文件上传 --========================================== local chunk_size = 4096 local form, err = upload:new(chunk_size) if not form then ngx.log(ngx.ERR, &#34;failed to new upload: &#34;, err) ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR) end form:set_timeout(1000) -- 文件保存的根路径 local saveRootPath = &#34;./download/&#34; -- 保存的文件对象 local fileToSave --文件是否成……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/12/openresty-upload/">阅读全文</a></p>
     </article>
     
     
@@ -494,6 +494,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -507,10 +511,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -556,7 +556,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -568,7 +568,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

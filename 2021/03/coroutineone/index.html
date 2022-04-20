@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-09T09:43:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-09T19:10:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-01-06T18:58:01&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="协程解析一 | ucontext">
@@ -211,9 +211,9 @@
             <h2 id="概述">概述</h2>
 <p>最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 <code>uncontext</code>来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了。</p>
 <p>头文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;ucontext.h&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;ucontext.h&gt;
 </code></pre></div><p><code>ucontext</code>结构体</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct ucontext
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct ucontext
   {
     unsigned long int uc_flags;
     struct ucontext *uc_link;
@@ -231,28 +231,28 @@
 <li><code>uc_mcontext</code> 则保存具体的程序执行上下文——如PC值、堆栈指针、寄存器值等信息</li>
 </ul>
 <p>操作<code>ucontext</code>的四个函数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">getcontext()  : 获取当前context
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">getcontext()  : 获取当前context
 setcontext()  : 切换到指定context
 makecontext() : 设置 函数指针 和 堆栈 到对应context保存的sp和pc寄存器中,调用之前要先调用 getcontext()
 swapcontext() : 保存当前context，并且切换到指定context
 </code></pre></div><h2 id="通过getcontext和swapcontext实现流程控制">通过getcontext和swapcontext实现流程控制</h2>
 <p>代码如下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int main()
-{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+<span style="color:#960050;background-color:#1e0010">{</span>
 	ucontext_t ctx, main;
-	int done = 1;
-	getcontext(&amp;ctx); 
-	if (done &gt; 5)
-	{&lt;!-- --&gt;
-		printf(&#34;ctx done\n&#34;);
-		swapcontext(&amp;ctx, &amp;main); //切换到指定的main
-	}
-	printf(&#34;done: %d\n&#34;, done++);
-	swapcontext(&amp;main, &amp;ctx);  //保存当前上下文`main`，并且切换到指定`ctx`
+	<span style="color:#66d9ef">int</span> done <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+	<span style="color:#a6e22e">getcontext</span>(<span style="color:#f92672">&amp;</span>ctx); 
+	<span style="color:#66d9ef">if</span> (done <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>)
+	<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#f92672">&lt;!</span><span style="color:#75715e">-- --&gt;
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;ctx done\n&#34;</span>);
+		<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>ctx, <span style="color:#f92672">&amp;</span>main); <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">切换到指定的</span>main
+	<span style="color:#960050;background-color:#1e0010">}</span>
+	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;done: %d\n&#34;</span>, done<span style="color:#f92672">++</span>);
+	<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>main, <span style="color:#f92672">&amp;</span>ctx);  <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">保存当前上下文</span><span style="color:#f92672">`</span>main<span style="color:#f92672">`</span><span style="color:#960050;background-color:#1e0010">，并且切换到指定</span><span style="color:#f92672">`</span>ctx<span style="color:#f92672">`</span>
 
-	printf(&#34;return 1\n&#34;);
-	return 1;
-}
+	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;return 1\n&#34;</span>);
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#960050;background-color:#1e0010">}</span>
 
 </code></pre></div><p>具体步骤如下：</p>
 <ul>
@@ -262,7 +262,7 @@ swapcontext() : 保存当前context，并且切换到指定context
 <li>如果为真则切换上下文： <code>swapcontext(&amp;ctx, &amp;main);</code>，</li>
 </ul>
 <p>输出如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">done: 1
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">done: 1
 done: 2
 done: 3
 done: 4
@@ -276,7 +276,7 @@ return 1
 <li>生产者，产生一个值，保存当前上下文，切换到消费者上下文- 消费者，输出生产者传递过来的值。保存消费者的当前上下文，切换到生产者
 上下文切换已经做了标记，代码如下：</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//procus.c
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//procus.c
 #include &lt;stdlib.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;ucontext.h&gt;
@@ -342,7 +342,7 @@ int main()
 	return 0;
 }
 </code></pre></div><p>编译，运行，输出如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -Wall -o procus procus.c
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -Wall -o procus procus.c
 $ ./procus
 a-&gt;n: 1
 n: 2
@@ -373,7 +373,7 @@ finally return
                 <a href="https://blog.rakfree.tk/2021/03/coroutineone/">https://blog.rakfree.tk/2021/03/coroutineone/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-09 19:10:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:58:01</li>
         <li><strong>版权声明：</strong>转载请务必保留本文链接和注明内容来源，并自负版权等法律责任。</li>
     </ul>
 </div>
@@ -503,6 +503,10 @@ finally return
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
@@ -516,10 +520,6 @@ finally return
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
     </li>
     
 </ul>
@@ -565,7 +565,7 @@ finally return
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (88)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -577,7 +577,7 @@ finally return
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (4)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
