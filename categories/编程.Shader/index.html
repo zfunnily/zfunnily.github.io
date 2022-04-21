@@ -95,11 +95,11 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader01/">Shader基本概念</a>
+                <a href="https://blog.rakfree.tk/2022/04/shaderfunc/">ShaderLab常用函数</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2022年4月6日
+            2022年4月20日
         </date>
         
         <div class="post-meta meta-category">
@@ -112,8 +112,33 @@
         </div>
         
         <div class="post-content">
-            何为shader shader中文翻译为着色器，其实是一种用来渲染图形的技术，我们可以通过shader编程，来自定义显卡渲染画面的算法，显示我们所期望的结果。 shader种类 顶点着色器: 处理每个顶点，将……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader01/">阅读全文</a></p>
+            数学函数 cg/hlsl函数 功能描述 dot(A,B) 点积, 点积结果为标量，主要用于求向量的夹角或b向量在a向量上的投影 cross(A,B) 叉积, 叉积结果为向量，结果与这两个向量组成的平面垂直。主要用于3D图形学 mul(M, N) 矩阵M和矩阵N的积 mul(M,……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shaderfunc/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2022/04/cginc/">UnityCG.cginc中常用函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月20日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Shader'>编程.Shader</a>
+            
+        </div>
+        
+        <div class="post-content">
+            摄像机方向 WorldSpaceViewDir 输入一个模型空间中的顶点坐标 -&gt; 输出（世界空间）从这个点到摄像机的观察方向； WorldSpaceViewDir // 内部实现也是用UnityWorldSpaceViewDir // Computes world space view direction, from object space position // *Legacy* Please use UnityWorldSpaceViewDir instead inline float3 WorldSpaceViewDir( in float4 localPos ) { float3 worldPos……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/cginc/">阅读全文</a></p>
         </div>
     </article>
     
@@ -193,23 +218,23 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="Shader基本概念">Shader基本概念</a>
+        <a href="https://blog.rakfree.tk/2022/04/cginc/" title="UnityCG.cginc中常用函数">UnityCG.cginc中常用函数</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/04/graphics/" title="Graphics">Graphics</a>
+        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/afk/" title="抽卡逻辑自述">抽卡逻辑自述</a>
+        <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/03/timerskynet/" title="层级时间轮 ｜ skynet 定时器">层级时间轮 ｜ skynet 定时器</a>
+        <a href="https://blog.rakfree.tk/2022/04/shader03/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
     </li>
     
 </ul>
@@ -255,7 +280,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (86)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (91)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -265,11 +290,11 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (2)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (1)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     

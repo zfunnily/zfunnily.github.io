@@ -6,7 +6,25 @@
     <description>Recent content in 编程 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 10 Apr 2022 15:42:33 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Apr 2022 15:41:29 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ShaderLab常用函数</title>
+      <link>https://blog.rakfree.tk/2022/04/shaderfunc/</link>
+      <pubDate>Wed, 20 Apr 2022 15:41:29 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/04/shaderfunc/</guid>
+      <description>数学函数 cg/hlsl函数 功能描述 dot(A,B) 点积, 点积结果为标量，主要用于求向量的夹角或b向量在a向量上的投影 cross(A,B) 叉积, 叉积结果为向量，结果与这两个向量组成的平面垂直。主要用于3D图形学 mul(M, N) 矩阵M和矩阵N的积 mul(M,</description>
+    </item>
+    
+    <item>
+      <title>UnityCG.cginc中常用函数</title>
+      <link>https://blog.rakfree.tk/2022/04/cginc/</link>
+      <pubDate>Wed, 20 Apr 2022 15:35:49 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/04/cginc/</guid>
+      <description>摄像机方向 WorldSpaceViewDir 输入一个模型空间中的顶点坐标 -&amp;gt; 输出（世界空间）从这个点到摄像机的观察方向； WorldSpaceViewDir // 内部实现也是用UnityWorldSpaceViewDir // Computes world space view direction, from object space position // *Legacy* Please use UnityWorldSpaceViewDir instead inline float3 WorldSpaceViewDir( in float4 localPos ) { float3 worldPos</description>
+    </item>
+    
     <item>
       <title>《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</title>
       <link>https://blog.rakfree.tk/2022/04/shader05/</link>

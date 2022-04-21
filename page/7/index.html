@@ -87,6 +87,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/01/attandintel/" title="汇编 | AT&amp;T和Intel规范的区别">汇编 | AT&amp;T和Intel规范的区别</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月31日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96'>编程.汇编</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 常见的指令集以及汇编语言规范： x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范： intel公司发布的汇编语言规范，称intel 汇编：Windows派系……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/attandintel/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/01/skynetprotobuf/" title="Skynet | lua-protobuf">Skynet | lua-protobuf</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 在最新的skynet中我使用的是云风的pbc库来解析protobuf，该项目中的一个文件protobuf.lua 使用了module语法在lua5.1版本中已经删除，最新的skynet是lua5.4……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/skynetprotobuf/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2021/01/pbempty/" title="Protobuf | 请求参数为空的案例">Protobuf | 请求参数为空的案例</a>
             </h1>
         </header>
@@ -274,56 +322,6 @@
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/sds/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/01/chararray/" title="struct中使用char[]">struct中使用char[]</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.C'>编程.C</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            缘由 最近在看redis的源码，刚开始看sds，看到这块代码 struct __attribute__ ((__packed__)) sdshdr5 { unsigned char flags; /* 3 lsb of type, and 5 msb of string length */ char buf[]; }; 好奇为什么使用 char buf[],而不用char *buf，找到答案记录一下。 struct中的char*……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/chararray/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/01/lastbattle/" title="Lastbattle | 游戏场景服务器SS解析">Lastbattle | 游戏场景服务器SS解析</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月2日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            游戏场景服务器概况 指令对应的处理handle的文件：SSBattleMgr.cpp 创建战场 指令： eMsgToSSFromCS_CreateBattle GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLengt……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/01/lastbattle/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -487,6 +485,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/cginc/" title="UnityCG.cginc中常用函数">UnityCG.cginc中常用函数</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
     </li>
     
@@ -496,14 +502,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader03/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
     </li>
     
 </ul>
@@ -549,7 +547,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (91)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -558,6 +556,8 @@
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (2)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     

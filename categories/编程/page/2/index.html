@@ -95,6 +95,54 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2022/03/https/">Nginx | 给网站添加证书</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月3日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Https 最近在购买的云服务器上把个人博客搭建起来了，实际上是hugo生成静态网页，nginx加载静态网页。现在只能通过http访问，缺少个https。 要搭建一个https的网站需要证书。之前在网上找的教程太……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2022/03/https/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2022/03/http/">Golang | http注解路由</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月2日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Http服务器 Golang有一个很强大的官方http库了，使用上很方便。也有一些很强大的三方http框架， 比如gin，beego等等。 自以为，框架在提供便利，提升开发效率的同时，也限制了我们的想象力。……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2022/03/http/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2022/03/reload/">Goang | Plugin插件热更</a>
             </h1>
         </header>
@@ -292,54 +340,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/12/openresty-upload/">Openresty三 | 上传文件</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月8日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-        </div>
-        
-        <div class="post-content">
-            上传文件接口 nginx.conf 的server 增加一个location: location /upload { resolver 8.8.8.8 ipv6=off; content_by_lua_file lua/upload.lua; } upload.lua lua -- upload.lua --========================================== -- 文件上传 --========================================== local chunk_size = 4096 local form, err = upload:new(chunk_size) if not form then ngx.log(ngx.ERR, &#34;failed to new upload: &#34;, err) ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR) end form:set_timeout(1000) -- 文件保存的根路径 local saveRootPath = &#34;./download/&#34; -- 保存的文件对象 local fileToSave --文件是否成……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2021/12/openresty-upload/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/11/webrtcdesk/">Webrtc二 | 共享桌面</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年11月15日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91'>编程.音视频</a>
-            
-        </div>
-        
-        <div class="post-content">
-            环境 Ubuntu18.04 webrtc M84 改造peerconnection例子，用来实现桌面共享 改造类CapturerTrackSource 增加桌面的数据源类RcrtcDesktopCapturerTrackSource 继承webr……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2021/11/webrtcdesk/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -387,6 +387,10 @@
     
     <li >
         <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/9/">9</a>
+    </li>
+    
+    <li >
+        <a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/page/10/">10</a>
     </li>
     
 
@@ -468,6 +472,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/cginc/" title="UnityCG.cginc中常用函数">UnityCG.cginc中常用函数</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
     </li>
     
@@ -477,14 +489,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shader03/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader02/" title="shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
     </li>
     
 </ul>
@@ -530,7 +534,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (89)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (91)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -539,6 +543,8 @@
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Shader/">编程.Shader (2)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
