@@ -7,21 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Lastbattle | 游戏场景服务器SS解析 | Zzz记忆</title>
-    <meta property="og:title" content="Lastbattle | 游戏场景服务器SS解析 - Zzz记忆">
+    <title>MAC平台几何着色器不生效 | Zzz记忆</title>
+    <meta property="og:title" content="MAC平台几何着色器不生效 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
-    <meta property="article:published_time" content='2021-01-02T23:19:58&#43;08:00'>
+    <meta property="article:published_time" content='2022-05-05T16:49:29&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-05T17:15:56&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Lastbattle | 游戏场景服务器SS解析">
+    <meta name="description" content="MAC平台几何着色器不生效">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/01/lastbattle/">
+    <meta property="og:url" content="https://blog.rakfree.tk/2022/05/geometry/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -153,16 +153,9 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#游戏场景服务器概况">游戏场景服务器概况</a></li>
-    <li><a href="#创建战场">创建战场</a></li>
-    <li><a href="#英雄移动">英雄移动</a></li>
-    <li><a href="#英雄技能">英雄技能</a></li>
-    <li><a href="#装备买卖">装备买卖</a>
-      <ul>
-        <li><a href="#商品配置">商品配置</a></li>
-      </ul>
-    </li>
-    <li><a href="#整个服务器的心跳">整个服务器的心跳</a></li>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#解决步骤">解决步骤</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav>
     </div>
@@ -197,10 +190,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Lastbattle | 游戏场景服务器SS解析</h1>
+            <h1 class="post-title">MAC平台几何着色器不生效</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年1月2日
+            2022年5月5日
         </date>
         
         <div class="post-meta">
@@ -208,203 +201,51 @@
             
             <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
             
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Shader'>编程.Shader</a></span>
             
         </div>
         
         
         
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
         <div class="post-content">
-            <h2 id="游戏场景服务器概况">游戏场景服务器概况</h2>
-<p>
-        <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png">
-            <img class="mx-auto" alt="5658cf3a9b5eba8535a6e556dbe7da34.png" src="https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png" />
-        </a>
-    </p>
-<blockquote>
-<p>指令对应的处理handle的文件：SSBattleMgr.cpp</p>
-</blockquote>
-<h2 id="创建战场">创建战场</h2>
+            <h2 id="问题">问题</h2>
+<p>MAC平台几何着色器不生效</p>
+<h2 id="解决步骤">解决步骤</h2>
+<ol>
+<li>unity shaderlab 怎么设置以至于支持几何着色器
+设置过后还不生效</li>
+<li>找原因，设置 编译目标级别，#pragma target 4.0, 不管用</li>
+<li>看到一句话，Unity 在 Metal 图形上支持曲面细分着色器，但 Metal 不支持几何着色器</li>
+<li>找到mac和ios平台使用的是Metal标准的图形api</li>
+<li>遂查询是否有其他的图形 API， 发现 mac和ios还支持 OpenGL</li>
+<li>在Unity中编写的Shader最终会根据不同的平台来编绎成不同的着色器语言，官方的建议是用Cg/HLSL来编写，当然也可以使用GLSL，主要是因为Cg/HLSL有更好的跨平台性，更倾向于使用Cg/HLSL来编写Shader程序。</li>
+<li>Shader编程语言</li>
+</ol>
 <ul>
-<li>指令： eMsgToSSFromCS_CreateBattle</li>
-<li>GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数<code>INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)</code>中创建站场成功后，加入到战场管理器中:</li>
+<li>基于OpenGL的OpenGL Shading Language，简称GLSL。</li>
+<li>基于DirectX的High Level Shading Language,简称HLSL。</li>
+<li>还有NVIDIA公司的C for Graphic，简称Cg语言。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
-</code></pre></div><p>发送创建结果给CS服务器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
-</code></pre></div><p>发送可以进入战场的消息给客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
-</code></pre></div><h2 id="英雄移动">英雄移动</h2>
+<ol start="8">
+<li>URP 通用渲染管线使用HLSL</li>
+<li>unity是否可以指定 graphics  API</li>
+<li>打开 Player 设置（菜单：<strong>Edit &gt; Project Settings</strong>，然后选择 Player 类别）。</li>
+</ol>
 <ul>
-<li>指令：eMsgToGSToSSFromGC_AskMoveDir，eMsgToGSToSSFromGC_AskStopMove</li>
-<li>GSToSS： 客户端发往SS,fromGC
-收到客户端发来的移动信息， <code>GCToSS::MoveDir</code>, 转化为服务器能识别的参数 <code>CVector3D</code>, 开始计算客户端移动的位置</li>
+<li>导航到 Other Settings 并确保选中 <strong>Auto Graphics API</strong>：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
-m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
-</code></pre></div><p>开始按照方向移动：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
-{&lt;!-- --&gt;
-...
-        //计算下一个100毫秒后的位置
-		pMObject-&gt;CalculateStepMoveTarget(now + 100);
-                //检查是否会直接撞墙
-		if(FALSE == TestNextStepMove(pMObject)){&lt;!-- --&gt;
-			if(FALSE == TryTurnDir(pMObject)){&lt;!-- --&gt;
-				pMObject-&gt;Stop(now,FALSE);
-				return FALSE;
-			}
-		}
-		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
-}
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
-</code></pre></div><p>同步移动状态到客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pcCurBattle-&gt;SyncState(this);
-...
-SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
-...
-CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
-void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
+<h2 id="参考链接">参考链接</h2>
+<p><a href="https://docs.unity3d.com/cn/2019.3/Manual/SL-ShaderCompileTargets.html">着色器编译目标级别</a>
+<a href="https://docs.unity3d.com/cn/2019.4/Manual/Metal.html">Metal</a>
+<a href="https://docs.unity3d.com/cn/2019.4/Manual/GraphicsAPIs.html">unity设置图形API</a>
+<a href="https://www.jianshu.com/p/e58026d54cd1">图形API分类</a></p>
 
-</code></pre></div><h2 id="英雄技能">英雄技能</h2>
-<ul>
-<li>指令：eMsgToGSToSSFromGC_AskBuyGoods- GSToSS：客户端发往SS,fromGC
-SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGoods</code>， 转化数据为<code>GCToSS::UseSkill</code>格式 :</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
-INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
-</code></pre></div><p>请求释放技能：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
-//检查是否是不能操作状态
-//检查是否被沉默了
-//检查是否在吸附中，如果是，不能使用技能
-//获取并检查技能是否存在
-//检查技能是否符合可用条件
-//检查是否是正在运行的技能
-</code></pre></div><p>开始使用技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pSkill-&gt;Start();
-```cpp
-准备技能的配置
-```cpp
-void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
-...
-	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
-
-}
-</code></pre></div><p>从配置中添加技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
-	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
-...
-AddEffect(pEffect); 
-}
-</code></pre></div><p>添加效果到管理器中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
-...
-        //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
-		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
-			//if (FALSE == pEffect-&gt;m_pCfg-&gt;bIsCanMove){&lt;!-- --&gt;
-				pEffect-&gt;AddSelfToUsingList();
-			//}
-			m_UpdateEffectMap[pEffect-&gt;m_un32UniqueID] = pEffect;
-		}
-		//如果效果启动失败，检查其是否会开始计算技能CD，然后结束技能。
-		else{&lt;!-- --&gt;
-			pEffect-&gt;CheckCooldown();
-			pEffect-&gt;End();
-			DestroyAFreeSkillEffect(pEffect);
-			return eEC_AddEffectFailed;
-		}
-...
-}
-//正在运行的效果列表
-m_UpdateEffectMap
-
-</code></pre></div><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
-<ul>
-<li>SSSkillEffect_Buf.cpp： 附加的buff技能</li>
-<li>SSSkillEffect_Fly.cpp: 飞行技能</li>
-<li>…</li>
-</ul>
-<h2 id="装备买卖">装备买卖</h2>
-<ul>
-<li>买装备指令：eMsgToGSToSSFromGC_AskBuyGoods</li>
-<li>卖商品指令：eMsgToGSToSSFromGC_AskSellGoods</li>
-<li>释放装备技能：eMsgToGSToSSFromGC_AskUseGoods</li>
-<li>GSToSS： 客户端发往SS,fromGC</li>
-</ul>
-<h3 id="商品配置">商品配置</h3>
-<p>目录:</p>
-<ul>
-<li>商品组合：CSBattleMgr/CombineCfg.xml</li>
-<li>商品描述：CSBattleMgr/ItemCfg.xml</li>
-</ul>
-<p>商品配置描述：
-|attributeKeyList / attributeValList|描述
-|&mdash;&mdash;
-|5 / 10|+10 物理攻击
-|6 / 35|+35点魔法攻击
-|7 / 20|+20 点物理防御
-|8 / 25|+25点魔法防御
-|9 / 60|+60点移动速度
-|10 / 200|+200生命值
-|11 / 200|+200生命值
-|12 / 150|+150魔法值
-|13 / 2000|+2点/秒生命回复</p>
-<ul>
-<li><code>attributeKeyLi</code>: 占位</li>
-<li><code>attributeValList</code>： 值</li>
-<li><code>n32CPCost</code>： 金币</li>
-</ul>
-<p>举例</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	&lt;info un32GoodsID=&#34;30038&#34;&gt;
-		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
-		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
-		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
-		&lt;attributeKeyList&gt;6&lt;/attributeKeyList&gt;
-		&lt;attributeValList&gt;65&lt;/attributeValList&gt;
-		&lt;attributePerList&gt;0&lt;/attributePerList&gt;
-		&lt;un8UseTimes&gt;0&lt;/un8UseTimes&gt;
-		&lt;bDestroyAfterUsed&gt;0&lt;/bDestroyAfterUsed&gt;
-		&lt;un32SkillID&gt;0&lt;/un32SkillID&gt;
-		&lt;un32PassSkillID&gt;0&lt;/un32PassSkillID&gt;
-		&lt;bIsCanDeathToBuy&gt;1&lt;/bIsCanDeathToBuy&gt;
-		&lt;bUsedAfterBuyed&gt;0&lt;/bUsedAfterBuyed&gt;
-		&lt;sIcon&gt;Dicon038&lt;/sIcon&gt;
-		&lt;un32CdTime&gt;0&lt;/un32CdTime&gt;
-		&lt;bUniqueID&gt;0&lt;/bUniqueID&gt;
-		&lt;un8OverlapTimes&gt;1&lt;/un8OverlapTimes&gt;
-		&lt;un8CPCostType&gt;1&lt;/un8CPCostType&gt;
-		&lt;n32CPCost&gt;800&lt;/n32CPCost&gt;
-		&lt;n32CombineCPCost&gt;200&lt;/n32CombineCPCost&gt;
-		&lt;un8FunctionType&gt;0&lt;/un8FunctionType&gt;
-		&lt;un32UniqueTypeID&gt;0&lt;/un32UniqueTypeID&gt;
-		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
-		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
-	&lt;/info&gt;
-</code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p>
-<h2 id="整个服务器的心跳">整个服务器的心跳</h2>
-<p>心跳的作用：</p>
-<ul>
-<li>检查掉线时间。如果玩家掉线超过30秒，则将其AI替换为机器人AI</li>
-<li>技能心跳- 移动心跳- NPC和hero的心跳</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
-...
-    //移动心跳
-    m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    for (GameObjectMap::iterator iterObj = m_cGameObjectMap.begin(); iterObj != m_cGameObjectMap.end(); ++iterObj){&lt;!-- --&gt;
-            //NPC和hero的心跳
-    		iterObj-&gt;second-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    }
-...
-    //技能心跳
-    m_pEffectMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    m_pPassiveSkillMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-...
-}
-</code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -420,10 +261,10 @@ m_UpdateEffectMap
         </li>
         <li style="word-break:break-all"><strong> 原文链接：</strong>
             
-                <a href="https://blog.rakfree.tk/2021/01/lastbattle/">https://blog.rakfree.tk/2021/01/lastbattle/</a>
+                <a href="https://blog.rakfree.tk/2022/05/geometry/">https://blog.rakfree.tk/2022/05/geometry/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-05 17:15:56</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -437,15 +278,15 @@ m_UpdateEffectMap
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/2020/12/ccnet/">CCnet | 单线程reactor演变为多线程</a></li>
+        <li><a href="/2022/04/shaderfunc/">ShaderLab常用函数</a></li>
         
-        <li><a href="/2020/12/syncmutex/">Golang | sync.Mutex详解</a></li>
+        <li><a href="/2022/04/cginc/">UnityCG.cginc中常用函数</a></li>
         
-        <li><a href="/2020/12/iomodels/">五种网络IO模型总结</a></li>
+        <li><a href="/2022/04/shader05/">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a></li>
         
-        <li><a href="/2020/12/ccnetone/">CCnet | 一个reactor单线程网络库</a></li>
+        <li><a href="/2022/04/shader04/">《Unity Shader入门精要》第三章 | UnityShader基础</a></li>
         
-        <li><a href="/2020/12/reserve/">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a></li>
+        <li><a href="/2022/04/shader03/">《Unity Shader入门精要》第二章 | 渲染流水线</a></li>
         
     </ul>
 </div>
