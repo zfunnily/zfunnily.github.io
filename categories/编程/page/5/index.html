@@ -95,6 +95,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/06/distribute/">Golang | redis实现分布式锁</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年6月3日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            
+            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 网上有很多Golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁- 删……
+            <p class="readmore"><a href="https://blog.rakfree.tk/2021/06/distribute/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://blog.rakfree.tk/2021/06/goredis/">Golang | redis</a>
             </h1>
         </header>
@@ -317,31 +342,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/02/timer/">Golang | 定时器</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年2月25日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
-            
-            <a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 golang有三种方式实现定时器： ticker timer select Ticker 通过 time.NewTicker(d)的方式实现定时器 d := time.Duration(time.Second * 2) t1 := time.NewTicker(d) defer t1.Stop() go func() { for { &lt;- t1.C fmt.Println(&#34;NewTicker...&#34;) } }() Timer 通过 time.NewTimer(d)的方式实现定时器 t2 := time.NewTimer(d)……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2021/02/timer/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -474,6 +474,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/shader07/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shader06/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
     </li>
     
@@ -487,10 +491,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/cginc/" title="UnityCG.cginc中常用函数">UnityCG.cginc中常用函数</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
     </li>
     
 </ul>
@@ -536,7 +536,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (93)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (94)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -548,7 +548,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (9)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (10)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
