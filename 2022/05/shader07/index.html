@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-05-07T16:22:40&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T17:15:39&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-07T17:16:09&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第六章 | 基础光照">
@@ -263,6 +263,11 @@
 <li>光源方向 i</li>
 </ul>
 <p>为了防止点积结果为负值，我们需要使用max操作，而Cg提供了这样的函数。在本例中，使用Cg的另一个函数可以达到同样的目的，即saturate函数。</p>
+<ul>
+<li>函数 ：saturate(x )</li>
+<li>参数 ：x ：为用于操作的标量或矢量，可以是float、float2、float3等类型。</li>
+<li>描述 ：把x 截取在[0, 1]范围内，如果x 是一个矢量，那么会对它的每一个分量进行这样的操作。</li>
+</ul>
 <h2 id="实现高光反射光照模型">实现高光反射光照模型</h2>
 <p>计算高光反射需要知道4个参数：</p>
 <ul>
@@ -348,7 +353,7 @@
                 <a href="https://blog.rakfree.tk/2022/05/shader07/">https://blog.rakfree.tk/2022/05/shader07/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 17:15:39</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 17:16:09</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
