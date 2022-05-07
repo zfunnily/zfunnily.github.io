@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>《Unity Shader入门精要》第二章 | 渲染流水线 | Zzz记忆</title>
+    <meta property="og:title" content="《Unity Shader入门精要》第二章 | 渲染流水线 - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2022-04-09T11:55:55&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-04-09T17:00:44&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="《Unity Shader入门精要》第二章 | 渲染流水线">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="https://blog.rakfree.tk/2022/04/shaderrenderpipline/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+
+    
+    
+    
+        <link href="/js/jquery.fancybox.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
+    
+    <script src='/js/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://blog.rakfree.tk">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://blog.rakfree.tk">首页</a>
+                    
+                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#渲染流水线">渲染流水线</a>
+      <ul>
+        <li><a href="#应用阶段application-stage">应用阶段（Application Stage）</a></li>
+        <li><a href="#几何阶段geometry-stage">几何阶段（Geometry Stage）</a></li>
+        <li><a href="#光栅化阶段rasterizer-stage">光栅化阶段（Rasterizer Stage）</a></li>
+      </ul>
+    </li>
+    <li><a href="#cpu和gpu的通信">CPU和GPU的通信</a>
+      <ul>
+        <li><a href="#把数据加载到显存中">把数据加载到显存中</a></li>
+        <li><a href="#设置渲染状态">设置渲染状态</a></li>
+        <li><a href="#调用draw-call">调用Draw Call</a></li>
+      </ul>
+    </li>
+    <li><a href="#gpu流水线">GPU流水线</a>
+      <ul>
+        <li><a href="#几何阶段">几何阶段</a></li>
+        <li><a href="#光栅化阶段">光栅化阶段</a></li>
+      </ul>
+    </li>
+    <li><a href="#顶点着色器-几何阶段">顶点着色器 [几何阶段]</a></li>
+    <li><a href="#裁剪-几何阶段">裁剪 [几何阶段]</a></li>
+    <li><a href="#屏幕映射-几何阶段">屏幕映射 [几何阶段]</a></li>
+    <li><a href="#三角形设置-光栅化阶段">三角形设置 [光栅化阶段]</a></li>
+    <li><a href="#三角形遍历-光栅化阶段">三角形遍历 [光栅化阶段]</a></li>
+    <li><a href="#片元着色器-光栅化阶段">片元着色器 [光栅化阶段]</a></li>
+    <li><a href="#逐片元操作-光栅化阶段">逐片元操作 [光栅化阶段]</a>
+      <ul>
+        <li><a href="#混合操作">混合操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#一些容易困惑的地方">一些容易困惑的地方</a>
+      <ul>
+        <li><a href="#什么是opengldirectx">什么是OpenGL/DirectX</a></li>
+        <li><a href="#什么是hlslglslcg">什么是HLSL、GLSL、CG</a></li>
+        <li><a href="#什么是draw-call">什么是Draw Call</a></li>
+        <li><a href="#批处理">批处理</a></li>
+        <li><a href="#减少draw-call的开销">减少Draw Call的开销</a></li>
+        <li><a href="#什么是固定渲染管线">什么是固定渲染管线</a></li>
+      </ul>
+    </li>
+    <li><a href="#什么是shader">什么是Shader</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">《Unity Shader入门精要》第二章 | 渲染流水线</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.UnityShader'>编程.UnityShader</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="渲染流水线">渲染流水线</h2>
+<p>Render-Time Rendering, Third Edition》一书中将一个渲染流程分成3个阶段：应用阶段（Application Stage） 、几何阶段（Geometry Stage） 、光栅化阶段（Rasterizer Stage） 。</p>
+<h3 id="应用阶段application-stage">应用阶段（Application Stage）</h3>
+<p>开发者有3个主要任务：</p>
+<ul>
+<li>准备场景数据: 例如摄像机的位置、视锥体、场景中包含了哪些模型;</li>
+<li>裁剪: 为了提高渲染性能，我们往往需要做一个粗粒度剔除（culling）工作，以把那些不可见的物体剔除出去，这样就不需要再移交给几何阶段进行处理;</li>
+<li>设置渲染状态: 渲染状态包括但不限于它使用的材质（漫反射颜色、高光反射颜色）、使用的纹理、使用的Shader等。这一阶段最重要的输出是渲染所需的几何信息;</li>
+</ul>
+<p>这一阶段最重要的输出是渲染所需的几何信息，即渲染图元。 通俗来讲，渲染图元可以是点、线、三角面等。这些渲染图元将会被传递给下一个阶段——几何阶段。</p>
+<h3 id="几何阶段geometry-stage">几何阶段（Geometry Stage）</h3>
+<p>几何阶段用于处理所有和我们要绘制的几何相关的事情</p>
+<ul>
+<li>在GPU上进行</li>
+<li>和每个渲染图元打交道，进行逐顶点、逐多边形的操作</li>
+<li>把顶点坐标变换到屏幕空间中，再交给光栅器进行处理</li>
+<li>可分成更小的流水阶段</li>
+</ul>
+<p>这一阶段将会输出屏幕空间的二维顶点坐标、每个顶点对应的深度值、着色等相关信息，并传递给下一个阶段</p>
+<h3 id="光栅化阶段rasterizer-stage">光栅化阶段（Rasterizer Stage）</h3>
+<p>这一阶段将会使用上个阶段传递的数据来产生屏幕上的像素，并渲染出最终的图像</p>
+<ul>
+<li>在GPU上进行</li>
+<li>决定每个渲染图元中的哪些像素应该被绘制在屏幕上</li>
+<li>需要对上一个阶段得到的逐顶点数据（例如纹理坐标、顶点颜色等）进行插值，然后再进行逐像素处理</li>
+<li>可分成更小的流水阶段</li>
+</ul>
+<h2 id="cpu和gpu的通信">CPU和GPU的通信</h2>
+<p>渲染流水线的起点是CPU，即应用阶段。应用阶段大致可分为下面3个阶段：</p>
+<ul>
+<li>把数据加载到显存中。</li>
+<li>设置渲染状态。</li>
+<li>调用Draw Call</li>
+</ul>
+<h3 id="把数据加载到显存中">把数据加载到显存中</h3>
+<ul>
+<li>渲染所需的数据都需要从硬盘（Hard Disk Drive，HDD）中加载到系统内存</li>
+<li>网格和纹理等数据又被加载到显卡上的存储空间——显存</li>
+</ul>
+<p>显卡对于显存的访问速度更快，而且大多数显卡对于RAM没有直接的访问权利</p>
+<h3 id="设置渲染状态">设置渲染状态</h3>
+<ul>
+<li>这些状态定义了场景中的网格是怎样被渲染的。例如，使用哪个顶点着色器（Vertex Shader）/片元着色器（Fragment Shader）、光源属性、材质等</li>
+</ul>
+<p>在准备好上述所有工作后，CPU就需要调用一个渲染命令来告诉GPU：“嘿！老兄，我都帮你把数据准备好啦，你可以按照我的设置来开始渲染啦！”而这个渲染命令就是Draw Call。</p>
+<h3 id="调用draw-call">调用Draw Call</h3>
+<ul>
+<li>Draw Call就是一个命令，它的发起方是CPU，接收方是GPU</li>
+<li>这个命令仅仅会指向一个需要被渲染的图元（primitives）列表，而不会再包含任何材质信息</li>
+</ul>
+<p>当给定了一个Draw Call时，GPU就会根据渲染状态（例如材质、纹理、着色器等）和所有输入的顶点数据来进行计算，最终输出成屏幕上显示的那些漂亮的像素。而这个计算过程，就是我们下一节要讲的GPU流水线。</p>
+<h2 id="gpu流水线">GPU流水线</h2>
+<p>GPU渲染的过程就是GPU流水线</p>
+<p>对于概念阶段的后两个阶段，即<strong>几何阶段</strong>和<strong>光栅化阶段</strong>，开发者无法拥有绝对的控制权，其实现的载体是GPU</p>
+<p>几何阶段和光栅化阶段可以分成若干更小的流水线阶段，每个阶段GPU提供了不同的可配置性或可编程性。流程图如下 ：
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494882850601649488284964.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494882850601649488284964.png" />
+        </a>
+    </p>
+<h3 id="几何阶段">几何阶段</h3>
+<ul>
+<li>顶点着色器（Vertex Shader）: 作为输入数据。在应用阶段加载到显存的。完全可编程的，它通常用于实现顶点的空间变换、顶点着色等功能。</li>
+<li>曲面细分着色器（Tessellation Shader）: 是一个可选的着色器，它用于细分图元。</li>
+<li>几何着色器（Geometry Shader）: 同样是一个可选的着色器，它可以被用于执行逐图元（Per-Primitive）的着色操作，或者被用于产生更多的图元。</li>
+<li>裁剪（Clipping） ，这一阶段的目的是将那些不在摄像机视野内的顶点裁剪掉，并剔除某些三角图元的面片。这个阶段是可配置的。</li>
+<li>屏幕映射（Screen Mapping）: 这一阶段是不可配置和编程的，它负责把每个图元的坐标转换到屏幕坐标系中。</li>
+</ul>
+<h3 id="光栅化阶段">光栅化阶段</h3>
+<p>光栅化阶段有两个最重要的目标：计算每个图元覆盖了哪些像素，以及为这些像素计算它们的颜色</p>
+<ul>
+<li>三角形设置（Triangle Setup）: 和三角形遍历（Triangle Traversal） 阶段也都是固定函数</li>
+<li>片元着色器（Fragment Shader）: 则是完全可编程的，它用于实现逐片元（Per-Fragment）的着色操作</li>
+<li>逐片元操作（Per-Fragment Operations）: 阶段负责执行很多重要的操作，例如修改颜色、深度缓冲、进行混合等，它不是可编程的，但具有很高的可配置性</li>
+</ul>
+<h2 id="顶点着色器-几何阶段">顶点着色器 [几何阶段]</h2>
+<p>顶点着色器的几个特性</p>
+<ul>
+<li>顶点着色器的处理单位是顶点，也就是说，输入进来的每个顶点都会调用一次顶点着色器</li>
+<li>顶点着色器本身不可以创建或者销毁任何顶点</li>
+<li>不知道顶点和顶点之间的关系，因为这样的特性，GPU处理速度很快。</li>
+</ul>
+<p>主要完成的工作:</p>
+<ul>
+<li>坐标变换: 对顶点的坐标（即位置）进行某种变换，一个最基本的顶点着色器必须完成的一个工作是，把顶点坐标从模型空间转换到齐次裁剪空间</li>
+<li>逐顶点光照</li>
+<li>输出后续阶段所需的数据</li>
+</ul>
+<h2 id="裁剪-几何阶段">裁剪 [几何阶段]</h2>
+<ul>
+<li>裁剪主要做的工作是裁剪掉那些不在摄像机视野范围的物体。</li>
+<li>这一步不可被编程, 可自定义一些配置。</li>
+</ul>
+<h2 id="屏幕映射-几何阶段">屏幕映射 [几何阶段]</h2>
+<ul>
+<li>屏幕映射（Screen Mapping） 的任务是把每个图元的x 和y 坐标转换到屏幕坐标系</li>
+<li>屏幕坐标系是一个二维坐标系，它和我们用于显示画面的分辨率有很大关系。</li>
+<li>屏幕坐标系和z 坐标一起构成了一个坐标系，叫做窗口坐标系（Window Coordinates） 。这些值会一起被传递到光栅化阶段。</li>
+</ul>
+<p>注意:
+OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义了屏幕的左上角为最小的窗口坐标值。 如下图:
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494891042101649489103841.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494891042101649489103841.png" />
+        </a>
+    </p>
+<blockquote>
+<p>产生这种差异的原因是，微软的窗口都使用了这样的坐标系统，因为这和我们的阅读方式是一致的：从左到右、从上到下，</p>
+</blockquote>
+<h2 id="三角形设置-光栅化阶段">三角形设置 [光栅化阶段]</h2>
+<p>这个阶段会计算光栅化一个三角网格所需的信息</p>
+<ul>
+<li>上一个阶段输出的都是三角网格的顶点，即我们得到的是三角网格每条边的两个端点</li>
+<li>如果要得到整个三角网格对像素的覆盖情况，我们就必须计算每条边上的像素坐标</li>
+<li>一个计算三角网格表示数据的过程就叫做三角形设置</li>
+</ul>
+<h2 id="三角形遍历-光栅化阶段">三角形遍历 [光栅化阶段]</h2>
+<p>这个阶段将会检查每个像素是否被一个三角网格所覆盖</p>
+<ul>
+<li>如果被覆盖的话，就会生成一个片元（fragment） 。而这样一个找到哪些像素被三角网格覆盖的过程就是三角形遍历，这个阶段也被称为<strong>扫描变换（Scan Conversion）</strong>。</li>
+<li>三角形遍历阶段会根据上一个阶段的计算结果来判断一个三角网格覆盖了哪些像素，并使用三角网格3个顶点的顶点信息对整个覆盖区域的像素进行插值</li>
+<li>三角形遍历的过程。根据几何阶段输出的顶点信息，最终得到该三角网格覆盖的像素位置。对应像素会生成一个片元，而片元中的状态是对3个顶点的信息进行插值得到的。</li>
+</ul>
+<p>片元:</p>
+<ul>
+<li>这一步的输出就是得到一个片元序列</li>
+<li><strong>一个片元并不是真正意义上的像素</strong>，而是包含了很多状态的集合，这些状态用于计算每个像素的最终颜色。</li>
+<li>这些状态包括了（但不限于）它的屏幕坐标、深度信息，以及其他从几何阶段输出的顶点信息，例如法线、纹理坐标等。</li>
+</ul>
+<h2 id="片元着色器-光栅化阶段">片元着色器 [光栅化阶段]</h2>
+<p>片元着色器被称为像素着色器, 但片元着色器是一个更合适的名字，因为此时的片元并不是一个真正意义上的像素。</p>
+<p>真正会对像素产生影响的阶段是下一个流水线阶段——逐片元操作。</p>
+<p>这一阶段可以完成很多重要的渲染技术</p>
+<ul>
+<li>纹理采样: 我们通常会在顶点着色器阶段输出每个顶点对应的纹理坐标，然后经过光栅化阶段对三角网格的3个顶点对应的纹理坐标进行插值后，就可以得到其覆盖的片元的纹理坐标了。</li>
+<li>片元着色器的局限是: 它仅可以影响单个片元. 执行片元着色器时 它不可以将自己的任何结果直接发送给它的邻居们”</li>
+</ul>
+<h2 id="逐片元操作-光栅化阶段">逐片元操作 [光栅化阶段]</h2>
+<p>逐片元操作阶段是高度可配置性,这一阶段被称为输出合并阶段（Output-Merger） 。主要任务如下:</p>
+<ul>
+<li>决定每个片元的可见性</li>
+<li>如果一个片元通过了所有的测试，就需要把这个片元的颜色值和已经存储在颜色缓冲区中的颜色进行合并，或者说是混合。</li>
+</ul>
+<p>
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494904962831649490495496.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494904962831649490495496.png" />
+        </a>
+    </p>
+<p>解决每个片元的可见性问题。这需要进行一系列测试, 这里有两个最基本的测试——深度测试和模板测试, 实现过程如下:
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494906272881649490626721.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494906272881649490626721.png" />
+        </a>
+    </p>
+<ul>
+<li>如果一个片元幸运地通过了模板测试，那么它会进行下一个测试——深度测试（Depth Test）</li>
+</ul>
+<h3 id="混合操作">混合操作</h3>
+<ul>
+<li>对于不透明物体，开发者可以关闭混合（Blend） 操作。</li>
+<li>对于半透明物体，我们就需要使用混合操作来让这个物体看起来是透明的</li>
+<li>开发者可以选择开启/关闭混合操作。</li>
+</ul>
+<p>
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494908762941649490875438.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494908762941649490875438.png" />
+        </a>
+    </p>
+<h2 id="一些容易困惑的地方">一些容易困惑的地方</h2>
+<h3 id="什么是opengldirectx">什么是OpenGL/DirectX</h3>
+<ul>
+<li>OpenGL和DirectX就是这些图像应用编程接口，这些接口用于渲染二维或三维图形。</li>
+<li>一个应用程序向这些接口发送渲染命令，而这些接口会依次向显卡驱动（Graphics Driver）发送渲染命令，这些显卡驱动是真正知道如何和GPU通信的角色， 正是它们把OpenGL或者DirectX的函数调用翻译成了GPU能够听懂的语言，同时它们也负责把纹理等数据转换成GPU所支持的格式</li>
+</ul>
+<p>一个显卡除了有图像处理单元GPU外，还拥有自己的内存，这个内存通常被称为显存, 显卡驱动就是显卡的操作系统。下图展示了这样的关系。
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494912412891649491240665.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494912412891649491240665.png" />
+        </a>
+    </p>
+<h3 id="什么是hlslglslcg">什么是HLSL、GLSL、CG</h3>
+<p>常见的着色语言有DirectX的HLSL（High Level Shading Language）、OpenGL的GLSL（OpenGL Shading Language）以及NVIDIA的CG（C for Graphic）</p>
+<ul>
+<li>GLSL的优点在于它的跨平台性，它可以在Windows、Linux、Mac甚至移动平台等多种平台上工作，但这种跨平台性是由于OpenGL没有提供着色器编译器，而是由显卡驱动来完成着色器的编译工作。</li>
+<li>对于HLSL，是由微软控制着色器的编译，就算使用了不同的硬件，同一个着色器的编译结果也是一样的。它的跨平台性较差，几乎完全是微软的产品。</li>
+<li>Cg则是真正意义上的跨平台。它会根据平台的不同，编译成相应的中间语言。 CG语言的语法和HLSL非常相像，Cg语言可以无缝移植成HLSL代码。但缺点是可能无法完全发挥出OpenGL的最新特性。</li>
+</ul>
+<p>在Unity Shader中，我们可以选择使用“Cg/HLSL”或者“GLSL”。带引号是因为Unity里的这些着色语言并不是真正意义上的对应的着色语言</p>
+<h3 id="什么是draw-call">什么是Draw Call</h3>
+<p>Draw Call 是CPU调用图像编程接口, 如OpenGL中的glDrawElements命令或者DirectX中的DrawIndexedPrimitive命令，以命令GPU进行渲染的操作。</p>
+<ul>
+<li>Draw Call中造成性能问题的元凶是CPU</li>
+</ul>
+<p>带着问题去理解:</p>
+<ol>
+<li>CPU和GPU是如何实现并行工作的？</li>
+</ol>
+<ul>
+<li>需要让CPU和GPU可以并行工作。而解决方法就是使用一个命令缓冲区</li>
+</ul>
+<p>命令缓冲区包含了一个命令队列，由CPU向其中添加命令，而由GPU从中读取命令，添加和读取的过程是互相独立的。命令缓冲区使得CPU和GPU可以相互独立工作。
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494918903051649491889882.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494918903051649491889882.png" />
+        </a>
+    </p>
+<ol start="2">
+<li>为什么Draw Call多了会影响帧率？
+在讲原因之前，先做一个实验。</li>
+</ol>
+<ul>
+<li>创建10000个小文件，每个文件的大小为1kB， 然后把它们从一个文件夹复制到另一个文件夹。</li>
+<li>单独创建一个文件，大小为10MB，然后把它从一个文件夹复制到另外一个文件夹。</li>
+</ul>
+<p>对比这两次操作发现，虽然文件总大小是一致的，文件数量多的一方所需要花费的时间更长。原因在于每个复制动作都要很多额外的操作，例如分配内存、创建各种元数据等。</p>
+<p>渲染过程虽然跟上面的实验不同，但是有类似的地方。</p>
+<ul>
+<li>在每次调用Draw Call之前，CPU需要向GPU发送很多内容，包括数据、状态和命令等</li>
+<li>一旦CPU完成了这些准备工作，GPU就可以开始本次的渲染</li>
+<li>GPU的渲染能力是很强的，渲染200个还是2 000个三角网格通常没有什么区别，因此渲染速度往往快于CPU提交命令的速度。</li>
+</ul>
+<p>如果Draw Call的数量太多，CPU就会把大量时间花费在提交Draw Call上，造成CPU的过载
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494923512911649492350326.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494923512911649492350326.png" />
+        </a>
+    </p>
+<h3 id="批处理">批处理</h3>
+<p>解决CPU过载的方法有很多，书中讨论的是<strong>批处理</strong></p>
+<ul>
+<li>提交大量的Draw Call造成CPU瓶颈，CPU把时间花在提交Draw Call上了，那么一个很显然优化的方法是把Draw Call <strong>先合并再提交</strong>。</li>
+<li>批处理技术更加适合于那些静态的物体，例如不会移动的大地、石头等，对于这些静态物体我们只需要合并一次即可</li>
+</ul>
+<h3 id="减少draw-call的开销">减少Draw Call的开销</h3>
+<ul>
+<li>避免使用大量很小的网格， 当不可避免使用小网格时，考虑是否可以合并它们。</li>
+<li>避免使用过多的材质，尽量在不同的网格之间共用同一个材质。</li>
+</ul>
+<h3 id="什么是固定渲染管线">什么是固定渲染管线</h3>
+<p>固定函数的流水线（Fixed-Function Pipeline） ，也简称为固定管线，通常是指在较旧的GPU上实现的渲染流水线。</p>
+<ul>
+<li>这种流水线只给开发者提供一些配置操作，但开发者没有对流水线阶段的完全控制权。</li>
+<li>固定渲染管线是只可配置的管线</li>
+</ul>
+<p>进化到现在，看到有许多可编程的流水线阶段，比如顶点着色器、片元着色器，这些可编程的着色器阶段可以说是GPU进化最重要的贡献</p>
+<ul>
+<li>在GPU发展的过程中，为了继续提供固定管线的接口抽象，一些显卡驱动的开发者们使用了更加通用的着色架构，即使用可编程的管线来模拟固定管线</li>
+<li>OpenGL 2.0在没有真正的固定管线的硬件支持下，依靠系统的可编程管线功能来模仿固定管线的处理过程</li>
+<li>OpenGL 3.0是最后既支持可编程管线又完全支持固定管线编程接口的版本，在OpenGL 3.2中，Core Profile就完全移除了固定管线的概念。</li>
+</ul>
+<h2 id="什么是shader">什么是Shader</h2>
+<ul>
+<li>GPU流水线上一些可高度编程的阶段，而由着色器编译出来的最终代码是会在GPU上运行的（对于固定管线的渲染来说，着色器有时等同于一些特定的渲染设置）；</li>
+<li>有一些特定类型的着色器，如顶点着色器、片元着色器等；</li>
+<li>依靠着色器我们可以控制流水线中的渲染细节，例如用顶点着色器来进行顶点变换以及传递数据，用片元着色器来进行逐像素的渲染。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<ul>
+<li>渲染流水线的概念几乎贯穿全文</li>
+<li>Shader编程其实就是在GPU流水线上一些可高度编程的阶段</li>
+</ul>
+<h2 id="参考">参考</h2>
+<p>《Unity Shader入门精要》</p>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="https://blog.rakfree.tk/2022/04/shaderrenderpipline/">https://blog.rakfree.tk/2022/04/shaderrenderpipline/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-09 17:00:44</li>
+        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2022/04/shaderhelloworld/">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a></li>
+        
+        <li><a href="/2022/04/shader01/">UnityShader基本概念</a></li>
+        
+        <li><a href="/2022/04/graphics/">Graphics</a></li>
+        
+        <li><a href="/2022/03/afk/">抽卡逻辑自述</a></li>
+        
+        <li><a href="/2022/03/timerskynet/">层级时间轮 ｜ skynet 定时器</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></li>
+                
+                <li><a href='/tags/shader'>shader</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        
+
+    
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章 | 透明度">《Unity Shader入门精要》第八章 | 透明度</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="https://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="https://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader/">shader</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+</body>
+
+</html>

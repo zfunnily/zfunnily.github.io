@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>《Unity Shader入门精要》第三章 | UnityShader基础 | Zzz记忆</title>
+    <meta property="og:title" content="《Unity Shader入门精要》第三章 | UnityShader基础 - Zzz记忆">
+    <meta property="og:type" content="article">
+    <meta name="color-scheme" content="light dark">
+        
+    <meta property="article:published_time" content='2022-04-10T14:51:19&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-04-11T09:26:50&#43;08:00'>
+        
+    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
+    <meta name="description" content="《Unity Shader入门精要》第三章 | UnityShader基础">
+        
+    <meta name="author" content="留白">
+    <meta property="og:url" content="https://blog.rakfree.tk/2022/04/shaderbase/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+
+    
+    
+    
+        <link href="/js/jquery.fancybox.css" rel="stylesheet">
+    
+    
+    
+    
+        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
+    
+
+
+    
+    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
+    
+    <script src='/js/Valine.min.js'></script>
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://blog.rakfree.tk">
+                        Zzz记忆
+                    </a>
+                
+
+                <div id="quotes" class="description"></div>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://blog.rakfree.tk">首页</a>
+                    
+                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
+                    
+                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
+                    
+                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#材质">材质</a></li>
+    <li><a href="#unity的材质">Unity的材质</a></li>
+    <li><a href="#unity的shader">Unity的shader</a></li>
+    <li><a href="#shaderlab">ShaderLab</a>
+      <ul>
+        <li><a href="#什么是shaderlab">什么是ShaderLab？</a></li>
+      </ul>
+    </li>
+    <li><a href="#基础结构">基础结构</a>
+      <ul>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#subshader">SubShader</a></li>
+        <li><a href="#留一条后路fallback">留一条后路：Fallback</a></li>
+      </ul>
+    </li>
+    <li><a href="#三种形式">三种形式</a>
+      <ul>
+        <li><a href="#unity的宠儿表面着色器">Unity的宠儿：表面着色器</a></li>
+        <li><a href="#最聪明的孩子顶点片元着色器">最聪明的孩子：顶点/片元着色器</a></li>
+        <li><a href="#被抛弃的角落固定函数着色器">被抛弃的角落：固定函数着色器</a></li>
+      </ul>
+    </li>
+    <li><a href="#选择哪种形式">选择哪种形式</a></li>
+    <li><a href="#unity-shader--真正的shader">Unity Shader != 真正的Shader</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">《Unity Shader入门精要》第三章 | UnityShader基础</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.UnityShader'>编程.UnityShader</a></span>
+            
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="材质">材质</h2>
+<p>在Unity中我们需要配合使用材质 （Material） 和Unity Shader才能达到需要的效果。一个最常见的流程是</p>
+<ul>
+<li>创建一个材质；活着导入一个材质</li>
+<li>创建一个Unity Shader，并把它赋给上一步中创建的材质；</li>
+<li>把材质赋给要渲染的对象；</li>
+<li>在材质面板中调整Unity Shader的属性，以得到满意的效果。</li>
+</ul>
+<h2 id="unity的材质">Unity的材质</h2>
+<p>Unity中的材质需要结合一个GameObject的Mesh或者Particle Systems组件来工作。它决定了我们的游戏对象看起来是什么样子的（这当然也需要Unity Shader的配合）。</p>
+<h2 id="unity的shader">Unity的shader</h2>
+<p>Unity一共提供了4种Unity Shader模板供我们选择</p>
+<ul>
+<li>Standard Surface Shader: 会产生一个包含了标准光照模型的表面着色器模板</li>
+<li>Unlit Shader: 会产生一个不包含光照（但包含雾效）的基本的顶点/片元着色器</li>
+<li>Image Effect Shader: 为我们实现各种屏幕后处理效果（详见第12章）提供了一个基本模板</li>
+<li>Compute Shade: 产生一种特殊的Shader文件，这类Shader旨在利用GPU的并行性来进行一些与常规渲染流水线无关的计算</li>
+</ul>
+<h2 id="shaderlab">ShaderLab</h2>
+<p>Unity为了解决初学者更好的入门shader编程，以及更方便的进行shader编程，为我们提供了一层抽象——Unity Shader。</p>
+<h3 id="什么是shaderlab">什么是ShaderLab？</h3>
+<p>Unity Shader是Unity为开发者提供的高层级的渲染抽象层
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495780275151649578027197.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495780275151649578027197.png" />
+        </a>
+    </p>
+<h2 id="基础结构">基础结构</h2>
+<p>一个Unity Shader的基础结构如下所示</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;ShaderName&#34; {
+    Properties {
+        // 属性
+    }
+    SubShader {
+        // 显卡A使用的子着色器
+    }
+    SubShader {
+        // 显卡B使用的子着色器
+    }    
+    Fallback &#34;VertexLit&#34;
+}
+</code></pre></div><h3 id="properties">Properties</h3>
+<p>材质和Unity Shader的桥梁
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495791795801649579179119.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495791795801649579179119.png" />
+        </a>
+    </p>
+<p>下面的代码给出了一个展示所有属性类型的例子:</p>
+<details   class="code-detail">
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;Custom/ShaderLabProperties&#34;</span> {
+    Properties {
+        <span style="color:#f92672">//</span> Numbers and Sliders
+        <span style="color:#a6e22e">_Int </span>(<span style="color:#e6db74">&#34;Int&#34;</span>, Int) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+        <span style="color:#a6e22e">_Float </span>(<span style="color:#e6db74">&#34;Float&#34;</span>, Float) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>
+        <span style="color:#a6e22e">_Range</span>(<span style="color:#e6db74">&#34;Range&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">5.0</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0</span>
+        <span style="color:#f92672">//</span> Colors and Vectors
+        <span style="color:#a6e22e">_Color </span>(<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+        <span style="color:#a6e22e">_Vector </span>(<span style="color:#e6db74">&#34;Vector&#34;</span>, Vector) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>)
+        <span style="color:#f92672">//</span> Textures
+        <span style="color:#a6e22e">_2D </span>(<span style="color:#e6db74">&#34;2D&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> {}
+        <span style="color:#a6e22e">_Cube </span>(<span style="color:#e6db74">&#34;Cube&#34;</span>, Cube) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+        <span style="color:#a6e22e">_3D </span>(<span style="color:#e6db74">&#34;3D&#34;</span>, <span style="color:#ae81ff">3</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span> {}
+    }
+
+    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+}
+</code></pre></div></details>
+<br/>
+<h3 id="subshader">SubShader</h3>
+<p>每一个Unity Shader文件可以包含多个SubShader 语义块，但最少要有一个。</p>
+<p>当Unity需要加载这个Unity Shader时，Unity会扫描所有的SubShader 语义块，然后选择第一个能够在目标平台上运行的SubShader 。如果都不支持的话，Unity就会使用Fallback 语义指定的Unity Shader。</p>
+<p>SubShader 语义块中包含的定义通常如下:</p>
+<details   class="code-detail">
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">SubShader {
+    <span style="color:#f92672">//</span> 可选的
+    [Tags]
+
+    <span style="color:#f92672">//</span> 可选的
+    [RenderSetup]
+
+    Pass {
+    }
+    <span style="color:#f92672">//</span> Other Passes
+}
+</code></pre></div></details>
+<br/>
+<ul>
+<li>每个Pass 定义了一次完整的渲染流程，但如果Pass 的数目过多，往往会造成渲染性能的下降</li>
+<li>状态[RenderSetup]和标签[Tags]同样可以在Pass 声明,</li>
+<li>SubShader 中的一些标签设置是特定的。也就是说，这些标签设置和Pass 中使用的标签是不一样的</li>
+<li>对于状态设置来说，其使用的语法是相同的。但是，如果我们在SubShader 进行了这些设置，那么将会用于所有的Pass</li>
+</ul>
+<h4 id="状态设置">状态设置</h4>
+<p>ShaderLab中常见的渲染状态设置选项:
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495797005661649579699991.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495797005661649579699991.png" />
+        </a>
+    </p>
+<h4 id="subshader-的标签">SubShader 的标签</h4>
+<p>标签的结构如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Tags { <span style="color:#e6db74">&#34;TagName1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value1&#34;</span> <span style="color:#e6db74">&#34;TagName2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value2&#34;</span> }
+</code></pre></div><p>
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495799848931649579984799.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495799848931649579984799.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495800925761649580092498.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495800925761649580092498.png" />
+        </a>
+    </p>
+<h4 id="pass-语义块">Pass 语义块</h4>
+<p>Pass 基本结构如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass { 
+    [Name]
+    [Tags] 
+    [RenderSetup] 
+    // Other code
+}
+</code></pre></div><p>我们可以使用ShaderLab的<code>UsePass</code>命令 + <code>PassName</code>来直接使用其他Unity Shader中的Pass,这样可以提高代码的复用性。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Name <span style="color:#e6db74">&#34;MyPassName&#34;</span>
+UsePass <span style="color:#e6db74">&#34;MyShader/MYPASSNAME&#34;</span>
+</code></pre></div><blockquote>
+<p>由于Unity内部会把所有Pass 的名称转换成大写字母的表示，因此，在使用UsePass 命令时必须使用大写形式的名字。</p>
+</blockquote>
+<p>Pass 中使用的标签类型:
+
+        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495804095861649580408789.png">
+            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495804095861649580408789.png" />
+        </a>
+    </p>
+<p>Unity Shader还支持一些特殊的Pass ，以便进行代码复用或实现更复杂的效果:</p>
+<ul>
+<li>UsePass ：如我们之前提到的一样，可以使用该命令来复用其他Unity Shader中的Pass ；</li>
+<li>GrabPass ：该Pass 负责抓取屏幕并将结果存储在一张纹理中，以用于后续的Pass 处理</li>
+</ul>
+<h3 id="留一条后路fallback">留一条后路：Fallback</h3>
+<p>紧接着SubShader 语义块后面的可以是Fallback指令，它用于告诉Unity，&ldquo;如果上面所有的SubShader在这块显卡上都不能运行，那么就使用这个最低级的Shader吧！&rdquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Fallback &#34;name&#34;
+// 或者
+Fallback Off
+</code></pre></div><ul>
+<li>Fallback 还会影响阴影的投射</li>
+<li>在渲染阴影纹理时，Unity会在每个Unity Shader中寻找一个阴影投射的Pass</li>
+<li>通常情况下，我们不需要自己专门实现一个Pass，这是因为Fallback 使用的内置Shader中包含了这样一个通用的Pass。</li>
+</ul>
+<h2 id="三种形式">三种形式</h2>
+<p>真正意义上的Shader代码都需要包含在ShaderLab语义块中，如下所示:</p>
+<details   class="code-detail">
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;MyShader&#34;</span> {
+    Properties {
+        <span style="color:#f92672">//</span> 所需的各种属性
+    }
+    SubShader {
+        <span style="color:#f92672">//</span> 真正意义上的Shader代码会出现在这里
+        <span style="color:#f92672">//</span> 表面着色器（Surface Shader）或者
+        <span style="color:#f92672">//</span> 顶点<span style="color:#f92672">/</span>片元着色器（Vertex<span style="color:#f92672">/</span>Fragment Shader）或者
+        <span style="color:#f92672">//</span> 固定函数着色器（Fixed Function Shader）
+    }
+    SubShader {
+        <span style="color:#f92672">//</span> 和上一个SubShader类似
+    }
+}
+</code></pre></div></details>
+<br/>
+<h3 id="unity的宠儿表面着色器">Unity的宠儿：表面着色器</h3>
+<p>表面着色器 （Surface Shader） 是Unity自己创造的一种着色器代码类型</p>
+<ul>
+<li>它需要的代码量很少，Unity在背后做了很多工作，但渲染的代价比较大</li>
+<li>当给Unity提供一个表面着色器的时候，它在背后仍旧把它转换成对应的顶点/片元着色器, 它在本质上和下面要讲到的顶点/片元着色器是一样的</li>
+<li>它存在的价值在于，Unity为我们处理了很多光照细节，使得我们不需要再操心这些“烦人的事情”</li>
+</ul>
+<p>一个简单的表面着色器示例代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;Custom/Simple Surface Shader&#34;</span> {
+    SubShader {
+        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Opaque&#34;</span> }
+        CGPROGRAM
+        <span style="color:#75715e">#pragma surface surf Lambert</span>
+        struct Input {
+            float4 color <span style="color:#f92672">:</span> COLOR;
+        };
+        void <span style="color:#a6e22e">surf </span>(Input IN, inout SurfaceOutput o) {
+            o.Albedo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+        }
+        ENDCG
+    }
+    Fallback <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+}
+</code></pre></div><ul>
+<li>表面着色器被定义在SubShader 语义块（而非Pass 语义块）中的CGPROGRAM 和ENDCG 之间。</li>
+<li>表面着色器不需要开发者关心使用多少个Pass、每个Pass如何渲染等问题，Unity会在背后为我们做好这些事情</li>
+<li>CGPROGRAM 和ENDCG 之间的代码是使用Cg/HLSL编写的。</li>
+</ul>
+<h3 id="最聪明的孩子顶点片元着色器">最聪明的孩子：顶点/片元着色器</h3>
+<p>一个简单的顶点/片元着色器示例代码:</p>
+<details   class="code-detail">
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Custom/Simple VertexFragment Shader&#34; {
+    SubShader {
+        Pass {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            float4 vert(float4 v : POSITION) : SV_POSITION {
+                return mul (UNITY_MATRIX_MVP, v);
+            }
+
+            fixed4 frag() : SV_Target {
+                return fixed4(1.0,0.0,0.0,1.0);
+            }
+
+            ENDCG
+        }
+    }
+}
+</code></pre></div></details>
+<br/>
+<ul>
+<li>顶点/片元着色器的代码也需要定义在CGPROGRAM 和ENDCG 之间, 但是代码是写在Pass 语义块内，而非SubShader 内的</li>
+<li></li>
+</ul>
+<h3 id="被抛弃的角落固定函数着色器">被抛弃的角落：固定函数着色器</h3>
+<p>对于一些较旧的设备（其GPU仅支持DirectX 7.0、OpenGL 1.5或OpenGL ES 1.1），例如iPhone 3，它们不支持可编程管线着色器，因此，这时候我们就需要使用固定函数着色器 （Fixed Function Shader） 来完成渲染。</p>
+<p>简单代码：</p>
+<details   class="code-detail">
+    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
+         代码 
+    </summary>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Tutorial/Basic&#34; {
+    Properties {
+        _Color (&#34;Main Color&#34;, Color) = (1,0.5,0.5,1)
+    }
+    SubShader {
+        Pass {
+            Material {
+                Diffuse [_Color]
+            }
+            Lighting On
+        }
+    }
+}
+</code></pre></div></details>
+<br/>
+<ul>
+<li>固定函数着色器的代码被定义在Pass 语义块中</li>
+<li>需要完全使用ShaderLab的语法（即使用ShaderLab的渲染设置命令）来编写，而非使用Cg/HLSL。</li>
+<li>在Unity 5.2中，所有固定函数着色器都会在背后被Unity编译成对应的顶点/片元着色器，因此真正意义上的固定函数着色器已经不存在了</li>
+</ul>
+<h2 id="选择哪种形式">选择哪种形式</h2>
+<ul>
+<li>除非你有非常明确的需求必须要使用固定函数着色器，例如需要在非常旧的设备上运行你的游戏（这些设备非常少见），否则请使用可编程管线的着色器，即<strong>表面着色器或顶点/片元着色器</strong>。</li>
+<li>如果你想和各种<strong>光源</strong>打交道，你可能更喜欢使用<strong>表面着色器</strong>，但需要小心它在移动平台的性能表现。</li>
+<li>如果你需要使用的<strong>光照数目非常少</strong>，例如只有一个平行光，那么使用<strong>顶点/片元着色器</strong>是一个更好的选择。
+最重要的是，如果你有很多<strong>自定义的渲染效果</strong>，那么请选择<strong>顶点/片元着色器</strong>。</li>
+</ul>
+<h2 id="unity-shader--真正的shader">Unity Shader != 真正的Shader</h2>
+<p>在Unity里，Unity Shader实际上指的就是一个ShaderLab文件——硬盘上以.shader 作为文件后缀的一种文件</p>
+<p>在Unity Shader（或者说是ShaderLab文件）里，我们可以做的事情远多于一个传统意义上的Shader：</p>
+<ul>
+<li>在传统的Shader中，我们仅可以编写特定类型的Shader，例如顶点着色器、片元着色器等。而在Unity Shader中，我们可以在同一个文件里同时包含需要的顶点着色器和片元着色器代码。</li>
+<li>在传统的Shader中，我们无法设置一些渲染设置，例如是否开启混合、深度测试等，这些是开发者在另外的代码中自行设置的。而在Unity Shader中，我们通过一行特定的指令就可以完成这些设置。</li>
+<li>在传统的Shader中，我们需要编写冗长的代码来设置着色器的输入和输出，要小心地处理这些输入输出的位置对应关系等。而在Unity Shader中，我们只需要在特定语句块中声明一些属性，就可以依靠材质来方便地改变这些属性。而且对于模型自带的数据（如顶点位置、纹理坐标、法线等），Unity Shader也提供了直接访问的方法，不需要开发者自行编码来传给着色器。</li>
+</ul>
+<p>Unity Shader的缺点：</p>
+<ul>
+<li>由于Unity Shader的高度封装性，我们可以编写的Shader类型和语法都被限制了</li>
+<li>对于一些类型的Shader，例如曲面细分着色器（Tessellation Shader）、几何着色器（Geometry Shader）等，Unity的支持就相对差一些</li>
+<li>一些高级的Shader语法Unity Shader也不支持</li>
+</ul>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="https://blog.rakfree.tk/2022/04/shaderbase/">https://blog.rakfree.tk/2022/04/shaderbase/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-11 09:26:50</li>
+        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2022/04/shaderrenderpipline/">《Unity Shader入门精要》第二章 | 渲染流水线</a></li>
+        
+        <li><a href="/2022/04/shaderhelloworld/">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a></li>
+        
+        <li><a href="/2022/04/shader01/">UnityShader基本概念</a></li>
+        
+        <li><a href="/2022/04/graphics/">Graphics</a></li>
+        
+        <li><a href="/2022/03/afk/">抽卡逻辑自述</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></li>
+                
+                <li><a href='/tags/shader'>shader</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+
+    
+</div>
+
+                    
+
+
+
+
+
+
+
+
+
+
+<footer id="footer">
+
+    <div>
+        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+    <div>
+        
+        
+
+    
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章 | 透明度">《Unity Shader入门精要》第八章 | 透明度</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
+    </li>
+    
+</ul>
+
+<h3 class="widget-title">随想</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
+    </li>
+    
+</ul>
+
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
+    
+    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
+    
+    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
+    
+    <a href="https://blog.rakfree.tk/tags/except/">except</a>
+    
+    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
+    
+    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
+    
+    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
+    
+    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
+    
+    <a href="https://blog.rakfree.tk/tags/music/">music</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
+    
+    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
+    
+    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
+    
+    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
+    
+    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
+    
+    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader/">shader</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
+    
+    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
+    
+    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
+    
+    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
+    
+    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
+    
+    <a href="https://blog.rakfree.tk/tags/year/">year</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+    
+    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+</body>
+
+</html>

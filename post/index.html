@@ -88,7 +88,34 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/05/shader07/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+                <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章 | 透明度">《Unity Shader入门精要》第八章 | 透明度</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年5月7日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.UnityShader'>编程.UnityShader</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            渲染顺序 名称 队列索引号 描 述 Background 1000 这个渲染队列会在任何其他队列之前被渲染，我们通常使用该队列来渲染那些需要绘制在背景上的物体 Geometry 2000 默认的渲染队列，大多数物体都使用这个队列。不透明物体使用这个队列 AlphaTest 2450 需要透明……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/05/shaderalpha/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -107,7 +134,7 @@
         <div class="post-content">
             我们是如何看到这个世界的 光源: 在光学里，我们使用辐照度 （irradiance） 来量化光 物体的吸收和散射: 光线由光源发射出来后，就会与一些物体相交 着色: 根据材质属性（如漫反射属性等）、光源信息（如光源方……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/05/shader07/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/05/shaderlighting/">阅读全文</a></p>
     </article>
     
     
@@ -115,7 +142,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/05/shader06/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
+                <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -134,7 +161,7 @@
         <div class="post-content">
             一个简单的顶点/片元着色器 代码 Shader &#34;Unity Shaders Book/Chapter 5/Simple Shader&#34; { Properties { // 声明一个Color类型的属性 _Color (&#34;Color Tint&#34;, Color) = (1.0,1.0,1.0,1.0) } SubShader { Pass { CGPROGRAM #pragma vertex vert #pragma fragment frag // 在Cg代码中，我们需要定义一个与属性名称和类型都匹配的变量 fixed4 _Color; // 使用一个结构体来定义……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/05/shader06/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/05/shaderbase/">阅读全文</a></p>
     </article>
     
     
@@ -223,7 +250,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader05/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
+                <a href="https://blog.rakfree.tk/2022/04/shadermathematic/" title="《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础">《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -242,7 +269,7 @@
         <div class="post-content">
             概述 在学习Shader的过程中，我们最常使用的就是矢量和矩阵（即数学的分支之一——线性代数）。 笛卡儿坐标系 我们使用数学绝大部分都是为了计算位置、距离和角度等变量。而这些计算大部分都是在笛卡儿坐标系 （C……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader05/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shadermathematic/">阅读全文</a></p>
     </article>
     
     
@@ -250,7 +277,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader04/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
+                <a href="https://blog.rakfree.tk/2022/04/shaderbase/" title="《Unity Shader入门精要》第三章 | UnityShader基础">《Unity Shader入门精要》第三章 | UnityShader基础</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -269,7 +296,7 @@
         <div class="post-content">
             材质 在Unity中我们需要配合使用材质 （Material） 和Unity Shader才能达到需要的效果。一个最常见的流程是 创建一个材质；活着导入一个材质 创建一个Unity Shader，并把它赋给上一步中……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader04/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shaderbase/">阅读全文</a></p>
     </article>
     
     
@@ -277,7 +304,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader03/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
+                <a href="https://blog.rakfree.tk/2022/04/shaderrenderpipline/" title="《Unity Shader入门精要》第二章 | 渲染流水线">《Unity Shader入门精要》第二章 | 渲染流水线</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -296,7 +323,7 @@
         <div class="post-content">
             渲染流水线 Render-Time Rendering, Third Edition》一书中将一个渲染流程分成3个阶段：应用阶段（Application Stage） 、几何阶段（Geometry Stage） 、光栅化阶段（Rasterizer Stage） 。 应……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader03/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shaderrenderpipline/">阅读全文</a></p>
     </article>
     
     
@@ -304,7 +331,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader02/" title="shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a>
+                <a href="https://blog.rakfree.tk/2022/04/shaderhelloworld/" title="shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)">shader初尝试 ｜ 给石头覆盖一层雪景(Hello World)</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -323,34 +350,7 @@
         <div class="post-content">
             给石头覆盖一层雪景 资源准备 石头模型 Unity2021.2.3f1c1 Mac &amp; Windows 在Unity中创建一个项目，导入石头模型，下面就开始利用shader给石头做一个雪景覆盖. 实现效果 未覆盖雪景的样子 覆盖了雪景的样子 开始代码 我在代码中标注了1，……
         </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader02/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2022/04/shader01/" title="UnityShader基本概念">UnityShader基本概念</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年4月6日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.UnityShader'>编程.UnityShader</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            何为shader shader中文翻译为着色器，其实是一种用来渲染图形的技术，我们可以通过shader编程，来自定义显卡渲染画面的算法，显示我们所期望的结果。 shader种类 顶点着色器: 处理每个顶点，将……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shader01/">阅读全文</a></p>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2022/04/shaderhelloworld/">阅读全文</a></p>
     </article>
     
     
@@ -485,11 +485,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/05/shader07/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章 | 透明度">《Unity Shader入门精要》第八章 | 透明度</a>
     </li>
     
     <li>
-        <a href="https://blog.rakfree.tk/2022/05/shader06/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
+        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章 | 基础光照">《Unity Shader入门精要》第六章 | 基础光照</a>
+    </li>
+    
+    <li>
+        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章 | 开始shader练习">《Unity Shader入门精要》第五章 | 开始shader练习</a>
     </li>
     
     <li>
@@ -498,10 +502,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/cginc/" title="UnityCG.cginc中常用函数">UnityCG.cginc中常用函数</a>
     </li>
     
 </ul>
@@ -547,7 +547,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (94)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -559,7 +559,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (10)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
