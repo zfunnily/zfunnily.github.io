@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-05-07T17:17:18&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T18:04:53&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-07T18:08:54&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第八章 | 透明度">
@@ -170,8 +170,8 @@
         <li><a href="#透明度混合的双面渲染">透明度混合的双面渲染</a></li>
       </ul>
     </li>
-    <li><a href="#ztest">ZTest</a></li>
-    <li><a href="#stencil">Stencil</a></li>
+    <li><a href="#ztest-copy">ZTest (copy)</a></li>
+    <li><a href="#stencil-copy">Stencil (copy)</a></li>
     <li><a href="#扩展阅读">扩展阅读</a></li>
   </ul>
 </nav>
@@ -635,7 +635,7 @@ Blend One One
 <li>第一个Pass只渲染背面 Cull Front</li>
 <li>第二个Pass只渲染正面 Cull Back</li>
 </ul>
-<h2 id="ztest">ZTest</h2>
+<h2 id="ztest-copy">ZTest (copy)</h2>
 <p>比较新旧z值的大小，就是Ztest;之后更新摄像机每一个像素的z值，就是Zwrite。
 Ztest影响的是当前物体的显示；Zwrite影响的是之后渲染物体的显示。</p>
 <p>Zwrite的概念相对简单，无非就是根据条件，对一个变量进行反复地赋值。比较有意思的Ztest。
@@ -651,7 +651,7 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
 <p>Never(Ztest永远不通过)</p>
 <p>Off(等同于 ZTest Always)</p>
 <p>On(等同于ZTest LEqual)</p>
-<h2 id="stencil">Stencil</h2>
+<h2 id="stencil-copy">Stencil (copy)</h2>
 <p>我们假定Stencil也有一个值叫Ref值。那么Stencil的用法也实在是看着眼熟：获取Ref值-&gt;测试(比较)Ref值-&gt;写入新的Ref值(如果通过测试)。</p>
 <p>说到底这俩玩意儿的区别，就是在第一步，获取当前物体在这个像素上的这个变量。</p>
 <p>Z值是根据像素到摄像机的距离算出来的，不会因为你的个人意愿而改变；S值是你可以随便填的(是的随便填，想写几就写几，范围0-255)。</p>
@@ -680,7 +680,7 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
                 <a href="https://blog.rakfree.tk/2022/05/shaderalpha/">https://blog.rakfree.tk/2022/05/shaderalpha/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:04:53</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:08:54</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
