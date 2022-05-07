@@ -6,7 +6,16 @@
     <description>Recent content in 读书笔记 on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 10 Apr 2022 15:42:33 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 10:22:33 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《Unity Shader入门精要》第五章 | 开始shader练习</title>
+      <link>https://blog.rakfree.tk/2022/05/shader06/</link>
+      <pubDate>Sat, 07 May 2022 10:22:33 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/05/shader06/</guid>
+      <description>一个简单的顶点/片元着色器 代码 Shader &amp;#34;Unity Shaders Book/Chapter 5/Simple Shader&amp;#34; { Properties { // 声明一个Color类型的属性 _Color (&amp;#34;Color Tint&amp;#34;, Color) = (1.0,1.0,1.0,1.0) } SubShader { Pass { CGPROGRAM #pragma vertex vert #pragma fragment frag // 在Cg代码中，我们需要定义一个与属性名称和类型都匹配的变量 fixed4 _Color; // 使用一个结构体来定义</description>
+    </item>
+    
     <item>
       <title>《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</title>
       <link>https://blog.rakfree.tk/2022/04/shader05/</link>

@@ -6,7 +6,16 @@
     <description>Recent content in 编程.UnityShader on Zzz记忆</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 05 May 2022 16:49:29 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 10:22:33 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>《Unity Shader入门精要》第五章 | 开始shader练习</title>
+      <link>https://blog.rakfree.tk/2022/05/shader06/</link>
+      <pubDate>Sat, 07 May 2022 10:22:33 +0800</pubDate>
+      
+      <guid>https://blog.rakfree.tk/2022/05/shader06/</guid>
+      <description>一个简单的顶点/片元着色器 代码 Shader &amp;#34;Unity Shaders Book/Chapter 5/Simple Shader&amp;#34; { Properties { // 声明一个Color类型的属性 _Color (&amp;#34;Color Tint&amp;#34;, Color) = (1.0,1.0,1.0,1.0) } SubShader { Pass { CGPROGRAM #pragma vertex vert #pragma fragment frag // 在Cg代码中，我们需要定义一个与属性名称和类型都匹配的变量 fixed4 _Color; // 使用一个结构体来定义</description>
+    </item>
+    
     <item>
       <title>MAC平台几何着色器不生效</title>
       <link>https://blog.rakfree.tk/2022/05/geometry/</link>
