@@ -8,7 +8,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 07 May 2022 17:17:18 +0800</lastBuildDate><atom:link href="https://blog.rakfree.tk/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>《Unity Shader入门精要》第八章 | 透明度</title>
+      <title>《Unity Shader入门精要》第八章笔记 | 透明度</title>
       <link>https://blog.rakfree.tk/2022/05/shaderalpha/</link>
       <pubDate>Sat, 07 May 2022 17:17:18 +0800</pubDate>
       
@@ -17,7 +17,7 @@
     </item>
     
     <item>
-      <title>《Unity Shader入门精要》第六章 | 基础光照</title>
+      <title>《Unity Shader入门精要》第六章笔记 | 基础光照</title>
       <link>https://blog.rakfree.tk/2022/05/shaderlighting/</link>
       <pubDate>Sat, 07 May 2022 16:22:40 +0800</pubDate>
       
@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>《Unity Shader入门精要》第五章 | 开始shader练习</title>
+      <title>《Unity Shader入门精要》第五章笔记 | 开始shader练习</title>
       <link>https://blog.rakfree.tk/2022/05/shaderbase/</link>
       <pubDate>Sat, 07 May 2022 10:22:33 +0800</pubDate>
       
@@ -62,7 +62,7 @@
     </item>
     
     <item>
-      <title>《Unity Shader入门精要》第四章 | 学习Shader所需的数学基础</title>
+      <title>《Unity Shader入门精要》第四章笔记 | 学习Shader所需的数学基础</title>
       <link>https://blog.rakfree.tk/2022/04/shadermathematic/</link>
       <pubDate>Sun, 10 Apr 2022 15:42:33 +0800</pubDate>
       
@@ -71,7 +71,7 @@
     </item>
     
     <item>
-      <title>《Unity Shader入门精要》第三章 | UnityShader基础</title>
+      <title>《Unity Shader入门精要》第三章笔记| UnityShader基础</title>
       <link>https://blog.rakfree.tk/2022/04/shaderbase/</link>
       <pubDate>Sun, 10 Apr 2022 14:51:19 +0800</pubDate>
       
@@ -80,7 +80,7 @@
     </item>
     
     <item>
-      <title>《Unity Shader入门精要》第二章 | 渲染流水线</title>
+      <title>《Unity Shader入门精要》第二章笔记 | 渲染流水线</title>
       <link>https://blog.rakfree.tk/2022/04/shaderrenderpipline/</link>
       <pubDate>Sat, 09 Apr 2022 11:55:55 +0800</pubDate>
       
