@@ -7,22 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>music | Zzz记忆</title>
-    <meta property="og:title" content="music - Zzz记忆">
+    <title>百度网盘不限速 | Aria2篇 | Zzz记忆</title>
+    <meta property="og:title" content="百度网盘不限速 | Aria2篇 - Zzz记忆">
     <meta property="og:type" content="article">
     <meta name="color-scheme" content="light dark">
         
+    <meta property="article:published_time" content='2022-05-17T16:40:59&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-05-17T17:23:09&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="music">
+    <meta name="description" content="百度网盘不限速 | Aria2篇">
         
     <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/tags/music/">
+    <meta property="og:url" content="https://blog.rakfree.tk/2022/05/baidu/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://blog.rakfree.tk/tags/music/index.xml" title="Zzz记忆" />
     <script type="text/javascript" src="/js/jquery.js"></script>
 
     
@@ -60,7 +63,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://blog.rakfree.tk">首页</a>
+                    <a class="current" href="https://blog.rakfree.tk">首页</a>
                     
                     <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
                     
@@ -83,45 +86,267 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">music</span>
-        的文章
-    </h3>
-    
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
-    
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+
+<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#环境">环境</a></li>
+    <li><a href="#aria2">Aria2</a></li>
+    <li><a href="#百度网盘简易下载助手">百度网盘简易下载助手</a></li>
+    <li><a href="#扩展阅读">扩展阅读</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/09/music/">免费Music</a>
-            </h1>
+            <h1 class="post-title">百度网盘不限速 | Aria2篇</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年9月8日
+            2022年5月17日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a>
+            <span class="meta-category"><a href='/categories/IT'>IT</a></span>
             
+        </div>
+        
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
         </div>
         
         <div class="post-content">
-            介绍一个可以免费听音乐的方法 环境 docker mac 安装 $ docker run -d -p 264:264 -p 9000:9000 -v $dir_name:/var/www/html/cache --name music oldiy/music-player-docker $dir_name 是 你自己宿主机的目录。可以自定义 访问：127.0.0.1:264 就可以放心使用， 同事推荐的，贼好用。……
-            <p class="readmore"><a href="https://blog.rakfree.tk/2021/09/music/">阅读全文</a></p>
+            <h2 id="环境">环境</h2>
+<ul>
+<li>win10</li>
+<li>chrome</li>
+<li>油猴插件</li>
+<li>aria2</li>
+</ul>
+<h2 id="aria2">Aria2</h2>
+<p>对于不想折腾的有懒人包. 实际上包里含有的是aria2软件和aria2 GUI。 下载链接如下:</p>
+<ol>
+<li>懒人下载包：https://wwz.lanzouf.com/ieHNa04n4igb</li>
+<li>AriaNg: <a href="https://github.com/mayswind/AriaNg/releases/tag/1.2.4">https://github.com/mayswind/AriaNg/releases/tag/1.2.4</a></li>
+<li>Aria2: <a href="https://github.com/aria2/aria2/releases">https://github.com/aria2/aria2/releases</a></li>
+</ol>
+<h2 id="百度网盘简易下载助手">百度网盘简易下载助手</h2>
+<p>安装油猴脚本 <a href="https://greasyfork.org/zh-CN/scripts/418182-%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E7%AE%80%E6%98%93%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B-%E7%9B%B4%E9%93%BE%E4%B8%8B%E8%BD%BD%E5%A4%8D%E6%B4%BB%E7%89%88">百度网盘简易下载助手</a></p>
+<p>安装好上述环境之后，可以在百度网盘web页面看到
+
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/zfunnily/PictureUtools20220517170400.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/zfunnily/PictureUtools20220517170400.png" />
+        </a>
+    </p>
+<p>选中一个你想要下载的文件，然后点击获取直链地址。第一次获取可能需要关注公众号，获得验证码。输入验证码之后，再次点击获取直链地址。
+
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517170755.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517170755.png" />
+        </a>
+    </p>
+<p>可以选择复制直链地址，也可以直接发送到Aria2。 可以看到速度飞起， 比开了会员的速度还要快。
+
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517171031.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517171031.png" />
+        </a>
+    </p>
+<h2 id="扩展阅读">扩展阅读</h2>
+<p>这次突破百度云盘的方法有几个要素:</p>
+<ol>
+<li>软件 aria2</li>
+<li>得到百度网盘里文件的直链，能让aria2下载</li>
+</ol>
+<p>aria2 软件是不会被封的(可能被墙，暂且不论)，被封的只能是脚本了。所以如果上面百度网盘简易下载助手的脚本失效了， 可以尝试去晚上找别的可以获取直链的方法。 比如: <a href="https://greasyfork.org/zh-CN/scripts/436446-%E7%BD%91%E7%9B%98%E7%9B%B4%E9%93%BE%E4%B8%8B%E8%BD%BD%E5%8A%A9%E6%89%8B">网盘直链下载助手</a></p>
+<ol>
+<li>
+<p>脚本安装后，在百度网盘web页面上会有一个 &ldquo;下载助手&rdquo; 按钮。</p>
+</li>
+<li>
+<p>选中文件，点击按钮，可以获得aria2的下载直链。
+
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517171759.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220517171759.png" />
+        </a>
+    </p>
+</li>
+<li>
+<p>然后到aria2.exe所在目录，右键运行cmd黑窗体，执行命令下载命令:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>aria2c &#34;https://d.pcs.baidu.com/file/3880b7adak647ec42ca8aec1c13631da?fid=1271847445-250528-373982952796171&amp;rt=pr&amp;sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-tBWHrm%2Bd0hfZqkEtvEVVP6chmMM%3D&amp;expires=8h&amp;chkbd=0&amp;chkv=0&amp;dp-logid=3278883060372832463&amp;dp-callid=0&amp;dstime=1652779150&amp;r=192156788&amp;origin_appid=&amp;file_type=0&#34; --out &#34;hdzs_66795.zip&#34; --header &#34;User-Agent: pan.baidu.com&#34; --header &#34;Cookie: BDUSS=Hg2dXJwcDdUZk81RDdHaTNnRkdLczNzdWNSRmlvdzhjb1c1Zlo5bHExWmN4S1ZpSVFBQUFBJCQAAAAAAAAAAAEAAACUS8rKu-6xprfJueoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFw3fd&#34;
+</span></span></code></pre></div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/37021947">https://zhuanlan.zhihu.com/p/37021947</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/492677609">https://zhuanlan.zhihu.com/p/492677609</a></li>
+</ul>
+
+
+            <h4 align="center">--完--</h4>
+        </div>
+
+        
+
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong>
+            
+                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
+            
+        </li>
+        <li style="word-break:break-all"><strong> 原文链接：</strong>
+            
+                <a href="https://blog.rakfree.tk/2022/05/baidu/">https://blog.rakfree.tk/2022/05/baidu/</a>
+            
+        </li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 17:23:09</li>
+        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/2022/05/refraction/">URP 透明/半透明物体的折射</a></li>
+        
+        <li><a href="/2022/05/shaderalpha/">《Unity Shader入门精要》第八章笔记 | 透明度</a></li>
+        
+        <li><a href="/2022/05/shaderlighting/">《Unity Shader入门精要》第六章笔记 | 基础光照</a></li>
+        
+        <li><a href="/2022/05/shaderbase/">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a></li>
+        
+        <li><a href="/2022/05/geometry/">MAC平台几何着色器不生效</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
         </div>
     </article>
     
-
     
 
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "zfunnily/zfunnily.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 
-
-
-
+    
 </div>
 
                     
@@ -163,6 +388,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
