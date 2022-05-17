@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-10-12T16:29:34&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T16:02:34&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="CPU的核与线程-4核8线程">
@@ -219,33 +219,29 @@
         
         <div class="post-content">
             <h2 id="a-idcpu_1a查看cpu信息"><a id="cpu_1"></a>查看cpu信息</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo
-
-</code></pre></div><h2 id="a-idcpu_7a物理cpu"><a id="CPU_7"></a>物理CPU</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ cat /proc/cpuinfo
+</span></span></code></pre></div><h2 id="a-idcpu_7a物理cpu"><a id="CPU_7"></a>物理CPU</h2>
 <p>物理CPU就是计算机上实际配置的CPU个数。<br> 在linux上可以打开<strong>cat /proc/cpuinfo</strong> 来查看，其中的physical id就是每个物理CPU的ID，能找到几个<strong>physical id</strong>就代表计算机实际有几个CPU。</p>
 <p>在linux下可以通过指令 <strong>grep ‘physical id’ /proc/cpuinfo | sort -u | wc -l</strong> 来查看物理CPU个数。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
-
-1
-
-</code></pre></div><h2 id="a-idcpu_19acpu核数"><a id="cpu_19"></a>cpu核数</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1
+</span></span></code></pre></div><h2 id="a-idcpu_19acpu核数"><a id="cpu_19"></a>cpu核数</h2>
 <p>linux的cpu核心总数也可以在/proc/cpuinfo里面通过指令cat /proc/cpuinfo查看的到，其中的core id指的是每个物理CPU下的cpu核的id，能找到几个core id就代表计算机有几个核心。</p>
 <h3 id="a-id_22a物理核"><a id="_22"></a>物理核</h3>
 <p>物理核数=cpu数(机子上装的cpu的数量)*每个cpu的物理核数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
-
-4
-
-</code></pre></div><h3 id="a-id_29a虚拟核"><a id="_29"></a>虚拟核</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4
+</span></span></code></pre></div><h3 id="a-id_29a虚拟核"><a id="_29"></a>虚拟核</h3>
 <p>所谓的4核8线程，4核指的是物理数。通过超线程技术，用一个物理核 模拟两个虚拟核，每个虚拟核1个线程，总数为8线程。<br> 在操作系统看来是8个核，但是实际上是4个物理核。<br> 通过超线程技术可以实现单个物理核实现线程级别的并行计算，但是比不上性能两个物理核。</p>
 <h2 id="a-idcpu_35a逻辑cpu"><a id="CPU_35"></a>逻辑CPU</h2>
 <p>操作系统可以使用逻辑CPU来模拟出真实CPU的效果。在之前没有多核处理器的时候，一个CPU只有一个核，而现在有了多核技术，其效果就好像把多个CPU集中在一个CPU上。</p>
 <p>当计算机没有开启超线程时，逻辑CPU的个数就是计算机的核数。而当超线程开启后，逻辑CPU的个数是核数的两倍。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;processor&#39; /proc/cpuinfo | sort -u | wc -l
-
-8
-
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ grep &#39;processor&#39; /proc/cpuinfo | sort -u | wc -l
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>8
+</span></span></code></pre></div><blockquote>
 </blockquote>
 <p>8/4/1 = 2 看来已经开启了超线程<br> 逻辑CPU的数量/物理核的数量/cpu核数 = 2 则开启了超线程</p>
 <h3 id="a-id_47a线程数量"><a id="_47"></a>线程数量</h3>
@@ -254,15 +250,12 @@
 <p>都是一个cpu，不同的是每个cpu上的核心数<br> 多核cpu是多个单核cpu的替代方案，多核cpu减小了体积，同时也减少了功耗<br> <strong>一个核心只能同时执行一个线程</strong></p>
 <h2 id="a-id_56a总结"><a id="_56"></a>总结</h2>
 <p>1.物理cpu数：主板上实际插入的cpu数量，可以数不重复的 physical id 有几个（physical id）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
-
-</code></pre></div><p>2.cpu核数：单块CPU上面能处理数据的芯片组的数量，如双核、四核等 （cpu cores）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
-
-</code></pre></div><p>3.逻辑cpu数：简单来说，它可使处理器中的1颗内核，如2颗内核那样在操作系统中发挥作用。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ cat /proc/cpuinfo | grep &#39;cpu cores&#39; | wc -l
-
-</code></pre></div><p>这样一来，操作系统可使用的执行资源扩大了一倍，大幅提高了系统的整体性能，此时逻辑cpu=物理CPU个数×每颗核数x2。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ grep &#39;physical id&#39; /proc/cpuinfo | sort -u | wc -l
+</span></span></code></pre></div><p>2.cpu核数：单块CPU上面能处理数据的芯片组的数量，如双核、四核等 （cpu cores）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ grep &#39;core id&#39; /proc/cpuinfo | sort -u | wc -l
+</span></span></code></pre></div><p>3.逻辑cpu数：简单来说，它可使处理器中的1颗内核，如2颗内核那样在操作系统中发挥作用。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ cat /proc/cpuinfo | grep &#39;cpu cores&#39; | wc -l
+</span></span></code></pre></div><p>这样一来，操作系统可使用的执行资源扩大了一倍，大幅提高了系统的整体性能，此时逻辑cpu=物理CPU个数×每颗核数x2。</p>
 <p>总核数 = 物理CPU个数 × 每颗物理CPU的核数。总逻辑CPU数 = 物理CPU个数 ×每颗物理CPU的核数 × 超线程数。</p>
 <p>所以这算双核的。</p>
 
@@ -284,7 +277,7 @@
                 <a href="https://blog.rakfree.tk/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/">https://blog.rakfree.tk/2020/10/CPU%E7%9A%84%E6%A0%B8%E4%B8%8E%E7%BA%BF%E7%A8%8B-4%E6%A0%B88%E7%BA%BF%E7%A8%8B/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 16:02:34</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -418,6 +411,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -431,10 +428,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -480,7 +473,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -492,7 +485,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -518,6 +511,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

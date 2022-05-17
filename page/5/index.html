@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.87.0" />
+	<meta name="generator" content="Hugo 0.99.0" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,6 +83,31 @@
                     
 <div class="res-cons">
 
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://blog.rakfree.tk/2021/10/shell/" title="Golang | 调用带有后台进程shell脚本可能会被挂起">Golang | 调用带有后台进程shell脚本可能会被挂起</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年10月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            起因 今天用Golang写一个调用外部shell脚本的程序，使用 exec.Command方法，这段脚本代码中包含了一个后台任务语句。 结果发生了一个问题：cmd.Output 始终不会返回，一直挂起。导致我……
+        </div>
+        <p class="readmore"><a href="https://blog.rakfree.tk/2021/10/shell/">阅读全文</a></p>
+    </article>
     
     <article class="post">
         <header>
@@ -307,31 +332,6 @@
         <p class="readmore"><a href="https://blog.rakfree.tk/2021/06/distribute/">阅读全文</a></p>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://blog.rakfree.tk/2021/06/goredis/" title="Golang | redis">Golang | redis</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年6月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Golang'>编程.Golang</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            概述 网上有很多golang操作redis的例子，我使用github.com/gomodule/redigo/redis包写一个关于redis分布式锁的问题。 redis分布式锁 锁需要的几个组件 获取锁 删除……
-        </div>
-        <p class="readmore"><a href="https://blog.rakfree.tk/2021/06/goredis/">阅读全文</a></p>
-    </article>
-    
     
 
 
@@ -495,6 +495,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -508,10 +512,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -557,7 +557,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -569,7 +569,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -595,6 +595,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

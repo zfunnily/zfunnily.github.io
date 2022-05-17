@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-15T00:05:15&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | Ingress的基本使用">
@@ -207,136 +207,132 @@
         <div class="post-content">
             <h2 id="缘由">缘由</h2>
 <p>看了statefulset基础教程的基础教程，并且把环境搭建起来后。pod内部是可以连通了。但是我不知道怎么去从外部访问。在网上搜索一番，通过Ingress可以作为集群的入口。遂记录之。<br> 结合Statefulset的示例进行配置。这是未配置Ingress之前的Statefulset示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-  labels:
-    app: nginx
-spec:
-  ports:
-    - port: 80
-      name: web
-  clusterIP: None
-  selector:
-    app: nginx
-
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: &#34;www-data-pv&#34;
-  labels:
-    name: www-data-pv
-    release: stable
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
-  nfs:
-    path: /nfs/www/data
-    server: 192.168.84.75
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: www-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  selector:
-    matchLabels:
-      name: www-data-pv
-      release: stable
-
----
-
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: web
-spec:
-  serviceName: &#34;nginx&#34;
-  replicas: 2
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-        - name: nginx
-          image: nginx
-          ports:
-            - containerPort: 80
-              name: web
-          volumeMounts:
-            - name: www
-              mountPath: /usr/share/nginx/html
-      volumes:
-        - name: www
-          persistentVolumeClaim:
-            claimName:  www-data-pvc
-
-</code></pre></div><h2 id="a-idingress_86aingress"><a id="Ingress_86"></a>Ingress</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: Service
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: nginx
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  ports:
+</span></span><span style="display:flex;"><span>    - port: 80
+</span></span><span style="display:flex;"><span>      name: web
+</span></span><span style="display:flex;"><span>  clusterIP: None
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: PersistentVolume
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: &#34;www-data-pv&#34;
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    name: www-data-pv
+</span></span><span style="display:flex;"><span>    release: stable
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  capacity:
+</span></span><span style="display:flex;"><span>    storage: 5Gi
+</span></span><span style="display:flex;"><span>  accessModes:
+</span></span><span style="display:flex;"><span>    - ReadWriteOnce
+</span></span><span style="display:flex;"><span>  persistentVolumeReclaimPolicy: Recycle
+</span></span><span style="display:flex;"><span>  nfs:
+</span></span><span style="display:flex;"><span>    path: /nfs/www/data
+</span></span><span style="display:flex;"><span>    server: 192.168.84.75
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: PersistentVolumeClaim
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: www-data-pvc
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  accessModes:
+</span></span><span style="display:flex;"><span>    - ReadWriteOnce
+</span></span><span style="display:flex;"><span>  resources:
+</span></span><span style="display:flex;"><span>    requests:
+</span></span><span style="display:flex;"><span>      storage: 5Gi
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    matchLabels:
+</span></span><span style="display:flex;"><span>      name: www-data-pv
+</span></span><span style="display:flex;"><span>      release: stable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>apiVersion: apps/v1
+</span></span><span style="display:flex;"><span>kind: StatefulSet
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: web
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  serviceName: &#34;nginx&#34;
+</span></span><span style="display:flex;"><span>  replicas: 2
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    matchLabels:
+</span></span><span style="display:flex;"><span>      app: nginx
+</span></span><span style="display:flex;"><span>  template:
+</span></span><span style="display:flex;"><span>    metadata:
+</span></span><span style="display:flex;"><span>      labels:
+</span></span><span style="display:flex;"><span>        app: nginx
+</span></span><span style="display:flex;"><span>    spec:
+</span></span><span style="display:flex;"><span>      containers:
+</span></span><span style="display:flex;"><span>        - name: nginx
+</span></span><span style="display:flex;"><span>          image: nginx
+</span></span><span style="display:flex;"><span>          ports:
+</span></span><span style="display:flex;"><span>            - containerPort: 80
+</span></span><span style="display:flex;"><span>              name: web
+</span></span><span style="display:flex;"><span>          volumeMounts:
+</span></span><span style="display:flex;"><span>            - name: www
+</span></span><span style="display:flex;"><span>              mountPath: /usr/share/nginx/html
+</span></span><span style="display:flex;"><span>      volumes:
+</span></span><span style="display:flex;"><span>        - name: www
+</span></span><span style="display:flex;"><span>          persistentVolumeClaim:
+</span></span><span style="display:flex;"><span>            claimName:  www-data-pvc
+</span></span></code></pre></div><h2 id="a-idingress_86aingress"><a id="Ingress_86"></a>Ingress</h2>
 <p>我们知道前面我们使用 NodePort 和 LoadBlancer 类型的 Service 可以实现把应用暴露给外部用户使用，除此之外，Kubernetes 还为我们提供了一个非常重要的资源对象可以用来暴露服务给外部用户，那就是 ingress。<br> 创建一个 ingress 对象：(ingress.yaml)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Ingress 配置
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: web-cluster-external
-  labels:
-    name: web-cluster-external
-    app: nginx
-spec:
-  rules:
-    - host: nginx.com
-      http:
-        paths:
-          - backend:
-              serviceName: web-cluster-external
-              servicePort: 80
-            path: /
-
-</code></pre></div><p>然后为 traefik dashboard 创建对应的 ingress 对象：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl create -f ingress.yaml
-
-</code></pre></div><p>可以查看ingress是否创建成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl describe ingress web-cluster-external
-
-</code></pre></div><p>要注意上面的 ingress 对象的规则，特别是 rules 区域，我们这里是要为 ngin 建立一个 ingress 对象，所以这里的 serviceName 对应的是上面我们创建的 web-cluster-external<br> ，端口也要注意对应 80端口，为了避免端口更改，这里的 servicePort 的值也可以替换成上面定义的 port 的名字： web<br> ``<br> 创建完成后，我们应该怎么来测试呢？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># Ingress 配置
+</span></span><span style="display:flex;"><span>apiVersion: extensions/v1beta1
+</span></span><span style="display:flex;"><span>kind: Ingress
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: web-cluster-external
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    name: web-cluster-external
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  rules:
+</span></span><span style="display:flex;"><span>    - host: nginx.com
+</span></span><span style="display:flex;"><span>      http:
+</span></span><span style="display:flex;"><span>        paths:
+</span></span><span style="display:flex;"><span>          - backend:
+</span></span><span style="display:flex;"><span>              serviceName: web-cluster-external
+</span></span><span style="display:flex;"><span>              servicePort: 80
+</span></span><span style="display:flex;"><span>            path: /
+</span></span></code></pre></div><p>然后为 traefik dashboard 创建对应的 ingress 对象：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ kubectl create -f ingress.yaml
+</span></span></code></pre></div><p>可以查看ingress是否创建成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubectl describe ingress web-cluster-external
+</span></span></code></pre></div><p>要注意上面的 ingress 对象的规则，特别是 rules 区域，我们这里是要为 ngin 建立一个 ingress 对象，所以这里的 serviceName 对应的是上面我们创建的 web-cluster-external<br> ，端口也要注意对应 80端口，为了避免端口更改，这里的 servicePort 的值也可以替换成上面定义的 port 的名字： web<br> ``<br> 创建完成后，我们应该怎么来测试呢？</p>
 <ul>
 <li>第一步，在本地的**/etc/hosts**里面添加上 nginx.com<br> 与 节点外网 IP 的映射关系- 第二步，在浏览器中访问：nginx.com 我们会发现并没有得到我们期望的 inde.html界面，这是因为我们上面statefulset 部署 nginx 的时候没有外放NodePort端口。需要配置。ClusterIP都是集群内部访问的。需要我们建立一个名为service对象node.yaml</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># cluster ip
-apiVersion: v1
-kind: Service
-metadata:
-  name:  web-cluster-external
-  labels:
-    name:  web-cluster-external
-    app: nginx
-spec:
-  selector:
-    app: nginx
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      nodePort: 32002 #增加
-  type: NodePort
-</code></pre></div><p>创建service对象</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl  apply node.yaml
-</code></pre></div><p>这样就可以通过节点 ip:32002来访问nginx或者是通过域名来访问啦</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># cluster ip
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: Service
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name:  web-cluster-external
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    name:  web-cluster-external
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>  ports:
+</span></span><span style="display:flex;"><span>    - name: http
+</span></span><span style="display:flex;"><span>      port: 80
+</span></span><span style="display:flex;"><span>      targetPort: 80
+</span></span><span style="display:flex;"><span>      nodePort: 32002 #增加
+</span></span><span style="display:flex;"><span>  type: NodePort
+</span></span></code></pre></div><p>创建service对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubectl  apply node.yaml
+</span></span></code></pre></div><p>这样就可以通过节点 ip:32002来访问nginx或者是通过域名来访问啦</p>
 
 
             <h4 align="center">--完--</h4>
@@ -356,7 +352,7 @@ spec:
                 <a href="https://blog.rakfree.tk/2020/08/ingress/">https://blog.rakfree.tk/2020/08/ingress/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -490,6 +486,10 @@ spec:
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -503,10 +503,6 @@ spec:
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -552,7 +548,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -564,7 +560,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -590,6 +586,8 @@ spec:
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

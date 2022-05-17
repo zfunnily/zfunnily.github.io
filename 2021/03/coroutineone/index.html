@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-03-09T09:43:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T18:58:01&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="协程解析一 | ucontext">
@@ -211,19 +211,18 @@
             <h2 id="概述">概述</h2>
 <p>最近在研究协程的实现原理，看了云风的coroutine和腾讯的开源库libco后，原来要实现一个协程库也没那么难。我先来讲讲云风的coroutine库。他使用的是 <code>uncontext</code>来保存程序运行上下文，进而实现协程库，这个库很值深入了解一番，吃透了这个库，协程的原理也就了解了。</p>
 <p>头文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;ucontext.h&gt;
-</code></pre></div><p><code>ucontext</code>结构体</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">typedef struct ucontext
-  {
-    unsigned long int uc_flags;
-    struct ucontext *uc_link;
-    stack_t uc_stack;
-    mcontext_t uc_mcontext;
-    __sigset_t uc_sigmask;
-    struct _libc_fpstate __fpregs_mem;
-  } ucontext_t;
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#include &lt;ucontext.h&gt;
+</span></span></code></pre></div><p><code>ucontext</code>结构体</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>typedef struct ucontext
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    unsigned long int uc_flags;
+</span></span><span style="display:flex;"><span>    struct ucontext *uc_link;
+</span></span><span style="display:flex;"><span>    stack_t uc_stack;
+</span></span><span style="display:flex;"><span>    mcontext_t uc_mcontext;
+</span></span><span style="display:flex;"><span>    __sigset_t uc_sigmask;
+</span></span><span style="display:flex;"><span>    struct _libc_fpstate __fpregs_mem;
+</span></span><span style="display:flex;"><span>  } ucontext_t;
+</span></span></code></pre></div><ul>
 <li><code>sigset_t</code>和 <code>stack_t</code> 定义在标准头文件 <code>&lt;signal.h&gt;</code> 中</li>
 <li><code>uc_link</code>字段保存当前context结束后继续执行的context记录;</li>
 <li><code>uc_sigmask</code> 记录该context运行阶段需要屏蔽的信号;</li>
@@ -231,30 +230,29 @@
 <li><code>uc_mcontext</code> 则保存具体的程序执行上下文——如PC值、堆栈指针、寄存器值等信息</li>
 </ul>
 <p>操作<code>ucontext</code>的四个函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">getcontext()  : 获取当前context
-setcontext()  : 切换到指定context
-makecontext() : 设置 函数指针 和 堆栈 到对应context保存的sp和pc寄存器中,调用之前要先调用 getcontext()
-swapcontext() : 保存当前context，并且切换到指定context
-</code></pre></div><h2 id="通过getcontext和swapcontext实现流程控制">通过getcontext和swapcontext实现流程控制</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>getcontext()  : 获取当前context
+</span></span><span style="display:flex;"><span>setcontext()  : 切换到指定context
+</span></span><span style="display:flex;"><span>makecontext() : 设置 函数指针 和 堆栈 到对应context保存的sp和pc寄存器中,调用之前要先调用 getcontext()
+</span></span><span style="display:flex;"><span>swapcontext() : 保存当前context，并且切换到指定context
+</span></span></code></pre></div><h2 id="通过getcontext和swapcontext实现流程控制">通过getcontext和swapcontext实现流程控制</h2>
 <p>代码如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-mysql" data-lang="mysql"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-<span style="color:#960050;background-color:#1e0010">{</span>
-	ucontext_t ctx, main;
-	<span style="color:#66d9ef">int</span> done <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-	<span style="color:#a6e22e">getcontext</span>(<span style="color:#f92672">&amp;</span>ctx); 
-	<span style="color:#66d9ef">if</span> (done <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>)
-	<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#f92672">&lt;!</span><span style="color:#75715e">-- --&gt;
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;ctx done\n&#34;</span>);
-		<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>ctx, <span style="color:#f92672">&amp;</span>main); <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">切换到指定的</span>main
-	<span style="color:#960050;background-color:#1e0010">}</span>
-	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;done: %d\n&#34;</span>, done<span style="color:#f92672">++</span>);
-	<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>main, <span style="color:#f92672">&amp;</span>ctx);  <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">保存当前上下文</span><span style="color:#f92672">`</span>main<span style="color:#f92672">`</span><span style="color:#960050;background-color:#1e0010">，并且切换到指定</span><span style="color:#f92672">`</span>ctx<span style="color:#f92672">`</span>
-
-	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;return 1\n&#34;</span>);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-<span style="color:#960050;background-color:#1e0010">}</span>
-
-</code></pre></div><p>具体步骤如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>	ucontext_t ctx, main;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> done <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">getcontext</span>(<span style="color:#f92672">&amp;</span>ctx); 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (done <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">{</span><span style="color:#f92672">&lt;!</span><span style="color:#75715e">-- --&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;ctx done\n&#34;</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>ctx, <span style="color:#f92672">&amp;</span>main); <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">切换到指定的</span>main
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;done: %d\n&#34;</span>, done<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">swapcontext</span>(<span style="color:#f92672">&amp;</span>main, <span style="color:#f92672">&amp;</span>ctx);  <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">保存当前上下文</span><span style="color:#f92672">`</span>main<span style="color:#f92672">`</span><span style="color:#960050;background-color:#1e0010">，并且切换到指定</span><span style="color:#f92672">`</span>ctx<span style="color:#f92672">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;return 1\n&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><p>具体步骤如下：</p>
 <ul>
 <li>获取当前上下文: getcontext(&amp;ctx);
 判断 <code>done&gt;5</code>,</li>
@@ -262,99 +260,98 @@ swapcontext() : 保存当前context，并且切换到指定context
 <li>如果为真则切换上下文： <code>swapcontext(&amp;ctx, &amp;main);</code>，</li>
 </ul>
 <p>输出如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">done: 1
-done: 2
-done: 3
-done: 4
-done: 5
-ctx done
-return 1
-
-</code></pre></div><h2 id="a-iduncontet_71a使用uncontet写一个消费者和生产者的程序"><a id="uncontet_71"></a>使用uncontet写一个消费者和生产者的程序</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>done: 1
+</span></span><span style="display:flex;"><span>done: 2
+</span></span><span style="display:flex;"><span>done: 3
+</span></span><span style="display:flex;"><span>done: 4
+</span></span><span style="display:flex;"><span>done: 5
+</span></span><span style="display:flex;"><span>ctx done
+</span></span><span style="display:flex;"><span>return 1
+</span></span></code></pre></div><h2 id="a-iduncontet_71a使用uncontet写一个消费者和生产者的程序"><a id="uncontet_71"></a>使用uncontet写一个消费者和生产者的程序</h2>
 <p>步骤如下：</p>
 <ul>
 <li>生产者，产生一个值，保存当前上下文，切换到消费者上下文- 消费者，输出生产者传递过来的值。保存消费者的当前上下文，切换到生产者
 上下文切换已经做了标记，代码如下：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//procus.c
-#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;ucontext.h&gt;
-#include &lt;stddef.h&gt;
-
-#include &lt;sys/types.h&gt;
-
-#define STACK_SIZE (1024*1024)
-
-struct args {&lt;!-- --&gt;
-	int n;
-	int send;
-	ucontext_t*  ctx;
-	ucontext_t*  main_ctx;
-};
-
-
-void product(void *arg)
-{&lt;!-- --&gt;
-	struct args* a = (struct args*)arg;
-	a-&gt;send = 1;
-	while (a-&gt;n&lt;5)
-	{&lt;!-- --&gt;
-		printf(&#34;a-&gt;n: %d\n&#34;, a-&gt;n++);
-		swapcontext(a-&gt;ctx, a-&gt;main_ctx); //标记1, 保存当前上下文到a-&gt;ctx, 切换到a-&gt;main_ctx， 跳转到标记4
-	}
-	a-&gt;send = 0;
-	printf(&#34;send is 0: %d\n&#34;, a-&gt;n++);
-	swapcontext(a-&gt;ctx, a-&gt;main_ctx);     //标记2,保存当前上下文到a-&gt;ctx, 切换到a-&gt;main_ctx， 跳转到标记4
-}
-
-void customer(void *arg)
-{&lt;!-- --&gt;
-
-	struct args* a = (struct args*)arg;
-	while (a-&gt;send==1)
-	{&lt;!-- --&gt;
-		printf(&#34;n: %d\n&#34;, a-&gt;n);
-		swapcontext(a-&gt;main_ctx, a-&gt;ctx); //标记3,保存当前上下文到a-&gt;main_ctx, 切换到a-&gt;ctx, 跳转到标记1
-	}
-	
-}
-
-
-int main()
-{&lt;!-- --&gt;
-	ucontext_t ctx, main_ctx;
-	getcontext(&amp;ctx);
-	struct args a;
-	a.n  = 1;
-	a.ctx = &amp;ctx;
-	a.main_ctx = &amp;main_ctx;
-
-	ctx.uc_stack.ss_sp = malloc(STACK_SIZE);  //分配一块空间
-	ctx.uc_stack.ss_size = STACK_SIZE;
-	ctx.uc_link = a.main_ctx;
-
-	makecontext(&amp;ctx, product, 1, &amp;a); //指定上下文与对应的生产者函数
-	swapcontext(a.main_ctx, &amp;ctx);	   //标记4, 保存当前上下文到a.main_ctx, 切换到ctx，跳转到product函数
-	customer(&amp;a);					   //消费者函数
-
-	printf(&#34;finally return\n&#34;);
-	return 0;
-}
-</code></pre></div><p>编译，运行，输出如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -g -Wall -o procus procus.c
-$ ./procus
-a-&gt;n: 1
-n: 2
-a-&gt;n: 2
-n: 3
-a-&gt;n: 3
-n: 4
-a-&gt;n: 4
-n: 5
-send is 0: 5
-finally return
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>//procus.c
+</span></span><span style="display:flex;"><span>#include &lt;stdlib.h&gt;
+</span></span><span style="display:flex;"><span>#include &lt;stdio.h&gt;
+</span></span><span style="display:flex;"><span>#include &lt;ucontext.h&gt;
+</span></span><span style="display:flex;"><span>#include &lt;stddef.h&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#include &lt;sys/types.h&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#define STACK_SIZE (1024*1024)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>struct args {&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>	int n;
+</span></span><span style="display:flex;"><span>	int send;
+</span></span><span style="display:flex;"><span>	ucontext_t*  ctx;
+</span></span><span style="display:flex;"><span>	ucontext_t*  main_ctx;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>void product(void *arg)
+</span></span><span style="display:flex;"><span>{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>	struct args* a = (struct args*)arg;
+</span></span><span style="display:flex;"><span>	a-&gt;send = 1;
+</span></span><span style="display:flex;"><span>	while (a-&gt;n&lt;5)
+</span></span><span style="display:flex;"><span>	{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>		printf(&#34;a-&gt;n: %d\n&#34;, a-&gt;n++);
+</span></span><span style="display:flex;"><span>		swapcontext(a-&gt;ctx, a-&gt;main_ctx); //标记1, 保存当前上下文到a-&gt;ctx, 切换到a-&gt;main_ctx， 跳转到标记4
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	a-&gt;send = 0;
+</span></span><span style="display:flex;"><span>	printf(&#34;send is 0: %d\n&#34;, a-&gt;n++);
+</span></span><span style="display:flex;"><span>	swapcontext(a-&gt;ctx, a-&gt;main_ctx);     //标记2,保存当前上下文到a-&gt;ctx, 切换到a-&gt;main_ctx， 跳转到标记4
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>void customer(void *arg)
+</span></span><span style="display:flex;"><span>{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	struct args* a = (struct args*)arg;
+</span></span><span style="display:flex;"><span>	while (a-&gt;send==1)
+</span></span><span style="display:flex;"><span>	{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>		printf(&#34;n: %d\n&#34;, a-&gt;n);
+</span></span><span style="display:flex;"><span>		swapcontext(a-&gt;main_ctx, a-&gt;ctx); //标记3,保存当前上下文到a-&gt;main_ctx, 切换到a-&gt;ctx, 跳转到标记1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>int main()
+</span></span><span style="display:flex;"><span>{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>	ucontext_t ctx, main_ctx;
+</span></span><span style="display:flex;"><span>	getcontext(&amp;ctx);
+</span></span><span style="display:flex;"><span>	struct args a;
+</span></span><span style="display:flex;"><span>	a.n  = 1;
+</span></span><span style="display:flex;"><span>	a.ctx = &amp;ctx;
+</span></span><span style="display:flex;"><span>	a.main_ctx = &amp;main_ctx;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx.uc_stack.ss_sp = malloc(STACK_SIZE);  //分配一块空间
+</span></span><span style="display:flex;"><span>	ctx.uc_stack.ss_size = STACK_SIZE;
+</span></span><span style="display:flex;"><span>	ctx.uc_link = a.main_ctx;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	makecontext(&amp;ctx, product, 1, &amp;a); //指定上下文与对应的生产者函数
+</span></span><span style="display:flex;"><span>	swapcontext(a.main_ctx, &amp;ctx);	   //标记4, 保存当前上下文到a.main_ctx, 切换到ctx，跳转到product函数
+</span></span><span style="display:flex;"><span>	customer(&amp;a);					   //消费者函数
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	printf(&#34;finally return\n&#34;);
+</span></span><span style="display:flex;"><span>	return 0;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>编译，运行，输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ gcc -g -Wall -o procus procus.c
+</span></span><span style="display:flex;"><span>$ ./procus
+</span></span><span style="display:flex;"><span>a-&gt;n: 1
+</span></span><span style="display:flex;"><span>n: 2
+</span></span><span style="display:flex;"><span>a-&gt;n: 2
+</span></span><span style="display:flex;"><span>n: 3
+</span></span><span style="display:flex;"><span>a-&gt;n: 3
+</span></span><span style="display:flex;"><span>n: 4
+</span></span><span style="display:flex;"><span>a-&gt;n: 4
+</span></span><span style="display:flex;"><span>n: 5
+</span></span><span style="display:flex;"><span>send is 0: 5
+</span></span><span style="display:flex;"><span>finally return
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -373,7 +370,7 @@ finally return
                 <a href="https://blog.rakfree.tk/2021/03/coroutineone/">https://blog.rakfree.tk/2021/03/coroutineone/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:58:01</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -503,6 +500,10 @@ finally return
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -516,10 +517,6 @@ finally return
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -565,7 +562,7 @@ finally return
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -577,7 +574,7 @@ finally return
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -603,6 +600,8 @@ finally return
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

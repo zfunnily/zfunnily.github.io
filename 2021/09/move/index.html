@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-09-12T20:43:34&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="FPS游戏 | 实现移动功能">
@@ -236,41 +236,41 @@
 </ol>
 <h2 id="rigid-body--capsule-collider">Rigid body + Capsule Collider</h2>
 <p>控制摄像头旋转 FPMouseLook.cs 跟main camera 绑定</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">using</span> System.Collections;
-<span style="color:#66d9ef">using</span> System.Collections.Generic;
-<span style="color:#66d9ef">using</span> UnityEngine;
-<span style="color:#66d9ef">using</span> UnityEngine.UI;
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMouseLook</span> : MonoBehaviour
-{
-    <span style="color:#66d9ef">private</span> Transform cameraTransform;
-<span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> Transform characterTransform;
-    <span style="color:#66d9ef">private</span> Vector3 cameraRotation;
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MouseSensitivity;
-    <span style="color:#66d9ef">public</span> Vector2 MaxMinAngle;
-    <span style="color:#75715e">// Start is called before the first frame update
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Start()
-    {
-        cameraTransform = transform;
-    }
-
-    <span style="color:#75715e">// Update is called once per frame
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Update()
-    {
-        <span style="color:#66d9ef">var</span> tmp_MouseX = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse X&#34;</span>);
-        <span style="color:#66d9ef">var</span> tmp_MouseY = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse Y&#34;</span>);
-
-        cameraRotation.x -= tmp_MouseY * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18
-</span><span style="color:#75715e"></span>        cameraRotation.y += tmp_MouseX * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18
-</span><span style="color:#75715e"></span>
-        cameraRotation.x = Mathf.Clamp(cameraRotation.x, MaxMinAngle.x, MaxMinAngle.y);
-        cameraTransform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, <span style="color:#ae81ff">0</span>);
-
-        characterTransform.rotation = Quaternion.Euler(<span style="color:#ae81ff">0</span>, cameraRotation.y, <span style="color:#ae81ff">0</span>);
-    }
-}
-</code></pre></div><h2 id="函数解析">函数解析</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine.UI;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMouseLook</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Transform cameraTransform;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">    [SerializeField]</span> <span style="color:#66d9ef">private</span> Transform characterTransform;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Vector3 cameraRotation;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MouseSensitivity;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Vector2 MaxMinAngle;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Start is called before the first frame update</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cameraTransform = transform;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update is called once per frame</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Update()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> tmp_MouseX = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse X&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> tmp_MouseY = Input.GetAxis(<span style="color:#e6db74">&#34;Mouse Y&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cameraRotation.x -= tmp_MouseY * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18</span>
+</span></span><span style="display:flex;"><span>        cameraRotation.y += tmp_MouseX * MouseSensitivity;<span style="color:#75715e">//MouseSensitivity=18</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cameraRotation.x = Mathf.Clamp(cameraRotation.x, MaxMinAngle.x, MaxMinAngle.y);
+</span></span><span style="display:flex;"><span>        cameraTransform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        characterTransform.rotation = Quaternion.Euler(<span style="color:#ae81ff">0</span>, cameraRotation.y, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="函数解析">函数解析</h2>
 <h3 id="inputgetaxis">Input.GetAxis</h3>
 <p>一、触屏类
 1、Mouse X 鼠标沿屏幕X移动时触发
@@ -280,91 +280,90 @@
 1、Vertical 键盘按上或下键时触发
 2、Horizontal 键盘按左或右键时触发</p>
 <p>使用示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Input.GetAxis(&#34;Mouse Y&#34;);
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Input.GetAxis(&#34;Mouse Y&#34;);
+</span></span></code></pre></div><blockquote>
 <p>返回值是一个数，正负代表方向</p>
 </blockquote>
 <h3 id="mathfclamp">Mathf.Clamp</h3>
 <p>函数定义：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">static</span> function Clamp (<span style="color:#66d9ef">value</span> : <span style="color:#66d9ef">float</span>, min : <span style="color:#66d9ef">float</span>, max : <span style="color:#66d9ef">float</span>) : <span style="color:#66d9ef">float</span>
-</code></pre></div><p>解释： 限制<code>value</code>的值在<code>min</code>和<code>max</code>之间， 如果<code>value</code>小于<code>min</code>，返回<code>min</code>。 如果<code>value</code>大于<code>max</code>，返回<code>max</code>，否则返回<code>value</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> function Clamp (<span style="color:#66d9ef">value</span> : <span style="color:#66d9ef">float</span>, min : <span style="color:#66d9ef">float</span>, max : <span style="color:#66d9ef">float</span>) : <span style="color:#66d9ef">float</span>
+</span></span></code></pre></div><p>解释： 限制<code>value</code>的值在<code>min</code>和<code>max</code>之间， 如果<code>value</code>小于<code>min</code>，返回<code>min</code>。 如果<code>value</code>大于<code>max</code>，返回<code>max</code>，否则返回<code>value</code></p>
 <h2 id="控制降落--跳跃">控制降落 + 跳跃</h2>
 <p>FPMoveMent.cs</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
-<span style="color:#66d9ef">using</span> System.Collections.Generic;
-<span style="color:#66d9ef">using</span> UnityEngine;
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMoveMent</span> : MonoBehaviour
-{
-    <span style="color:#75715e">//自由落体速度
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Speed;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> grativty;
-    
-    <span style="color:#75715e">//跳跃
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
-    <span style="color:#66d9ef">private</span> Transform characterTransform;
-    <span style="color:#66d9ef">private</span> Rigidbody characterRigidbody;
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isGrounded = <span style="color:#66d9ef">true</span>;
-    <span style="color:#75715e">// Start is called before the first frame update
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Start()
-    {
-        characterTransform = transform;
-        characterRigidbody = GetComponent&lt;Rigidbody&gt;();
-    }
-
-    <span style="color:#75715e">// Update is called once per frame
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> Update()
-    {
-        
-    }
-
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> FixedUpdate()
-    {
-        Debug.Log(isGrounded);
-        <span style="color:#66d9ef">if</span> (isGrounded)
-        {
-            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
-            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
-
-
-            <span style="color:#66d9ef">var</span> tmp_CurrentDirection = <span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical);
-            <span style="color:#75715e">//自身坐标转化为世界坐标
-</span><span style="color:#75715e"></span>            tmp_CurrentDirection = characterTransform.TransformDirection(tmp_CurrentDirection);
-            tmp_CurrentDirection *= Speed;
-
-            <span style="color:#66d9ef">var</span> tmp_CurrentVelocity = characterRigidbody.velocity;
-            <span style="color:#66d9ef">var</span> tmp_VelocityChange = tmp_CurrentDirection - tmp_CurrentVelocity;
-            tmp_VelocityChange.y = <span style="color:#ae81ff">0</span>;
-
-            characterRigidbody.AddForce(tmp_VelocityChange, ForceMode.VelocityChange);
-
-Debug.Log(<span style="color:#e6db74">&#34;button: &#34;</span> + Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>));
-            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
-            {
-                characterRigidbody.velocity = <span style="color:#66d9ef">new</span> Vector3(tmp_CurrentVelocity.x, CalculateJumpHeightSpeed(), tmp_CurrentVelocity.z);
-            }
-        }
-
-        characterRigidbody.AddForce(<span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">0</span>, -grativty * characterRigidbody.mass,<span style="color:#ae81ff">0</span>));
-    }
-
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> CalculateJumpHeightSpeed()
-    {
-        <span style="color:#66d9ef">return</span> Mathf.Sqrt(<span style="color:#ae81ff">2</span> * grativty * JumpHeight);
-    }
-
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionStay(Collision <span style="color:#ae81ff">_</span>other)
-    {
-        isGrounded = <span style="color:#66d9ef">true</span>;
-    }
-
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionExit(Collision <span style="color:#ae81ff">_</span>other)
-    {
-        isGrounded = <span style="color:#66d9ef">false</span>;
-    }
-}
-
-</code></pre></div><h2 id="函数解析-1">函数解析</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPMoveMent</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//自由落体速度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Speed;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> grativty;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//跳跃</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Transform characterTransform;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Rigidbody characterRigidbody;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isGrounded = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Start is called before the first frame update</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        characterTransform = transform;
+</span></span><span style="display:flex;"><span>        characterRigidbody = GetComponent&lt;Rigidbody&gt;();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Update is called once per frame</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Update()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> FixedUpdate()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Debug.Log(isGrounded);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (isGrounded)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_CurrentDirection = <span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//自身坐标转化为世界坐标</span>
+</span></span><span style="display:flex;"><span>            tmp_CurrentDirection = characterTransform.TransformDirection(tmp_CurrentDirection);
+</span></span><span style="display:flex;"><span>            tmp_CurrentDirection *= Speed;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_CurrentVelocity = characterRigidbody.velocity;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_VelocityChange = tmp_CurrentDirection - tmp_CurrentVelocity;
+</span></span><span style="display:flex;"><span>            tmp_VelocityChange.y = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            characterRigidbody.AddForce(tmp_VelocityChange, ForceMode.VelocityChange);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Debug.Log(<span style="color:#e6db74">&#34;button: &#34;</span> + Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                characterRigidbody.velocity = <span style="color:#66d9ef">new</span> Vector3(tmp_CurrentVelocity.x, CalculateJumpHeightSpeed(), tmp_CurrentVelocity.z);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        characterRigidbody.AddForce(<span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">0</span>, -grativty * characterRigidbody.mass,<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> CalculateJumpHeightSpeed()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Mathf.Sqrt(<span style="color:#ae81ff">2</span> * grativty * JumpHeight);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionStay(Collision <span style="color:#ae81ff">_</span>other)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        isGrounded = <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OnCollisionExit(Collision <span style="color:#ae81ff">_</span>other)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        isGrounded = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="函数解析-1">函数解析</h2>
 <p>OnCollisionStay()</p>
 <p>OnCollisionStay与OnCollisionEnter的区别
 OnCollisionStay();</p>
@@ -414,134 +413,134 @@ OnCollisionStay();</p>
 </ul>
 <p>参考： physicalSystyme.md</p>
 <h2 id="移动-方案2">移动 方案2</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
-<span style="color:#66d9ef">using</span> System.Collections.Generic;
-<span style="color:#66d9ef">using</span> UnityEngine;
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
-{
-    <span style="color:#66d9ef">private</span> CharacterController characterController;
-    <span style="color:#66d9ef">private</span> Transform characterTransForm;
-    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed;
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
-
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
-    {
-        characterController = GetComponent&lt;CharacterController&gt;();
-        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();
-</span><span style="color:#75715e"></span>        characterTransForm = transform;
-    }
-
-    <span style="color:#66d9ef">void</span> Update()
-    {
-
-Debug.Log(characterController.isGrounded);
-        <span style="color:#75715e">//如果在地面 则返回 true
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
-        {
-            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
-            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
-
-            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
-            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
-</span><span style="color:#75715e"></span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
-</span><span style="color:#75715e"></span>
-            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
-            {
-               movementDirection.y = JumpHeight; 
-            }
-        }
-        movementDirection.y -=  Gravity * Time.deltaTime;
-        characterController.Move(movementDirection * Time.deltaTime * MovementSpeed);<span style="color:#75715e">//不具备重力算法
-</span><span style="color:#75715e"></span>    }
-}
-</code></pre></div><h2 id="shift-奔跑--下蹲">shift 奔跑 + 下蹲</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Collections;
-<span style="color:#66d9ef">using</span> System.Collections.Generic;
-<span style="color:#66d9ef">using</span> UnityEngine;
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
-{
-    <span style="color:#66d9ef">private</span> CharacterController characterController;
-    <span style="color:#66d9ef">private</span> Transform characterTransForm;
-    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed; <span style="color:#75715e">//移动速度
-</span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight; <span style="color:#75715e">//跳跃高度
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeed = <span style="color:#ae81ff">8</span>;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeed = <span style="color:#ae81ff">4</span>;
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeedWhenCrouch = <span style="color:#ae81ff">4</span>;<span style="color:#75715e">//当下蹲时
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeedWhenCrouch = <span style="color:#ae81ff">2</span>;<span style="color:#75715e">//当下蹲时
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> CrouchHeight = <span style="color:#ae81ff">1f</span>; <span style="color:#75715e">//下蹲高度
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isCrouched; <span style="color:#75715e">//是否下蹲
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> originHeight; <span style="color:#75715e">//原来的高度
-</span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
-    {
-        characterController = GetComponent&lt;CharacterController&gt;();
-        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();
-</span><span style="color:#75715e"></span>        characterTransForm = transform;
-        originHeight = characterController.height;
-        isCrouched = <span style="color:#66d9ef">false</span>;
-    }
-
-    <span style="color:#66d9ef">void</span> Update()
-    {
-
-Debug.Log(characterController.isGrounded);
-        <span style="color:#66d9ef">float</span> currentSpeed = WalkSpeed;
-        <span style="color:#75715e">//如果在地面 则返回 true
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
-        {
-            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
-            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
-
-            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
-            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);
-</span><span style="color:#75715e"></span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);
-</span><span style="color:#75715e"></span>
-            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
-            {
-               movementDirection.y = JumpHeight; 
-            }
-
-            <span style="color:#66d9ef">if</span> (Input.GetKeyDown(KeyCode.C))
-            {
-                <span style="color:#66d9ef">var</span> tmpCrouchHeight = isCrouched?originHeight:CrouchHeight ;
-                StartCoroutine(DoCrouch(tmpCrouchHeight));
-                isCrouched = !isCrouched;
-            }
-            <span style="color:#75715e">//shift奔跑
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (isCrouched)
-            {
-                currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeedWhenCrouch : WalkSpeedWhenCrouch;
-            }
-            <span style="color:#66d9ef">else</span>
-
-            {
-                currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeed : WalkSpeed;
-    
-            }
-        }
-        movementDirection.y -=  Gravity * Time.deltaTime;
-        characterController.Move(movementDirection * Time.deltaTime * currentSpeed);<span style="color:#75715e">//不具备重力算法
-</span><span style="color:#75715e"></span>    }
-
-    <span style="color:#66d9ef">private</span> IEnumerator DoCrouch(<span style="color:#66d9ef">float</span> target)
-    {
-        <span style="color:#66d9ef">float</span> tmp_CurrentHeight = <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">while</span>(Mathf.Abs(characterController.height - target) &gt; <span style="color:#ae81ff">0.1f</span>)
-        {
-            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
-            characterController.height = Mathf.SmoothDamp(characterController.height, target, <span style="color:#66d9ef">ref</span> tmp_CurrentHeight, Time.deltaTime * <span style="color:#ae81ff">5</span> );
-        }
-    }
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> CharacterController characterController;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Transform characterTransForm;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        characterController = GetComponent&lt;CharacterController&gt;();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();</span>
+</span></span><span style="display:flex;"><span>        characterTransForm = transform;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Update()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Debug.Log(characterController.isGrounded);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//如果在地面 则返回 true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>               movementDirection.y = JumpHeight; 
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        movementDirection.y -=  Gravity * Time.deltaTime;
+</span></span><span style="display:flex;"><span>        characterController.Move(movementDirection * Time.deltaTime * MovementSpeed);<span style="color:#75715e">//不具备重力算法</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="shift-奔跑--下蹲">shift 奔跑 + 下蹲</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Collections.Generic;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> UnityEngine;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FPCharacterControllerMovement</span> : MonoBehaviour
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> CharacterController characterController;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Transform characterTransForm;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Vector3 movementDirection;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> MovementSpeed; <span style="color:#75715e">//移动速度</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> Gravity = <span style="color:#ae81ff">9.8f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> JumpHeight; <span style="color:#75715e">//跳跃高度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeed = <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeed = <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> SprintingSpeedWhenCrouch = <span style="color:#ae81ff">4</span>;<span style="color:#75715e">//当下蹲时</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> WalkSpeedWhenCrouch = <span style="color:#ae81ff">2</span>;<span style="color:#75715e">//当下蹲时</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">float</span> CrouchHeight = <span style="color:#ae81ff">1f</span>; <span style="color:#75715e">//下蹲高度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">bool</span> isCrouched; <span style="color:#75715e">//是否下蹲</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">float</span> originHeight; <span style="color:#75715e">//原来的高度</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> Start()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        characterController = GetComponent&lt;CharacterController&gt;();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// characterForm = GetComponent&lt;Transform&gt;();</span>
+</span></span><span style="display:flex;"><span>        characterTransForm = transform;
+</span></span><span style="display:flex;"><span>        originHeight = characterController.height;
+</span></span><span style="display:flex;"><span>        isCrouched = <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> Update()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Debug.Log(characterController.isGrounded);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> currentSpeed = WalkSpeed;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//如果在地面 则返回 true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (characterController.isGrounded)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Horizontal = Input.GetAxis(<span style="color:#e6db74">&#34;Horizontal&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> tmp_Vertical = Input.GetAxis(<span style="color:#e6db74">&#34;Vertical&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            movementDirection =  characterTransForm.TransformDirection(<span style="color:#66d9ef">new</span> Vector3(tmp_Horizontal, <span style="color:#ae81ff">0</span>, tmp_Vertical));
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// characterTransForm.LookAt(characterTransForm.position + tmp_MovementDirection);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// characterController.SimpleMove(movementDirection * Time.deltaTime * MovementSpeed);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (Input.GetButtonDown(<span style="color:#e6db74">&#34;Jump&#34;</span>))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>               movementDirection.y = JumpHeight; 
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (Input.GetKeyDown(KeyCode.C))
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">var</span> tmpCrouchHeight = isCrouched?originHeight:CrouchHeight ;
+</span></span><span style="display:flex;"><span>                StartCoroutine(DoCrouch(tmpCrouchHeight));
+</span></span><span style="display:flex;"><span>                isCrouched = !isCrouched;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//shift奔跑</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (isCrouched)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeedWhenCrouch : WalkSpeedWhenCrouch;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                currentSpeed = Input.GetKey(KeyCode.LeftShift) ? SprintingSpeed : WalkSpeed;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        movementDirection.y -=  Gravity * Time.deltaTime;
+</span></span><span style="display:flex;"><span>        characterController.Move(movementDirection * Time.deltaTime * currentSpeed);<span style="color:#75715e">//不具备重力算法</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> IEnumerator DoCrouch(<span style="color:#66d9ef">float</span> target)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">float</span> tmp_CurrentHeight = <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(Mathf.Abs(characterController.height - target) &gt; <span style="color:#ae81ff">0.1f</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            characterController.height = Mathf.SmoothDamp(characterController.height, target, <span style="color:#66d9ef">ref</span> tmp_CurrentHeight, Time.deltaTime * <span style="color:#ae81ff">5</span> );
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -560,7 +559,7 @@ Debug.Log(characterController.isGrounded);
                 <a href="https://blog.rakfree.tk/2021/09/move/">https://blog.rakfree.tk/2021/09/move/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -690,6 +689,10 @@ Debug.Log(characterController.isGrounded);
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -703,10 +706,6 @@ Debug.Log(characterController.isGrounded);
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -752,7 +751,7 @@ Debug.Log(characterController.isGrounded);
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -764,7 +763,7 @@ Debug.Log(characterController.isGrounded);
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -790,6 +789,8 @@ Debug.Log(characterController.isGrounded);
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

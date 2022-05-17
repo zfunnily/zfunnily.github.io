@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-10T14:51:19&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T18:13:48&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T15:11:45&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第三章笔记| UnityShader基础">
@@ -258,29 +258,29 @@
 <h3 id="什么是shaderlab">什么是ShaderLab？</h3>
 <p>Unity Shader是Unity为开发者提供的高层级的渲染抽象层
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495780275151649578027197.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495780275151649578027197.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495780275151649578027197.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495780275151649578027197.png" />
         </a>
     </p>
 <h2 id="基础结构">基础结构</h2>
 <p>一个Unity Shader的基础结构如下所示</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;ShaderName&#34; {
-    Properties {
-        // 属性
-    }
-    SubShader {
-        // 显卡A使用的子着色器
-    }
-    SubShader {
-        // 显卡B使用的子着色器
-    }    
-    Fallback &#34;VertexLit&#34;
-}
-</code></pre></div><h3 id="properties">Properties</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Shader &#34;ShaderName&#34; {
+</span></span><span style="display:flex;"><span>    Properties {
+</span></span><span style="display:flex;"><span>        // 属性
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        // 显卡A使用的子着色器
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        // 显卡B使用的子着色器
+</span></span><span style="display:flex;"><span>    }    
+</span></span><span style="display:flex;"><span>    Fallback &#34;VertexLit&#34;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="properties">Properties</h3>
 <p>材质和Unity Shader的桥梁
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495791795801649579179119.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495791795801649579179119.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495791795801649579179119.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495791795801649579179119.png" />
         </a>
     </p>
 <p>下面的代码给出了一个展示所有属性类型的例子:</p>
@@ -288,24 +288,24 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;Custom/ShaderLabProperties&#34;</span> {
-    Properties {
-        <span style="color:#f92672">//</span> Numbers and Sliders
-        <span style="color:#a6e22e">_Int </span>(<span style="color:#e6db74">&#34;Int&#34;</span>, Int) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-        <span style="color:#a6e22e">_Float </span>(<span style="color:#e6db74">&#34;Float&#34;</span>, Float) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>
-        <span style="color:#a6e22e">_Range</span>(<span style="color:#e6db74">&#34;Range&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">5.0</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0</span>
-        <span style="color:#f92672">//</span> Colors and Vectors
-        <span style="color:#a6e22e">_Color </span>(<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
-        <span style="color:#a6e22e">_Vector </span>(<span style="color:#e6db74">&#34;Vector&#34;</span>, Vector) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>)
-        <span style="color:#f92672">//</span> Textures
-        <span style="color:#a6e22e">_2D </span>(<span style="color:#e6db74">&#34;2D&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> {}
-        <span style="color:#a6e22e">_Cube </span>(<span style="color:#e6db74">&#34;Cube&#34;</span>, Cube) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
-        <span style="color:#a6e22e">_3D </span>(<span style="color:#e6db74">&#34;3D&#34;</span>, <span style="color:#ae81ff">3</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span> {}
-    }
-
-    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/ShaderLabProperties&#34;</span> {
+</span></span><span style="display:flex;"><span>    Properties {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Numbers and Sliders
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Int </span>(<span style="color:#e6db74">&#34;Int&#34;</span>, Int) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Float </span>(<span style="color:#e6db74">&#34;Float&#34;</span>, Float) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Range</span>(<span style="color:#e6db74">&#34;Range&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">5.0</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Colors and Vectors
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Color </span>(<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Vector </span>(<span style="color:#e6db74">&#34;Vector&#34;</span>, Vector) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Textures
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_2D </span>(<span style="color:#e6db74">&#34;2D&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Cube </span>(<span style="color:#e6db74">&#34;Cube&#34;</span>, Cube) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_3D </span>(<span style="color:#e6db74">&#34;3D&#34;</span>, <span style="color:#ae81ff">3</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span> {}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <h3 id="subshader">SubShader</h3>
 <p>每一个Unity Shader文件可以包含多个SubShader 语义块，但最少要有一个。</p>
@@ -315,18 +315,18 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">SubShader {
-    <span style="color:#f92672">//</span> 可选的
-    [Tags]
-
-    <span style="color:#f92672">//</span> 可选的
-    [RenderSetup]
-
-    Pass {
-    }
-    <span style="color:#f92672">//</span> Other Passes
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>SubShader {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">//</span> 可选的
+</span></span><span style="display:flex;"><span>    [Tags]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">//</span> 可选的
+</span></span><span style="display:flex;"><span>    [RenderSetup]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Pass {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">//</span> Other Passes
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ul>
 <li>每个Pass 定义了一次完整的渲染流程，但如果Pass 的数目过多，往往会造成渲染性能的下降</li>
@@ -337,41 +337,41 @@
 <h4 id="状态设置">状态设置</h4>
 <p>ShaderLab中常见的渲染状态设置选项:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495797005661649579699991.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495797005661649579699991.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495797005661649579699991.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495797005661649579699991.png" />
         </a>
     </p>
 <h4 id="subshader-的标签">SubShader 的标签</h4>
 <p>标签的结构如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Tags { <span style="color:#e6db74">&#34;TagName1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value1&#34;</span> <span style="color:#e6db74">&#34;TagName2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value2&#34;</span> }
-</code></pre></div><p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495799848931649579984799.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495799848931649579984799.png" />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Tags { <span style="color:#e6db74">&#34;TagName1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value1&#34;</span> <span style="color:#e6db74">&#34;TagName2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Value2&#34;</span> }
+</span></span></code></pre></div><p>
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495799848931649579984799.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495799848931649579984799.png" />
         </a>
     
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495800925761649580092498.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495800925761649580092498.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495800925761649580092498.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495800925761649580092498.png" />
         </a>
     </p>
 <h4 id="pass-语义块">Pass 语义块</h4>
 <p>Pass 基本结构如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass { 
-    [Name]
-    [Tags] 
-    [RenderSetup] 
-    // Other code
-}
-</code></pre></div><p>我们可以使用ShaderLab的<code>UsePass</code>命令 + <code>PassName</code>来直接使用其他Unity Shader中的Pass,这样可以提高代码的复用性。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Name <span style="color:#e6db74">&#34;MyPassName&#34;</span>
-UsePass <span style="color:#e6db74">&#34;MyShader/MYPASSNAME&#34;</span>
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Pass { 
+</span></span><span style="display:flex;"><span>    [Name]
+</span></span><span style="display:flex;"><span>    [Tags] 
+</span></span><span style="display:flex;"><span>    [RenderSetup] 
+</span></span><span style="display:flex;"><span>    // Other code
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>我们可以使用ShaderLab的<code>UsePass</code>命令 + <code>PassName</code>来直接使用其他Unity Shader中的Pass,这样可以提高代码的复用性。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Name <span style="color:#e6db74">&#34;MyPassName&#34;</span>
+</span></span><span style="display:flex;"><span>UsePass <span style="color:#e6db74">&#34;MyShader/MYPASSNAME&#34;</span>
+</span></span></code></pre></div><blockquote>
 <p>由于Unity内部会把所有Pass 的名称转换成大写字母的表示，因此，在使用UsePass 命令时必须使用大写形式的名字。</p>
 </blockquote>
 <p>Pass 中使用的标签类型:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495804095861649580408789.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495804095861649580408789.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495804095861649580408789.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495804095861649580408789.png" />
         </a>
     </p>
 <p>Unity Shader还支持一些特殊的Pass ，以便进行代码复用或实现更复杂的效果:</p>
@@ -381,10 +381,10 @@ UsePass <span style="color:#e6db74">&#34;MyShader/MYPASSNAME&#34;</span>
 </ul>
 <h3 id="留一条后路fallback">留一条后路：Fallback</h3>
 <p>紧接着SubShader 语义块后面的可以是Fallback指令，它用于告诉Unity，&ldquo;如果上面所有的SubShader在这块显卡上都不能运行，那么就使用这个最低级的Shader吧！&rdquo;</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Fallback &#34;name&#34;
-// 或者
-Fallback Off
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Fallback &#34;name&#34;
+</span></span><span style="display:flex;"><span>// 或者
+</span></span><span style="display:flex;"><span>Fallback Off
+</span></span></code></pre></div><ul>
 <li>Fallback 还会影响阴影的投射</li>
 <li>在渲染阴影纹理时，Unity会在每个Unity Shader中寻找一个阴影投射的Pass</li>
 <li>通常情况下，我们不需要自己专门实现一个Pass，这是因为Fallback 使用的内置Shader中包含了这样一个通用的Pass。</li>
@@ -395,21 +395,21 @@ Fallback Off
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;MyShader&#34;</span> {
-    Properties {
-        <span style="color:#f92672">//</span> 所需的各种属性
-    }
-    SubShader {
-        <span style="color:#f92672">//</span> 真正意义上的Shader代码会出现在这里
-        <span style="color:#f92672">//</span> 表面着色器（Surface Shader）或者
-        <span style="color:#f92672">//</span> 顶点<span style="color:#f92672">/</span>片元着色器（Vertex<span style="color:#f92672">/</span>Fragment Shader）或者
-        <span style="color:#f92672">//</span> 固定函数着色器（Fixed Function Shader）
-    }
-    SubShader {
-        <span style="color:#f92672">//</span> 和上一个SubShader类似
-    }
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;MyShader&#34;</span> {
+</span></span><span style="display:flex;"><span>    Properties {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 所需的各种属性
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 真正意义上的Shader代码会出现在这里
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 表面着色器（Surface Shader）或者
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 顶点<span style="color:#f92672">/</span>片元着色器（Vertex<span style="color:#f92672">/</span>Fragment Shader）或者
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 固定函数着色器（Fixed Function Shader）
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> 和上一个SubShader类似
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <h3 id="unity的宠儿表面着色器">Unity的宠儿：表面着色器</h3>
 <p>表面着色器 （Surface Shader） 是Unity自己创造的一种着色器代码类型</p>
@@ -419,22 +419,22 @@ Fallback Off
 <li>它存在的价值在于，Unity为我们处理了很多光照细节，使得我们不需要再操心这些“烦人的事情”</li>
 </ul>
 <p>一个简单的表面着色器示例代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Shader <span style="color:#e6db74">&#34;Custom/Simple Surface Shader&#34;</span> {
-    SubShader {
-        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Opaque&#34;</span> }
-        CGPROGRAM
-        <span style="color:#75715e">#pragma surface surf Lambert</span>
-        struct Input {
-            float4 color <span style="color:#f92672">:</span> COLOR;
-        };
-        void <span style="color:#a6e22e">surf </span>(Input IN, inout SurfaceOutput o) {
-            o.Albedo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-        }
-        ENDCG
-    }
-    Fallback <span style="color:#e6db74">&#34;Diffuse&#34;</span>
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Simple Surface Shader&#34;</span> {
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Opaque&#34;</span> }
+</span></span><span style="display:flex;"><span>        CGPROGRAM
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#pragma surface surf Lambert</span>
+</span></span><span style="display:flex;"><span>        struct Input {
+</span></span><span style="display:flex;"><span>            float4 color <span style="color:#f92672">:</span> COLOR;
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        void <span style="color:#a6e22e">surf </span>(Input IN, inout SurfaceOutput o) {
+</span></span><span style="display:flex;"><span>            o.Albedo <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        ENDCG
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Fallback <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>表面着色器被定义在SubShader 语义块（而非Pass 语义块）中的CGPROGRAM 和ENDCG 之间。</li>
 <li>表面着色器不需要开发者关心使用多少个Pass、每个Pass如何渲染等问题，Unity会在背后为我们做好这些事情</li>
 <li>CGPROGRAM 和ENDCG 之间的代码是使用Cg/HLSL编写的。</li>
@@ -445,26 +445,26 @@ Fallback Off
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Custom/Simple VertexFragment Shader&#34; {
-    SubShader {
-        Pass {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-
-            float4 vert(float4 v : POSITION) : SV_POSITION {
-                return mul (UNITY_MATRIX_MVP, v);
-            }
-
-            fixed4 frag() : SV_Target {
-                return fixed4(1.0,0.0,0.0,1.0);
-            }
-
-            ENDCG
-        }
-    }
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Shader &#34;Custom/Simple VertexFragment Shader&#34; {
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        Pass {
+</span></span><span style="display:flex;"><span>            CGPROGRAM
+</span></span><span style="display:flex;"><span>            #pragma vertex vert
+</span></span><span style="display:flex;"><span>            #pragma fragment frag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            float4 vert(float4 v : POSITION) : SV_POSITION {
+</span></span><span style="display:flex;"><span>                return mul (UNITY_MATRIX_MVP, v);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            fixed4 frag() : SV_Target {
+</span></span><span style="display:flex;"><span>                return fixed4(1.0,0.0,0.0,1.0);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            ENDCG
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ul>
 <li>顶点/片元着色器的代码也需要定义在CGPROGRAM 和ENDCG 之间, 但是代码是写在Pass 语义块内，而非SubShader 内的</li>
@@ -477,20 +477,20 @@ Fallback Off
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Tutorial/Basic&#34; {
-    Properties {
-        _Color (&#34;Main Color&#34;, Color) = (1,0.5,0.5,1)
-    }
-    SubShader {
-        Pass {
-            Material {
-                Diffuse [_Color]
-            }
-            Lighting On
-        }
-    }
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Shader &#34;Tutorial/Basic&#34; {
+</span></span><span style="display:flex;"><span>    Properties {
+</span></span><span style="display:flex;"><span>        _Color (&#34;Main Color&#34;, Color) = (1,0.5,0.5,1)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader {
+</span></span><span style="display:flex;"><span>        Pass {
+</span></span><span style="display:flex;"><span>            Material {
+</span></span><span style="display:flex;"><span>                Diffuse [_Color]
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            Lighting On
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ul>
 <li>固定函数着色器的代码被定义在Pass 语义块中</li>
@@ -537,7 +537,7 @@ Fallback Off
                 <a href="https://blog.rakfree.tk/2022/04/shaderbase/">https://blog.rakfree.tk/2022/04/shaderbase/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:13:48</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 15:11:45</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -673,6 +673,10 @@ Fallback Off
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -686,10 +690,6 @@ Fallback Off
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -735,7 +735,7 @@ Fallback Off
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -747,7 +747,7 @@ Fallback Off
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -773,6 +773,8 @@ Fallback Off
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

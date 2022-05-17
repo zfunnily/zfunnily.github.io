@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-12-28T16:04:10&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:23:26&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Nginx的一些配置">
@@ -234,42 +234,42 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         nginx.conf
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">worker_processes  1;
-pid        nginx.pid;
-
-events {
-    worker_connections  1024;
-    multi_accept on;
-}
-
-
-http {
-    default_type  application/octet-stream;
-
-
-    sendfile        on;
-    keepalive_timeout  100;
-
-     server {
-        listen 80;
-        charset utf-8,gbk;
-        server_name localhost;
-
-        location /{
-            root /opt/;
-		    autoindex on;
-		    autoindex_localtime on;
-	    }
-
-	    index index.html; # 显示首页
-
-        #静态文件访问
-	    location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|js|pdf|txt) {
-            root /opt;
-        }
-    }
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>worker_processes  1;
+</span></span><span style="display:flex;"><span>pid        nginx.pid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>events {
+</span></span><span style="display:flex;"><span>    worker_connections  1024;
+</span></span><span style="display:flex;"><span>    multi_accept on;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http {
+</span></span><span style="display:flex;"><span>    default_type  application/octet-stream;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    sendfile        on;
+</span></span><span style="display:flex;"><span>    keepalive_timeout  100;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     server {
+</span></span><span style="display:flex;"><span>        listen 80;
+</span></span><span style="display:flex;"><span>        charset utf-8,gbk;
+</span></span><span style="display:flex;"><span>        server_name localhost;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        location /{
+</span></span><span style="display:flex;"><span>            root /opt/;
+</span></span><span style="display:flex;"><span>		    autoindex on;
+</span></span><span style="display:flex;"><span>		    autoindex_localtime on;
+</span></span><span style="display:flex;"><span>	    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	    index index.html; # 显示首页
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        #静态文件访问
+</span></span><span style="display:flex;"><span>	    location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|js|pdf|txt) {
+</span></span><span style="display:flex;"><span>            root /opt;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ul>
 <li>root: 表示网站根目录</li>
@@ -286,44 +286,44 @@ http {
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         nginx.conf
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    server {
-            listen 80;
-            charset utf-8;
-            server_name pc.com;
-
-            location /{
-                    proxy_pass http://127.0.0.1:8081;
-                    proxy_redirect default;
-            }
-    }
-    server {
-            listen 80;
-            charset utf-8;
-            server_name h5.com;
-
-            location / {
-                    proxy_pass http://127.0.0.1:8082;
-                    proxy_redirect default;
-            }
-    }
-
-    server {
-        listen 8081;
-        location /{
-            root   /website/pc;
-            # 默认打开 index.html
-            index  index.html index.htm;
-        }
-    }
-    server {
-        listen 8082;
-        location / {
-            root   /website/h5;
-            # 默认打开 index.html
-            index  index.html index.htm;
-        }
-    }
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>    server {
+</span></span><span style="display:flex;"><span>            listen 80;
+</span></span><span style="display:flex;"><span>            charset utf-8;
+</span></span><span style="display:flex;"><span>            server_name pc.com;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            location /{
+</span></span><span style="display:flex;"><span>                    proxy_pass http://127.0.0.1:8081;
+</span></span><span style="display:flex;"><span>                    proxy_redirect default;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    server {
+</span></span><span style="display:flex;"><span>            listen 80;
+</span></span><span style="display:flex;"><span>            charset utf-8;
+</span></span><span style="display:flex;"><span>            server_name h5.com;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            location / {
+</span></span><span style="display:flex;"><span>                    proxy_pass http://127.0.0.1:8082;
+</span></span><span style="display:flex;"><span>                    proxy_redirect default;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    server {
+</span></span><span style="display:flex;"><span>        listen 8081;
+</span></span><span style="display:flex;"><span>        location /{
+</span></span><span style="display:flex;"><span>            root   /website/pc;
+</span></span><span style="display:flex;"><span>            # 默认打开 index.html
+</span></span><span style="display:flex;"><span>            index  index.html index.htm;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    server {
+</span></span><span style="display:flex;"><span>        listen 8082;
+</span></span><span style="display:flex;"><span>        location / {
+</span></span><span style="display:flex;"><span>            root   /website/h5;
+</span></span><span style="display:flex;"><span>            # 默认打开 index.html
+</span></span><span style="display:flex;"><span>            index  index.html index.htm;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div></details>
 <br/>
 <ul>
 <li>http公共部分的配置我隐去了，参考上面静态网站配置</li>
@@ -357,7 +357,7 @@ http {
                 <a href="https://blog.rakfree.tk/2021/12/nginx/">https://blog.rakfree.tk/2021/12/nginx/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:23:26</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -491,6 +491,10 @@ http {
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -504,10 +508,6 @@ http {
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -553,7 +553,7 @@ http {
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -565,7 +565,7 @@ http {
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -591,6 +591,8 @@ http {
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

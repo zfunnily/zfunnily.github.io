@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-09T11:55:55&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T18:14:27&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T15:11:45&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第二章笔记 | 渲染流水线">
@@ -311,8 +311,8 @@
 <p>对于概念阶段的后两个阶段，即<strong>几何阶段</strong>和<strong>光栅化阶段</strong>，开发者无法拥有绝对的控制权，其实现的载体是GPU</p>
 <p>几何阶段和光栅化阶段可以分成若干更小的流水线阶段，每个阶段GPU提供了不同的可配置性或可编程性。流程图如下 ：
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494882850601649488284964.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494882850601649488284964.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494882850601649488284964.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494882850601649488284964.png" />
         </a>
     </p>
 <h3 id="几何阶段">几何阶段</h3>
@@ -354,11 +354,11 @@
 <li>屏幕坐标系是一个二维坐标系，它和我们用于显示画面的分辨率有很大关系。</li>
 <li>屏幕坐标系和z 坐标一起构成了一个坐标系，叫做窗口坐标系（Window Coordinates） 。这些值会一起被传递到光栅化阶段。</li>
 </ul>
-<p>注意:
-OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义了屏幕的左上角为最小的窗口坐标值。 如下图:
+<p>注意: 
+OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义了屏幕的左上角为最小的窗口坐标值。 如下图: 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494891042101649489103841.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494891042101649489103841.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494891042101649489103841.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494891042101649489103841.png" />
         </a>
     </p>
 <blockquote>
@@ -399,14 +399,14 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 <li>如果一个片元通过了所有的测试，就需要把这个片元的颜色值和已经存储在颜色缓冲区中的颜色进行合并，或者说是混合。</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494904962831649490495496.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494904962831649490495496.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494904962831649490495496.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494904962831649490495496.png" />
         </a>
     </p>
-<p>解决每个片元的可见性问题。这需要进行一系列测试, 这里有两个最基本的测试——深度测试和模板测试, 实现过程如下:
+<p>解决每个片元的可见性问题。这需要进行一系列测试, 这里有两个最基本的测试——深度测试和模板测试, 实现过程如下: 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494906272881649490626721.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494906272881649490626721.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494906272881649490626721.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494906272881649490626721.png" />
         </a>
     </p>
 <ul>
@@ -419,8 +419,8 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 <li>开发者可以选择开启/关闭混合操作。</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494908762941649490875438.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494908762941649490875438.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494908762941649490875438.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494908762941649490875438.png" />
         </a>
     </p>
 <h2 id="一些容易困惑的地方">一些容易困惑的地方</h2>
@@ -431,8 +431,8 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 </ul>
 <p>一个显卡除了有图像处理单元GPU外，还拥有自己的内存，这个内存通常被称为显存, 显卡驱动就是显卡的操作系统。下图展示了这样的关系。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494912412891649491240665.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494912412891649491240665.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494912412891649491240665.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494912412891649491240665.png" />
         </a>
     </p>
 <h3 id="什么是hlslglslcg">什么是HLSL、GLSL、CG</h3>
@@ -457,8 +457,8 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 </ul>
 <p>命令缓冲区包含了一个命令队列，由CPU向其中添加命令，而由GPU从中读取命令，添加和读取的过程是互相独立的。命令缓冲区使得CPU和GPU可以相互独立工作。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494918903051649491889882.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494918903051649491889882.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494918903051649491889882.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494918903051649491889882.png" />
         </a>
     </p>
 <ol start="2">
@@ -478,8 +478,8 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 </ul>
 <p>如果Draw Call的数量太多，CPU就会把大量时间花费在提交Draw Call上，造成CPU的过载
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494923512911649492350326.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16494923512911649492350326.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494923512911649492350326.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16494923512911649492350326.png" />
         </a>
     </p>
 <h3 id="批处理">批处理</h3>
@@ -537,7 +537,7 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
                 <a href="https://blog.rakfree.tk/2022/04/shaderrenderpipline/">https://blog.rakfree.tk/2022/04/shaderrenderpipline/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:14:27</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 15:11:45</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -673,6 +673,10 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -686,10 +690,6 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -735,7 +735,7 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -747,7 +747,7 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -773,6 +773,8 @@ OpenGL把屏幕的左下角当成最小的窗口坐标值，而DirectX则定义�
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

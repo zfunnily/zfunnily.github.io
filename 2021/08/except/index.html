@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-08-30T17:13:33&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T18:57:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Shell | Except 使用">
@@ -208,29 +208,29 @@
         
         <div class="post-content">
             <h2 id="except-参数">Except 参数</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">spawn               交互程序开始后面跟命令或者指定程序
-expect              获取匹配信息匹配成功则执行expect后面的程序动作
-send exp_send       用于发送指定的字符串信息
-exp_continue        在expect中多次匹配就需要用到
-send_user           用来打印输出 相当于shell中的echo
-exit                退出expect脚本
-eof                 expect执行结束 退出
-set                 定义变量
-puts                输出变量
-set timeout         设置超时时间
-log_user            是否开启日志 0/1
-log_file            设置日志路径,log_user <span style="color:#f92672">=</span> 1时才有效
-</code></pre></div><h2 id="一个完整的示例">一个完整的示例</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>spawn               交互程序开始后面跟命令或者指定程序
+</span></span><span style="display:flex;"><span>expect              获取匹配信息匹配成功则执行expect后面的程序动作
+</span></span><span style="display:flex;"><span>send exp_send       用于发送指定的字符串信息
+</span></span><span style="display:flex;"><span>exp_continue        在expect中多次匹配就需要用到
+</span></span><span style="display:flex;"><span>send_user           用来打印输出 相当于shell中的echo
+</span></span><span style="display:flex;"><span>exit                退出expect脚本
+</span></span><span style="display:flex;"><span>eof                 expect执行结束 退出
+</span></span><span style="display:flex;"><span>set                 定义变量
+</span></span><span style="display:flex;"><span>puts                输出变量
+</span></span><span style="display:flex;"><span>set timeout         设置超时时间
+</span></span><span style="display:flex;"><span>log_user            是否开启日志 0/1
+</span></span><span style="display:flex;"><span>log_file            设置日志路径,log_user <span style="color:#f92672">=</span> 1时才有效
+</span></span></code></pre></div><h2 id="一个完整的示例">一个完整的示例</h2>
 <p>我是用<code>skynet</code>的<code>debug_console</code>作为示例:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/usr/bin/expect
-</span><span style="color:#75715e"></span>set timeout <span style="color:#ae81ff">35</span>
-log_user <span style="color:#ae81ff">1</span>
-log_file colle1.log
-
-spawn nc  127.0.0.1 <span style="color:#ae81ff">10001</span>
-expect <span style="color:#e6db74">&#34;Welcome to skynet console&#34;</span> <span style="color:#f92672">{</span>send <span style="color:#e6db74">&#34;mem\n&#34;</span><span style="color:#f92672">}</span>
-expect eof
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/expect
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set timeout <span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>log_user <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>log_file colle1.log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>spawn nc  127.0.0.1 <span style="color:#ae81ff">10001</span>
+</span></span><span style="display:flex;"><span>expect <span style="color:#e6db74">&#34;Welcome to skynet console&#34;</span> <span style="color:#f92672">{</span>send <span style="color:#e6db74">&#34;mem\n&#34;</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>expect eof
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -249,7 +249,7 @@ expect eof
                 <a href="https://blog.rakfree.tk/2021/08/except/">https://blog.rakfree.tk/2021/08/except/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -383,6 +383,10 @@ expect eof
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -396,10 +400,6 @@ expect eof
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -445,7 +445,7 @@ expect eof
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -457,7 +457,7 @@ expect eof
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -483,6 +483,8 @@ expect eof
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

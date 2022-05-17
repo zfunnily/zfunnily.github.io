@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-02-01T14:40:51&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:03:42&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="汇编 | C/C&#43;&#43;调用汇编">
@@ -212,135 +212,134 @@
         <div class="post-content">
             <h2 id="概述">概述</h2>
 <p>我使用AT&amp;T的规范，在linux上完成 C和汇编的互相调用，并使用gcc编译成可执行文件。<br> 目标：汇编函数提供输出。类似C语言的函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
-{
-    printf(value);
-}
-</code></pre></div><p>提供给C语言调用：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">int main()
-{
-    hello_world(&#34;hello world!\n&#34;);
-}
-</code></pre></div><h2 id="搭建att的环境">搭建AT&amp;T的环境</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>void hello_world(char* value)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    printf(value);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>提供给C语言调用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>int main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    hello_world(&#34;hello world!\n&#34;);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="搭建att的环境">搭建AT&amp;T的环境</h2>
 <ul>
 <li>ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc
 下载<code>vscode</code>插件<code>GNU Assembler Language Support</code></li>
 </ul>
 <h2 id="c代码生成为汇编代码">C代码生成为汇编代码</h2>
 <p>提供一个hello.c</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void hello_world(char* value)
-{
-    printf(value);
-}
-
-int main()
-{
-  hello_world(&#34;Hello World!\n&#34;);
-}
-</code></pre></div><p>为了达到使用C++调用汇编函数输出<code>hello world!</code>的目的，我们需要把<code>hello_world</code>函数转化为汇编语言编写，我们先将<br> gcc 将hello.c转化为汇编代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -S hello.c -o hello.s
-</code></pre></div><p>转化之后的汇编代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	.file	&#34;hello.c&#34;
-	.text
-	.globl	hello_world
-	.type	hello_world, @function
-hello_world:
-.LFB0:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movq	%rdi, -8(%rbp)
-	movq	-8(%rbp), %rax
-	movq	%rax, %rdi
-	movl	$0, %eax
-	call	printf
-	nop
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE0:
-	.size	hello_world, .-hello_world
-	.section	.rodata
-.LC0:
-	.string	&#34;Hello World!\n&#34;
-	.text
-	.globl	main
-	.type	main, @function
-main:
-.LFB1:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movl	$.LC0, %edi
-	call	hello_world
-	movl	$0, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE1:
-	.size	main, .-main
-	.ident	&#34;GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609&#34;
-	.section	.note.GNU-stack,&#34;&#34;,@progbits
-</code></pre></div><p>我们根据上面的汇编代码可以看到汇编的<code>hello_world</code>汇编函数。我们可以根据自己的理解重新写一份，步骤如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>void hello_world(char* value)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    printf(value);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>int main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  hello_world(&#34;Hello World!\n&#34;);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>为了达到使用C++调用汇编函数输出<code>hello world!</code>的目的，我们需要把<code>hello_world</code>函数转化为汇编语言编写，我们先将<br> gcc 将hello.c转化为汇编代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ gcc -S hello.c -o hello.s
+</span></span></code></pre></div><p>转化之后的汇编代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>	.file	&#34;hello.c&#34;
+</span></span><span style="display:flex;"><span>	.text
+</span></span><span style="display:flex;"><span>	.globl	hello_world
+</span></span><span style="display:flex;"><span>	.type	hello_world, @function
+</span></span><span style="display:flex;"><span>hello_world:
+</span></span><span style="display:flex;"><span>.LFB0:
+</span></span><span style="display:flex;"><span>	.cfi_startproc
+</span></span><span style="display:flex;"><span>	pushq	%rbp
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa_offset 16
+</span></span><span style="display:flex;"><span>	.cfi_offset 6, -16
+</span></span><span style="display:flex;"><span>	movq	%rsp, %rbp
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa_register 6
+</span></span><span style="display:flex;"><span>	subq	$16, %rsp
+</span></span><span style="display:flex;"><span>	movq	%rdi, -8(%rbp)
+</span></span><span style="display:flex;"><span>	movq	-8(%rbp), %rax
+</span></span><span style="display:flex;"><span>	movq	%rax, %rdi
+</span></span><span style="display:flex;"><span>	movl	$0, %eax
+</span></span><span style="display:flex;"><span>	call	printf
+</span></span><span style="display:flex;"><span>	nop
+</span></span><span style="display:flex;"><span>	leave
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa 7, 8
+</span></span><span style="display:flex;"><span>	ret
+</span></span><span style="display:flex;"><span>	.cfi_endproc
+</span></span><span style="display:flex;"><span>.LFE0:
+</span></span><span style="display:flex;"><span>	.size	hello_world, .-hello_world
+</span></span><span style="display:flex;"><span>	.section	.rodata
+</span></span><span style="display:flex;"><span>.LC0:
+</span></span><span style="display:flex;"><span>	.string	&#34;Hello World!\n&#34;
+</span></span><span style="display:flex;"><span>	.text
+</span></span><span style="display:flex;"><span>	.globl	main
+</span></span><span style="display:flex;"><span>	.type	main, @function
+</span></span><span style="display:flex;"><span>main:
+</span></span><span style="display:flex;"><span>.LFB1:
+</span></span><span style="display:flex;"><span>	.cfi_startproc
+</span></span><span style="display:flex;"><span>	pushq	%rbp
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa_offset 16
+</span></span><span style="display:flex;"><span>	.cfi_offset 6, -16
+</span></span><span style="display:flex;"><span>	movq	%rsp, %rbp
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa_register 6
+</span></span><span style="display:flex;"><span>	movl	$.LC0, %edi
+</span></span><span style="display:flex;"><span>	call	hello_world
+</span></span><span style="display:flex;"><span>	movl	$0, %eax
+</span></span><span style="display:flex;"><span>	popq	%rbp
+</span></span><span style="display:flex;"><span>	.cfi_def_cfa 7, 8
+</span></span><span style="display:flex;"><span>	ret
+</span></span><span style="display:flex;"><span>	.cfi_endproc
+</span></span><span style="display:flex;"><span>.LFE1:
+</span></span><span style="display:flex;"><span>	.size	main, .-main
+</span></span><span style="display:flex;"><span>	.ident	&#34;GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609&#34;
+</span></span><span style="display:flex;"><span>	.section	.note.GNU-stack,&#34;&#34;,@progbits
+</span></span></code></pre></div><p>我们根据上面的汇编代码可以看到汇编的<code>hello_world</code>汇编函数。我们可以根据自己的理解重新写一份，步骤如下：</p>
 <ul>
 <li>在C中调用hello_world汇编函数，需要先声明：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern hello_world(char* value);
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>extern hello_world(char* value);
+</span></span></code></pre></div><ul>
 <li>编写AT&amp;T规范的汇编代码，文件后缀是<code>.s</code></li>
 </ul>
 <h2 id="hello_world-汇编函数">hello_world 汇编函数</h2>
 <p>hello.s</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#hello.s
-.globl hello_world
-.type hello_world, @function
-
-.section .text
-hello_world:
-    pushq   %rbp            #压栈
-    movq    %rsp, %rbp      #把栈顶指针赋值给%rbp
-    subq	$8, %rsp        #调整栈指针，向下移动8个字节，给局部变量留出空间  
-    movq	%rdi, -8(%rbp)   #把rdi的值赋值给位于rbp-8的局部变量  rdi代表第一个参数
-    movq	-8(%rbp), %rax   #把位于rbp-8的局部变量赋值给rax 
-    #movq	%rax, %rdi       #rax 赋值给 rdi
-    movq	$0, %rax        #以0结尾
-    nop
-    call	printf
-    leave
-    ret
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#hello.s
+</span></span><span style="display:flex;"><span>.globl hello_world
+</span></span><span style="display:flex;"><span>.type hello_world, @function
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.section .text
+</span></span><span style="display:flex;"><span>hello_world:
+</span></span><span style="display:flex;"><span>    pushq   %rbp            #压栈
+</span></span><span style="display:flex;"><span>    movq    %rsp, %rbp      #把栈顶指针赋值给%rbp
+</span></span><span style="display:flex;"><span>    subq	$8, %rsp        #调整栈指针，向下移动8个字节，给局部变量留出空间  
+</span></span><span style="display:flex;"><span>    movq	%rdi, -8(%rbp)   #把rdi的值赋值给位于rbp-8的局部变量  rdi代表第一个参数
+</span></span><span style="display:flex;"><span>    movq	-8(%rbp), %rax   #把位于rbp-8的局部变量赋值给rax 
+</span></span><span style="display:flex;"><span>    #movq	%rax, %rdi       #rax 赋值给 rdi
+</span></span><span style="display:flex;"><span>    movq	$0, %rax        #以0结尾
+</span></span><span style="display:flex;"><span>    nop
+</span></span><span style="display:flex;"><span>    call	printf
+</span></span><span style="display:flex;"><span>    leave
+</span></span><span style="display:flex;"><span>    ret
+</span></span></code></pre></div><ul>
 <li>压栈和把栈顶指针赋值给%rbp是汇编函数的常规操作，基本上每个汇编函数都需要。- 调整栈指针，给局部变量留出空间- <code>%rdi</code>代表是第一个参数- 最后字符串结尾需要加上<code>0</code>- <code>call printf</code>调用printf函数打印寄存器中的字符串
 hello.c</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">extern void hello_world(char* value);
-int main()
-{
-  hello_world(&#34;Hello World!\n&#34;);
-}
-</code></pre></div><p>编译成可执行文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ gcc -o hello hello.c hello.s
-</code></pre></div><p>运行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ ./hello
-Hello World!
-</code></pre></div><h2 id="x64">x64</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>extern void hello_world(char* value);
+</span></span><span style="display:flex;"><span>int main()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  hello_world(&#34;Hello World!\n&#34;);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>编译成可执行文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ gcc -o hello hello.c hello.s
+</span></span></code></pre></div><p>运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ ./hello
+</span></span><span style="display:flex;"><span>Hello World!
+</span></span></code></pre></div><h2 id="x64">x64</h2>
 <p>在x64汇编中调用函数时，以下寄存器用作参数。 尝试将它们提交到内存中，因为将来您会经常使用它们</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">第一个参数：RDI
-第二个参数：RSI
-第三个参数：RDX
-第四个参数：RCX
-第五个参数：R8
-第六个参数：R9
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>第一个参数：RDI
+</span></span><span style="display:flex;"><span>第二个参数：RSI
+</span></span><span style="display:flex;"><span>第三个参数：RDX
+</span></span><span style="display:flex;"><span>第四个参数：RCX
+</span></span><span style="display:flex;"><span>第五个参数：R8
+</span></span><span style="display:flex;"><span>第六个参数：R9
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -359,7 +358,7 @@ Hello World!
                 <a href="https://blog.rakfree.tk/2021/02/compilation/">https://blog.rakfree.tk/2021/02/compilation/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:03:42</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -489,6 +488,10 @@ Hello World!
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -502,10 +505,6 @@ Hello World!
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -551,7 +550,7 @@ Hello World!
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -563,7 +562,7 @@ Hello World!
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -589,6 +588,8 @@ Hello World!
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-19T18:47:45&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-07T17:59:19&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Skynet源码赏析二 | 基础数据结构">
@@ -217,26 +217,26 @@
             <h2 id="module管理模块">module管理模块</h2>
 <p>我们所写的C服务编译成.so文件后放在<code>cpath</code>变量路径下，程序会加载路径<code>cpath = root..&quot;cservice/?.so&quot;</code>下的.so文件，通过<code>static void * _try_open(struct modules *m, const char * name)</code>函数第一次打开，然后被加载到全局变量<code>static struct modules * M</code>中。</p>
 <h3 id="module对应的数据结构如下">module对应的数据结构如下：</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//skynet_module.h
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> {
-	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name;          <span style="color:#75715e">// C服务名称
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> module;              <span style="color:#75715e">// 访问so的dl句柄
-</span><span style="color:#75715e"></span>	skynet_dl_create create;    <span style="color:#75715e">// 绑定.so的 xxx_create 函数
-</span><span style="color:#75715e"></span>	skynet_dl_init init;        <span style="color:#75715e">// 绑定.so的 xxx_init 函数
-</span><span style="color:#75715e"></span>	skynet_dl_release release;  <span style="color:#75715e">// 绑定.so的 xxx_release 函数
-</span><span style="color:#75715e"></span>	skynet_dl_signal signal;    <span style="color:#75715e">// 绑定.so的 xxx_signal 函数
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#75715e">//skynet_modules.c
-</span><span style="color:#75715e"></span><span style="color:#75715e">#define MAX_MODULE_TYPE 32
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">modules</span> {
-	<span style="color:#66d9ef">int</span> count;                  <span style="color:#75715e">// C服务数量
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;       <span style="color:#75715e">// 自旋锁
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> path;          <span style="color:#75715e">// C服务.so文件目录，由cpath变量控制置
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> m[MAX_MODULE_TYPE]; <span style="color:#75715e">// C服务列表
-</span><span style="color:#75715e"></span>};
-</code></pre></div><h3 id="当要创建该类服务的实例时">当要创建该类服务的实例时</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//skynet_module.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name;          <span style="color:#75715e">// C服务名称
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> module;              <span style="color:#75715e">// 访问so的dl句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_dl_create create;    <span style="color:#75715e">// 绑定.so的 xxx_create 函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_dl_init init;        <span style="color:#75715e">// 绑定.so的 xxx_init 函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_dl_release release;  <span style="color:#75715e">// 绑定.so的 xxx_release 函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_dl_signal signal;    <span style="color:#75715e">// 绑定.so的 xxx_signal 函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//skynet_modules.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#define MAX_MODULE_TYPE 32
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">modules</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> count;                  <span style="color:#75715e">// C服务数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;       <span style="color:#75715e">// 自旋锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> path;          <span style="color:#75715e">// C服务.so文件目录，由cpath变量控制置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> m[MAX_MODULE_TYPE]; <span style="color:#75715e">// C服务列表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><h3 id="当要创建该类服务的实例时">当要创建该类服务的实例时</h3>
 <ol>
 <li>从<code>modules</code>列表中取出该服务的<code>skynet_module</code>句柄, 然后调用<code>m-&gt;create()</code>创建实例。</li>
 <li>将实例<code>inst</code>赋值到新的<code>skynet_context</code>中。</li>
@@ -244,98 +244,98 @@
 <li>初始化<code>inst</code>实例<code>m-&gt;init()</code>。
 对应的代码如下</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">skynet_context_new</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>param) {
-	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> <span style="color:#f92672">*</span> mod <span style="color:#f92672">=</span> skynet_module_query(name); <span style="color:#75715e">//1. 取出服务句柄
-</span><span style="color:#75715e"></span>    ...
-	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>inst <span style="color:#f92672">=</span> skynet_module_instance_create(mod);<span style="color:#75715e">//m-&gt;create 创建实例
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> ctx <span style="color:#f92672">=</span> skynet_malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>ctx));
-	CHECKCALLING_INIT(ctx)
-
-	ctx<span style="color:#f92672">-&gt;</span>mod <span style="color:#f92672">=</span> mod;
-	ctx<span style="color:#f92672">-&gt;</span>instance <span style="color:#f92672">=</span> inst; <span style="color:#75715e">//2. 将实例赋值懂啊 skynet_context中
-</span><span style="color:#75715e"></span>    ...
-	ctx<span style="color:#f92672">-&gt;</span>handle <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;	
-	ctx<span style="color:#f92672">-&gt;</span>handle <span style="color:#f92672">=</span> skynet_handle_register(ctx); <span style="color:#75715e">//3. 注册到skynet_context list中
-</span><span style="color:#75715e"></span>    ...
-	<span style="color:#75715e">// init function maybe use ctx-&gt;handle, so it must init at last
-</span><span style="color:#75715e"></span>	context_inc();
-
-	CHECKCALLING_BEGIN(ctx)
-	<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> skynet_module_instance_init(mod, inst, ctx, param); <span style="color:#75715e">//4.m-&gt;init()
-</span><span style="color:#75715e"></span>	CHECKCALLING_END(ctx)
-	<span style="color:#66d9ef">if</span> (r <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-        ...
-	} <span style="color:#66d9ef">else</span> {
-        ...
-	}
-}
-</code></pre></div><h2 id="skynet_context服务管理模块">skynet_context服务管理模块</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">skynet_context_new</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>param) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> <span style="color:#f92672">*</span> mod <span style="color:#f92672">=</span> skynet_module_query(name); <span style="color:#75715e">//1. 取出服务句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ...
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>inst <span style="color:#f92672">=</span> skynet_module_instance_create(mod);<span style="color:#75715e">//m-&gt;create 创建实例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span> ctx <span style="color:#f92672">=</span> skynet_malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>ctx));
+</span></span><span style="display:flex;"><span>	CHECKCALLING_INIT(ctx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx<span style="color:#f92672">-&gt;</span>mod <span style="color:#f92672">=</span> mod;
+</span></span><span style="display:flex;"><span>	ctx<span style="color:#f92672">-&gt;</span>instance <span style="color:#f92672">=</span> inst; <span style="color:#75715e">//2. 将实例赋值懂啊 skynet_context中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ...
+</span></span><span style="display:flex;"><span>	ctx<span style="color:#f92672">-&gt;</span>handle <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;	
+</span></span><span style="display:flex;"><span>	ctx<span style="color:#f92672">-&gt;</span>handle <span style="color:#f92672">=</span> skynet_handle_register(ctx); <span style="color:#75715e">//3. 注册到skynet_context list中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ...
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// init function maybe use ctx-&gt;handle, so it must init at last
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	context_inc();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	CHECKCALLING_BEGIN(ctx)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> skynet_module_instance_init(mod, inst, ctx, param); <span style="color:#75715e">//4.m-&gt;init()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	CHECKCALLING_END(ctx)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (r <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="skynet_context服务管理模块">skynet_context服务管理模块</h2>
 <p>创建一个新服务，首先要找到对应服务的modules，在创建并初始化modules之后绑定一个上下文<code>skynet_context</code>,skynet通过全局变量<code>static struct handle_storage *H</code>来管理服务。
 主要的数据结构如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//skynet_server.c
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> {
-	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> instance;                <span style="color:#75715e">// m-create()创建的实例
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> <span style="color:#f92672">*</span> mod;     <span style="color:#75715e">// 引用mod服务的指针，方便 m 的init(),create()等函数调用 
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> cb_ud;                   <span style="color:#75715e">// 调用callback函数时，回传给callback的userdata，一般是instance指针
-</span><span style="color:#75715e"></span>    skynet_cb cb;                   <span style="color:#75715e">// 服务的消息回调函数，一般在skynet_module的init函数里指定
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>queue;    <span style="color:#75715e">// 服务专属的次级消息队列
-</span><span style="color:#75715e"></span>	ATOM_POINTER logfile;           <span style="color:#75715e">// 日志句柄
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> cpu_cost;	            <span style="color:#75715e">// in microsec 
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> cpu_start;	            <span style="color:#75715e">// in microsec 
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">char</span> result[<span style="color:#ae81ff">32</span>];                <span style="color:#75715e">// 操作skynet_context的返回值，会写到这里
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 标识唯一context的服务id
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> session_id;                 <span style="color:#75715e">// 在发出请求后，收到对方的返回消息时，通过session_id来匹配一个返回，对应哪个请求
-</span><span style="color:#75715e"></span>	ATOM_INT ref;                   <span style="color:#75715e">// 引用计数变量，当为0时，表示内存可以被释放
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> message_count;              <span style="color:#75715e">// 消息数量
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> init;                      <span style="color:#75715e">// 是否完成初始化 
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> endless;                   <span style="color:#75715e">// 消息是否堵住 
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> profile;                   <span style="color:#75715e">// 配合 cpu_cost 和 cpu_start使用
-</span><span style="color:#75715e"></span>
-	CHECKCALLING_DECL
-};
-
-<span style="color:#75715e">//skynet_handle.c
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_name</span> {
-	<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name;                    <span style="color:#75715e">// 服务别名
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 标识唯一context的服务id
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_storage</span> {
-	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">rwlock</span> lock;             <span style="color:#75715e">// 读写锁
-</span><span style="color:#75715e"></span>
-	<span style="color:#66d9ef">uint32_t</span> harbor;                <span style="color:#75715e">// harbor id
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle_index;          <span style="color:#75715e">// 创建下一个服务时，该服务的slot idx，一般会先判断该slot是否被占用
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> slot_size;                  <span style="color:#75715e">// slot的大小，一定是2^n，初始值是4
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">**</span> slot;  <span style="color:#75715e">// skynet_context list
-</span><span style="color:#75715e"></span>	
-	<span style="color:#66d9ef">int</span> name_cap;                   <span style="color:#75715e">// 别名列表大小，大小为2^n
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> name_count;                 <span style="color:#75715e">// 别名数量
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_name</span> <span style="color:#f92672">*</span>name;       <span style="color:#75715e">// 别名列表
-</span><span style="color:#75715e"></span>};
-</code></pre></div><h2 id="消息与队列">消息与队列</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//skynet_server.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> instance;                <span style="color:#75715e">// m-create()创建的实例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_module</span> <span style="color:#f92672">*</span> mod;     <span style="color:#75715e">// 引用mod服务的指针，方便 m 的init(),create()等函数调用 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span> cb_ud;                   <span style="color:#75715e">// 调用callback函数时，回传给callback的userdata，一般是instance指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    skynet_cb cb;                   <span style="color:#75715e">// 服务的消息回调函数，一般在skynet_module的init函数里指定
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>queue;    <span style="color:#75715e">// 服务专属的次级消息队列
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ATOM_POINTER logfile;           <span style="color:#75715e">// 日志句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> cpu_cost;	            <span style="color:#75715e">// in microsec 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint64_t</span> cpu_start;	            <span style="color:#75715e">// in microsec 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">char</span> result[<span style="color:#ae81ff">32</span>];                <span style="color:#75715e">// 操作skynet_context的返回值，会写到这里
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 标识唯一context的服务id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> session_id;                 <span style="color:#75715e">// 在发出请求后，收到对方的返回消息时，通过session_id来匹配一个返回，对应哪个请求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ATOM_INT ref;                   <span style="color:#75715e">// 引用计数变量，当为0时，表示内存可以被释放
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> message_count;              <span style="color:#75715e">// 消息数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> init;                      <span style="color:#75715e">// 是否完成初始化 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> endless;                   <span style="color:#75715e">// 消息是否堵住 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">bool</span> profile;                   <span style="color:#75715e">// 配合 cpu_cost 和 cpu_start使用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	CHECKCALLING_DECL
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//skynet_handle.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_name</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> name;                    <span style="color:#75715e">// 服务别名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 标识唯一context的服务id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_storage</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">rwlock</span> lock;             <span style="color:#75715e">// 读写锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">uint32_t</span> harbor;                <span style="color:#75715e">// harbor id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle_index;          <span style="color:#75715e">// 创建下一个服务时，该服务的slot idx，一般会先判断该slot是否被占用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> slot_size;                  <span style="color:#75715e">// slot的大小，一定是2^n，初始值是4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">**</span> slot;  <span style="color:#75715e">// skynet_context list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> name_cap;                   <span style="color:#75715e">// 别名列表大小，大小为2^n
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> name_count;                 <span style="color:#75715e">// 别名数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">handle_name</span> <span style="color:#f92672">*</span>name;       <span style="color:#75715e">// 别名列表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><h2 id="消息与队列">消息与队列</h2>
 <p>在创建C服务module和对应的上下文skynet_context时，有一个对应的消息队列<code>message_queue</code>与之绑定, 最后把该消息队列push到全局队列中。
 数据结构如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">//skynet_mq.c
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> {
-	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;           <span style="color:#75715e">// 自旋锁 防止数据冲突
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 服务id 唯一
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> cap;                        <span style="color:#75715e">// 队列容量
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> head;                       <span style="color:#75715e">// 头部索引，当head=tail时会进行扩容。
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> tail;                       <span style="color:#75715e">// 尾部索引
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> release;                    <span style="color:#75715e">// 是否能释放消息
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> in_global;                  <span style="color:#75715e">// 是否在全局消息队列中，0表示不是，1表示是
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> overload;                   <span style="color:#75715e">// 是否过载
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> overload_threshold;
-	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_message</span> <span style="color:#f92672">*</span>queue;   <span style="color:#75715e">// 消息内容
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>next;     <span style="color:#75715e">// 下一个次级消息队列
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">global_queue</span> {
-	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>head;     <span style="color:#75715e">// 全局消息队列头部指针
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>tail;     <span style="color:#75715e">// 全局消息队列尾部指针
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;           <span style="color:#75715e">// 自旋锁
-</span><span style="color:#75715e"></span>};
-</code></pre></div><p>消息通过函数<code>struct message_queue * skynet_context_message_dispatch(struct skynet_monitor *sm, struct message_queue *q, int weight)</code>来处理，处理过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//skynet_mq.c
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;           <span style="color:#75715e">// 自旋锁 防止数据冲突
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">uint32_t</span> handle;                <span style="color:#75715e">// 服务id 唯一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> cap;                        <span style="color:#75715e">// 队列容量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> head;                       <span style="color:#75715e">// 头部索引，当head=tail时会进行扩容。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> tail;                       <span style="color:#75715e">// 尾部索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> release;                    <span style="color:#75715e">// 是否能释放消息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> in_global;                  <span style="color:#75715e">// 是否在全局消息队列中，0表示不是，1表示是
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> overload;                   <span style="color:#75715e">// 是否过载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">int</span> overload_threshold;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_message</span> <span style="color:#f92672">*</span>queue;   <span style="color:#75715e">// 消息内容
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>next;     <span style="color:#75715e">// 下一个次级消息队列
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">global_queue</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>head;     <span style="color:#75715e">// 全局消息队列头部指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">message_queue</span> <span style="color:#f92672">*</span>tail;     <span style="color:#75715e">// 全局消息队列尾部指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">spinlock</span> lock;           <span style="color:#75715e">// 自旋锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span></code></pre></div><p>消息通过函数<code>struct message_queue * skynet_context_message_dispatch(struct skynet_monitor *sm, struct message_queue *q, int weight)</code>来处理，处理过程如下：</p>
 <ol>
 <li>从全局消息队列中取出一个次级消息队列, <code>skynet_globalmq_pop();</code>;</li>
 <li>通过次级消息队列中的handle变量来获取对应服务的上下文， <code>struct skynet_context * ctx = skynet_handle_grab(handle);</code>;</li>
@@ -362,7 +362,7 @@
                 <a href="https://blog.rakfree.tk/2021/10/skynettwo/">https://blog.rakfree.tk/2021/10/skynettwo/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-07 17:59:19</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -496,6 +496,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -509,10 +513,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -558,7 +558,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -570,7 +570,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -596,6 +596,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

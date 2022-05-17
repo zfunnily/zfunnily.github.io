@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-11-15T11:23:24&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:52&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Webrtc二 | 共享桌面">
@@ -227,235 +227,235 @@
 添加<code>class VideoRenderer : public rtc::VideoSinkInterface&lt;webrtc::VideoFrame&gt; </code>的回调</li>
 </ul>
 <p>详细代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#ifndef __RCRTC_DESKTOP_CAPTURER__
-</span><span style="color:#75715e">#define __RCRTC_DESKTOP_CAPTURER__
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;api/video/i420_buffer.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/convert.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/video_common.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_broadcaster.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_common.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;modules/desktop_capture/desktop_and_cursor_composer.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/thread.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;system_wrappers/include/sleep.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test/vcm_capturer.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/platform_thread.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>desktop_capture_frame_callback)(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> y_stride, <span style="color:#66d9ef">int</span> u_stride, <span style="color:#66d9ef">int</span> v_stride, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>y, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>u, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>v, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>context);
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RcrtcDesktopCapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Callback,
-                                        <span style="color:#66d9ef">public</span> rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  RcrtcDesktopCapturerTrackSource(<span style="color:#75715e">/*const std::map&lt;std::string, std::string&gt;&amp; opts*/</span>) {
-    Start(<span style="color:#66d9ef">nullptr</span>);
-  }
-  <span style="color:#66d9ef">inline</span> <span style="color:#f92672">~</span>RcrtcDesktopCapturerTrackSource() <span style="color:#66d9ef">override</span> {}
-
-  <span style="color:#66d9ef">static</span> RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span><span style="color:#a6e22e">Create</span>()
-  {
-    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(<span style="color:#66d9ef">new</span> RcrtcDesktopCapturerTrackSource);
-    <span style="color:#66d9ef">return</span> desk.release();
-  }
-  <span style="color:#75715e">// overide webrtc::DesktopCapturer::Callback
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnCaptureResult</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result result,
-                       std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopFrame<span style="color:#f92672">&gt;</span> frame) <span style="color:#66d9ef">override</span>
-  {
-    <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result<span style="color:#f92672">::</span>SUCCESS)
-    {
-      <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().width();
-      <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().height();
-
-      rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">&gt;</span> I420buffer <span style="color:#f92672">=</span>
-          webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">::</span>Create(width, height);
-
-      <span style="color:#66d9ef">int</span> stride<span style="color:#f92672">=</span>width;
-      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> yplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataY();
-      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> uplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataU();
-      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> vplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataV();
-      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> conversionResult <span style="color:#f92672">=</span> libyuv<span style="color:#f92672">::</span>ConvertToI420( frame<span style="color:#f92672">-&gt;</span>data(), <span style="color:#ae81ff">0</span>, 
-          yplane,stride,
-          uplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
-          vplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
-          <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>,
-          width,height,
-          width,height,
-          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
-</span><span style="color:#75715e"></span>          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
-</span><span style="color:#75715e"></span>          libyuv<span style="color:#f92672">::</span>kRotate0, <span style="color:#f92672">::</span>libyuv<span style="color:#f92672">::</span>FOURCC_ARGB);
-
-      <span style="color:#66d9ef">if</span> (conversionResult <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
-      {
-        <span style="color:#75715e">// webrtc::VideoFrame videoFrame(I420buffer,
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               webrtc::VideoRotation::kVideoRotation_0,
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               rtc::TimeMicros());
-</span><span style="color:#75715e"></span>
-        <span style="color:#75715e">// rtc::scoped_refptr&lt;webrtc::I420BufferInterface&gt; buffer(
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//     videoFrame.video_frame_buffer()-&gt;ToI420());
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// _frameCallback(buffer-&gt;width(), buffer-&gt;height(), buffer-&gt;StrideY(),
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;StrideU(), buffer-&gt;StrideV(), buffer-&gt;DataY(),
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;DataU(), buffer-&gt;DataV(), this-&gt;_userContext);
-</span><span style="color:#75715e"></span>        
-        webrtc<span style="color:#f92672">::</span>VideoFrame videoFrame<span style="color:#f92672">=</span>webrtc<span style="color:#f92672">::</span>VideoFrame(I420buffer,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,webrtc<span style="color:#f92672">::</span>kVideoRotation_0);
-        _sink<span style="color:#f92672">-&gt;</span>OnFrame(videoFrame);
-      }
-    }
-  }
-
-  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setExccludeWindow</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Source windowId)
-  {
-    _excludeWindowList.push_back(windowId);
-  }
-
-  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureDeskThread</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>obj)
-  {
-    RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span>capture <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*&gt;</span>(obj);
-    capture<span style="color:#f92672">-&gt;</span>CaptureProcess();
-  }
-  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureProcess</span>()
-  {
-    webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions opts <span style="color:#f92672">=</span>
-        webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions<span style="color:#f92672">::</span>CreateDefault();
-    <span style="color:#75715e">// opts.set_allow_use_magnification_api(true);  //设置过滤窗口选项
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 使用 DesktopAndCursorComposer 可以采集鼠标
-</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span> capturer <span style="color:#f92672">=</span>
-        std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span>(
-            <span style="color:#66d9ef">new</span> webrtc<span style="color:#f92672">::</span>DesktopAndCursorComposer(
-                webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>CreateScreenCapturer(opts), opts));
-
-    <span style="color:#75715e">// 设置开始采集状态
-</span><span style="color:#75715e"></span>    capturer<span style="color:#f92672">-&gt;</span>Start(<span style="color:#66d9ef">this</span>);
-
-    <span style="color:#75715e">// 设置要过滤的窗口
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> source : _excludeWindowList)
-    {
-      capturer<span style="color:#f92672">-&gt;</span>SetExcludedWindow(source.id);
-    }
-
-    <span style="color:#66d9ef">while</span> (_isrunning)
-    {
-      webrtc<span style="color:#f92672">::</span>SleepMs(_msPerFrame);
-      <span style="color:#75715e">// 采集桌面图像
-</span><span style="color:#75715e"></span>      capturer<span style="color:#f92672">-&gt;</span>CaptureFrame();
-    }
-  }
-
-  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Start</span>(desktop_capture_frame_callback back)
-  {
-    printf(<span style="color:#e6db74">&#34;start desk capturer...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>_capture_thread)
-    {
-      _frameCallback <span style="color:#f92672">=</span> back;
-      _isrunning <span style="color:#f92672">=</span> true;
-      _capture_thread.reset(<span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>PlatformThread(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>CaptureDeskThread, <span style="color:#66d9ef">this</span>,
-                                                    <span style="color:#e6db74">&#34;CaptureThread&#34;</span>, rtc<span style="color:#f92672">::</span>ThreadPriority<span style="color:#f92672">::</span>kHighPriority));
-
-      _capture_thread<span style="color:#f92672">-&gt;</span>Start();
-    }
-    <span style="color:#75715e">// CaptureThread();
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread = rtc::Thread::Create();
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;Start();
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;PostTask(RTC_FROM_HERE, [&amp;]
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//                           { CaptureThread(); });
-</span><span style="color:#75715e"></span>  }
-
-  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Stop</span>()
-  {
-    <span style="color:#66d9ef">if</span> (_isrunning)
-    {
-      _isrunning <span style="color:#f92672">=</span> false;
-      _capture_thread<span style="color:#f92672">-&gt;</span>Stop();
-      _capture_thread.reset();
-    }
-  }
-
-  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">AddOrUpdateSink</span>(
-      rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink,
-      <span style="color:#66d9ef">const</span> rtc<span style="color:#f92672">::</span>VideoSinkWants <span style="color:#f92672">&amp;</span>wants)
-  {
-    <span style="color:#75715e">// Start(nullptr);
-</span><span style="color:#75715e"></span>    _sink <span style="color:#f92672">=</span> sink;
-  }
-
-  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RemoveSink</span>(rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink)
-  {
-    <span style="color:#66d9ef">if</span> (sink <span style="color:#f92672">==</span> _sink)
-    {
-      _sink <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
-    }
-
-    Stop();
-  }
-
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">int</span> _msPerFrame <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;                                   <span style="color:#75715e">// 100毫秒采集一次，每秒钟采集10帧
-</span><span style="color:#75715e"></span>  webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>SourceList _excludeWindowList;  <span style="color:#75715e">//需要过滤的窗口列表
-</span><span style="color:#75715e"></span>  desktop_capture_frame_callback _frameCallback <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; <span style="color:#75715e">//视频输出回调
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>_userContext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
-
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>rtc<span style="color:#f92672">::</span>PlatformThread<span style="color:#f92672">&gt;</span> _capture_thread;
-  <span style="color:#66d9ef">bool</span> _isrunning <span style="color:#f92672">=</span> false;
-  rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>_sink;
-};
-<span style="color:#75715e">#endif
-</span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">peerconnection.cc
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>VideoTrackSource {
- <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> Create() {
-    <span style="color:#66d9ef">const</span> size_t kWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">640</span>;
-    <span style="color:#66d9ef">const</span> size_t kHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">480</span>;
-    <span style="color:#66d9ef">const</span> size_t kFps <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
-    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer;
-    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoCaptureModule<span style="color:#f92672">::</span>DeviceInfo<span style="color:#f92672">&gt;</span> info(
-        webrtc<span style="color:#f92672">::</span>VideoCaptureFactory<span style="color:#f92672">::</span>CreateDeviceInfo());
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>info) {
-      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
-    }
-    <span style="color:#66d9ef">int</span> num_devices <span style="color:#f92672">=</span> info<span style="color:#f92672">-&gt;</span>NumberOfDevices();
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> num_devices; <span style="color:#f92672">++</span>i) {
-      capturer <span style="color:#f92672">=</span> absl<span style="color:#f92672">::</span>WrapUnique(
-          webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">::</span>Create(kWidth, kHeight, kFps, i));
-      <span style="color:#66d9ef">if</span> (capturer) {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span>
-            rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(capturer));
-      }
-    }
-
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
-  }
-
-  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> CreateDesk()
-  {
-    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>Create());
-    <span style="color:#66d9ef">if</span> (desk) {
-      printf(<span style="color:#e6db74">&#34;CreateDesk success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(desk));
-    }
-      printf(<span style="color:#e6db74">&#34;CreateDesk failed...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
-  }
-
- <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
-  <span style="color:#66d9ef">explicit</span> CapturerTrackSource(
-      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer)
-      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), capturer_(std<span style="color:#f92672">::</span>move(capturer)) {}
-  <span style="color:#66d9ef">explicit</span> <span style="color:#a6e22e">CapturerTrackSource</span>(
-      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk)
-      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), desk_(std<span style="color:#f92672">::</span>move(desk)) {}
- <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-  rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;*</span> source() <span style="color:#66d9ef">override</span> {
-    <span style="color:#66d9ef">return</span> desk_.get();
-    <span style="color:#75715e">// return capturer_.get();
-</span><span style="color:#75715e"></span>  }
-  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer_;
-  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk_;
-};
-</code></pre></div><p>参考： <a href="https://blog.csdn.net/weixin_29405665/article/details/107320004">https://blog.csdn.net/weixin_29405665/article/details/107320004</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#ifndef __RCRTC_DESKTOP_CAPTURER__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define __RCRTC_DESKTOP_CAPTURER__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;api/video/i420_buffer.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/convert.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;third_party/libyuv/include/libyuv/video_common.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_broadcaster.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;media/base/video_common.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;modules/desktop_capture/desktop_and_cursor_composer.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/thread.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;system_wrappers/include/sleep.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test/vcm_capturer.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;rtc_base/platform_thread.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">void</span> (<span style="color:#f92672">*</span>desktop_capture_frame_callback)(<span style="color:#66d9ef">int</span> width, <span style="color:#66d9ef">int</span> height, <span style="color:#66d9ef">int</span> y_stride, <span style="color:#66d9ef">int</span> u_stride, <span style="color:#66d9ef">int</span> v_stride, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>y, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>u, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">uint8_t</span> <span style="color:#f92672">*</span>v, <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>context);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RcrtcDesktopCapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Callback,
+</span></span><span style="display:flex;"><span>                                        <span style="color:#66d9ef">public</span> rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  RcrtcDesktopCapturerTrackSource(<span style="color:#75715e">/*const std::map&lt;std::string, std::string&gt;&amp; opts*/</span>) {
+</span></span><span style="display:flex;"><span>    Start(<span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">inline</span> <span style="color:#f92672">~</span>RcrtcDesktopCapturerTrackSource() <span style="color:#66d9ef">override</span> {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span><span style="color:#a6e22e">Create</span>()
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(<span style="color:#66d9ef">new</span> RcrtcDesktopCapturerTrackSource);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> desk.release();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// overide webrtc::DesktopCapturer::Callback
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnCaptureResult</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result result,
+</span></span><span style="display:flex;"><span>                       std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopFrame<span style="color:#f92672">&gt;</span> frame) <span style="color:#66d9ef">override</span>
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Result<span style="color:#f92672">::</span>SUCCESS)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().width();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> frame<span style="color:#f92672">-&gt;</span>size().height();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">&gt;</span> I420buffer <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>          webrtc<span style="color:#f92672">::</span>I420Buffer<span style="color:#f92672">::</span>Create(width, height);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> stride<span style="color:#f92672">=</span>width;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> yplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataY();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> uplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataU();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span> vplane<span style="color:#f92672">=</span>I420buffer<span style="color:#f92672">-&gt;</span>MutableDataV();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> conversionResult <span style="color:#f92672">=</span> libyuv<span style="color:#f92672">::</span>ConvertToI420( frame<span style="color:#f92672">-&gt;</span>data(), <span style="color:#ae81ff">0</span>, 
+</span></span><span style="display:flex;"><span>          yplane,stride,
+</span></span><span style="display:flex;"><span>          uplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>          vplane,(stride<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>          width,height,
+</span></span><span style="display:flex;"><span>          width,height,
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#75715e">// I420buffer-&gt;width(), I420buffer-&gt;height(), 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          libyuv<span style="color:#f92672">::</span>kRotate0, <span style="color:#f92672">::</span>libyuv<span style="color:#f92672">::</span>FOURCC_ARGB);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (conversionResult <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// webrtc::VideoFrame videoFrame(I420buffer,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               webrtc::VideoRotation::kVideoRotation_0,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//                               rtc::TimeMicros());
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// rtc::scoped_refptr&lt;webrtc::I420BufferInterface&gt; buffer(
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//     videoFrame.video_frame_buffer()-&gt;ToI420());
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// _frameCallback(buffer-&gt;width(), buffer-&gt;height(), buffer-&gt;StrideY(),
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;StrideU(), buffer-&gt;StrideV(), buffer-&gt;DataY(),
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//                buffer-&gt;DataU(), buffer-&gt;DataV(), this-&gt;_userContext);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        webrtc<span style="color:#f92672">::</span>VideoFrame videoFrame<span style="color:#f92672">=</span>webrtc<span style="color:#f92672">::</span>VideoFrame(I420buffer,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,webrtc<span style="color:#f92672">::</span>kVideoRotation_0);
+</span></span><span style="display:flex;"><span>        _sink<span style="color:#f92672">-&gt;</span>OnFrame(videoFrame);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setExccludeWindow</span>(webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>Source windowId)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    _excludeWindowList.push_back(windowId);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureDeskThread</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>obj)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*</span>capture <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource <span style="color:#f92672">*&gt;</span>(obj);
+</span></span><span style="display:flex;"><span>    capture<span style="color:#f92672">-&gt;</span>CaptureProcess();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CaptureProcess</span>()
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions opts <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        webrtc<span style="color:#f92672">::</span>DesktopCaptureOptions<span style="color:#f92672">::</span>CreateDefault();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// opts.set_allow_use_magnification_api(true);  //设置过滤窗口选项
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 使用 DesktopAndCursorComposer 可以采集鼠标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span> capturer <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">&gt;</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> webrtc<span style="color:#f92672">::</span>DesktopAndCursorComposer(
+</span></span><span style="display:flex;"><span>                webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>CreateScreenCapturer(opts), opts));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置开始采集状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    capturer<span style="color:#f92672">-&gt;</span>Start(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置要过滤的窗口
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> source : _excludeWindowList)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      capturer<span style="color:#f92672">-&gt;</span>SetExcludedWindow(source.id);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (_isrunning)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      webrtc<span style="color:#f92672">::</span>SleepMs(_msPerFrame);
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 采集桌面图像
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      capturer<span style="color:#f92672">-&gt;</span>CaptureFrame();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">Start</span>(desktop_capture_frame_callback back)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;start desk capturer...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>_capture_thread)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      _frameCallback <span style="color:#f92672">=</span> back;
+</span></span><span style="display:flex;"><span>      _isrunning <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>      _capture_thread.reset(<span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>PlatformThread(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>CaptureDeskThread, <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                                    <span style="color:#e6db74">&#34;CaptureThread&#34;</span>, rtc<span style="color:#f92672">::</span>ThreadPriority<span style="color:#f92672">::</span>kHighPriority));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      _capture_thread<span style="color:#f92672">-&gt;</span>Start();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// CaptureThread();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread = rtc::Thread::Create();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;Start();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// _capture_thread-&gt;PostTask(RTC_FROM_HERE, [&amp;]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//                           { CaptureThread(); });
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Stop</span>()
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (_isrunning)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      _isrunning <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>      _capture_thread<span style="color:#f92672">-&gt;</span>Stop();
+</span></span><span style="display:flex;"><span>      _capture_thread.reset();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">AddOrUpdateSink</span>(
+</span></span><span style="display:flex;"><span>      rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink,
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> rtc<span style="color:#f92672">::</span>VideoSinkWants <span style="color:#f92672">&amp;</span>wants)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Start(nullptr);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    _sink <span style="color:#f92672">=</span> sink;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RemoveSink</span>(rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>sink)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sink <span style="color:#f92672">==</span> _sink)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      _sink <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Stop();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> _msPerFrame <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;                                   <span style="color:#75715e">// 100毫秒采集一次，每秒钟采集10帧
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  webrtc<span style="color:#f92672">::</span>DesktopCapturer<span style="color:#f92672">::</span>SourceList _excludeWindowList;  <span style="color:#75715e">//需要过滤的窗口列表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  desktop_capture_frame_callback _frameCallback <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; <span style="color:#75715e">//视频输出回调
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>_userContext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>rtc<span style="color:#f92672">::</span>PlatformThread<span style="color:#f92672">&gt;</span> _capture_thread;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> _isrunning <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>  rtc<span style="color:#f92672">::</span>VideoSinkInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>_sink;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>peerconnection.cc
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CapturerTrackSource</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> webrtc<span style="color:#f92672">::</span>VideoTrackSource {
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> Create() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> size_t kWidth <span style="color:#f92672">=</span> <span style="color:#ae81ff">640</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> size_t kHeight <span style="color:#f92672">=</span> <span style="color:#ae81ff">480</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> size_t kFps <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoCaptureModule<span style="color:#f92672">::</span>DeviceInfo<span style="color:#f92672">&gt;</span> info(
+</span></span><span style="display:flex;"><span>        webrtc<span style="color:#f92672">::</span>VideoCaptureFactory<span style="color:#f92672">::</span>CreateDeviceInfo());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>info) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num_devices <span style="color:#f92672">=</span> info<span style="color:#f92672">-&gt;</span>NumberOfDevices();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> num_devices; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>      capturer <span style="color:#f92672">=</span> absl<span style="color:#f92672">::</span>WrapUnique(
+</span></span><span style="display:flex;"><span>          webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">::</span>Create(kWidth, kHeight, kFps, i));
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (capturer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span>
+</span></span><span style="display:flex;"><span>            rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(capturer));
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> rtc<span style="color:#f92672">::</span>scoped_refptr<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span> CreateDesk()
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk(RcrtcDesktopCapturerTrackSource<span style="color:#f92672">::</span>Create());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (desk) {
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;CreateDesk success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> rtc<span style="color:#f92672">::</span>RefCountedObject<span style="color:#f92672">&lt;</span>CapturerTrackSource<span style="color:#f92672">&gt;</span>(std<span style="color:#f92672">::</span>move(desk));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>      printf(<span style="color:#e6db74">&#34;CreateDesk failed...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">explicit</span> CapturerTrackSource(
+</span></span><span style="display:flex;"><span>      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer)
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), capturer_(std<span style="color:#f92672">::</span>move(capturer)) {}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">explicit</span> <span style="color:#a6e22e">CapturerTrackSource</span>(
+</span></span><span style="display:flex;"><span>      std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk)
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">:</span> VideoTrackSource(<span style="color:#75715e">/*remote=*/</span>false), desk_(std<span style="color:#f92672">::</span>move(desk)) {}
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  rtc<span style="color:#f92672">::</span>VideoSourceInterface<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>VideoFrame<span style="color:#f92672">&gt;*</span> source() <span style="color:#66d9ef">override</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> desk_.get();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return capturer_.get();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>webrtc<span style="color:#f92672">::</span>test<span style="color:#f92672">::</span>VcmCapturer<span style="color:#f92672">&gt;</span> capturer_;
+</span></span><span style="display:flex;"><span>  std<span style="color:#f92672">::</span>unique_ptr<span style="color:#f92672">&lt;</span>RcrtcDesktopCapturerTrackSource<span style="color:#f92672">&gt;</span> desk_;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>参考： <a href="https://blog.csdn.net/weixin_29405665/article/details/107320004">https://blog.csdn.net/weixin_29405665/article/details/107320004</a></p>
 
 
             <h4 align="center">--完--</h4>
@@ -475,7 +475,7 @@
                 <a href="https://blog.rakfree.tk/2021/11/webrtcdesk/">https://blog.rakfree.tk/2021/11/webrtcdesk/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:52</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -605,6 +605,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -618,10 +622,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -667,7 +667,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -679,7 +679,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -705,6 +705,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

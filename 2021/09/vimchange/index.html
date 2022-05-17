@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-09-07T10:46:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T18:57:22&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Vim | 切换模式/输入法">
@@ -224,21 +224,21 @@
 <li>IdeaVimExtension</li>
 </ul>
 <p>我们需要在 用户目录下创建 <code>.ideavimrc</code> 文件, 并输入以下内容</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">set keep-english-in-normal 
-set keep-english-in-normal-and-restore-in-insert
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ source ~/.ideavimrc
-</code></pre></div><p>重启 <code>idea</code> 可以看到效果了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>set keep-english-in-normal 
+</span></span><span style="display:flex;"><span>set keep-english-in-normal-and-restore-in-insert
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ source ~/.ideavimrc
+</span></span></code></pre></div><p>重启 <code>idea</code> 可以看到效果了。</p>
 <p>IdeaVimExtension插件的文档：
-为<code>IdeaVim</code>插件增加自动切换为英文输入法的功能
+为<code>IdeaVim</code>插件增加自动切换为英文输入法的功能 
 输入法自动切换功能不会默认启用
 编辑器中normal模式下输入输入下面的指令以启用自动切换输入法功能：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">:set keep-english-in-normal 开启输入法自动切换功能
-:set keep-english-in-normal-and-restore-in-insert 回到insert模式时恢复输入法
-:set nokeep-english-in-normal-and-restore-in-insert 保留输入法自动切换功能，但是回到insert模式不恢复输入法
-:set nokeep-english-in-normal 关闭输入法自动切换功能
-</code></pre></div><p>也可以通过将<code>set keep-english-in-normal[-and-restore-in-insert]</code>加入到<code>~/.ideavimrc</code>文件中并重启IDE来启用插件功能。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>:set keep-english-in-normal 开启输入法自动切换功能
+</span></span><span style="display:flex;"><span>:set keep-english-in-normal-and-restore-in-insert 回到insert模式时恢复输入法
+</span></span><span style="display:flex;"><span>:set nokeep-english-in-normal-and-restore-in-insert 保留输入法自动切换功能，但是回到insert模式不恢复输入法
+</span></span><span style="display:flex;"><span>:set nokeep-english-in-normal 关闭输入法自动切换功能
+</span></span></code></pre></div><p>也可以通过将<code>set keep-english-in-normal[-and-restore-in-insert]</code>加入到<code>~/.ideavimrc</code>文件中并重启IDE来启用插件功能。
 注意:支持MacOS和Windows, 通过fcitx-remote支持Linux
-MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国键盘 Linux需要使用fcitx输入法，通过fcitx-remote切换
+MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国键盘 Linux需要使用fcitx输入法，通过fcitx-remote切换 
 在macOS中,normal模式的输入法可以通过<code>keep_input_source_in_normal</code> 来设置,例如<code>let keep_input_source_in_normal=&quot;com.apple.keylayout.ABC&quot;</code></p>
 <h2 id="在vscode中使用-vim">在vscode中使用 vim</h2>
 <p>参考 vscode 插件： <a href="https://github.com/VSCodeVim/Vim#input-method">https://github.com/VSCodeVim/Vim#input-method</a></p>
@@ -249,18 +249,18 @@ MacOS需要开启英语美国键盘或ABC键盘 Windows需要开启英语美国�
 <li>im-select</li>
 </ul>
 <h3 id="安装-im-select">安装 im-select</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com.cnpmjs.org/daipeihust/im-select.git
-$ mv im-select/im-select-mac/out/im-select /usr/local/bin/
-$ chmod 777 /usr/local/bin/im-select
-</code></pre></div><p>查看当前输入法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ /usr/local/bin/im-select
-com.apple.keylayout.ABC
-</code></pre></div><h3 id="全局配置-settingsjson">全局配置 settings.json</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;vim.autoSwitchInputMethod.enable&#34;: true,
-&#34;vim.autoSwitchInputMethod.defaultIM&#34;: &#34;com.apple.keylayout.ABC&#34;,
-&#34;vim.autoSwitchInputMethod.obtainIMCmd&#34;: &#34;/usr/local/bin/im-select&#34;,
-&#34;vim.autoSwitchInputMethod.switchIMCmd&#34;: &#34;/usr/local/bin/im-select {im}&#34;
-</code></pre></div><p>settings.json 参数解析:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ git clone https://github.com.cnpmjs.org/daipeihust/im-select.git
+</span></span><span style="display:flex;"><span>$ mv im-select/im-select-mac/out/im-select /usr/local/bin/
+</span></span><span style="display:flex;"><span>$ chmod 777 /usr/local/bin/im-select
+</span></span></code></pre></div><p>查看当前输入法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ /usr/local/bin/im-select
+</span></span><span style="display:flex;"><span>com.apple.keylayout.ABC
+</span></span></code></pre></div><h3 id="全局配置-settingsjson">全局配置 settings.json</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>&#34;vim.autoSwitchInputMethod.enable&#34;: true,
+</span></span><span style="display:flex;"><span>&#34;vim.autoSwitchInputMethod.defaultIM&#34;: &#34;com.apple.keylayout.ABC&#34;,
+</span></span><span style="display:flex;"><span>&#34;vim.autoSwitchInputMethod.obtainIMCmd&#34;: &#34;/usr/local/bin/im-select&#34;,
+</span></span><span style="display:flex;"><span>&#34;vim.autoSwitchInputMethod.switchIMCmd&#34;: &#34;/usr/local/bin/im-select {im}&#34;
+</span></span></code></pre></div><p>settings.json 参数解析: </p>
 <table>
 <thead>
 <tr>
@@ -307,7 +307,7 @@ com.apple.keylayout.ABC
                 <a href="https://blog.rakfree.tk/2021/09/vimchange/">https://blog.rakfree.tk/2021/09/vimchange/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 18:57:22</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -441,6 +441,10 @@ com.apple.keylayout.ABC
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -454,10 +458,6 @@ com.apple.keylayout.ABC
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -503,7 +503,7 @@ com.apple.keylayout.ABC
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -515,7 +515,7 @@ com.apple.keylayout.ABC
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -541,6 +541,8 @@ com.apple.keylayout.ABC
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

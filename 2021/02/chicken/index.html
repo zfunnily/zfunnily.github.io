@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-02-24T17:51:46&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:02:58&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Lua | 解决百元买鸡的问题">
@@ -210,35 +210,35 @@
             <h2 id="问题">问题</h2>
 <p>编写<code>lua</code>程序求解百鸡百钱问题。公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？</p>
 <h2 id="代码">代码</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">-----------------------------------------------------------------------------
---公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？
------------------------------------------------------------------------------
-
-local maxprice  = 100   --总价
-local maxnum = 100      --总数量
-
-local malePrice = 5    --公鸡价格
-local femalePrice = 3  --母鸡价格
-local smallPrice = 1/3 --小鸡价格
-
-for malenum = 0, 20 do --公鸡的最大数量=100/4
-    for femalenum = 0, 34 do --母鸡的数量最大值=100/3
-        for smallnum = 0, 300 do --小鸡的数量最大值=100*3
-            local tolsum = malenum * malePrice + femalenum * femalePrice + smallnum * smallPrice
-            local num = malenum + femalenum + smallnum
-            if tolsum == 100 and num == 100 then
-                print(string.format(&#34;小鸡：%d只，母鸡：%d只，公鸡：%d只\n&#34;,smallnum, femalenum, malenum))
-            end
-        end
-    end
-end
-</code></pre></div><p>输出</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ lua test.lua
-小鸡：75只，母鸡：25只，公鸡：0只
-小鸡：78只，母鸡：18只，公鸡：4只
-小鸡：81只，母鸡：11只，公鸡：8只
-小鸡：84只，母鸡：4只，公鸡：12只
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>-----------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>--公鸡5元一只，母鸡3元一只，小鸡一元3只，问100元钱买100只鸡，可买公鸡、母鸡、小鸡各多少只？
+</span></span><span style="display:flex;"><span>-----------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>local maxprice  = 100   --总价
+</span></span><span style="display:flex;"><span>local maxnum = 100      --总数量
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>local malePrice = 5    --公鸡价格
+</span></span><span style="display:flex;"><span>local femalePrice = 3  --母鸡价格
+</span></span><span style="display:flex;"><span>local smallPrice = 1/3 --小鸡价格
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>for malenum = 0, 20 do --公鸡的最大数量=100/4
+</span></span><span style="display:flex;"><span>    for femalenum = 0, 34 do --母鸡的数量最大值=100/3
+</span></span><span style="display:flex;"><span>        for smallnum = 0, 300 do --小鸡的数量最大值=100*3
+</span></span><span style="display:flex;"><span>            local tolsum = malenum * malePrice + femalenum * femalePrice + smallnum * smallPrice
+</span></span><span style="display:flex;"><span>            local num = malenum + femalenum + smallnum
+</span></span><span style="display:flex;"><span>            if tolsum == 100 and num == 100 then
+</span></span><span style="display:flex;"><span>                print(string.format(&#34;小鸡：%d只，母鸡：%d只，公鸡：%d只\n&#34;,smallnum, femalenum, malenum))
+</span></span><span style="display:flex;"><span>            end
+</span></span><span style="display:flex;"><span>        end
+</span></span><span style="display:flex;"><span>    end
+</span></span><span style="display:flex;"><span>end
+</span></span></code></pre></div><p>输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ lua test.lua
+</span></span><span style="display:flex;"><span>小鸡：75只，母鸡：25只，公鸡：0只
+</span></span><span style="display:flex;"><span>小鸡：78只，母鸡：18只，公鸡：4只
+</span></span><span style="display:flex;"><span>小鸡：81只，母鸡：11只，公鸡：8只
+</span></span><span style="display:flex;"><span>小鸡：84只，母鸡：4只，公鸡：12只
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -257,7 +257,7 @@ end
                 <a href="https://blog.rakfree.tk/2021/02/chicken/">https://blog.rakfree.tk/2021/02/chicken/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:02:58</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -387,6 +387,10 @@ end
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -400,10 +404,6 @@ end
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -449,7 +449,7 @@ end
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -461,7 +461,7 @@ end
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -487,6 +487,8 @@ end
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

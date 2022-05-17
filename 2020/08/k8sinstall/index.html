@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-05T10:00:40&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | 安装">
@@ -233,43 +233,43 @@
 </ul>
 <h3 id="关闭-swap">关闭 swap</h3>
 <p>暂时关闭</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ swapoff -a
-</code></pre></div><p>永久关闭
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ swapoff -a
+</span></span></code></pre></div><p>永久关闭
 注释掉这一行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim /etc/fstab 
-# /swapfile none swap sw 0 0
-</code></pre></div><p>重启机器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo reboot
-</code></pre></div><h2 id="docker-的配置">docker 的配置</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo vim /etc/fstab 
+</span></span><span style="display:flex;"><span># /swapfile none swap sw 0 0
+</span></span></code></pre></div><p>重启机器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div><h2 id="docker-的配置">docker 的配置</h2>
 <p>安装完成之后需要进行一些配置，包括 切换docker下载源为国内镜像站 以及 修改cgroups。<br> cgroups是一个进程隔离工具 docker就是用它来实现容器的隔离的。docker 默认使用的是cgroupfs，而 k8s 也用到了一个进程隔离工具systemd，如果使用两个隔离组的话可能会引起异常，所以我们要把 docker 的也改成systemd。
 编辑daemon.json：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo vim /etc/docker/daemon.json
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
-  &#34;registry-mirrors&#34;: [
-		&#34;阿里云加速地址&#34;
-		],
-  &#34;exec-opts&#34;: [ &#34;native.cgroupdriver=systemd&#34; ]
-}
-</code></pre></div><p>然后:wq保存后重启 docker：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo systemctl daemon-reload
-sudo systemctl restart docker
-</code></pre></div><h2 id="安装-k8s">安装 k8s</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo vim /etc/docker/daemon.json
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  &#34;registry-mirrors&#34;: [
+</span></span><span style="display:flex;"><span>		&#34;阿里云加速地址&#34;
+</span></span><span style="display:flex;"><span>		],
+</span></span><span style="display:flex;"><span>  &#34;exec-opts&#34;: [ &#34;native.cgroupdriver=systemd&#34; ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然后:wq保存后重启 docker：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo systemctl daemon-reload
+</span></span><span style="display:flex;"><span>sudo systemctl restart docker
+</span></span></code></pre></div><h2 id="安装-k8s">安装 k8s</h2>
 <p>kubelet: k8s 的核心服务<br> kubeadm: 这个是用于快速安装 k8s 的一个集成工具，我们在master1和worker1上的 k8s 部署都将使用它来完成。<br> kubectl: k8s 的命令行工具，部署完成之后后续的操作都要用它来执行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#进入root权限/或者使用sudo
-
-# 使得 apt 支持 ssl 传输
-sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https
-# 下载 gpg 密钥
-sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add - 
-# 添加 k8s 镜像源
-sudo cat &lt;&lt; EOF &gt;/etc/apt/sources.list.d/kubernetes.list 
-deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main 
-EOF
-# 更新源列表
-apt-get update
-# 下载 kubectl，kubeadm以及 kubelet 安装固定版本18.0/ 我试过1.18.6的镜像下载不下来
-sudo apt install kubeadm=1.18.0-00 kubectl=1.18.0-00 kubelet=1.18.0-00
-</code></pre></div><h2 id="安装-master-节点">安装 master 节点</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#进入root权限/或者使用sudo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># 使得 apt 支持 ssl 传输
+</span></span><span style="display:flex;"><span>sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https
+</span></span><span style="display:flex;"><span># 下载 gpg 密钥
+</span></span><span style="display:flex;"><span>sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add - 
+</span></span><span style="display:flex;"><span># 添加 k8s 镜像源
+</span></span><span style="display:flex;"><span>sudo cat &lt;&lt; EOF &gt;/etc/apt/sources.list.d/kubernetes.list 
+</span></span><span style="display:flex;"><span>deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main 
+</span></span><span style="display:flex;"><span>EOF
+</span></span><span style="display:flex;"><span># 更新源列表
+</span></span><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span># 下载 kubectl，kubeadm以及 kubelet 安装固定版本18.0/ 我试过1.18.6的镜像下载不下来
+</span></span><span style="display:flex;"><span>sudo apt install kubeadm=1.18.0-00 kubectl=1.18.0-00 kubelet=1.18.0-00
+</span></span></code></pre></div><h2 id="安装-master-节点">安装 master 节点</h2>
 <p>初始化master节点，这一章节只需要在管理节点上配置即可，大致可以分为如下几步：</p>
 <ul>
 <li>拉去国内镜像- 初始化master节点</li>
@@ -277,182 +277,179 @@ sudo apt install kubeadm=1.18.0-00 kubectl=1.18.0-00 kubelet=1.18.0-00
 </ul>
 <h3 id="拉取国内镜像">拉取国内镜像</h3>
 <p>获取镜像列表<br> 由于官方镜像地址被墙，所以我们需要首先获取所需镜像以及它们的版本。然后从国内阿里的镜像站获取。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubeadm config images list
-</code></pre></div><p>脚本获取</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">images=(
-kube-apiserver:v1.18.0
-kube-controller-manager:v1.18.0
-kube-scheduler:v1.18.0
-kube-proxy:v1.18.0
-pause:3.2
-etcd:3.4.3-0
-coredns:1.6.7
-)
-for imageName in ${images[@]} ; do
-        docker pull registry.aliyuncs.com/google_containers/$imageName
-        docker tag registry.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
-        docker rmi registry.aliyuncs.com/google_containers/$imageName
-done
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubeadm config images list
+</span></span></code></pre></div><p>脚本获取</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>images=(
+</span></span><span style="display:flex;"><span>kube-apiserver:v1.18.0
+</span></span><span style="display:flex;"><span>kube-controller-manager:v1.18.0
+</span></span><span style="display:flex;"><span>kube-scheduler:v1.18.0
+</span></span><span style="display:flex;"><span>kube-proxy:v1.18.0
+</span></span><span style="display:flex;"><span>pause:3.2
+</span></span><span style="display:flex;"><span>etcd:3.4.3-0
+</span></span><span style="display:flex;"><span>coredns:1.6.7
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>for imageName in ${images[@]} ; do
+</span></span><span style="display:flex;"><span>        docker pull registry.aliyuncs.com/google_containers/$imageName
+</span></span><span style="display:flex;"><span>        docker tag registry.aliyuncs.com/google_containers/$imageName k8s.gcr.io/$imageName
+</span></span><span style="display:flex;"><span>        docker rmi registry.aliyuncs.com/google_containers/$imageName
+</span></span><span style="display:flex;"><span>done
+</span></span></code></pre></div><blockquote>
 <p>版本要对应。</p>
 </blockquote>
 <h3 id="如果版本对不上">如果版本对不上</h3>
 <p>比如kubeadm config images list输出的版本号为v1.18.6，但是安装的k8s版本是v1.18.0，则使用配置<br> 导出配置文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubeadm config print init-defaults --kubeconfig ClusterConfiguration &gt; kubeadm.yml
-</code></pre></div><p>修改配置</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 修改配置为如下内容
-apiVersion: kubeadm.k8s.io/v1beta1
-bootstrapTokens:
-- groups:
-  - system:bootstrappers:kubeadm:default-node-token
-  token: abcdef.0123456789abcdef
-  ttl: 24h0m0s
-  usages:
-  - signing
-  - authentication
-kind: InitConfiguration
-localAPIEndpoint:
-  # 修改为主节点 IP
-  advertiseAddress: 192.168.141.130
-  bindPort: 6443
-nodeRegistration:
-  criSocket: /var/run/dockershim.sock
-  name: kubernetes-master
-  taints:
-  - effect: NoSchedule
-    key: node-role.kubernetes.io/master
----
-apiServer:
-  timeoutForControlPlane: 4m0s
-apiVersion: kubeadm.k8s.io/v1beta1
-certificatesDir: /etc/kubernetes/pki
-clusterName: kubernetes
-controlPlaneEndpoint: &#34;&#34;
-controllerManager: {}
-dns:
-  type: CoreDNS
-etcd:
-  local:
-    dataDir: /var/lib/etcd
-# 国内不能访问 Google，修改为阿里云
-imageRepository: registry.aliyuncs.com/google_containers
-kind: ClusterConfiguration
-# 修改版本号
-kubernetesVersion: v1.14.1
-networking:
-  dnsDomain: cluster.local
-  # 配置成 Calico 的默认网段
-  podSubnet: &#34;192.168.0.0/16&#34;
-  serviceSubnet: 10.96.0.0/12
-scheduler: {}
----
-# 开启 IPVS 模式
-apiVersion: kubeproxy.config.k8s.io/v1alpha1
-kind: KubeProxyConfiguration
-featureGates:
-  SupportIPVSProxyMode: true
-mode: ipvs
-
-</code></pre></div><p>查看和拉取镜像</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 查看所需镜像列表
-kubeadm config images list --config kubeadm.yml
-# 拉取镜像
-kubeadm config images pull --config kubeadm.yml
-</code></pre></div><p>这样镜像就拉取下来了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubeadm config print init-defaults --kubeconfig ClusterConfiguration &gt; kubeadm.yml
+</span></span></code></pre></div><p>修改配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># 修改配置为如下内容
+</span></span><span style="display:flex;"><span>apiVersion: kubeadm.k8s.io/v1beta1
+</span></span><span style="display:flex;"><span>bootstrapTokens:
+</span></span><span style="display:flex;"><span>- groups:
+</span></span><span style="display:flex;"><span>  - system:bootstrappers:kubeadm:default-node-token
+</span></span><span style="display:flex;"><span>  token: abcdef.0123456789abcdef
+</span></span><span style="display:flex;"><span>  ttl: 24h0m0s
+</span></span><span style="display:flex;"><span>  usages:
+</span></span><span style="display:flex;"><span>  - signing
+</span></span><span style="display:flex;"><span>  - authentication
+</span></span><span style="display:flex;"><span>kind: InitConfiguration
+</span></span><span style="display:flex;"><span>localAPIEndpoint:
+</span></span><span style="display:flex;"><span>  # 修改为主节点 IP
+</span></span><span style="display:flex;"><span>  advertiseAddress: 192.168.141.130
+</span></span><span style="display:flex;"><span>  bindPort: 6443
+</span></span><span style="display:flex;"><span>nodeRegistration:
+</span></span><span style="display:flex;"><span>  criSocket: /var/run/dockershim.sock
+</span></span><span style="display:flex;"><span>  name: kubernetes-master
+</span></span><span style="display:flex;"><span>  taints:
+</span></span><span style="display:flex;"><span>  - effect: NoSchedule
+</span></span><span style="display:flex;"><span>    key: node-role.kubernetes.io/master
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>apiServer:
+</span></span><span style="display:flex;"><span>  timeoutForControlPlane: 4m0s
+</span></span><span style="display:flex;"><span>apiVersion: kubeadm.k8s.io/v1beta1
+</span></span><span style="display:flex;"><span>certificatesDir: /etc/kubernetes/pki
+</span></span><span style="display:flex;"><span>clusterName: kubernetes
+</span></span><span style="display:flex;"><span>controlPlaneEndpoint: &#34;&#34;
+</span></span><span style="display:flex;"><span>controllerManager: {}
+</span></span><span style="display:flex;"><span>dns:
+</span></span><span style="display:flex;"><span>  type: CoreDNS
+</span></span><span style="display:flex;"><span>etcd:
+</span></span><span style="display:flex;"><span>  local:
+</span></span><span style="display:flex;"><span>    dataDir: /var/lib/etcd
+</span></span><span style="display:flex;"><span># 国内不能访问 Google，修改为阿里云
+</span></span><span style="display:flex;"><span>imageRepository: registry.aliyuncs.com/google_containers
+</span></span><span style="display:flex;"><span>kind: ClusterConfiguration
+</span></span><span style="display:flex;"><span># 修改版本号
+</span></span><span style="display:flex;"><span>kubernetesVersion: v1.14.1
+</span></span><span style="display:flex;"><span>networking:
+</span></span><span style="display:flex;"><span>  dnsDomain: cluster.local
+</span></span><span style="display:flex;"><span>  # 配置成 Calico 的默认网段
+</span></span><span style="display:flex;"><span>  podSubnet: &#34;192.168.0.0/16&#34;
+</span></span><span style="display:flex;"><span>  serviceSubnet: 10.96.0.0/12
+</span></span><span style="display:flex;"><span>scheduler: {}
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span># 开启 IPVS 模式
+</span></span><span style="display:flex;"><span>apiVersion: kubeproxy.config.k8s.io/v1alpha1
+</span></span><span style="display:flex;"><span>kind: KubeProxyConfiguration
+</span></span><span style="display:flex;"><span>featureGates:
+</span></span><span style="display:flex;"><span>  SupportIPVSProxyMode: true
+</span></span><span style="display:flex;"><span>mode: ipvs
+</span></span></code></pre></div><p>查看和拉取镜像</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># 查看所需镜像列表
+</span></span><span style="display:flex;"><span>kubeadm config images list --config kubeadm.yml
+</span></span><span style="display:flex;"><span># 拉取镜像
+</span></span><span style="display:flex;"><span>kubeadm config images pull --config kubeadm.yml
+</span></span></code></pre></div><p>这样镜像就拉取下来了</p>
 <h3 id="初始化-master-节点">初始化 master 节点</h3>
 <p>如果使用了上面的配置，则使用–config参数 &ndash;config=kubeadm.yml</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubeadm init  --config=kubeadm.yml
-</code></pre></div><p>使用kubeadm的init命令就可以轻松的完成初始化，不过需要携带几个参数，如下。先不要直接复制执行，将赋值给–apiserver-advertise-address参数的 ip 地址修改为自己的master主机地址，然后再执行。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubeadm init \
---apiserver-advertise-address=192.168.84.75 \
---pod-network-cidr=10.244.0.0/16 \
---image-repository=registry.aliyuncs.com/google_containers
-
---image-repository=googlecontainersmirror
-</code></pre></div><p>参数含义：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubeadm init  --config=kubeadm.yml
+</span></span></code></pre></div><p>使用kubeadm的init命令就可以轻松的完成初始化，不过需要携带几个参数，如下。先不要直接复制执行，将赋值给–apiserver-advertise-address参数的 ip 地址修改为自己的master主机地址，然后再执行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubeadm init \
+</span></span><span style="display:flex;"><span>--apiserver-advertise-address=192.168.84.75 \
+</span></span><span style="display:flex;"><span>--pod-network-cidr=10.244.0.0/16 \
+</span></span><span style="display:flex;"><span>--image-repository=registry.aliyuncs.com/google_containers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>--image-repository=googlecontainersmirror
+</span></span></code></pre></div><p>参数含义：</p>
 <ul>
 <li>–apiserver-advertise-address: k8s 中的主要服务apiserver的部署地址，填自己的管理节点 ip- –image-repository: 拉取的 docker 镜像源，因为初始化的时候kubeadm会去拉 k8s 的很多组件来进行部署，所以需要指定国内镜像源，下不然会拉取不到镜像。- –pod-network-cidr: 这个是 k8s 采用的节点网络，因为我们将要使用flannel作为 k8s 的网络，所以这里填10.244.0.0/16就好- –kubernetes-version: 这个是用来指定你要部署的 k8s 版本的，一般不用填，不过如果初始化过程中出现了因为版本不对导致的安装错误的话，可以用这个参数手动指定。- –ignore-preflight-errors: 忽略初始化时遇到的错误，比如说我想忽略 cpu 数量不够 2 核引起的错误，就可以用–ignore-preflight-errors=CpuNum。错误名称在初始化错误时会给出来。
 当你看到如下字样是，就说明初始化成功了，请把最后那行以kubeadm join开头的命令复制下来，之后安装工作节点时要用到的，如果你不慎遗失了该命令，可以在master节点上使用<code>kubeadm token create --print-join-command</code>命令来重新生成一条。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Your Kubernetes master has initialized successfully!
- 
-To start using your cluster, you need to run the following as a regular user:
- 
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
- 
-You should now deploy a pod network to the cluster.
-Run &#34;kubectl apply -f [podnetwork].yaml&#34; with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
- 
-You can now join any number of machines by running the following on each node
-as root:
- 
-kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
-    --discovery-token-ca-cert-hash sha256:623718f891678481bc0379984756b7d37468343eb9c243cdf51e90209a749a17
-</code></pre></div><p>如果在初始化过程中出现了任何Error导致初始化终止了，使用<code>kubeadm reset</code>重置之后再重新进行初始化。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Your Kubernetes master has initialized successfully!
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>To start using your cluster, you need to run the following as a regular user:
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>  mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>You should now deploy a pod network to the cluster.
+</span></span><span style="display:flex;"><span>Run &#34;kubectl apply -f [podnetwork].yaml&#34; with one of the options listed at:
+</span></span><span style="display:flex;"><span>  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>You can now join any number of machines by running the following on each node
+</span></span><span style="display:flex;"><span>as root:
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
+</span></span><span style="display:flex;"><span>    --discovery-token-ca-cert-hash sha256:623718f891678481bc0379984756b7d37468343eb9c243cdf51e90209a749a17
+</span></span></code></pre></div><p>如果在初始化过程中出现了任何Error导致初始化终止了，使用<code>kubeadm reset</code>重置之后再重新进行初始化。</p>
 <p>最后两行需要保存下来,<code>kubeadm join ...</code>是worker节点加入所需要执行的命令.</p>
 <h3 id="配置kubectl工具">配置kubectl工具</h3>
 <p>接下来配置环境, 让当前用户可以执行kubectl命令:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/kubelet.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-</code></pre></div><p>执行完成后并不会刷新出什么信息，可以通过下面两条命令测试 kubectl是否可用：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 查看已加入的节点
-sudo kubectl get nodes
-# 查看集群状态
-sudo kubectl get cs
-</code></pre></div><p>测试一下: 此处的<code>NotReady</code>是因为网络还没配置.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get node
-NAME         STATUS     ROLES    AGE     VERSION
-k8s-master   NotReady   master   3m25s   v1.15.3
-</code></pre></div><h3 id="部署calico网络">部署calico网络</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>sudo cp -i /etc/kubernetes/kubelet.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span></code></pre></div><p>执行完成后并不会刷新出什么信息，可以通过下面两条命令测试 kubectl是否可用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># 查看已加入的节点
+</span></span><span style="display:flex;"><span>sudo kubectl get nodes
+</span></span><span style="display:flex;"><span># 查看集群状态
+</span></span><span style="display:flex;"><span>sudo kubectl get cs
+</span></span></code></pre></div><p>测试一下: 此处的<code>NotReady</code>是因为网络还没配置.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl get node
+</span></span><span style="display:flex;"><span>NAME         STATUS     ROLES    AGE     VERSION
+</span></span><span style="display:flex;"><span>k8s-master   NotReady   master   3m25s   v1.15.3
+</span></span></code></pre></div><h3 id="部署calico网络">部署calico网络</h3>
 <p>下载描述文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo wget https://docs.projectcalico.org/v3.8/manifests/calico.yaml
-$ cat kubeadm-init.yaml | grep serviceSubnet:
-serviceSubnet: 10.96.0.0/12
-
-</code></pre></div><p>打开<code>calico.yaml</code>, 将<code>192.168.0.0/16</code>修改为<code>10.96.0.0/12</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo wget https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+</span></span><span style="display:flex;"><span>$ cat kubeadm-init.yaml | grep serviceSubnet:
+</span></span><span style="display:flex;"><span>serviceSubnet: 10.96.0.0/12
+</span></span></code></pre></div><p>打开<code>calico.yaml</code>, 将<code>192.168.0.0/16</code>修改为<code>10.96.0.0/12</code></p>
 <blockquote>
 <p>需要注意的是, calico.yaml中的IP和kubeadm-init.yaml需要保持一致, 要么初始化前修改kubeadm-init.yaml, 要么初始化后修改calico.yaml.</p>
 </blockquote>
 <p>执行<code>kubectl apply -f calico.yaml</code>初始化网络.</p>
 <p>此时查看node信息, master的状态已经是<code>Ready</code>了.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get node
-NAME         STATUS   ROLES    AGE   VERSION
-k8s-master   Ready    master   15m   v1.15.3
-
-</code></pre></div><h2 id="子节点加入">子节点加入</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl get node
+</span></span><span style="display:flex;"><span>NAME         STATUS   ROLES    AGE   VERSION
+</span></span><span style="display:flex;"><span>k8s-master   Ready    master   15m   v1.15.3
+</span></span></code></pre></div><h2 id="子节点加入">子节点加入</h2>
 <p>在master节点上使用<strong>sudo kubeadm token create &ndash;print-join-command</strong>命令来重新生成一条</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Your Kubernetes master has initialized successfully!
- 
-To start using your cluster, you need to run the following as a regular user:
- 
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
- 
-You should now deploy a pod network to the cluster.
-Run &#34;kubectl apply -f [podnetwork].yaml&#34; with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
- 
-You can now join any number of machines by running the following on each node
-as root:
- 
-kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
-    --discovery-token-ca-cert-hash sha256:623718f891678481bc0379984756b7d37468343eb9c243cdf51e90209a749a17
-</code></pre></div><h3 id="删除节点">删除节点</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Your Kubernetes master has initialized successfully!
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>To start using your cluster, you need to run the following as a regular user:
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>  mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>You should now deploy a pod network to the cluster.
+</span></span><span style="display:flex;"><span>Run &#34;kubectl apply -f [podnetwork].yaml&#34; with one of the options listed at:
+</span></span><span style="display:flex;"><span>  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>You can now join any number of machines by running the following on each node
+</span></span><span style="display:flex;"><span>as root:
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
+</span></span><span style="display:flex;"><span>    --discovery-token-ca-cert-hash sha256:623718f891678481bc0379984756b7d37468343eb9c243cdf51e90209a749a17
+</span></span></code></pre></div><h3 id="删除节点">删除节点</h3>
 <p>卸载节点（drain 翻译排出，此时卸载节点，但是没有删除）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl drain &lt;node_name&gt;  --delete-local-data --force --ignore-daemonsets
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubectl drain &lt;node_name&gt;  --delete-local-data --force --ignore-daemonsets
+</span></span></code></pre></div><blockquote>
 <p>可通过 sudo kubectl get node 获取 &lt;node_name&gt;</p>
 </blockquote>
 <p>删除节点</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubectl delete node &lt;node_name&gt;
-</code></pre></div><p>清空init配置，需要在删除的节点上执行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kubeadm reset
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubectl delete node &lt;node_name&gt;
+</span></span></code></pre></div><p>清空init配置，需要在删除的节点上执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kubeadm reset
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -471,7 +468,7 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
                 <a href="https://blog.rakfree.tk/2020/08/k8sinstall/">https://blog.rakfree.tk/2020/08/k8sinstall/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -601,6 +598,10 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -614,10 +615,6 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -663,7 +660,7 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -675,7 +672,7 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -701,6 +698,8 @@ kubeadm join 192.168.84.75:6443 --token abcdef.0123456789abcdef \
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

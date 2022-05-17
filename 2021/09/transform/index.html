@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-09-07T15:55:59&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:03:16&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Unity3D | Transform类">
@@ -231,30 +231,30 @@
 <p>脚本中类中的方法就是对它们的改变。 而我们也可以在Scene中和Inspector中直接进行设置。</p>
 <h2 id="修改属性">修改属性</h2>
 <p>修改 <code>Position</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">var</span> pos =transform.position;
-transform.position.x;
-transform.position.y;
-transform.position.z;
-transform.position = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
-</code></pre></div><p>修改<code>Rotation</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localEulerAngles.x;
-transform.localEulerAngles.y;
-transform.localEulerAngles.z;
-
-transform.localEulerAngles = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">90f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
-rotation = <span style="color:#66d9ef">new</span> Rotation(x,y,z,w);
-
-<span style="color:#75715e">//修改2：
-</span><span style="color:#75715e">//如果物体面板Rotation (x=22.5,y=0,z=0)
-</span><span style="color:#75715e">//用代码实现方法:
-</span><span style="color:#75715e"></span>transform.Rotate(<span style="color:#ae81ff">22.5f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
-</code></pre></div><p>修改<code>Scale</code>, 缩放,没有本地和世界分别</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">transform.localScale.x;
-transform.localScale.y;
-transform.localScale.z;
-
-transform.localScale = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
-</code></pre></div><h2 id="在unity中不能对transformpositionxyz直接赋值的原因">在Unity中不能对transform.position.x/y/z直接赋值的原因</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> pos =transform.position;
+</span></span><span style="display:flex;"><span>transform.position.x;
+</span></span><span style="display:flex;"><span>transform.position.y;
+</span></span><span style="display:flex;"><span>transform.position.z;
+</span></span><span style="display:flex;"><span>transform.position = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
+</span></span></code></pre></div><p>修改<code>Rotation</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>transform.localEulerAngles.x;
+</span></span><span style="display:flex;"><span>transform.localEulerAngles.y;
+</span></span><span style="display:flex;"><span>transform.localEulerAngles.z;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>transform.localEulerAngles = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">90f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>rotation = <span style="color:#66d9ef">new</span> Rotation(x,y,z,w);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//修改2：</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//如果物体面板Rotation (x=22.5,y=0,z=0)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//用代码实现方法:</span>
+</span></span><span style="display:flex;"><span>transform.Rotate(<span style="color:#ae81ff">22.5f</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><p>修改<code>Scale</code>, 缩放,没有本地和世界分别</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>transform.localScale.x;
+</span></span><span style="display:flex;"><span>transform.localScale.y;
+</span></span><span style="display:flex;"><span>transform.localScale.z;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>transform.localScale = <span style="color:#66d9ef">new</span> Vector3(<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>,<span style="color:#ae81ff">1f</span>);
+</span></span></code></pre></div><h2 id="在unity中不能对transformpositionxyz直接赋值的原因">在Unity中不能对transform.position.x/y/z直接赋值的原因</h2>
 <ol>
 <li>Vector3是一个结构体，而position是一个自动实现的属性。</li>
 <li>在C#里，结构体是值类型的，值类型在通过方法传递的时候，所传递的只是值的副本。C#的属性可以说是两个分别名为get和set的方法</li>
@@ -262,7 +262,7 @@ transform.localScale = <span style="color:#66d9ef">new</span> Vector3(<span styl
 <li>由于position是结构体类型的，get得到的也只是position的一个副本，而对这个副本所作出的任何修改，都对原positon没有任何影响，因此这样的修改是毫无意义的。</li>
 </ol>
 <h2 id="坐标系">坐标系</h2>
-<p>A本地坐标 + A父物体世界坐标 = A在上一级节点的相对坐标
+<p>A本地坐标 + A父物体世界坐标 = A在上一级节点的相对坐标 
 A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中的坐标</p>
 <h3 id="本地坐标">本地坐标</h3>
 <ul>
@@ -288,9 +288,9 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
 <h3 id="跟欧拉角有关的函数">跟欧拉角有关的函数</h3>
 <p>Quaternion.Euler
 基本语法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">（1）public static Quaternion Euler(Vector3 euler);
-（2）public static Quaternion Euler(float x, float y, float z);
-</code></pre></div><p>功能说明：此方法用于返回欧拉角Vector3(x,y,z)对应的四元数Quaternion实例。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>（1）public static Quaternion Euler(Vector3 euler);
+</span></span><span style="display:flex;"><span>（2）public static Quaternion Euler(float x, float y, float z);
+</span></span></code></pre></div><p>功能说明：此方法用于返回欧拉角Vector3(x,y,z)对应的四元数Quaternion实例。</p>
 <p>四元数Quaternion(qx,qy,qz,qw)与其欧拉角eulerAngles(ex,ey,ez)之间的对应关系如下。</p>
 
 
@@ -311,7 +311,7 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
                 <a href="https://blog.rakfree.tk/2021/09/transform/">https://blog.rakfree.tk/2021/09/transform/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:03:16</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -441,6 +441,10 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -454,10 +458,6 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -503,7 +503,7 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -515,7 +515,7 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -541,6 +541,8 @@ A本地坐标 + A父物体世界坐标 = 是以父物体为原点的坐标系中
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

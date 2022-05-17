@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-10-20T11:26:07&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-07T17:59:17&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Skynet源码赏析三 | 服务启动">
@@ -236,36 +236,36 @@
 <ol>
 <li>创建<code>snlua</code>服务，先调用 <code>snlua_create</code>，</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">snlua_create</span>(<span style="color:#66d9ef">void</span>) {
-    <span style="color:#75715e">//初始化snlua结构
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> l <span style="color:#f92672">=</span> skynet_malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
-	memset(l,<span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
-	l<span style="color:#f92672">-&gt;</span>mem_report <span style="color:#f92672">=</span> MEMORY_WARNING_REPORT;
-    ...
-    <span style="color:#75715e">//初始化一个lua虚拟机
-</span><span style="color:#75715e"></span>	l<span style="color:#f92672">-&gt;</span>L <span style="color:#f92672">=</span> lua_newstate(lalloc, l);
-    ...
-	<span style="color:#66d9ef">return</span> l;
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">snlua_create</span>(<span style="color:#66d9ef">void</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//初始化snlua结构
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span> l <span style="color:#f92672">=</span> skynet_malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
+</span></span><span style="display:flex;"><span>	memset(l,<span style="color:#ae81ff">0</span>,<span style="color:#66d9ef">sizeof</span>(<span style="color:#f92672">*</span>l));
+</span></span><span style="display:flex;"><span>	l<span style="color:#f92672">-&gt;</span>mem_report <span style="color:#f92672">=</span> MEMORY_WARNING_REPORT;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//初始化一个lua虚拟机
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	l<span style="color:#f92672">-&gt;</span>L <span style="color:#f92672">=</span> lua_newstate(lalloc, l);
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> l;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>创建一个snlua结构，创建一个Lua虚拟机，内存分配指定的是lalloc，目的是为了监控Lua分配的内存。<code>MEMORY_WARNING_REPORT</code>为Lua服务的内存阀值，超过该值，会报警</li>
 </ul>
 <ol start="2">
 <li><code>snlua</code>服务被创建后，初始化，调用的 <code>snlua_init</code></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">snlua_init</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args) {
-    ...
-    <span style="color:#75715e">//指定回掉函数
-</span><span style="color:#75715e"></span>	skynet_callback(ctx, l , launch_cb);
-    <span style="color:#75715e">//取本地服务的句柄
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;REG&#34;</span>, NULL);
-   	<span style="color:#66d9ef">uint32_t</span> handle_id <span style="color:#f92672">=</span> strtoul(self<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, NULL, <span style="color:#ae81ff">16</span>);
-	<span style="color:#75715e">// it must be first message
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//发送第一条消息，在launc_cb可见
-</span><span style="color:#75715e"></span>	skynet_send(ctx, <span style="color:#ae81ff">0</span>, handle_id, PTYPE_TAG_DONTCOPY,<span style="color:#ae81ff">0</span>, tmp, sz);
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">snlua_init</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args) {
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//指定回掉函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_callback(ctx, l , launch_cb);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//取本地服务的句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> self <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;REG&#34;</span>, NULL);
+</span></span><span style="display:flex;"><span>   	<span style="color:#66d9ef">uint32_t</span> handle_id <span style="color:#f92672">=</span> strtoul(self<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, NULL, <span style="color:#ae81ff">16</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// it must be first message
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//发送第一条消息，在launc_cb可见
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	skynet_send(ctx, <span style="color:#ae81ff">0</span>, handle_id, PTYPE_TAG_DONTCOPY,<span style="color:#ae81ff">0</span>, tmp, sz);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>指定初始化的回调函数,launch_cb</li>
 <li>取得本地服务句柄</li>
 <li>向服务发送第一条消息, 打上<code>PTYPE_TAG_DONTCOPY</code>的tag，这表示skynet内部不会重新分配内存拷贝tmp。</li>
@@ -274,48 +274,48 @@
 <li>launch_cb函数处理<code>snlua</code>服务收到自己给自己发送的第一条消息，删除回调函数，并且调用init_cb函数，前面删除了回调，后面必定会把回调函数给加上(下文启动lua服务的时候会在lua脚本里设置回调)，直接看init_cb函数的逻辑。
 代码太长，我就只贴关键的代码：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">init_cb</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args, size_t sz) {
-	lua_State <span style="color:#f92672">*</span>L <span style="color:#f92672">=</span> l<span style="color:#f92672">-&gt;</span>L;
-	l<span style="color:#f92672">-&gt;</span>ctx <span style="color:#f92672">=</span> ctx;
-	lua_gc(L, LUA_GCSTOP, <span style="color:#ae81ff">0</span>);
-    ...
-    <span style="color:#75715e">//LUA_PATH：Lua搜索路径，在config.lua_path指定。
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>path <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_path&#34;</span>,<span style="color:#e6db74">&#34;./lualib/?.lua;./lualib/?/init.lua&#34;</span>);
-	lua_pushstring(L, path);
-	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PATH&#34;</span>);
-
-    <span style="color:#75715e">//LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cpath <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_cpath&#34;</span>,<span style="color:#e6db74">&#34;./luaclib/?.so&#34;</span>);
-	lua_pushstring(L, cpath);
-	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_CPATH&#34;</span>);
-
-    <span style="color:#75715e">//LUA_SERVICE：Lua服务的搜索路径，在config.luaservice指定。
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>service <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;luaservice&#34;</span>, <span style="color:#e6db74">&#34;./service/?.lua&#34;</span>);
-	lua_pushstring(L, service);
-	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_SERVICE&#34;</span>);
-
-    <span style="color:#75715e">//LUA_PRELOAD：预加载脚本，这些脚本会在所有服务开始之前执行，可以用它来初始化一些全局的设置。执行loader.lua，把要执行的脚本传进去，由loader去加载执行，skynet初始执行bootstrap.lua。
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>preload <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;GETENV&#34;</span>, <span style="color:#e6db74">&#34;preload&#34;</span>);
-	lua_pushstring(L, preload);
-	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PRELOAD&#34;</span>);
-	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> loader <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lualoader&#34;</span>, <span style="color:#e6db74">&#34;./lualib/loader.lua&#34;</span>);
-
-	<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> luaL_loadfile(L,loader);
-    ...
-	lua_pushlstring(L, args, sz);
-    <span style="color:#75715e">//执行lua脚本，调用脚本里 skynet.start的地方
-</span><span style="color:#75715e"></span>	r <span style="color:#f92672">=</span> lua_pcall(L,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
-	<span style="color:#66d9ef">if</span> (r <span style="color:#f92672">!=</span> LUA_OK) {
-		skynet_error(ctx, <span style="color:#e6db74">&#34;lua loader error : %s&#34;</span>, lua_tostring(L, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
-		report_launcher_error(ctx);
-		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-	}
-    ...
-	lua_gc(L, LUA_GCRESTART, <span style="color:#ae81ff">0</span>);
-
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>总结一下<code>init_cb</code>做的事情，设置lua全局变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">init_cb</span>(<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">snlua</span> <span style="color:#f92672">*</span>l, <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">skynet_context</span> <span style="color:#f92672">*</span>ctx, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> args, size_t sz) {
+</span></span><span style="display:flex;"><span>	lua_State <span style="color:#f92672">*</span>L <span style="color:#f92672">=</span> l<span style="color:#f92672">-&gt;</span>L;
+</span></span><span style="display:flex;"><span>	l<span style="color:#f92672">-&gt;</span>ctx <span style="color:#f92672">=</span> ctx;
+</span></span><span style="display:flex;"><span>	lua_gc(L, LUA_GCSTOP, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//LUA_PATH：Lua搜索路径，在config.lua_path指定。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>path <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_path&#34;</span>,<span style="color:#e6db74">&#34;./lualib/?.lua;./lualib/?/init.lua&#34;</span>);
+</span></span><span style="display:flex;"><span>	lua_pushstring(L, path);
+</span></span><span style="display:flex;"><span>	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PATH&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>cpath <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lua_cpath&#34;</span>,<span style="color:#e6db74">&#34;./luaclib/?.so&#34;</span>);
+</span></span><span style="display:flex;"><span>	lua_pushstring(L, cpath);
+</span></span><span style="display:flex;"><span>	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_CPATH&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//LUA_SERVICE：Lua服务的搜索路径，在config.luaservice指定。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>service <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;luaservice&#34;</span>, <span style="color:#e6db74">&#34;./service/?.lua&#34;</span>);
+</span></span><span style="display:flex;"><span>	lua_pushstring(L, service);
+</span></span><span style="display:flex;"><span>	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_SERVICE&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//LUA_PRELOAD：预加载脚本，这些脚本会在所有服务开始之前执行，可以用它来初始化一些全局的设置。执行loader.lua，把要执行的脚本传进去，由loader去加载执行，skynet初始执行bootstrap.lua。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>preload <span style="color:#f92672">=</span> skynet_command(ctx, <span style="color:#e6db74">&#34;GETENV&#34;</span>, <span style="color:#e6db74">&#34;preload&#34;</span>);
+</span></span><span style="display:flex;"><span>	lua_pushstring(L, preload);
+</span></span><span style="display:flex;"><span>	lua_setglobal(L, <span style="color:#e6db74">&#34;LUA_PRELOAD&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> loader <span style="color:#f92672">=</span> optstring(ctx, <span style="color:#e6db74">&#34;lualoader&#34;</span>, <span style="color:#e6db74">&#34;./lualib/loader.lua&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> luaL_loadfile(L,loader);
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>	lua_pushlstring(L, args, sz);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//执行lua脚本，调用脚本里 skynet.start的地方
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	r <span style="color:#f92672">=</span> lua_pcall(L,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (r <span style="color:#f92672">!=</span> LUA_OK) {
+</span></span><span style="display:flex;"><span>		skynet_error(ctx, <span style="color:#e6db74">&#34;lua loader error : %s&#34;</span>, lua_tostring(L, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>		report_launcher_error(ctx);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>	lua_gc(L, LUA_GCRESTART, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>总结一下<code>init_cb</code>做的事情，设置lua全局变量：</p>
 <ul>
 <li>LUA_PATH：Lua搜索路径，在config.lua_path指定。</li>
 <li>LUA_CPATH：C模块的搜索路径，在config.lua_cpath指定。</li>
@@ -345,122 +345,122 @@
 <ul>
 <li><code>skynet.newservice()</code>函数实现</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">newservice</span>(name, ...)
-	<span style="color:#66d9ef">return</span> skynet.call(<span style="color:#e6db74">&#34;.launcher&#34;</span>, <span style="color:#e6db74">&#34;lua&#34;</span> , <span style="color:#e6db74">&#34;LAUNCH&#34;</span>, <span style="color:#e6db74">&#34;snlua&#34;</span>, name, ...)
-<span style="color:#66d9ef">end</span>
-</code></pre></div><p>调用的是<code>.launcher</code>服务的<code>LAUNCH</code>函数，参数是<code>snlua name</code>, <code>.launcher</code>服务收到了消息后的处理：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">--launcher.lua</span>
-<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">launch_service</span>(service, ...)
-	<span style="color:#66d9ef">local</span> param <span style="color:#f92672">=</span> table.concat({...}, <span style="color:#e6db74">&#34; &#34;</span>)
-    <span style="color:#75715e">--创建一个服务，并返回服务句柄</span>
-	<span style="color:#66d9ef">local</span> inst <span style="color:#f92672">=</span> skynet.launch(service, param)
-	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> skynet.context()
-    <span style="color:#75715e">--取一个resonse闭包，先存起来，等skynet.start返回再调用。</span>
-	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> skynet.response()
-	<span style="color:#66d9ef">if</span> inst <span style="color:#66d9ef">then</span>
-		services[inst] <span style="color:#f92672">=</span> service <span style="color:#f92672">..</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">..</span> param
-		instance[inst] <span style="color:#f92672">=</span> response
-		launch_session[inst] <span style="color:#f92672">=</span> session
-	<span style="color:#66d9ef">else</span>
-		response(<span style="color:#66d9ef">false</span>)
-		<span style="color:#66d9ef">return</span>
-	<span style="color:#66d9ef">end</span>
-	<span style="color:#66d9ef">return</span> inst
-<span style="color:#66d9ef">end</span>
-
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCH</span>(_, service, ...)
-	launch_service(service, ...)
-	<span style="color:#66d9ef">return</span> NORET
-<span style="color:#66d9ef">end</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">newservice</span>(name, ...)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> skynet.call(<span style="color:#e6db74">&#34;.launcher&#34;</span>, <span style="color:#e6db74">&#34;lua&#34;</span> , <span style="color:#e6db74">&#34;LAUNCH&#34;</span>, <span style="color:#e6db74">&#34;snlua&#34;</span>, name, ...)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>调用的是<code>.launcher</code>服务的<code>LAUNCH</code>函数，参数是<code>snlua name</code>, <code>.launcher</code>服务收到了消息后的处理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#75715e">--launcher.lua</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">launch_service</span>(service, ...)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> param <span style="color:#f92672">=</span> table.concat({...}, <span style="color:#e6db74">&#34; &#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--创建一个服务，并返回服务句柄</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> inst <span style="color:#f92672">=</span> skynet.launch(service, param)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> skynet.context()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--取一个resonse闭包，先存起来，等skynet.start返回再调用。</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> skynet.response()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> inst <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		services[inst] <span style="color:#f92672">=</span> service <span style="color:#f92672">..</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">..</span> param
+</span></span><span style="display:flex;"><span>		instance[inst] <span style="color:#f92672">=</span> response
+</span></span><span style="display:flex;"><span>		launch_session[inst] <span style="color:#f92672">=</span> session
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		response(<span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> inst
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCH</span>(_, service, ...)
+</span></span><span style="display:flex;"><span>	launch_service(service, ...)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> NORET
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><ul>
 <li>实际上只用看<code>launch_service</code>函数即可, <code>service=snlua</code> <code>param=服务名B</code></li>
 <li>通过<code>snlua</code>创建lua服务B，并返回B的句柄</li>
 <li>取一个resonse闭包，先存起来，等<code>skynet.start</code>返回再调用。</li>
 </ul>
 <p>B服务创建后，调用B.lua脚本，调用脚本里的<code>skynet.start</code>函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">start</span>(start_func)
-	c.callback(skynet.dispatch_message)
-	init_thread <span style="color:#f92672">=</span> skynet.timeout(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">function</span>()
-		skynet.init_service(start_func)
-		init_thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
-	<span style="color:#66d9ef">end</span>)
-<span style="color:#66d9ef">end</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">start</span>(start_func)
+</span></span><span style="display:flex;"><span>	c.callback(skynet.dispatch_message)
+</span></span><span style="display:flex;"><span>	init_thread <span style="color:#f92672">=</span> skynet.timeout(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">function</span>()
+</span></span><span style="display:flex;"><span>		skynet.init_service(start_func)
+</span></span><span style="display:flex;"><span>		init_thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><ul>
 <li>前文snlua启动的时候，在函数<code>launch_cb</code>中，删除了回调函数，这里<code>c.callback</code>,重新设置了收到消息后的回调。</li>
 <li><code>c.callback</code>,代码在<code>lua-skynet.c</code>中，，以后向这个服务发消息，<code>skynet.dispatch_message</code>就会被调用。</li>
 </ul>
 <p>调用skynet.init_service(start_func):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">init_service</span>(start)
-	<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>()
-		skynet_require.init_all()
-		start()
-	<span style="color:#66d9ef">end</span>
-	<span style="color:#66d9ef">local</span> ok, err <span style="color:#f92672">=</span> xpcall(main, traceback)
-	<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ok <span style="color:#66d9ef">then</span>
-		skynet.error(<span style="color:#e6db74">&#34;init service failed: &#34;</span> <span style="color:#f92672">..</span> tostring(err))
-		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;ERROR&#34;</span>)
-		skynet.exit()
-	<span style="color:#66d9ef">else</span>
-		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;LAUNCHOK&#34;</span>)
-	<span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><p>B服务在<code>skynet.start</code>调用完毕之后，会发送 <code>LAUNCHOK</code>消息：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCHOK</span>(address)
-	<span style="color:#75715e">-- init notice</span>
-	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> instance[address]
-	<span style="color:#66d9ef">if</span> response <span style="color:#66d9ef">then</span>
-		response(<span style="color:#66d9ef">true</span>, address)
-		instance[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
-		launch_session[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
-	<span style="color:#66d9ef">end</span>
-
-	<span style="color:#66d9ef">return</span> NORET
-<span style="color:#66d9ef">end</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">init_service</span>(start)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>		skynet_require.init_all()
+</span></span><span style="display:flex;"><span>		start()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> ok, err <span style="color:#f92672">=</span> xpcall(main, traceback)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> ok <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		skynet.error(<span style="color:#e6db74">&#34;init service failed: &#34;</span> <span style="color:#f92672">..</span> tostring(err))
+</span></span><span style="display:flex;"><span>		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;ERROR&#34;</span>)
+</span></span><span style="display:flex;"><span>		skynet.exit()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>		skynet.send(<span style="color:#e6db74">&#34;.launcher&#34;</span>,<span style="color:#e6db74">&#34;lua&#34;</span>, <span style="color:#e6db74">&#34;LAUNCHOK&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>B服务在<code>skynet.start</code>调用完毕之后，会发送 <code>LAUNCHOK</code>消息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">command</span>.<span style="color:#a6e22e">LAUNCHOK</span>(address)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- init notice</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> response <span style="color:#f92672">=</span> instance[address]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> response <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		response(<span style="color:#66d9ef">true</span>, address)
+</span></span><span style="display:flex;"><span>		instance[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>		launch_session[address] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> NORET
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><ul>
 <li>从<code>instance</code>取出<code>response</code>函数，调用它，传入true表示成功，后面跟的address就是skynet.call的返回值，这样A服务终于从<code>skynet.newservice</code>返回，并得到了B的地址(句柄)。</li>
 <li>所有经过skynet.newsevice创建的服务，都会记录在launcher服务中，launcher提供了些函数用于查询服务的状态。</li>
 </ul>
 <h3 id="为什么skynetnewservice阻塞">为什么skynet.newservice阻塞</h3>
 <p>为什么A创建B服务的时候<code>skynet.newservice</code>会阻塞，并等到到B服务创建成功并返回句柄，才继续往下走，请看 skynet.call的代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">call</span>(addr, typename, ...)
-	<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[running_thread]
-	<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span>
-		c.trace(tag, <span style="color:#e6db74">&#34;call&#34;</span>, <span style="color:#ae81ff">2</span>)
-		c.send(addr, skynet.PTYPE_TRACE, <span style="color:#ae81ff">0</span>, tag)
-	<span style="color:#66d9ef">end</span>
-
-	<span style="color:#66d9ef">local</span> p <span style="color:#f92672">=</span> proto[typename]
-	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> c.send(addr, p.id , <span style="color:#66d9ef">nil</span> , p.pack(...))
-	<span style="color:#66d9ef">if</span> session <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
-		error(<span style="color:#e6db74">&#34;call to invalid address &#34;</span> <span style="color:#f92672">..</span> skynet.address(addr))
-	<span style="color:#66d9ef">end</span>
-	<span style="color:#66d9ef">return</span> p.unpack(yield_call(addr, session))
-<span style="color:#66d9ef">end</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">skynet</span>.<span style="color:#a6e22e">call</span>(addr, typename, ...)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[running_thread]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		c.trace(tag, <span style="color:#e6db74">&#34;call&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>		c.send(addr, skynet.PTYPE_TRACE, <span style="color:#ae81ff">0</span>, tag)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> p <span style="color:#f92672">=</span> proto[typename]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">local</span> session <span style="color:#f92672">=</span> c.send(addr, p.id , <span style="color:#66d9ef">nil</span> , p.pack(...))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> session <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		error(<span style="color:#e6db74">&#34;call to invalid address &#34;</span> <span style="color:#f92672">..</span> skynet.address(addr))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> p.unpack(yield_call(addr, session))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><ul>
 <li><code>c.send</code>直接返回，阻塞在<code>return p.unpack(yield_call(addr, session))</code></li>
 <li>yield_call是挂起了当前协程</li>
 </ul>
 <p>在B服务创建成功，并且调用<code>skynet.repsonse()</code>之后,往A服务发送了一个协议<code>skynet.PTYPE_RESPONSE</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ret = c.send(co_address, skynet.PTYPE_RESPONSE, co_session, pack(...))
-</code></pre></div><p>A服务收到skynet.PTYPE_RESPONSE协议后,会回到yield_call挂起协程的地方</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">raw_dispatch_message</span>(prototype, msg, sz, session, source)
-	<span style="color:#75715e">-- skynet.PTYPE_RESPONSE = 1, read skynet.h</span>
-	<span style="color:#66d9ef">if</span> prototype <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
-		<span style="color:#66d9ef">local</span> co <span style="color:#f92672">=</span> session_id_coroutine[session]
-		<span style="color:#66d9ef">if</span> co <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;BREAK&#34;</span> <span style="color:#66d9ef">then</span>
-			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
-		<span style="color:#66d9ef">elseif</span> co <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
-			unknown_response(session, source, msg, sz)
-		<span style="color:#66d9ef">else</span>
-			<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[co]
-			<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span> c.trace(tag, <span style="color:#e6db74">&#34;resume&#34;</span>) <span style="color:#66d9ef">end</span>
-			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
-            <span style="color:#75715e">-- 在这一步重新调用协程函数</span>
-			suspend(co, coroutine_resume(co, <span style="color:#66d9ef">true</span>, msg, sz))
-		<span style="color:#66d9ef">end</span>
-        ...
-<span style="color:#66d9ef">end</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ret = c.send(co_address, skynet.PTYPE_RESPONSE, co_session, pack(...))
+</span></span></code></pre></div><p>A服务收到skynet.PTYPE_RESPONSE协议后,会回到yield_call挂起协程的地方</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">raw_dispatch_message</span>(prototype, msg, sz, session, source)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">-- skynet.PTYPE_RESPONSE = 1, read skynet.h</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> prototype <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">local</span> co <span style="color:#f92672">=</span> session_id_coroutine[session]
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> co <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;BREAK&#34;</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elseif</span> co <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>			unknown_response(session, source, msg, sz)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">local</span> tag <span style="color:#f92672">=</span> session_coroutine_tracetag[co]
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> tag <span style="color:#66d9ef">then</span> c.trace(tag, <span style="color:#e6db74">&#34;resume&#34;</span>) <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>			session_id_coroutine[session] <span style="color:#f92672">=</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">-- 在这一步重新调用协程函数</span>
+</span></span><span style="display:flex;"><span>			suspend(co, coroutine_resume(co, <span style="color:#66d9ef">true</span>, msg, sz))
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><ul>
 <li>这样就能解释为为什么skynet.newservice是阻塞的了。</li>
 <li>同理skynet.call是阻塞的.</li>
 </ul>
@@ -483,7 +483,7 @@
                 <a href="https://blog.rakfree.tk/2021/10/skynetthree/">https://blog.rakfree.tk/2021/10/skynetthree/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-07 17:59:17</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -617,6 +617,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -630,10 +634,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -679,7 +679,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -691,7 +691,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -717,6 +717,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

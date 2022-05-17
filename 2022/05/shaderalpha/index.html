@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-05-07T17:17:18&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T18:14:48&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T15:11:45&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第八章笔记 | 透明度">
@@ -283,80 +283,80 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Unity Shaders Book/Chapter 8/Alpha Test&#34; {
-Properties {
-    _Color (&#34;Main Tint&#34;, Color) = (1,1,1,1)
-    _MainTex (&#34;Main Tex&#34;, 2D) = &#34;white&#34; {}
-    _Cutoff (&#34;Alpha Cutoff&#34;, Range(0, 1)) = 0.5
-}
-SubShader {
-    Tags {&#34;Queue&#34;=&#34;AlphaTest&#34; &#34;IgnoreProjector&#34;=&#34;True&#34; &#34;RenderType&#34;=&#34;TransparentCutout&#34;}
-
-    Pass {
-        Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
-
-CGPROGRAM
-
-#pragma vertex vert
-#pragma fragment frag
-#include &#34;Lighting.cginc&#34;
-fixed4 _Color;
-sampler2D _MainTex;
-float4 _MainTex_ST;
-fixed _Cutoff;
-
-struct a2v {
-    float4 vertex : POSITION;
-    float3 normal : NORMAL;
-    float4 texcoord : TEXCOORD0;
-};
-
-struct v2f {
-    float4 pos : SV_POSITION;
-    float3 worldNormal : TEXCOORD0;
-    float3 worldPos : TEXCOORD1;
-    float2 uv : TEXCOORD2;
-};
-
-v2f vert(a2v v) {
-    v2f o;
-    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-
-    o.worldNormal = UnityObjectToWorldNormal(v.normal);
-
-    o.worldPos = mul(_Object2World, v.vertex).xyz;
-
-    o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
-
-    return o;
-}
-fixed4 frag(v2f i) : SV_Target {
-    fixed3 worldNormal = normalize(i.worldNormal);
-    fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
-
-    fixed4 texColor = tex2D(_MainTex, i.uv);
-
-    // Alpha test
-    clip (texColor.a - _Cutoff);
-    // Equal to 
-//  if ((texColor.a - _Cutoff) &lt; 0.0) {
-//      discard;
-//  }
-
-    fixed3 albedo = texColor.rgb * _Color.rgb;
-
-    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
-
-    fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
-
-    return fixed4(ambient + diffuse, 1.0);
-}
-ENDCG
-    }
-}
-Fallback &#34;Transparent/Cutout/VertexLit&#34;
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Shader &#34;Unity Shaders Book/Chapter 8/Alpha Test&#34; {
+</span></span><span style="display:flex;"><span>Properties {
+</span></span><span style="display:flex;"><span>    _Color (&#34;Main Tint&#34;, Color) = (1,1,1,1)
+</span></span><span style="display:flex;"><span>    _MainTex (&#34;Main Tex&#34;, 2D) = &#34;white&#34; {}
+</span></span><span style="display:flex;"><span>    _Cutoff (&#34;Alpha Cutoff&#34;, Range(0, 1)) = 0.5
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>SubShader {
+</span></span><span style="display:flex;"><span>    Tags {&#34;Queue&#34;=&#34;AlphaTest&#34; &#34;IgnoreProjector&#34;=&#34;True&#34; &#34;RenderType&#34;=&#34;TransparentCutout&#34;}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Pass {
+</span></span><span style="display:flex;"><span>        Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CGPROGRAM
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#pragma vertex vert
+</span></span><span style="display:flex;"><span>#pragma fragment frag
+</span></span><span style="display:flex;"><span>#include &#34;Lighting.cginc&#34;
+</span></span><span style="display:flex;"><span>fixed4 _Color;
+</span></span><span style="display:flex;"><span>sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>fixed _Cutoff;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>struct a2v {
+</span></span><span style="display:flex;"><span>    float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>    float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>    float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>struct v2f {
+</span></span><span style="display:flex;"><span>    float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>    float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>    float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>    float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v2f vert(a2v v) {
+</span></span><span style="display:flex;"><span>    v2f o;
+</span></span><span style="display:flex;"><span>    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.worldNormal = UnityObjectToWorldNormal(v.normal);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.worldPos = mul(_Object2World, v.vertex).xyz;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    return o;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>fixed4 frag(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>    fixed3 worldNormal = normalize(i.worldNormal);
+</span></span><span style="display:flex;"><span>    fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed4 texColor = tex2D(_MainTex, i.uv);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Alpha test
+</span></span><span style="display:flex;"><span>    clip (texColor.a - _Cutoff);
+</span></span><span style="display:flex;"><span>    // Equal to 
+</span></span><span style="display:flex;"><span>//  if ((texColor.a - _Cutoff) &lt; 0.0) {
+</span></span><span style="display:flex;"><span>//      discard;
+</span></span><span style="display:flex;"><span>//  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 albedo = texColor.rgb * _Color.rgb;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    return fixed4(ambient + diffuse, 1.0);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>ENDCG
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Fallback &#34;Transparent/Cutout/VertexLit&#34;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <h2 id="透明度混合">透明度混合</h2>
 <ul>
@@ -392,86 +392,86 @@ Fallback &#34;Transparent/Cutout/VertexLit&#34;
 </tbody>
 </table>
 <p>与透明度测试不同的是，我们还需要在Pass中为透明度混合进行合适的混合状态设置</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass {
-    Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
-
-    ZWrite Off
-    Blend SrcAlpha OneMinusSrcAlpha
-</code></pre></div><details   class="code-detail">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Pass {
+</span></span><span style="display:flex;"><span>    Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ZWrite Off
+</span></span><span style="display:flex;"><span>    Blend SrcAlpha OneMinusSrcAlpha
+</span></span></code></pre></div><details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Shader &#34;Unity Shaders Book/Chapter 8/Alpha Test&#34; {
-Properties {
-    _Color (&#34;Main Tint&#34;, Color) = (1,1,1,1)
-    _MainTex (&#34;Main Tex&#34;, 2D) = &#34;white&#34; {}
-    _AlphaScale (&#34;Alpha Scale&#34;, Range(0, 1)) = 1
-}
-SubShader {
-    Tags {&#34;Queue&#34;=&#34;Transparent&#34; &#34;IgnoreProjector&#34;=&#34;True&#34; &#34;RenderType&#34;=&#34;Transparent&#34;}
-
-    Pass {
-         Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
-
-    ZWrite Off
-    Blend SrcAlpha OneMinusSrcAlpha
-
-
-CGPROGRAM
-
-#pragma vertex vert
-#pragma fragment frag
-#include &#34;Lighting.cginc&#34;
-fixed4 _Color;
-sampler2D _MainTex;
-float4 _MainTex_ST;
-fixed _AlphaScale;
-
-struct a2v {
-    float4 vertex : POSITION;
-    float3 normal : NORMAL;
-    float4 texcoord : TEXCOORD0;
-};
-
-struct v2f {
-    float4 pos : SV_POSITION;
-    float3 worldNormal : TEXCOORD0;
-    float3 worldPos : TEXCOORD1;
-    float2 uv : TEXCOORD2;
-};
-
-v2f vert(a2v v) {
-    v2f o;
-    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
-
-    o.worldNormal = UnityObjectToWorldNormal(v.normal);
-
-    o.worldPos = mul(_Object2World, v.vertex).xyz;
-
-    o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
-
-    return o;
-}
-fixed4 frag(v2f i) : SV_Target {
-    fixed3 worldNormal = normalize(i.worldNormal);
-    fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
-
-    fixed4 texColor = tex2D(_MainTex, i.uv);
-
-    fixed3 albedo = texColor.rgb * _Color.rgb;
-
-    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
-
-    fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
-
-    return fixed4(ambient + diffuse, texColor.a * _AlphaScale);
-}
-ENDCG
-    }
-}
-Fallback &#34;Transparent/VertexLit&#34;
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Shader &#34;Unity Shaders Book/Chapter 8/Alpha Test&#34; {
+</span></span><span style="display:flex;"><span>Properties {
+</span></span><span style="display:flex;"><span>    _Color (&#34;Main Tint&#34;, Color) = (1,1,1,1)
+</span></span><span style="display:flex;"><span>    _MainTex (&#34;Main Tex&#34;, 2D) = &#34;white&#34; {}
+</span></span><span style="display:flex;"><span>    _AlphaScale (&#34;Alpha Scale&#34;, Range(0, 1)) = 1
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>SubShader {
+</span></span><span style="display:flex;"><span>    Tags {&#34;Queue&#34;=&#34;Transparent&#34; &#34;IgnoreProjector&#34;=&#34;True&#34; &#34;RenderType&#34;=&#34;Transparent&#34;}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Pass {
+</span></span><span style="display:flex;"><span>         Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ZWrite Off
+</span></span><span style="display:flex;"><span>    Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CGPROGRAM
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#pragma vertex vert
+</span></span><span style="display:flex;"><span>#pragma fragment frag
+</span></span><span style="display:flex;"><span>#include &#34;Lighting.cginc&#34;
+</span></span><span style="display:flex;"><span>fixed4 _Color;
+</span></span><span style="display:flex;"><span>sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>float4 _MainTex_ST;
+</span></span><span style="display:flex;"><span>fixed _AlphaScale;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>struct a2v {
+</span></span><span style="display:flex;"><span>    float4 vertex : POSITION;
+</span></span><span style="display:flex;"><span>    float3 normal : NORMAL;
+</span></span><span style="display:flex;"><span>    float4 texcoord : TEXCOORD0;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>struct v2f {
+</span></span><span style="display:flex;"><span>    float4 pos : SV_POSITION;
+</span></span><span style="display:flex;"><span>    float3 worldNormal : TEXCOORD0;
+</span></span><span style="display:flex;"><span>    float3 worldPos : TEXCOORD1;
+</span></span><span style="display:flex;"><span>    float2 uv : TEXCOORD2;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v2f vert(a2v v) {
+</span></span><span style="display:flex;"><span>    v2f o;
+</span></span><span style="display:flex;"><span>    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.worldNormal = UnityObjectToWorldNormal(v.normal);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.worldPos = mul(_Object2World, v.vertex).xyz;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    return o;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>fixed4 frag(v2f i) : SV_Target {
+</span></span><span style="display:flex;"><span>    fixed3 worldNormal = normalize(i.worldNormal);
+</span></span><span style="display:flex;"><span>    fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed4 texColor = tex2D(_MainTex, i.uv);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 albedo = texColor.rgb * _Color.rgb;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    return fixed4(ambient + diffuse, texColor.a * _AlphaScale);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>ENDCG
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Fallback &#34;Transparent/VertexLit&#34;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <p>只有使用Blend命令打开混合后，我们在这里设置透明通道才有意义</p>
 <h2 id="开启深度写入的半透明效果">开启深度写入的半透明效果</h2>
@@ -553,8 +553,8 @@ Fallback &#34;Transparent/VertexLit&#34;
 </tbody>
 </table>
 <p>如果我们想要在混合后，输出颜色的透明度值就是源颜色的透明度，可以使用下面的命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Blend SrcAlpha OneMinusSrcAlpha, One Zero
-</code></pre></div><h3 id="混合操作">混合操作</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Blend SrcAlpha OneMinusSrcAlpha, One Zero
+</span></span></code></pre></div><h3 id="混合操作">混合操作</h3>
 <table>
 <thead>
 <tr>
@@ -590,49 +590,49 @@ Fallback &#34;Transparent/VertexLit&#34;
 </tbody>
 </table>
 <h3 id="常见的混合类型">常见的混合类型</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// 正常（Normal），即透明度混合
-Blend SrcAlpha OneMinusSrcAlpha
-
-// 柔和相加（Soft Additive）
-Blend OneMinusDstColor One
-
-// 正片叠底（Multiply），即相乘
-Blend DstColor Zero
-
-// 两倍相乘（2x Multiply）
-Blend DstColor SrcColor
-
-// 变暗（Darken）
-BlendOp Min
-Blend One One
-
-// 变亮（Lighten）
-BlendOp Max
-Blend One One
-
-// 滤色（Screen）
-Blend OneMinusDstColor One
-// 等同于
-Blend One OneMinusSrcColor
-
-// 线性减淡（Linear Dodge）
-Blend One One
-</code></pre></div><p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16519168837961651916883602.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16519168837961651916883602.png" />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// 正常（Normal），即透明度混合
+</span></span><span style="display:flex;"><span>Blend SrcAlpha OneMinusSrcAlpha
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 柔和相加（Soft Additive）
+</span></span><span style="display:flex;"><span>Blend OneMinusDstColor One
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 正片叠底（Multiply），即相乘
+</span></span><span style="display:flex;"><span>Blend DstColor Zero
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 两倍相乘（2x Multiply）
+</span></span><span style="display:flex;"><span>Blend DstColor SrcColor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 变暗（Darken）
+</span></span><span style="display:flex;"><span>BlendOp Min
+</span></span><span style="display:flex;"><span>Blend One One
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 变亮（Lighten）
+</span></span><span style="display:flex;"><span>BlendOp Max
+</span></span><span style="display:flex;"><span>Blend One One
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 滤色（Screen）
+</span></span><span style="display:flex;"><span>Blend OneMinusDstColor One
+</span></span><span style="display:flex;"><span>// 等同于
+</span></span><span style="display:flex;"><span>Blend One OneMinusSrcColor
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>// 线性减淡（Linear Dodge）
+</span></span><span style="display:flex;"><span>Blend One One
+</span></span></code></pre></div><p>
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16519168837961651916883602.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16519168837961651916883602.png" />
         </a>
     </p>
 <h2 id="双面渲染的透明效果">双面渲染的透明效果</h2>
 <p>可以使用Cull 指令来控制需要剔除哪个面的渲染图元。在Unity中，Cull指令的语法如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cull Back | Front | Off
-</code></pre></div><h3 id="透明度测试的双面渲染">透明度测试的双面渲染</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Cull Back | Front | Off
+</span></span></code></pre></div><h3 id="透明度测试的双面渲染">透明度测试的双面渲染</h3>
 <p>和透明度测试的代码一样，只是多了一行代码， 如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass {
-    Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
-
-    // Turn off culling
-    Cull Off
-</code></pre></div><p>我们可以透过正方体的镂空区域看到内部的渲染结果。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Pass {
+</span></span><span style="display:flex;"><span>    Tags { &#34;LightMode&#34;=&#34;ForwardBase&#34; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Turn off culling
+</span></span><span style="display:flex;"><span>    Cull Off
+</span></span></code></pre></div><p>我们可以透过正方体的镂空区域看到内部的渲染结果。</p>
 <h3 id="透明度混合的双面渲染">透明度混合的双面渲染</h3>
 <p>透明度混合需要关闭深度写入。复制原Pass的代码，得到另一个Pass。</p>
 <ul>
@@ -685,7 +685,7 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
                 <a href="https://blog.rakfree.tk/2022/05/shaderalpha/">https://blog.rakfree.tk/2022/05/shaderalpha/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:14:48</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 15:11:45</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -819,6 +819,10 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -832,10 +836,6 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -881,7 +881,7 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -893,7 +893,7 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -919,6 +919,8 @@ Less (当物体的这个像素的Z值小于当前摄像机在这个像素上的Z
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

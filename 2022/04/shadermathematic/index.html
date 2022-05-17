@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-10T15:42:33&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-07T18:14:24&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T15:11:45&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="《Unity Shader入门精要》第四章笔记 | 学习Shader所需的数学基础">
@@ -261,8 +261,8 @@
 <p>我们使用数学绝大部分都是为了计算位置、距离和角度等变量。而这些计算大部分都是在笛卡儿坐标系 （Cartesian Coordinate System） 下进行的。这个名字来源于法国伟大的哲学家、物理学家、心理学家、数学家笛卡儿（René Descartes）。</p>
 <h3 id="二维笛卡儿坐标系">二维笛卡儿坐标系</h3>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495841628441649584162708.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495841628441649584162708.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495841628441649584162708.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495841628441649584162708.png" />
         </a>
     
 一个二维的笛卡儿坐标系包含了两个部分的信息：</p>
@@ -271,15 +271,15 @@
 <li>两条过原点的互相垂直的矢量，即x 轴和y 轴。这些坐标轴也被称为是该坐标系的基矢量。</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495842387471649584238674.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495842387471649584238674.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495842387471649584238674.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495842387471649584238674.png" />
         </a>
     </p>
 <h3 id="三维笛卡儿坐标系">三维笛卡儿坐标系</h3>
 <p>在三维笛卡儿坐标系中，我们需要定义3个坐标轴和一个原点:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495842867001649584285723.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495842867001649584285723.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495842867001649584285723.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495842867001649584285723.png" />
         </a>
     </p>
 <p>这3个坐标轴也被称为是该坐标系的基矢量 （basis vector） 。</p>
@@ -298,17 +298,17 @@
 <li>对于三维笛卡儿坐标系，靠这种旋转有时并不能使两个不同朝向的坐标系重合, 我们总可以让其中两个坐标轴的指向重合，但第三个坐标轴的指向有可能是相反的。</li>
 </ul>
 <p>我们可以利用我们的双手来判断一个坐标系的旋向性。请读者举起你的左手，用食指和大拇指摆出一个“L”的手势，并且让你的食指指向上，大拇指指向右。现在，伸出你的中指，不出意外的话它应该指向你的前方，即可得到一个左手坐标系.</p>
-<p>左手坐标系如下图:
+<p>左手坐标系如下图: 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495847727801649584772705.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495847727801649584772705.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495847727801649584772705.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495847727801649584772705.png" />
         </a>
     </p>
 <p>通过右手来得到一个右手坐标系。举起你的右手，这次食指仍然指向上，中指指向前方，不同的是，大拇指将指向左侧, 即可得到一个右手坐标系.</p>
-<p>右手坐标系如下图:
+<p>右手坐标系如下图: 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495848467171649584846484.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495848467171649584846484.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495848467171649584846484.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495848467171649584846484.png" />
         </a>
     </p>
 <h3 id="判断是左手还是右手坐标系">判断是左手还是右手坐标系</h3>
@@ -324,13 +324,13 @@
 <li>在左手坐标系中，旋转正方向是顺时针的，而在右手坐标系中，旋转正方向是逆时针的</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495855027551649585502502.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495855027551649585502502.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495855027551649585502502.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495855027551649585502502.png" />
         </a>
     </p>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495858457471649585845217.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495858457471649585845217.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495858457471649585845217.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495858457471649585845217.png" />
         </a>
     </p>
 <h3 id="unity使用的坐标系">Unity使用的坐标系</h3>
@@ -339,8 +339,8 @@
 </ol>
 <p>在模型空间中，一个物体的右侧（right）、上侧（up）和前侧（forward）分别对应了x 轴、y 轴和z 轴的正方向。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495859397511649585939399.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495859397511649585939399.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495859397511649585939399.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495859397511649585939399.png" />
         </a>
     </p>
 <ol start="2">
@@ -348,8 +348,8 @@
 </ol>
 <p>观察空间，通俗来讲就是以摄像机为原点的坐标系。在这个坐标系中，摄像机的前向是z 轴的负方向，这与在模型空间和世界空间中的定义相反。也就是说，z 轴坐标的减少意味着场景深度的增加。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495860487831649586048720.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495860487831649586048720.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495860487831649586048720.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495860487831649586048720.png" />
         </a>
     </p>
 <h3 id="练习题">练习题</h3>
@@ -358,8 +358,8 @@
 <p>（2）在左手坐标系中，有一点的坐标是（0, 0, 1），如果把该点绕y 轴正方向旋转+90°，旋转后的坐标是什么？如果是在右手坐标系中，同样有一点坐标为（0, 0, 1），把它绕y 轴正方向旋转+90°，旋转后的坐标是什么？</p>
 <p>（3）在Unity中，新建的场景中主摄像机的位置位于世界空间中的（0, 1, −10）位置。在不改变摄像机的任何设置（如保持Rotation为(0, 0, 0)，Scale为（1, 1, 1））的情况下，在世界空间中的(0, 1, 0)位置新建一个球体，如图4.14所示。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495862487601649586248046.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495862487601649586248046.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495862487601649586248046.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495862487601649586248046.png" />
         </a>
     </p>
 <h2 id="点和矢量">点和矢量</h2>
@@ -374,16 +374,16 @@
 <li>矢量和标量乘法/除法
 我们只需要把矢量的每个分量和标量相乘即可</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kv =(kvx ,kvy , kvz )
-</code></pre></div><p>一个矢量也可以被一个非零的标量除
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kv =(kvx ,kvy , kvz )
+</span></span></code></pre></div><p>一个矢量也可以被一个非零的标量除
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495908191671649590818764.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495908191671649590818764.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495908191671649590818764.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495908191671649590818764.png" />
         </a>
     
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495908398971649590839135.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495908398971649590839135.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495908398971649590839135.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495908398971649590839135.png" />
         </a>
     
 对于乘法来说，矢量和标量的位置可以互换。但对于除法，只能是矢量被标量除，而不能是标量被矢量除，这是没有意义的。</p>
@@ -391,40 +391,40 @@
 <li>矢量的加法和减法
 两个矢量进行相加或相减，其结果是一个相同维度的新矢量</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">a +b =(ax +bx ,ay +by , az +bz )
-a –b =(ax −bx ,ay -by , az −bz )
-
-(1,2,3)+(4,5,6)=(5,7,9)
-(5,2,7) − (3,8,4)=(2, −6,3)
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>a +b =(ax +bx ,ay +by , az +bz )
+</span></span><span style="display:flex;"><span>a –b =(ax −bx ,ay -by , az −bz )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(1,2,3)+(4,5,6)=(5,7,9)
+</span></span><span style="display:flex;"><span>(5,2,7) − (3,8,4)=(2, −6,3)
+</span></span></code></pre></div><blockquote>
 <p>一个矢量不可以和一个标量相加或相减，或者是和不同维度的矢量进行运算</p>
 </blockquote>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495911529051649591152776.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495911529051649591152776.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495911529051649591152776.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495911529051649591152776.png" />
         </a>
     </p>
 <h3 id="矢量加法的三角形定则">矢量加法的三角形定则</h3>
 <p>如果我们从一个起点开始进行了一个位置偏移a ，然后又进行一个位置偏移b ，那么就等同于进行了一个a +b 的位置偏移.
 这被称为矢量加法的三 角形定则（triangle rule） 。矢量的减法是类似的
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495911359061649591135524.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495911359061649591135524.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495911359061649591135524.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495911359061649591135524.png" />
         </a>
     </p>
 <h3 id="矢量的模">矢量的模</h3>
 <p>矢量的模是一个标量，可以理解为是矢量在空间中的长度。它的表示符号通常是在矢量两旁分别加上一条垂直线（有的文献中会使用两条垂直线）.</p>
 <p>三维矢量的模的计算公式如下:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495912519081649591251514.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495912519081649591251514.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495912519081649591251514.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495912519081649591251514.png" />
         </a>
     </p>
 <blockquote>
 <p>对每个分量的平方相加后再开根号就能得到一个矢量的模。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495913119101649591311462.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495913119101649591311462.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495913119101649591311462.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495913119101649591311462.png" />
         </a>
     </p>
 </blockquote>
@@ -437,14 +437,14 @@ a –b =(ax −bx ,ay -by , az −bz )
 <p>我们通过在一个矢量的头上添加一个戴帽符号来表示单位矢量，例如。为了对矢量进行归一化，我们可以用矢量的模除以该矢量来得到</p>
 <p>公式如下:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915759181649591575610.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915759181649591575610.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915759181649591575610.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915759181649591575610.png" />
         </a>
     </p>
-<p>示例如下:
+<p>示例如下: 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915959201649591595589.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915959201649591595589.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915959201649591595589.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915959201649591595589.png" />
         </a>
     </p>
 <h3 id="零矢量">零矢量</h3>
@@ -457,16 +457,16 @@ a –b =(ax −bx ,ay -by , az −bz )
 </ol>
 <p>点积的操作数之一可以是另一个运算的结果，即矢量和标量相乘的结果，也就是说对点积中其中一个矢量进行缩放的结果，相当于对最后的点积结果进行缩放。</p>
 <p>公式如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(k a )·b = a ·(k b )=k (a ·b )
-</code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>(k a )·b = a ·(k b )=k (a ·b )
+</span></span></code></pre></div><ol start="2">
 <li>点积可结合矢量加法和减法，和性质一类似。点积的操作数可以是矢量相加或相减后的结果</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">a ·(b + c )= a ·b + a ·c
-</code></pre></div><ol start="3">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>a ·(b + c )= a ·b + a ·c
+</span></span></code></pre></div><ol start="3">
 <li>一个矢量和本身进行点积的结果，是该矢量的模的平方。
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495929979661649592997812.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495929979661649592997812.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495929979661649592997812.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495929979661649592997812.png" />
         </a>
     </li>
 </ol>
@@ -476,8 +476,8 @@ a –b =(ax −bx ,ay -by , az −bz )
 <p>公式一
 两个三维矢量的点积是把两个矢量对应分量相乘后再取和，最后的结果是一个标量
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495919219281649591920953.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495919219281649591920953.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495919219281649591920953.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495919219281649591920953.png" />
         </a>
     
 矢量的点积满足交换律，即a ·b =b ·a</p>
@@ -486,10 +486,10 @@ a –b =(ax −bx ,ay -by , az −bz )
 <p>公式二, 两个矢量的点积可以表示为两个矢量的模相乘，再乘以它们之间夹角的余弦值</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">a ·b =｜a ｜｜b ｜cosθ
-</code></pre></div><p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495937020401649593701855.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495937020401649593701855.png" />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>a ·b =｜a ｜｜b ｜cosθ
+</span></span></code></pre></div><p>
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495937020401649593701855.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495937020401649593701855.png" />
         </a>
     
 证明过程：</p>
@@ -503,13 +503,13 @@ a –b =(ax −bx ,ay -by , az −bz )
 </ul>
 <p>应用性质一就可以得到公式二了
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915759181649591575610.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495915759181649591575610.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915759181649591575610.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495915759181649591575610.png" />
         </a>
     
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495941069941649594106107.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495941069941649594106107.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495941069941649594106107.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495941069941649594106107.png" />
         </a>
     </p>
 <p>当夹角小于90°时，cosθ &gt;0；当夹角等于90°时，cosθ =0；当夹角大于90°时，cosθ &lt;0。</p>
@@ -524,26 +524,26 @@ a –b =(ax −bx ,ay -by , az −bz )
 <li>当它们的方向相同（夹角小于90°）时，结果大于0</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495922969401649592296274.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495922969401649592296274.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495922969401649592296274.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495922969401649592296274.png" />
         </a>
     
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495926239501649592623173.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495926239501649592623173.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495926239501649592623173.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495926239501649592623173.png" />
         </a>
     </p>
 <h3 id="矢量的叉积">矢量的叉积</h3>
 <p>另一个重要的矢量运算就是叉积 （cross product） ，也被称为外积 （outer product） 。与点积不同的是，矢量叉积的结果仍是一个矢量，而非标量.</p>
 <p>两个矢量的叉积可以用如下公式:
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495945273851649594526415.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495945273851649594526415.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495945273851649594526415.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495945273851649594526415.png" />
         </a>
     
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495946283601649594627573.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495946283601649594627573.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495946283601649594627573.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495946283601649594627573.png" />
         </a>
     </p>
 <ul>
@@ -552,14 +552,14 @@ a –b =(ax −bx ,ay -by , az −bz )
 <li>叉积也不满足结合律，即 (a ×b ) ×c ≠a ×(b ×c )。</li>
 </ul>
 <p>a ×b 的长度等于a 和b 的模的乘积再乘以它们之间夹角的正弦值</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">｜a×b ｜=｜a ｜｜b ｜sinθ
-</code></pre></div><p>使用左手坐标系还是右手坐标系不会对叉积的计算结果产生任何影响，它影响的只是数字在三维空间中的视觉化表现而已</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>｜a×b ｜=｜a ｜｜b ｜sinθ
+</span></span></code></pre></div><p>使用左手坐标系还是右手坐标系不会对叉积的计算结果产生任何影响，它影响的只是数字在三维空间中的视觉化表现而已</p>
 <h2 id="矩阵运算">矩阵运算</h2>
 <h3 id="矩阵和标量的乘法">矩阵和标量的乘法</h3>
 <p>和矢量类似，矩阵也可以和标量相乘，它的结果仍然是一个相同维度的矩阵
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495951113731649595110441.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495951113731649595110441.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495951113731649595110441.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495951113731649595110441.png" />
         </a>
     </p>
 <h3 id="矩阵和矩阵的乘法">矩阵和矩阵的乘法</h3>
@@ -571,15 +571,15 @@ a –b =(ax −bx ,ay -by , az −bz )
 </ul>
 <p>设有r ×n 的矩阵A 和一个n ×c 的矩阵B ，它们相乘会得到一个r ×c 的矩阵C =AB 。那么，C 中的每一个元素cij 等于A 的第i 行所对应的矢量和B 的第j 列所对应的矢量进行矢量点乘的结果.
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495957303931649595729872.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495957303931649595729872.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495957303931649595729872.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495957303931649595729872.png" />
         </a>
     </p>
 <p>对于每个元素cij ，我们找到A 中的第i 行和B 中的第j 列，然后把它们的对应元素相乘后再加起来，这个和就是cij 。</p>
 <p>举个例子来理解这个公式，如下图：
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495959363981649595935987.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495959363981649595935987.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495959363981649595935987.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495959363981649595935987.png" />
         </a>
     </p>
 <h3 id="矩阵乘法满足一些性质">矩阵乘法满足一些性质</h3>
@@ -591,17 +591,17 @@ a –b =(ax −bx ,ay -by , az −bz )
 <ol>
 <li>方块矩阵（square matrix） ，简称方阵，是指那些行和列数目相等的矩阵。在三维渲染里，最常使用的就是3×3和4×4的方阵。</li>
 </ol>
-<p>如果一个矩阵除了对角元素外的所有元素都为0，那么这个矩阵就叫做对角矩阵 （diagonal matrix）
+<p>如果一个矩阵除了对角元素外的所有元素都为0，那么这个矩阵就叫做对角矩阵 （diagonal matrix） 
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495960694041649596068758.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495960694041649596068758.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495960694041649596068758.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495960694041649596068758.png" />
         </a>
     </p>
 <p>2．单位矩阵, 任何矩阵和它相乘的结果都还是原来的矩阵</p>
 <p>一个特殊的对角矩阵是单位矩阵 （identity matrix） ，用I n 来表示。一个3×3的单位矩阵如下
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495960984031649596098203.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495960984031649596098203.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495960984031649596098203.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495960984031649596098203.png" />
         </a>
     </p>
 <ol start="3">
@@ -610,14 +610,14 @@ a –b =(ax −bx ,ay -by , az −bz )
 <p>给定一个r ×c 的矩阵M ，它的转置可以表示成M T ，这是一个c ×r 的矩阵。转置矩阵的计算非常简单，我们只需要把原矩阵翻转一下即可, 原矩阵的第i 行变成了第i 列，而第j 列变成了第j 行。</p>
 <p>数学公式如下：
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495962944091649596293847.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495962944091649596293847.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495962944091649596293847.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495962944091649596293847.png" />
         </a>
     </p>
 <p>对于行矩阵和列矩阵来说，我们可以使用转置操作来转换行列矩阵
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495963544141649596354130.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/unityshader/16495963544141649596354130.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495963544141649596354130.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/unityshader/16495963544141649596354130.png" />
         </a>
     </p>
 <h3 id="转置矩阵常用的性质">转置矩阵常用的性质</h3>
@@ -659,7 +659,7 @@ a –b =(ax −bx ,ay -by , az −bz )
                 <a href="https://blog.rakfree.tk/2022/04/shadermathematic/">https://blog.rakfree.tk/2022/04/shadermathematic/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-07 18:14:24</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 15:11:45</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -793,6 +793,10 @@ a –b =(ax −bx ,ay -by , az −bz )
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -806,10 +810,6 @@ a –b =(ax −bx ,ay -by , az −bz )
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -855,7 +855,7 @@ a –b =(ax −bx ,ay -by , az −bz )
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -867,7 +867,7 @@ a –b =(ax −bx ,ay -by , az −bz )
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -893,6 +893,8 @@ a –b =(ax −bx ,ay -by , az −bz )
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

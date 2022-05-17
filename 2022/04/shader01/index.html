@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-06T11:54:02&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-04-09T17:22:09&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T15:11:45&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="UnityShader基本概念">
@@ -271,8 +271,8 @@
 <h2 id="unity-shader-程序结构">Unity Shader 程序结构</h2>
 <p>Unity Shader 基本结构如下图：
 
-        <a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/image/16492410030761649241002871.png">
-            <img class="mx-auto" alt="" src="https://cdn.jsdelivr.net/gh/zfunnily/PictureUtools@main/image/16492410030761649241002871.png" />
+        <a data-fancybox="gallery" href="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image/16492410030761649241002871.png">
+            <img class="mx-auto" alt="" src="https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image/16492410030761649241002871.png" />
         </a>
     </p>
 <p>在Unity中创建一个Shader， 得到如下代码</p>
@@ -280,81 +280,80 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         unity shader
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s"><span style="color:#f92672">//</span> Upgrade NOTE<span style="color:#f92672">:</span> replaced <span style="color:#e6db74">&#39;_Object2World&#39;</span> with <span style="color:#e6db74">&#39;unity_ObjectToWorld&#39;</span>
-
-Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
-{
-    Properties
-    {
-        <span style="color:#a6e22e">_Color </span>(<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
-        <span style="color:#a6e22e">_MainTex </span>(<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
-        <span style="color:#a6e22e">_Glossiness </span>(<span style="color:#e6db74">&#34;Smoothness&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
-        <span style="color:#a6e22e">_Metallic </span>(<span style="color:#e6db74">&#34;Metallic&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
-    }
-    SubShader
-    {
-        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
-        LOD <span style="color:#ae81ff">200</span>
-
-        CGPROGRAM
-        <span style="color:#f92672">//</span> Physically based Standard lighting model, and enable shadows on all light types
-        <span style="color:#75715e">#pragma surface surf CustomDiffuse</span>
-
-        <span style="color:#f92672">//</span> Use shader model <span style="color:#ae81ff">3.0</span> target, to get nicer looking lighting
-        <span style="color:#75715e">#pragma target 3.0</span>
-
-        sampler2D _MainTex;
-
-        struct Input
-        {
-            float2 uv_MainTex;
-
-            <span style="color:#f92672">//</span><span style="color:#ae81ff">3</span>
-            float2 uv_Bump;
-            float3 worldNormal; INTERNAL_DATA
-        };
-
-        half _Glossiness;
-        half _Metallic;
-        fixed4 _Color;
-
-        <span style="color:#f92672">//</span> Add instancing support for this shader. You need to check <span style="color:#e6db74">&#39;Enable Instancing&#39;</span> on materials that use the shader.
-        <span style="color:#f92672">//</span> See https<span style="color:#f92672">://</span>docs.unity3d.com<span style="color:#f92672">/</span>Manual<span style="color:#f92672">/</span>GPUInstancing.html for more information about instancing.
-        <span style="color:#f92672">//</span> <span style="color:#75715e">#pragma instancing_options assumeuniformscaling</span>
-        <span style="color:#a6e22e">UNITY_INSTANCING_BUFFER_START</span>(Props)
-            <span style="color:#f92672">//</span> put more per<span style="color:#f92672">-</span>instance properties here
-        <span style="color:#a6e22e">UNITY_INSTANCING_BUFFER_END</span>(Props)
-
-        void <span style="color:#a6e22e">surf </span>(Input IN, inout SurfaceOutput o)
-        {
-            <span style="color:#f92672">//</span> Albedo comes from a texture tinted by color
-            fixed4 c <span style="color:#f92672">=</span> <span style="color:#a6e22e">tex2D </span>(_MainTex, IN.uv_MainTex) <span style="color:#f92672">*</span> _Color;
-            o.Albedo <span style="color:#f92672">=</span> c.rgb;
-            o.Alpha <span style="color:#f92672">=</span> c.a;
-        }
-
-        inline float4 <span style="color:#a6e22e">LightingCustomDiffuse </span>(SurfaceOutput s, fixed3 lightDir, fixed atten)
-        {
-            float difLight <span style="color:#f92672">=</span> <span style="color:#a6e22e">dot</span>(s.Normal, lightDir);
-            float hLambert <span style="color:#f92672">=</span> difLight <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>;
-
-            float4 col;
-            col.rgb <span style="color:#f92672">=</span> s.Albedo <span style="color:#f92672">*</span> _LightColor0.rgb <span style="color:#f92672">*</span> (difLight <span style="color:#f92672">*</span> atten <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
-            col.a <span style="color:#f92672">=</span> s.Alpha;
-            return col;
-        }
-       
-        ENDCG
-    }
-    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
-}
-
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span><span style="color:#f92672">//</span> Upgrade NOTE<span style="color:#f92672">:</span> replaced <span style="color:#e6db74">&#39;_Object2World&#39;</span> with <span style="color:#e6db74">&#39;unity_ObjectToWorld&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Properties
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Color </span>(<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_MainTex </span>(<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Glossiness </span>(<span style="color:#e6db74">&#34;Smoothness&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_Metallic </span>(<span style="color:#e6db74">&#34;Metallic&#34;</span>, <span style="color:#a6e22e">Range</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    SubShader
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
+</span></span><span style="display:flex;"><span>        LOD <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        CGPROGRAM
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Physically based Standard lighting model, and enable shadows on all light types
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#pragma surface surf CustomDiffuse</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Use shader model <span style="color:#ae81ff">3.0</span> target, to get nicer looking lighting
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#pragma target 3.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        struct Input
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            float2 uv_MainTex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">//</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>            float2 uv_Bump;
+</span></span><span style="display:flex;"><span>            float3 worldNormal; INTERNAL_DATA
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        half _Glossiness;
+</span></span><span style="display:flex;"><span>        half _Metallic;
+</span></span><span style="display:flex;"><span>        fixed4 _Color;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> Add instancing support for this shader. You need to check <span style="color:#e6db74">&#39;Enable Instancing&#39;</span> on materials that use the shader.
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> See https<span style="color:#f92672">://</span>docs.unity3d.com<span style="color:#f92672">/</span>Manual<span style="color:#f92672">/</span>GPUInstancing.html for more information about instancing.
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">//</span> <span style="color:#75715e">#pragma instancing_options assumeuniformscaling</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">UNITY_INSTANCING_BUFFER_START</span>(Props)
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">//</span> put more per<span style="color:#f92672">-</span>instance properties here
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">UNITY_INSTANCING_BUFFER_END</span>(Props)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        void <span style="color:#a6e22e">surf </span>(Input IN, inout SurfaceOutput o)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">//</span> Albedo comes from a texture tinted by color
+</span></span><span style="display:flex;"><span>            fixed4 c <span style="color:#f92672">=</span> <span style="color:#a6e22e">tex2D </span>(_MainTex, IN.uv_MainTex) <span style="color:#f92672">*</span> _Color;
+</span></span><span style="display:flex;"><span>            o.Albedo <span style="color:#f92672">=</span> c.rgb;
+</span></span><span style="display:flex;"><span>            o.Alpha <span style="color:#f92672">=</span> c.a;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        inline float4 <span style="color:#a6e22e">LightingCustomDiffuse </span>(SurfaceOutput s, fixed3 lightDir, fixed atten)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            float difLight <span style="color:#f92672">=</span> <span style="color:#a6e22e">dot</span>(s.Normal, lightDir);
+</span></span><span style="display:flex;"><span>            float hLambert <span style="color:#f92672">=</span> difLight <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.5</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            float4 col;
+</span></span><span style="display:flex;"><span>            col.rgb <span style="color:#f92672">=</span> s.Albedo <span style="color:#f92672">*</span> _LightColor0.rgb <span style="color:#f92672">*</span> (difLight <span style="color:#f92672">*</span> atten <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>            col.a <span style="color:#f92672">=</span> s.Alpha;
+</span></span><span style="display:flex;"><span>            return col;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>       
+</span></span><span style="display:flex;"><span>        ENDCG
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    FallBack <span style="color:#e6db74">&#34;Diffuse&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <h3 id="property-属性定义">Property （属性定义）</h3>
 <p>在Properties{}中定义着色器属性，在这里定义的属性将被作为输入提供给所有的子着色器。每一条属性的定义的语法如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">_Name(&#34;Display Name&#34;, type) = defaultValue[{options}]
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>_Name(&#34;Display Name&#34;, type) = defaultValue[{options}]
+</span></span></code></pre></div><ul>
 <li>_Name: 属性的名字，简单说就是变量名，在之后整个Shader代码中将使用这个名字来获取该属性的内容</li>
 <li>Display Name - 这个字符串将显示在Unity的材质编辑器中作为Shader的使用者可读的内容</li>
 <li>type - 这个属性的类型，可能的type所表示的内容有以下几种
@@ -379,18 +378,18 @@ Shader <span style="color:#e6db74">&#34;Custom/Diffuse Texture&#34;</span>
 <li>{option}: 它只对2D，Rect或者Cube贴图有关，在写输入时我们最少要在贴图之后写一对什么都不含的空白的{}，当我们需要打开特定选项时可以把其写在这对花括号内。如果需要同时打开多个选项，可以使用空白分隔。</li>
 </ul>
 <p>一组属性的例子</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">_Color (<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
-_MainTex (<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
-_Glossiness (<span style="color:#e6db74">&#34;Smoothness&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
-_Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
-</code></pre></div><h3 id="subshader子着色器">SubShader（子着色器）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>_Color (<span style="color:#e6db74">&#34;Color&#34;</span>, Color) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>_MainTex (<span style="color:#e6db74">&#34;Albedo (RGB)&#34;</span>, <span style="color:#ae81ff">2</span>D) <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span> {}
+</span></span><span style="display:flex;"><span>_Glossiness (<span style="color:#e6db74">&#34;Smoothness&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span>_Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span></code></pre></div><h3 id="subshader子着色器">SubShader（子着色器）</h3>
 <p>一个Shader可以有多个子着色器，这些子着色器互不相干且只有一个会在最终的平台运行，编写多个的目的是解决兼容性问题，Unity会自己选择兼容终端平台的Shader运行。
 语法如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Subshader { [Tags] [CommonState] Passdef [Passdef ...] }
-</code></pre></div><h4 id="tags">Tags</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Subshader { [Tags] [CommonState] Passdef [Passdef ...] }
+</span></span></code></pre></div><h4 id="tags">Tags</h4>
 <p>表面着色器可以被若干的标签（tags）所修饰，而硬件将通过判定这些标签来决定什么时候调用该着色器。比如我们的例子中SubShader的第一句</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
-</code></pre></div><p>Unity定义了一些列这样的渲染过程， 使用不同的标签来调用这些过程</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-s" data-lang="s"><span style="display:flex;"><span>Tags { <span style="color:#e6db74">&#34;RenderType&#34;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Opaque&#34;</span> }
+</span></span></code></pre></div><p>Unity定义了一些列这样的渲染过程， 使用不同的标签来调用这些过程</p>
 <ul>
 <li>&ldquo;RenderType&rdquo;=&ldquo;Opaque&rdquo;: 表示系统应该在渲染非透明物体时调用我们</li>
 <li>&ldquo;RenderType&rdquo; = &ldquo;Transparent&rdquo; 表示渲染含有透明效果的物体时调用</li>
@@ -431,52 +430,52 @@ _Metallic (<span style="color:#e6db74">&#34;Metallic&#34;</span>, Range(<span st
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
          代码 
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CGPROGRAM
-// Physically based Standard lighting model, and enable shadows on all light types
-#pragma surface surf CustomDiffuse
-// Use shader model 3.0 target, to get nicer looking lighting
-#pragma target 3.0
-sampler2D _MainTex;
-struct Input
-{
-    float2 uv_MainTex;
-};
-half _Glossiness;
-half _Metallic;
-fixed4 _Color;
-// Add instancing support for this shader. You need to check &#39;Enable Instancing&#39; on materials that use the shader.
-// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
-// #pragma instancing_options assumeuniformscaling
-UNITY_INSTANCING_BUFFER_START(Props)
-    // put more per-instance properties here
-UNITY_INSTANCING_BUFFER_END(Props)
-void surf (Input IN, inout SurfaceOutput o)
-{
-    // Albedo comes from a texture tinted by color
-    fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-    o.Albedo = c.rgb;
-    o.Alpha = c.a;
-}
-inline float4 LightingCustomDiffuse (SurfaceOutput s, fixed3 lightDir, fixed atten)
-{
-    float difLight = dot(s.Normal, lightDir);
-    float hLambert = difLight * 0.5 + 0.5;
-    float4 col;
-    col.rgb = s.Albedo * _LightColor0.rgb * (difLight * atten * 2);
-    col.a = s.Alpha;
-    return col;
-}
-
-ENDCG
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CGPROGRAM
+</span></span><span style="display:flex;"><span>// Physically based Standard lighting model, and enable shadows on all light types
+</span></span><span style="display:flex;"><span>#pragma surface surf CustomDiffuse
+</span></span><span style="display:flex;"><span>// Use shader model 3.0 target, to get nicer looking lighting
+</span></span><span style="display:flex;"><span>#pragma target 3.0
+</span></span><span style="display:flex;"><span>sampler2D _MainTex;
+</span></span><span style="display:flex;"><span>struct Input
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float2 uv_MainTex;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>half _Glossiness;
+</span></span><span style="display:flex;"><span>half _Metallic;
+</span></span><span style="display:flex;"><span>fixed4 _Color;
+</span></span><span style="display:flex;"><span>// Add instancing support for this shader. You need to check &#39;Enable Instancing&#39; on materials that use the shader.
+</span></span><span style="display:flex;"><span>// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+</span></span><span style="display:flex;"><span>// #pragma instancing_options assumeuniformscaling
+</span></span><span style="display:flex;"><span>UNITY_INSTANCING_BUFFER_START(Props)
+</span></span><span style="display:flex;"><span>    // put more per-instance properties here
+</span></span><span style="display:flex;"><span>UNITY_INSTANCING_BUFFER_END(Props)
+</span></span><span style="display:flex;"><span>void surf (Input IN, inout SurfaceOutput o)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    // Albedo comes from a texture tinted by color
+</span></span><span style="display:flex;"><span>    fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+</span></span><span style="display:flex;"><span>    o.Albedo = c.rgb;
+</span></span><span style="display:flex;"><span>    o.Alpha = c.a;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>inline float4 LightingCustomDiffuse (SurfaceOutput s, fixed3 lightDir, fixed atten)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float difLight = dot(s.Normal, lightDir);
+</span></span><span style="display:flex;"><span>    float hLambert = difLight * 0.5 + 0.5;
+</span></span><span style="display:flex;"><span>    float4 col;
+</span></span><span style="display:flex;"><span>    col.rgb = s.Albedo * _LightColor0.rgb * (difLight * atten * 2);
+</span></span><span style="display:flex;"><span>    col.a = s.Alpha;
+</span></span><span style="display:flex;"><span>    return col;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ENDCG
+</span></span></code></pre></div></details>
 <br/>
 <ol>
 <li>CGPROGRAM 表示CG程序的开始， ENDCG表示CG程序的结束</li>
 <li>#pragma surface surf CustomDiffuse
 编译指令，它声明了我们要写一个表面Shader，并指定了光照模型。它的写法是这样的</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#pragma surface surfaceFunction lightModel [optionalparams]
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#pragma surface surfaceFunction lightModel [optionalparams]
+</span></span></code></pre></div><ul>
 <li>surface: 声明的是一个表面着色器</li>
 <li>surfaceFunction: 着色器代码的方法的名字</li>
 <li>lightModel: 使用的光照模型。</li>
@@ -485,17 +484,17 @@ ENDCG
 <li>sampler2D _MainTex
 在CG中，sampler2D就是和texture所绑定的一个数据容器接口。更简单地理解，sampler2D就是GLSL中的2D贴图的类型，相应的，还有sampler1D，sampler3D，samplerCube等等格式</li>
 </ol>
-<p>在Properties中已经声明了_MainTex, 为什么还需要再声明一次？
+<p>在Properties中已经声明了_MainTex, 为什么还需要再声明一次？ 
 其原因是因为在CGPROGRAM&hellip;.ENDCG这段代码块中，这是一段CG程序。 要想访问在Properties中所定义的变量的话，<strong>必须使用和之前变量相同的名字进行声明</strong>。于是其实sampler2D _MainTex;
 做的事情就是再次声明并链接了_MainTex，使得接下来的CG程序能够使用这个变量</p>
 <ol start="4">
 <li>struct Input</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">struct</span> Input
-{
-    float2 uv_MainTex;
-};
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> Input
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float2 uv_MainTex;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
 <li>定义了一个 Input结构体， 作为输入的结构体必须命名为Input。</li>
 <li>float和vec都可以在之后加入一个2到4的数字，来表示被打包在一起的2到4个同类型数.</li>
 <li>uv_MainTex: 包含两个浮点数的变量
@@ -509,14 +508,14 @@ ENDCG
 <ol start="5">
 <li>函数surf</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">surf</span> (Input IN, inout SurfaceOutput o)
-{
-    <span style="color:#75715e">// Albedo comes from a texture tinted by color
-</span><span style="color:#75715e"></span>    fixed4 c <span style="color:#f92672">=</span> tex2D (_MainTex, IN.uv_MainTex) <span style="color:#f92672">*</span> _Color;
-    o.Albedo <span style="color:#f92672">=</span> c.rgb;
-    o.Alpha <span style="color:#f92672">=</span> c.a;
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">surf</span> (Input IN, inout SurfaceOutput o)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Albedo comes from a texture tinted by color
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    fixed4 c <span style="color:#f92672">=</span> tex2D (_MainTex, IN.uv_MainTex) <span style="color:#f92672">*</span> _Color;
+</span></span><span style="display:flex;"><span>    o.Albedo <span style="color:#f92672">=</span> c.rgb;
+</span></span><span style="display:flex;"><span>    o.Alpha <span style="color:#f92672">=</span> c.a;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>tex2D函数: CG程序中用来在一张贴图中对一个点进行采样的方法，返回一个float4</li>
 <li>这里对_MainTex在输入点上进行了采样，并将其颜色的rbg值赋予了输出的像素颜色，将a值赋予透明度。</li>
 <li>着色器工作内容：找到贴图上对应的uv点，直接使用颜色信息来进行着色。</li>
@@ -524,12 +523,12 @@ ENDCG
 <h3 id="fallback回滚">Fallback（回滚）</h3>
 <p>如果子着色器在终端平台上都无法运行，那么使用Fallback指定的备用Shader，俗称备胎。
 语法如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Fallback &#34;name&#34;
-</code></pre></div><h3 id="pass">Pass</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Fallback &#34;name&#34;
+</span></span></code></pre></div><h3 id="pass">Pass</h3>
 <p>一个Pass就是一次绘制。对于表面着色器，只能有一个Pass，所以不存在Pass节。顶点片段着色器可以有多个Pass。多次Pass可以实现很多特殊效果，例如当人物被环境遮挡时还可以看到人物轮廓就可以用多Pass来实现。
 语法如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Pass { [Name and Tags] [RenderSetup] }
-</code></pre></div><h2 id="参考">参考</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Pass { [Name and Tags] [RenderSetup] }
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://onevcat.com/2013/07/shader-tutorial-1/">shader基础教程</a></li>
 </ul>
@@ -552,7 +551,7 @@ ENDCG
                 <a href="https://blog.rakfree.tk/2022/04/shader01/">https://blog.rakfree.tk/2022/04/shader01/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-04-09 17:22:09</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 15:11:45</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -686,6 +685,10 @@ ENDCG
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -699,10 +702,6 @@ ENDCG
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -748,7 +747,7 @@ ENDCG
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -760,7 +759,7 @@ ENDCG
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -786,6 +785,8 @@ ENDCG
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

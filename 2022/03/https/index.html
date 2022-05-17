@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-03-03T10:26:56&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-03-03T11:55:32&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Nginx | 给网站添加证书">
@@ -238,103 +238,103 @@
 </ul>
 <h2 id="给网站一键添加证书">给网站一键添加证书</h2>
 <h3 id="安装系统依赖">安装系统依赖</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo apt update
-$ sudo apt install python3 python3-venv libaugeas0
-</code></pre></div><h3 id="初始化certbot所用的python虚拟环境">初始化certbot所用的python虚拟环境</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo python3 -m venv /data/certbot/
-$ sudo /data/certbot/bin/pip install --upgrade pip
-</code></pre></div><h3 id="使用pip安装certbot">使用pip安装certbot</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo /data/certbot/bin/pip install certbot certbot-nginx
-$ sudo ln -s /data/certbot/bin/certbot /usr/bin/certbot
-</code></pre></div><h3 id="配置certbot网站变成https访问">配置certbot，网站变成https访问</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo apt update
+</span></span><span style="display:flex;"><span>$ sudo apt install python3 python3-venv libaugeas0
+</span></span></code></pre></div><h3 id="初始化certbot所用的python虚拟环境">初始化certbot所用的python虚拟环境</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo python3 -m venv /data/certbot/
+</span></span><span style="display:flex;"><span>$ sudo /data/certbot/bin/pip install --upgrade pip
+</span></span></code></pre></div><h3 id="使用pip安装certbot">使用pip安装certbot</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo /data/certbot/bin/pip install certbot certbot-nginx
+</span></span><span style="display:flex;"><span>$ sudo ln -s /data/certbot/bin/certbot /usr/bin/certbot
+</span></span></code></pre></div><h3 id="配置certbot网站变成https访问">配置certbot，网站变成https访问</h3>
 <details   class="code-detail">
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         配置CertBot
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo certbot --nginx
-
-#输入邮箱
-Saving debug log to /var/log/letsencrypt/letsencrypt.log
-Enter email address (used for urgent renewal and security notices)
- (Enter &#39;c&#39; to cancel): 
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Please read the Terms of Service at
-https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
-agree in order to register with the ACME server. Do you agree?
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-(Y)es/(N)o: y
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Would you be willing, once your first certificate is successfully issued, to
-share your email address with the Electronic Frontier Foundation, a founding
-partner of the Let&#39;s Encrypt project and the non-profit organization that
-develops Certbot? We&#39;d like to send you email about our work encrypting the web,
-EFF news, campaigns, and ways to support digital freedom.
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-(Y)es/(N)o: y
-Account registered.
-
-#选择域名的序号
-Which names would you like to activate HTTPS for?
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-1: blog.rakfree.tk
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Select the appropriate numbers separated by commas and/or spaces, or leave input
-blank to select all options shown (Enter &#39;c&#39; to cancel): 1
-Requesting a certificate for blog.rakfree.tk
-
-Successfully received certificate.
-Certificate is saved at: /etc/letsencrypt/live/blog.rakfree.tk/fullchain.pem
-Key is saved at:         /etc/letsencrypt/live/blog.rakfree.tk/privkey.pem
-This certificate expires on 2022-06-01.
-These files will be updated when the certificate renews.
-
-Deploying certificate
-Successfully deployed certificate for blog.rakfree.tk to /etc/nginx/sites-enabled/mysite
-Congratulations! You have successfully enabled HTTPS on https://blog.rakfree.tk
-
-NEXT STEPS:
-- The certificate will need to be renewed before it expires. Certbot can automatically renew the certificate in the background, but you may need to take steps to enable that functionality. See https://certbot.org/renewal-setup for instructions.
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-If you like Certbot, please consider supporting our work by:
- * Donating to ISRG / Let&#39;s Encrypt:   https://letsencrypt.org/donate
- * Donating to EFF:                    https://eff.org/donate-le
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo certbot --nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#输入邮箱
+</span></span><span style="display:flex;"><span>Saving debug log to /var/log/letsencrypt/letsencrypt.log
+</span></span><span style="display:flex;"><span>Enter email address (used for urgent renewal and security notices)
+</span></span><span style="display:flex;"><span> (Enter &#39;c&#39; to cancel): 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>Please read the Terms of Service at
+</span></span><span style="display:flex;"><span>https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+</span></span><span style="display:flex;"><span>agree in order to register with the ACME server. Do you agree?
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>(Y)es/(N)o: y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>Would you be willing, once your first certificate is successfully issued, to
+</span></span><span style="display:flex;"><span>share your email address with the Electronic Frontier Foundation, a founding
+</span></span><span style="display:flex;"><span>partner of the Let&#39;s Encrypt project and the non-profit organization that
+</span></span><span style="display:flex;"><span>develops Certbot? We&#39;d like to send you email about our work encrypting the web,
+</span></span><span style="display:flex;"><span>EFF news, campaigns, and ways to support digital freedom.
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>(Y)es/(N)o: y
+</span></span><span style="display:flex;"><span>Account registered.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#选择域名的序号
+</span></span><span style="display:flex;"><span>Which names would you like to activate HTTPS for?
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>1: blog.rakfree.tk
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>Select the appropriate numbers separated by commas and/or spaces, or leave input
+</span></span><span style="display:flex;"><span>blank to select all options shown (Enter &#39;c&#39; to cancel): 1
+</span></span><span style="display:flex;"><span>Requesting a certificate for blog.rakfree.tk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Successfully received certificate.
+</span></span><span style="display:flex;"><span>Certificate is saved at: /etc/letsencrypt/live/blog.rakfree.tk/fullchain.pem
+</span></span><span style="display:flex;"><span>Key is saved at:         /etc/letsencrypt/live/blog.rakfree.tk/privkey.pem
+</span></span><span style="display:flex;"><span>This certificate expires on 2022-06-01.
+</span></span><span style="display:flex;"><span>These files will be updated when the certificate renews.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Deploying certificate
+</span></span><span style="display:flex;"><span>Successfully deployed certificate for blog.rakfree.tk to /etc/nginx/sites-enabled/mysite
+</span></span><span style="display:flex;"><span>Congratulations! You have successfully enabled HTTPS on https://blog.rakfree.tk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NEXT STEPS:
+</span></span><span style="display:flex;"><span>- The certificate will need to be renewed before it expires. Certbot can automatically renew the certificate in the background, but you may need to take steps to enable that functionality. See https://certbot.org/renewal-setup for instructions.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span><span style="display:flex;"><span>If you like Certbot, please consider supporting our work by:
+</span></span><span style="display:flex;"><span> * Donating to ISRG / Let&#39;s Encrypt:   https://letsencrypt.org/donate
+</span></span><span style="display:flex;"><span> * Donating to EFF:                    https://eff.org/donate-le
+</span></span><span style="display:flex;"><span>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</span></span></code></pre></div></details>
 <br/>
 <h2 id="定时更新证书保持证书不过期">定时更新证书，保持证书不过期</h2>
 <p>Let’s Encrypt机构颁发的，每次生成的证书有90天的有效期， 建议使用linux系统的定时任务crontab进行自动续期</p>
 <p>在用户目录root下写一个脚本文件<code>certbot-renew.sh</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>echo <span style="color:#e6db74">&#34;==================Certbot Renew=====================&#34;</span>
-echo <span style="color:#e6db74">&#34;==================`date`============================&#34;</span>
-
-<span style="color:#75715e"># 更新TLS证书</span>
-/usr/bin/certbot renew
-<span style="color:#75715e"># 重启Web服务器</span>
-nginx -s reload
-
-echo <span style="color:#e6db74">&#34;==================End===============================&#34;</span>
-</code></pre></div><p>给脚本执行权限</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ chmod +x certbot-renew.sh
-</code></pre></div><p>linux 定时任务, 编辑crontab文件 , <code>ctrl + x</code>可以退出编辑模式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ crontab -e
-
-0 0 1 * * /root/certbot-renew.sh
-</code></pre></div><p>可以使用这个命令检查自动更新程序是否正常配置了</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo certbot renew --dry-run
-</code></pre></div><h2 id="certbot的一些指令">certbot的一些指令</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>echo <span style="color:#e6db74">&#34;==================Certbot Renew=====================&#34;</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;==================`date`============================&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新TLS证书</span>
+</span></span><span style="display:flex;"><span>/usr/bin/certbot renew
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 重启Web服务器</span>
+</span></span><span style="display:flex;"><span>nginx -s reload
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;==================End===============================&#34;</span>
+</span></span></code></pre></div><p>给脚本执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ chmod +x certbot-renew.sh
+</span></span></code></pre></div><p>linux 定时任务, 编辑crontab文件 , <code>ctrl + x</code>可以退出编辑模式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ crontab -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>0 0 1 * * /root/certbot-renew.sh
+</span></span></code></pre></div><p>可以使用这个命令检查自动更新程序是否正常配置了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo certbot renew --dry-run
+</span></span></code></pre></div><h2 id="certbot的一些指令">certbot的一些指令</h2>
 <p>查看过期时间</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot renew
-</code></pre></div><p>查看证书情况</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot certificates
-</code></pre></div><p>手动续期证书（过期前一个月内）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot renew
-</code></pre></div><p>忽略证书过期时间，直接重置证书时间</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ certbot renew --force-renewal
-</code></pre></div><h2 id="参考">参考</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ certbot renew
+</span></span></code></pre></div><p>查看证书情况</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ certbot certificates
+</span></span></code></pre></div><p>手动续期证书（过期前一个月内）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ certbot renew
+</span></span></code></pre></div><p>忽略证书过期时间，直接重置证书时间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ certbot renew --force-renewal
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <p><a href="https://blog.rmgee.com/2021/07/09/nginx-ssl-https/">nginx+https</a></p>
 <p><a href="https://www.runoob.com/w3cnote/linux-crontab-tasks.html">linux定时任务</a></p>
 
@@ -356,7 +356,7 @@ echo <span style="color:#e6db74">&#34;==================End=====================
                 <a href="https://blog.rakfree.tk/2022/03/https/">https://blog.rakfree.tk/2022/03/https/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-03-03 11:55:32</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -486,6 +486,10 @@ echo <span style="color:#e6db74">&#34;==================End=====================
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -499,10 +503,6 @@ echo <span style="color:#e6db74">&#34;==================End=====================
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -548,7 +548,7 @@ echo <span style="color:#e6db74">&#34;==================End=====================
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -560,7 +560,7 @@ echo <span style="color:#e6db74">&#34;==================End=====================
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -586,6 +586,8 @@ echo <span style="color:#e6db74">&#34;==================End=====================
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-06T09:04:14&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | Dashboard界面管理">
@@ -219,126 +219,112 @@
         <div class="post-content">
             <h2 id="安装部署dashboard">安装部署Dashboard</h2>
 <p>通过一下命令来部署, <a href="dashboard%E7%9A%84yaml%E6%96%87%E4%BB%B6.md">recommended.yaml</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
-</code></pre></div><p><code>https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml</code>这个地址却很难打开，如果能打开，直接执行即可，如果不能，可以这样做：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">到github地址上一步步找：`https://github.com/kubernetes/dashboard/tree/v2.0.0-beta4/aio/deploy`下的`recommended.yaml`文件;
-</code></pre></div><h3 id="nodeport方式访问web">NodePort方式访问web</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+</span></span></code></pre></div><p><code>https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml</code>这个地址却很难打开，如果能打开，直接执行即可，如果不能，可以这样做：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>到github地址上一步步找：`https://github.com/kubernetes/dashboard/tree/v2.0.0-beta4/aio/deploy`下的`recommended.yaml`文件;
+</span></span></code></pre></div><h3 id="nodeport方式访问web">NodePort方式访问web</h3>
 <p>为了测试方便，我们将<code>Service</code>改成<code>NodePort</code>类型，注意 YAML 中最下面的 Service 部分新增一个<code>type=NodePort</code>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">kind: Service
-apiVersion: v1
-metadata:
-  labels:
-    k8s-app: kubernetes-dashboard
-  name: kubernetes-dashboard
-  namespace: kube-system
-spec:
-  type: NodePort #增加
-  ports:
-    - port: 443
-      targetPort: 8443
-      nodePort: 30000 #增加
-  selector:
-    k8s-app: kubernetes-dashboard
-
-</code></pre></div><p>然后直接部署新版本的<code>dashboard</code>即可：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl create -f recommended.yaml
-或者
-$ sudo  kubectl apply -f recommended.yaml
-
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>kind: Service
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    k8s-app: kubernetes-dashboard
+</span></span><span style="display:flex;"><span>  name: kubernetes-dashboard
+</span></span><span style="display:flex;"><span>  namespace: kube-system
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  type: NodePort #增加
+</span></span><span style="display:flex;"><span>  ports:
+</span></span><span style="display:flex;"><span>    - port: 443
+</span></span><span style="display:flex;"><span>      targetPort: 8443
+</span></span><span style="display:flex;"><span>      nodePort: 30000 #增加
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    k8s-app: kubernetes-dashboard
+</span></span></code></pre></div><p>然后直接部署新版本的<code>dashboard</code>即可：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl create -f recommended.yaml
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>$ sudo  kubectl apply -f recommended.yaml
+</span></span></code></pre></div><blockquote>
 </blockquote>
 <p>删除的指令 sudo kubectl delete -f recommended.yaml</p>
 <p>查看服务暴露的端口</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get service -n kubernetes-dashboard
-NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
-dashboard-metrics-scraper   ClusterIP   10.103.34.200   &lt;none&gt;        8000/TCP        4s
-kubernetes-dashboard        NodePort    10.98.254.205   &lt;none&gt;        443:31038/TCP   4s
-
-</code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl get service -n kubernetes-dashboard
+</span></span><span style="display:flex;"><span>NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
+</span></span><span style="display:flex;"><span>dashboard-metrics-scraper   ClusterIP   10.103.34.200   &lt;none&gt;        8000/TCP        4s
+</span></span><span style="display:flex;"><span>kubernetes-dashboard        NodePort    10.98.254.205   &lt;none&gt;        443:31038/TCP   4s
+</span></span></code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
 <p>查看dashboard状态</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl get pods --all-namespaces | grep dashboard
-kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
-kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
-
-</code></pre></div><p>查看dashboard的日志</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
-
-</code></pre></div><p>如果安装后，dashboard状态直接爆错，没有处于Running状态，可以执行下面命令删除插件与镜像，使用docker pull安装镜像的可以更换其他版本镜像与yaml进行安装</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 删除dashboard插件，recommended.yaml为安装时的名称，执行删除后，docker里对应的镜像没不会同步删除
-sudo kubectl delete -f recommended.yaml
-
-</code></pre></div><h2 id="a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl get pods --all-namespaces | grep dashboard
+</span></span><span style="display:flex;"><span>kubernetes-dashboard   dashboard-metrics-scraper-6b4884c9d5-mvnb9   1/1     Running   0          40m
+</span></span><span style="display:flex;"><span>kubernetes-dashboard   kubernetes-dashboard-d7f7f565d-zhpsc         1/1     Running   0          40m
+</span></span></code></pre></div><p>查看dashboard的日志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo  kubectl logs -f -n kubernetes-dashboard kubernetes-dashboard-d7f7f565d-zhpsc
+</span></span></code></pre></div><p>如果安装后，dashboard状态直接爆错，没有处于Running状态，可以执行下面命令删除插件与镜像，使用docker pull安装镜像的可以更换其他版本镜像与yaml进行安装</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># 删除dashboard插件，recommended.yaml为安装时的名称，执行删除后，docker里对应的镜像没不会同步删除
+</span></span><span style="display:flex;"><span>sudo kubectl delete -f recommended.yaml
+</span></span></code></pre></div><h2 id="a-idweb_64aweb访问的其他方式"><a id="Web_64"></a>Web访问的其他方式</h2>
 <h3 id="a-idnodeport_65a开启nodeport访问的另一种方式"><a id="NodePort_65"></a>开启NodePort访问的另一种方式</h3>
 <p>查看 kubernetes-dashboard</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
-
-[root@k8s ~]# kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
-NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
-kubernetes-dashboard   ClusterIP   10.97.154.42   &lt;none&gt;        443/TCP   28m
-
-</code></pre></div><p>编辑<code>kubernetes-dashboard</code>, 将里面的<code>type: ClusterIP</code>改为<code>type: NodePort</code>即可。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ kubectl --namespace=kubernetes-dashboard edit service kubernetes-dashboard
-
-</code></pre></div><p><code>wq</code>保存即可。等一会儿，重新查看，就变为NodePort了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
-NAME                   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
-kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/TCP   59s
-
-</code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[root@k8s ~]# kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
+</span></span><span style="display:flex;"><span>NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+</span></span><span style="display:flex;"><span>kubernetes-dashboard   ClusterIP   10.97.154.42   &lt;none&gt;        443/TCP   28m
+</span></span></code></pre></div><p>编辑<code>kubernetes-dashboard</code>, 将里面的<code>type: ClusterIP</code>改为<code>type: NodePort</code>即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ kubectl --namespace=kubernetes-dashboard edit service kubernetes-dashboard
+</span></span></code></pre></div><p><code>wq</code>保存即可。等一会儿，重新查看，就变为NodePort了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl --namespace=kubernetes-dashboard get service kubernetes-dashboard
+</span></span><span style="display:flex;"><span>NAME                   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
+</span></span><span style="display:flex;"><span>kubernetes-dashboard   NodePort   10.98.254.205   &lt;none&gt;        443:31038/TCP   59s
+</span></span></code></pre></div><p>然后<strong>直接访问集群中的任何一个节点 IP</strong> 加上上面的<strong>31038</strong>端口即可打开 dashboard 页面了</p>
 <h3 id="a-idapi_server_87aapi-server访问"><a id="API_Server_87"></a>API Server访问</h3>
 <p>启动Web访问，accept-hosts需要绑定当前服务器ip，即绑定接收请求的地址（可以使用正则表达式），不绑定访问可能会被拒绝，直接返回“Forbidden”</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nohup sudo kubectl proxy --address=&#39;0.0.0.0&#39; --port=8001 --accept-hosts=&#39;.*&#39; &amp;
-
-</code></pre></div><p>直接用curl在服务器测试访问</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl http://localhost:8001/api/
-
-</code></pre></div><p>如果能返回下面json串，就表示Dashboard已安装成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
-  &#34;kind&#34;: &#34;APIVersions&#34;,
-  &#34;versions&#34;: [
-    &#34;v1&#34;
-  ],
-  &#34;serverAddressByClientCIDRs&#34;: [
-    {
-      &#34;clientCIDR&#34;: &#34;0.0.0.0/0&#34;,
-      &#34;serverAddress&#34;: &#34;192.168.10.161:6443&#34;
-    }
-  ]
-}
-
-</code></pre></div><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>nohup sudo kubectl proxy --address=&#39;0.0.0.0&#39; --port=8001 --accept-hosts=&#39;.*&#39; &amp;
+</span></span></code></pre></div><p>直接用curl在服务器测试访问</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl http://localhost:8001/api/
+</span></span></code></pre></div><p>如果能返回下面json串，就表示Dashboard已安装成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  &#34;kind&#34;: &#34;APIVersions&#34;,
+</span></span><span style="display:flex;"><span>  &#34;versions&#34;: [
+</span></span><span style="display:flex;"><span>    &#34;v1&#34;
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  &#34;serverAddressByClientCIDRs&#34;: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      &#34;clientCIDR&#34;: &#34;0.0.0.0/0&#34;,
+</span></span><span style="display:flex;"><span>      &#34;serverAddress&#34;: &#34;192.168.10.161:6443&#34;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>进入Dashboard web管理平台 <a href="http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login">http://192.168.10.161:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login</a></p>
 <h2 id="a-id_113a创建用户"><a id="_113"></a>创建用户</h2>
 <p>我们创建一个admin用户并授予admin 角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后就可以通过token 登陆dashbaord，这种认证方式本质实际上是通过Service Account 的身份认证加上Bearer token请求 API server 的方式实现，参考<a href="https://kubernetes.io/docs/admin/authentication/">Kubernetes 中的认证</a>。<br> ``<br> <strong>新建文件(文件名随意)<code>admin-user.yaml</code>：</strong><br> 输入内容：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
-
-</code></pre></div><p>执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f admin-user.yaml
-
-</code></pre></div><h2 id="a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: ServiceAccount
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: admin-user
+</span></span><span style="display:flex;"><span>  namespace: kubernetes-dashboard
+</span></span></code></pre></div><p>执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl create -f admin-user.yaml
+</span></span></code></pre></div><h2 id="a-id_129a绑定用户关系"><a id="_129"></a>绑定用户关系</h2>
 <p><strong>新建文件(文件名随意)<code>admin-user-role-binding.yaml</code>：</strong><br> 输入内容：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
-</code></pre></div><p>执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f admin-user-role-binding.yaml
-</code></pre></div><p><strong>如果过程中提示存在或者需要删除，只需要<code>kubectl delete -f 相应的yaml文件</code>即可。</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span style="display:flex;"><span>kind: ClusterRoleBinding
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: admin-user
+</span></span><span style="display:flex;"><span>roleRef:
+</span></span><span style="display:flex;"><span>  apiGroup: rbac.authorization.k8s.io
+</span></span><span style="display:flex;"><span>  kind: ClusterRole
+</span></span><span style="display:flex;"><span>  name: cluster-admin
+</span></span><span style="display:flex;"><span>subjects:
+</span></span><span style="display:flex;"><span>- kind: ServiceAccount
+</span></span><span style="display:flex;"><span>  name: admin-user
+</span></span><span style="display:flex;"><span>  namespace: kubernetes-dashboard
+</span></span></code></pre></div><p>执行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl create -f admin-user-role-binding.yaml
+</span></span></code></pre></div><p><strong>如果过程中提示存在或者需要删除，只需要<code>kubectl delete -f 相应的yaml文件</code>即可。</strong></p>
 <h2 id="获取token">获取token</h2>
 <p>按照官网提示的获取token方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ sudo kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;{print $1}&#39;)
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ sudo kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk &#39;{print $1}&#39;)
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -357,7 +343,7 @@ subjects:
                 <a href="https://blog.rakfree.tk/2020/08/dashboard/">https://blog.rakfree.tk/2020/08/dashboard/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -489,6 +475,10 @@ subjects:
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -502,10 +492,6 @@ subjects:
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -551,7 +537,7 @@ subjects:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -563,7 +549,7 @@ subjects:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -589,6 +575,8 @@ subjects:
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

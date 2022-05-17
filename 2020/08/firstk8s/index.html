@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2020-08-13T15:28:31&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T15:10:33&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="K8S | 创建第一个应用">
@@ -207,69 +207,64 @@
         <div class="post-content">
             <h2 id="使用k8s部署第一个应用">使用k8s部署第一个应用</h2>
 <p>创建一个nginx.yaml文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-  # 指定 label，便于检索
-  labels:
-    app: nginx
-spec:
-  containers:
-    - name: nginx
-      # 指定镜像
-      image: nginx:alpine
-      # 指定暴露端口
-      ports:
-        - containerPort: 80
-
----
-# 创建网络服务
-apiVersion: v1
-kind: Service
-metadata:
-  name: kube-node-service
-  labels:
-    name: kube-node-service
-spec:
-  type: NodePort      #这里代表是NodePort类型的
-  ports:
-    - port: 80          #这里的端口和clusterIP(10.97.114.36)对应，即10.97.114.36:80,供内部访问。
-      targetPort: 80  #端口一定要和container暴露出来的端口对应，nodejs暴露出来的端口是8081，所以这里也应是8081
-      protocol: TCP
-      nodePort: 32143   # 所有的节点都会开放此端口，此端口供外部调用。
-
-  selector:
-    app: nginx          #这里选择器一定要选择容器的标签，之前写name:kube-node是错的。
-
-</code></pre></div><p>执行指令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl create -f nginx.yaml
-
-</code></pre></div><p>查看 服务</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get service
-
-</code></pre></div><p>查看 pod</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo kubectl get pod
-
-</code></pre></div><p>访问：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ip:32143
-
-</code></pre></div><p>就可以看到ngixn的欢迎页面啦</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: Pod
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: nginx
+</span></span><span style="display:flex;"><span>  # 指定 label，便于检索
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    app: nginx
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  containers:
+</span></span><span style="display:flex;"><span>    - name: nginx
+</span></span><span style="display:flex;"><span>      # 指定镜像
+</span></span><span style="display:flex;"><span>      image: nginx:alpine
+</span></span><span style="display:flex;"><span>      # 指定暴露端口
+</span></span><span style="display:flex;"><span>      ports:
+</span></span><span style="display:flex;"><span>        - containerPort: 80
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span># 创建网络服务
+</span></span><span style="display:flex;"><span>apiVersion: v1
+</span></span><span style="display:flex;"><span>kind: Service
+</span></span><span style="display:flex;"><span>metadata:
+</span></span><span style="display:flex;"><span>  name: kube-node-service
+</span></span><span style="display:flex;"><span>  labels:
+</span></span><span style="display:flex;"><span>    name: kube-node-service
+</span></span><span style="display:flex;"><span>spec:
+</span></span><span style="display:flex;"><span>  type: NodePort      #这里代表是NodePort类型的
+</span></span><span style="display:flex;"><span>  ports:
+</span></span><span style="display:flex;"><span>    - port: 80          #这里的端口和clusterIP(10.97.114.36)对应，即10.97.114.36:80,供内部访问。
+</span></span><span style="display:flex;"><span>      targetPort: 80  #端口一定要和container暴露出来的端口对应，nodejs暴露出来的端口是8081，所以这里也应是8081
+</span></span><span style="display:flex;"><span>      protocol: TCP
+</span></span><span style="display:flex;"><span>      nodePort: 32143   # 所有的节点都会开放此端口，此端口供外部调用。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  selector:
+</span></span><span style="display:flex;"><span>    app: nginx          #这里选择器一定要选择容器的标签，之前写name:kube-node是错的。
+</span></span></code></pre></div><p>执行指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl create -f nginx.yaml
+</span></span></code></pre></div><p>查看 服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl get service
+</span></span></code></pre></div><p>查看 pod</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo kubectl get pod
+</span></span></code></pre></div><p>访问：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ip:32143
+</span></span></code></pre></div><p>就可以看到ngixn的欢迎页面啦</p>
 <h2 id="同一个service开启多个端口">同一个service开启多个端口</h2>
 <p>一般我们只有一个端口的时候，在service的yaml文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
-  - nodePort: 8482
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-</code></pre></div><p>而如果你想开两个端口，直接复制粘贴可不行，k8s会提示你必须要加上name。所以,如果要开多端口，要为每个port都指定一个name，如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ports:
-  - name: http
-    nodePort: 8482
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ports:
+</span></span><span style="display:flex;"><span>  - nodePort: 8482
+</span></span><span style="display:flex;"><span>    port: 8080
+</span></span><span style="display:flex;"><span>    protocol: TCP
+</span></span><span style="display:flex;"><span>    targetPort: 8080
+</span></span></code></pre></div><p>而如果你想开两个端口，直接复制粘贴可不行，k8s会提示你必须要加上name。所以,如果要开多端口，要为每个port都指定一个name，如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ports:
+</span></span><span style="display:flex;"><span>  - name: http
+</span></span><span style="display:flex;"><span>    nodePort: 8482
+</span></span><span style="display:flex;"><span>    port: 8080
+</span></span><span style="display:flex;"><span>    protocol: TCP
+</span></span><span style="display:flex;"><span>    targetPort: 8080
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -288,7 +283,7 @@ spec:
                 <a href="https://blog.rakfree.tk/2020/08/firstk8s/">https://blog.rakfree.tk/2020/08/firstk8s/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 15:10:33</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -422,6 +417,10 @@ spec:
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -435,10 +434,6 @@ spec:
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -484,7 +479,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -496,7 +491,7 @@ spec:
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -522,6 +517,8 @@ spec:
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

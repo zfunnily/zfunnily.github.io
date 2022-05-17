@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2021-01-02T23:19:58&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-01-06T19:04:12&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="Lastbattle | 游戏场景服务器SS解析">
@@ -229,98 +229,96 @@
 <li>指令： eMsgToSSFromCS_CreateBattle</li>
 <li>GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数<code>INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)</code>中创建站场成功后，加入到战场管理器中:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
-</code></pre></div><p>发送创建结果给CS服务器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
-</code></pre></div><p>发送可以进入战场的消息给客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
-</code></pre></div><h2 id="英雄移动">英雄移动</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
+</span></span></code></pre></div><p>发送创建结果给CS服务器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
+</span></span></code></pre></div><p>发送可以进入战场的消息给客户端</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
+</span></span></code></pre></div><h2 id="英雄移动">英雄移动</h2>
 <ul>
 <li>指令：eMsgToGSToSSFromGC_AskMoveDir，eMsgToGSToSSFromGC_AskStopMove</li>
 <li>GSToSS： 客户端发往SS,fromGC
 收到客户端发来的移动信息， <code>GCToSS::MoveDir</code>, 转化为服务器能识别的参数 <code>CVector3D</code>, 开始计算客户端移动的位置</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
-m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
-</code></pre></div><p>开始按照方向移动：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
-{&lt;!-- --&gt;
-...
-        //计算下一个100毫秒后的位置
-		pMObject-&gt;CalculateStepMoveTarget(now + 100);
-                //检查是否会直接撞墙
-		if(FALSE == TestNextStepMove(pMObject)){&lt;!-- --&gt;
-			if(FALSE == TryTurnDir(pMObject)){&lt;!-- --&gt;
-				pMObject-&gt;Stop(now,FALSE);
-				return FALSE;
-			}
-		}
-		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
-}
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
-</code></pre></div><p>同步移动状态到客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pcCurBattle-&gt;SyncState(this);
-...
-SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
-...
-CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
-void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
-
-</code></pre></div><h2 id="英雄技能">英雄技能</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
+</span></span><span style="display:flex;"><span>m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
+</span></span></code></pre></div><p>开始按照方向移动：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
+</span></span><span style="display:flex;"><span>{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>        //计算下一个100毫秒后的位置
+</span></span><span style="display:flex;"><span>		pMObject-&gt;CalculateStepMoveTarget(now + 100);
+</span></span><span style="display:flex;"><span>                //检查是否会直接撞墙
+</span></span><span style="display:flex;"><span>		if(FALSE == TestNextStepMove(pMObject)){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>			if(FALSE == TryTurnDir(pMObject)){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>				pMObject-&gt;Stop(now,FALSE);
+</span></span><span style="display:flex;"><span>				return FALSE;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
+</span></span></code></pre></div><p>同步移动状态到客户端</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pcCurBattle-&gt;SyncState(this);
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
+</span></span><span style="display:flex;"><span>void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
+</span></span></code></pre></div><h2 id="英雄技能">英雄技能</h2>
 <ul>
 <li>指令：eMsgToGSToSSFromGC_AskBuyGoods- GSToSS：客户端发往SS,fromGC
 SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGoods</code>， 转化数据为<code>GCToSS::UseSkill</code>格式 :</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
-INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
-</code></pre></div><p>请求释放技能：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
-//检查是否是不能操作状态
-//检查是否被沉默了
-//检查是否在吸附中，如果是，不能使用技能
-//获取并检查技能是否存在
-//检查技能是否符合可用条件
-//检查是否是正在运行的技能
-</code></pre></div><p>开始使用技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pSkill-&gt;Start();
-```cpp
-准备技能的配置
-```cpp
-void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
-...
-	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
-
-}
-</code></pre></div><p>从配置中添加技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
-	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
-...
-AddEffect(pEffect); 
-}
-</code></pre></div><p>添加效果到管理器中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
-...
-        //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
-		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
-			//if (FALSE == pEffect-&gt;m_pCfg-&gt;bIsCanMove){&lt;!-- --&gt;
-				pEffect-&gt;AddSelfToUsingList();
-			//}
-			m_UpdateEffectMap[pEffect-&gt;m_un32UniqueID] = pEffect;
-		}
-		//如果效果启动失败，检查其是否会开始计算技能CD，然后结束技能。
-		else{&lt;!-- --&gt;
-			pEffect-&gt;CheckCooldown();
-			pEffect-&gt;End();
-			DestroyAFreeSkillEffect(pEffect);
-			return eEC_AddEffectFailed;
-		}
-...
-}
-//正在运行的效果列表
-m_UpdateEffectMap
-
-</code></pre></div><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
+</span></span><span style="display:flex;"><span>INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
+</span></span></code></pre></div><p>请求释放技能：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
+</span></span><span style="display:flex;"><span>//检查是否是不能操作状态
+</span></span><span style="display:flex;"><span>//检查是否被沉默了
+</span></span><span style="display:flex;"><span>//检查是否在吸附中，如果是，不能使用技能
+</span></span><span style="display:flex;"><span>//获取并检查技能是否存在
+</span></span><span style="display:flex;"><span>//检查技能是否符合可用条件
+</span></span><span style="display:flex;"><span>//检查是否是正在运行的技能
+</span></span></code></pre></div><p>开始使用技能</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pSkill-&gt;Start();
+</span></span><span style="display:flex;"><span>```cpp
+</span></span><span style="display:flex;"><span>准备技能的配置
+</span></span><span style="display:flex;"><span>```cpp
+</span></span><span style="display:flex;"><span>void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>从配置中添加技能</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
+</span></span><span style="display:flex;"><span>	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>AddEffect(pEffect); 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>添加效果到管理器中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>        //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
+</span></span><span style="display:flex;"><span>		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>			//if (FALSE == pEffect-&gt;m_pCfg-&gt;bIsCanMove){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>				pEffect-&gt;AddSelfToUsingList();
+</span></span><span style="display:flex;"><span>			//}
+</span></span><span style="display:flex;"><span>			m_UpdateEffectMap[pEffect-&gt;m_un32UniqueID] = pEffect;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		//如果效果启动失败，检查其是否会开始计算技能CD，然后结束技能。
+</span></span><span style="display:flex;"><span>		else{&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>			pEffect-&gt;CheckCooldown();
+</span></span><span style="display:flex;"><span>			pEffect-&gt;End();
+</span></span><span style="display:flex;"><span>			DestroyAFreeSkillEffect(pEffect);
+</span></span><span style="display:flex;"><span>			return eEC_AddEffectFailed;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>//正在运行的效果列表
+</span></span><span style="display:flex;"><span>m_UpdateEffectMap
+</span></span></code></pre></div><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
 <ul>
 <li>SSSkillEffect_Buf.cpp： 附加的buff技能</li>
 <li>SSSkillEffect_Fly.cpp: 飞行技能</li>
@@ -357,54 +355,54 @@ m_UpdateEffectMap
 <li><code>n32CPCost</code>： 金币</li>
 </ul>
 <p>举例</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">	&lt;info un32GoodsID=&#34;30038&#34;&gt;
-		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
-		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
-		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
-		&lt;attributeKeyList&gt;6&lt;/attributeKeyList&gt;
-		&lt;attributeValList&gt;65&lt;/attributeValList&gt;
-		&lt;attributePerList&gt;0&lt;/attributePerList&gt;
-		&lt;un8UseTimes&gt;0&lt;/un8UseTimes&gt;
-		&lt;bDestroyAfterUsed&gt;0&lt;/bDestroyAfterUsed&gt;
-		&lt;un32SkillID&gt;0&lt;/un32SkillID&gt;
-		&lt;un32PassSkillID&gt;0&lt;/un32PassSkillID&gt;
-		&lt;bIsCanDeathToBuy&gt;1&lt;/bIsCanDeathToBuy&gt;
-		&lt;bUsedAfterBuyed&gt;0&lt;/bUsedAfterBuyed&gt;
-		&lt;sIcon&gt;Dicon038&lt;/sIcon&gt;
-		&lt;un32CdTime&gt;0&lt;/un32CdTime&gt;
-		&lt;bUniqueID&gt;0&lt;/bUniqueID&gt;
-		&lt;un8OverlapTimes&gt;1&lt;/un8OverlapTimes&gt;
-		&lt;un8CPCostType&gt;1&lt;/un8CPCostType&gt;
-		&lt;n32CPCost&gt;800&lt;/n32CPCost&gt;
-		&lt;n32CombineCPCost&gt;200&lt;/n32CombineCPCost&gt;
-		&lt;un8FunctionType&gt;0&lt;/un8FunctionType&gt;
-		&lt;un32UniqueTypeID&gt;0&lt;/un32UniqueTypeID&gt;
-		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
-		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
-	&lt;/info&gt;
-</code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>	&lt;info un32GoodsID=&#34;30038&#34;&gt;
+</span></span><span style="display:flex;"><span>		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
+</span></span><span style="display:flex;"><span>		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
+</span></span><span style="display:flex;"><span>		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
+</span></span><span style="display:flex;"><span>		&lt;attributeKeyList&gt;6&lt;/attributeKeyList&gt;
+</span></span><span style="display:flex;"><span>		&lt;attributeValList&gt;65&lt;/attributeValList&gt;
+</span></span><span style="display:flex;"><span>		&lt;attributePerList&gt;0&lt;/attributePerList&gt;
+</span></span><span style="display:flex;"><span>		&lt;un8UseTimes&gt;0&lt;/un8UseTimes&gt;
+</span></span><span style="display:flex;"><span>		&lt;bDestroyAfterUsed&gt;0&lt;/bDestroyAfterUsed&gt;
+</span></span><span style="display:flex;"><span>		&lt;un32SkillID&gt;0&lt;/un32SkillID&gt;
+</span></span><span style="display:flex;"><span>		&lt;un32PassSkillID&gt;0&lt;/un32PassSkillID&gt;
+</span></span><span style="display:flex;"><span>		&lt;bIsCanDeathToBuy&gt;1&lt;/bIsCanDeathToBuy&gt;
+</span></span><span style="display:flex;"><span>		&lt;bUsedAfterBuyed&gt;0&lt;/bUsedAfterBuyed&gt;
+</span></span><span style="display:flex;"><span>		&lt;sIcon&gt;Dicon038&lt;/sIcon&gt;
+</span></span><span style="display:flex;"><span>		&lt;un32CdTime&gt;0&lt;/un32CdTime&gt;
+</span></span><span style="display:flex;"><span>		&lt;bUniqueID&gt;0&lt;/bUniqueID&gt;
+</span></span><span style="display:flex;"><span>		&lt;un8OverlapTimes&gt;1&lt;/un8OverlapTimes&gt;
+</span></span><span style="display:flex;"><span>		&lt;un8CPCostType&gt;1&lt;/un8CPCostType&gt;
+</span></span><span style="display:flex;"><span>		&lt;n32CPCost&gt;800&lt;/n32CPCost&gt;
+</span></span><span style="display:flex;"><span>		&lt;n32CombineCPCost&gt;200&lt;/n32CombineCPCost&gt;
+</span></span><span style="display:flex;"><span>		&lt;un8FunctionType&gt;0&lt;/un8FunctionType&gt;
+</span></span><span style="display:flex;"><span>		&lt;un32UniqueTypeID&gt;0&lt;/un32UniqueTypeID&gt;
+</span></span><span style="display:flex;"><span>		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
+</span></span><span style="display:flex;"><span>		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
+</span></span><span style="display:flex;"><span>	&lt;/info&gt;
+</span></span></code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p>
 <h2 id="整个服务器的心跳">整个服务器的心跳</h2>
 <p>心跳的作用：</p>
 <ul>
 <li>检查掉线时间。如果玩家掉线超过30秒，则将其AI替换为机器人AI</li>
 <li>技能心跳- 移动心跳- NPC和hero的心跳</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
-...
-    //移动心跳
-    m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    for (GameObjectMap::iterator iterObj = m_cGameObjectMap.begin(); iterObj != m_cGameObjectMap.end(); ++iterObj){&lt;!-- --&gt;
-            //NPC和hero的心跳
-    		iterObj-&gt;second-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    }
-...
-    //技能心跳
-    m_pEffectMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    m_pPassiveSkillMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-    m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-...
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>    //移动心跳
+</span></span><span style="display:flex;"><span>    m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style="display:flex;"><span>    for (GameObjectMap::iterator iterObj = m_cGameObjectMap.begin(); iterObj != m_cGameObjectMap.end(); ++iterObj){&lt;!-- --&gt;
+</span></span><span style="display:flex;"><span>            //NPC和hero的心跳
+</span></span><span style="display:flex;"><span>    		iterObj-&gt;second-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>    //技能心跳
+</span></span><span style="display:flex;"><span>    m_pEffectMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style="display:flex;"><span>    m_pPassiveSkillMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style="display:flex;"><span>    m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
             <h4 align="center">--完--</h4>
         </div>
@@ -423,7 +421,7 @@ m_UpdateEffectMap
                 <a href="https://blog.rakfree.tk/2021/01/lastbattle/">https://blog.rakfree.tk/2021/01/lastbattle/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-01-06 19:04:12</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -553,6 +551,10 @@ m_UpdateEffectMap
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -566,10 +568,6 @@ m_UpdateEffectMap
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -615,7 +613,7 @@ m_UpdateEffectMap
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -627,7 +625,7 @@ m_UpdateEffectMap
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -653,6 +651,8 @@ m_UpdateEffectMap
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     

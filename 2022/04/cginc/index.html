@@ -15,7 +15,7 @@
     <meta property="article:published_time" content='2022-04-20T15:35:49&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-05-05T17:24:20&#43;08:00'>
+    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
         
     <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
     <meta name="description" content="UnityCG.cginc中常用函数">
@@ -222,15 +222,15 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         WorldSpaceViewDir
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// 内部实现也是用UnityWorldSpaceViewDir
-</span><span style="color:#75715e">// Computes world space view direction, from object space position
-</span><span style="color:#75715e">// *Legacy* Please use UnityWorldSpaceViewDir instead
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">WorldSpaceViewDir</span>( in float4 localPos )
-{
-    float3 worldPos <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, localPos).xyz;
-    <span style="color:#66d9ef">return</span> UnityWorldSpaceViewDir(worldPos);
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// 内部实现也是用UnityWorldSpaceViewDir
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Computes world space view direction, from object space position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// *Legacy* Please use UnityWorldSpaceViewDir instead
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">WorldSpaceViewDir</span>( in float4 localPos )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float3 worldPos <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, localPos).xyz;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> UnityWorldSpaceViewDir(worldPos);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ol start="2">
 <li>UnityWorldSpaceViewDir
@@ -240,12 +240,12 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         UnityWorldSpaceViewDir
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// Computes world space view direction, from object space position
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">UnityWorldSpaceViewDir</span>( in float3 worldPos )
-{
-    <span style="color:#66d9ef">return</span> _WorldSpaceCameraPos.xyz <span style="color:#f92672">-</span> worldPos;
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Computes world space view direction, from object space position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">UnityWorldSpaceViewDir</span>( in float3 worldPos )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> _WorldSpaceCameraPos.xyz <span style="color:#f92672">-</span> worldPos;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ol start="3">
 <li>ObjSpaceViewDir
@@ -255,13 +255,13 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         ObjSpaceViewDir
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// Computes object space view direction
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">ObjSpaceViewDir</span>( in float4 v )
-{
-    float3 objSpaceCameraPos <span style="color:#f92672">=</span> mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, <span style="color:#ae81ff">1</span>)).xyz;
-    <span style="color:#66d9ef">return</span> objSpaceCameraPos <span style="color:#f92672">-</span> v.xyz;
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Computes object space view direction
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">ObjSpaceViewDir</span>( in float4 v )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float3 objSpaceCameraPos <span style="color:#f92672">=</span> mul(unity_WorldToObject, float4(_WorldSpaceCameraPos.xyz, <span style="color:#ae81ff">1</span>)).xyz;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> objSpaceCameraPos <span style="color:#f92672">-</span> v.xyz;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <h2 id="光源方向">光源方向</h2>
 <ol>
@@ -272,14 +272,14 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         WorldSpaceLightDir
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// Computes world space light direction, from object space position
-</span><span style="color:#75715e">// *Legacy* Please use UnityWorldSpaceLightDir instead
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">WorldSpaceLightDir</span>( in float4 localPos )
-{
-    float3 worldPos <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, localPos).xyz;
-    <span style="color:#66d9ef">return</span> UnityWorldSpaceLightDir(worldPos);
-}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Computes world space light direction, from object space position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// *Legacy* Please use UnityWorldSpaceLightDir instead
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">WorldSpaceLightDir</span>( in float4 localPos )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    float3 worldPos <span style="color:#f92672">=</span> mul(unity_ObjectToWorld, localPos).xyz;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> UnityWorldSpaceLightDir(worldPos);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></details>
 <br/>
 <ol start="2">
 <li>UnityWorldSpaceLightDir
@@ -289,20 +289,20 @@
     <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
         WorldSpaceLightDir
     </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// Computes world space light direction, from world space position
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">UnityWorldSpaceLightDir</span>( in float3 worldPos )
-{
-    <span style="color:#75715e">#ifndef USING_LIGHT_MULTI_COMPILE
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz <span style="color:#f92672">-</span> worldPos <span style="color:#f92672">*</span> _WorldSpaceLightPos0.w;
-    <span style="color:#75715e">#else
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">#ifndef USING_DIRECTIONAL_LIGHT
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz <span style="color:#f92672">-</span> worldPos;
-        <span style="color:#75715e">#else
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz;
-        <span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span>}
-</code></pre></div></details>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Computes world space light direction, from world space position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">inline</span> float3 <span style="color:#a6e22e">UnityWorldSpaceLightDir</span>( in float3 worldPos )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#ifndef USING_LIGHT_MULTI_COMPILE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz <span style="color:#f92672">-</span> worldPos <span style="color:#f92672">*</span> _WorldSpaceLightPos0.w;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">#ifndef USING_DIRECTIONAL_LIGHT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz <span style="color:#f92672">-</span> worldPos;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> _WorldSpaceLightPos0.xyz;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></details>
 <br/>
 
 
@@ -323,7 +323,7 @@
                 <a href="https://blog.rakfree.tk/2022/04/cginc/">https://blog.rakfree.tk/2022/04/cginc/</a>
             
         </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-05 17:24:20</li>
+        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
         <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
     </ul>
 </div>
@@ -453,6 +453,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 透明/半透明物体的折射">URP 透明/半透明物体的折射</a>
+    </li>
+    
+    <li>
         <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
     </li>
     
@@ -466,10 +470,6 @@
     
     <li>
         <a href="https://blog.rakfree.tk/2022/05/geometry/" title="MAC平台几何着色器不生效">MAC平台几何着色器不生效</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/04/shaderfunc/" title="ShaderLab常用函数">ShaderLab常用函数</a>
     </li>
     
 </ul>
@@ -515,7 +515,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (95)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
     
@@ -527,7 +527,7 @@
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
     
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (11)</a></li>
+    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
     
     <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
     
@@ -553,6 +553,8 @@
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
     
     <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
     
