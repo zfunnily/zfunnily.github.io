@@ -1,771 +1,223 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-
-    <title>A*算法 | Lua版本 | Zzz记忆</title>
-    <meta property="og:title" content="A*算法 | Lua版本 - Zzz记忆">
-    <meta property="og:type" content="article">
-    <meta name="color-scheme" content="light dark">
-        
-    <meta property="article:published_time" content='2021-12-23T16:37:44&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
-        
-    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="A*算法 | Lua版本">
-        
-    <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/12/astar/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
-
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-
-    
-    
-    
-        <link href="/js/jquery.fancybox.css" rel="stylesheet">
-    
-    
-    
-    
-        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
-    
-
-
-    
-    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
-    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    
-</head>
-
-
-<body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://blog.rakfree.tk">
-                        Zzz记忆
-                    </a>
-                
-
-                <div id="quotes" class="description"></div>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://blog.rakfree.tk">首页</a>
-                    
-                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
-                    
-                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
-                    
-                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
-
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
-    <style type="text/css">
-    .post-toc {
-        position: fixed;
-        width: 200px;
-        margin-left: -210px;
-        padding: 5px 10px;
-        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
-        font-size: 12px;
-        border: 1px solid rgba(0, 0, 0, .07);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.98);
-        background-clip: padding-box;
-        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        word-wrap: break-word;
-        white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 999;
-        cursor: pointer;
-        max-height: 70%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .post-toc .post-toc-title {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .post-toc .post-toc-content {
-        font-size: 15px;
-    }
-
-    .post-toc .post-toc-content>nav>ul {
-        margin: 10px 0;
-    }
-
-    .post-toc .post-toc-content ul {
-        padding-left: 20px;
-        list-style: square;
-        margin: 0.5em;
-        line-height: 1.8em;
-    }
-
-    .post-toc .post-toc-content ul ul {
-        padding-left: 15px;
-        display: none;
-    }
-
-    @media print,
-    screen and (max-width:1057px) {
-        .post-toc {
-            display: none;
-        }
-    }
-</style>
-
-<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#a算法思路">A*算法思路</a></li>
-    <li><a href="#lua代码">lua代码</a></li>
-  </ul>
-</nav>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var postToc = $(".post-toc");
-        if (postToc.length) {
-            var leftPos = $("#main").offset().left;
-            if(leftPos<220){
-                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
-            }
-
-            var t = postToc.offset().top - 20,
-                a = {
-                    start: {
-                        position: "absolute",
-                        top: t
-                    },
-                    process: {
-                        position: "fixed",
-                        top: 20
-                    },
-                };
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                e < t ? postToc.css(a.start) : postToc.css(a.process)
-            })
-        }
-    })
-</script>
-    <article class="post">
-        <header>
-            <h1 class="post-title">A*算法 | Lua版本</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年12月23日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.Lua'>编程.Lua</a></span>
-            
-        </div>
-        
-        
-        
-        <div class="clear" style="display: none">
-            <div class="toc-article">
-                <div class="toc-title">文章目录</div>
-            </div>
-        </div>
-        
-        <div class="post-content">
-            <h2 id="a算法思路">A*算法思路</h2>
-<p>
-        <a data-fancybox="gallery" href="https://img-blog.csdn.net/20150730163618465">
-            <img class="mx-auto" alt="" src="https://img-blog.csdn.net/20150730163618465" />
-        </a>
-    
-寻路步骤</p>
-<ol>
-<li>从起点A开始, 把它作为待处理的方格存入一个&quot;开启列表&quot;, 开启列表就是一个等待检查方格的列表.</li>
-<li>寻找起点A周围可以到达的方格, 将它们放入&quot;开启列表&quot;, 并设置它们的&quot;父方格&quot;为A.</li>
-<li>从&quot;开启列表&quot;中删除起点 A, 并将起点 A 加入&quot;关闭列表&quot;, &ldquo;关闭列表&quot;中存放的都是不需要再次检查的方格</li>
-<li>从 &ldquo;开启列表&rdquo; 中选择 F 值最低的方格 C (绿色起始方块 A 右边的方块), 把它从 &ldquo;开启列表&rdquo; 中删除, 并放到 &ldquo;关闭列表&rdquo; 中.</li>
-<li>检查它所有相邻并且可以到达 (障碍物和 &ldquo;关闭列表&rdquo; 的方格都不考虑) 的方格. 如果这些方格还不在 &ldquo;开启列表&rdquo; 里的话, 将它们加入 &ldquo;开启列表&rdquo;, 计算这些方格的 G, H 和 F 值各是多少, 并设置它们的 &ldquo;父方格&rdquo; 为 C.</li>
-<li>如果某个相邻方格 D 已经在 &ldquo;开启列表&rdquo; 里了, 检查如果用新的路径 (就是经过C 的路径) 到达它的话, G值是否会更低一些, 如果新的G值更低, 那就把它的 &ldquo;父方格&rdquo; 改为目前选中的方格 C, 然后重新计算它的 F 值和 G 值 (H 值不需要重新计算, 因为对于每个方块, H 值是不变的).
-如果新的 G 值比较高, 就说明经过 C 再到达 D 不是一个明智的选择, 因为它需要更远的路, 这时我们什么也不做.</li>
-<li>当我们发现 &ldquo;开始列表&rdquo; 里出现了目标终点方块的时候, 说明路径已经被找到.</li>
-</ol>
-<p>对每个格子怎么走，往哪个方向走有一个很重要的函数-估价函数, 公式如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>f(n) = g(n) + h(n)
-</span></span></code></pre></div><ul>
-<li>g(n) 是指从起始格子到格子n的实际代价。</li>
-<li>h(n) 是指从格子n到终点的的估计代价。</li>
-</ul>
-<h2 id="lua代码">lua代码</h2>
-<p>astart.lua代码如下</p>
-<details   class="code-detail">
-    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
-        lua
-    </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#75715e">#! /usr/local/bin/lua</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--参考： https://blog.csdn.net/u012234115/article/details/47152137</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> kCost1<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>; <span style="color:#75715e">--直移一格消耗</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> kCost2<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>; <span style="color:#75715e">--移一格消耗</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> openList <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> closeList <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--初始化地图，用二维矩阵代表地图，1表示障碍物，0表示可通</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> maze <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>},
-</span></span><span style="display:flex;"><span>    {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>}
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--  F=G+H</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--G 表示从起点 A 移动到网格上指定方格的移动耗费 (可沿斜方向移动).</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--H 表示从指定的方格移动到终点 B 的预计耗费 (H 有很多计算方法, 本文代码使用简单的欧几里得距离计算方法).</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">calcG</span>(startP, point)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> extraG <span style="color:#f92672">=</span> math.abs(point.x<span style="color:#f92672">-</span>startP.x)<span style="color:#f92672">+</span>math.abs(point.y<span style="color:#f92672">-</span>startP.y)<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> kCost1 <span style="color:#f92672">or</span> kCost2
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> parentG <span style="color:#f92672">=</span> (next(point.parent <span style="color:#f92672">or</span> {})) <span style="color:#f92672">and</span> point.parent.G <span style="color:#f92672">or</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> parentG <span style="color:#f92672">+</span> extraG
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">calcH</span>(point, endP)
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--用简单的欧几里得距离计算H，这个H的计算是关键，还有很多算法</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> math.sqrt((endP.x<span style="color:#f92672">-</span>point.x)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (endP.y<span style="color:#f92672">-</span>point.y)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">calcF</span>(point)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> point.G <span style="color:#f92672">+</span> point.H
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getPointString</span>(point)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&lt;&#34;</span><span style="color:#f92672">..</span>point.x<span style="color:#f92672">..</span> <span style="color:#e6db74">&#34;,&#34;</span><span style="color:#f92672">..</span>point.y<span style="color:#f92672">..</span><span style="color:#e6db74">&#34;&gt;&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isInList</span>(tbl, target)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _,v <span style="color:#66d9ef">in</span> ipairs(tbl) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> target.x <span style="color:#f92672">==</span> v.x <span style="color:#f92672">and</span> target.y <span style="color:#f92672">==</span> v.y <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> v
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--判断某点是否可以用于下一步判断</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isCanreach</span>(point, target, ignore)
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--如果目标点超出地图、与当前节点重合、是障碍物、或者在关闭列表中，返回false</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> target.x<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> target.x<span style="color:#f92672">&gt;#</span>maze
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">or</span> target.y<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> target.y<span style="color:#f92672">&gt;#</span>maze[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">or</span> maze[target.x][target.y]<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">or</span> (target.x<span style="color:#f92672">==</span>point.x <span style="color:#f92672">and</span> target.y<span style="color:#f92672">==</span>point.y) <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span> <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> isInList(closeList, target) <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">--print(&#34;target in closeList: &#34;.. getPointString(target))</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--非斜角可以</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> math.abs(point.x<span style="color:#f92672">-</span>target.x) <span style="color:#f92672">+</span> math.abs(point.y<span style="color:#f92672">-</span>target.y) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">--斜对角要判断是否绊住</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> maze[point.x][target.y] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> maze[target.x][point.y] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span> <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ignore
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--获取节点周围的节点</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getSurroundP</span>(point, ignore)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> surroundP <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i<span style="color:#f92672">=</span>point.x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, point.x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j<span style="color:#f92672">=</span>point.y<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, point.y<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">local</span> tmp <span style="color:#f92672">=</span> {x<span style="color:#f92672">=</span>i,y<span style="color:#f92672">=</span>j, G<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, H<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, F<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>}
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> isCanreach(point, tmp, ignore)<span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>                table.insert(surroundP, tmp)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">--print(&#34;not search: point:&#34; .. getPointString(point) .. &#34;; target: &#34;.. getPointString(tmp))</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> surroundP
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getLeastFPoint</span>()
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> curP <span style="color:#f92672">=</span> openList[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> curP <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, v <span style="color:#66d9ef">in</span> ipairs(openList) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> v.F <span style="color:#f92672">&lt;</span> curP.F <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>            curP <span style="color:#f92672">=</span> v
-</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">=</span> i
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cur,curP
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findPath</span>(startP, endP, ignore)
-</span></span><span style="display:flex;"><span>    table.insert(openList, startP) <span style="color:#75715e">--置入起点</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> next(openList) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">local</span> cur, curP <span style="color:#f92672">=</span> getLeastFPoint()<span style="color:#75715e">--找到最小的F</span>
-</span></span><span style="display:flex;"><span>        table.remove(openList, cur) <span style="color:#75715e">--从开启列表中删除</span>
-</span></span><span style="display:flex;"><span>        table.insert(closeList, curP) <span style="color:#75715e">--放到关闭列表</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">--1.找到当前周围八个格中可以通过的格子</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">local</span> surroundP <span style="color:#f92672">=</span> getSurroundP(curP, ignore)
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">--print(&#34;curP: &#34; .. getPointString(curP)..&#34; ####surroundP: &#34;..#surroundP)</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _, target <span style="color:#66d9ef">in</span> ipairs(surroundP) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">--2,对某一个格子，如果它不在开启列表中，加入到开启列表，设置当前格为其父节点，计算F G H</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isInList(openList, target) <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>                target.parent <span style="color:#f92672">=</span> curP
-</span></span><span style="display:flex;"><span>                target.G <span style="color:#f92672">=</span> calcG(curP, target)
-</span></span><span style="display:flex;"><span>                target.H <span style="color:#f92672">=</span> calcH(target, endP)
-</span></span><span style="display:flex;"><span>                target.F <span style="color:#f92672">=</span> calcF(target)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                table.insert(openList, target)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">--3，对某一个格子，它在开启列表中，计算G值, 如果比原来的大, 就什么都不做, 否则设置它的父节点为当前点,并更新G和F</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">local</span> tempG <span style="color:#f92672">=</span> calcG(curP, target)
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> tempG <span style="color:#f92672">&lt;</span> target.G <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>                    target.parent <span style="color:#f92672">=</span>  curP
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                    target.G <span style="color:#f92672">=</span> tempG
-</span></span><span style="display:flex;"><span>                    target.F <span style="color:#f92672">=</span> calcF(target)
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> i, v <span style="color:#66d9ef">in</span> ipairs(openList) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">--print(&#34;openList: &#34; .. getPointString(v))</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">local</span> resP <span style="color:#f92672">=</span> isInList(openList, endP)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> resP <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> resP
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">GetPath</span>(startP, endP, ignore)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> result <span style="color:#f92672">=</span> findPath(startP, endP, ignore)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> path <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> result <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        table.insert(path, <span style="color:#ae81ff">1</span>, result)
-</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> result.parent
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    openList <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>    closeList <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> path
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;start findPath.....&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> startP <span style="color:#f92672">=</span> {x<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, G<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,H<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,F<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> endP <span style="color:#f92672">=</span> {x<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">11</span>, G<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,H<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,F<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> path <span style="color:#f92672">=</span> GetPath(startP, endP, <span style="color:#66d9ef">false</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> _, v <span style="color:#66d9ef">in</span> ipairs(path) <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>    print(getPointString(v))
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;end.....&#34;</span>)
-</span></span></code></pre></div></details>
-<br/>
-<p>执行:</p>
-<details  open=""  class="code-detail">
-    <summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px;">
-        shell
-    </summary>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ lua astart.lua
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>start .....
-</span></span><span style="display:flex;"><span>&lt;2,2&gt;
-</span></span><span style="display:flex;"><span>&lt;3,2&gt;
-</span></span><span style="display:flex;"><span>&lt;4,3&gt;
-</span></span><span style="display:flex;"><span>&lt;4,4&gt;
-</span></span><span style="display:flex;"><span>&lt;4,5&gt;
-</span></span><span style="display:flex;"><span>&lt;5,6&gt;
-</span></span><span style="display:flex;"><span>&lt;5,7&gt;
-</span></span><span style="display:flex;"><span>&lt;6,8&gt;
-</span></span><span style="display:flex;"><span>&lt;6,9&gt;
-</span></span><span style="display:flex;"><span>&lt;6,10&gt;
-</span></span><span style="display:flex;"><span>&lt;7,11&gt;
-</span></span><span style="display:flex;"><span>end.....
-</span></span></code></pre></div></details>
-<br/>
-<p>参考连接:https://blog.csdn.net/u012234115/article/details/47152137</p>
-
-
-            <h4 align="center">--完--</h4>
-        </div>
-
-        
-
-<div class="post-archive">
-    <ul class="post-copyright">
-        <li><strong>原文作者：</strong>
-            
-                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
-            
-        </li>
-        <li style="word-break:break-all"><strong> 原文链接：</strong>
-            
-                <a href="https://blog.rakfree.tk/2021/12/astar/">https://blog.rakfree.tk/2021/12/astar/</a>
-            
-        </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
-        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
-    </ul>
-</div>
-<br/>
-
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/2021/12/music/">Blog | 音乐播放器</a></li>
-        
-        <li><a href="/2021/12/dark/">Blog | 网站暗模式</a></li>
-        
-        <li><a href="/2021/12/openresty-upload/">Openresty三 | 上传文件</a></li>
-        
-        <li><a href="/2021/11/webrtcdesk/">Webrtc二 | 共享桌面</a></li>
-        
-        <li><a href="/2021/11/webrtcpeerconnection/">Webrtc一 | peerconnection</a></li>
-        
-    </ul>
-</div>
-
-
-        <div class="post-meta meta-tags">
-            
-            没有标签
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-
-    
-
-    
-    <div id="cusdis_thread"
-      data-host="https://cusdis-vercel-five.vercel.app"
-      data-app-id="01429b04-b016-4c60-99b1-2e11e67ec4c1"
-      data-page-id="fe55037ca5552dba4f52c6c2a8e25082"
-      data-page-url="https://blog.rakfree.tk/2021/12/astar/"
-      data-page-title="A*算法 | Lua版本" ></div>
-    <script async defer src="https://cusdis-vercel-five.vercel.app/js/cusdis.es.js"></script>
-    
-</div>
-
-                    
-
-
-
-
-
-
-
-
-
-
-<footer id="footer">
-
-    <div>
-        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
-        </div>
-    </div>
-    <div>
-        
-        
-
-    
-    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
-
-
-
-
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/baidu/" title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a>
-    </li>
-    
-</ul>
-
-<h3 class="widget-title">随想</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-</ul>
-
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (11)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
-    
-    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
-    
-    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
-    
-    <a href="https://blog.rakfree.tk/tags/except/">except</a>
-    
-    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
-    
-    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
-    
-    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
-    
-    <a href="https://blog.rakfree.tk/tags/music/">music</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
-    
-    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
-    
-    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
-    
-    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
-    
-    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader/">shader</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
-    
-    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
-    
-    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
-    
-    <a href="https://blog.rakfree.tk/tags/year/">year</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
-    
-</div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-            </div>
-        </div>
-    </div>
-
-
-    
-
-</body>
-
-</html>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>A*算法 | Lua版本 | Zzz记忆</title><meta property="og:title" content="A*算法 | Lua版本 - Zzz记忆"><meta property="og:type" content="article"><meta name=color-scheme content="light dark"><meta property="article:published_time" content="2021-12-23T16:37:44+08:00"><meta property="article:modified_time" content="2022-06-21T11:17:04+08:00"><meta name=Keywords content="skynet开发,skynet源码解析,skynet框架分析,golang,C++,游戏服务器,lua开发 ,IM服务器"><meta name=description content="A*算法 | Lua版本"><meta name=author content="留白"><meta property="og:url" content="https://blog.rakfree.tk/2021/12/astar/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=/js/jquery.js></script>
+<link href=/js/jquery.fancybox.css rel=stylesheet><link rel=stylesheet type=text/css href=/css/bilibili.css><script id=LA_COLLECT src=/js/js-sdk-pro.min.js></script>
+<script>LA.init({id:"JXzIfjoKHVwu0mwG",ck:"JXzIfjoKHVwu0mwG"})</script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://blog.rakfree.tk>Zzz记忆</a><div id=quotes class=description></div></div><div><nav id=nav-menu class=clearfix><a class=current href=https://blog.rakfree.tk>首页</a>
+<a href=https://blog.rakfree.tk/thinking/ title=随想>随想</a>
+<a href=https://blog.rakfree.tk/archives/ title=归档>归档</a>
+<a href=https://blog.rakfree.tk/about/ title=关于>关于</a>
+<a href=https://blog.rakfree.tk/search/ title=搜索>搜索</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><style type=text/css>.post-toc{position:fixed;width:200px;margin-left:-210px;padding:5px 10px;font-family:Athelas,STHeiti,Microsoft Yahei,serif;font-size:12px;border:1px solid rgba(0,0,0,7%);border-radius:5px;background-color:rgba(255,255,255,.98);background-clip:padding-box;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,.125);box-shadow:1px 1px 2px rgba(0,0,0,.125);word-wrap:break-word;white-space:nowrap;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:999;cursor:pointer;max-height:70%;overflow-y:auto;overflow-x:hidden}.post-toc .post-toc-title{width:100%;margin:0 auto;font-size:20px;font-weight:400;text-transform:uppercase;text-align:center}.post-toc .post-toc-content{font-size:15px}.post-toc .post-toc-content>nav>ul{margin:10px 0}.post-toc .post-toc-content ul{padding-left:20px;list-style:square;margin:.5em;line-height:1.8em}.post-toc .post-toc-content ul ul{padding-left:15px;display:none}@media print,screen and (max-width:1057px){.post-toc{display:none}}</style><div class=post-toc style=position:absolute;top:188px;mix-blend-mode:difference><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#a算法思路>A*算法思路</a></li><li><a href=#lua代码>lua代码</a></li></ul></nav></div></div><script type=text/javascript>$(document).ready(function(){if(e=$(".post-toc"),e.length){t=$("#main").offset().left,t<220&&e.css({width:t-10,"margin-left":0-t});var e,t,n=e.offset().top-20,s={start:{position:"absolute",top:n},process:{position:"fixed",top:20}};$(window).scroll(function(){var t=$(window).scrollTop();t<n?e.css(s.start):e.css(s.process)})}})</script><article class=post><header><h1 class=post-title>A*算法 | Lua版本</h1></header><date class="post-meta meta-date">2021年12月23日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B>编程</a></span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91>编程.游戏开发</a></span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B.Lua>编程.Lua</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><h2 id=a算法思路>A*算法思路</h2><p><a data-fancybox=gallery href=https://img-blog.csdn.net/20150730163618465><img class=mx-auto alt src=https://img-blog.csdn.net/20150730163618465></a>
+寻路步骤</p><ol><li>从起点A开始, 把它作为待处理的方格存入一个"开启列表", 开启列表就是一个等待检查方格的列表.</li><li>寻找起点A周围可以到达的方格, 将它们放入"开启列表", 并设置它们的"父方格"为A.</li><li>从"开启列表"中删除起点 A, 并将起点 A 加入"关闭列表", &ldquo;关闭列表"中存放的都是不需要再次检查的方格</li><li>从 &ldquo;开启列表&rdquo; 中选择 F 值最低的方格 C (绿色起始方块 A 右边的方块), 把它从 &ldquo;开启列表&rdquo; 中删除, 并放到 &ldquo;关闭列表&rdquo; 中.</li><li>检查它所有相邻并且可以到达 (障碍物和 &ldquo;关闭列表&rdquo; 的方格都不考虑) 的方格. 如果这些方格还不在 &ldquo;开启列表&rdquo; 里的话, 将它们加入 &ldquo;开启列表&rdquo;, 计算这些方格的 G, H 和 F 值各是多少, 并设置它们的 &ldquo;父方格&rdquo; 为 C.</li><li>如果某个相邻方格 D 已经在 &ldquo;开启列表&rdquo; 里了, 检查如果用新的路径 (就是经过C 的路径) 到达它的话, G值是否会更低一些, 如果新的G值更低, 那就把它的 &ldquo;父方格&rdquo; 改为目前选中的方格 C, 然后重新计算它的 F 值和 G 值 (H 值不需要重新计算, 因为对于每个方块, H 值是不变的).
+如果新的 G 值比较高, 就说明经过 C 再到达 D 不是一个明智的选择, 因为它需要更远的路, 这时我们什么也不做.</li><li>当我们发现 &ldquo;开始列表&rdquo; 里出现了目标终点方块的时候, 说明路径已经被找到.</li></ol><p>对每个格子怎么走，往哪个方向走有一个很重要的函数-估价函数, 公式如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>f(n) = g(n) + h(n)
+</span></span></code></pre></div><ul><li>g(n) 是指从起始格子到格子n的实际代价。</li><li>h(n) 是指从格子n到终点的的估计代价。</li></ul><h2 id=lua代码>lua代码</h2><p>astart.lua代码如下</p><details class=code-detail><summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px">lua</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#75715e>#! /usr/local/bin/lua</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--参考： https://blog.csdn.net/u012234115/article/details/47152137</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> kCost1<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>; <span style=color:#75715e>--直移一格消耗</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> kCost2<span style=color:#f92672>=</span><span style=color:#ae81ff>14</span>; <span style=color:#75715e>--移一格消耗</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> openList <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> closeList <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--初始化地图，用二维矩阵代表地图，1表示障碍物，0表示可通</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> maze <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>1</span>},
+</span></span><span style=display:flex><span>    {<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>--  F=G+H</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--G 表示从起点 A 移动到网格上指定方格的移动耗费 (可沿斜方向移动).</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--H 表示从指定的方格移动到终点 B 的预计耗费 (H 有很多计算方法, 本文代码使用简单的欧几里得距离计算方法).</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>calcG</span>(startP, point)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> extraG <span style=color:#f92672>=</span> math.abs(point.x<span style=color:#f92672>-</span>startP.x)<span style=color:#f92672>+</span>math.abs(point.y<span style=color:#f92672>-</span>startP.y)<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>and</span> kCost1 <span style=color:#f92672>or</span> kCost2
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> parentG <span style=color:#f92672>=</span> (next(point.parent <span style=color:#f92672>or</span> {})) <span style=color:#f92672>and</span> point.parent.G <span style=color:#f92672>or</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> parentG <span style=color:#f92672>+</span> extraG
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>calcH</span>(point, endP)
+</span></span><span style=display:flex><span>    <span style=color:#75715e>--用简单的欧几里得距离计算H，这个H的计算是关键，还有很多算法</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> math.sqrt((endP.x<span style=color:#f92672>-</span>point.x)<span style=color:#f92672>^</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> (endP.y<span style=color:#f92672>-</span>point.y)<span style=color:#f92672>^</span><span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>calcF</span>(point)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> point.G <span style=color:#f92672>+</span> point.H
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getPointString</span>(point)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;&lt;&#34;</span><span style=color:#f92672>..</span>point.x<span style=color:#f92672>..</span> <span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>..</span>point.y<span style=color:#f92672>..</span><span style=color:#e6db74>&#34;&gt;&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isInList</span>(tbl, target)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> _,v <span style=color:#66d9ef>in</span> ipairs(tbl) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> target.x <span style=color:#f92672>==</span> v.x <span style=color:#f92672>and</span> target.y <span style=color:#f92672>==</span> v.y <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> v
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--判断某点是否可以用于下一步判断</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isCanreach</span>(point, target, ignore)
+</span></span><span style=display:flex><span>    <span style=color:#75715e>--如果目标点超出地图、与当前节点重合、是障碍物、或者在关闭列表中，返回false</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> target.x<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>or</span> target.x<span style=color:#f92672>&gt;#</span>maze
+</span></span><span style=display:flex><span>    <span style=color:#f92672>or</span> target.y<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>or</span> target.y<span style=color:#f92672>&gt;#</span>maze[<span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>or</span> maze[target.x][target.y]<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>or</span> (target.x<span style=color:#f92672>==</span>point.x <span style=color:#f92672>and</span> target.y<span style=color:#f92672>==</span>point.y) <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span> <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> isInList(closeList, target) <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>--print(&#34;target in closeList: &#34;.. getPointString(target))</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>--非斜角可以</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> math.abs(point.x<span style=color:#f92672>-</span>target.x) <span style=color:#f92672>+</span> math.abs(point.y<span style=color:#f92672>-</span>target.y) <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span> <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>--斜对角要判断是否绊住</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> maze[point.x][target.y] <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>and</span> maze[target.x][point.y] <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span> <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ignore
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>--获取节点周围的节点</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getSurroundP</span>(point, ignore)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> surroundP <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i<span style=color:#f92672>=</span>point.x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, point.x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span> <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> j<span style=color:#f92672>=</span>point.y<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, point.y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span> <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>local</span> tmp <span style=color:#f92672>=</span> {x<span style=color:#f92672>=</span>i,y<span style=color:#f92672>=</span>j, G<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, H<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, F<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>}
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> isCanreach(point, tmp, ignore)<span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                table.insert(surroundP, tmp)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>--print(&#34;not search: point:&#34; .. getPointString(point) .. &#34;; target: &#34;.. getPointString(tmp))</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> surroundP
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getLeastFPoint</span>()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> cur <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> curP <span style=color:#f92672>=</span> openList[<span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> curP <span style=color:#66d9ef>then</span> <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i, v <span style=color:#66d9ef>in</span> ipairs(openList) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> v.F <span style=color:#f92672>&lt;</span> curP.F <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>            curP <span style=color:#f92672>=</span> v
+</span></span><span style=display:flex><span>            cur <span style=color:#f92672>=</span> i
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> cur,curP
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>findPath</span>(startP, endP, ignore)
+</span></span><span style=display:flex><span>    table.insert(openList, startP) <span style=color:#75715e>--置入起点</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> next(openList) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>local</span> cur, curP <span style=color:#f92672>=</span> getLeastFPoint()<span style=color:#75715e>--找到最小的F</span>
+</span></span><span style=display:flex><span>        table.remove(openList, cur) <span style=color:#75715e>--从开启列表中删除</span>
+</span></span><span style=display:flex><span>        table.insert(closeList, curP) <span style=color:#75715e>--放到关闭列表</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>--1.找到当前周围八个格中可以通过的格子</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>local</span> surroundP <span style=color:#f92672>=</span> getSurroundP(curP, ignore)
+</span></span><span style=display:flex><span>        <span style=color:#75715e>--print(&#34;curP: &#34; .. getPointString(curP)..&#34; ####surroundP: &#34;..#surroundP)</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> _, target <span style=color:#66d9ef>in</span> ipairs(surroundP) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>--2,对某一个格子，如果它不在开启列表中，加入到开启列表，设置当前格为其父节点，计算F G H</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> isInList(openList, target) <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                target.parent <span style=color:#f92672>=</span> curP
+</span></span><span style=display:flex><span>                target.G <span style=color:#f92672>=</span> calcG(curP, target)
+</span></span><span style=display:flex><span>                target.H <span style=color:#f92672>=</span> calcH(target, endP)
+</span></span><span style=display:flex><span>                target.F <span style=color:#f92672>=</span> calcF(target)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                table.insert(openList, target)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>--3，对某一个格子，它在开启列表中，计算G值, 如果比原来的大, 就什么都不做, 否则设置它的父节点为当前点,并更新G和F</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>local</span> tempG <span style=color:#f92672>=</span> calcG(curP, target)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> tempG <span style=color:#f92672>&lt;</span> target.G <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                    target.parent <span style=color:#f92672>=</span>  curP
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                    target.G <span style=color:#f92672>=</span> tempG
+</span></span><span style=display:flex><span>                    target.F <span style=color:#f92672>=</span> calcF(target)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> i, v <span style=color:#66d9ef>in</span> ipairs(openList) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>--print(&#34;openList: &#34; .. getPointString(v))</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>local</span> resP <span style=color:#f92672>=</span> isInList(openList, endP)
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> resP <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> resP
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>GetPath</span>(startP, endP, ignore)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> result <span style=color:#f92672>=</span> findPath(startP, endP, ignore)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>local</span> path <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> result <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>        table.insert(path, <span style=color:#ae81ff>1</span>, result)
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> result.parent
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    openList <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>    closeList <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> path
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;start findPath.....&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> startP <span style=color:#f92672>=</span> {x<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, y<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>, G<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,H<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,F<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> endP <span style=color:#f92672>=</span> {x<span style=color:#f92672>=</span><span style=color:#ae81ff>7</span>, y<span style=color:#f92672>=</span><span style=color:#ae81ff>11</span>, G<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,H<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,F<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>local</span> path <span style=color:#f92672>=</span> GetPath(startP, endP, <span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> _, v <span style=color:#66d9ef>in</span> ipairs(path) <span style=color:#66d9ef>do</span>
+</span></span><span style=display:flex><span>    print(getPointString(v))
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;end.....&#34;</span>)
+</span></span></code></pre></div></details><br><p>执行:</p><details open class=code-detail><summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px">shell</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>$ lua astart.lua
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>start .....
+</span></span><span style=display:flex><span>&lt;2,2&gt;
+</span></span><span style=display:flex><span>&lt;3,2&gt;
+</span></span><span style=display:flex><span>&lt;4,3&gt;
+</span></span><span style=display:flex><span>&lt;4,4&gt;
+</span></span><span style=display:flex><span>&lt;4,5&gt;
+</span></span><span style=display:flex><span>&lt;5,6&gt;
+</span></span><span style=display:flex><span>&lt;5,7&gt;
+</span></span><span style=display:flex><span>&lt;6,8&gt;
+</span></span><span style=display:flex><span>&lt;6,9&gt;
+</span></span><span style=display:flex><span>&lt;6,10&gt;
+</span></span><span style=display:flex><span>&lt;7,11&gt;
+</span></span><span style=display:flex><span>end.....
+</span></span></code></pre></div></details><br><p>参考连接:https://blog.csdn.net/u012234115/article/details/47152137</p><h4 align=center>--完--</h4></div><div class=post-archive><ul class=post-copyright><li><strong>原文作者：</strong>
+<a rel=author href=https://blog.rakfree.tk>留白</a></li><li style=word-break:break-all><strong>原文链接：</strong>
+<a href=https://blog.rakfree.tk/2021/12/astar/>https://blog.rakfree.tk/2021/12/astar/</a></li><li style=word-break:break-all><strong>更新时间：</strong>2022-06-21 11:17:04</li><li><strong>本文声明：</strong>转载请标记原文作者及链接</li></ul></div><br><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/2021/12/music/>Blog | 音乐播放器</a></li><li><a href=/2021/12/dark/>Blog | 网站暗模式</a></li><li><a href=/2021/12/openresty-upload/>Openresty三 | 上传文件</a></li><li><a href=/2021/11/webrtcdesk/>Webrtc二 | 共享桌面</a></li><li><a href=/2021/11/webrtcpeerconnection/>Webrtc一 | peerconnection</a></li></ul></div><div class="post-meta meta-tags">没有标签</div></article><div id=cusdis_thread data-host=https://cusdis-vercel-five.vercel.app data-app-id=01429b04-b016-4c60-99b1-2e11e67ec4c1 data-page-id=fe55037ca5552dba4f52c6c2a8e25082 data-page-url=https://blog.rakfree.tk/2021/12/astar/ data-page-title="A*算法 | Lua版本"></div><script async defer src=https://cusdis-vercel-five.vercel.app/js/cusdis.es.js></script></div><footer id=footer><div>&copy; 2022 <a href=https://blog.rakfree.tk>Zzz记忆 By 留白</a></div><br><div><div class=github-badge><a href=https://gohugo.io/ target=_black rel=nofollow><span class=badge-subject>Powered by</span><span class="badge-value bg-blue">Hugo</span></a></div><div class=github-badge><a href=https://www.flysnow.org/ target=_black><span class=badge-subject>Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a></div><div class=github-badge><a href=https://github.com/flysnow-org/maupassant-hugo target=_black><span class=badge-subject>Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a></div></div><div><script id=LA-DATA-WIDGET crossorigin=anonymous src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script></div></footer><script type=text/javascript>window.MathJax={tex2jax:{inlineMath:[["$","$"]],processEscapes:!0}}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src=/js/jquery.fancybox.min.js></script>
+<a id=rocket href=#top></a>
+<script type=text/javascript src='/js/totop.js?v=0.0.0' async></script></div><div id=secondary><section class=widget><form id=search action=https://blog.rakfree.tk/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://blog.rakfree.tk>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/2022/05/baidu/ title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a></li><li><a href=https://blog.rakfree.tk/2022/05/refraction/ title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderalpha/ title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderlighting/ title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderbase/ title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a></li></ul><h3 class=widget-title>随想</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/thinking/2022/03/shuowang/ title="无聊 & 痛苦">无聊 & 痛苦</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/think01/ title=爬楼有感>爬楼有感</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/weekly01/ title=老纪>老纪</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/summarize/ title=2021焦虑总结>2021焦虑总结</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/01/jx/ title=转载｜江雪：长安十日>转载｜江雪：长安十日</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/categories/>分类</a></h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/categories/IT/>IT (11)</a></li><li><a href=https://blog.rakfree.tk/categories/IT.Linux/>IT.Linux (10)</a></li><li><a href=https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/>博客记事 (7)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/>科普 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/>编程 (96)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/>编程.C (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/>编程.Golang (22)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/>编程.Lua (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/>编程.P2P (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/>编程.Unity3D (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/>编程.UnityShader (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/>编程.图形学入门 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/>编程.汇编 (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/>编程.游戏开发 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/>编程.网络编程 (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/>编程.音视频 (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/>自动部署 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/>转载 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/>随笔 (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/>随笔.摘抄 (2)</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/tags/>标签</a></h3><div class=tagcloud><a href=https://blog.rakfree.tk/tags/URP/>URP</a>
+<a href=https://blog.rakfree.tk/tags/cpu/>cpu</a>
+<a href=https://blog.rakfree.tk/tags/docker/>docker</a>
+<a href=https://blog.rakfree.tk/tags/except/>except</a>
+<a href=https://blog.rakfree.tk/tags/ffmpeg/>ffmpeg</a>
+<a href=https://blog.rakfree.tk/tags/gcc/>gcc</a>
+<a href=https://blog.rakfree.tk/tags/glibc/>glibc</a>
+<a href=https://blog.rakfree.tk/tags/hugo/>hugo</a>
+<a href=https://blog.rakfree.tk/tags/k8s/>k8s</a>
+<a href=https://blog.rakfree.tk/tags/music/>music</a>
+<a href=https://blog.rakfree.tk/tags/nginx/>nginx</a>
+<a href=https://blog.rakfree.tk/tags/nsf/>nsf</a>
+<a href=https://blog.rakfree.tk/tags/p2p/>p2p</a>
+<a href=https://blog.rakfree.tk/tags/randomquotes/>randomquotes</a>
+<a href=https://blog.rakfree.tk/tags/redis/>redis</a>
+<a href=https://blog.rakfree.tk/tags/rsync/>rsync</a>
+<a href=https://blog.rakfree.tk/tags/screen/>screen</a>
+<a href=https://blog.rakfree.tk/tags/shader/>shader</a>
+<a href=https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>shader学习笔记</a>
+<a href=https://blog.rakfree.tk/tags/shortcodes/>shortcodes</a>
+<a href=https://blog.rakfree.tk/tags/skynet/>skynet</a>
+<a href=https://blog.rakfree.tk/tags/vim/>vim</a>
+<a href=https://blog.rakfree.tk/tags/weekly/>weekly</a>
+<a href=https://blog.rakfree.tk/tags/year/>year</a>
+<a href=https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/>定时器</a>
+<a href=https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/>抽卡</a>
+<a href=https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/>读书笔记</a>
+<a href=https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/>长安十日</a></div></section><section class=widget><h3 class=widget-title>友情链接</h3><ul class=widget-list><li><a target=_blank href=https://github.com/zfunnily title=留白的github>留白github</a></li></ul></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/index.xml>文章 RSS</a></li></ul></section></div></div></div></div></body></html>

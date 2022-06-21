@@ -1,342 +1,84 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-
-    <title>Lastbattle | 游戏场景服务器SS解析 | Zzz记忆</title>
-    <meta property="og:title" content="Lastbattle | 游戏场景服务器SS解析 - Zzz记忆">
-    <meta property="og:type" content="article">
-    <meta name="color-scheme" content="light dark">
-        
-    <meta property="article:published_time" content='2021-01-02T23:19:58&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
-        
-    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="Lastbattle | 游戏场景服务器SS解析">
-        
-    <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/01/lastbattle/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
-
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-
-    
-    
-    
-        <link href="/js/jquery.fancybox.css" rel="stylesheet">
-    
-    
-    
-    
-        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
-    
-
-
-    
-    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
-    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    
-</head>
-
-
-<body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://blog.rakfree.tk">
-                        Zzz记忆
-                    </a>
-                
-
-                <div id="quotes" class="description"></div>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://blog.rakfree.tk">首页</a>
-                    
-                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
-                    
-                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
-                    
-                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
-
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
-    <style type="text/css">
-    .post-toc {
-        position: fixed;
-        width: 200px;
-        margin-left: -210px;
-        padding: 5px 10px;
-        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
-        font-size: 12px;
-        border: 1px solid rgba(0, 0, 0, .07);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.98);
-        background-clip: padding-box;
-        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        word-wrap: break-word;
-        white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 999;
-        cursor: pointer;
-        max-height: 70%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .post-toc .post-toc-title {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .post-toc .post-toc-content {
-        font-size: 15px;
-    }
-
-    .post-toc .post-toc-content>nav>ul {
-        margin: 10px 0;
-    }
-
-    .post-toc .post-toc-content ul {
-        padding-left: 20px;
-        list-style: square;
-        margin: 0.5em;
-        line-height: 1.8em;
-    }
-
-    .post-toc .post-toc-content ul ul {
-        padding-left: 15px;
-        display: none;
-    }
-
-    @media print,
-    screen and (max-width:1057px) {
-        .post-toc {
-            display: none;
-        }
-    }
-</style>
-
-<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#游戏场景服务器概况">游戏场景服务器概况</a></li>
-    <li><a href="#创建战场">创建战场</a></li>
-    <li><a href="#英雄移动">英雄移动</a></li>
-    <li><a href="#英雄技能">英雄技能</a></li>
-    <li><a href="#装备买卖">装备买卖</a>
-      <ul>
-        <li><a href="#商品配置">商品配置</a></li>
-      </ul>
-    </li>
-    <li><a href="#整个服务器的心跳">整个服务器的心跳</a></li>
-  </ul>
-</nav>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var postToc = $(".post-toc");
-        if (postToc.length) {
-            var leftPos = $("#main").offset().left;
-            if(leftPos<220){
-                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
-            }
-
-            var t = postToc.offset().top - 20,
-                a = {
-                    start: {
-                        position: "absolute",
-                        top: t
-                    },
-                    process: {
-                        position: "fixed",
-                        top: 20
-                    },
-                };
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                e < t ? postToc.css(a.start) : postToc.css(a.process)
-            })
-        }
-    })
-</script>
-    <article class="post">
-        <header>
-            <h1 class="post-title">Lastbattle | 游戏场景服务器SS解析</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月2日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91'>编程.游戏开发</a></span>
-            
-        </div>
-        
-        
-        
-        <div class="post-content">
-            <h2 id="游戏场景服务器概况">游戏场景服务器概况</h2>
-<p>
-        <a data-fancybox="gallery" href="https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png">
-            <img class="mx-auto" alt="5658cf3a9b5eba8535a6e556dbe7da34.png" src="https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png" />
-        </a>
-    </p>
-<blockquote>
-<p>指令对应的处理handle的文件：SSBattleMgr.cpp</p>
-</blockquote>
-<h2 id="创建战场">创建战场</h2>
-<ul>
-<li>指令： eMsgToSSFromCS_CreateBattle</li>
-<li>GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数<code>INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)</code>中创建站场成功后，加入到战场管理器中:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
-</span></span></code></pre></div><p>发送创建结果给CS服务器</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
-</span></span></code></pre></div><p>发送可以进入战场的消息给客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
-</span></span></code></pre></div><h2 id="英雄移动">英雄移动</h2>
-<ul>
-<li>指令：eMsgToGSToSSFromGC_AskMoveDir，eMsgToGSToSSFromGC_AskStopMove</li>
-<li>GSToSS： 客户端发往SS,fromGC
-收到客户端发来的移动信息， <code>GCToSS::MoveDir</code>, 转化为服务器能识别的参数 <code>CVector3D</code>, 开始计算客户端移动的位置</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
-</span></span><span style="display:flex;"><span>m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
-</span></span></code></pre></div><p>开始按照方向移动：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
-</span></span><span style="display:flex;"><span>{&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>        //计算下一个100毫秒后的位置
-</span></span><span style="display:flex;"><span>		pMObject-&gt;CalculateStepMoveTarget(now + 100);
-</span></span><span style="display:flex;"><span>                //检查是否会直接撞墙
-</span></span><span style="display:flex;"><span>		if(FALSE == TestNextStepMove(pMObject)){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>			if(FALSE == TryTurnDir(pMObject)){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>				pMObject-&gt;Stop(now,FALSE);
-</span></span><span style="display:flex;"><span>				return FALSE;
-</span></span><span style="display:flex;"><span>			}
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
-</span></span></code></pre></div><p>同步移动状态到客户端</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pcCurBattle-&gt;SyncState(this);
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
-</span></span><span style="display:flex;"><span>void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
-</span></span></code></pre></div><h2 id="英雄技能">英雄技能</h2>
-<ul>
-<li>指令：eMsgToGSToSSFromGC_AskBuyGoods- GSToSS：客户端发往SS,fromGC
-SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGoods</code>， 转化数据为<code>GCToSS::UseSkill</code>格式 :</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
-</span></span><span style="display:flex;"><span>INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
-</span></span></code></pre></div><p>请求释放技能：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
-</span></span><span style="display:flex;"><span>//检查是否是不能操作状态
-</span></span><span style="display:flex;"><span>//检查是否被沉默了
-</span></span><span style="display:flex;"><span>//检查是否在吸附中，如果是，不能使用技能
-</span></span><span style="display:flex;"><span>//获取并检查技能是否存在
-</span></span><span style="display:flex;"><span>//检查技能是否符合可用条件
-</span></span><span style="display:flex;"><span>//检查是否是正在运行的技能
-</span></span></code></pre></div><p>开始使用技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pSkill-&gt;Start();
-</span></span><span style="display:flex;"><span>```cpp
-</span></span><span style="display:flex;"><span>准备技能的配置
-</span></span><span style="display:flex;"><span>```cpp
-</span></span><span style="display:flex;"><span>void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>从配置中添加技能</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
-</span></span><span style="display:flex;"><span>	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>AddEffect(pEffect); 
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>添加效果到管理器中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>        //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
-</span></span><span style="display:flex;"><span>		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>			//if (FALSE == pEffect-&gt;m_pCfg-&gt;bIsCanMove){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>				pEffect-&gt;AddSelfToUsingList();
-</span></span><span style="display:flex;"><span>			//}
-</span></span><span style="display:flex;"><span>			m_UpdateEffectMap[pEffect-&gt;m_un32UniqueID] = pEffect;
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>		//如果效果启动失败，检查其是否会开始计算技能CD，然后结束技能。
-</span></span><span style="display:flex;"><span>		else{&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>			pEffect-&gt;CheckCooldown();
-</span></span><span style="display:flex;"><span>			pEffect-&gt;End();
-</span></span><span style="display:flex;"><span>			DestroyAFreeSkillEffect(pEffect);
-</span></span><span style="display:flex;"><span>			return eEC_AddEffectFailed;
-</span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>//正在运行的效果列表
-</span></span><span style="display:flex;"><span>m_UpdateEffectMap
-</span></span></code></pre></div><p>对应的技能在如下图所示的文件中<br> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p>
-<ul>
-<li>SSSkillEffect_Buf.cpp： 附加的buff技能</li>
-<li>SSSkillEffect_Fly.cpp: 飞行技能</li>
-<li>…</li>
-</ul>
-<h2 id="装备买卖">装备买卖</h2>
-<ul>
-<li>买装备指令：eMsgToGSToSSFromGC_AskBuyGoods</li>
-<li>卖商品指令：eMsgToGSToSSFromGC_AskSellGoods</li>
-<li>释放装备技能：eMsgToGSToSSFromGC_AskUseGoods</li>
-<li>GSToSS： 客户端发往SS,fromGC</li>
-</ul>
-<h3 id="商品配置">商品配置</h3>
-<p>目录:</p>
-<ul>
-<li>商品组合：CSBattleMgr/CombineCfg.xml</li>
-<li>商品描述：CSBattleMgr/ItemCfg.xml</li>
-</ul>
-<p>商品配置描述：
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Lastbattle | 游戏场景服务器SS解析 | Zzz记忆</title><meta property="og:title" content="Lastbattle | 游戏场景服务器SS解析 - Zzz记忆"><meta property="og:type" content="article"><meta name=color-scheme content="light dark"><meta property="article:published_time" content="2021-01-02T23:19:58+08:00"><meta property="article:modified_time" content="2022-06-21T11:17:04+08:00"><meta name=Keywords content="skynet开发,skynet源码解析,skynet框架分析,golang,C++,游戏服务器,lua开发 ,IM服务器"><meta name=description content="Lastbattle | 游戏场景服务器SS解析"><meta name=author content="留白"><meta property="og:url" content="https://blog.rakfree.tk/2021/01/lastbattle/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=/js/jquery.js></script>
+<link href=/js/jquery.fancybox.css rel=stylesheet><link rel=stylesheet type=text/css href=/css/bilibili.css><script id=LA_COLLECT src=/js/js-sdk-pro.min.js></script>
+<script>LA.init({id:"JXzIfjoKHVwu0mwG",ck:"JXzIfjoKHVwu0mwG"})</script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://blog.rakfree.tk>Zzz记忆</a><div id=quotes class=description></div></div><div><nav id=nav-menu class=clearfix><a class=current href=https://blog.rakfree.tk>首页</a>
+<a href=https://blog.rakfree.tk/thinking/ title=随想>随想</a>
+<a href=https://blog.rakfree.tk/archives/ title=归档>归档</a>
+<a href=https://blog.rakfree.tk/about/ title=关于>关于</a>
+<a href=https://blog.rakfree.tk/search/ title=搜索>搜索</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><style type=text/css>.post-toc{position:fixed;width:200px;margin-left:-210px;padding:5px 10px;font-family:Athelas,STHeiti,Microsoft Yahei,serif;font-size:12px;border:1px solid rgba(0,0,0,7%);border-radius:5px;background-color:rgba(255,255,255,.98);background-clip:padding-box;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,.125);box-shadow:1px 1px 2px rgba(0,0,0,.125);word-wrap:break-word;white-space:nowrap;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:999;cursor:pointer;max-height:70%;overflow-y:auto;overflow-x:hidden}.post-toc .post-toc-title{width:100%;margin:0 auto;font-size:20px;font-weight:400;text-transform:uppercase;text-align:center}.post-toc .post-toc-content{font-size:15px}.post-toc .post-toc-content>nav>ul{margin:10px 0}.post-toc .post-toc-content ul{padding-left:20px;list-style:square;margin:.5em;line-height:1.8em}.post-toc .post-toc-content ul ul{padding-left:15px;display:none}@media print,screen and (max-width:1057px){.post-toc{display:none}}</style><div class=post-toc style=position:absolute;top:188px;mix-blend-mode:difference><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#游戏场景服务器概况>游戏场景服务器概况</a></li><li><a href=#创建战场>创建战场</a></li><li><a href=#英雄移动>英雄移动</a></li><li><a href=#英雄技能>英雄技能</a></li><li><a href=#装备买卖>装备买卖</a><ul><li><a href=#商品配置>商品配置</a></li></ul></li><li><a href=#整个服务器的心跳>整个服务器的心跳</a></li></ul></nav></div></div><script type=text/javascript>$(document).ready(function(){if(e=$(".post-toc"),e.length){t=$("#main").offset().left,t<220&&e.css({width:t-10,"margin-left":0-t});var e,t,n=e.offset().top-20,s={start:{position:"absolute",top:n},process:{position:"fixed",top:20}};$(window).scroll(function(){var t=$(window).scrollTop();t<n?e.css(s.start):e.css(s.process)})}})</script><article class=post><header><h1 class=post-title>Lastbattle | 游戏场景服务器SS解析</h1></header><date class="post-meta meta-date">2021年1月2日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B>编程</a></span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91>编程.游戏开发</a></span></div><div class=post-content><h2 id=游戏场景服务器概况>游戏场景服务器概况</h2><p><a data-fancybox=gallery href=https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png><img class=mx-auto alt=5658cf3a9b5eba8535a6e556dbe7da34.png src=https://img-blog.csdnimg.cn/img_convert/5658cf3a9b5eba8535a6e556dbe7da34.png></a></p><blockquote><p>指令对应的处理handle的文件：SSBattleMgr.cpp</p></blockquote><h2 id=创建战场>创建战场</h2><ul><li>指令： eMsgToSSFromCS_CreateBattle</li><li>GC服务器发往SS fromCS 收到中心服务器CS创建站场的指令，在函数<code>INT32 CSSBattleMgr::OnMsgFromCS_CreateBattle(const char* pData, int n32DataLength)</code>中创建站场成功后，加入到战场管理器中:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>m_cAllBattleMap[pBattle-&gt;GetBattleID()] = pBattle;
+</span></span></code></pre></div><p>发送创建结果给CS服务器</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>CSSWorkThreadMgr::GetInstance().PostMsgToCS(sMsg, sMsg.mgsid());
+</span></span></code></pre></div><p>发送可以进入战场的消息给客户端</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU((*iter)-&gt;GetUserNetInfo(), sMsgBattle, sMsgBattle.msgid());
+</span></span></code></pre></div><h2 id=英雄移动>英雄移动</h2><ul><li>指令：eMsgToGSToSSFromGC_AskMoveDir，eMsgToGSToSSFromGC_AskStopMove</li><li>GSToSS： 客户端发往SS,fromGC
+收到客户端发来的移动信息， <code>GCToSS::MoveDir</code>, 转化为服务器能识别的参数 <code>CVector3D</code>, 开始计算客户端移动的位置</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>CVector3D pcDir(pMoveDir-&gt;dir().x(), 0, pMoveDir-&gt;dir().z());
+</span></span><span style=display:flex><span>m_pMsgBattle-&gt;AskMoveDir(m_pMsgUser, pcDir);
+</span></span></code></pre></div><p>开始按照方向移动：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>bool CSSMoveMgr::AskStartMoveDir(ISSMoveObject* pMObject, ColVector dir) 
+</span></span><span style=display:flex><span>{&lt;!-- --&gt;
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>        //计算下一个100毫秒后的位置
+</span></span><span style=display:flex><span>		pMObject-&gt;CalculateStepMoveTarget(now + 100);
+</span></span><span style=display:flex><span>                //检查是否会直接撞墙
+</span></span><span style=display:flex><span>		if(FALSE == TestNextStepMove(pMObject)){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>			if(FALSE == TryTurnDir(pMObject)){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>				pMObject-&gt;Stop(now,FALSE);
+</span></span><span style=display:flex><span>				return FALSE;
+</span></span><span style=display:flex><span>			}
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>		pMObject-&gt;OnStartMove(pMObject-&gt;GetDir());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>INT32 CSSGameUnit::BeginAction_Move(const CVector3D &amp;crsDir, bool bIfNotifyGC){&lt;!-- --&gt;}
+</span></span></code></pre></div><p>同步移动状态到客户端</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>pcCurBattle-&gt;SyncState(this);
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>SendMsgToAllWatcher(*sMsg, msgid, pcGO); 
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>CSSWorkThreadMgr::GetInstance().PostMsgToGCLIULU(watcherArray[i]-&gt;GetUserNetInfo(), sMsg, n32MsgID);
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>INT32	CSSBattle::SyncState(CSSGameUnit *pcGO, bool spot){&lt;!-- --&gt;}
+</span></span><span style=display:flex><span>void CSSBattle::SendMsgToAllWatcher(google::protobuf::Message&amp; sMsg, int n32MsgID, CSSGameUnit* pGU){&lt;!-- --&gt;}
+</span></span></code></pre></div><h2 id=英雄技能>英雄技能</h2><ul><li>指令：eMsgToGSToSSFromGC_AskBuyGoods- GSToSS：客户端发往SS,fromGC
+SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGoods</code>， 转化数据为<code>GCToSS::UseSkill</code>格式 :</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>boost::shared_ptr&lt;GCToSS::UseSkill&gt; pUseSkill = ParseProtoMsgWithNewMemory&lt;GCToSS::UseSkill&gt;(pData, n32DataLength);
+</span></span><span style=display:flex><span>INT32 nret = m_pMsgBattle-&gt;AskUseSkill(m_pMsgUser, pUseSkill-&gt;skillid());
+</span></span></code></pre></div><p>请求释放技能：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>INT32 CSSAI_Hero::AskUseSkill(UINT32 un32SkillID) {&lt;!-- --&gt;}
+</span></span><span style=display:flex><span>//检查是否是不能操作状态
+</span></span><span style=display:flex><span>//检查是否被沉默了
+</span></span><span style=display:flex><span>//检查是否在吸附中，如果是，不能使用技能
+</span></span><span style=display:flex><span>//获取并检查技能是否存在
+</span></span><span style=display:flex><span>//检查技能是否符合可用条件
+</span></span><span style=display:flex><span>//检查是否是正在运行的技能
+</span></span></code></pre></div><p>开始使用技能</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>pSkill-&gt;Start();
+</span></span><span style=display:flex><span>```cpp
+</span></span><span style=display:flex><span>准备技能的配置
+</span></span><span style=display:flex><span>```cpp
+</span></span><span style=display:flex><span>void CSSSkill::MakeSkillEffect(TIME_MILSEC	tUTCMilsec){
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>	pcCurBattle-&gt;GetEffectMgr()-&gt;AddEffectsFromCfg((SSNextSkillEffectCfg*)cpsCfg-&gt;asSkillModelList, pcMasterGU.get(), pcTarGU.get(), cPos, pcMasterGU-&gt;GetCurDir(), this, tUTCMilsec);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>从配置中添加技能</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>INT32 CSSEffectMgr::AddEffectsFromCfg(SSNextSkillEffectCfg* pEffectCfg, CSSGameUnit* pMaster, CSSGameUnit* pTarget, CVector3D cPos, CVector3D cDir
+</span></span><span style=display:flex><span>	,  CSSSkill* pSkill, TIME_MILSEC beginTime, CSSGameUnit* pStartSkillGU){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>AddEffect(pEffect); 
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>添加效果到管理器中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>INT32 CSSEffectMgr::AddEffect(CSSSkillEffect* pEffect) {&lt;!-- --&gt;
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>        //尝试使用效果的启动方法。如果启动成功，将其加入正在运行的技能列表中
+</span></span><span style=display:flex><span>		if(eNormal == pEffect-&gt;Begin()){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>			//if (FALSE == pEffect-&gt;m_pCfg-&gt;bIsCanMove){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>				pEffect-&gt;AddSelfToUsingList();
+</span></span><span style=display:flex><span>			//}
+</span></span><span style=display:flex><span>			m_UpdateEffectMap[pEffect-&gt;m_un32UniqueID] = pEffect;
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>		//如果效果启动失败，检查其是否会开始计算技能CD，然后结束技能。
+</span></span><span style=display:flex><span>		else{&lt;!-- --&gt;
+</span></span><span style=display:flex><span>			pEffect-&gt;CheckCooldown();
+</span></span><span style=display:flex><span>			pEffect-&gt;End();
+</span></span><span style=display:flex><span>			DestroyAFreeSkillEffect(pEffect);
+</span></span><span style=display:flex><span>			return eEC_AddEffectFailed;
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>//正在运行的效果列表
+</span></span><span style=display:flex><span>m_UpdateEffectMap
+</span></span></code></pre></div><p>对应的技能在如下图所示的文件中<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-uoAAHV02-1609600677855)(https://s3.ax1x.com/2021/01/02/spS5KH.png)]</p><ul><li>SSSkillEffect_Buf.cpp： 附加的buff技能</li><li>SSSkillEffect_Fly.cpp: 飞行技能</li><li>…</li></ul><h2 id=装备买卖>装备买卖</h2><ul><li>买装备指令：eMsgToGSToSSFromGC_AskBuyGoods</li><li>卖商品指令：eMsgToGSToSSFromGC_AskSellGoods</li><li>释放装备技能：eMsgToGSToSSFromGC_AskUseGoods</li><li>GSToSS： 客户端发往SS,fromGC</li></ul><h3 id=商品配置>商品配置</h3><p>目录:</p><ul><li>商品组合：CSBattleMgr/CombineCfg.xml</li><li>商品描述：CSBattleMgr/ItemCfg.xml</li></ul><p>商品配置描述：
 |attributeKeyList / attributeValList|描述
 |&mdash;&mdash;
 |5 / 10|+10 物理攻击
@@ -347,396 +89,77 @@ SS服务器接收到请求释放技能的指令<code>eMsgToGSToSSFromGC_AskBuyGo
 |10 / 200|+200生命值
 |11 / 200|+200生命值
 |12 / 150|+150魔法值
-|13 / 2000|+2点/秒生命回复</p>
-<ul>
-<li><code>attributeKeyLi</code>: 占位</li>
-<li><code>attributeValList</code>： 值</li>
-<li><code>n32CPCost</code>： 金币</li>
-</ul>
-<p>举例</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>	&lt;info un32GoodsID=&#34;30038&#34;&gt;
-</span></span><span style="display:flex;"><span>		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
-</span></span><span style="display:flex;"><span>		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
-</span></span><span style="display:flex;"><span>		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
-</span></span><span style="display:flex;"><span>		&lt;attributeKeyList&gt;6&lt;/attributeKeyList&gt;
-</span></span><span style="display:flex;"><span>		&lt;attributeValList&gt;65&lt;/attributeValList&gt;
-</span></span><span style="display:flex;"><span>		&lt;attributePerList&gt;0&lt;/attributePerList&gt;
-</span></span><span style="display:flex;"><span>		&lt;un8UseTimes&gt;0&lt;/un8UseTimes&gt;
-</span></span><span style="display:flex;"><span>		&lt;bDestroyAfterUsed&gt;0&lt;/bDestroyAfterUsed&gt;
-</span></span><span style="display:flex;"><span>		&lt;un32SkillID&gt;0&lt;/un32SkillID&gt;
-</span></span><span style="display:flex;"><span>		&lt;un32PassSkillID&gt;0&lt;/un32PassSkillID&gt;
-</span></span><span style="display:flex;"><span>		&lt;bIsCanDeathToBuy&gt;1&lt;/bIsCanDeathToBuy&gt;
-</span></span><span style="display:flex;"><span>		&lt;bUsedAfterBuyed&gt;0&lt;/bUsedAfterBuyed&gt;
-</span></span><span style="display:flex;"><span>		&lt;sIcon&gt;Dicon038&lt;/sIcon&gt;
-</span></span><span style="display:flex;"><span>		&lt;un32CdTime&gt;0&lt;/un32CdTime&gt;
-</span></span><span style="display:flex;"><span>		&lt;bUniqueID&gt;0&lt;/bUniqueID&gt;
-</span></span><span style="display:flex;"><span>		&lt;un8OverlapTimes&gt;1&lt;/un8OverlapTimes&gt;
-</span></span><span style="display:flex;"><span>		&lt;un8CPCostType&gt;1&lt;/un8CPCostType&gt;
-</span></span><span style="display:flex;"><span>		&lt;n32CPCost&gt;800&lt;/n32CPCost&gt;
-</span></span><span style="display:flex;"><span>		&lt;n32CombineCPCost&gt;200&lt;/n32CombineCPCost&gt;
-</span></span><span style="display:flex;"><span>		&lt;un8FunctionType&gt;0&lt;/un8FunctionType&gt;
-</span></span><span style="display:flex;"><span>		&lt;un32UniqueTypeID&gt;0&lt;/un32UniqueTypeID&gt;
-</span></span><span style="display:flex;"><span>		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
-</span></span><span style="display:flex;"><span>		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
-</span></span><span style="display:flex;"><span>	&lt;/info&gt;
-</span></span></code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p>
-<h2 id="整个服务器的心跳">整个服务器的心跳</h2>
-<p>心跳的作用：</p>
-<ul>
-<li>检查掉线时间。如果玩家掉线超过30秒，则将其AI替换为机器人AI</li>
-<li>技能心跳- 移动心跳- NPC和hero的心跳</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>    //移动心跳
-</span></span><span style="display:flex;"><span>    m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-</span></span><span style="display:flex;"><span>    for (GameObjectMap::iterator iterObj = m_cGameObjectMap.begin(); iterObj != m_cGameObjectMap.end(); ++iterObj){&lt;!-- --&gt;
-</span></span><span style="display:flex;"><span>            //NPC和hero的心跳
-</span></span><span style="display:flex;"><span>    		iterObj-&gt;second-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>    //技能心跳
-</span></span><span style="display:flex;"><span>    m_pEffectMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-</span></span><span style="display:flex;"><span>    m_pPassiveSkillMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-</span></span><span style="display:flex;"><span>    m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
-
-            <h4 align="center">--完--</h4>
-        </div>
-
-        
-
-<div class="post-archive">
-    <ul class="post-copyright">
-        <li><strong>原文作者：</strong>
-            
-                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
-            
-        </li>
-        <li style="word-break:break-all"><strong> 原文链接：</strong>
-            
-                <a href="https://blog.rakfree.tk/2021/01/lastbattle/">https://blog.rakfree.tk/2021/01/lastbattle/</a>
-            
-        </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
-        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
-    </ul>
-</div>
-<br/>
-
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/2020/12/ccnet/">CCnet | 单线程reactor演变为多线程</a></li>
-        
-        <li><a href="/2020/12/syncmutex/">Golang | sync.Mutex详解</a></li>
-        
-        <li><a href="/2020/12/iomodels/">五种网络IO模型总结</a></li>
-        
-        <li><a href="/2020/12/ccnetone/">CCnet | 一个reactor单线程网络库</a></li>
-        
-        <li><a href="/2020/12/reserve/">C&#43;&#43; | vector中的resize()函数 VS reserve()函数</a></li>
-        
-    </ul>
-</div>
-
-
-        <div class="post-meta meta-tags">
-            
-            没有标签
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-
-    
-
-    
-    <div id="cusdis_thread"
-      data-host="https://cusdis-vercel-five.vercel.app"
-      data-app-id="01429b04-b016-4c60-99b1-2e11e67ec4c1"
-      data-page-id="ac4f504d82c65652ffb09e13eccb6a6d"
-      data-page-url="https://blog.rakfree.tk/2021/01/lastbattle/"
-      data-page-title="Lastbattle | 游戏场景服务器SS解析" ></div>
-    <script async defer src="https://cusdis-vercel-five.vercel.app/js/cusdis.es.js"></script>
-    
-</div>
-
-                    
-
-
-
-
-
-
-
-
-
-
-<footer id="footer">
-
-    <div>
-        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
-        </div>
-    </div>
-    <div>
-        
-        
-
-    
-    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
-
-
-
-
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/baidu/" title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a>
-    </li>
-    
-</ul>
-
-<h3 class="widget-title">随想</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-</ul>
-
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (11)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
-    
-    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
-    
-    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
-    
-    <a href="https://blog.rakfree.tk/tags/except/">except</a>
-    
-    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
-    
-    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
-    
-    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
-    
-    <a href="https://blog.rakfree.tk/tags/music/">music</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
-    
-    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
-    
-    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
-    
-    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
-    
-    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader/">shader</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
-    
-    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
-    
-    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
-    
-    <a href="https://blog.rakfree.tk/tags/year/">year</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
-    
-</div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-            </div>
-        </div>
-    </div>
-
-
-    
-
-</body>
-
-</html>
+|13 / 2000|+2点/秒生命回复</p><ul><li><code>attributeKeyLi</code>: 占位</li><li><code>attributeValList</code>： 值</li><li><code>n32CPCost</code>： 金币</li></ul><p>举例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>	&lt;info un32GoodsID=&#34;30038&#34;&gt;
+</span></span><span style=display:flex><span>		&lt;sNameID&gt;spe_item_HP&lt;/sNameID&gt;
+</span></span><span style=display:flex><span>		&lt;sNameCh&gt;神果&lt;/sNameCh&gt;
+</span></span><span style=display:flex><span>		&lt;un8TypeID&gt;3&lt;/un8TypeID&gt;
+</span></span><span style=display:flex><span>		&lt;attributeKeyList&gt;6&lt;/attributeKeyList&gt;
+</span></span><span style=display:flex><span>		&lt;attributeValList&gt;65&lt;/attributeValList&gt;
+</span></span><span style=display:flex><span>		&lt;attributePerList&gt;0&lt;/attributePerList&gt;
+</span></span><span style=display:flex><span>		&lt;un8UseTimes&gt;0&lt;/un8UseTimes&gt;
+</span></span><span style=display:flex><span>		&lt;bDestroyAfterUsed&gt;0&lt;/bDestroyAfterUsed&gt;
+</span></span><span style=display:flex><span>		&lt;un32SkillID&gt;0&lt;/un32SkillID&gt;
+</span></span><span style=display:flex><span>		&lt;un32PassSkillID&gt;0&lt;/un32PassSkillID&gt;
+</span></span><span style=display:flex><span>		&lt;bIsCanDeathToBuy&gt;1&lt;/bIsCanDeathToBuy&gt;
+</span></span><span style=display:flex><span>		&lt;bUsedAfterBuyed&gt;0&lt;/bUsedAfterBuyed&gt;
+</span></span><span style=display:flex><span>		&lt;sIcon&gt;Dicon038&lt;/sIcon&gt;
+</span></span><span style=display:flex><span>		&lt;un32CdTime&gt;0&lt;/un32CdTime&gt;
+</span></span><span style=display:flex><span>		&lt;bUniqueID&gt;0&lt;/bUniqueID&gt;
+</span></span><span style=display:flex><span>		&lt;un8OverlapTimes&gt;1&lt;/un8OverlapTimes&gt;
+</span></span><span style=display:flex><span>		&lt;un8CPCostType&gt;1&lt;/un8CPCostType&gt;
+</span></span><span style=display:flex><span>		&lt;n32CPCost&gt;800&lt;/n32CPCost&gt;
+</span></span><span style=display:flex><span>		&lt;n32CombineCPCost&gt;200&lt;/n32CombineCPCost&gt;
+</span></span><span style=display:flex><span>		&lt;un8FunctionType&gt;0&lt;/un8FunctionType&gt;
+</span></span><span style=display:flex><span>		&lt;un32UniqueTypeID&gt;0&lt;/un32UniqueTypeID&gt;
+</span></span><span style=display:flex><span>		&lt;sDescribe&gt;+65点魔法攻击&lt;/sDescribe&gt;
+</span></span><span style=display:flex><span>		&lt;un32UseSoundID&gt;0&lt;/un32UseSoundID&gt;
+</span></span><span style=display:flex><span>	&lt;/info&gt;
+</span></span></code></pre></div><p>神果+65点魔法攻击， 售价是800金币。</p><h2 id=整个服务器的心跳>整个服务器的心跳</h2><p>心跳的作用：</p><ul><li>检查掉线时间。如果玩家掉线超过30秒，则将其AI替换为机器人AI</li><li>技能心跳- 移动心跳- NPC和hero的心跳</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>void	CSSBattle::DoPlayHeartBeat(TIME_MILSEC tUTCMilsec, TIME_TICK tTickSpan){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>    //移动心跳
+</span></span><span style=display:flex><span>    m_pMoveMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style=display:flex><span>    for (GameObjectMap::iterator iterObj = m_cGameObjectMap.begin(); iterObj != m_cGameObjectMap.end(); ++iterObj){&lt;!-- --&gt;
+</span></span><span style=display:flex><span>            //NPC和hero的心跳
+</span></span><span style=display:flex><span>    		iterObj-&gt;second-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>    //技能心跳
+</span></span><span style=display:flex><span>    m_pEffectMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style=display:flex><span>    m_pPassiveSkillMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style=display:flex><span>    m_pSightMgr-&gt;OnHeartBeat(tUTCMilsec, tTickSpan);
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 align=center>--完--</h4></div><div class=post-archive><ul class=post-copyright><li><strong>原文作者：</strong>
+<a rel=author href=https://blog.rakfree.tk>留白</a></li><li style=word-break:break-all><strong>原文链接：</strong>
+<a href=https://blog.rakfree.tk/2021/01/lastbattle/>https://blog.rakfree.tk/2021/01/lastbattle/</a></li><li style=word-break:break-all><strong>更新时间：</strong>2022-06-21 11:17:04</li><li><strong>本文声明：</strong>转载请标记原文作者及链接</li></ul></div><br><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/2020/12/ccnet/>CCnet | 单线程reactor演变为多线程</a></li><li><a href=/2020/12/syncmutex/>Golang | sync.Mutex详解</a></li><li><a href=/2020/12/iomodels/>五种网络IO模型总结</a></li><li><a href=/2020/12/ccnetone/>CCnet | 一个reactor单线程网络库</a></li><li><a href=/2020/12/reserve/>C++ | vector中的resize()函数 VS reserve()函数</a></li></ul></div><div class="post-meta meta-tags">没有标签</div></article><div id=cusdis_thread data-host=https://cusdis-vercel-five.vercel.app data-app-id=01429b04-b016-4c60-99b1-2e11e67ec4c1 data-page-id=ac4f504d82c65652ffb09e13eccb6a6d data-page-url=https://blog.rakfree.tk/2021/01/lastbattle/ data-page-title="Lastbattle | 游戏场景服务器SS解析"></div><script async defer src=https://cusdis-vercel-five.vercel.app/js/cusdis.es.js></script></div><footer id=footer><div>&copy; 2022 <a href=https://blog.rakfree.tk>Zzz记忆 By 留白</a></div><br><div><div class=github-badge><a href=https://gohugo.io/ target=_black rel=nofollow><span class=badge-subject>Powered by</span><span class="badge-value bg-blue">Hugo</span></a></div><div class=github-badge><a href=https://www.flysnow.org/ target=_black><span class=badge-subject>Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a></div><div class=github-badge><a href=https://github.com/flysnow-org/maupassant-hugo target=_black><span class=badge-subject>Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a></div></div><div><script id=LA-DATA-WIDGET crossorigin=anonymous src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script></div></footer><script type=text/javascript>window.MathJax={tex2jax:{inlineMath:[["$","$"]],processEscapes:!0}}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src=/js/jquery.fancybox.min.js></script>
+<a id=rocket href=#top></a>
+<script type=text/javascript src='/js/totop.js?v=0.0.0' async></script></div><div id=secondary><section class=widget><form id=search action=https://blog.rakfree.tk/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://blog.rakfree.tk>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/2022/05/baidu/ title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a></li><li><a href=https://blog.rakfree.tk/2022/05/refraction/ title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderalpha/ title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderlighting/ title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderbase/ title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a></li></ul><h3 class=widget-title>随想</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/thinking/2022/03/shuowang/ title="无聊 & 痛苦">无聊 & 痛苦</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/think01/ title=爬楼有感>爬楼有感</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/weekly01/ title=老纪>老纪</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/summarize/ title=2021焦虑总结>2021焦虑总结</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/01/jx/ title=转载｜江雪：长安十日>转载｜江雪：长安十日</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/categories/>分类</a></h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/categories/IT/>IT (11)</a></li><li><a href=https://blog.rakfree.tk/categories/IT.Linux/>IT.Linux (10)</a></li><li><a href=https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/>博客记事 (7)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/>科普 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/>编程 (96)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/>编程.C (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/>编程.Golang (22)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/>编程.Lua (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/>编程.P2P (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/>编程.Unity3D (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/>编程.UnityShader (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/>编程.图形学入门 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/>编程.汇编 (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/>编程.游戏开发 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/>编程.网络编程 (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/>编程.音视频 (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/>自动部署 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/>转载 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/>随笔 (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/>随笔.摘抄 (2)</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/tags/>标签</a></h3><div class=tagcloud><a href=https://blog.rakfree.tk/tags/URP/>URP</a>
+<a href=https://blog.rakfree.tk/tags/cpu/>cpu</a>
+<a href=https://blog.rakfree.tk/tags/docker/>docker</a>
+<a href=https://blog.rakfree.tk/tags/except/>except</a>
+<a href=https://blog.rakfree.tk/tags/ffmpeg/>ffmpeg</a>
+<a href=https://blog.rakfree.tk/tags/gcc/>gcc</a>
+<a href=https://blog.rakfree.tk/tags/glibc/>glibc</a>
+<a href=https://blog.rakfree.tk/tags/hugo/>hugo</a>
+<a href=https://blog.rakfree.tk/tags/k8s/>k8s</a>
+<a href=https://blog.rakfree.tk/tags/music/>music</a>
+<a href=https://blog.rakfree.tk/tags/nginx/>nginx</a>
+<a href=https://blog.rakfree.tk/tags/nsf/>nsf</a>
+<a href=https://blog.rakfree.tk/tags/p2p/>p2p</a>
+<a href=https://blog.rakfree.tk/tags/randomquotes/>randomquotes</a>
+<a href=https://blog.rakfree.tk/tags/redis/>redis</a>
+<a href=https://blog.rakfree.tk/tags/rsync/>rsync</a>
+<a href=https://blog.rakfree.tk/tags/screen/>screen</a>
+<a href=https://blog.rakfree.tk/tags/shader/>shader</a>
+<a href=https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>shader学习笔记</a>
+<a href=https://blog.rakfree.tk/tags/shortcodes/>shortcodes</a>
+<a href=https://blog.rakfree.tk/tags/skynet/>skynet</a>
+<a href=https://blog.rakfree.tk/tags/vim/>vim</a>
+<a href=https://blog.rakfree.tk/tags/weekly/>weekly</a>
+<a href=https://blog.rakfree.tk/tags/year/>year</a>
+<a href=https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/>定时器</a>
+<a href=https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/>抽卡</a>
+<a href=https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/>读书笔记</a>
+<a href=https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/>长安十日</a></div></section><section class=widget><h3 class=widget-title>友情链接</h3><ul class=widget-list><li><a target=_blank href=https://github.com/zfunnily title=留白的github>留白github</a></li></ul></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/index.xml>文章 RSS</a></li></ul></section></div></div></div></div></body></html>

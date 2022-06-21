@@ -1,232 +1,19 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-
-    <title>汇编 | AT&amp;T和Intel规范的区别 | Zzz记忆</title>
-    <meta property="og:title" content="汇编 | AT&amp;T和Intel规范的区别 - Zzz记忆">
-    <meta property="og:type" content="article">
-    <meta name="color-scheme" content="light dark">
-        
-    <meta property="article:published_time" content='2021-01-31T11:25:39&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2022-05-17T11:23:52&#43;08:00'>
-        
-    <meta name="Keywords" content="skynet开发,skynet源码解析, skynet框架分析,golang, C&#43;&#43;, 游戏服务器, lua开发 , IM服务器">
-    <meta name="description" content="汇编 | AT&amp;T和Intel规范的区别">
-        
-    <meta name="author" content="留白">
-    <meta property="og:url" content="https://blog.rakfree.tk/2021/01/attandintel/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
-
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-
-    
-    
-    
-        <link href="/js/jquery.fancybox.css" rel="stylesheet">
-    
-    
-    
-    
-        <link rel="stylesheet"  type="text/css" href='/css/bilibili.css'>
-    
-
-
-    
-    <script charset="UTF-8" id="LA_COLLECT" src="/js/js-sdk-pro.min.js"></script>
-    <script>LA.init({id: "JXzIfjoKHVwu0mwG",ck: "JXzIfjoKHVwu0mwG"})</script>
-    
-</head>
-
-
-<body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://blog.rakfree.tk">
-                        Zzz记忆
-                    </a>
-                
-
-                <div id="quotes" class="description"></div>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://blog.rakfree.tk">首页</a>
-                    
-                    <a  href="https://blog.rakfree.tk/thinking/" title="随想">随想</a>
-                    
-                    <a  href="https://blog.rakfree.tk/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://blog.rakfree.tk/about/" title="关于">关于</a>
-                    
-                    <a  href="https://blog.rakfree.tk/search/" title="搜索">搜索</a>
-                    
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
-
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
-    <style type="text/css">
-    .post-toc {
-        position: fixed;
-        width: 200px;
-        margin-left: -210px;
-        padding: 5px 10px;
-        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
-        font-size: 12px;
-        border: 1px solid rgba(0, 0, 0, .07);
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.98);
-        background-clip: padding-box;
-        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
-        word-wrap: break-word;
-        white-space: nowrap;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        z-index: 999;
-        cursor: pointer;
-        max-height: 70%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    .post-toc .post-toc-title {
-        width: 100%;
-        margin: 0 auto;
-        font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .post-toc .post-toc-content {
-        font-size: 15px;
-    }
-
-    .post-toc .post-toc-content>nav>ul {
-        margin: 10px 0;
-    }
-
-    .post-toc .post-toc-content ul {
-        padding-left: 20px;
-        list-style: square;
-        margin: 0.5em;
-        line-height: 1.8em;
-    }
-
-    .post-toc .post-toc-content ul ul {
-        padding-left: 15px;
-        display: none;
-    }
-
-    @media print,
-    screen and (max-width:1057px) {
-        .post-toc {
-            display: none;
-        }
-    }
-</style>
-
-<div class="post-toc" style="position: absolute; top: 188px; mix-blend-mode: difference;">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#概述">概述</a></li>
-    <li><a href="#att格式-和-intel格式的区别">AT&amp;T格式 和 Intel格式的区别</a></li>
-    <li><a href="#搭建intel的环境">搭建Intel的环境</a></li>
-    <li><a href="#intel的helloasm">Intel的hello.asm</a></li>
-    <li><a href="#a-idatt_63a搭建att的环境"><a id="ATT_63"></a>搭建AT&amp;T的环境</a></li>
-    <li><a href="#a-idatthellos_71aatt的hellos"><a id="ATThellos_71"></a>AT&amp;T的hello.s</a></li>
-    <li><a href="#a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构"><a id="objdumpcpu_101"></a>通过objdump查看到的几种cpu架构</a></li>
-  </ul>
-</nav>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var postToc = $(".post-toc");
-        if (postToc.length) {
-            var leftPos = $("#main").offset().left;
-            if(leftPos<220){
-                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
-            }
-
-            var t = postToc.offset().top - 20,
-                a = {
-                    start: {
-                        position: "absolute",
-                        top: t
-                    },
-                    process: {
-                        position: "fixed",
-                        top: 20
-                    },
-                };
-            $(window).scroll(function () {
-                var e = $(window).scrollTop();
-                e < t ? postToc.css(a.start) : postToc.css(a.process)
-            })
-        }
-    })
-</script>
-    <article class="post">
-        <header>
-            <h1 class="post-title">汇编 | AT&amp;T和Intel规范的区别</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2021年1月31日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B'>编程</a></span>
-            
-            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96'>编程.汇编</a></span>
-            
-        </div>
-        
-        
-        
-        <div class="post-content">
-            <h2 id="概述">概述</h2>
-<p><strong>常见的指令集以及汇编语言规范：</strong>
-x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范：</p>
-<ul>
-<li>intel公司发布的汇编语言规范，称<code>intel 汇编</code>：Windows派系(Microsoft)，比较著名的汇编器有微软的masm和开源的nasm。</li>
-<li>AT&amp;T公司发布的汇编语言规范，称<code>AT&amp;T 汇编</code>：Unix派系(或者说GNU)，比如g++编译器等。</li>
-</ul>
-<h2 id="att格式-和-intel格式的区别">AT&amp;T格式 和 Intel格式的区别</h2>
-<p>表格如下：</p>
-<p>|AT&amp;T格式|Intel格式|说明 
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>汇编 | AT&T和Intel规范的区别 | Zzz记忆</title><meta property="og:title" content="汇编 | AT&T和Intel规范的区别 - Zzz记忆"><meta property="og:type" content="article"><meta name=color-scheme content="light dark"><meta property="article:published_time" content="2021-01-31T11:25:39+08:00"><meta property="article:modified_time" content="2022-06-21T11:17:04+08:00"><meta name=Keywords content="skynet开发,skynet源码解析,skynet框架分析,golang,C++,游戏服务器,lua开发 ,IM服务器"><meta name=description content="汇编 | AT&T和Intel规范的区别"><meta name=author content="留白"><meta property="og:url" content="https://blog.rakfree.tk/2021/01/attandintel/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=/js/jquery.js></script>
+<link href=/js/jquery.fancybox.css rel=stylesheet><link rel=stylesheet type=text/css href=/css/bilibili.css><script id=LA_COLLECT src=/js/js-sdk-pro.min.js></script>
+<script>LA.init({id:"JXzIfjoKHVwu0mwG",ck:"JXzIfjoKHVwu0mwG"})</script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://blog.rakfree.tk>Zzz记忆</a><div id=quotes class=description></div></div><div><nav id=nav-menu class=clearfix><a class=current href=https://blog.rakfree.tk>首页</a>
+<a href=https://blog.rakfree.tk/thinking/ title=随想>随想</a>
+<a href=https://blog.rakfree.tk/archives/ title=归档>归档</a>
+<a href=https://blog.rakfree.tk/about/ title=关于>关于</a>
+<a href=https://blog.rakfree.tk/search/ title=搜索>搜索</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><style type=text/css>.post-toc{position:fixed;width:200px;margin-left:-210px;padding:5px 10px;font-family:Athelas,STHeiti,Microsoft Yahei,serif;font-size:12px;border:1px solid rgba(0,0,0,7%);border-radius:5px;background-color:rgba(255,255,255,.98);background-clip:padding-box;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,.125);box-shadow:1px 1px 2px rgba(0,0,0,.125);word-wrap:break-word;white-space:nowrap;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:999;cursor:pointer;max-height:70%;overflow-y:auto;overflow-x:hidden}.post-toc .post-toc-title{width:100%;margin:0 auto;font-size:20px;font-weight:400;text-transform:uppercase;text-align:center}.post-toc .post-toc-content{font-size:15px}.post-toc .post-toc-content>nav>ul{margin:10px 0}.post-toc .post-toc-content ul{padding-left:20px;list-style:square;margin:.5em;line-height:1.8em}.post-toc .post-toc-content ul ul{padding-left:15px;display:none}@media print,screen and (max-width:1057px){.post-toc{display:none}}</style><div class=post-toc style=position:absolute;top:188px;mix-blend-mode:difference><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#概述>概述</a></li><li><a href=#att格式-和-intel格式的区别>AT&T格式 和 Intel格式的区别</a></li><li><a href=#搭建intel的环境>搭建Intel的环境</a></li><li><a href=#intel的helloasm>Intel的hello.asm</a></li><li><a href=#a-idatt_63a搭建att的环境><a id=ATT_63></a>搭建AT&T的环境</a></li><li><a href=#a-idatthellos_71aatt的hellos><a id=ATThellos_71></a>AT&T的hello.s</a></li><li><a href=#a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构><a id=objdumpcpu_101></a>通过objdump查看到的几种cpu架构</a></li></ul></nav></div></div><script type=text/javascript>$(document).ready(function(){if(e=$(".post-toc"),e.length){t=$("#main").offset().left,t<220&&e.css({width:t-10,"margin-left":0-t});var e,t,n=e.offset().top-20,s={start:{position:"absolute",top:n},process:{position:"fixed",top:20}};$(window).scroll(function(){var t=$(window).scrollTop();t<n?e.css(s.start):e.css(s.process)})}})</script><article class=post><header><h1 class=post-title>汇编 | AT&T和Intel规范的区别</h1></header><date class="post-meta meta-date">2021年1月31日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B>编程</a></span>
+<span class=meta-category><a href=/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96>编程.汇编</a></span></div><div class=post-content><h2 id=概述>概述</h2><p><strong>常见的指令集以及汇编语言规范：</strong>
+x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不同汇编语言规范：</p><ul><li>intel公司发布的汇编语言规范，称<code>intel 汇编</code>：Windows派系(Microsoft)，比较著名的汇编器有微软的masm和开源的nasm。</li><li>AT&T公司发布的汇编语言规范，称<code>AT&T 汇编</code>：Unix派系(或者说GNU)，比如g++编译器等。</li></ul><h2 id=att格式-和-intel格式的区别>AT&T格式 和 Intel格式的区别</h2><p>表格如下：</p><p>|AT&T格式|Intel格式|说明
 |&mdash;&mdash;
-|pushl %eax|push eax|在AT&amp;T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀
-|pushl $1|push 1|在AT&amp;T汇编格式中，用’$&lsquo;前缀表示一个立即操作数；而在Intel汇编格式中，立即数的表示不用带任何前缀
-|addl $1, %eax|add eax, 1|AT&amp;T和Intel格式中的源操作数和目标操作数的位置正好相反。在Intel汇编格式中，目标操作数在源操作数的左边；而在AT&amp;T汇编格式中，目标操作数在源操作数的右边。
-|movb val, %al|mov al, byte ptr val|在AT&amp;T汇编格式中，操作数的字长由操作符的最后一个字母决定，后缀’b’、‘w’、&rsquo;l’分别表示操作数为字节（byte，8比特）、字（word，16比特）和长字（long，32比特）；而在Intel汇编格式中，操作数的字长是用&quot;byte ptr&quot;和&quot;word ptr&quot;等前缀来表示的。
-|ljump $section, $offset|jmp far section:offset|在AT&amp;T汇编格式中，绝对转移和调用指令（jump/call）的操作数前要加上’<em>&lsquo;作为前缀，而在Intel格式中则不需要。远程转移指令和远程子调用指令的操作码，在AT&amp;T汇编格式中为&quot;ljump&quot;和&quot;lcall&quot;，而在Intel汇编格式中则为&quot;jmp far&quot;和&quot;call far&quot;
+|pushl %eax|push eax|在AT&T汇编格式中，寄存器名要加上’ %&lsquo;作为前缀；而在Intel汇编格式中，寄存器名不需要加前缀
+|pushl $1|push 1|在AT&T汇编格式中，用’$&lsquo;前缀表示一个立即操作数；而在Intel汇编格式中，立即数的表示不用带任何前缀
+|addl $1, %eax|add eax, 1|AT&T和Intel格式中的源操作数和目标操作数的位置正好相反。在Intel汇编格式中，目标操作数在源操作数的左边；而在AT&T汇编格式中，目标操作数在源操作数的右边。
+|movb val, %al|mov al, byte ptr val|在AT&T汇编格式中，操作数的字长由操作符的最后一个字母决定，后缀’b’、‘w’、&rsquo;l’分别表示操作数为字节（byte，8比特）、字（word，16比特）和长字（long，32比特）；而在Intel汇编格式中，操作数的字长是用"byte ptr"和"word ptr"等前缀来表示的。
+|ljump $section, $offset|jmp far section:offset|在AT&T汇编格式中，绝对转移和调用指令（jump/call）的操作数前要加上’<em>&lsquo;作为前缀，而在Intel格式中则不需要。远程转移指令和远程子调用指令的操作码，在AT&T汇编格式中为"ljump"和"lcall"，而在Intel汇编格式中则为"jmp far"和"call far"
 |lcall $section, $offset|call far section:offset|同上
 |lret $stack_adjust|ret far stack_adjust|与之相应的远程返回指令
 |section:disp(base, index, scale)|section:[base + index</em>scale + disp]|寻址方式的区别，无论形式如何，都是实现如下的地址计算：（其中base和index必须是寄存器，disp和scale可以是常数）disp + base + index * scale
@@ -234,425 +21,104 @@ x86(IA-32)、x86-64指令集(常见于PC端)，对应有2家公司发布的不�
 |movl -4(%ebp), %eax|mov eax, [ebp - 4]|内存操作数的例子
 |movl array(, %eax, 4), %eax|mov eax, [eax<em>4 + array]|内存操作数的例子
 |movw array(%ebx, %eax, 4), %cx|mov cx, [ebx + 4</em>eax + array]|内存操作数的例子
-|movb $4, %fs:(%eax)|mov fs:eax, 4|内存操作数的例子</p>
-<h2 id="搭建intel的环境">搭建Intel的环境</h2>
-<ul>
-<li>ubuntu16.04 或 ubuntu18.04- vscode- dosbox- 文件后缀：.asm
-安装dosbox</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sudo apt-get install dosbox
-</span></span></code></pre></div><p>下载<code>vscode</code>插件<code>MASM/TASM</code></p>
-<h2 id="intel的helloasm">Intel的hello.asm</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>;description
-</span></span><span style="display:flex;"><span>DATA SEGMENT USE16
-</span></span><span style="display:flex;"><span>    MYWORD DB &#34;hello world!!!&#34;
-</span></span><span style="display:flex;"><span>DATA ENDS
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>;description
-</span></span><span style="display:flex;"><span>CODE SEGMENT USE16
-</span></span><span style="display:flex;"><span>    ASSUME CS:CODE, DS:DATA ;代表谁是代码段，谁是数据段
-</span></span><span style="display:flex;"><span>main:
-</span></span><span style="display:flex;"><span>    mov AX, DATA ;数据首地址赋值给AX， ax是寄存器
-</span></span><span style="display:flex;"><span>    mov DS, AX   ;使得DS等价于AX，同样指向数据段
-</span></span><span style="display:flex;"><span>    LEA DX, MYWORD ;使DX寄存器指向数据变量word的首地址
-</span></span><span style="display:flex;"><span>    mov AH, 09h ;AH输出数据
-</span></span><span style="display:flex;"><span>    INT 21h ;执行AH的09h功能， 输出数据
-</span></span><span style="display:flex;"><span>    mov AX, 4c00h ;设置寄存器的功能
-</span></span><span style="display:flex;"><span>    INT 21h ;调用寄存器功能 程序结束
-</span></span><span style="display:flex;"><span>CODE ENDS
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>END main
-</span></span></code></pre></div><p>在文件中点击鼠标右键<code>运行程序</code></p>
-<h2 id="a-idatt_63a搭建att的环境"><a id="ATT_63"></a>搭建AT&amp;T的环境</h2>
-<ul>
-<li>ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc
-下载<code>vscode</code>插件<code>GNU Assembler Language Support</code></li>
-</ul>
-<h2 id="a-idatthellos_71aatt的hellos"><a id="ATThellos_71"></a>AT&amp;T的hello.s</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>#hello.s
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>.data#数据段声明
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>msg : .string &#34;Hello, world\n&#34; #要输出的字符串
-</span></span><span style="display:flex;"><span>len = . - msg       #字串长度
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>.text               #代码段声明
-</span></span><span style="display:flex;"><span>.global main      #指定入口函数
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>main:             #在屏幕上显示一个字符串
-</span></span><span style="display:flex;"><span>    movl $len, %edx     #参数三：字符串长度 
-</span></span><span style="display:flex;"><span>    movl $msg, %ecx     #参数二：要显示的字符串
-</span></span><span style="display:flex;"><span>    movl $1, %ebx       #参数一：文件描述符(stdout)
-</span></span><span style="display:flex;"><span>    movl $4, %eax       #系统调用号(sys_write)
-</span></span><span style="display:flex;"><span>    int  $0x80            #调用内核功能
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    #退出程序
-</span></span><span style="display:flex;"><span>    movl $0,%ebx        #参数一：退出代码
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    movl $1,%eax        #系统调用号(sys_exit)
-</span></span><span style="display:flex;"><span>    int  $0x80            #调用内核功能
-</span></span></code></pre></div><p>编译运行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ gcc hello.s -o hello_att
-</span></span><span style="display:flex;"><span>$ ./hello_att
-</span></span></code></pre></div><h2 id="a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构"><a id="objdumpcpu_101"></a>通过objdump查看到的几种cpu架构</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ objdump --help
-</span></span><span style="display:flex;"><span>objdump：支持的体系结构： i386 i386:x86-64 i386:x64-32 i8086 i386:intel i386:x86-64:intel i386:x64-32:intel i386:nacl i386:x86-64:nacl i386:x64-32:nacl iamcu iamcu:intel l1om l1om:intel k1om k1om:intel plugin
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>下列 i386/x86-64 特定的反汇编器选项在使用 -M 开关时可用（使用逗号分隔多个选项）：
-</span></span><span style="display:flex;"><span>  x86-64      Disassemble in 64bit mode
-</span></span><span style="display:flex;"><span>  i386        Disassemble in 32bit mode
-</span></span><span style="display:flex;"><span>  i8086       在 16 位模式下反汇编
-</span></span><span style="display:flex;"><span>  att         用 AT&amp;T 语法显示指令
-</span></span><span style="display:flex;"><span>  intel       用 Intel 语法显示指令
-</span></span><span style="display:flex;"><span>  att-mnemonic
-</span></span><span style="display:flex;"><span>              Display instruction in AT&amp;T mnemonic
-</span></span><span style="display:flex;"><span>  intel-mnemonic
-</span></span><span style="display:flex;"><span>              Display instruction in Intel mnemonic
-</span></span><span style="display:flex;"><span>  addr64      假定 64 位地址大小
-</span></span><span style="display:flex;"><span>  addr32      假定 32 位地址大小
-</span></span><span style="display:flex;"><span>  addr16      假定 16 位地址大小
-</span></span><span style="display:flex;"><span>  data32      假定 32 位数据大小
-</span></span><span style="display:flex;"><span>  data16      假定 16 位数据大小
-</span></span><span style="display:flex;"><span>  suffix      在 AT&amp;T 语法中始终显示指令后缀
-</span></span><span style="display:flex;"><span>  amd64       Display instruction in AMD64 ISA
-</span></span><span style="display:flex;"><span>  intel64     Display instruction in Intel64 ISA
-</span></span></code></pre></div><p>汇编学习地址：http://c.biancheng.net/view/3463.html</p>
-
-
-            <h4 align="center">--完--</h4>
-        </div>
-
-        
-
-<div class="post-archive">
-    <ul class="post-copyright">
-        <li><strong>原文作者：</strong>
-            
-                <a rel="author" href="https://blog.rakfree.tk"> 留白 </a>
-            
-        </li>
-        <li style="word-break:break-all"><strong> 原文链接：</strong>
-            
-                <a href="https://blog.rakfree.tk/2021/01/attandintel/">https://blog.rakfree.tk/2021/01/attandintel/</a>
-            
-        </li>
-        <li style="word-break:break-all"><strong>更新时间：</strong>2022-05-17 11:23:52</li>
-        <li><strong>本文声明：</strong>转载请标记原文作者及链接</li>
-    </ul>
-</div>
-<br/>
-
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/2021/01/skynetprotobuf/">Skynet | lua-protobuf</a></li>
-        
-        <li><a href="/2021/01/pbempty/">Protobuf | 请求参数为空的案例</a></li>
-        
-        <li><a href="/2021/01/goslience/">Golang | C数组转化为Golang的切片类型</a></li>
-        
-        <li><a href="/2021/01/skynetecho/">Skynet | echo服务</a></li>
-        
-        <li><a href="/2021/01/ziplist/">Redis源码分析 | ziplist</a></li>
-        
-    </ul>
-</div>
-
-
-        <div class="post-meta meta-tags">
-            
-            没有标签
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-
-    
-
-    
-    <div id="cusdis_thread"
-      data-host="https://cusdis-vercel-five.vercel.app"
-      data-app-id="01429b04-b016-4c60-99b1-2e11e67ec4c1"
-      data-page-id="0483bf544daa47edd713ad5f3716eec9"
-      data-page-url="https://blog.rakfree.tk/2021/01/attandintel/"
-      data-page-title="汇编 | AT&amp;T和Intel规范的区别" ></div>
-    <script async defer src="https://cusdis-vercel-five.vercel.app/js/cusdis.es.js"></script>
-    
-</div>
-
-                    
-
-
-
-
-
-
-
-
-
-
-<footer id="footer">
-
-    <div>
-        &copy; 2022 <a href="https://blog.rakfree.tk">Zzz记忆 By 留白</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
-        </div>
-    </div>
-    <div>
-        
-        
-
-    
-    <script id="LA-DATA-WIDGET" crossorigin="anonymous" src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="/js/jquery.fancybox.min.js"></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
-
-
-
-
-
-
-
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='https://blog.rakfree.tk/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://blog.rakfree.tk">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/baidu/" title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/refraction/" title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderalpha/" title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderlighting/" title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/2022/05/shaderbase/" title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a>
-    </li>
-    
-</ul>
-
-<h3 class="widget-title">随想</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/shuowang/" title="无聊 &amp; 痛苦">无聊 &amp; 痛苦</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/think01/" title="爬楼有感">爬楼有感</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/weekly01/" title="老纪">老纪</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/03/summarize/" title="2021焦虑总结">2021焦虑总结</a>
-    </li>
-    
-    <li>
-        <a href="https://blog.rakfree.tk/thinking/2022/01/jx/" title="转载｜江雪：长安十日">转载｜江雪：长安十日</a>
-    </li>
-    
-</ul>
-
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT/">IT (11)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/IT.Linux/">IT.Linux (10)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/">博客记事 (7)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/">科普 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/">编程 (96)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/">编程.C (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/">编程.Golang (22)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/">编程.Lua (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/">编程.P2P (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/">编程.Unity3D (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/">编程.UnityShader (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/">编程.图形学入门 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/">编程.汇编 (2)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">编程.游戏开发 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">编程.网络编程 (4)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/">编程.音视频 (9)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/">自动部署 (12)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/">转载 (1)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/">随笔 (5)</a></li>
-    
-    <li><a href="https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/">随笔.摘抄 (2)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://blog.rakfree.tk/tags/URP/">URP</a>
-    
-    <a href="https://blog.rakfree.tk/tags/cpu/">cpu</a>
-    
-    <a href="https://blog.rakfree.tk/tags/docker/">docker</a>
-    
-    <a href="https://blog.rakfree.tk/tags/except/">except</a>
-    
-    <a href="https://blog.rakfree.tk/tags/ffmpeg/">ffmpeg</a>
-    
-    <a href="https://blog.rakfree.tk/tags/gcc/">gcc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/glibc/">glibc</a>
-    
-    <a href="https://blog.rakfree.tk/tags/hugo/">hugo</a>
-    
-    <a href="https://blog.rakfree.tk/tags/k8s/">k8s</a>
-    
-    <a href="https://blog.rakfree.tk/tags/music/">music</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nginx/">nginx</a>
-    
-    <a href="https://blog.rakfree.tk/tags/nsf/">nsf</a>
-    
-    <a href="https://blog.rakfree.tk/tags/p2p/">p2p</a>
-    
-    <a href="https://blog.rakfree.tk/tags/randomquotes/">randomquotes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/redis/">redis</a>
-    
-    <a href="https://blog.rakfree.tk/tags/rsync/">rsync</a>
-    
-    <a href="https://blog.rakfree.tk/tags/screen/">screen</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader/">shader</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">shader学习笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/shortcodes/">shortcodes</a>
-    
-    <a href="https://blog.rakfree.tk/tags/skynet/">skynet</a>
-    
-    <a href="https://blog.rakfree.tk/tags/vim/">vim</a>
-    
-    <a href="https://blog.rakfree.tk/tags/weekly/">weekly</a>
-    
-    <a href="https://blog.rakfree.tk/tags/year/">year</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/">定时器</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/">抽卡</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
-    
-    <a href="https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/">长安十日</a>
-    
-</div>
-    </section>
-
-    
-<section class="widget">
-    <h3 class="widget-title">友情链接</h3>
-    <ul class="widget-list">
-        
-        <li>
-            <a target="_blank" href="https://github.com/zfunnily" title="留白的github">留白github</a>
-        </li>
-        
-    </ul>
-</section>
-
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://blog.rakfree.tk/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-            </div>
-        </div>
-    </div>
-
-
-    
-
-</body>
-
-</html>
+|movb $4, %fs:(%eax)|mov fs:eax, 4|内存操作数的例子</p><h2 id=搭建intel的环境>搭建Intel的环境</h2><ul><li>ubuntu16.04 或 ubuntu18.04- vscode- dosbox- 文件后缀：.asm
+安装dosbox</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>sudo apt-get install dosbox
+</span></span></code></pre></div><p>下载<code>vscode</code>插件<code>MASM/TASM</code></p><h2 id=intel的helloasm>Intel的hello.asm</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>;description
+</span></span><span style=display:flex><span>DATA SEGMENT USE16
+</span></span><span style=display:flex><span>    MYWORD DB &#34;hello world!!!&#34;
+</span></span><span style=display:flex><span>DATA ENDS
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>;description
+</span></span><span style=display:flex><span>CODE SEGMENT USE16
+</span></span><span style=display:flex><span>    ASSUME CS:CODE, DS:DATA ;代表谁是代码段，谁是数据段
+</span></span><span style=display:flex><span>main:
+</span></span><span style=display:flex><span>    mov AX, DATA ;数据首地址赋值给AX， ax是寄存器
+</span></span><span style=display:flex><span>    mov DS, AX   ;使得DS等价于AX，同样指向数据段
+</span></span><span style=display:flex><span>    LEA DX, MYWORD ;使DX寄存器指向数据变量word的首地址
+</span></span><span style=display:flex><span>    mov AH, 09h ;AH输出数据
+</span></span><span style=display:flex><span>    INT 21h ;执行AH的09h功能， 输出数据
+</span></span><span style=display:flex><span>    mov AX, 4c00h ;设置寄存器的功能
+</span></span><span style=display:flex><span>    INT 21h ;调用寄存器功能 程序结束
+</span></span><span style=display:flex><span>CODE ENDS
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>END main
+</span></span></code></pre></div><p>在文件中点击鼠标右键<code>运行程序</code></p><h2 id=a-idatt_63a搭建att的环境><a id=ATT_63></a>搭建AT&T的环境</h2><ul><li>ubuntu16.04 或 ubuntu18.04- vscode- 文件后缀： .s- gcc
+下载<code>vscode</code>插件<code>GNU Assembler Language Support</code></li></ul><h2 id=a-idatthellos_71aatt的hellos><a id=ATThellos_71></a>AT&T的hello.s</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>#hello.s
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>.data#数据段声明
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>msg : .string &#34;Hello, world\n&#34; #要输出的字符串
+</span></span><span style=display:flex><span>len = . - msg       #字串长度
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>.text               #代码段声明
+</span></span><span style=display:flex><span>.global main      #指定入口函数
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>main:             #在屏幕上显示一个字符串
+</span></span><span style=display:flex><span>    movl $len, %edx     #参数三：字符串长度 
+</span></span><span style=display:flex><span>    movl $msg, %ecx     #参数二：要显示的字符串
+</span></span><span style=display:flex><span>    movl $1, %ebx       #参数一：文件描述符(stdout)
+</span></span><span style=display:flex><span>    movl $4, %eax       #系统调用号(sys_write)
+</span></span><span style=display:flex><span>    int  $0x80            #调用内核功能
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    #退出程序
+</span></span><span style=display:flex><span>    movl $0,%ebx        #参数一：退出代码
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    movl $1,%eax        #系统调用号(sys_exit)
+</span></span><span style=display:flex><span>    int  $0x80            #调用内核功能
+</span></span></code></pre></div><p>编译运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>$ gcc hello.s -o hello_att
+</span></span><span style=display:flex><span>$ ./hello_att
+</span></span></code></pre></div><h2 id=a-idobjdumpcpu_101a通过objdump查看到的几种cpu架构><a id=objdumpcpu_101></a>通过objdump查看到的几种cpu架构</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>$ objdump --help
+</span></span><span style=display:flex><span>objdump：支持的体系结构： i386 i386:x86-64 i386:x64-32 i8086 i386:intel i386:x86-64:intel i386:x64-32:intel i386:nacl i386:x86-64:nacl i386:x64-32:nacl iamcu iamcu:intel l1om l1om:intel k1om k1om:intel plugin
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>下列 i386/x86-64 特定的反汇编器选项在使用 -M 开关时可用（使用逗号分隔多个选项）：
+</span></span><span style=display:flex><span>  x86-64      Disassemble in 64bit mode
+</span></span><span style=display:flex><span>  i386        Disassemble in 32bit mode
+</span></span><span style=display:flex><span>  i8086       在 16 位模式下反汇编
+</span></span><span style=display:flex><span>  att         用 AT&amp;T 语法显示指令
+</span></span><span style=display:flex><span>  intel       用 Intel 语法显示指令
+</span></span><span style=display:flex><span>  att-mnemonic
+</span></span><span style=display:flex><span>              Display instruction in AT&amp;T mnemonic
+</span></span><span style=display:flex><span>  intel-mnemonic
+</span></span><span style=display:flex><span>              Display instruction in Intel mnemonic
+</span></span><span style=display:flex><span>  addr64      假定 64 位地址大小
+</span></span><span style=display:flex><span>  addr32      假定 32 位地址大小
+</span></span><span style=display:flex><span>  addr16      假定 16 位地址大小
+</span></span><span style=display:flex><span>  data32      假定 32 位数据大小
+</span></span><span style=display:flex><span>  data16      假定 16 位数据大小
+</span></span><span style=display:flex><span>  suffix      在 AT&amp;T 语法中始终显示指令后缀
+</span></span><span style=display:flex><span>  amd64       Display instruction in AMD64 ISA
+</span></span><span style=display:flex><span>  intel64     Display instruction in Intel64 ISA
+</span></span></code></pre></div><p>汇编学习地址：http://c.biancheng.net/view/3463.html</p><h4 align=center>--完--</h4></div><div class=post-archive><ul class=post-copyright><li><strong>原文作者：</strong>
+<a rel=author href=https://blog.rakfree.tk>留白</a></li><li style=word-break:break-all><strong>原文链接：</strong>
+<a href=https://blog.rakfree.tk/2021/01/attandintel/>https://blog.rakfree.tk/2021/01/attandintel/</a></li><li style=word-break:break-all><strong>更新时间：</strong>2022-06-21 11:17:04</li><li><strong>本文声明：</strong>转载请标记原文作者及链接</li></ul></div><br><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/2021/01/skynetprotobuf/>Skynet | lua-protobuf</a></li><li><a href=/2021/01/pbempty/>Protobuf | 请求参数为空的案例</a></li><li><a href=/2021/01/goslience/>Golang | C数组转化为Golang的切片类型</a></li><li><a href=/2021/01/skynetecho/>Skynet | echo服务</a></li><li><a href=/2021/01/ziplist/>Redis源码分析 | ziplist</a></li></ul></div><div class="post-meta meta-tags">没有标签</div></article><div id=cusdis_thread data-host=https://cusdis-vercel-five.vercel.app data-app-id=01429b04-b016-4c60-99b1-2e11e67ec4c1 data-page-id=0483bf544daa47edd713ad5f3716eec9 data-page-url=https://blog.rakfree.tk/2021/01/attandintel/ data-page-title="汇编 | AT&T和Intel规范的区别"></div><script async defer src=https://cusdis-vercel-five.vercel.app/js/cusdis.es.js></script></div><footer id=footer><div>&copy; 2022 <a href=https://blog.rakfree.tk>Zzz记忆 By 留白</a></div><br><div><div class=github-badge><a href=https://gohugo.io/ target=_black rel=nofollow><span class=badge-subject>Powered by</span><span class="badge-value bg-blue">Hugo</span></a></div><div class=github-badge><a href=https://www.flysnow.org/ target=_black><span class=badge-subject>Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a></div><div class=github-badge><a href=https://github.com/flysnow-org/maupassant-hugo target=_black><span class=badge-subject>Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a></div></div><div><script id=LA-DATA-WIDGET crossorigin=anonymous src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script></div></footer><script type=text/javascript>window.MathJax={tex2jax:{inlineMath:[["$","$"]],processEscapes:!0}}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src=/js/jquery.fancybox.min.js></script>
+<a id=rocket href=#top></a>
+<script type=text/javascript src='/js/totop.js?v=0.0.0' async></script></div><div id=secondary><section class=widget><form id=search action=https://blog.rakfree.tk/search method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://blog.rakfree.tk>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/2022/05/baidu/ title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a></li><li><a href=https://blog.rakfree.tk/2022/05/refraction/ title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderalpha/ title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderlighting/ title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderbase/ title="《Unity Shader入门精要》第五章笔记 | 开始shader练习">《Unity Shader入门精要》第五章笔记 | 开始shader练习</a></li></ul><h3 class=widget-title>随想</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/thinking/2022/03/shuowang/ title="无聊 & 痛苦">无聊 & 痛苦</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/think01/ title=爬楼有感>爬楼有感</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/weekly01/ title=老纪>老纪</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/summarize/ title=2021焦虑总结>2021焦虑总结</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/01/jx/ title=转载｜江雪：长安十日>转载｜江雪：长安十日</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/categories/>分类</a></h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/categories/IT/>IT (11)</a></li><li><a href=https://blog.rakfree.tk/categories/IT.Linux/>IT.Linux (10)</a></li><li><a href=https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/>博客记事 (7)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/>科普 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/>编程 (96)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/>编程.C (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/>编程.Golang (22)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/>编程.Lua (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/>编程.P2P (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/>编程.Unity3D (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/>编程.UnityShader (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/>编程.图形学入门 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/>编程.汇编 (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/>编程.游戏开发 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/>编程.网络编程 (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/>编程.音视频 (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/>自动部署 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/>转载 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/>随笔 (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/>随笔.摘抄 (2)</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/tags/>标签</a></h3><div class=tagcloud><a href=https://blog.rakfree.tk/tags/URP/>URP</a>
+<a href=https://blog.rakfree.tk/tags/cpu/>cpu</a>
+<a href=https://blog.rakfree.tk/tags/docker/>docker</a>
+<a href=https://blog.rakfree.tk/tags/except/>except</a>
+<a href=https://blog.rakfree.tk/tags/ffmpeg/>ffmpeg</a>
+<a href=https://blog.rakfree.tk/tags/gcc/>gcc</a>
+<a href=https://blog.rakfree.tk/tags/glibc/>glibc</a>
+<a href=https://blog.rakfree.tk/tags/hugo/>hugo</a>
+<a href=https://blog.rakfree.tk/tags/k8s/>k8s</a>
+<a href=https://blog.rakfree.tk/tags/music/>music</a>
+<a href=https://blog.rakfree.tk/tags/nginx/>nginx</a>
+<a href=https://blog.rakfree.tk/tags/nsf/>nsf</a>
+<a href=https://blog.rakfree.tk/tags/p2p/>p2p</a>
+<a href=https://blog.rakfree.tk/tags/randomquotes/>randomquotes</a>
+<a href=https://blog.rakfree.tk/tags/redis/>redis</a>
+<a href=https://blog.rakfree.tk/tags/rsync/>rsync</a>
+<a href=https://blog.rakfree.tk/tags/screen/>screen</a>
+<a href=https://blog.rakfree.tk/tags/shader/>shader</a>
+<a href=https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>shader学习笔记</a>
+<a href=https://blog.rakfree.tk/tags/shortcodes/>shortcodes</a>
+<a href=https://blog.rakfree.tk/tags/skynet/>skynet</a>
+<a href=https://blog.rakfree.tk/tags/vim/>vim</a>
+<a href=https://blog.rakfree.tk/tags/weekly/>weekly</a>
+<a href=https://blog.rakfree.tk/tags/year/>year</a>
+<a href=https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/>定时器</a>
+<a href=https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/>抽卡</a>
+<a href=https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/>读书笔记</a>
+<a href=https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/>长安十日</a></div></section><section class=widget><h3 class=widget-title>友情链接</h3><ul class=widget-list><li><a target=_blank href=https://github.com/zfunnily title=留白的github>留白github</a></li></ul></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/index.xml>文章 RSS</a></li></ul></section></div></div></div></div></body></html>
