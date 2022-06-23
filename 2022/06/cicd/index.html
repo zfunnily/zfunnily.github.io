@@ -1,0 +1,181 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>Gitlab | CI/CD简单实现 | Zzz记忆</title><meta property="og:title" content="Gitlab | CI/CD简单实现 - Zzz记忆"><meta property="og:type" content="article"><meta name=color-scheme content="light dark"><meta property="article:published_time" content="2022-06-22T14:26:25+08:00"><meta property="article:modified_time" content="2022-06-23T04:10:57+08:00"><meta name=Keywords content="skynet开发,skynet源码解析,skynet框架分析,golang,C++,游戏服务器,lua开发 ,IM服务器"><meta name=description content="Gitlab | CI/CD简单实现"><meta name=author content="留白"><meta property="og:url" content="https://blog.rakfree.tk/2022/06/cicd/"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=stylesheet href=/css/normalize.css><link rel=stylesheet href=/css/style.css><script type=text/javascript src=/js/jquery.js></script>
+<link href=/js/jquery.fancybox.css rel=stylesheet><link rel=stylesheet type=text/css href=/css/bilibili.css><script id=LA_COLLECT src=/js/js-sdk-pro.min.js></script>
+<script>LA.init({id:"JXzIfjoKHVwu0mwG",ck:"JXzIfjoKHVwu0mwG"})</script></head><body><header id=header class=clearfix><div class=container><div class=col-group><div class=site-name><a id=logo href=https://blog.rakfree.tk>Zzz记忆</a><div id=quotes class=description></div></div><div><nav id=nav-menu class=clearfix><a class=current href=https://blog.rakfree.tk>首页</a>
+<a href=https://blog.rakfree.tk/thinking/ title=随想>随想</a>
+<a href=https://blog.rakfree.tk/archives/ title=归档>归档</a>
+<a href=https://blog.rakfree.tk/about/ title=关于>关于</a>
+<a href=https://blog.rakfree.tk/search/ title=搜索>搜索</a></nav></div></div></div></header><div id=body><div class=container><div class=col-group><div class=col-8 id=main><div class=res-cons><style type=text/css>.post-toc{position:fixed;width:200px;margin-left:-210px;padding:5px 10px;font-family:Athelas,STHeiti,Microsoft Yahei,serif;font-size:12px;border:1px solid rgba(0,0,0,7%);border-radius:5px;background-color:rgba(255,255,255,.98);background-clip:padding-box;-webkit-box-shadow:1px 1px 2px rgba(0,0,0,.125);box-shadow:1px 1px 2px rgba(0,0,0,.125);word-wrap:break-word;white-space:nowrap;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:999;cursor:pointer;max-height:70%;overflow-y:auto;overflow-x:hidden}.post-toc .post-toc-title{width:100%;margin:0 auto;font-size:20px;font-weight:400;text-transform:uppercase;text-align:center}.post-toc .post-toc-content{font-size:15px}.post-toc .post-toc-content>nav>ul{margin:10px 0}.post-toc .post-toc-content ul{padding-left:20px;list-style:square;margin:.5em;line-height:1.8em}.post-toc .post-toc-content ul ul{padding-left:15px;display:none}@media print,screen and (max-width:1057px){.post-toc{display:none}}</style><div class=post-toc style=position:absolute;top:188px;mix-blend-mode:difference><h2 class=post-toc-title>文章目录</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#cicd-流水线-组件组成>CI/CD 流水线 组件组成</a></li><li><a href=#gitlab-runner-安装>gitlab runner 安装</a><ul><li><a href=#docker安装>docker安装</a></li><li><a href=#其他安装方式>其他安装方式</a></li><li><a href=#注册runner命令>注册runner命令</a></li></ul></li><li><a href=#executor执行器>Executor(执行器)</a><ul><li><a href=#如果使用的是shell执行器executor-如果要免密操作需要如下步骤>如果使用的是shell执行器(Executor), 如果要免密操作需要如下步骤</a></li></ul></li><li><a href=#简单实现cicd>简单实现CI/CD</a></li></ul></nav></div></div><script type=text/javascript>$(document).ready(function(){if(e=$(".post-toc"),e.length){t=$("#main").offset().left,t<220&&e.css({width:t-10,"margin-left":0-t});var e,t,n=e.offset().top-20,s={start:{position:"absolute",top:n},process:{position:"fixed",top:20}};$(window).scroll(function(){var t=$(window).scrollTop();t<n?e.css(s.start):e.css(s.process)})}})</script><article class=post><header><h1 class=post-title>Gitlab | CI/CD简单实现</h1></header><date class="post-meta meta-date">2022年6月22日</date><div class=post-meta><span>|</span>
+<span class=meta-category><a href=/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2>自动部署</a></span></div><div class=clear style=display:none><div class=toc-article><div class=toc-title>文章目录</div></div></div><div class=post-content><h2 id=cicd-流水线-组件组成>CI/CD 流水线 组件组成</h2><ol><li>stages</li><li>job</li><li>gitlab runner(可以与gitlab服务器独立, c/s架构. )</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>--------    --------    --------- 
+</span></span><span style=display:flex><span>|stage1| -&gt; |stage2| -&gt; | stage3|          
+</span></span><span style=display:flex><span>--------    --------    --------- 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>------    ------    -------
+</span></span><span style=display:flex><span>|job1|    |job2|    | job3|          
+</span></span><span style=display:flex><span>------    ------    ------- 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>---------   ---------    --------- 
+</span></span><span style=display:flex><span>|runner1|   |runner2| -&gt; |runner3|          
+</span></span><span style=display:flex><span>---------   ---------    --------- 
+</span></span></code></pre></div><ul><li>pipline: 包含多个stages， 顺序执行</li><li>stages: 一个stage可以包含多个job，job之间并行</li><li>jobs: 一个job对应一个runner</li><li>runner: job的运行环境 可以独立于gitlab，放到其他宿主机上.</li></ul><h2 id=gitlab-runner-安装>gitlab runner 安装</h2><p>gitlab runner是运行job的环境。需要安装一个可以执行<code>gitlab runner</code>命令的环境.</p><h3 id=docker安装>docker安装</h3><p><a href=https://docs.gitlab.com/runner/install/docker.html>https://docs.gitlab.com/runner/install/docker.html</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>$ docker volume create gitlab-runner-config
+</span></span><span style=display:flex><span>$ docker run -d --name gitlab-runner --restart always \
+</span></span><span style=display:flex><span>    -v /var/run/docker.sock:/var/run/docker.sock \
+</span></span><span style=display:flex><span>    -v gitlab-runner-config:/etc/gitlab-runner \
+</span></span><span style=display:flex><span>    gitlab/gitlab-runner:latest
+</span></span></code></pre></div><h3 id=其他安装方式>其他安装方式</h3><p>参考:
+<a data-fancybox=gallery href=https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220623114802.png><img class=mx-auto alt src=https://raw.githubusercontent.com/zfunnily/PictureUtools/main/image20220623114802.png></a></p><h3 id=注册runner命令>注册runner命令</h3><h4 id=汇总操作命令-推荐>汇总操作命令 (推荐)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>$ docker exec -it gitlab-runner  gitlab-runner register -n \
+</span></span><span style=display:flex><span>  --executor docker \
+</span></span><span style=display:flex><span>  --docker-image &#34;docker:latest&#34; \
+</span></span><span style=display:flex><span>  --url &#34;https://gitlab.com&#34; \
+</span></span><span style=display:flex><span>  --registration-token &#34;GR1348941pvMxbpQFn2&#34; \
+</span></span><span style=display:flex><span>  --description &#34;Docker&#34; \
+</span></span><span style=display:flex><span>  --tag-list &#34;docker,pro2dserver&#34; \
+</span></span><span style=display:flex><span>  --docker-privileged=true \
+</span></span><span style=display:flex><span>  --docker-pull-policy=&#34;if-not-present&#34; \
+</span></span><span style=display:flex><span>  --locked=&#34;false&#34; \
+</span></span><span style=display:flex><span>  --docker-volumes /var/run/docker.sock:/var/run/docker.sock 
+</span></span></code></pre></div><ul><li>executor: 执行器，有docker，shell，ssh&mldr;</li><li>docker-image: 指定runner使用的docker镜像</li><li>url: 指定gitlab服务地址</li><li>registration-token: 项目的runner token， 可以在setting->CI/CD->Runner 中找到</li><li>tag-list: 配置流水管线的job任务时，可以通过指定tag，来使用与之相同tag的runner</li><li>pull-policy: 使用缓存, 提升速度</li><li>docker-volumes: 使用宿主机的docker</li></ul><h4 id=分步操作>分步操作</h4><details class=code-detail><summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px">代码</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># 进入容器
+</span></span><span style=display:flex><span>docker exec -it gitlab-runner /bin/bash
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 运行以下注册命令
+</span></span><span style=display:flex><span>gitlab-runner register
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 输入Gitlab实例的地址
+</span></span><span style=display:flex><span>Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com )
+</span></span><span style=display:flex><span>https://gitlab.com  # 端口采用默认的80，否则需要加上端口
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 输入token
+</span></span><span style=display:flex><span>Please enter the gitlab-ci token for this runner
+</span></span><span style=display:flex><span>GR1348941pvMxbpQFn2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 输入Runner的描述，后期可以手动修改
+</span></span><span style=display:flex><span>Please enter the gitlab-ci description for this runner
+</span></span><span style=display:flex><span>[hostname] my-runner
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 输入与Runner关联的标签，后期可以手动修改
+</span></span><span style=display:flex><span>Please enter the gitlab-ci tags for this runner (comma separated):
+</span></span><span style=display:flex><span>my-tag
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 输入Ruuner的执行者
+</span></span><span style=display:flex><span>Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell:
+</span></span><span style=display:flex><span>docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># 如果上面执行者为docker，需要你在后续项目根部的.gitlab-ci.yml中指定docker版本
+</span></span><span style=display:flex><span>Please enter the Docker image (eg. ruby:2.1):
+</span></span><span style=display:flex><span>alpine:latest
+</span></span></code></pre></div></details><br><p>runner注册完毕之后，还需要修改一下runner的配置文件，实现runner与宿主机的数据挂载:</p><details class=code-detail><summary style="background-color:#f5f5f5;border:1px solid #d2d2d2;padding:5px">代码</summary><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>$ vim /etc/gitlab-runner/config/config.toml # 开头创建的宿主机挂载目录
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>concurrent = 1
+</span></span><span style=display:flex><span>check_interval = 0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[session_server]
+</span></span><span style=display:flex><span>  session_timeout = 1800
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[[runners]]
+</span></span><span style=display:flex><span>  name = &#34;my-runner&#34;
+</span></span><span style=display:flex><span>  url = &#34;http://192.168.0.253&#34;
+</span></span><span style=display:flex><span>  token = &#34;tyXBwC8frbShS4yn3nE5&#34;
+</span></span><span style=display:flex><span>  executor = &#34;docker&#34;
+</span></span><span style=display:flex><span>  [runners.custom_build_dir]
+</span></span><span style=display:flex><span>  [runners.cache]
+</span></span><span style=display:flex><span>    [runners.cache.s3]
+</span></span><span style=display:flex><span>    [runners.cache.gcs]
+</span></span><span style=display:flex><span>    [runners.cache.azure]
+</span></span><span style=display:flex><span>  [runners.docker]
+</span></span><span style=display:flex><span>    tls_verify = false
+</span></span><span style=display:flex><span>    image = &#34;alpine:latest&#34;
+</span></span><span style=display:flex><span>    privileged = false
+</span></span><span style=display:flex><span>    disable_entrypoint_overwrite = false
+</span></span><span style=display:flex><span>    oom_kill_disable = false
+</span></span><span style=display:flex><span>    disable_cache = false
+</span></span><span style=display:flex><span>    volumes = [&#34;/cache&#34;,&#34;/var/run/docker.sock:/var/run/docker.sock&#34;]
+</span></span><span style=display:flex><span>    shm_size = 0
+</span></span></code></pre></div></details><br><p>原先是volumes = ["/cache"]
+上面的volumes数组中添加docker的挂载，加快项目的构建速度。</p><p>最后，只需要再重启runner容器即可:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>docker restart gitlab-runner
+</span></span></code></pre></div><p>说明：
+1.不同的项目可以使用不同的gitlab-runner，根据实际情况再运行一个名称不一样的容器，并根据新项目的token注册就行了。
+2.不同的项目还可以使用同一个gitlab-runner，只需要在注册的时候使用不同项目下的token就行了。</p><h2 id=executor执行器>Executor(执行器)</h2><p>参考: <a href=https://docs.gitlab.com/runner/executors/>https://docs.gitlab.com/runner/executors/</a></p><h3 id=如果使用的是shell执行器executor-如果要免密操作需要如下步骤>如果使用的是shell执行器(Executor), 如果要免密操作需要如下步骤</h3><p>生成密钥</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>ssh-keygen
+</span></span><span style=display:flex><span>ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
+</span></span></code></pre></div><p>测试免密登录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>ssh user@host
+</span></span></code></pre></div><p>因为是docker拉起来的gitlab-runner, 免密操作可能会出现</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>scp code/*.sh root@11.22.33.55:/root/
+</span></span><span style=display:flex><span>Host key verification failed.
+</span></span></code></pre></div><p>解决方案：
+需要在gitlab-settings-variables下设置变量SSH_PRIVATE_KEY，value为~/.ssh/id_rsa的内容，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>-----BEGIN RSA PRIVATE KEY-----
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>-----END RSA PRIVATE KEY-----
+</span></span></code></pre></div><p>添加到value中.</p><p>需要更新.gitlab-ci.yml文件，在before_script步骤内添加以下内容</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>  before_script:
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#- cd /usr/local/${CI_PROJECT_NAME}/src/${CI_PROJECT_NAME}</span>
+</span></span><span style=display:flex><span>    - eval <span style=color:#66d9ef>$(</span>ssh-agent -s<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>    - echo <span style=color:#e6db74>&#34;</span>$SSH_PRIVATE_KEY<span style=color:#e6db74>&#34;</span> | tr -d <span style=color:#e6db74>&#39;\r&#39;</span> | ssh-add -
+</span></span><span style=display:flex><span>    <span style=color:#75715e>## Create the SSH directory and give it the right permissions</span>
+</span></span><span style=display:flex><span>    - mkdir -p ~/.ssh
+</span></span><span style=display:flex><span>    - chmod <span style=color:#ae81ff>700</span> ~/.ssh
+</span></span><span style=display:flex><span>    - ssh-keyscan <span style=color:#e6db74>${</span>DEPLOY_HOST<span style=color:#e6db74>}</span> &gt; ~/.ssh/known_hosts
+</span></span><span style=display:flex><span>    - chmod <span style=color:#ae81ff>644</span> ~/.ssh/known_hosts
+</span></span></code></pre></div><h2 id=简单实现cicd>简单实现CI/CD</h2><p>以需求为导向, 实现三个阶段build, test, deploy。</p><p>在项目根目录创建文件 <code>.gitlab-ci.yml</code>, 写入一下内容，提交服务器，即可以看到CI/CD流水线中已经开始运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>stages:          # List of stages for jobs, and their order of execution
+</span></span><span style=display:flex><span>  - build
+</span></span><span style=display:flex><span>  - test
+</span></span><span style=display:flex><span>  - deploy
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>build-job:       # This job runs in the build stage, which runs first.
+</span></span><span style=display:flex><span>  stage: build
+</span></span><span style=display:flex><span>  script:
+</span></span><span style=display:flex><span>    - echo &#34;Compiling the code...&#34;
+</span></span><span style=display:flex><span>    - echo &#34;Compile complete.&#34;
+</span></span><span style=display:flex><span>  only:
+</span></span><span style=display:flex><span>    - master
+</span></span><span style=display:flex><span>  tags:
+</span></span><span style=display:flex><span>    - docker
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>unit-test-job:   # This job runs in the test stage.
+</span></span><span style=display:flex><span>  stage: test    # It only starts when the job in the build stage completes successfully.
+</span></span><span style=display:flex><span>  script:
+</span></span><span style=display:flex><span>    - echo &#34;Running unit tests... This will take about 60 seconds.&#34;
+</span></span><span style=display:flex><span>    - echo &#34;Code coverage is 90%&#34;
+</span></span><span style=display:flex><span>  only:
+</span></span><span style=display:flex><span>    - master
+</span></span><span style=display:flex><span>  tags:
+</span></span><span style=display:flex><span>    - shell
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>deploy-job:      # This job runs in the deploy stage.
+</span></span><span style=display:flex><span>  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+</span></span><span style=display:flex><span>  script:
+</span></span><span style=display:flex><span>    - echo &#34;Deploying application...&#34;
+</span></span><span style=display:flex><span>    - echo &#34;Application successfully deployed.&#34;
+</span></span><span style=display:flex><span>  only:
+</span></span><span style=display:flex><span>    - master
+</span></span><span style=display:flex><span>  tags:
+</span></span><span style=display:flex><span>    - shell
+</span></span></code></pre></div><ul><li>only: 指定项目分支或者tags， 当有某个分支或者有个新tag提交上来时出发该job</li><li>tags: 指定runner的tag，job运行在与之匹配的tags的runner环境中。</li></ul><h4 align=center>--完--</h4></div><div class=post-archive><ul class=post-copyright><li><strong>原文作者：</strong>
+<a rel=author href=https://blog.rakfree.tk>留白</a></li><li style=word-break:break-all><strong>原文链接：</strong>
+<a href=https://blog.rakfree.tk/2022/06/cicd/>https://blog.rakfree.tk/2022/06/cicd/</a></li><li style=word-break:break-all><strong>更新时间：</strong>2022-06-23 04:10:57</li><li><strong>本文声明：</strong>转载请标记原文作者及链接</li></ul></div><br><div class=post-archive><h2>See Also</h2><ul class=listing><li><a href=/2022/05/baidu/>百度网盘不限速 | Aria2篇</a></li><li><a href=/2022/05/refraction/>URP 不透明/半透明物体的折射</a></li><li><a href=/2022/05/shaderalpha/>《Unity Shader入门精要》第八章笔记 | 透明度</a></li><li><a href=/2022/05/shaderlighting/>《Unity Shader入门精要》第六章笔记 | 基础光照</a></li><li><a href=/2022/05/shaderbase/>《Unity Shader入门精要》第五章笔记 | 开始shader练习</a></li></ul></div><div class="post-meta meta-tags">没有标签</div></article><div id=cusdis_thread data-host=https://cusdis-vercel-five.vercel.app data-app-id=01429b04-b016-4c60-99b1-2e11e67ec4c1 data-page-id=5fcc16fa6b26fd58d2abf703bbf01473 data-page-url=https://blog.rakfree.tk/2022/06/cicd/ data-page-title="Gitlab | CI/CD简单实现"></div><script async defer src=https://cusdis-vercel-five.vercel.app/js/cusdis.es.js></script></div><footer id=footer><div>&copy; 2022 <a href=https://blog.rakfree.tk>Zzz记忆 By 留白</a></div><br><div><div class=github-badge><a href=https://gohugo.io/ target=_black rel=nofollow><span class=badge-subject>Powered by</span><span class="badge-value bg-blue">Hugo</span></a></div><div class=github-badge><a href=https://www.flysnow.org/ target=_black><span class=badge-subject>Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a></div><div class=github-badge><a href=https://github.com/flysnow-org/maupassant-hugo target=_black><span class=badge-subject>Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a></div></div><div><script id=LA-DATA-WIDGET crossorigin=anonymous src="https://v6-widget.51.la/v6/JXzIfjoKHVwu0mwG/quote.js?theme=0&f=12"></script></div></footer><script type=text/javascript>window.MathJax={tex2jax:{inlineMath:[["$","$"]],processEscapes:!0}}</script><script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src=/js/jquery.fancybox.min.js></script>
+<a id=rocket href=#top></a>
+<script type=text/javascript src='/js/totop.js?v=0.0.0' async></script></div><div id=secondary><section class=widget><form id=search action=https://blog.rakfree.tk/search/ method=get accept-charset=utf-8 target=_blank _lpchecked=1><input type=text name=q maxlength=20 placeholder=Search>
+<input type=hidden name=sitesearch value=https://blog.rakfree.tk>
+<button type=submit class="submit icon-search"></button></form></section><section class=widget><h3 class=widget-title>最近文章</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/2022/06/cicd/ title="Gitlab | CI/CD简单实现">Gitlab | CI/CD简单实现</a></li><li><a href=https://blog.rakfree.tk/2022/05/baidu/ title="百度网盘不限速 | Aria2篇">百度网盘不限速 | Aria2篇</a></li><li><a href=https://blog.rakfree.tk/2022/05/refraction/ title="URP 不透明/半透明物体的折射">URP 不透明/半透明物体的折射</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderalpha/ title="《Unity Shader入门精要》第八章笔记 | 透明度">《Unity Shader入门精要》第八章笔记 | 透明度</a></li><li><a href=https://blog.rakfree.tk/2022/05/shaderlighting/ title="《Unity Shader入门精要》第六章笔记 | 基础光照">《Unity Shader入门精要》第六章笔记 | 基础光照</a></li></ul><h3 class=widget-title>随想</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/thinking/2022/03/shuowang/ title="无聊 & 痛苦">无聊 & 痛苦</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/think01/ title=爬楼有感>爬楼有感</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/weekly01/ title=老纪>老纪</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/03/summarize/ title=2021焦虑总结>2021焦虑总结</a></li><li><a href=https://blog.rakfree.tk/thinking/2022/01/jx/ title=转载｜江雪：长安十日>转载｜江雪：长安十日</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/categories/>分类</a></h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/categories/IT/>IT (11)</a></li><li><a href=https://blog.rakfree.tk/categories/IT.Linux/>IT.Linux (10)</a></li><li><a href=https://blog.rakfree.tk/categories/%E5%8D%9A%E5%AE%A2%E8%AE%B0%E4%BA%8B/>博客记事 (7)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%A7%91%E6%99%AE/>科普 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B/>编程 (96)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.C/>编程.C (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Golang/>编程.Golang (22)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Lua/>编程.Lua (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.P2P/>编程.P2P (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.Unity3D/>编程.Unity3D (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.UnityShader/>编程.UnityShader (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8/>编程.图形学入门 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B1%87%E7%BC%96/>编程.汇编 (2)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/>编程.游戏开发 (12)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/>编程.网络编程 (4)</a></li><li><a href=https://blog.rakfree.tk/categories/%E7%BC%96%E7%A8%8B.%E9%9F%B3%E8%A7%86%E9%A2%91/>编程.音视频 (9)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/>自动部署 (13)</a></li><li><a href=https://blog.rakfree.tk/categories/%E8%BD%AC%E8%BD%BD/>转载 (1)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94/>随笔 (5)</a></li><li><a href=https://blog.rakfree.tk/categories/%E9%9A%8F%E7%AC%94.%E6%91%98%E6%8A%84/>随笔.摘抄 (2)</a></li></ul></section><section class=widget><h3 class=widget-title><a href=/tags/>标签</a></h3><div class=tagcloud><a href=https://blog.rakfree.tk/tags/URP/>URP</a>
+<a href=https://blog.rakfree.tk/tags/cpu/>cpu</a>
+<a href=https://blog.rakfree.tk/tags/docker/>docker</a>
+<a href=https://blog.rakfree.tk/tags/except/>except</a>
+<a href=https://blog.rakfree.tk/tags/ffmpeg/>ffmpeg</a>
+<a href=https://blog.rakfree.tk/tags/gcc/>gcc</a>
+<a href=https://blog.rakfree.tk/tags/glibc/>glibc</a>
+<a href=https://blog.rakfree.tk/tags/hugo/>hugo</a>
+<a href=https://blog.rakfree.tk/tags/k8s/>k8s</a>
+<a href=https://blog.rakfree.tk/tags/music/>music</a>
+<a href=https://blog.rakfree.tk/tags/nginx/>nginx</a>
+<a href=https://blog.rakfree.tk/tags/nsf/>nsf</a>
+<a href=https://blog.rakfree.tk/tags/p2p/>p2p</a>
+<a href=https://blog.rakfree.tk/tags/randomquotes/>randomquotes</a>
+<a href=https://blog.rakfree.tk/tags/redis/>redis</a>
+<a href=https://blog.rakfree.tk/tags/rsync/>rsync</a>
+<a href=https://blog.rakfree.tk/tags/screen/>screen</a>
+<a href=https://blog.rakfree.tk/tags/shader/>shader</a>
+<a href=https://blog.rakfree.tk/tags/shader%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>shader学习笔记</a>
+<a href=https://blog.rakfree.tk/tags/shortcodes/>shortcodes</a>
+<a href=https://blog.rakfree.tk/tags/skynet/>skynet</a>
+<a href=https://blog.rakfree.tk/tags/vim/>vim</a>
+<a href=https://blog.rakfree.tk/tags/weekly/>weekly</a>
+<a href=https://blog.rakfree.tk/tags/year/>year</a>
+<a href=https://blog.rakfree.tk/tags/%E5%AE%9A%E6%97%B6%E5%99%A8/>定时器</a>
+<a href=https://blog.rakfree.tk/tags/%E6%8A%BD%E5%8D%A1/>抽卡</a>
+<a href=https://blog.rakfree.tk/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/>读书笔记</a>
+<a href=https://blog.rakfree.tk/tags/%E9%95%BF%E5%AE%89%E5%8D%81%E6%97%A5/>长安十日</a></div></section><section class=widget><h3 class=widget-title>友情链接</h3><ul class=widget-list><li><a target=_blank href=https://github.com/zfunnily title=留白的github>留白github</a></li></ul></section><section class=widget><h3 class=widget-title>其它</h3><ul class=widget-list><li><a href=https://blog.rakfree.tk/index.xml>文章 RSS</a></li></ul></section></div></div></div></div></body></html>
