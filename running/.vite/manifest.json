@@ -1,0 +1,129 @@
+{
+  "_chunk-CTC_7jcf.js": {
+    "file": "assets/chunk-CTC_7jcf.js",
+    "name": "chunk"
+  },
+  "_const-DIkJ8VTM.js": {
+    "file": "assets/const-DIkJ8VTM.js",
+    "name": "const",
+    "imports": [
+      "index.html"
+    ]
+  },
+  "_mapbox-gl-aD9tyR2g.js": {
+    "file": "assets/mapbox-gl-aD9tyR2g.js",
+    "name": "mapbox-gl",
+    "imports": [
+      "_chunk-CTC_7jcf.js",
+      "index.html"
+    ]
+  },
+  "_polyline-D3ovbSOY.js": {
+    "file": "assets/polyline-D3ovbSOY.js",
+    "name": "polyline",
+    "imports": [
+      "_chunk-CTC_7jcf.js"
+    ]
+  },
+  "assets/github.svg": {
+    "file": "assets/github-CZg5T0CE.js",
+    "name": "github",
+    "src": "assets/github.svg",
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-CTC_7jcf.js",
+      "index.html"
+    ]
+  },
+  "assets/grid.svg": {
+    "file": "assets/grid-B3w_WQjF.js",
+    "name": "grid",
+    "src": "assets/grid.svg",
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-CTC_7jcf.js",
+      "index.html"
+    ]
+  },
+  "index.html": {
+    "file": "assets/index-CPZpU-Gd.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_chunk-CTC_7jcf.js"
+    ],
+    "dynamicImports": [
+      "src/themes/dashboard/index.tsx",
+      "src/themes/classic/index.tsx"
+    ],
+    "assets": [
+      "assets/activities-BEqw9WPH.json"
+    ]
+  },
+  "src/assets/china-provinces.json": {
+    "file": "assets/china-provinces-CXPUbNck.js",
+    "name": "china-provinces",
+    "src": "src/assets/china-provinces.json",
+    "isDynamicEntry": true
+  },
+  "src/static/activities.json": {
+    "file": "assets/activities-BEqw9WPH.json",
+    "src": "src/static/activities.json"
+  },
+  "src/themes/classic/index.tsx": {
+    "file": "assets/classic-Dq6rpf65.js",
+    "name": "classic",
+    "src": "src/themes/classic/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-CTC_7jcf.js",
+      "index.html",
+      "_polyline-D3ovbSOY.js",
+      "_const-DIkJ8VTM.js"
+    ],
+    "dynamicImports": [
+      "assets/github.svg",
+      "assets/grid.svg",
+      "_mapbox-gl-aD9tyR2g.js",
+      "src/themes/classic/static/run_countries.ts"
+    ],
+    "css": [
+      "assets/classic-Dqxvhkrm.css"
+    ],
+    "assets": [
+      "assets/world.zh-CrAdl_WO.json"
+    ]
+  },
+  "src/themes/classic/static/run_countries.ts": {
+    "file": "assets/run_countries-BdN8NTCg.js",
+    "name": "run_countries",
+    "src": "src/themes/classic/static/run_countries.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_const-DIkJ8VTM.js"
+    ]
+  },
+  "src/themes/classic/static/world.zh.json": {
+    "file": "assets/world.zh-CrAdl_WO.json",
+    "src": "src/themes/classic/static/world.zh.json"
+  },
+  "src/themes/dashboard/index.tsx": {
+    "file": "assets/dashboard-Hidqa2Z1.js",
+    "name": "dashboard",
+    "src": "src/themes/dashboard/index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-CTC_7jcf.js",
+      "index.html",
+      "_polyline-D3ovbSOY.js",
+      "_mapbox-gl-aD9tyR2g.js"
+    ],
+    "dynamicImports": [
+      "src/assets/china-provinces.json"
+    ],
+    "css": [
+      "assets/dashboard-ClWNMiSo.css"
+    ]
+  }
+}

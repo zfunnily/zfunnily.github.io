@@ -1,1 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>总结，总结.月 on Zzz记忆</title><link>https://zfunnily.github.io/categories/%E6%80%BB%E7%BB%93%E6%80%BB%E7%BB%93.%E6%9C%88/</link><description>Recent content in 总结，总结.月 on Zzz记忆</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 16 Apr 2024 01:01:05 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E6%80%BB%E7%BB%93%E6%80%BB%E7%BB%93.%E6%9C%88/index.xml" rel="self" type="application/rss+xml"/><item><title>2024-2月</title><link>https://zfunnily.github.io/2024/02/02/</link><pubDate>Tue, 27 Feb 2024 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2024/02/02/</guid><description>学习 书籍 电影 游戏 《Lies of P》 《Dark Soul》重制版 番&amp;amp;剧 《绝命毒师》第一季/第二季 其他</description></item><item><title>12月</title><link>https://zfunnily.github.io/2023/12/30/</link><pubDate>Sat, 30 Dec 2023 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2023/12/30/</guid><description>学习 银河城地图 搭建 ue5 paper2d 书籍 《游戏设计艺术》 电影 《复仇者联盟》4 游戏 《血污：夜之仪式》 《LOL》 《神之亵渎》 23小时 番&amp;amp;剧 其他</description></item><item><title>11月</title><link>https://zfunnily.github.io/2023/11/30/</link><pubDate>Thu, 30 Nov 2023 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2023/11/30/</guid><description>学习 chatglm + langchain 知识库 docker搭建 ue5 paper2d的使用 wsl 子系统研究， win11 镜像模式. 电视剧 《繁城之下》 番剧 《反叛的鲁路修》 一季、二季 书籍 《置身事内》 电影 《复仇者联盟》3 游戏 《马里奥惊奇》已完结 《血污：夜之</description></item><item><title>2024-01月</title><link>https://zfunnily.github.io/1/01/30/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/30/</guid><description>学习 书籍 电影 游戏 《艾尔登法环》 《Dark Soul》3 《LOL》 番&amp;amp;剧 其他</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>总结，总结.月 on Zzz记忆</title><link>https://zfunnily.github.io/categories/%E6%80%BB%E7%BB%93%E6%80%BB%E7%BB%93.%E6%9C%88/</link><description>Recent content in 总结，总结.月 on Zzz记忆</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Aug 2026 09:37:46 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/categories/%E6%80%BB%E7%BB%93%E6%80%BB%E7%BB%93.%E6%9C%88/index.xml" rel="self" type="application/rss+xml"/><item><title>2025-11月</title><link>https://zfunnily.github.io/2025/11/13/</link><pubDate>Thu, 13 Nov 2025 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2025/11/13/</guid><description>&lt;h1 id="-动态域名解析ddns全攻略让你的家庭服务器随时可访问"&gt;🌐 动态域名解析（DDNS）全攻略：让你的家庭服务器随时可访问！&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;——以 ddns-go 为例的实用教程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="-一为什么需要-ddns"&gt;🧭 一、为什么需要 DDNS？&lt;/h2&gt;
+&lt;p&gt;如果你有以下需求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;想在外面远程访问家里的 NAS、监控或家庭服务器&lt;/li&gt;
+&lt;li&gt;想自己搭建一个网站或远程开发环境&lt;/li&gt;
+&lt;li&gt;但发现家里的宽带没有固定公网 IP
+那么你一定遇到过这种尴尬：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“昨天还能访问的 IP，今天就变了。”
+“我明明在公网开放了端口，但连不进去了。”&lt;/p&gt;</description></item><item><title>2024-6月</title><link>https://zfunnily.github.io/2024/06/25/</link><pubDate>Tue, 25 Jun 2024 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2024/06/25/</guid><description>&lt;h2 id="svn-配置保存账户密码"&gt;svn 配置保存账户密码&lt;/h2&gt;
+&lt;p&gt;启用密码缓存机制, 安装gnome-keyring&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ sudo apt-get install gnome-keyring
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;编辑配置文件 ~/.subversion/config&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[auth]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;password-stores = gnome-keyring
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;store-auth-creds = yes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行下面命令会跳出密码框， 输入密码后会自动保存密码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ svn update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ svn checkout
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>2024-2月</title><link>https://zfunnily.github.io/2024/02/02/</link><pubDate>Tue, 27 Feb 2024 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2024/02/02/</guid><description>&lt;h2 id="学习"&gt;学习&lt;/h2&gt;
+&lt;h2 id="书籍"&gt;书籍&lt;/h2&gt;
+&lt;h2 id="电影"&gt;电影&lt;/h2&gt;
+&lt;h2 id="游戏"&gt;游戏&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;《Lies of P》&lt;/li&gt;
+&lt;li&gt;《Dark Soul》重制版&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="番剧"&gt;番&amp;amp;剧&lt;/h2&gt;
+&lt;p&gt;《绝命毒师》第一季/第二季&lt;/p&gt;
+&lt;h2 id="其他"&gt;其他&lt;/h2&gt;</description></item><item><title>2024-01月</title><link>https://zfunnily.github.io/2024/01/30/</link><pubDate>Tue, 30 Jan 2024 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2024/01/30/</guid><description>&lt;h2 id="学习"&gt;学习&lt;/h2&gt;
+&lt;h2 id="书籍"&gt;书籍&lt;/h2&gt;
+&lt;h2 id="电影"&gt;电影&lt;/h2&gt;
+&lt;h2 id="游戏"&gt;游戏&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;《艾尔登法环》&lt;/li&gt;
+&lt;li&gt;《Dark Soul》3&lt;/li&gt;
+&lt;li&gt;《LOL》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="番剧"&gt;番&amp;amp;剧&lt;/h2&gt;
+&lt;h2 id="其他"&gt;其他&lt;/h2&gt;</description></item><item><title>12月</title><link>https://zfunnily.github.io/2023/12/30/</link><pubDate>Sat, 30 Dec 2023 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2023/12/30/</guid><description>&lt;h2 id="学习"&gt;学习&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;银河城地图 搭建&lt;/li&gt;
+&lt;li&gt;ue5 paper2d&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="书籍"&gt;书籍&lt;/h2&gt;
+&lt;p&gt;《游戏设计艺术》&lt;/p&gt;
+&lt;h2 id="电影"&gt;电影&lt;/h2&gt;
+&lt;p&gt;《复仇者联盟》4&lt;/p&gt;
+&lt;h2 id="游戏"&gt;游戏&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;《血污：夜之仪式》&lt;/li&gt;
+&lt;li&gt;《LOL》&lt;/li&gt;
+&lt;li&gt;《神之亵渎》 23小时&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="番剧"&gt;番&amp;amp;剧&lt;/h2&gt;
+&lt;h2 id="其他"&gt;其他&lt;/h2&gt;</description></item><item><title>11月</title><link>https://zfunnily.github.io/2023/11/30/</link><pubDate>Thu, 30 Nov 2023 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2023/11/30/</guid><description>&lt;h2 id="学习"&gt;学习&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;chatglm + langchain 知识库 docker搭建&lt;/li&gt;
+&lt;li&gt;ue5 paper2d的使用&lt;/li&gt;
+&lt;li&gt;wsl 子系统研究， win11 镜像模式.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="电视剧"&gt;电视剧&lt;/h2&gt;
+&lt;p&gt;《繁城之下》&lt;/p&gt;
+&lt;h2 id="番剧"&gt;番剧&lt;/h2&gt;
+&lt;p&gt;《反叛的鲁路修》 一季、二季&lt;/p&gt;
+&lt;h2 id="书籍"&gt;书籍&lt;/h2&gt;
+&lt;p&gt;《置身事内》&lt;/p&gt;
+&lt;h2 id="电影"&gt;电影&lt;/h2&gt;
+&lt;p&gt;《复仇者联盟》3&lt;/p&gt;
+&lt;h2 id="游戏"&gt;游戏&lt;/h2&gt;
+&lt;p&gt;《马里奥惊奇》已完结
+《血污：夜之仪式》未完
+《LOL》玩了两个周末&lt;/p&gt;</description></item></channel></rss>
