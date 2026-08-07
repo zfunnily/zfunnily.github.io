@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zzz记忆</title><link>https://zfunnily.github.io/</link><description>Recent content on Zzz记忆</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Aug 2026 09:41:07 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2025-11月</title><link>https://zfunnily.github.io/2025/11/13/</link><pubDate>Thu, 13 Nov 2025 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2025/11/13/</guid><description>&lt;h1 id="-动态域名解析ddns全攻略让你的家庭服务器随时可访问"&gt;🌐 动态域名解析（DDNS）全攻略：让你的家庭服务器随时可访问！&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zzz记忆</title><link>https://zfunnily.github.io/</link><description>Recent content on Zzz记忆</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 07 Aug 2026 09:51:01 +0000</lastBuildDate><atom:link href="https://zfunnily.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2025-11月</title><link>https://zfunnily.github.io/2025/11/13/</link><pubDate>Thu, 13 Nov 2025 15:45:00 +0800</pubDate><guid>https://zfunnily.github.io/2025/11/13/</guid><description>&lt;h1 id="-动态域名解析ddns全攻略让你的家庭服务器随时可访问"&gt;🌐 动态域名解析（DDNS）全攻略：让你的家庭服务器随时可访问！&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;——以 ddns-go 为例的实用教程&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -4045,39 +4045,34 @@ web管理部署一个就可以。如果安装了其他web管理可以删除&lt;b
 &lt;p&gt;&lt;a data-fancybox="gallery" href="https://cdn.jsdelivr.net/gh/zfunnily/zfunnily.github.io/1/01/14/image-3.png"&gt;
  &lt;img class="mx-auto" alt="alt text" src="https://cdn.jsdelivr.net/gh/zfunnily/zfunnily.github.io/1/01/14/image-3.png" /&gt;
  &lt;/a&gt;
-在家庭与小型办公室的数字化管理场景中，“远程开机”早已成为高频需求。不论是外网访问 NAS 文件、远程开发、还是让家里的主机做下载/渲染，“让设备在需要时自动开机”都是提高效率的关键能力。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/18/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/18/</guid><description>&lt;h1 id="nginx-proxy-manager-从安装到使用手把手完整教学含反向代理--https"&gt;Nginx Proxy Manager 从安装到使用：手把手完整教学（含反向代理 + HTTPS）&lt;/h1&gt;
+在家庭与小型办公室的数字化管理场景中，“远程开机”早已成为高频需求。不论是外网访问 NAS 文件、远程开发、还是让家里的主机做下载/渲染，“让设备在需要时自动开机”都是提高效率的关键能力。&lt;/p&gt;
+&lt;p&gt;而让这一切成为现实的核心技术，就是 WOL（Wake-on-LAN）网络唤醒。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/18/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/18/</guid><description>&lt;h1 id="nginx-proxy-manager-从安装到使用手把手完整教学含反向代理--https"&gt;Nginx Proxy Manager 从安装到使用：手把手完整教学（含反向代理 + HTTPS）&lt;/h1&gt;
 &lt;p&gt;在智能家居、NAS、自建服务越来越流行的今天，如何安全、稳定、便捷地把内网服务暴露到公网，成为许多人要面对的问题。&lt;/p&gt;
 &lt;p&gt;没错，你可以自己写 Nginx 配置，但对很多人来说太复杂。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/21/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/21/</guid><description>&lt;h1 id="-用-frp-解决远程访问难题从安装到使用的最简指南"&gt;🛠 用 FRP 解决远程访问难题：从安装到使用的最简指南&lt;/h1&gt;
 &lt;p&gt;在远程办公、远程维护设备已经成为常态的今天，我们常常会遇到一个头疼的问题：&lt;/p&gt;
 &lt;p&gt;明明家里有公网 IP，为什么在公司却连不上家里的电脑？
 为什么公司电脑没有公网 IP，我在外面就远程不了？&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/01/</guid><description>&lt;h1 id="基于-webdav-的-ios-播放器开发实践从需求到落地的完整过程"&gt;基于 WebDAV 的 iOS 播放器开发实践：从需求到落地的完整过程&lt;/h1&gt;
-&lt;p&gt;最近想在 iPhone 上找一个&lt;strong&gt;无广告、免费的 WebDAV 视频播放器&lt;/strong&gt;。简单搜索之后发现：不是强制付费，就是夹杂广告，要不就是功能阉割。既然找不到适合自己的，那就干脆自己动手做一个。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/13/</guid><description>&lt;h1 id="windows-远程-mac-miniios-webdav-播放器开发实践"&gt;Windows 远程 Mac mini：iOS WebDAV 播放器开发实践&lt;/h1&gt;
-&lt;p&gt;最近在开发 &lt;strong&gt;iOS 平台的 WebDAV 播放器&lt;/strong&gt;，开发环境选择的是 &lt;strong&gt;Mac mini&lt;/strong&gt;。但实际使用中，我的&lt;strong&gt;主力机仍然是 Windows&lt;/strong&gt;，而且&lt;strong&gt;只有一个显示器&lt;/strong&gt;。如何在不频繁切换设备、不额外增加硬件成本的前提下，高效地远程使用 Mac mini，就成了一个绕不开的问题。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/15/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/15/</guid><description>&lt;h1 id="从-0-到-1一个-slg-游戏的基础架构tick-优化与扩展方向"&gt;从 0 到 1：一个 SLG 游戏的基础架构、Tick 优化与扩展方向&lt;/h1&gt;
+&lt;p&gt;最近想在 iPhone 上找一个&lt;strong&gt;无广告、免费的 WebDAV 视频播放器&lt;/strong&gt;。简单搜索之后发现：不是强制付费，就是夹杂广告，要不就是功能阉割。既然找不到适合自己的，那就干脆自己动手做一个。&lt;/p&gt;
+&lt;p&gt;正好家里有一台 &lt;strong&gt;Mac mini (M4)&lt;/strong&gt;，环境齐全，于是开启了我作为“小白开发者”的 WebDAV 播放器开发之旅。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/13/</guid><description>&lt;h1 id="windows-远程-mac-miniios-webdav-播放器开发实践"&gt;Windows 远程 Mac mini：iOS WebDAV 播放器开发实践&lt;/h1&gt;
+&lt;p&gt;最近在开发 &lt;strong&gt;iOS 平台的 WebDAV 播放器&lt;/strong&gt;，开发环境选择的是 &lt;strong&gt;Mac mini&lt;/strong&gt;。但实际使用中，我的&lt;strong&gt;主力机仍然是 Windows&lt;/strong&gt;，而且&lt;strong&gt;只有一个显示器&lt;/strong&gt;。如何在不频繁切换设备、不额外增加硬件成本的前提下，高效地远程使用 Mac mini，就成了一个绕不开的问题。&lt;/p&gt;
+&lt;p&gt;这篇文章就结合我自己的实践，聊一聊 &lt;strong&gt;Windows 远程 Mac mini 的几种方案对比&lt;/strong&gt;，以及我最终的选择。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/15/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/15/</guid><description>&lt;h1 id="从-0-到-1一个-slg-游戏的基础架构tick-优化与扩展方向"&gt;从 0 到 1：一个 SLG 游戏的基础架构、Tick 优化与扩展方向&lt;/h1&gt;
 &lt;p&gt;在写 SLG（策略类）游戏时，真正决定系统能走多远的，从来不是玩法堆得有多满，而是&lt;strong&gt;底层结构是否稳定、是否可扩展&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;这篇文章记录的是我在实现一套 SLG 服务端基础架构过程中的完整思路：&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/19/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/19/</guid><description>&lt;h1 id="一次车祸之后我才真正理解交强险和人性"&gt;一次车祸之后：我才真正理解“交强险”和人性&lt;/h1&gt;
+&lt;p&gt;这篇文章记录的是我在实现一套 SLG 服务端基础架构过程中的完整思路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何从 0 到 1 搭建一个最小可运行的 SLG 骨架&lt;/li&gt;
+&lt;li&gt;在规模出现之前，提前解决 tick 驱动下的性能问题&lt;/li&gt;
+&lt;li&gt;以及这套结构未来可以如何自然扩展&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/19/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/19/</guid><description>&lt;h1 id="一次车祸之后我才真正理解交强险和人性"&gt;一次车祸之后：我才真正理解“交强险”和人性&lt;/h1&gt;
 &lt;p&gt;这是一条迟到很久的 vlog 文本版。&lt;/p&gt;
-&lt;p&gt;不是为了博同情，也不是为了复盘谁对谁错，只是想把&lt;strong&gt;第一次真正经历交通事故的全过程&lt;/strong&gt;记录下来，也许能帮到以后遇到同样事情的人。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="事情起因一次再正常不过的早高峰"&gt;事情起因：一次再正常不过的早高峰&lt;/h2&gt;
-&lt;p&gt;那天和往常一样，开车上班。&lt;/p&gt;
-&lt;p&gt;出小区，进入主道的&lt;strong&gt;红绿灯十字路口&lt;/strong&gt;，&lt;strong&gt;绿灯左拐&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/30/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/30/</guid><description>&lt;h1 id="从-master--slave-到路由系统"&gt;从 Master / Slave 到路由系统&lt;/h1&gt;
+&lt;p&gt;不是为了博同情，也不是为了复盘谁对谁错，只是想把&lt;strong&gt;第一次真正经历交通事故的全过程&lt;/strong&gt;记录下来，也许能帮到以后遇到同样事情的人。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/30/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/30/</guid><description>&lt;h1 id="从-master--slave-到路由系统"&gt;从 Master / Slave 到路由系统&lt;/h1&gt;
 &lt;h2 id="一次服务器集群治理的重构思考"&gt;一次服务器集群治理的重构思考&lt;/h2&gt;
 &lt;p&gt;在使用当前自研服务器框架的过程中，我反复遇到一个问题：&lt;/p&gt;
-&lt;p&gt;一旦业务涉及多节点协作，系统复杂度就会迅速上升。&lt;/p&gt;
-&lt;p&gt;最典型的场景，就是房间系统。&lt;/p&gt;
-&lt;h2 id="一问题背景房间系统的常见形态"&gt;一、问题背景：房间系统的常见形态&lt;/h2&gt;
-&lt;p&gt;在现有架构下，只要业务涉及：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;创建房间&lt;/li&gt;
-&lt;li&gt;管理房间生命周期&lt;/li&gt;
-&lt;li&gt;将房间分配到多个节点运行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;最终几乎都会走向同一种设计：&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/31/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/31/</guid><description>&lt;h1 id="stub管理服务room-与-player-的关系管理"&gt;Stub(管理服务)、Room 与 Player 的关系管理&lt;/h1&gt;
+&lt;p&gt;一旦业务涉及多节点协作，系统复杂度就会迅速上升。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/31/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/31/</guid><description>&lt;h1 id="stub管理服务room-与-player-的关系管理"&gt;Stub(管理服务)、Room 与 Player 的关系管理&lt;/h1&gt;
 &lt;h2 id="一次关于权威边界的服务器设计思考"&gt;一次关于“权威边界”的服务器设计思考&lt;/h2&gt;
 &lt;p&gt;在多节点服务器架构中，玩家与房间（Room）的关系管理几乎是一个无法回避的问题。&lt;/p&gt;
 &lt;p&gt;表面上看，这不过是一个简单的映射关系：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;player_id -&amp;gt; room_id
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但当系统逐步引入多节点部署、服务器重启、Room 懒加载、缓存机制，以及对性能与一致性的权衡后，这个问题会迅速演变成一个复杂的系统设计问题。&lt;/p&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/12/</guid><description>&lt;h1 id="锁与虚位占用"&gt;锁与虚位占用&lt;/h1&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://zfunnily.github.io/1/01/12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/1/01/12/</guid><description>&lt;h1 id="锁与虚位占用"&gt;锁与虚位占用&lt;/h1&gt;
 &lt;h2 id="分布式房间加入的一次工程性选择"&gt;分布式房间加入的一次工程性选择&lt;/h2&gt;
 &lt;p&gt;在多人实时系统中，“加入房间”是一个看似简单、但极易出问题的流程。&lt;br&gt;
 真正的复杂度，往往隐藏在&lt;strong&gt;并发与分布式&lt;/strong&gt;之下。&lt;/p&gt;
@@ -4087,4 +4082,7 @@ web管理部署一个就可以。如果安装了其他web管理可以删除&lt;b
 &lt;blockquote&gt;
 &lt;p&gt;多个玩家几乎同时请求加入房间&lt;br&gt;
 系统判断“当前没有未满房间”&lt;br&gt;
-最终却创建出了多个未满房间&lt;/p&gt;</description></item><item><title>搜索</title><link>https://zfunnily.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/search/</guid><description/></item></channel></rss>
+最终却创建出了多个未满房间&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这并不是代码写错了，而是&lt;strong&gt;并发 + 协程让出&lt;/strong&gt;下的必然结果。&lt;/p&gt;
+&lt;p&gt;下面总结两种在实际工程中可落地、可维护的解决思路。&lt;/p&gt;</description></item><item><title>搜索</title><link>https://zfunnily.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zfunnily.github.io/search/</guid><description/></item></channel></rss>
