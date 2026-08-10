@@ -3,15 +3,15 @@
     "file": "assets/chunk-CTC_7jcf.js",
     "name": "chunk"
   },
-  "_const-DRXTTn_V.js": {
-    "file": "assets/const-DRXTTn_V.js",
+  "_const-T-0wjLM8.js": {
+    "file": "assets/const-T-0wjLM8.js",
     "name": "const",
     "imports": [
       "index.html"
     ]
   },
-  "_mapbox-gl-CUXgjySx.js": {
-    "file": "assets/mapbox-gl-CUXgjySx.js",
+  "_mapbox-gl-CPeVacmn.js": {
+    "file": "assets/mapbox-gl-CPeVacmn.js",
     "name": "mapbox-gl",
     "imports": [
       "_chunk-CTC_7jcf.js",
@@ -26,7 +26,7 @@
     ]
   },
   "assets/github.svg": {
-    "file": "assets/github-CV-A7Fjz.js",
+    "file": "assets/github-Do3pK1Dr.js",
     "name": "github",
     "src": "assets/github.svg",
     "isDynamicEntry": true,
@@ -36,7 +36,7 @@
     ]
   },
   "assets/github_2026.svg": {
-    "file": "assets/github_2026-BXNo5zdD.js",
+    "file": "assets/github_2026-6Q7xX_kc.js",
     "name": "github_2026",
     "src": "assets/github_2026.svg",
     "isDynamicEntry": true,
@@ -46,7 +46,7 @@
     ]
   },
   "assets/grid.svg": {
-    "file": "assets/grid-BfiVI2wI.js",
+    "file": "assets/grid-DJXdH9qL.js",
     "name": "grid",
     "src": "assets/grid.svg",
     "isDynamicEntry": true,
@@ -56,7 +56,7 @@
     ]
   },
   "assets/mol.svg": {
-    "file": "assets/mol-BhusA6su.js",
+    "file": "assets/mol-CcoRM2Zf.js",
     "name": "mol",
     "src": "assets/mol.svg",
     "isDynamicEntry": true,
@@ -66,7 +66,7 @@
     ]
   },
   "assets/mol_running.svg": {
-    "file": "assets/mol_running-BV0WXIgQ.js",
+    "file": "assets/mol_running-CKY7m46o.js",
     "name": "mol_running",
     "src": "assets/mol_running.svg",
     "isDynamicEntry": true,
@@ -76,7 +76,7 @@
     ]
   },
   "assets/year_2021.svg": {
-    "file": "assets/year_2021-BiRRSA2q.js",
+    "file": "assets/year_2021-DyN5sjE2.js",
     "name": "year_2021",
     "src": "assets/year_2021.svg",
     "isDynamicEntry": true,
@@ -86,7 +86,7 @@
     ]
   },
   "assets/year_2022.svg": {
-    "file": "assets/year_2022-BUHPd5C-.js",
+    "file": "assets/year_2022-D2yaZ_nO.js",
     "name": "year_2022",
     "src": "assets/year_2022.svg",
     "isDynamicEntry": true,
@@ -96,7 +96,7 @@
     ]
   },
   "assets/year_2023.svg": {
-    "file": "assets/year_2023-DnaB3_w7.js",
+    "file": "assets/year_2023-B3buVXiH.js",
     "name": "year_2023",
     "src": "assets/year_2023.svg",
     "isDynamicEntry": true,
@@ -106,7 +106,7 @@
     ]
   },
   "assets/year_2024.svg": {
-    "file": "assets/year_2024--nucNfWZ.js",
+    "file": "assets/year_2024-c0HUxKax.js",
     "name": "year_2024",
     "src": "assets/year_2024.svg",
     "isDynamicEntry": true,
@@ -116,7 +116,7 @@
     ]
   },
   "assets/year_2025.svg": {
-    "file": "assets/year_2025-D5oh-jyp.js",
+    "file": "assets/year_2025-Ds5QZp0r.js",
     "name": "year_2025",
     "src": "assets/year_2025.svg",
     "isDynamicEntry": true,
@@ -126,7 +126,7 @@
     ]
   },
   "assets/year_2026.svg": {
-    "file": "assets/year_2026-dhiuyuge.js",
+    "file": "assets/year_2026-GNerrW-h.js",
     "name": "year_2026",
     "src": "assets/year_2026.svg",
     "isDynamicEntry": true,
@@ -136,7 +136,7 @@
     ]
   },
   "assets/year_summary_2021.svg": {
-    "file": "assets/year_summary_2021-B4Zttysd.js",
+    "file": "assets/year_summary_2021-eQflaQU8.js",
     "name": "year_summary_2021",
     "src": "assets/year_summary_2021.svg",
     "isDynamicEntry": true,
@@ -146,7 +146,7 @@
     ]
   },
   "assets/year_summary_2022.svg": {
-    "file": "assets/year_summary_2022-OHwdrxVd.js",
+    "file": "assets/year_summary_2022-CWjIMrSd.js",
     "name": "year_summary_2022",
     "src": "assets/year_summary_2022.svg",
     "isDynamicEntry": true,
@@ -156,7 +156,7 @@
     ]
   },
   "assets/year_summary_2023.svg": {
-    "file": "assets/year_summary_2023-B5FSBk3i.js",
+    "file": "assets/year_summary_2023--PM9npCg.js",
     "name": "year_summary_2023",
     "src": "assets/year_summary_2023.svg",
     "isDynamicEntry": true,
@@ -166,7 +166,7 @@
     ]
   },
   "assets/year_summary_2024.svg": {
-    "file": "assets/year_summary_2024-KMtljMg0.js",
+    "file": "assets/year_summary_2024-BEIVq4sT.js",
     "name": "year_summary_2024",
     "src": "assets/year_summary_2024.svg",
     "isDynamicEntry": true,
@@ -176,7 +176,7 @@
     ]
   },
   "assets/year_summary_2025.svg": {
-    "file": "assets/year_summary_2025-BzZmaFWA.js",
+    "file": "assets/year_summary_2025-DKPANJx2.js",
     "name": "year_summary_2025",
     "src": "assets/year_summary_2025.svg",
     "isDynamicEntry": true,
@@ -186,7 +186,7 @@
     ]
   },
   "assets/year_summary_2026.svg": {
-    "file": "assets/year_summary_2026-9tNIeMLN.js",
+    "file": "assets/year_summary_2026-F8TwouCK.js",
     "name": "year_summary_2026",
     "src": "assets/year_summary_2026.svg",
     "isDynamicEntry": true,
@@ -196,7 +196,7 @@
     ]
   },
   "index.html": {
-    "file": "assets/index-Bpeu0uMq.js",
+    "file": "assets/index-Crwi86sx.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -208,7 +208,7 @@
       "src/themes/classic/index.tsx"
     ],
     "assets": [
-      "assets/activities-BRJGE1Ch.json"
+      "assets/activities-DoyQcx5A.json"
     ]
   },
   "src/assets/china-provinces.json": {
@@ -218,11 +218,11 @@
     "isDynamicEntry": true
   },
   "src/static/activities.json": {
-    "file": "assets/activities-BRJGE1Ch.json",
+    "file": "assets/activities-DoyQcx5A.json",
     "src": "src/static/activities.json"
   },
   "src/themes/classic/index.tsx": {
-    "file": "assets/classic-DV7Q5zJ-.js",
+    "file": "assets/classic-CnZsvLn9.js",
     "name": "classic",
     "src": "src/themes/classic/index.tsx",
     "isDynamicEntry": true,
@@ -230,7 +230,7 @@
       "_chunk-CTC_7jcf.js",
       "index.html",
       "_polyline-C43PkKij.js",
-      "_const-DRXTTn_V.js"
+      "_const-T-0wjLM8.js"
     ],
     "dynamicImports": [
       "assets/year_2021.svg",
@@ -250,7 +250,7 @@
       "assets/grid.svg",
       "assets/mol.svg",
       "assets/mol_running.svg",
-      "_mapbox-gl-CUXgjySx.js",
+      "_mapbox-gl-CPeVacmn.js",
       "src/themes/classic/static/run_countries.ts"
     ],
     "css": [
@@ -261,12 +261,12 @@
     ]
   },
   "src/themes/classic/static/run_countries.ts": {
-    "file": "assets/run_countries-CbnvbZqS.js",
+    "file": "assets/run_countries-Ln6F-dMJ.js",
     "name": "run_countries",
     "src": "src/themes/classic/static/run_countries.ts",
     "isDynamicEntry": true,
     "imports": [
-      "_const-DRXTTn_V.js"
+      "_const-T-0wjLM8.js"
     ]
   },
   "src/themes/classic/static/world.zh.json": {
@@ -274,7 +274,7 @@
     "src": "src/themes/classic/static/world.zh.json"
   },
   "src/themes/dashboard/index.tsx": {
-    "file": "assets/dashboard-BPw64YYP.js",
+    "file": "assets/dashboard-CInkCiPm.js",
     "name": "dashboard",
     "src": "src/themes/dashboard/index.tsx",
     "isDynamicEntry": true,
@@ -282,7 +282,7 @@
       "_chunk-CTC_7jcf.js",
       "index.html",
       "_polyline-C43PkKij.js",
-      "_mapbox-gl-CUXgjySx.js"
+      "_mapbox-gl-CPeVacmn.js"
     ],
     "dynamicImports": [
       "src/assets/china-provinces.json"
